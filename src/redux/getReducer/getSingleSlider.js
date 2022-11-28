@@ -34,7 +34,7 @@ export const {setSlider, setStatus} = getSingleSlider.actions;
 export default getSingleSlider.reducer;
 //https://mksbackend.herokuapp.com/api/v1/Sliderget
 export const fetchSingleSlider= createAsyncThunk('getsingleSlider/fetch', async ({sliderid}) => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/updateSlider/${sliderid}`);
+    const res = await axios.get(`${window.env.API_URL}/updateSlider/${sliderid}`);
     const data = res.data;
     return data.data;
 }) 

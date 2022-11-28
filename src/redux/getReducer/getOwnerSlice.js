@@ -33,7 +33,7 @@ export const { setOwner, setStatus } = getOwnerSlice.actions;
 export default getOwnerSlice.reducer;
 
 export const fetchOwner = createAsyncThunk('Ownerget/fetch', async () => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/Ownerget?keyword=&page=`)
+    const res = await axios.get(`${window.env.API_URL}/Ownerget?keyword=&page=`)
     const data =  res.data;
     return data.data;
 });

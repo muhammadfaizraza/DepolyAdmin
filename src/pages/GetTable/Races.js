@@ -17,10 +17,6 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 
 const Prize = (data) => {
-  
-
-
-(data, "FifthPrice");
   return (
     <>
       <table className="Prizeclass">
@@ -51,9 +47,7 @@ const Prize = (data) => {
 
 const Races = () => {
   const history = useNavigate();
-
-  const [PublishRace, setPublishRace] = useState(false)
-  
+  const [PublishRace, setPublishRace] = useState(true);
 
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -92,12 +86,14 @@ const Races = () => {
     dispatch(fetchtobePublishRace());
   }, [dispatch]);
 
-  const handleAwaited = () => {
+  const handleAwaited = async() => {
+    await setPublishRace(!PublishRace)
     setAllRace(tobePublishRace)
-    setPublishRace(true)
+    
   }
   const handleAll = () => {
     setAllRace(race)
+    setPublishRace(!PublishRace)
   }
   const GoToPublish = (RaceId) => {
     history("/publishrace", {
@@ -121,9 +117,6 @@ const Races = () => {
     );
   }
   
-
-
-(race)
   return (
     <>
       <div className="page">
@@ -178,7 +171,9 @@ const Races = () => {
                       <th>Race Status</th>
                       <th>Prize Money</th>
                       <th>image</th>
-                      
+                      {
+                        !PublishRace ? <th>Publish</th>: <></>
+                      }
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -286,11 +281,11 @@ const Races = () => {
                                   }}
                                 />{" "}
                               </td>
-                              {/* {
-                                PublishRace ? <td>
+                              {
+                                !PublishRace ? <td>
                                 <button  className="Approvedbtn resultbtn" onClick={() => GoToPublish(item._id)}>Click</button>
                               </td>:null
-                              } */}
+                              }
                               <td>
                                 <MdDelete
                                   onClick={() => handleRemove(item._id)}

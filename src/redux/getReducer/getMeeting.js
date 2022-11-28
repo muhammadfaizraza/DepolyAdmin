@@ -33,7 +33,7 @@ export const {setMeeting , setStatus} = getMeetingSlice.actions;
 export default getMeetingSlice.reducer;
 
 export const fetchMeeting = createAsyncThunk('/Meetingget/fetch', async() => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/MeetingTypeget?keyword=&page=`);
+    const res = await axios.get(`${window.env.API_URL}/MeetingTypeget?keyword=&page=`);
     const MeetingData = res.data;
     return MeetingData.data;
 })

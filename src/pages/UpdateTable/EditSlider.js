@@ -28,7 +28,7 @@ const SliderForm = () => {
       formData.append("TitleEn", state1.TitleEn);
       formData.append("TitleAr", state1.TitleAr);
       const response = await axios.put(
-        `http://3.90.189.40:4000/api/v1/updateSlider/${sliderid}`,
+        `${window.env.API_URL}/updateSlider/${sliderid}`,
         formData
       );
       history("/slider");

@@ -33,7 +33,7 @@ export const {setbreeder , setStatus} = getBreederSlice.actions;
 export default getBreederSlice.reducer;
 
 export const fetchbreeder = createAsyncThunk('/Breederget/fetch', async() => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/Breederget?keyword=&page=`);
+    const res = await axios.get(`${window.env.API_URL}/Breederget?keyword=&page=`);
     const breederData = res.data;
     return breederData.data;
 })

@@ -33,7 +33,7 @@ export const { setNews, setStatus } = getNewsSlice.actions;
 export default getNewsSlice.reducer;
 
 export const fetchNews = createAsyncThunk('newsGet/fetch', async ({pagenumber}) => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/newsget?keyword=&page=${pagenumber}`)
+    const res = await axios.get(`${window.env.API_URL}/newsget?keyword=&page=${pagenumber}`)
     const data =  res.data;
     return data.data;
 });

@@ -33,7 +33,7 @@ export const {setRaceName , setStatus} = getRaceNameSlice.actions;
 export default getRaceNameSlice.reducer;
 
 export const fetchRaceName = createAsyncThunk('/RaceName/fetch', async() => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/RaceNameget?keyword=&page=`);
+    const res = await axios.get(`${window.env.API_URL}/RaceNameget?keyword=&page=`);
     const RaceNameData = res.data;
     return RaceNameData.data;
 })

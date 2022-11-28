@@ -21,7 +21,7 @@ const Verdicts = () => {
           formData.append("NameAr" , NameAr)
           formData.append("shortCode",shortCode);
     
-          await axios.post(`http://3.90.189.40:4000/api/v1uploadVerdict`, formData)
+          await axios.post(`${window.env.API_URL}uploadVerdict`, formData)
           history('/verdictlist')
           swal({
             title: "Success!",

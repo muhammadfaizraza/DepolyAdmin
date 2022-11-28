@@ -7,7 +7,6 @@ import { useEffect } from "react";
 
 const ProtectedRoute = () => {
   const dispatch = useDispatch();
-
   const { userToken,userInfo } = useSelector((state) => state.user)
   useEffect(() => {
     if (userToken) {

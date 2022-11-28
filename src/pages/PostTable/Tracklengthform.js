@@ -34,7 +34,7 @@ const Tracklengthform = () => {
       formData.append("GroundType", GroundType.id);
       formData.append("RailPosition", RailPosition);
 
-      await axios.post(`http://3.90.189.40:4000/api/v1/uploadTrackLength`, formData);
+      await axios.post(`${window.env.API_URL}/uploadTrackLength`, formData);
       swal({
         title: "Success!",
         text: "Data has been added successfully ",

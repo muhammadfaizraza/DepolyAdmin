@@ -28,7 +28,7 @@ const history = useNavigate()
       formData.append("DescriptionEn", DescriptionEn);
       formData.append("image", image);
 
-      await axios.post(`http://3.90.189.40:4000/api/v1/uploadBreeder`, formData)
+      await axios.post(`${window.env.API_URL}/uploadBreeder`, formData)
 
       history('/breederlist')
       swal({

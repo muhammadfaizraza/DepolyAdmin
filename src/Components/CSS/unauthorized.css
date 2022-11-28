@@ -1,10 +1,13 @@
 .wrapper {
-    position: relative;
-    max-width: 1298px;
-    height: auto;
-    margin: 2em auto 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  
+  .unauthorized {
+    width: 60%;
+    margin: auto;
+    padding-top: 10%;
+}
   .box {
     max-width: 70%;
     min-height: auto;

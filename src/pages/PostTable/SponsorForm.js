@@ -33,7 +33,7 @@ const SponsorForm = () => {
       formData.append("DescriptionAr", DescriptionAr);
       formData.append("DescriptionEn", DescriptionEn);
       const response = await axios.post(
-        `http://3.90.189.40:4000/api/v1/uploadSponsor?keyword=&page=`,
+        `${window.env.API_URL}/uploadSponsor?keyword=&page=`,
         formData
       );
       swal({

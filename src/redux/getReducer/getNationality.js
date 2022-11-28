@@ -33,7 +33,7 @@ export const {setnationality , setStatus} = getNationalitySlice.actions;
 export default getNationalitySlice.reducer;
 
 export const fetchnationality = createAsyncThunk('/Nationalityget/fetch', async() => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/Nationalityget?keyword=&page=`);
+    const res = await axios.get(`${window.env.API_URL}/Nationalityget?keyword=&page=`);
     const nationalityData = res.data;
     return nationalityData.data;
 })

@@ -33,7 +33,7 @@ export const {setracecard , setStatus} = getracecardSlice.actions;
 export default getracecardSlice.reducer;
 
 export const fetchracecard = createAsyncThunk('/racecardget/fetch', async() => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/racecardget?keyword=&page=`);
+    const res = await axios.get(`${window.env.API_URL}/racecardget?keyword=&page=`);
     const racecardData = res.data;
     return racecardData.data;
 })

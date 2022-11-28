@@ -73,8 +73,8 @@ const RaceForm = () => {
     event.preventDefault();
     try {
       
-      // const response = await axios.post(`http://3.90.189.40:4000/api/v1addracehorses/${RaceId}`, {HorseEntry:items});
-      // const response1 = await axios.put(`http://3.90.189.40:4000/api/v1/publishrace/${RaceId}`);
+      // const response = await axios.post(`${window.env.API_URL}addracehorses/${RaceId}`, {HorseEntry:items});
+      // const response1 = await axios.put(`${window.env.API_URL}/publishrace/${RaceId}`);
       // history("/fullpublishrace", {
       //   state: {
       //     RaceId: RaceId

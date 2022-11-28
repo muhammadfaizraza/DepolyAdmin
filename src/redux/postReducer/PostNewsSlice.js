@@ -6,12 +6,12 @@ const PostNewsSlice = createSlice({
     initialState : [],
     reducers:{
         add(state,action){
-          const response = axios.post(`http://3.90.189.40:4000/api/v1/uploadnews`,action.payload)
+          const response = axios.post(`${window.env.API_URL}/uploadnews`,action.payload)
           return response;
         },
 
         remove(state, action){
-            const response = axios.delete(`http://3.90.189.40:4000/api/v1/deletenews/${action.payload}`)
+            const response = axios.delete(`${window.env.API_URL}/deletenews/${action.payload}`)
             return response;
         }
     }

@@ -59,9 +59,6 @@ const BreederTable = () => {
     }
 
    
-
-
-(breeder,'breederbreeder')
   return (
     <Fragment>
 

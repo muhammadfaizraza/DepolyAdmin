@@ -56,7 +56,7 @@ const NewsForm = () => {
       formData.append("Rating", Rating);
       formData.append("JockeyLicenseDate", JockeyLicenseDate);
 
-      await axios.post(`http://3.90.189.40:4000/api/v1/uploadJockey`, formData);
+      await axios.post(`${window.env.API_URL}/uploadJockey`, formData);
       swal({
         title: "success!",
         text: "Data Submitted !",

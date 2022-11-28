@@ -32,7 +32,7 @@ const getRaceCourseSlice = createSlice({
 export const {setRacecourse, setStatus} = getRaceCourseSlice.actions;
 export default getRaceCourseSlice.reducer;
 export const fetchracecourse = createAsyncThunk('getracecourse/fetch', async () => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/getracecourse?keyword=&page=`);
+    const res = await axios.get(`${window.env.API_URL}/getracecourse?keyword=&page=`);
     const data = res.data;
     return data.data;
 })

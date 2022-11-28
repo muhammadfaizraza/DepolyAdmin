@@ -22,7 +22,7 @@ const Gender = () => {
         formData.append("NameAr" , NameAr)
         formData.append("shortCode",shortCode);
   
-        await axios.post(`http://3.90.189.40:4000/api/v1/uploadSex`, formData)
+        await axios.post(`${window.env.API_URL}/uploadSex`, formData)
         swal({
           title: "Success!",
           text: "Data has been added successfully ",

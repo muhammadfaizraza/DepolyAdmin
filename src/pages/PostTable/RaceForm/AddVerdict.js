@@ -87,12 +87,8 @@ const PublishRace = () => {
   const submit = async (event) => {
     event.preventDefault();
     try {
-      
-
-
-(items, "VerdictEntry");
-      const response = await axios.post(`http://3.90.189.40:4000/api/v1addverdicts/${RaceId}`, {VerdictEntry:items});
-      const response1 = await axios.put(`http://3.90.189.40:4000/api/v1/publishrace/${RaceId}`);
+      const response = await axios.post(`${window.env.API_URL}addverdicts/${RaceId}`, {VerdictEntry:items});
+      const response1 = await axios.put(`${window.env.API_URL}/publishrace/${RaceId}`);
       history("/races");
       swal({
         title: "Success",

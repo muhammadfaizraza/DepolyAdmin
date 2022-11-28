@@ -6,16 +6,16 @@ const postSponsor = createSlice({
     initialState : [],
     reducers:{
         add(state,action){
-          const response = axios.post(`http://3.90.189.40:4000/api/v1/uploadSponsor`,action.payload)
+          const response = axios.post(`${window.env.API_URL}/uploadSponsor`,action.payload)
           return response;
         },
 
         remove(state, action){
-            const response = axios.delete(`http://3.90.189.40:4000/api/v1/deleteSponsor/${action.payload}`)
+            const response = axios.delete(`${window.env.API_URL}/deleteSponsor/${action.payload}`)
            return response;
         },
         edit(state, action){
-            const response = axios.put(`http://3.90.189.40:4000/api/v1/updateSponsor/${action.payload}`)
+            const response = axios.put(`${window.env.API_URL}/updateSponsor/${action.payload}`)
            return response; 
         }
     }

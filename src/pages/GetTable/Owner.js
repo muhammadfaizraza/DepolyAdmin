@@ -49,12 +49,6 @@ const Owner = () => {
     return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
   }
 
-
-
-
-
-(owner)
-
   return (
     <>
   

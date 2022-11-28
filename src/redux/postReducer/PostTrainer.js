@@ -6,12 +6,12 @@ const postTrainer = createSlice({
     initialState : [],
     reducers:{
         add(state,action){
-          const response = axios.post(`http://3.90.189.40:4000/api/v1/uploadtrainer`,action.payload)
+          const response = axios.post(`${window.env.API_URL}/uploadtrainer`,action.payload)
           return response;
         },
 
         remove(state, action){
-            const response = axios.delete(`http://3.90.189.40:4000/api/v1/deletetrainer/${action.payload}`)
+            const response = axios.delete(`${window.env.API_URL}/deletetrainer/${action.payload}`)
             state.filter((item) => item._id !== action.payload);
             return response;
         }

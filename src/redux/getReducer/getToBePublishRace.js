@@ -31,7 +31,7 @@ const gettobePublishRaceSlice = createSlice({
 export const {settobePublishRace, setStatus} = gettobePublishRaceSlice.actions;
 export default gettobePublishRaceSlice.reducer;
 export const fetchtobePublishRace = createAsyncThunk('gettobePublishRace/fetch', async () => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/getracetobepublished?keyword=&limit=&page=`);
+    const res = await axios.get(`${window.env.API_URL}/getracetobepublished?keyword=&limit=&page=`);
     const data = res.data;
     return data.data;
 })

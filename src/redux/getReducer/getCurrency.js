@@ -33,7 +33,7 @@ export const {setcurrency , setStatus} = getCurrencySlice.actions;
 export default getCurrencySlice.reducer;
 
 export const fetchcurrency = createAsyncThunk('/Currencyget/fetch', async() => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/Currencyget?keyword=&page=`);
+    const res = await axios.get(`${window.env.API_URL}/Currencyget?keyword=&page=`);
     const currencyData = res.data;
     return currencyData.data;
 })

@@ -82,7 +82,7 @@ const RaceCourseForm = () => {
       formData.append("NationalityId", NationalityId.id);
       formData.append("shortCode", shortCode);
       const response = await axios.post(
-        `http://3.90.189.40:4000/api/v1/createcourse?keyword=&page=`,
+        `${window.env.API_URL}/createcourse?keyword=&page=`,
         formData
       );
       swal({

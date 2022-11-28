@@ -7,12 +7,12 @@ const postRace = createSlice({
     //https:mksbackend.herokuapp.com/api/v1/createrace
     reducers:{
         add(state,action){
-          const response = axios.post(`http://3.90.189.40:4000/api/v1/createrace`,action.payload)
+          const response = axios.post(`${window.env.API_URL}/createrace`,action.payload)
           return response;
         },
 //https://mksbackend.herokuapp.com/api/v1/deleterace/:id
         remove(state, action){
-            const response = axios.delete(`http://3.90.189.40:4000/api/v1/deleterace/${action.payload}`)
+            const response = axios.delete(`${window.env.API_URL}/deleterace/${action.payload}`)
            return response; 
         }
     }

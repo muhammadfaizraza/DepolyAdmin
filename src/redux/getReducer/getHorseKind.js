@@ -33,7 +33,7 @@ export const {setHorseKind , setStatus} = getHorseKindSlice.actions;
 export default getHorseKindSlice.reducer;
 
 export const fetchHorseKind = createAsyncThunk('/HorseKind/fetch', async() => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/HorseKindget?keyword=&page=`);
+    const res = await axios.get(`${window.env.API_URL}/HorseKindget?keyword=&page=`);
     const HorseKindData = res.data;
     return HorseKindData.data;
 })

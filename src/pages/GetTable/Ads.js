@@ -49,10 +49,7 @@ const Ads = () => {
     );
   }
 
-  
 
-
-(allads,'allads')
   return (
     <>
       <div className="page">

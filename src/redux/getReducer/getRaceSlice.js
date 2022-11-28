@@ -32,7 +32,7 @@ const getRaceSlice = createSlice({
 export const {setRace, setStatus} = getRaceSlice.actions;
 export default getRaceSlice.reducer;
 export const fetchrace = createAsyncThunk('getrace/fetch', async () => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/getrace?keyword=&limit=&page=`);
+    const res = await axios.get(`${window.env.API_URL}/getrace?keyword=&limit=&page=`);
     const data = res.data;
     return data.data;
 })

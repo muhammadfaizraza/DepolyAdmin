@@ -55,7 +55,7 @@ const TrainerForm = () => {
       formData.append("TrainerLicenseDate", TrainerLicenseDate);
       formData.append("ShortNameEn", ShortNameEn);
       formData.append("ShortNameAr", ShortNameAr);
-    await axios.post(`http://3.90.189.40:4000/api/v1/uploadtrainer?keyword=&page=`,formData);
+    await axios.post(`${window.env.API_URL}/uploadtrainer?keyword=&page=`,formData);
       
       swal({
         title: "success!",

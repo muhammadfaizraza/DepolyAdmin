@@ -31,7 +31,7 @@ const gettobeRaceResultSlice = createSlice({
 export const {settobeRaceResult, setStatus} = gettobeRaceResultSlice.actions;
 export default gettobeRaceResultSlice.reducer;
 export const fetchtobeRaceResult = createAsyncThunk('gettobeRaceResult/fetch', async () => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/GetRaceResultToBeAnnounced?keyword=&limit=&page=`);
+    const res = await axios.get(`${window.env.API_URL}/GetRaceResultToBeAnnounced?keyword=&limit=&page=`);
     const data = res.data;
     return data.data;
 })

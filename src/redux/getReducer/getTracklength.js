@@ -33,7 +33,7 @@ export const {setTrackLength , setStatus} = getTrackLengthSlice.actions;
 export default getTrackLengthSlice.reducer;
 
 export const fetchTrackLength = createAsyncThunk('/TrackLength/fetch', async() => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/TrackLengthget?keyword=&page=`);
+    const res = await axios.get(`${window.env.API_URL}/TrackLengthget?keyword=&page=`);
     const TrackLengthData = res.data;
     return TrackLengthData.data;
 })  

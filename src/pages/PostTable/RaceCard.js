@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import DateTimePicker from "react-datetime-picker";
 import { fetchracecourse } from "../../redux/getReducer/getRaceCourseSlice";
 import { useSelector, useDispatch } from "react-redux";
 import makeAnimated from "react-select/animated";
-import dateFormat, { masks } from "dateformat";
+import dateFormat from "dateformat";
 
 const Nationality = () => {
   const [Race, setRace] = useState("");
   const [DayNTime, setDayNTime] = useState("");
   const [FetchData, setFetchData] = useState('')
   
-  const history = useNavigate();
+  // const history = useNavigate();
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
 
@@ -36,13 +36,35 @@ const Nationality = () => {
 
   useEffect(() => {
     dispatch(fetchracecourse());
-  }, []);
+  }, [dispatch]);
   const submit = async (event) => {
     event.preventDefault();
-        const response = axios.post(`http://3.90.189.40:4000/api/v1/getracesthroughracecourseandtime/${Race.id}/${FormaredDate}`);
-    setFetchData(response);
+    try {
+      const response =  await axios.post(`${window.env.API_URL}/getracesthroughracecourseandtime/${Race.id}/${FormaredDate}`);
+      setFetchData(response.data.data);
+      const msg = response.data.data.length
+      
+      swal({
+        // title: "Success!",
+        text: `${msg} Data Found`,
+        icon: "success",
+        button: "OK",
+      });
+      
+    } catch (error) {
+      console.log(error)
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
+    }
+        
   }
 
+  console.log(FetchData,'FetchData')
   return (
     <div className="page">
       <div className="rightsidedata">

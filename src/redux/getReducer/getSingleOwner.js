@@ -33,7 +33,7 @@ export const {setOwner, setStatus} = getSingleOwner.actions;
 export default getSingleOwner.reducer;
 //https://mksbackend.herokuapp.com/api/v1/ownerget
 export const fetchSingleOwner= createAsyncThunk('getsingleOwner/fetch', async ({id}) => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/singleOwner/${id}`);
+    const res = await axios.get(`${window.env.API_URL}/singleOwner/${id}`);
     const data = res.data;
     return data.data;
 }) 

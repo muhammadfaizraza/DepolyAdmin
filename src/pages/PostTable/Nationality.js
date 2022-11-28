@@ -31,7 +31,7 @@ const history = useNavigate()
       formData.append("Offset",Offset);
       formData.append("Value" ,Value);
       formData.append("image" ,image);
-      await axios.post(`http://3.90.189.40:4000/api/v1/uploadNationality`,formData);
+      await axios.post(`${window.env.API_URL}/uploadNationality`,formData);
     history("/nationalitylist")
       swal({
         title: "Success!",

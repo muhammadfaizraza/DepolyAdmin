@@ -12,7 +12,7 @@ export const userLogin = createAsyncThunk(
         },
       }
       const { data } = await axios.post(
-        `http://3.90.189.40:4000/api/v1/login`,
+        `${window.env.API_URL}/login`,
         { Email, password },
         config
       )
@@ -41,7 +41,7 @@ export const registerUser = createAsyncThunk(
       }
 
       const { data } = await axios.post(
-        `http://3.90.189.40:4000/api/v1/register`,
+        `${window.env.API_URL}/register`,
         { FirstName,LastName,PassportNo,PhoneNumber,password,Email },
         config
       )
@@ -73,7 +73,7 @@ export const getUserDetails = createAsyncThunk(
         },
       }
 
-      const { data } = await axios.get(`http://3.90.189.40:4000/api/v1/singlesubscriber/${Cookies.get('id')}`, config)
+      const { data } = await axios.get(`${window.env.API_URL}/singlesubscriber/${Cookies.get('id')}`, config)
       return data
     } catch (error) {
       if (error.response && error.response.data.message) {

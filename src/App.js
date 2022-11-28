@@ -79,6 +79,7 @@ import GroundTypeTable from "./pages/GetTable/GroundTypeTable";
 import TestTable from './pages/PostTable/RaceForm/RaceTwo'
 import RaceCard from './pages/PostTable/RaceCard'
 import { ToastContainer } from 'react-toastify';
+import NotFound from "./Components/Common/NotFound";
 
 function App() {
   useEffect(() => {
@@ -167,6 +168,7 @@ function App() {
                 <Route path="/fullpublishrace" element={<PublishRace />} />
                 <Route path="/testTable" element={<TestTable />} />
                 <Route path="/racecard" element={<RaceCard />} />
+                <Route path="*" element={<NotFound />} />
 
                 {/* Edit Pages */}
                 <Route path="/editjockey" element={<EditJockey />} />

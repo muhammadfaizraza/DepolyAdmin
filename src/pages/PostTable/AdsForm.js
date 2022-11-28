@@ -29,7 +29,7 @@ const AdsForm = () => {
       formData.append("TitleAr", TitleAr);
       formData.append("DescriptionAr", DescriptionAr);
       formData.append("DescriptionEn", DescriptionEn);
-      await axios.post(`http://3.90.189.40:4000/api/v1/uploadAds`, formData);
+      await axios.post(`${window.env.API_URL}/uploadAds`, formData);
       swal({
         title: "Success!",
         text: "Data has been added Successfully",

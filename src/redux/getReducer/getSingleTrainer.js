@@ -33,7 +33,7 @@ export const {settrainer, setStatus} = getSingletrainer.actions;
 export default getSingletrainer.reducer;
 //https://mksbackend.herokuapp.com/api/v1/trainerget
 export const fetchSingletrainer = createAsyncThunk('getsingletrainer/fetch', async ({trainerid}) => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/singletrainer/${trainerid}`);
+    const res = await axios.get(`${window.env.API_URL}/singletrainer/${trainerid}`);
     const data = res.data;
     return data.data;
 })

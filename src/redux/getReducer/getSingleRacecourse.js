@@ -33,7 +33,7 @@ export const {setOwner, setStatus} = getsingleracecourse.actions;
 export default getsingleracecourse.reducer;
 //https://mksbackend.herokuapp.com/api/v1/singleracecourse
 export const fetchsingleracecourse= createAsyncThunk('singleracecourse/fetch', async ({id}) => {
-    const res = await axios.get(`http://3.90.189.40:4000/api/v1/singleracecourse/${id}`);
+    const res = await axios.get(`${window.env.API_URL}/singleracecourse/${id}`);
     const data = res.data;
     return data.data;
 }) 

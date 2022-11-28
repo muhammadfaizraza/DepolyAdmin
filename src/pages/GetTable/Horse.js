@@ -41,7 +41,7 @@ const Horse = () => {
   
 
 
-(horse);
+
   const handleRemove = (Id) => {
     swal({
       title: "Are you sure?",

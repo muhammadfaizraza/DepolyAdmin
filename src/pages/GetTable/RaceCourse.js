@@ -70,7 +70,7 @@ const Racecourse = () => {
   
 
 
-(racecourse,'dad')
+
   return (
     <>
       <div className="page">

@@ -1,0 +1,84 @@
+/* .mainContainer {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    margin: 0 auto;
+    margin-top: 0px;
+  
+  
+    margin-left: auto;
+    margin-top: 10rem;
+  }
+  
+  
+  .btnDiv {
+  
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .btnDiv button {
+  
+    color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background: #19469D;
+    border: none;
+  }
+  
+  .btnDiv button:hover {
+  
+    transform: scale(1.1);
+  }
+  
+  .fileInput {
+  
+  
+    color: #19469D;
+  
+  }
+  
+  .imageContainer img {
+  
+  
+    justify-content: left;
+    align-items: flex-start;
+    height: 300px;
+    width: 299px;
+    display: flex;
+  }
+  
+  .fileInput input {
+  
+  
+    background: #19469D;
+  }
+  
+  label {
+    padding: 10px;
+  
+  
+    display: table;
+    color: #fff;
+  
+    background: #19469D;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  
+  
+  
+  
+  
+  input[type="file"] {
+    display: none;
+  
+  }
+  
+  label:hover {
+    transform: scale(1.1);
+  }
+   */

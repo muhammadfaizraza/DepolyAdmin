@@ -1,0 +1,45 @@
+.modal-header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--bs-modal-header-padding);
+    border-bottom: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
+    border-top-left-radius: var(--bs-modal-inner-border-radius);
+    border-top-right-radius: var(--bs-modal-inner-border-radius);
+    padding: 15px;
+    color: white;
+    background:  linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%) !important;
+}
+.modalImage{
+
+width: 200px;
+margin: 0 auto;
+position: relative;
+flex: 1 1 auto;
+padding: var(--bs-modal-padding);
+font-size: 30px;
+display: block;
+font-weight: 500;
+font-family: inherit;
+}
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: var(--bs-modal-padding);
+    font-size: 22px;
+    font-weight: 600;
+    font-family: inherit;
+}
+.modalClosebtn{
+
+    width: 186px;
+    height: 51px;
+    background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
+    border-radius: 20px;
+    color: white;
+  border: none;
+  margin-top: 22px;
+font-size: 20px;
+
+}

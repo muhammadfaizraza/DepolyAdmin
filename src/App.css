@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body::-webkit-scrollbar {
+    width: 0.1em;
+  }
+  body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  body::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, rgb(48, 8, 139), darksalmon);
+  }
+   .rightsidedata::-webkit-scrollbar {
+    width: 0.1em;
+  }
+   .rightsidedata::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+   .rightsidedata::-webkit-scrollbar-thumb {
+    background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
+  }
+
+  

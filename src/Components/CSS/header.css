@@ -1,0 +1,135 @@
+.header{
+    height: 80px;
+    width: 100%;
+}
+.innerHeader{
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    text-align: center;
+}
+.searchclass {
+    flex: 6;
+}
+.logoclass{
+    width: 260px;
+    height: 80px;
+    background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
+    border-radius: 0px 0px 50px 0px;
+}
+.logoclass img{
+    width: 196px;
+    padding: 18px;
+}
+.searchdiv{
+    flex: 4;
+}
+.searchdiv input{
+    width: 100%;
+    height: 50px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+}
+.searchdiv input::placeholder{
+    width: 80%;
+    height: 19px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15.5949px;
+    line-height: 19px;
+    color: #000000;
+    opacity: 0.5;
+    padding-left: 22px;
+}
+.auth{
+    width: 100%;
+    height: 75px;
+    top: 0px;
+    background: #FFFFFF;
+    border-radius: 0px 0px 0px 20px;
+    
+    
+}
+/* .userprofile{
+    width: 80%;
+    height: 96px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    margin-inline: auto;
+}
+.profilepic > img{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+}
+.profilename p{
+margin-bottom: 0 !important;
+} */
+
+.pointuser{
+    color: #19469D;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18.6726px;
+    line-height: 23px;
+}
+.username{
+    color:  #000000;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14.6133px;
+    line-height: 18px;
+}
+
+  
+ .notificationclass{
+flex: 1;
+justify-content: center;
+ }
+
+ .mylink {
+    text-decoration: none;   
+    color: #000000;
+    padding: 15px;
+    padding-left: 39px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16.5949px;
+    line-height: 19px;
+}
+.sidebar {
+    display: flex;
+    flex-direction: column;
+
+ width: 240px;
+    background-color: #E8E8E8;
+    border-radius: 1px 39px 50px 0px;
+    margin-top: 20px;
+    height:fit-content;
+
+}
+.logoutclass{
+    width: 260px;
+    height: 80px;
+    background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
+    border-radius: 0px 0px 0px 50px;
+}
+.buttonLogout{
+    border: none;
+    font-size: 18px;
+    margin-top: 20px;
+    width: 140px;
+    height: 40px;
+    border-radius: 10px;
+}
+.OngoingRaces{
+    cursor: pointer;
+}
+.ResultAwaited{
+    cursor: pointer;
+}

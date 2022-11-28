@@ -1,0 +1,252 @@
+.page{
+    display: flex;
+    gap: 22px;
+    width: 87.5%;
+    margin-left: 13px;
+}
+.rightsidedata{
+margin-top: 22px;
+width: 100%;
+/* height: 900px; */
+overflow-y: auto;
+overflow-x: hidden;
+margin-bottom: 80px;
+}
+.tr_table_class td img {
+  border-radius: 50%;
+  height: 35px;
+  width: 80px;
+  object-fit: contain;
+}
+
+.table_delete_btn1{
+    cursor: pointer;
+}
+.plusIconStyle{
+    float: right;
+    cursor: pointer;
+}
+
+.dashboardheader{
+    width: 100%;
+    height: 77px;
+    background-color: #E8E8E8;
+    border-radius: 0px 0px  0px 20px;
+}
+.dashboardheader > h2{
+    padding: 25px;
+    font-style: normal;
+font-weight: 700;
+font-size: 15.5949px;
+line-height: 19px;
+}
+.OngoingRaces{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 300;
+font-size: 20px;
+line-height: 24px;
+    font-size: 20px;
+    line-height: 24px;
+    width: 360.35px;
+    height: 246.19px;
+    left: 638.35px;
+    top: 430.19px;
+    background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
+    border-radius: 20px;
+} 
+.OngoingRaces > h3 {
+  padding: 10px;
+  position: top;
+  top: 16%;
+  position: relative;
+  right: -2%;
+  font-size: 40px;
+}
+.ResultAwaited > h3 {
+  padding: 10px;
+  position: top;
+  top: 16%;
+  position: relative;
+  right: -2%;
+  font-size: 40px;
+}
+.DashboardCard {
+  /* margin-top: 3rem; */
+  display: flex;
+  /* justify-content: space-evenly; */
+  gap: 50px;
+  flex-wrap: wrap;
+  margin: 3rem;
+}
+.ResultAwaited{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24px;
+    width: 360.35px;
+    height: 246.19px;
+    left: 638.35px;
+    top: 430.19px;
+    background: linear-gradient(89.98deg, #C8C8C8 23.67%, #8D8D8D 97.94%);  
+    border-radius: 20px;
+}
+.CompetitionsRaces{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 300;
+font-size: 20px;
+line-height: 24px;
+    font-size: 20px;
+    line-height: 24px;
+    width: 360.35px;
+    height: 246.19px;
+    left: 638.35px;
+    top: 430.19px;
+    background: linear-gradient(89.98deg, #C8C8C8 23.67%, #8D8D8D 97.94%);    border-radius: 20px;
+}
+.TeamsRace{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 300;
+font-size: 20px;
+line-height: 24px;
+
+    line-height: 24px;
+    width: 360.35px;
+    height: 246.19px;
+    left: 638.35px;
+    top: 430.19px;
+    background: linear-gradient(89.98deg, #C8C8C8 23.67%, #8D8D8D 97.94%);    border-radius: 20px;
+}
+.GenerateReports{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Inter';
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 300;
+font-size: 20px;
+line-height: 24px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24px;
+    width: 360.35px;
+    height: 246.19px;
+    left: 638.35px;
+    top: 430.19px;
+    background: linear-gradient(89.98deg, #C8C8C8 23.67%, #8D8D8D 97.94%);   border-radius: 20px;
+}
+.accordion-button:not(.collapsed) {
+  color: #fff;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15.5949px;
+  line-height: 19px;
+  padding-left: 36px;
+}
+.loader  {
+    animation: rotate 1s infinite;  
+    height: 50px;
+    width: 50px;
+    margin-left: 45%;
+    margin-top: 20%;
+  }
+  
+  .loader:before,
+  .loader:after {   
+    border-radius: 50%;
+    content: '';
+    display: block;
+    height: 20px;  
+    width: 20px;
+  }
+  .loader:before {
+    animation: ball1 1s infinite;  
+    background-color: #cb2025;
+    box-shadow: 30px 0 0 #f8b334;
+    margin-bottom: 10px;
+  }
+  .loader:after {
+    animation: ball2 1s infinite; 
+    background-color: #00a096;
+    box-shadow: 30px 0 0 #97bf0d;
+  }
+  
+  @keyframes rotate {
+    0% { 
+      -webkit-transform: rotate(0deg) scale(0.8); 
+      -moz-transform: rotate(0deg) scale(0.8);
+    }
+    50% { 
+      -webkit-transform: rotate(360deg) scale(1.2); 
+      -moz-transform: rotate(360deg) scale(1.2);
+    }
+    100% { 
+      -webkit-transform: rotate(720deg) scale(0.8); 
+      -moz-transform: rotate(720deg) scale(0.8);
+    }
+  }
+  
+  @keyframes ball1 {
+    0% {
+      box-shadow: 30px 0 0 #f8b334;
+    }
+    50% {
+      box-shadow: 0 0 0 #f8b334;
+      margin-bottom: 0;
+      -webkit-transform: translate(15px,15px);
+      -moz-transform: translate(15px, 15px);
+    }
+    100% {
+      box-shadow: 30px 0 0 #f8b334;
+      margin-bottom: 10px;
+    }
+  }
+  
+  @keyframes ball2 {
+    0% {
+      box-shadow: 30px 0 0 #97bf0d;
+    }
+    50% {
+      box-shadow: 0 0 0 #97bf0d;
+      margin-top: -20px;
+      -webkit-transform: translate(15px,15px);
+      -moz-transform: translate(15px, 15px);
+    }
+    100% {
+      box-shadow: 30px 0 0 #97bf0d;
+      margin-top: 0;
+    }
+  }

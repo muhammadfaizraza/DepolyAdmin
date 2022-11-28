@@ -1,0 +1,218 @@
+@media (max-width:1900px) and (min-width:1600px) {
+
+    .accordion-button:not(.collapsed) {
+       
+        font-size: 14px;
+      
+       
+    }
+    .AccordionBody > div > .mylink {
+     
+        font-size: 14px;
+      
+    }
+    .accordion-button {
+     
+        font-size: 14px;
+       
+    }
+    .SettingSec {
+       
+        font-size: 14px;
+    
+        
+    }
+    .mylink {
+        font-size: 14px;
+   
+    }
+    .mylink:hover{
+
+        color: black;
+    }
+    .page {
+        width: 88.5%;
+     
+    }
+    
+    
+    
+}
+@media (max-width:1600px) and (min-width:1320px) {
+
+
+
+    .accordion-button:not(.collapsed) {
+       
+        font-size: 13.5px;
+      
+       
+    }
+    .AccordionBody > div > .mylink {
+     
+        font-size: 13.5px;
+      
+    }
+    .accordion-button {
+     
+        font-size: 13.5px;
+       
+    }
+    .SettingSec {
+       
+        font-size: 13.5px;
+    
+        
+    }
+    .mylink {
+        font-size: 13.5px;
+   
+    }
+    .mylink:hover{
+
+        color: black;
+    }
+    
+    .page {
+        width: 87.3%;
+        margin-left: -15px;
+     
+    }
+    .logoutclass {
+        width: 200px;
+      
+    }
+    
+    .buttonLogout {
+     
+        font-size: 15px;
+
+        width: 126px;
+ 
+
+    }
+    .Header h4 {
+       
+        font-size: 16px;
+     
+    }
+    .Header button {
+       
+        font-size: 13px;
+      
+    }
+    
+    .SubmitButton {
+       
+        font-size: 13px;
+    }
+    .div_maintb td:nth-child(1) {
+      
+        padding-right: 70px;
+        font-size: 13px;
+    }
+    .Header h6 {
+      
+        font-size: 13px;
+       
+    }
+    
+}
+@media (max-width:1320px) and (min-width:1024px) {
+
+    .accordion-button:not(.collapsed) {
+       
+        font-size: 12.5px;
+      
+       
+    }
+    .AccordionBody > div > .mylink {
+     
+        font-size: 12.5px;
+      
+    }
+    .accordion-button {
+     
+        font-size: 12.5px;
+       
+    }
+    .SettingSec {
+       
+        font-size: 12.5px;
+    
+        
+    }
+    .mylink {
+        font-size: 12.5px;
+   
+    }
+    .mylink:hover{
+
+        color: black;
+    }
+    
+    .page {
+        width: 85.5%;
+        margin-left: -7px;
+     
+    }
+    .logoutclass {
+        width: 200px;
+      
+    }
+    
+    .buttonLogout {
+     
+        font-size: 15px;
+
+        width: 126px;
+ 
+
+    }
+    .Header h4 {
+       
+        font-size: 16px;
+     
+    }
+    .Header button {
+       
+        font-size: 13px;
+      
+    }
+    
+    .SubmitButton {
+       
+        font-size: 13px;
+    }
+    .div_maintb td:nth-child(1) {
+      
+        padding-right: 70px;
+        font-size: 13px;
+    }
+    .logoclass {
+        width: 234px;
+    
+    }
+
+    td,th{
+
+        font-size: 12px !important;
+    }
+
+    .sidebar {
+      
+        width: 190px;
+        height: 100vh;
+     
+    }
+    .Header h6 {
+      
+        font-size: 12px;
+       
+    }
+    
+    .rightsidedata {
+   
+        margin-left: 30px;
+    }
+}

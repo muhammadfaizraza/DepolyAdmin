@@ -34,7 +34,13 @@ const history = useNavigate()
 
     
     } catch (error) {
-      alert(error.message);
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
     }
   };
   return (

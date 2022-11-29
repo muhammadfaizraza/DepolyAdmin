@@ -43,7 +43,7 @@ const Tracklengthform = () => {
       });
       history("/tracklength");
     } catch (error) {
-      const err = error.message;
+      const err = error.response.data.message;
       swal({
         title: "Error!",
         text: err,

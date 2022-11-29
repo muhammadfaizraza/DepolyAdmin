@@ -232,7 +232,7 @@ const RaceCourseForm = () => {
                         }
                       >
                         <>
-                        <button className="addmore" onClick={handleShow}>+</button>
+                        <span className="addmore" onClick={handleShow}>+</span>
                         </>
                       </OverlayTrigger> 
                       <OverlayTrigger 
@@ -361,7 +361,7 @@ const RaceCourseForm = () => {
           <ColorPopUp />
         </Modal.Body>
       </Modal>
-      <Modal
+      {/* <Modal
         show={show}
         onHide={handleClose}
         size="lg"
@@ -374,7 +374,7 @@ const RaceCourseForm = () => {
         <Modal.Body>
           <NationalityPopUp />
         </Modal.Body>
-      </Modal>
+      </Modal> */}
     </Fragment>
   );
 };

@@ -63,16 +63,16 @@ const RaceForm = () => {
     };
   });
   const dispatch = useDispatch();
-  const HorseEntry = [
-    `${Gate},${InputData.id},${JockeyData.id},${JockeyData.weight},${EquipmentData.id}`,
-  ];
+  
 
 
 
 const HorseLength = horse.length;
 const ItemLength = items.length;
 
-
+const HorseEntry = [
+    `${Gate},${InputData.id},${JockeyData.id},${JockeyData.weight},${EquipmentData.id}`,
+  ];
   useEffect(() => {
     dispatch(fetchHorse());
     dispatch(fetchjockey());
@@ -81,8 +81,9 @@ const ItemLength = items.length;
   useEffect(() => {
     localStorage.setItem("lists", JSON.stringify(items));
   }, [items ,InputData]);
-
+  
   const addItem = () => {
+    
     if(HorseLength === ItemLength){
       toast('No Horse ')
     }

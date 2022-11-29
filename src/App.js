@@ -77,7 +77,7 @@ import VerdictTable from "./pages/GetTable/VerdictTable";
 import GroundType from "./pages/PostTable/GroundType";
 import GroundTypeTable from "./pages/GetTable/GroundTypeTable";
 import TestTable from './pages/PostTable/RaceForm/RaceTwo'
-import RaceCard from './pages/PostTable/RaceCard'
+import RaceCard from './pages/PostTable/RaceCard/RaceCard'
 import { ToastContainer } from 'react-toastify';
 import NotFound from "./Components/Common/NotFound";
 

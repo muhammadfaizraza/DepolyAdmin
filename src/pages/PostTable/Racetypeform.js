@@ -32,8 +32,8 @@ const Racetypeform = () => {
           history('/racetype')
         }
        
-      } catch (error) {
-        const err = error.message;
+      }catch (error) {
+        const err = error.response.data.message;
         swal({
           title: "Error!",
           text: err,

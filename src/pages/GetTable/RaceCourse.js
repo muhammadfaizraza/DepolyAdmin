@@ -15,6 +15,8 @@ import RacecoursePopup from "../../Components/Popup/RacecoursePopup";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
+import axios from "axios";
+
 
 const Racecourse = () => {
   const [show, setShow] = useState(false);
@@ -32,22 +34,22 @@ const Racecourse = () => {
     dispatch(fetchracecourse());
   }, [dispatch]);
 
-  const handleRemove = (Id) => {
+  const handleRemove = async (Id) => {
     swal({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this file !",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        dispatch(remove(Id));
-        swal(" Your  file has been deleted!", {
+        swal("Poof! Your imaginary file has been deleted!", {
           icon: "success",
         });
-        
+        const res = axios.delete(`${window.env.API_URL}/deletecourse/${Id}`);
+          window.location.reload();
       } else {
-        swal("Your data  is safe!");
+        swal("Your imaginary file is safe!");
       }
     });
   };
@@ -68,9 +70,6 @@ const Racecourse = () => {
     );
   }
   
-
-
-
   return (
     <>
       <div className="page">
@@ -147,7 +146,7 @@ const Racecourse = () => {
                                 style={{
                                   fontSize: "22px",
                                 }}
-                                // onClick={() => handleRemove(item._id)}
+                                onClick={() => handleRemove(item._id)}
                               />
                             </td>
                           </tr>

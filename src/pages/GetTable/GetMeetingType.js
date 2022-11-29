@@ -8,6 +8,7 @@ import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
+import axios from "axios";
 
 const GetMeetingType = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const GetMeetingType = () => {
   useEffect(() => {
     dispatch(fetchMeeting());
   }, [dispatch]);
-  const handleRemove = (Id) => {
+  const handleRemove = async (Id) => {
     swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -28,14 +29,12 @@ const GetMeetingType = () => {
         swal("Poof! Your imaginary file has been deleted!", {
           icon: "success",
         });
-        dispatch(remove(Id));
-        history("/meeting");
+        const res = axios.delete(`${window.env.API_URL}/deleteMeetingType/${Id}`)
+          window.location.reload();
       } else {
         swal("Your imaginary file is safe!");
       }
     });
-    dispatch(remove(Id));
-    history("/");
   };
 
   if (status === STATUSES.LOADING) {
@@ -112,7 +111,7 @@ const GetMeetingType = () => {
                                 style={{
                                   fontSize: "22px",
                                 }}
-                                  // onClick={() => handleRemove(item._id)}
+                                  onClick={() => handleRemove(item._id)}
                                 />
                               </td>
                             </tr>

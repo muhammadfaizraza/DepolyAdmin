@@ -9,6 +9,7 @@ import swal from 'sweetalert';
 import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
+import axios from "axios";
 
 const BreederTable = () => {
 
@@ -31,14 +32,14 @@ const BreederTable = () => {
           swal("Poof! Your imaginary file has been deleted!", {
             icon: "success",
           });
-          dispatch(remove(Id));
+          const res = axios.delete(`${window.env.API_URL}/deleteBreeder/${Id}`)
+          window.location.reload();
           history("/breederlist");
         } else {
           swal("Your imaginary file is safe!");
         }
       });
-      dispatch(remove(Id));
-      history("/breederlist");
+      
     };
   
     
@@ -132,7 +133,7 @@ const BreederTable = () => {
                                     style={{
                                       fontSize: "22px",
                                     }}
-                                    // onClick={() => handleRemove(item._id)}
+                                    onClick={() => handleRemove(item._id)}
                                   />
                              
                                 </td>

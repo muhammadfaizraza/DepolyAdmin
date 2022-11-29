@@ -8,16 +8,12 @@ import { BiEdit } from "react-icons/bi";
 import swal from 'sweetalert';
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
-
-
 import ScrollContainer from "react-indiana-drag-scroll";
+import axios from "axios";
 
 
 
 const NationalityTable = () => {
-
-
-
     const dispatch = useDispatch();
     const history = useNavigate();
     const { data: nationality, status } = useSelector((state) => state.nationality);
@@ -37,14 +33,13 @@ const NationalityTable = () => {
           swal("Poof! Your imaginary file has been deleted!", {
             icon: "success",
           });
-          dispatch(remove(Id));
-          history("/jockey");
+          const res = axios.delete(`${window.env.API_URL}/deleteNationality/${Id}`)
+          window.location.reload();
         } else {
           swal("Your imaginary file is safe!");
         }
       });
-      dispatch(remove(Id));
-      history("/nationalitylist");
+      
     };
   
     
@@ -140,7 +135,7 @@ const NationalityTable = () => {
                                 style={{
                                   fontSize: "22px",
                                 }}
-                                // onClick={() => handleRemove(item._id)}
+                                onClick={() => handleRemove(item._id)}
                               />
                          
                             </td>

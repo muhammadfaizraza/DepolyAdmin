@@ -8,6 +8,7 @@ import swal from 'sweetalert';
 import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
+import axios from "axios";
 
 
 
@@ -32,14 +33,15 @@ const CurrencyTable = () => {
           swal("Poof! Your imaginary file has been deleted!", {
             icon: "success",
           });
-          dispatch(remove(Id));
+          const res = axios.delete(`${window.env.API_URL}/deleteCurrency/${Id}`)
+      window.location.reload();
+      history("/currencylist");
           history("/currencylist");
         } else {
           swal("Your imaginary file is safe!");
         }
       });
-      dispatch(remove(Id));
-      history("/currencylist");
+      
     };
   
     
@@ -125,7 +127,7 @@ const CurrencyTable = () => {
                                 style={{
                                   fontSize: "22px",
                                 }}
-                                // onClick={() => handleRemove(item._id)}
+                                onClick={() => handleRemove(item._id)}
                               />
                          
                             </td>

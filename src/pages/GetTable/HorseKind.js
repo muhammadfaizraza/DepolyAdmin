@@ -8,7 +8,7 @@ import swal from 'sweetalert';
 import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
-
+import axios from "axios";
 
 const HorseKind = () => {
 
@@ -18,27 +18,24 @@ const HorseKind = () => {
     useEffect(() => {
       dispatch(fetchHorseKind());
     }, [dispatch]);
-    const handleRemove = (Id) => {
+    const handleRemove = async (Id) => {
       swal({
         title: "Are you sure?",
         text: "Once deleted, you will not be able to recover this imaginary file!",
         icon: "warning",
         buttons: true,
         dangerMode: true,
-      })
-      .then((willDelete) => {
+      }).then((willDelete) => {
         if (willDelete) {
           swal("Poof! Your imaginary file has been deleted!", {
             icon: "success",
           });
-          dispatch(remove(Id));
-          
+          const res = axios.delete(`${window.env.API_URL}/deleteHorseKind/${Id}`)
+            window.location.reload();
         } else {
           swal("Your imaginary file is safe!");
         }
       });
-      dispatch(remove(Id));
-     
     };
   
     
@@ -121,12 +118,11 @@ const HorseKind = () => {
                               
                                 <td className="table_delete_btn1">
                            {/* <Link to={`/editjockey/${item._id}`}> <BiEdit /></Link>  */}
-                           <MdDelete style={{
+                               <MdDelete style={{
                                   fontSize: "22px",
                                 }}
-                                    // onClick={() => handleRemove(item._id)}
+                                    onClick={() => handleRemove(item._id)}
                                   />
-                             
                                 </td>
                               </tr>
                             </>

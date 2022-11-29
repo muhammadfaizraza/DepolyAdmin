@@ -31,7 +31,7 @@ const Statistic = () => {
     dispatch(fetchjockey());
     
   }, [dispatch]);
-  const handleRemove = (Id) => {
+  const handleRemove = async (Id) => {
     swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -43,13 +43,12 @@ const Statistic = () => {
         swal("Poof! Your imaginary file has been deleted!", {
           icon: "success",
         });
-        dispatch(remove(Id));
-        navigate("/jockey");
+        const res = axios.delete(`${window.env.API_URL}/deleteJockey/${Id}`)
+          window.location.reload();
       } else {
         swal("Your imaginary file is safe!");
       }
     });
-    
   };
 
   if (status === STATUSES.LOADING) {
@@ -153,9 +152,9 @@ const Statistic = () => {
                                   jockeyid:item._id
                                 }
                               })}>
-                                  <BiEdit />
+                                  {/* <BiEdit /> */}
                                 <MdDelete
-                                  // onClick={() => handleRemove(item._id)}
+                                  onClick={() => handleRemove(item._id)}
                                 />
                               </td>
                             </tr>

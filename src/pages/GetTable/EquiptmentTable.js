@@ -3,7 +3,6 @@ import { fetchequipment ,STATUSES } from "../../redux/getReducer/getEquipment";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
 import { Link, useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -31,7 +30,8 @@ const EquiptmentTable = () => {
           swal(" Your imaginary file has been deleted!", {
             icon: "success",
           });
-          const response = axios.delete(`${window.env.API_URL}deleteEquipment/${Id}`);
+          const res = axios.delete(`${window.env.API_URL}/deleteEquipment/${Id}`)
+          window.location.reload();
           history("/equipmentlist");
         } else {
           swal("Your imaginary file is safe!");
@@ -123,7 +123,7 @@ const EquiptmentTable = () => {
                                     style={{
                                       fontSize: "22px",
                                     }}
-                                    // onClick={() => handleRemove(item._id)}
+                                    onClick={() => handleRemove(item._id)}
                                   />
                              
                                 </td>

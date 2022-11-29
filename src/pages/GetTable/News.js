@@ -12,6 +12,7 @@ import NewsPopup from "../../Components/Popup/NewsPopup";
 import {BsFillEyeFill} from 'react-icons/bs'
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
+import axios from "axios";
 
 const News = () => {
 
@@ -50,13 +51,13 @@ const News = () => {
           swal("Poof! Your imaginary file has been deleted!", {
             icon: "success",
           });
-          dispatch(remove(Id));
+          const res = axios.delete(`${window.env.API_URL}/deletenews/${Id}`)
+          window.location.reload();
         } else {
           swal("Your imaginary file is safe!");
         }
       });
-    dispatch(remove(Id));
-    history("/news");
+   
   };
 
   if (status === STATUSES.LOADING) {
@@ -148,7 +149,7 @@ const News = () => {
                           
                               <MdDelete
                                
-                                onClick={() => handleRemove(item.id)}
+                                onClick={() => handleRemove(item._id)}
                               />
                         
                             </td>

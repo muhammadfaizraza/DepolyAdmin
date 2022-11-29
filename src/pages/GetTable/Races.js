@@ -16,6 +16,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 
+
 const Prize = (data) => {
   return (
     <>

@@ -3,12 +3,12 @@ import { fetchcolor ,STATUSES } from "../../redux/getReducer/getColor";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { remove } from "../../redux/postReducer/PostJockey";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import swal from 'sweetalert';
 import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
-
+import axios from "axios";
 
 const ColorTable = () => {
     const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const ColorTable = () => {
     useEffect(() => {
       dispatch(fetchcolor());
     }, [dispatch]);
-    const handleRemove = (Id) => {
+    const handleRemove =  (Id) => {
       swal({
         title: "Are you sure?",
         text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -26,11 +26,13 @@ const ColorTable = () => {
         dangerMode: true,
       })
       .then((willDelete) => {
+       
         if (willDelete) {
           swal("Poof! Your imaginary file has been deleted!", {
             icon: "success",
           });
-          dispatch(remove(Id));
+          const res = axios.delete(`${window.env.API_URL}/deleteColor/${Id}`)
+          window.location.reload();
           history("/colorlist");
         } else {
           swal("Your imaginary file is safe!");
@@ -123,7 +125,7 @@ const ColorTable = () => {
                                     style={{
                                       fontSize: "22px",
                                     }}
-                                    // onClick={() => handleRemove(item._id)}
+                                    onClick={() => handleRemove(item._id)}
                                   />
                              
                                 </td>

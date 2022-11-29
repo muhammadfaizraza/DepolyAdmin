@@ -1,26 +1,25 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchSponsor, STATUSES } from "../../redux/getReducer/getSponsorSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { remove } from "../../redux/postReducer/PostSponsor";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 import { Link } from "react-router-dom";
-import { BiEdit } from 'react-icons/bi'
+import { BiEdit } from "react-icons/bi";
 import ScrollContainer from "react-indiana-drag-scroll";
-import SponserPopup from '../../Components/Popup/SponserPopup';
+import SponserPopup from "../../Components/Popup/SponserPopup";
 import { Modal } from "react-bootstrap";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
-
+import axios from "axios";
 
 const News = () => {
- 
   const [show, setShow] = useState(false);
-  const [modaldata, setmodaldata] = useState()
+  const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
   const handleShow = async (data) => {
-      setmodaldata(data)
-      await setShow(true)
+    setmodaldata(data);
+    await setShow(true);
   };
 
   const dispatch = useDispatch();
@@ -35,23 +34,24 @@ const News = () => {
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    })
-      .then((willDelete) => {
-        if (willDelete) {
-          swal("Poof! Your imaginary file has been deleted!", {
-            icon: "success",
-          });
-          dispatch(remove(Id));
-        } else {
-          swal("Your imaginary file is safe!");
-        }
-      });
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal("Poof! Your imaginary file has been deleted!", {
+          icon: "success",
+        });
+        const res = axios.delete(`${window.env.API_URL}/deleteSponsor/${Id}`);
+        window.location.reload();
+      } else {
+        swal("Your imaginary file is safe!");
+      }
+    });
 
     fetchSponsor();
   };
   if (status === STATUSES.LOADING) {
-    return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
-
+    return (
+      <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
+    );
   }
 
   if (status === STATUSES.ERROR) {
@@ -68,9 +68,7 @@ const News = () => {
 
   return (
     <>
-
       <div className="page">
-
         <div className="rightsidedata">
           <div
             style={{
@@ -87,9 +85,7 @@ const News = () => {
                     alignItems: "center",
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
-                >
-                  
-                </h6>
+                ></h6>
 
                 <Link to="/sponsorform">
                   <button>Add Sponsor</button>
@@ -101,16 +97,12 @@ const News = () => {
                 <table striped bordered hover>
                   <thead>
                     <tr>
-
-
-
-
                       <th>Title </th>
                       <th>Title Arabic</th>
                       <th>Description </th>
                       <th>Description Arabic</th>
                       <th>Image</th>
-                      <th style={{textAlign: 'center'}}>Action</th>
+                      <th style={{ textAlign: "center" }}>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -118,26 +110,30 @@ const News = () => {
                       return (
                         <>
                           <tr className="tr_table_class">
-
-
                             <td>{item.TitleEn}</td>
                             <td>{item.TitleAr}</td>
                             <td>{item.DescriptionEn}</td>
                             <td>{item.DescriptionAr}</td>
 
                             <td>
-                              <img src={item.image} alt="" style={{
-                                width: '30px', height: '30px'
-                              }} />
+                              <img
+                                src={item.image}
+                                alt=""
+                                style={{
+                                  width: "30px",
+                                  height: "30px",
+                                }}
+                              />
                             </td>
-                            <td className="table_delete_btn1" style={{textAlign: 'center'}}>
-                            {/* <Link to ={`/editsponsor/${item._Id}`}      ><BiEdit /></Link>  */}
-                          
+                            <td
+                              className="table_delete_btn1"
+                              style={{ textAlign: "center" }}
+                            >
+                              {/* <Link to ={`/editsponsor/${item._Id}`}      ><BiEdit /></Link>  */}
+
                               <MdDelete
-                              
                                 onClick={() => handleRemove(item._id)}
                               />
-                             
                             </td>
                           </tr>
                         </>
@@ -148,23 +144,27 @@ const News = () => {
               </ScrollContainer>
             </div>
           </div>
-
         </div>
       </div>
-      <Modal show={show} onHide={handleClose}   size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered>
-                <Modal.Header closeButton>
-                    <h2>Sponsor </h2>
-                </Modal.Header>
-                <Modal.Body>
-                <SponserPopup data={modaldata} />
-                </Modal.Body>
-                <Modal.Footer>
-
-                <button onClick={handleClose}  className='modalClosebtn'>Close</button>
-                </Modal.Footer>
-            </Modal>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Sponsor </h2>
+        </Modal.Header>
+        <Modal.Body>
+          <SponserPopup data={modaldata} />
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

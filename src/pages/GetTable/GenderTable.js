@@ -8,6 +8,7 @@ import swal from 'sweetalert';
 import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
+import axios from "axios";
 
 
 const GenderTable = () => {
@@ -30,14 +31,14 @@ const GenderTable = () => {
           swal("Poof! Your imaginary file has been deleted!", {
             icon: "success",
           });
-          dispatch(remove(Id));
+          const res = axios.delete(`${window.env.API_URL}/deleteSex/${Id}`)
+          window.location.reload();
           history("/genderlist");
         } else {
           swal("Your imaginary file is safe!");
         }
       });
-      dispatch(remove(Id));
-      history("/gender");
+      
     };
   
     
@@ -124,7 +125,7 @@ const GenderTable = () => {
                                     style={{
                                       fontSize: "22px",
                                     }}
-                                    // onClick={() => handleRemove(item._id)}
+                                    onClick={() => handleRemove(item._id)}
                                   />
                              
                                 </td>

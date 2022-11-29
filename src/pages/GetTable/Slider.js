@@ -13,6 +13,7 @@ import { BsFillEyeFill } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
+import axios from "axios";
 
 
 const Slider = () => {
@@ -36,7 +37,8 @@ const Slider = () => {
         swal("Poof! Your imaginary file has been deleted!", {
           icon: "success",
         });
-        dispatch(remove(Id));
+        const res = axios.delete(`${window.env.API_URL}/deleteSlider/${Id}`)
+          window.location.reload();
       } else {
         swal("Your imaginary file is safe!");
       }
@@ -147,7 +149,7 @@ const Slider = () => {
                                 }
                               /> */}
                               <MdDelete
-                                // onClick={() => handleRemove(item._id)}
+                                onClick={() => handleRemove(item._id)}
                               />
                             </td>
                           </tr>

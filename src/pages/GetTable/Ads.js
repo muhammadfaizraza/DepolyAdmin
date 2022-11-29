@@ -12,6 +12,9 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import {BiEdit} from 'react-icons/bi'
+import axios from "axios";
+import swal from "sweetalert";
+
 
 const Ads = () => {
 
@@ -25,9 +28,27 @@ const Ads = () => {
   useEffect(() => {
     dispatch(fetchAds());
   }, []);
-  const handleRemove = (Id) => {
-    dispatch(remove(Id));
+  const handleRemove = async (Id) => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal("Poof! Your imaginary file has been deleted!", {
+          icon: "success",
+        });
+        const res = axios.delete(`${window.env.API_URL}/deleteAds/${Id}`)
+          window.location.reload();
+      } else {
+        swal("Your imaginary file is safe!");
+      }
+    });
   };
+
+
   let handleEdit = (Id) => {
 
     dispatch(edit(Id));
@@ -106,17 +127,13 @@ const Ads = () => {
                               <img src={item.image} alt="" />
                             </td>
 
-                            <td className="table_delete_btn1" onClick={() => history('/editjockey',{
-                                state:{
-                                  jockeyid:item._id
-                                }
-                              })}>
+                            <td className="table_delete_btn1">
                                   {/* <BiEdit /> */}
                                 <MdDelete
                                 style={{
                                   fontSize: "22px",
                                 }}
-                                  // onClick={() => handleRemove(item._id)}
+                                  onClick={() => handleRemove(item._id)}
                                 />
                               </td>
                           

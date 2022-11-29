@@ -13,6 +13,9 @@ import Moment from "react-moment";
 import {BiEdit} from 'react-icons/bi'
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
+import axios from "axios";
+import swal from "sweetalert";
+
 
 const Owner = () => {
 
@@ -39,7 +42,25 @@ const Owner = () => {
   useEffect(() => {
     dispatch(fetchOwner({pagenumber}));
   },[dispatch]);
- 
+  const handleRemove = async (Id) => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal("Poof! Your imaginary file has been deleted!", {
+          icon: "success",
+        });
+        const res = axios.delete(`${window.env.API_URL}/deleteOwner/${Id}`)
+          window.location.reload();
+      } else {
+        swal("Your imaginary file is safe!");
+      }
+    });
+  };
   if (status === STATUSES.LOADING) {
         return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
 
@@ -115,15 +136,18 @@ const Owner = () => {
                     
                       <td>{item.OwnerDataNationalityData.NameEn}</td> 
                          <td>
-                          <img src={item.OwnerIDData[0].OwnerSilkColor} alt='' />
+                          <img src={item.OwnerIDData === undefined ? <></> : item.OwnerIDData.OwnerSilkColor} alt='' />
                          </td>
                          <td>
                            <img src={item.image} alt="" />
                          </td>
-                        <td style={{textAlign: 'center'}}><MdDelete style={{
+                        <td style={{textAlign: 'center'}}>
+                        <MdDelete
+                                style={{
                                   fontSize: "22px",
-                                }}/>
-                        
+                                }}
+                                  onClick={() => handleRemove(item._id)}
+                                />
                        
                          {/* <BiEdit onClick={() => navigate('/editowner',{
                                 state:{

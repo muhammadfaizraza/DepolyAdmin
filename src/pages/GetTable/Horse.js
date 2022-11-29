@@ -39,9 +39,6 @@ const Horse = () => {
     dispatch(fetchHorse({ pagenumber }));
   }, [dispatch]);
   
-
-
-
   const handleRemove = (Id) => {
     swal({
       title: "Are you sure?",

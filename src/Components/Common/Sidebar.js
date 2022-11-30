@@ -227,16 +227,28 @@ const Sidebar = () => {
               <Accordion.Header>Competition</Accordion.Header>
               <Accordion.Body className="AccordionBody">
                 <div>
-                  <Link to="/competition" className="mylink">
+                  <Link to="/competitionlisting" className="mylink">
                     View Listing
                   </Link>
                 </div>
                 <div>
                   {" "}
-                  <Link to="/competition" className="mylink">
-                    Add New
+                  <Link to="/addcompetition" className="mylink">
+                    Add Competition
                   </Link>
                 </div>
+                <div>
+                  <Link to="/CategoryListing" className="mylink">
+                     Category Listing
+                  </Link>
+                </div>
+                <div>
+                  {" "}
+                  <Link to="/addCategory" className="mylink">
+                    Add Category
+                  </Link>
+                </div>
+               
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="7">

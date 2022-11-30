@@ -43,6 +43,7 @@ import getGroundType from './getReducer/getGroundType';
 import getEquipment from './getReducer/getEquipment';
 import getResultSlice from './getReducer/getResultSlice';
 import getVerdict from './getReducer/getVerdict';
+import getCategory from './getReducer/getCategory';
 
 const store = configureStore({
     reducer: {
@@ -89,8 +90,8 @@ const store = configureStore({
         groundtype:getGroundType,
         equipment:getEquipment,
         Result:getResultSlice,
-        verdict:getVerdict
-        
+        verdict:getVerdict,
+        category:getCategory
     },
 });
 

@@ -252,7 +252,7 @@ input::file-selector-button {
   box-sizing: border-box;
   width: 95%;
   max-height: 50px;
-  margin-top: 0px;
+  margin-top: -10px;
   height: 50px;
   border: none;
   border-radius: 20px;
@@ -589,9 +589,9 @@ table.Prizeclass {
   margin-right: -43px;
 }
 .floatingInputAr>label {
-  right: -31px;
+  /* right: -31px; */
   left: initial;
-  padding-right: 44px;
+  /* padding-right: 44px; */
 }
 
 .Lottie{
@@ -610,4 +610,8 @@ label.Multiplecaplabel {
 }
 .starcss {
     margin-top: -22px;
+}
+
+.css-1gtu0rj-indicatorContainer {
+  padding: 25px !important;
 }

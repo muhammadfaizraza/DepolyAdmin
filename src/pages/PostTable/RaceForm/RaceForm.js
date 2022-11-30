@@ -396,7 +396,7 @@ const RaceForm = () => {
                 <div className="col-sm">
                     <Select
                       placeholder={<div>Race Name</div>}
-                      defaultValue={RaceName}
+                      defaultValue={RaceNameEn}
                       onChange={setRaceNameEn}
                       options={Racenameoptions}
                       isClearable={true}
@@ -418,7 +418,6 @@ const RaceForm = () => {
                         }
                       >
                         <>
-                          {/* <button className="addmore" onClick={handleShow}>+</button> */}
                           <button className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
                           </button>
@@ -550,7 +549,7 @@ const RaceForm = () => {
                   <div className="col-sm">
                     <Select
                       placeholder={<div>Select Race Type</div>}
-                      defaultValue={RaceType}
+                      defaultValue={RaceTyp}
                       onChange={setRaceType}
                       options={RaceTypes}
                       isClearable={true}
@@ -884,6 +883,8 @@ const RaceForm = () => {
                       value={DayNTime}
                       monthPlaceholder="Date "
                       dayPlaceholder="&"
+                      minDate={today}
+                      maxDate={new Date("02-29-2023")}
                       yearPlaceholder="Time"
                       style={{ direction: "rtl" }}
                     />
@@ -909,7 +910,7 @@ const RaceForm = () => {
                       placeholder="الجائزة الأولى "
                       value={FirstPrice}
                       onChange={(e) => setFirstPrice(e.target.value)}
-                     
+                      type='number'
                     ></input>
                   </div>
                 </div>
@@ -933,7 +934,7 @@ const RaceForm = () => {
                       placeholder="الجائزة الثانية "
                       value={SecondPrice}
                       onChange={(e) => setSecondPrice(e.target.value)}
-                     
+                      type='number'
                     ></input>
                   </div>
                 </div>
@@ -958,7 +959,7 @@ const RaceForm = () => {
                       style={{ direction: "rtl" }}
                       onChange={(e) => setThirdPrice(e.target.value)}
                       value={ThirdPrice}
-                     
+                      type='number'
                     ></input>
                   </div>
                 </div>
@@ -983,7 +984,7 @@ const RaceForm = () => {
                       placeholder="الجائزة الرابعة "
                       onChange={(e) => setFourthPrice(e.target.value)}
                       value={FourthPrice}
-                     
+                      type='number'
                     ></input>
                   </div>
                 </div>
@@ -1007,7 +1008,7 @@ const RaceForm = () => {
                       placeholder="الجائزة الخامسة "
                       onChange={(e) => setFifthPrice(e.target.value)}
                       value={FifthPrice}
-                     
+                      type='number'
                     ></input>
                   </div>
                 </div>
@@ -1031,7 +1032,7 @@ const RaceForm = () => {
                       placeholder="الجائزة السادسة"
                       onChange={(e) => setSixthPrice(e.target.value)}
                       value={SixthPrice}
-                     
+                      type='number'
                     ></input>
                   </div>
                 </div>

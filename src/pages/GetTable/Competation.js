@@ -1,33 +1,59 @@
-import React, { useEffect } from "react";
-
-import { fetchTrainer, STATUSES } from "../../redux/getReducer/getTrainerSlice";
+import React, { useEffect, useState } from "react";
+import { fetchjockey, STATUSES } from "../../redux/getReducer/getJockeySlice";
 import { useDispatch, useSelector } from "react-redux";
-
-
-import { remove } from "../../redux/postReducer/PostTrainer";
-
-import {  useNavigate } from "react-router-dom";
+import { MdDelete } from "react-icons/md";
+import { remove } from "../../redux/postReducer/PostJockey";
+import { Link, useNavigate } from "react-router-dom";
+import { BiEdit } from "react-icons/bi";
+import swal from "sweetalert";
+import JockeyPopup from "../../Components/Popup/JockeyPopup";
+import { Modal } from "react-bootstrap";
+import { BsFillEyeFill } from "react-icons/bs";
+import ScrollContainer from "react-indiana-drag-scroll";
+import Moment from "react-moment";
+import axios from "axios";
+import Lottie from "lottie-react";
+import HorseAnimation from "../../assets/horselottie.json";
 
 
 const Statistic = () => {
-  const dispatch = useDispatch();
-  const history = useNavigate();
-  const { data: trainer, status } = useSelector((state) => state.trainer);
-  useEffect(() => {
-    dispatch(fetchTrainer());
-  }, []);
-  const handleRemove = (Id) => {
-    dispatch(remove(Id));
-    history("/trainer");
+  const [show, setShow] = useState(false);
+  const [modaldata, setmodaldata] = useState();
+  const handleClose = () => setShow(false);
+  const handleShow = async (data) => {
+    setmodaldata(data);
+    await setShow(true);
   };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { data: jockey, status } = useSelector((state) => state.jockey);
+  useEffect(() => {
+    dispatch(fetchjockey()); 
+  }, [dispatch]);
+  
+  const handleRemove = async (Id) => {
+    // try {
+    //   const res = await axios.delete(`${window.env.API_URL}/deleteJockey/${Id}`)
+    //   swal({
+    //     title: "Success!",
+    //     text: "Data has been Deleted successfully ",
+    //     icon: "success",
+    //     button: "OK",
+    //   });
+    //   dispatch(fetchjockey());
+    // } catch (error) {
+    //   const err = error.response.data.message;
+    //   swal({
+    //     title: "Error!",
+    //     text: err,
+    //     icon: "error",
+    //     button: "OK",
+    //   });
+    // }
+  };
+
   if (status === STATUSES.LOADING) {
-    return (
-      <h2
-      className="loader"
-      >
-       
-      </h2>
-    );
+    return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
   }
 
   if (status === STATUSES.ERROR) {
@@ -42,64 +68,129 @@ const Statistic = () => {
     );
   }
   return (
-   <>
+    <>
+      <div className="page">
+        <div className="rightsidedata">
+          <div
+            style={{
+              marginTop: "30px",
+            }}
+          >
+            <div className="Header ">
+              <h4>Competition Listings</h4>
 
-   <div className="page">
- 
-      <div className="rightsidedata">
+              <div>
+                <h6
+                  style={{
+                    marginRight: "100px",
+                    alignItems: "center",
+                    color: "rgba(0, 0, 0, 0.6)",
+                  }}
+                >
+                  
+                </h6>
 
-      {/* <div className="newtables"></div> */}
-        {/* <div
-          style={{
-            marginTop: "30px",
-          }}
-        >
-          <>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>id</th>
-                  <th>Image</th>
-                  <th>Name</th>
-                  <th>Age</th>
-                  <th>Detail</th>
-                  <th>Remarks</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {trainer.map((item, index) => {
-                  return (
-                    <>
-                      <tr className="tr_table_class">
-                        <td>{index}</td>
-                        <td>
-                          <img src={item.image} alt="" />
-                        </td>
-                        <td>{item.Name}</td>
-                        <td>{item.Age}</td>
-                        <td>{item.Detail}</td>
-                        <td>{item.Remarks}</td>
-                        <td className="table_delete_btn1">
-                          <MdDelete
-                            style={{
-                              fontSize: "22px",
-                            }}
-                            onClick={() => handleRemove(item._id)}
-                          />
-                        </td>
+                <Link to="/addcompetition">
+                  <button>Add Category</button>
+                </Link>
+              </div>
+            </div>
+            <>
+              <div className="div_maintb">
+                <ScrollContainer>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Jockey Name</th>
+                        <th>Name Arabic </th>
+                        <th>Short Name </th>
+                        <th>Short Name Arabic</th>
+                        <th>Age</th>
+                        <th>Rating</th>
+                        <th>License Date </th>
+                        <th>Remarks</th>
+                        <th>Remarks Arabic </th>
+                        <th>Min Weight</th>
+                        <th>Max Weight</th>
+                        <th>Nationality</th>
+                        <th>Image</th>
+                        <th>Action</th>
                       </tr>
-                    </>
-                  );
-                })}
-              </tbody>
-            </Table>
-          </>
-        </div> */}
-       
+                    </thead>
+                    <tbody>
+                      {jockey.map((item, index) => {
+                        return (
+                          <>
+                            <tr className="tr_table_class">
+                              <td>{item.NameEn}</td>
+                              <td>{item.NameAr}</td>
+                              <td>{item.ShortNameEn}</td>
+                              <td>{item.ShortNameAr === '' ? <>N/A</> : item.ShortNameAr}</td>
+                              <td>
+                                {" "}
+                                <Moment fromNow ago>
+                                  {item.DOB}
+                                </Moment>
+                              </td>
+                              <td>{item.Rating} </td>
+
+                              <td>
+                                <Moment format="YYYY/MM/DD">
+                                  {item.JockeyLicenseDate}
+                                </Moment>{" "}
+                              </td>
+                              <td>{item.RemarksEn}</td>
+                              <td>{item.RemarksAr} </td>
+                              <td>{item.MiniumumJockeyWeight} KG</td>
+                              <td>{item.MaximumJockeyWeight} KG</td>
+                              <td>{item.JockeyNationalityData.NameEn}</td>
+                              <td>
+                                <img src={item.image} alt="" />
+                              </td>
+
+                              <td className="table_delete_btn1">
+                                  <BiEdit onClick={() => navigate('/competitionlisting',{
+                                state:{
+                                  competitionid:item._id
+                                }
+                              })}/>
+                                  <MdDelete
+                                  onClick={() => handleRemove(item._id)}
+                                />
+                              </td>
+                            </tr>
+                          </>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </ScrollContainer>
+              </div>
+            </>
+          </div>
+          <span className="plusIconStyle"></span>
+        </div>
       </div>
-    </div>
-   </>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Jockey </h2>
+        </Modal.Header>
+        <Modal.Body>
+          <JockeyPopup data={modaldata} />
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };
 export default Statistic;

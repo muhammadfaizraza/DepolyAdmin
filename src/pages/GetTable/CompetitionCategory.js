@@ -1,8 +1,7 @@
 import React, { useEffect, Fragment } from "react";
-import { fetchcolor, STATUSES } from "../../redux/getReducer/getColor";
+import { fetchcategory, STATUSES } from "../../redux/getReducer/getCategory";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -11,13 +10,14 @@ import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BiEdit } from "react-icons/bi";
 
-const ColorTable = () => {
+const CategoryTable = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
-  const { data: Color, status } = useSelector((state) => state.color);
+  const { data: category, status } = useSelector((state) => state.category);
   useEffect(() => {
-    dispatch(fetchcolor());
+    dispatch(fetchcategory());
   }, [dispatch]);
+
   const handleRemove = async (Id) => {
     try {
       const res = await axios.delete(`${window.env.API_URL}/deleteColor/${Id}`);
@@ -28,7 +28,7 @@ const ColorTable = () => {
         button: "OK",
       });
       history("/colorlist");
-      dispatch(fetchcolor());
+      dispatch(fetchcategory());
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -100,7 +100,7 @@ const ColorTable = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {Color.map((item, index) => {
+                      {category.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
@@ -143,4 +143,4 @@ const ColorTable = () => {
   );
 };
 
-export default ColorTable;
+export default CategoryTable;

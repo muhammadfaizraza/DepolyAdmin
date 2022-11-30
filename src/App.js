@@ -80,7 +80,6 @@ import Racename from "./pages/GetTable/Racename";
 import Racenameform from "./pages/PostTable/Racenameform";
 import MeetingType from "./pages/PostTable/MeetingType";
 import GetMeetingType from "./pages/GetTable/GetMeetingType";
-// import Racetype from "./pages/GetTable/Racetype";
 import Verdict from "./pages/PostTable/Verdict";
 import Setting from "./pages/GetTable/Setting";
 import AdminProfile from "./pages/Setting/AdminProfile";
@@ -99,6 +98,10 @@ import TestTable from './pages/PostTable/RaceForm/RaceTwo'
 import RaceCard from './pages/PostTable/RaceCard/RaceCard'
 import { ToastContainer } from 'react-toastify';
 import NotFound from "./Components/Common/NotFound";
+import AddCompetition from "./pages/PostTable/Competition/AddCompetition";
+import AddCategory from "./pages/PostTable/Competition/AddCategory";
+import CompetitionCategory from "./pages/GetTable/CompetitionCategory";
+
 
 function App() {
   // useEffect(() => {
@@ -125,7 +128,7 @@ function App() {
        <ToastContainer />
        <BrowserRouter>
          <Header />
-         <div style={{display: "flex"}}>
+         <div className='mainhomescreen'>
          <Sidebar />
          <Routes>
              <Route exact path="/" element={<Login />} />
@@ -137,7 +140,7 @@ function App() {
              <Route path='/AddRole' element={<AdminRole />} />
              <Route path="/racecourse" element={<RaceCourse />} />
              <Route path="/races" element={<Races />} />
-             <Route path="/competition" element={<Competition />} />
+             <Route path="/competitionlisting" element={<Competition />} />
              <Route path="/statistics" element={<Statistic />} />
              <Route path="/horse" element={<Horse />} />
              <Route path="/jockey" element={<Jockey />} />
@@ -194,6 +197,10 @@ function App() {
              <Route path="/fullpublishrace" element={<PublishRace />} />
              <Route path="/testTable" element={<TestTable />} />
              <Route path="/racecard" element={<RaceCard />} />
+             <Route path="/addcompetition" element={<AddCompetition />} />
+             <Route path="/addCategory" element={<AddCategory />} />
+             <Route path="/CategoryListing" element={<CompetitionCategory />} />
+
              <Route path="*" element={<NotFound />} />
 
              {/* Edit Pages */}

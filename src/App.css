@@ -25,3 +25,14 @@ body::-webkit-scrollbar {
   }
 
   
+  input:-webkit-autofill {
+    -webkit-box-shadow: none;
+    -webkit-text-fill-background: #fff !important;
+    -webkit-background-clip: #fff;
+    -webkit-backdrop-filter: none;
+
+}
+button:focus, input:focus, a:focus {
+    text-decoration: none !important;
+    outline: none !important;
+}

@@ -1,0 +1,385 @@
+import React, { useState, Fragment, useEffect } from "react";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import Select from "react-select";
+import { fetchnationality } from "../../../redux/getReducer/getNationality";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+import { useNavigate } from "react-router-dom";
+import DatePicker from "react-date-picker";
+import swal from "sweetalert";
+
+const TrainerForm = () => {
+  // const dispatch = useDispatch();
+  const history = useNavigate();
+  const dispatch = useDispatch();
+
+  const { data: nationality } = useSelector((state) => state.nationality);
+
+  const [NameEn, setNameEn] = useState("");
+  const [NameAr, setNameAr] = useState("");
+  const [DescEn, setDescEn] = useState("");
+  const [DescAr, setDescAr] = useState("");
+  const [shortCode, setshortCode] = useState("");
+  const [pickCount, setpickCount] = useState("");
+  const [TriCount, setTriCount] = useState("");
+  const [StartDate, setStartDate] = useState("");
+  const [CompetitionCategory, setCompetitionCategory] = useState("");
+  const [CompetitionCode, setCompetitionCode] = useState("");
+  const [preview, setPreview] = useState();
+  const [image, setImage] = useState();
+
+  const submit = async (event) => {
+    event.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("image", image);
+      formData.append("NameEn", NameEn);
+      formData.append("NameAr", NameAr);
+      formData.append("DescEn", DescEn);
+      formData.append("DescAr", DescAr);
+      formData.append("shortCode", shortCode);
+      formData.append("pickCount", pickCount);
+      formData.append("TriCount", TriCount);
+      formData.append("StartDate", StartDate);
+      formData.append("CompetitionCategory", CompetitionCategory);
+      formData.append("CompetitionCode", CompetitionCode);
+      formData.append("image", image);
+      await axios.post(
+        `${window.env.API_URL}/uploadCompetiton?keyword=&page=`,
+        formData
+      );
+
+      swal({
+        title: "success!",
+        text: "Data Submitted !",
+        icon: "success",
+        button: "OK",
+      });
+      history("/competitionlisting");
+    } catch (error) {
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
+    }
+  };
+
+  const convert = (num) => {
+    if (num) {
+      var date = new Date(num);
+      var months = [
+        "يناير",
+        "فبراير",
+        "مارس",
+        "إبريل",
+        "مايو",
+        "يونيو",
+        "يوليو",
+        "أغسطس",
+        "سبتمبر",
+        "أكتوبر",
+        "نوفمبر",
+        "ديسمبر",
+      ];
+      var days = [
+        "اﻷحد",
+        "اﻷثنين",
+        "الثلاثاء",
+        "اﻷربعاء",
+        "الخميس",
+        "الجمعة",
+        "السبت",
+      ];
+      var delDateString =
+        days[date.getDay()] +
+        " " +
+        date.getDate() +
+        " " +
+        months[date.getMonth()] +
+        " " +
+        date.getFullYear();
+      return delDateString;
+    }
+  };
+
+  var today = new Date();
+  useEffect(() => {
+    dispatch(fetchnationality());
+  }, []);
+
+
+  let AllNationality =
+    nationality === undefined ? (
+      <></>
+    ) : (
+      nationality.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameEn,
+          label: item.NameEn,
+        };
+      })
+    );
+
+  return (
+    <Fragment>
+      <div className="page">
+        <div className="rightsidedata">
+          <div
+            style={{
+              marginTop: "30px",
+            }}
+          >
+            <div className="Headers">Add Competition</div>
+            <div className="form">
+              <form onSubmit={submit}>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Name"
+                      className="mb-3"
+                      onChange={(e) => setNameEn(e.target.value)}
+                      name="Name"
+                      value={NameEn}
+                    >
+                      <Form.Control type="text" placeholder="Name" />
+                    </FloatingLabel>
+                    <span className="spanForm"> |</span>
+                  </div>
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
+                      onChange={(e) => setNameAr(e.target.value)}
+                      name="Name"
+                      value={NameAr}
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control type="text" placeholder="اسم" />
+                    </FloatingLabel>
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <DatePicker
+                      onChange={setStartDate}
+                      value={StartDate}
+                      maxDate={today}
+                      dayPlaceholder=" "
+                      monthPlaceholder="Start Date "
+                      yearPlaceholder=""
+                    />
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm" style={{ direction: "rtl" }}>
+                    <input
+                      value={convert(StartDate)}
+                      placeholder="تاريخ الولادة"
+                    />
+                  </div>
+                </div>
+                <div className="row  mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Title"
+                      className="mb-3"
+                      onChange={(e) => setDescEn(e.target.value)}
+                      value={DescEn}
+                    >
+                      <Form.Control type="text" placeholder="Description" />
+                    </FloatingLabel>
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="عنوان"
+                      className="mb-3 floatingInputAr"
+                      onChange={(e) => setDescAr(e.target.value)}
+                      name="Name"
+                      value={DescAr}
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control type="text" placeholder="عنوان" />
+                    </FloatingLabel>
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Short Name"
+                      className="mb-3"
+                      onChange={(e) => setshortCode(e.target.value)}
+                      value={shortCode}
+                    >
+                      <Form.Control type="text" placeholder="Short Code" />
+                    </FloatingLabel>
+
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم قصير"
+                      className="mb-3 floatingInputAr"
+                      onChange={(e) => setshortCode(e.target.value)}
+                      name="Name"
+                      value={shortCode}
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control type="text" placeholder="اسم قصير" />
+                    </FloatingLabel>
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Name"
+                      className="mb-3"
+                      onChange={(e) => setCompetitionCode(e.target.value)}
+                      name="Name"
+                      value={CompetitionCode}
+                    >
+                      <Form.Control
+                        type="text"
+                        placeholder="Competition Code"
+                      />
+                    </FloatingLabel>
+                    <span className="spanForm"> |</span>
+                  </div>
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
+                      onChange={(e) => setCompetitionCode(e.target.value)}
+                      name="Name"
+                      value={CompetitionCode}
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control type="text" placeholder="اسم" />
+                    </FloatingLabel>
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Pick Count"
+                      className="mb-3"
+                      onChange={(e) => setpickCount(e.target.value)}
+                      value={pickCount}
+                    >
+                      <Form.Control type="number" placeholder="Pick Count" />
+                    </FloatingLabel>
+
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="تفاصيل"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control type="text" placeholder="تفاصيل" />
+                    </FloatingLabel>
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Remarks"
+                      className="mb-3"
+                      onChange={(e) => setTriCount(e.target.value)}
+                      value={TriCount}
+                    >
+                      <Form.Control type="text" placeholder="Tri Count" />
+                    </FloatingLabel>
+
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="ملاحظات"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control type="text" placeholder="ملاحظات" />
+                    </FloatingLabel>
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Select Competition Category</div>}
+                      defaultValue={CompetitionCategory}
+                      onChange={setCompetitionCategory}
+                      options={AllNationality}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <button
+                          className="addmore"
+                          onClick={() => history("/nationality")}
+                        >
+                          +
+                        </button>
+                      </OverlayTrigger>
+                      |
+                    </span>
+                  </div>
+                  <div className="col-sm">
+                    <Select
+                      required
+                      placeholder={<div>حدد جيلتي</div>}
+                      className="selectdir"
+                      defaultValue={CompetitionCategory}
+                      onChange={setCompetitionCategory}
+                      options={AllNationality}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
+
+                <div
+                  className="ButtonSection "
+                  style={{ justifyContent: "end" }}
+                >
+                  <button Name="submit" className="SubmitButton">
+                    Add Competition
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  );
+};
+
+export default TrainerForm;

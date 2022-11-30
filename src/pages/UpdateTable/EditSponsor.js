@@ -1,31 +1,61 @@
 import React, { useState, useEffect } from "react";
 import "../../Components/CSS/forms.css";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { add } from "../../redux/postReducer/PostJockey";
-
+import { useNavigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
+import axios from "axios";
 
-const EditSponsor = () => {
-  const dispatch = useDispatch();
+const NewsForm = () => {
   const history = useNavigate();
-  const [Name, setName] = useState("");
-  const [Age, setAge] = useState("");
-  const [image, setImage] = useState();
-  const [preview, setPreview] = useState();
+  const { state } = useLocation();
 
+  const { sponsorid } = state;  
+  console.log(sponsorid,'sponsorid');
+
+  const [image,setImage] = useState();
+  const [state1, setState] = useState({
+		TitleEn: '',
+    TitleAr:'',
+    DescriptionEn:'',
+    DescriptionAr:'',
+		Url: '',
+    image:image
+	});
+
+ 
+
+  useEffect(() => {
+		if (sponsorid) {
+			setState({
+				TitleEn: sponsorid.TitleEn,
+        TitleAr: sponsorid.TitleAr,
+				DescriptionEn: sponsorid.DescriptionEn,
+        DescriptionAr: sponsorid.DescriptionAr,
+				Url: sponsorid.Url,
+			});
+		} else {
+		}
+	}, [sponsorid]);
+
+  const fileSelected = (event) => {
+    const image = event.target.files[0];
+    setImage(image);
+  };
   const submit = async (event) => {
     event.preventDefault();
     try {
+      
       const formData = new FormData();
-      formData.append("image", image);
-      formData.append("Name", Name);
-      formData.append("Age", Age);
-      dispatch(add(formData));
-      history("/jockey");
+      formData.append("TitleEn", state1.TitleEn);
+      formData.append("TitleAr", state1.TitleAr);
+      formData.append("DescriptionEn", state1.DescriptionEn);
+      formData.append("DescriptionAr", state1.DescriptionAr);
+      formData.append("Url", state1.Url);
+      formData.append("image",image);
+      const response = await axios.put(`${window.env.API_URL}/updateSponsor/${sponsorid._id}`, formData);
+      history("/sponsor");
       swal({
         title: "Success!",
-        text: "Data has been added successfully ",
+        text: "Data has been Updated successfully ",
         icon: "success",
         button: "OK",
       });
@@ -33,16 +63,6 @@ const EditSponsor = () => {
       alert(error.message);
     }
   };
-  useEffect(() => {
-    if (!image) {
-      setPreview(undefined);
-      return;
-    }
-    const objectUrl = URL.createObjectURL(image);
-    setPreview(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [image]);
-
   return (
     <>
       <div className="page">
@@ -52,18 +72,22 @@ const EditSponsor = () => {
               marginTop: "30px",
             }}
           >
-            <div className="Headers">Add Jockey</div>
+            <div className="Headers">Edit Sponsor</div>
             <div className="form">
               <form onSubmit={submit}>
                 <div className="row mainrow">
                   <div className="col-sm">
-                    <input
-                      placeholder=" Name"
-                      onChange={(e) => setName(e.target.value)}
-                      name="Name"
-                      value={Name}
-                      required
-                    ></input>
+                  <input
+										type='text'
+										name='TitleEn'
+										id='TitleEn'
+										className='group__control'
+										placeholder='Name'
+										value={state1.TitleEn}
+										onChange={(e) =>
+											setState({ ...state1, TitleEn: e.target.value })
+										}
+									/>
                     <span className="spanForm"> |</span>
                   </div>
 
@@ -71,41 +95,70 @@ const EditSponsor = () => {
                     <input
                       style={{ direction: "rtl" }}
                       placeholder="اسم "
+                      type='text'
+										name='TitleAr'
+										id='TitleAr'
+										className='group__control'
+										value={state1.TitleAr}
+										onChange={(e) =>
+											setState({ ...state1, TitleAr: e.target.value })
+										}
                     ></input>
                   </div>
                 </div>
+
                 <div className="row mainrow">
                   <div className="col-sm">
-                    <input
-                      placeholder="Age"
-                      onChange={(e) => setAge(e.target.value)}
-                      name="Name"
-                      value={Age}
-                      required
-                      type="number"
-                    ></input>
+                  <input
+										type='text'
+										name='TitleEn'
+										id='TitleEn'
+										className='group__control'
+										placeholder='Description'
+										value={state1.DescriptionEn}
+										onChange={(e) =>
+											setState({ ...state1, DescriptionEn: e.target.value })
+										}
+									/>
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
                     <input
                       style={{ direction: "rtl" }}
-                      type="number"
-                      placeholder="اسم المسار"
+                      placeholder="اسم "
+                      type='text'
+										name='TitleAr'
+										id='TitleAr'
+										className='group__control'
+										value={state1.DescriptionAr}
+										onChange={(e) =>
+											setState({ ...state1, DescriptionAr: e.target.value })
+										}
                     ></input>
                   </div>
                 </div>
 
-                <div className="ButtonSection">
-                  <div>
-                    <input type="file" className="formInput" />
-                    {image && (
-                      <img src={preview} alt="" className="PreviewImage" />
-                    )}
+                <div className="row mainrow">
+                  <div className="col-sm">
+                  <input
+										type='text'
+										className='group__control'
+										placeholder='Url'
+										value={state1.Url}
+										onChange={(e) =>
+											setState({ ...state1, Url: e.target.value })
+										}
+									/>
                   </div>
 
+                </div>
+                
+
+                <div className="ButtonSection">
+                  <input type="file" size="60" onChange={fileSelected} />
                   <button type="submit" className="SubmitButton">
-                    Update
+                  Update
                   </button>
                 </div>
               </form>
@@ -117,4 +170,4 @@ const EditSponsor = () => {
   );
 };
 
-export default EditSponsor;
+export default NewsForm;

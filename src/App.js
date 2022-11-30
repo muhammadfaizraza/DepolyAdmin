@@ -35,9 +35,27 @@ import Header from "./Components/Common/Header";
 import Sidebar from "./Components/Common/Sidebar";
 import EditJockey from './pages/UpdateTable/EditJockey'
 import EditRacecourse from "./pages/UpdateTable/EditRacecourse";
-import EditOwner from "./pages/UpdateTable/EditOwner"
-import EditSlider from "./pages/UpdateTable/EditSlider"
-import EditSponsor from "./pages/UpdateTable/EditSponsor"
+import EditOwner from "./pages/UpdateTable/EditOwner";
+import EditSlider from "./pages/UpdateTable/EditSlider";
+import EditSponsor from "./pages/UpdateTable/EditSponsor";
+import EditColor from "./pages/UpdateTable/EditColor";
+import EditBreeder from "./pages/UpdateTable/EditBreeder";
+import EditCurrency from "./pages/UpdateTable/EditCurrency";
+import EditEquipment from "./pages/UpdateTable/EditEquipment";
+import EditGender from "./pages/UpdateTable/EditGender";
+import EditNationality from "./pages/UpdateTable/EditNationality";
+import EditAds from "./pages/UpdateTable/EditAds";
+import EditNews from "./pages/UpdateTable/EditNews";
+import EditTrainer from "./pages/UpdateTable/EditTrainer";
+import EditHorse from "./pages/UpdateTable/EditHorse";
+import EditGroundType from "./pages/UpdateTable/EditGroundType";
+import EditTrack from "./pages/UpdateTable/EditTrack";
+import EditRaceName from "./pages/UpdateTable/EditRaceName";
+import EditRaceType from "./pages/UpdateTable/EditRaceType";
+import EditRaceKind from "./pages/UpdateTable/EditRaceKind";
+import EditMeetingType from "./pages/UpdateTable/EditMeetingType";
+import EditVerdict from "./pages/UpdateTable/EditVerdict";
+
 import ResultForm from "./pages/PostTable/Result/ResultForm";
 import RacesResult from "./pages/PostTable/Result/ResultRaces";
 import Color from "./pages/PostTable/Color";
@@ -176,7 +194,24 @@ function App() {
                 <Route path="/editowner" element={<EditOwner/>}/>
                 <Route path="/editslider" element={<EditSlider/>}/>
                 <Route path="/editsponsor" element={<EditSponsor/>}/>
-             
+                <Route path="/editcolor" element={<EditColor />}/>
+                <Route path="/editbreeder" element={<EditBreeder />}/>
+                <Route path="/editcurrency" element={<EditCurrency />}/>
+                <Route path="/editgender" element={<EditGender/>}/>
+                <Route path="/editequipment" element={<EditEquipment/>}/>
+                <Route path="/editads" element={<EditAds/>}/>
+                <Route path="/editnationality" element={<EditNationality/>}/>
+                <Route path="/editnews" element={<EditNews />}/>
+                <Route path="/edittrainer" element={<EditTrainer/>}/>
+                <Route path="/edithorse" element={<EditHorse />}/>
+                <Route path="/editgroundtype" element={<EditGroundType />}/>
+                <Route path="/edittrack" element={<EditTrack />}/>
+                <Route path="/editracename" element={<EditRaceName />}/>
+                <Route path="/editracetype" element={<EditRaceType />}/>
+                <Route path="/editracekind" element={<EditRaceKind />}/>
+                <Route path="/editmeetingtype" element={<EditMeetingType />}/>
+                <Route path="/editverdict" element={<EditVerdict />}/>
+
               </Route>
             </Routes>
             </div>

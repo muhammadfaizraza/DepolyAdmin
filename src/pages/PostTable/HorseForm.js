@@ -189,15 +189,12 @@ const HorseForm = () => {
 
 
   const [ActiveOwner, setActiveOwner] = useState("");
-  // const [Jockey, setJockey] = useState("");
   const [Age, setAge] = useState("");
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
   const [Owner, setOwner] = useState("");
   const [ActiveTrainer, setActiveTrainer] = useState("");
-  // const [ActiveJockey, setActiveJockey] = useState("");
   const [Breeder, setBreeder] = useState("");
-  // const [Trainer, setTrainer] = useState("");
   const [Remarks, setRemarks] = useState("");
   const [HorseStatus, setHorseStatus] = useState("");
   const [Sex, setSex] = useState("");
@@ -208,7 +205,6 @@ const HorseForm = () => {
   const [DOB, setDOB] = useState("");
   const [CreationId, setCreationId] = useState("");
   const [GSire, setGSire] = useState("");
-  // const [WinningAmount, setWinningAmount] = useState("");
   const [OverAllRating, setOverAllRating] = useState("");
   const [image, setimage] = useState();
   const [Foal, setFoal] = useState("");

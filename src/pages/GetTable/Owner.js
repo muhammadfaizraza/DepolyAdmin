@@ -141,21 +141,21 @@ const Owner = () => {
                          <td>
                            <img src={item.image} alt="" />
                          </td>
-                        <td style={{textAlign: 'center'}}>
-                        <MdDelete
-                                style={{
-                                  fontSize: "22px",
-                                }}
-                                  onClick={() => handleRemove(item._id)}
-                                />
-                       
-                         {/* <BiEdit onClick={() => navigate('/editowner',{
-                                state:{
-                                  ownerid:item._id
+                         <td className="table_delete_btn1"
+                              style={{ textAlign: "center" }}>
+                            <BiEdit
+                                onClick={() =>
+                                  navigate("/editowner", {
+                                    state: {
+                                      ownerid: item,
+                                    },
+                                  })
                                 }
-                              })}/> */}
-                        
-                        </td>
+                              />
+                              <MdDelete
+                                onClick={() => handleRemove(item._id)}
+                              />
+                            </td>
                        </tr>
                      </>
                    );

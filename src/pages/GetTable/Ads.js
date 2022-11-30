@@ -128,7 +128,13 @@ const Ads = () => {
                             </td>
 
                             <td className="table_delete_btn1">
-                                  {/* <BiEdit /> */}
+
+                            <BiEdit onClick={() => history('/editads',{
+                                state:{
+                                  adsid:item
+                                }
+                              })} />
+
                                 <MdDelete
                                 style={{
                                   fontSize: "22px",

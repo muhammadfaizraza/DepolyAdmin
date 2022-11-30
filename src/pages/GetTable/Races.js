@@ -137,10 +137,10 @@ const Races = () => {
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
                 >
-                  <DropdownButton id="dropdown-basic-button" title="Filter">
+                  {/* <DropdownButton id="dropdown-basic-button" title="Filter">
                   <Dropdown.Item onClick={() => handleAll()}>Published</Dropdown.Item>
                   <Dropdown.Item onClick={() => handleAwaited()}>Publish Awaited</Dropdown.Item>
-                </DropdownButton>
+                </DropdownButton> */}
                 </h6>
 
                 <Link to="/raceform">
@@ -178,7 +178,7 @@ const Races = () => {
                       <th>Action</th>
                     </tr>
                   </thead>
-                  {AllRace === undefined ? (
+                  {race === undefined ? (
                     <h3
                       style={{
                         textAlign: "center",
@@ -188,7 +188,7 @@ const Races = () => {
                     </h3>
                   ) : (
                     <>
-                      {AllRace.map((item) => {
+                      {race.map((item) => {
                         const { RaceStatus } = item;
                         return (
                           <tbody

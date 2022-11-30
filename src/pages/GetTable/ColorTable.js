@@ -9,6 +9,7 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+import { BiEdit } from "react-icons/bi";
 
 const ColorTable = () => {
     const dispatch = useDispatch();
@@ -120,7 +121,11 @@ const ColorTable = () => {
     
                               
                                 <td className="table_delete_btn1">
-                           {/* <Link to={`/editjockey/${item._id}`}> <BiEdit /></Link>  */}
+                                <BiEdit onClick={() => history('/editcolor',{
+                                state:{
+                                  colorid:item
+                                }
+                              })}/>
                                   <MdDelete
                                     style={{
                                       fontSize: "22px",

@@ -8,48 +8,42 @@ const NewsForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
 
-  const { adsid } = state;  
-  console.log(adsid,'adsid');
+  const { equipmentid } = state;
+  console.log(equipmentid);
 
-  const [image,setImage] = useState();
   const [state1, setState] = useState({
-		TitleEn: '',
-    TitleAr:'',
-    DescriptionEn:'',
-    DescriptionAr:'',
-    image:image
+		NameEn: '',
+    NameAr:'',
+		shortCode: '',
+    
 	});
-
  
 
   useEffect(() => {
-		if (adsid) {
+		if (equipmentid) {
 			setState({
-				TitleEn: adsid.TitleEn,
-        TitleAr: adsid.TitleAr,
-				DescriptionEn: adsid.DescriptionEn,
-        DescriptionAr: adsid.DescriptionAr,
+				NameEn: equipmentid.NameEn,
+        NameAr: equipmentid.NameAr,
+				shortCode: equipmentid.shortCode,
+   
 			});
 		} else {
+			alert('No Data')
 		}
-	}, [adsid]);
+	}, [equipmentid]);
 
-  const fileSelected = (event) => {
-    const image = event.target.files[0];
-    setImage(image);
-  };
+
   const submit = async (event) => {
     event.preventDefault();
     try {
       
       const formData = new FormData();
-      formData.append("TitleEn", state1.TitleEn);
-      formData.append("TitleAr", state1.TitleAr);
-      formData.append("DescriptionEn", state1.DescriptionEn);
-      formData.append("DescriptionAr", state1.DescriptionAr);
-      formData.append("image",image);
-      const response = await axios.put(`${window.env.API_URL}/updateAds/${adsid._id}`, formData);
-      history("/ads");
+      formData.append("NameEn", state1.NameEn);
+      formData.append("NameAr", state1.NameAr);
+      formData.append("shortCode", state1.shortCode);
+
+      const response = await axios.put(`${window.env.API_URL}/updateEquipment/${equipmentid._id}`, formData);
+      history("/equipmentlist");
       swal({
         title: "Success!",
         text: "Data has been Updated successfully ",
@@ -69,20 +63,20 @@ const NewsForm = () => {
               marginTop: "30px",
             }}
           >
-            <div className="Headers">Edit Sponsor</div>
+            <div className="Headers">Edit Equipment</div>
             <div className="form">
               <form onSubmit={submit}>
                 <div className="row mainrow">
                   <div className="col-sm">
                   <input
 										type='text'
-										name='TitleEn'
-										id='TitleEn'
+										name='NameEn'
+										id='NameEn'
 										className='group__control'
 										placeholder='Name'
-										value={state1.TitleEn}
+										value={state1.NameEn}
 										onChange={(e) =>
-											setState({ ...state1, TitleEn: e.target.value })
+											setState({ ...state1, NameEn: e.target.value })
 										}
 									/>
                     <span className="spanForm"> |</span>
@@ -93,52 +87,34 @@ const NewsForm = () => {
                       style={{ direction: "rtl" }}
                       placeholder="اسم "
                       type='text'
-										name='TitleAr'
-										id='TitleAr'
+										name='NameAr'
+										id='NameAr'
 										className='group__control'
-										value={state1.TitleAr}
+										value={state1.NameAr}
 										onChange={(e) =>
-											setState({ ...state1, TitleAr: e.target.value })
+											setState({ ...state1, NameAr: e.target.value })
 										}
                     ></input>
                   </div>
                 </div>
-
                 <div className="row mainrow">
                   <div className="col-sm">
                   <input
 										type='text'
-										name='TitleEn'
-										id='TitleEn'
+										name='MiniumumJockeyWeight'
+										id='MiniumumJockeyWeight'
 										className='group__control'
-										placeholder='Description'
-										value={state1.DescriptionEn}
+										placeholder='Short Code'
+										value={state1.shortCode}
 										onChange={(e) =>
-											setState({ ...state1, DescriptionEn: e.target.value })
+											setState({ ...state1, shortCode: e.target.value })
 										}
 									/>
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='TitleAr'
-										id='TitleAr'
-										className='group__control'
-										value={state1.DescriptionAr}
-										onChange={(e) =>
-											setState({ ...state1, DescriptionAr: e.target.value })
-										}
-                    ></input>
                   </div>
                 </div>
                 
 
                 <div className="ButtonSection">
-                  <input type="file" size="60" onChange={fileSelected} />
                   <button type="submit" className="SubmitButton">
                   Update
                   </button>

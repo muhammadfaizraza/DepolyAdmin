@@ -8,57 +8,58 @@ const NewsForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
 
-  const { newsid } = state;
-  console.log(newsid);
+  const { breederid } = state;
+  console.log(breederid);
+
   const [image,setImage] = useState();
 
   const [state1, setState] = useState({
-		TitleEn: '',
-    TitleAr:'',
+		NameEn: '',
+    NameAr:'',
+		shortCode: '',
     DescriptionEn: '',
     DescriptionAr:'',
-    SecondTitleEn: '',
-    SecondTitleAr:'',
     image:image
+    
 	});
- 
-
-  useEffect(() => {
-		if (newsid) {
-			setState({
-				TitleEn: newsid.TitleEn,
-        TitleAr: newsid.TitleAr,
-				DescriptionEn:newsid.DescriptionEn,
-        DescriptionAr:newsid.DescriptionAr,
-        SecondTitleEn: newsid.SecondTitleEn,
-        SecondTitleAr: newsid.SecondTitleAr,
-        image: newsid.image
-   
-			});
-		} else {
-			alert('No Data')
-		}
-	}, [newsid]);
 
   const fileSelected = (event) => {
     const image = event.target.files[0];
     setImage(image);
   };
+  
+
+
+  useEffect(() => {
+		if (breederid) {
+			setState({
+				NameEn: breederid.NameEn,
+        NameAr: breederid.NameAr,
+				DescriptionEn: breederid.DescriptionEn,
+        DescriptionAr: breederid.DescriptionAr,
+        shortCode: breederid.shortCode,
+        image:image
+
+			});
+		} else {
+		}
+	}, [breederid]);
+
+
   const submit = async (event) => {
     event.preventDefault();
     try {
       
       const formData = new FormData();
-      formData.append("TitleEn", state1.TitleEn);
-      formData.append("TitleAr", state1.TitleAr);
+      formData.append("image",image);
+      formData.append("NameEn", state1.NameEn);
+      formData.append("NameAr", state1.NameAr);
+      formData.append("shortCode", state1.shortCode);
       formData.append("DescriptionEn", state1.DescriptionEn);
       formData.append("DescriptionAr", state1.DescriptionAr);
-      formData.append("SecondTitleEn", state1.SecondTitleEn);
-      formData.append("SecondTitleAr", state1.SecondTitleAr);
-      formData.append("image", image);
 
-      const response = await axios.put(`${window.env.API_URL}/updatenews/${newsid._id}`, formData);
-      history("/news");
+      const response = await axios.put(`${window.env.API_URL}/updateBreeder/${breederid._id}`, formData);
+      history("/breederlist");
       swal({
         title: "Success!",
         text: "Data has been Updated successfully ",
@@ -78,20 +79,20 @@ const NewsForm = () => {
               marginTop: "30px",
             }}
           >
-            <div className="Headers">Edit News</div>
+            <div className="Headers">Edit Breeder</div>
             <div className="form">
               <form onSubmit={submit}>
                 <div className="row mainrow">
                   <div className="col-sm">
                   <input
 										type='text'
-										name='TitleEn'
-										id='TitleEn'
+										name='NameEn'
+										id='NameEn'
 										className='group__control'
-										placeholder='Title'
-										value={state1.TitleEn}
+										placeholder='Name'
+										value={state1.NameEn}
 										onChange={(e) =>
-											setState({ ...state1, TitleEn: e.target.value })
+											setState({ ...state1, NameEn: e.target.value })
 										}
 									/>
                     <span className="spanForm"> |</span>
@@ -102,25 +103,25 @@ const NewsForm = () => {
                       style={{ direction: "rtl" }}
                       placeholder="اسم "
                       type='text'
-										name='TitleAr'
-										id='TitleAr'
+										name='NameAr'
+										id='NameAr'
 										className='group__control'
-										value={state1.TitleAr}
+										value={state1.NameAr}
 										onChange={(e) =>
-											setState({ ...state1, TitleAr: e.target.value })
+											setState({ ...state1, NameAr: e.target.value })
 										}
                     ></input>
                   </div>
-                </div>
+                </div> 
 
                 <div className="row mainrow">
                   <div className="col-sm">
                   <input
 										type='text'
-										name='TitleEn'
-										id='TitleEn'
+										name='NameEn'
+										id='NameEn'
 										className='group__control'
-										placeholder='Description'
+										placeholder='Description English'
 										value={state1.DescriptionEn}
 										onChange={(e) =>
 											setState({ ...state1, DescriptionEn: e.target.value })
@@ -134,8 +135,8 @@ const NewsForm = () => {
                       style={{ direction: "rtl" }}
                       placeholder="اسم "
                       type='text'
-										name='TitleAr'
-										id='TitleAr'
+										name='NameAr'
+										id='NameAr'
 										className='group__control'
 										value={state1.DescriptionAr}
 										onChange={(e) =>
@@ -143,45 +144,29 @@ const NewsForm = () => {
 										}
                     ></input>
                   </div>
-                </div>
+                </div> 
 
                 <div className="row mainrow">
                   <div className="col-sm">
                   <input
 										type='text'
-										name='TitleEn'
-										id='TitleEn'
+										name='NameEn'
+										id='NameEn'
 										className='group__control'
-										placeholder='Second Title'
-										value={state1.SecondTitleEn}
+										placeholder='Short Code'
+										value={state1.shortCode}
 										onChange={(e) =>
-											setState({ ...state1, SecondTitleEn: e.target.value })
+											setState({ ...state1, shortCode: e.target.value })
 										}
 									/>
-                    <span className="spanForm"> |</span>
                   </div>
 
-                  <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='TitleAr'
-										id='TitleAr'
-										className='group__control'
-										value={state1.SecondTitleAr}
-										onChange={(e) =>
-											setState({ ...state1, SecondTitleAr: e.target.value })
-										}
-                    ></input>
-                  </div>
                 </div>
-                
 
                 <div className="ButtonSection">
                   <input type="file" size="60" onChange={fileSelected} />
                   <button type="submit" className="SubmitButton">
-                   Update
+                  Update
                   </button>
                 </div>
               </form>

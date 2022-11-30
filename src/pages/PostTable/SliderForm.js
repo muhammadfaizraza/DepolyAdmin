@@ -24,7 +24,7 @@ const SliderForm = () => {
       formData.append("TitleAr", TitleAr);
       formData.append("Url", Url);
       const response = await axios.post(
-        `${window.env.API_URL}uploadSlider`,
+        `${window.env.API_URL}/uploadSlider`,
         formData
       );
       history("/slider");
@@ -34,8 +34,14 @@ const SliderForm = () => {
         icon: "success",
         button: "OK",
       });
-    } catch (error) {
-      alert(error.message);
+    }  catch (error) {
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
     }
   };
   useEffect(() => {

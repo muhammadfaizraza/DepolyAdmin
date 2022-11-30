@@ -9,6 +9,7 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+import { BiEdit } from "react-icons/bi";
 
 const GetMeetingType = () => {
   const dispatch = useDispatch();
@@ -106,11 +107,19 @@ const GetMeetingType = () => {
                               <td>{item.shortCode} </td>
 
                               <td className="table_delete_btn1">
-                                {/* <Link to={`/editjockey/${item._id}`}> <BiEdit /></Link>  */}
+                                <BiEdit
+                                  onClick={() =>
+                                    history("/editmeetingtype", {
+                                      state: {
+                                        meetingtypeid: item,
+                                      },
+                                    })
+                                  }
+                                />
                                 <MdDelete
-                                style={{
-                                  fontSize: "22px",
-                                }}
+                                  style={{
+                                    fontSize: "22px",
+                                  }}
                                   onClick={() => handleRemove(item._id)}
                                 />
                               </td>

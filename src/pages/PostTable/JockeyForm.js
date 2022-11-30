@@ -17,7 +17,6 @@ import Form from "react-bootstrap/Form";
 const NewsForm = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
-
   const { data: nationality } = useSelector((state) => state.nationality);
   var today = new Date();
 
@@ -144,6 +143,7 @@ const NewsForm = () => {
         };
       })
     );
+    
   return (
     <>
       <div className="page">

@@ -2,18 +2,19 @@ import React, { useEffect ,Fragment } from "react";
 import { fetchTrackLength,STATUSES } from "../../redux/getReducer/getTracklength";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 import ScrollContainer from "react-indiana-drag-scroll";
 import { alignPropType } from "react-bootstrap/esm/types";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+import { BiEdit } from "react-icons/bi";
 
 const Tracklength = () => {
     
-const dispatch =useDispatch() 
+const dispatch =useDispatch() ;
+const navigate = useNavigate();
 const { data: trackLength, status } = useSelector((state) => state.trackLength);
 useEffect(() => {
   dispatch(fetchTrackLength());
@@ -108,11 +109,22 @@ if (status === STATUSES.ERROR) {
                                 <td>{item.RaceCourseData.TrackNameEn}</td>
                                 <td><img src={item.RaceCourseImage}/></td>
                                 <td className="table_delete_btn1">
-                                {/* <Link to={`/editjockey/${item._id}`}> <BiEdit /></Link>  */}
-                                  <MdDelete
-                                    onClick={() => handleRemove(item._id)}
-                                  />
-                                </td>
+                                <BiEdit
+                                  onClick={() =>
+                                    navigate("/edittrack", {
+                                      state: {
+                                        trackid: item,
+                                      },
+                                    })
+                                  }
+                                />
+                                <MdDelete
+                                  style={{
+                                    fontSize: "22px",
+                                  }}
+                                  onClick={() => handleRemove(item._id)}
+                                />
+                              </td>
                               </tr>
                             </>
                           );

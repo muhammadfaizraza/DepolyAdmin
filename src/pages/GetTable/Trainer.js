@@ -3,7 +3,7 @@ import { fetchTrainer, STATUSES } from "../../redux/getReducer/getTrainerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { remove } from "../../redux/postReducer/PostTrainer";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import TrainerPopup from "../../Components/Popup/TrainerPopup";
 import { BsFillEyeFill } from "react-icons/bs";
@@ -13,6 +13,7 @@ import swal from "sweetalert";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+import { BiEdit } from "react-icons/bi";
 
 const Trainer = () => {
   const [show, setShow] = useState(false);
@@ -24,6 +25,7 @@ const Trainer = () => {
   };
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { data: trainer, status } = useSelector((state) => state.trainer);
   const handleRemove = async (Id) => {
@@ -40,6 +42,7 @@ const Trainer = () => {
         });
         const res = axios.delete(`${window.env.API_URL}/deletetrainer/${Id}`);
         window.location.reload();
+        
       } else {
         swal("Your imaginary file is safe!");
       }
@@ -59,9 +62,6 @@ const Trainer = () => {
 
   const handlePageClick = async (data) => {
     let currentPage = data.selected + 1;
-
-    // const commentsFormServer = await fetchComments(currentPage);
-
     setItems(trainer);
   };
   if (status === STATUSES.LOADING) {
@@ -193,14 +193,21 @@ const Trainer = () => {
                               <td>
                                 <img src={item.image} alt="" />
                               </td>
-                              <td className="table_delete_btn1 ">
-                                <MdDelete
-                                  style={{
-                                    fontSize: "22px",
-                                  }}
-                                  onClick={() => handleRemove(item._id)}
-                                />
-                              </td>
+                              <td className="table_delete_btn1"
+                              style={{ textAlign: "center" }}>
+                            <BiEdit
+                                onClick={() =>
+                                  navigate("/edittrainer", {
+                                    state: {
+                                      trainerid: item,
+                                    },
+                                  })
+                                }
+                              />
+                              <MdDelete
+                                onClick={() => handleRemove(item._id)}
+                              />
+                            </td>
                             </tr>
                           </>
                         );

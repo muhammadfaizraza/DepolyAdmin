@@ -8,57 +8,43 @@ const NewsForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
 
-  const { newsid } = state;
-  console.log(newsid);
-  const [image,setImage] = useState();
-
+  const { currencyid } = state;  
+  console.log(currencyid,'currencyid')
   const [state1, setState] = useState({
-		TitleEn: '',
-    TitleAr:'',
-    DescriptionEn: '',
-    DescriptionAr:'',
-    SecondTitleEn: '',
-    SecondTitleAr:'',
-    image:image
+		NameEn: '',
+    NameAr:'',
+		shortCode: '',
+    Rate: ''
+    
 	});
+
  
 
   useEffect(() => {
-		if (newsid) {
+		if (currencyid) {
 			setState({
-				TitleEn: newsid.TitleEn,
-        TitleAr: newsid.TitleAr,
-				DescriptionEn:newsid.DescriptionEn,
-        DescriptionAr:newsid.DescriptionAr,
-        SecondTitleEn: newsid.SecondTitleEn,
-        SecondTitleAr: newsid.SecondTitleAr,
-        image: newsid.image
-   
+				NameEn: currencyid.NameEn,
+        NameAr: currencyid.NameAr,
+				shortCode: currencyid.shortCode,
+        Rate: currencyid.Rate
 			});
 		} else {
-			alert('No Data')
 		}
-	}, [newsid]);
+	}, [currencyid]);
 
-  const fileSelected = (event) => {
-    const image = event.target.files[0];
-    setImage(image);
-  };
+
   const submit = async (event) => {
     event.preventDefault();
     try {
       
       const formData = new FormData();
-      formData.append("TitleEn", state1.TitleEn);
-      formData.append("TitleAr", state1.TitleAr);
-      formData.append("DescriptionEn", state1.DescriptionEn);
-      formData.append("DescriptionAr", state1.DescriptionAr);
-      formData.append("SecondTitleEn", state1.SecondTitleEn);
-      formData.append("SecondTitleAr", state1.SecondTitleAr);
-      formData.append("image", image);
+      formData.append("NameEn", state1.NameEn);
+      formData.append("NameAr", state1.NameAr);
+      formData.append("shortCode", state1.shortCode);
+      formData.append("Rate", state1.Rate);
 
-      const response = await axios.put(`${window.env.API_URL}/updatenews/${newsid._id}`, formData);
-      history("/news");
+      const response = await axios.put(`${window.env.API_URL}/updateCurrency/${currencyid._id}`, formData);
+      history("/currencylist");
       swal({
         title: "Success!",
         text: "Data has been Updated successfully ",
@@ -78,20 +64,20 @@ const NewsForm = () => {
               marginTop: "30px",
             }}
           >
-            <div className="Headers">Edit News</div>
+            <div className="Headers">Edit Currency</div>
             <div className="form">
               <form onSubmit={submit}>
                 <div className="row mainrow">
                   <div className="col-sm">
                   <input
 										type='text'
-										name='TitleEn'
-										id='TitleEn'
+										name='NameEn'
+										id='NameEn'
 										className='group__control'
-										placeholder='Title'
-										value={state1.TitleEn}
+										placeholder='Name'
+										value={state1.NameEn}
 										onChange={(e) =>
-											setState({ ...state1, TitleEn: e.target.value })
+											setState({ ...state1, NameEn: e.target.value })
 										}
 									/>
                     <span className="spanForm"> |</span>
@@ -102,12 +88,12 @@ const NewsForm = () => {
                       style={{ direction: "rtl" }}
                       placeholder="اسم "
                       type='text'
-										name='TitleAr'
-										id='TitleAr'
+										name='NameAr'
+										id='NameAr'
 										className='group__control'
-										value={state1.TitleAr}
+										value={state1.NameAr}
 										onChange={(e) =>
-											setState({ ...state1, TitleAr: e.target.value })
+											setState({ ...state1, NameAr: e.target.value })
 										}
                     ></input>
                   </div>
@@ -117,13 +103,13 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <input
 										type='text'
-										name='TitleEn'
-										id='TitleEn'
+										name='NameEn'
+										id='NameEn'
 										className='group__control'
-										placeholder='Description'
-										value={state1.DescriptionEn}
+										placeholder='Short Code'
+										value={state1.shortCode}
 										onChange={(e) =>
-											setState({ ...state1, DescriptionEn: e.target.value })
+											setState({ ...state1, shortCode: e.target.value })
 										}
 									/>
                     <span className="spanForm"> |</span>
@@ -134,12 +120,12 @@ const NewsForm = () => {
                       style={{ direction: "rtl" }}
                       placeholder="اسم "
                       type='text'
-										name='TitleAr'
-										id='TitleAr'
+										name='NameAr'
+										id='NameAr'
 										className='group__control'
-										value={state1.DescriptionAr}
+										value={state1.shortCode}
 										onChange={(e) =>
-											setState({ ...state1, DescriptionAr: e.target.value })
+											setState({ ...state1, shortCode: e.target.value })
 										}
                     ></input>
                   </div>
@@ -148,14 +134,14 @@ const NewsForm = () => {
                 <div className="row mainrow">
                   <div className="col-sm">
                   <input
-										type='text'
-										name='TitleEn'
-										id='TitleEn'
+										type='number'
+										name='MiniumumJockeyWeight'
+										id='MiniumumJockeyWeight'
 										className='group__control'
-										placeholder='Second Title'
-										value={state1.SecondTitleEn}
+										placeholder='Rate'
+										value={state1.Rate}
 										onChange={(e) =>
-											setState({ ...state1, SecondTitleEn: e.target.value })
+											setState({ ...state1, Rate: e.target.value })
 										}
 									/>
                     <span className="spanForm"> |</span>
@@ -164,14 +150,11 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <input
                       style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='TitleAr'
-										id='TitleAr'
-										className='group__control'
-										value={state1.SecondTitleAr}
-										onChange={(e) =>
-											setState({ ...state1, SecondTitleAr: e.target.value })
+                      type="number"
+                      placeholder="اسم المسار"
+                      value={state1.Rate}
+							  			onChange={(e) =>
+											setState({ ...state1, Rate: e.target.value })
 										}
                     ></input>
                   </div>
@@ -179,9 +162,9 @@ const NewsForm = () => {
                 
 
                 <div className="ButtonSection">
-                  <input type="file" size="60" onChange={fileSelected} />
+                  {/* <input type="file" size="60" onChange={fileSelected} /> */}
                   <button type="submit" className="SubmitButton">
-                   Update
+                  Update
                   </button>
                 </div>
               </form>

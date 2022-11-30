@@ -264,6 +264,7 @@ td:last-child {
     vertical-align: middle;
     font-size: 18px;
     color: darkblue;
+    margin-left: 18px;
 }
 
 .div_maintb th {

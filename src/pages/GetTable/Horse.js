@@ -7,21 +7,21 @@ import { fetchHorse, STATUSES } from "../../redux/getReducer/getHorseSlice";
 import { MdDelete } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
 import ScrollContainer from "react-indiana-drag-scroll";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 import Moment from "react-moment";
 import { Modal } from "react-bootstrap";
 import HorsePopup from "../../Components/Popup/HorsePopup";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
+import axios from "axios";
 
 const Horse = () => {
- 
   const [show, setShow] = useState(false);
-  const [modaldata, setmodaldata] = useState()
+  const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
   const handleShow = async (data) => {
-      setmodaldata(data)
-      await setShow(true)
+    setmodaldata(data);
+    await setShow(true);
   };
   const dispatch = useDispatch();
   const history = useNavigate();
@@ -38,33 +38,31 @@ const Horse = () => {
   useEffect(() => {
     dispatch(fetchHorse({ pagenumber }));
   }, [dispatch]);
-  
-  const handleRemove = (Id) => {
+
+  const handleRemove = async (Id) => {
     swal({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this data!",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    })
-    .then((willDelete) => {
+    }).then((willDelete) => {
       if (willDelete) {
-        swal(" Your data  has been deleted!", {
+        swal("Poof! Your imaginary file has been deleted!", {
           icon: "success",
         });
-        dispatch(remove(Id));
+        const res = axios.delete(`${window.env.API_URL}/deletehorse/${Id}`);
+        window.location.reload();
       } else {
-        swal("Your data is safe!");
+        swal("Your imaginary file is safe!");
       }
     });
-
-   
-    history("/horse");
   };
 
   if (status === STATUSES.LOADING) {
-        return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
-
+    return (
+      <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
+    );
   }
 
   if (status === STATUSES.ERROR) {
@@ -80,9 +78,7 @@ const Horse = () => {
   }
   return (
     <>
-    
       <div className="page">
-   
         <div className="rightsidedata">
           <div
             style={{
@@ -99,9 +95,7 @@ const Horse = () => {
                     alignItems: "center",
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
-                >
-                  
-                </h6>
+                ></h6>
 
                 <Link to="/horseform">
                   <button>Add Horse</button>
@@ -113,7 +107,6 @@ const Horse = () => {
                 <ScrollContainer className="scroll-container">
                   <table id="customers">
                     <thead>
-              
                       <tr>
                         <th>Name</th>
                         <th>Name Ar</th>
@@ -128,13 +121,11 @@ const Horse = () => {
                         <th>Sire</th>
                         <th>GSire</th> */}
                         <th>Remarks</th>
-                       
+
                         <th>Rds</th>
                         {/* <th>Cap</th> */}
-                       
-                        
-                        
-                         <th>Image</th>
+
+                        <th>Image</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -146,16 +137,19 @@ const Horse = () => {
                             <tr>
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
-                              <td> <Moment fromNow ago>
+                              <td>
+                                {" "}
+                                <Moment fromNow ago>
                                   {item.Age}
-                                </Moment></td>
-                             
+                                </Moment>
+                              </td>
+
                               <td>{item.SexModelData.NameEn}</td>
-                            
-                            <td>{item.ColorIDData.NameEn} </td>
-                            {/* <td>{item.KindOfHorse === '' ? <>N/A</>: item.KindOfHorse}</td> */}
-                            <td>{item.PurchasePrice}</td>
-                            <td>
+
+                              <td>{item.ColorIDData.NameEn} </td>
+                              {/* <td>{item.KindOfHorse === '' ? <>N/A</>: item.KindOfHorse}</td> */}
+                              <td>{item.PurchasePrice}</td>
+                              <td>
                                 {item.BreederData === null ? (
                                   <>No Data</>
                                 ) : (
@@ -170,10 +164,8 @@ const Horse = () => {
                                   <>{item.OwnerModels.map((data) => data.NameEn)}</>
                                 )}
                               </td> */}
-                            <td>{item.Rds === true ? <>Yes</> : <>No</>}</td>
-                          
-                          
-                            
+                              <td>{item.Rds === true ? <>Yes</> : <>No</>}</td>
+
                               {/* <td>{item.DamData.NameEn === undefined ? <>N/A</>: <> {item.DamData.NameEn}</>}</td> */}
                               {/* <td>{item.SireData.NameEn}</td>
                               <td>{item.GSireData.NameEn}</td> */}
@@ -182,17 +174,31 @@ const Horse = () => {
                               {/* <td>{item.Rds}</td> */}
                               {/* <td>{item.Cap}</td> */}
                               <td>
-                                <img src={item.HorseImage} alt="" style={{
-                                  width:'30px',height:'30px'
-                                }}></img>
+                                <img
+                                  src={item.HorseImage}
+                                  alt=""
+                                  style={{
+                                    width: "30px",
+                                    height: "30px",
+                                  }}
+                                ></img>
                               </td>
-                              <td>
-                                {/* <BiEdit /> */}
-                                <MdDelete style={{
-                                  fontSize: "22px",
-                                }}/>
-                         
-
+                              <td
+                                className="table_delete_btn1"
+                                style={{ textAlign: "center" }}
+                              >
+                                <BiEdit
+                                  onClick={() =>
+                                    history("/edithorse", {
+                                      state: {
+                                        horseid: item._id,
+                                      },
+                                    })
+                                  }
+                                />
+                                <MdDelete
+                                  onClick={() => handleRemove(item._id)}
+                                />
                               </td>
                             </tr>
                           </tbody>
@@ -204,7 +210,6 @@ const Horse = () => {
               </div>
             </>
           </div>
-     
         </div>
       </div>
       {/* <div
@@ -236,20 +241,25 @@ const Horse = () => {
           Next
         </button>
       </div> */}
-        <Modal show={show} onHide={handleClose}   size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered>
-                <Modal.Header closeButton>
-                    <h2>Jockey </h2>
-                </Modal.Header>
-                <Modal.Body>
-                <HorsePopup data={modaldata} />
-                </Modal.Body>
-                <Modal.Footer>
-
-                <button onClick={handleClose}  className='modalClosebtn'>Close</button>
-                </Modal.Footer>
-            </Modal>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Jockey </h2>
+        </Modal.Header>
+        <Modal.Body>
+          <HorsePopup data={modaldata} />
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

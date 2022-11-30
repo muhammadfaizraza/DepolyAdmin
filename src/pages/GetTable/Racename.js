@@ -3,15 +3,18 @@ import { fetchRaceName, STATUSES } from "../../redux/getReducer/getRaceName";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { remove } from "../../redux/postReducer/PostJockey";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+import { BiEdit } from "react-icons/bi";
 
 const Racename = () => {
   const dispatch = useDispatch();
+  const history = useNavigate();
+
   const { data: RaceName, status } = useSelector((state) => state.RaceName);
   useEffect(() => {
     dispatch(fetchRaceName());
@@ -106,11 +109,19 @@ const Racename = () => {
                               <td>{item.shortCode} </td>
 
                               <td className="table_delete_btn1">
-                                {/* <Link to={`/editjockey/${item._id}`}> <BiEdit /></Link>  */}
-                                <MdDelete
-                                  onClick={() => handleRemove(item._id)}
-                                />
-                              </td>
+                                <BiEdit onClick={() => history('/editracename',{
+                                state:{
+                                  racenameid:item
+                                }
+                              })}/>
+                                  <MdDelete
+                                    style={{
+                                      fontSize: "22px",
+                                    }}
+                                    onClick={() => handleRemove(item._id)}
+                                  />
+                             
+                                </td>
                             </tr>
                           </>
                         );

@@ -28,9 +28,9 @@ const Statistic = () => {
   const navigate = useNavigate();
   const { data: jockey, status } = useSelector((state) => state.jockey);
   useEffect(() => {
-    dispatch(fetchjockey());
-    
+    dispatch(fetchjockey()); 
   }, [dispatch]);
+  
   const handleRemove = async (Id) => {
     swal({
       title: "Are you sure?",
@@ -147,13 +147,13 @@ const Statistic = () => {
                                 <img src={item.image} alt="" />
                               </td>
 
-                              <td className="table_delete_btn1" onClick={() => navigate('/editjockey',{
+                              <td className="table_delete_btn1">
+                                  <BiEdit onClick={() => navigate('/editjockey',{
                                 state:{
                                   jockeyid:item._id
                                 }
-                              })}>
-                                  {/* <BiEdit /> */}
-                                <MdDelete
+                              })}/>
+                                  <MdDelete
                                   onClick={() => handleRemove(item._id)}
                                 />
                               </td>

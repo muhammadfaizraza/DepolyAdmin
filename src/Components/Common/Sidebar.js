@@ -45,16 +45,17 @@ const Sidebar = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link to="/racename" className="mylink">
-                    Race Name Listing
-                  </Link>{" "}
-                </div>
-                <div>
                   {" "}
                   <Link to="/racecard" className="mylink">
                     Create Race Card
                   </Link>
                 </div>
+                <div>
+                  <Link to="/racename" className="mylink">
+                    Race Name Listing
+                  </Link>{" "}
+                </div>
+                
                 <div>
                   <Link to="/racenameform" className="mylink">
                     Add Race Name

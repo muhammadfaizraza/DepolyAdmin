@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { remove } from "../../redux/postReducer/PostSponsor";
 import swal from "sweetalert";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import ScrollContainer from "react-indiana-drag-scroll";
 import SponserPopup from "../../Components/Popup/SponserPopup";
@@ -23,6 +23,7 @@ const News = () => {
   };
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { data: sponsor, status } = useSelector((state) => state.sponsor);
   useEffect(() => {
     dispatch(fetchSponsor());
@@ -45,8 +46,6 @@ const News = () => {
         swal("Your imaginary file is safe!");
       }
     });
-
-    fetchSponsor();
   };
   if (status === STATUSES.LOADING) {
     return (
@@ -129,8 +128,11 @@ const News = () => {
                               className="table_delete_btn1"
                               style={{ textAlign: "center" }}
                             >
-                              {/* <Link to ={`/editsponsor/${item._Id}`}      ><BiEdit /></Link>  */}
-
+                              <BiEdit onClick={() => navigate('/editsponsor',{
+                                state:{
+                                  sponsorid:item
+                                }
+                              })} />
                               <MdDelete
                                 onClick={() => handleRemove(item._id)}
                               />

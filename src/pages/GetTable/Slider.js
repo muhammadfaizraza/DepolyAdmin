@@ -122,7 +122,7 @@ const Slider = () => {
                       <th>Title Arabic </th>
                       <th>Url</th>
                       <th>Image</th>
-                      <th>Action</th>
+                      <th style={{ textAlign: "center" }}>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -135,19 +135,27 @@ const Slider = () => {
                             <td>{item.TitleAr}</td>
                             <td>{item.Url}</td>
                             <td>
-                              <img src={item.image} alt="" />
+                              <img
+                                src={item.image}
+                                alt=""
+                                style={{
+                                  width: "30px",
+                                  height: "30px",
+                                }}
+                              />
                             </td>
 
-                            <td>
-                              {/* <BiEdit
+                            <td className="table_delete_btn1"
+                              style={{ textAlign: "center" }}>
+                              <BiEdit
                                 onClick={() =>
                                   history("/editslider", {
                                     state: {
-                                      sliderid: item._id,
+                                      sliderid: item,
                                     },
                                   })
                                 }
-                              /> */}
+                              />
                               <MdDelete
                                 onClick={() => handleRemove(item._id)}
                               />

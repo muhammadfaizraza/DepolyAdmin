@@ -5,6 +5,13 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { fetchSinglejockey } from "../../redux/getReducer/getSingleJockey";
 import swal from "sweetalert";
 import axios from "axios";
+import Select from "react-select";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+import ReactStars from "react-rating-stars-component";
+
 
 const NewsForm = () => {
   const dispatch = useDispatch();
@@ -50,6 +57,7 @@ const NewsForm = () => {
   const submit = async (event) => {
     event.preventDefault();
     try {
+      
       const formData = new FormData();
       formData.append("image", image);
       formData.append("NameEn", state1.NameEn);
@@ -78,9 +86,10 @@ const NewsForm = () => {
               marginTop: "30px",
             }}
           >
-            <div className="Headers">Edit Jockey</div>
+            <div className="Headers">Edit Horse</div>
             <div className="form">
               <form onSubmit={submit}>
+
                 <div className="row mainrow">
                   <div className="col-sm">
                   <input
@@ -112,17 +121,18 @@ const NewsForm = () => {
                     ></input>
                   </div>
                 </div>
+
                 <div className="row mainrow">
                   <div className="col-sm">
                   <input
-										type='number'
-										name='MiniumumJockeyWeight'
-										id='MiniumumJockeyWeight'
+										type='text'
+										name='NameEn'
+										id='NameEn'
 										className='group__control'
-										placeholder=''
-										value={state1.MiniumumJockeyWeight}
+										placeholder='Remarks'
+										value={state1.NameEn}
 										onChange={(e) =>
-											setState({ ...state1, MiniumumJockeyWeight: e.target.value })
+											setState({ ...state1, NameEn: e.target.value })
 										}
 									/>
                     <span className="spanForm"> |</span>
@@ -131,11 +141,117 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <input
                       style={{ direction: "rtl" }}
-                      type="number"
-                      placeholder="اسم المسار"
+                      placeholder="اسم "
+                      type='text'
+										name='NameAr'
+										id='NameAr'
+										className='group__control'
+										value={state1.NameAr}
+										onChange={(e) =>
+											setState({ ...state1, NameAr: e.target.value })
+										}
                     ></input>
                   </div>
                 </div>
+
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Select Owner</div>}
+                      defaultValue={state1.ColorCode}
+                      value={state1.ColorCode}
+                      onChange={(e) =>
+                        setState({ ...state1, ColorCode: e.target.value })
+                      }
+                      // options={AllColor}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <>
+                          {/* <span className="addmore" onClick={handleShow}>+</span> */}
+                        </>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <>
+                          {/* <button className="addmore" onClick={FetchNew}><AiOutlineReload /></button> */}
+                        </>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
+                  </div>
+                  <div className="col-sm">
+                    <Select
+                      required
+                      placeholder="تقييم الحصان"
+                      className="selectdir"
+                      value={state1.ColorCode}
+                      onChange={(e) =>
+                        setState({ ...state1, ColorCode: e.target.value })
+                      }
+                      // options={AllColor}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
+
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Select Owner</div>}
+                      defaultValue={state1.ColorCode}
+                      value={state1.ColorCode}
+                      onChange={(e) =>
+                        setState({ ...state1, ColorCode: e.target.value })
+                      }
+                      // options={AllColor}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <>
+                          {/* <span className="addmore" onClick={handleShow}>+</span> */}
+                        </>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <>
+                          {/* <button className="addmore" onClick={FetchNew}><AiOutlineReload /></button> */}
+                        </>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
+                  </div>
+                  <div className="col-sm">
+                    <Select
+                      required
+                      placeholder="تقييم الحصان"
+                      className="selectdir"
+                      value={state1.ColorCode}
+                      onChange={(e) =>
+                        setState({ ...state1, ColorCode: e.target.value })
+                      }
+                      // options={AllColor}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
+
                 <div className="row mainrow">
                   <div className="col-sm">
                   <input
@@ -143,7 +259,7 @@ const NewsForm = () => {
 										name='MaximumJockeyWeight'
 										id='MaximumJockeyWeight'
 										className='group__control'
-										placeholder='Post title'
+										placeholder='Purchased Price'
 										value={state1.MaximumJockeyWeight}
 										onChange={(e) =>
 											setState({ ...state1, MaximumJockeyWeight: e.target.value })
@@ -158,6 +274,28 @@ const NewsForm = () => {
                       type="number"
                       placeholder="اسم المسار"
                     ></input>
+                  </div>
+                </div>
+
+                <div className="row mainrow">
+                  <div className="starstyle">
+                    <p>Stars</p>
+                    <div className="starcss">
+                    <ReactStars
+                      count={5}
+                      // onChange={setSTARS}
+                      size={44}
+                      a11y= {true}
+                      isHalf= {true}
+                      activeColor="#19469D "
+                    />
+                      {/* <Rating
+                        fractions={2}
+                        stop={5}
+                        initialRating={STARS}
+                        onClick={(rate) => setSTARS(rate)}
+                      /> */}
+                    </div>
                   </div>
                 </div>
 

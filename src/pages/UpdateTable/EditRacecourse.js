@@ -1,9 +1,10 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../../Components/CSS/forms.css";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
+import { fetchsingleracecourse } from "../../redux/getReducer/getSingleRacecourse";
 import swal from "sweetalert";
-import Select from "react-select";
+import axios from "axios";
 import { fetchnationality } from "../../redux/getReducer/getNationality";
 import { fetchcolor } from "../../redux/getReducer/getColor";
 import { fetchTrackLength } from "../../redux/getReducer/getTracklength";
@@ -11,25 +12,28 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-import ColorPopUp from "../PostTable/Color";
-import NationalityPopUp from "../PostTable/Nationality";
-import { AiOutlineReload } from "react-icons/ai";
-import { Modal } from "react-bootstrap";
-import { useNavigate, useLocation } from "react-router-dom";
-import { fetchsingleracecourse } from "../../redux/getReducer/getSingleRacecourse";
+import Select from "react-select";
 
-const RaceCourseForm = () => {
+const NewsForm = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const { state } = useLocation();
-
+  const { courseid } = state;
+  const { data: singleracecourse } = useSelector(
+    (state) => state.singleracecourse
+  );
   const { data: nationality } = useSelector((state) => state.nationality);
   const { data: color } = useSelector((state) => state.color);
   const { data: trackLength } = useSelector((state) => state.trackLength);
-  const { data: singleracecourse } = useSelector((state) => state.singleracecourse);
 
-  
-
+  const [state1, setState] = useState({
+    TrackNameEn: "",
+    TrackNameAr: "",
+    shortCode: "",
+    NationalityId: "",
+    ColorCode: "",
+    image: "",
+  });
 
   let AllNationality =
     nationality === undefined ? (
@@ -70,49 +74,35 @@ const RaceCourseForm = () => {
       })
     );
 
-  const { courseid } = state;
-  const [NationalityId, setNationalityId] = useState("");
-  const [ColorCode, setColorCode] = useState("");
-  const [state1, setState] = useState({
-    TrackNameEn: "",
-    TrackNameAr: "",
-    ColorCode: "",
-    shortCode: "",
-  });
   const [image, setImage] = useState();
-  const [preview, setPreview] = useState();
-  const [show, setShow] = useState(false);
 
   const fileSelected = (event) => {
     const image = event.target.files[0];
     setImage(singleracecourse.image, image);
   };
+
   useEffect(() => {
+    dispatch(fetchsingleracecourse({ courseid }));
     dispatch(fetchnationality());
     dispatch(fetchcolor());
     dispatch(fetchTrackLength());
-    dispatch(fetchsingleracecourse());
-    if (!image) {
-      setPreview(undefined);
-      return;
-    }
+  }, []);
 
-    const objectUrl = URL.createObjectURL(image);
-    setPreview(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [image]);
   useEffect(() => {
     if (singleracecourse) {
       setState({
-        NameEn: singleracecourse.NameEn,
-        NameAr: singleracecourse.NameAr,
-        MaximumJockeyWeight: singleracecourse.MaximumJockeyWeight,
-        MiniumumJockeyWeight: singleracecourse.MiniumumJockeyWeight,
+        TrackNameEn: singleracecourse.TrackNameEn,
+        TrackNameAr: singleracecourse.TrackNameAr,
+        shortCode: singleracecourse.shortCode,
+        NationalityId: singleracecourse.NationalityId,
+        ColorCode: singleracecourse.ColorCode,
+        image: singleracecourse.image,
       });
     } else {
       dispatch(fetchsingleracecourse({ courseid }));
     }
   }, [singleracecourse]);
+
   const submit = async (event) => {
     event.preventDefault();
     try {
@@ -120,47 +110,29 @@ const RaceCourseForm = () => {
       formData.append("image", image);
       formData.append("TrackNameEn", state1.TrackNameEn);
       formData.append("TrackNameAr", state1.TrackNameAr);
-      formData.append("ColorCode", ColorCode.id);
-      formData.append("NationalityId", NationalityId.id);
       formData.append("shortCode", state1.shortCode);
-      const response = await axios.post(
-        `${window.env.API_URL}/createcourse?keyword=&page=`,
+      formData.append("NationalityId", state1.NationalityId);
+      formData.append("ColorCode", state1.ColorCode);
+
+      const response = await axios.put(
+        `${window.env.API_URL}/updatecourse/${courseid}`,
         formData
       );
+      history("/racecourse");
       swal({
-        title: "success!",
-        text: "Data Submitted !",
+        title: "Success!",
+        text: "Data has been Updated successfully ",
         icon: "success",
         button: "OK",
       });
-      history("/racecourse");
     } catch (error) {
-      
-      swal({
-        title: "Error!",
-        icon: "error",
-        button: "OK",
-      });
+      alert(error.message);
     }
   };
 
-  const onSelectFile = (e) => {
-    setImage(e.target.files[0]);
-  };
-
-  const handleClose = () => setShow(false);
-
-  const handleShow = async () => {
-    await setShow(true);
-  };
-  const FetchNew = () => {
-    dispatch(fetchnationality());
-    dispatch(fetchcolor());
-    dispatch(fetchTrackLength());
-  };
-
+  console.log(singleracecourse,'singleracecourse')
   return (
-    <Fragment>
+    <>
       <div className="page">
         <div className="rightsidedata">
           <div
@@ -177,12 +149,16 @@ const RaceCourseForm = () => {
                       controlId="floatingInput"
                       label="Track Name"
                       className="mb-3"
-                      value={state1.TrackNameEn}
-                      onChange={(e) =>
-                        setState({ ...state1, TrackNameEn: e.target.value })
-                      }
+                      name="TrackNameEn"
                     >
-                      <Form.Control type="text" placeholder="Track Name" />
+                      <Form.Control
+                        type="text"
+                        value={state1.TrackNameEn}
+                        onChange={(e) =>
+                          setState({ ...state1, TrackNameEn: e.target.value })
+                        }
+                        placeholder="Track Name"
+                      />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
                   </div>
@@ -191,10 +167,7 @@ const RaceCourseForm = () => {
                     <FloatingLabel
                       controlId="floatingInput"
                       label="رمز قصير"
-                      value={state1.TrackNameAr}
-                      onChange={(e) =>
-                        setState({ ...state1, TrackNameAr: e.target.value })
-                      }
+                      name="TrackNameAr"
                       className="mb-3 floatingInputAr "
                       style={{ direction: "rtl", left: "initial", right: 0 }}
                     >
@@ -202,6 +175,10 @@ const RaceCourseForm = () => {
                         type="text"
                         placeholder="رمز قصير"
                         style={{ left: "%" }}
+                        value={state1.TrackNameAr}
+                        onChange={(e) =>
+                          setState({ ...state1, TrackNameAr: e.target.value })
+                        }
                       />
                     </FloatingLabel>
                   </div>
@@ -213,12 +190,15 @@ const RaceCourseForm = () => {
                       controlId="floatingInput"
                       label="Short Code"
                       className="mb-3"
-                      value={state1.shortCode}
-                      onChange={(e) =>
-                        setState({ ...state1, shortCode: e.target.value })
-                      }
                     >
-                      <Form.Control type="text" placeholder="Short Code" />
+                      <Form.Control
+                        type="text"
+                        value={state1.shortCode}
+                        onChange={(e) =>
+                          setState({ ...state1, shortCode: e.target.value })
+                        }
+                        placeholder="Short Code"
+                      />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -235,6 +215,10 @@ const RaceCourseForm = () => {
                         type="text"
                         placeholder="رمز قصير"
                         style={{ left: "%" }}
+                        value={state1.shortCode}
+                        onChange={(e) =>
+                          setState({ ...state1, shortCode: e.target.value })
+                        }
                       />
                     </FloatingLabel>
                   </div>
@@ -243,9 +227,11 @@ const RaceCourseForm = () => {
                   <div className="col-sm">
                     <Select
                       placeholder={<div>Select Color</div>}
-                      defaultValue={ColorCode}
-                      value={ColorCode}
-                      onChange={setColorCode}
+                      defaultValue={state1.ColorCode}
+                      value={state1.ColorCode}
+                      onChange={(e) =>
+                        setState({ ...state1, ColorCode: e.target.value })
+                      }
                       options={AllColor}
                       isClearable={true}
                       isSearchable={true}
@@ -255,9 +241,7 @@ const RaceCourseForm = () => {
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
                         <>
-                          <button className="addmore" onClick={handleShow}>
-                            +
-                          </button>
+                          {/* <span className="addmore" onClick={handleShow}>+</span> */}
                         </>
                       </OverlayTrigger>
                       <OverlayTrigger
@@ -266,9 +250,7 @@ const RaceCourseForm = () => {
                         }
                       >
                         <>
-                          <button className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </button>
+                          {/* <button className="addmore" onClick={FetchNew}><AiOutlineReload /></button> */}
                         </>
                       </OverlayTrigger>{" "}
                       |
@@ -279,9 +261,10 @@ const RaceCourseForm = () => {
                       required
                       placeholder="تقييم الحصان"
                       className="selectdir"
-                      defaultValue={ColorCode}
-                      value={ColorCode}
-                      onChange={setColorCode}
+                      value={state1.ColorCode}
+                      onChange={(e) =>
+                        setState({ ...state1, ColorCode: e.target.value })
+                      }
                       options={AllColor}
                       isClearable={true}
                       isSearchable={true}
@@ -316,8 +299,10 @@ const RaceCourseForm = () => {
                   <div className="col-sm">
                     <Select
                       placeholder={<div>Type to search Nationality</div>}
-                      defaultValue={NationalityId}
-                      onChange={setNationalityId}
+                      value={state1.NationalityId}
+                      onChange={(e) =>
+                        setState({ ...state1, NationalityId: e.target.value })
+                      }
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
@@ -345,8 +330,10 @@ const RaceCourseForm = () => {
                           اكتب للبحث عن الجنسية
                         </div>
                       }
-                      defaultValue={NationalityId}
-                      onChange={setNationalityId}
+                      value={state1.NationalityId}
+                      onChange={(e) =>
+                        setState({ ...state1, NationalityId: e.target.value })
+                      }
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
@@ -357,12 +344,12 @@ const RaceCourseForm = () => {
                   <div>
                     <input
                       type="file"
-                      onChange={onSelectFile}
+                      onChange={state1.onSelectFile}
                       className="formInput"
                     />
-                    {image && (
+                    {/* {image && (
                       <img src={preview} className="PreviewImage" alt="" />
-                    )}
+                    )} */}
                   </div>
 
                   <button type="submit" className="SubmitButton">
@@ -374,36 +361,8 @@ const RaceCourseForm = () => {
           </div>
         </div>
       </div>
-      <Modal
-        show={show}
-        onHide={handleClose}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <h2>Add Color</h2>
-        </Modal.Header>
-        <Modal.Body>
-          <ColorPopUp />
-        </Modal.Body>
-      </Modal>
-      <Modal
-        show={show}
-        onHide={handleClose}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <h2>Add Nationality</h2>
-        </Modal.Header>
-        <Modal.Body>
-          <NationalityPopUp />
-        </Modal.Body>
-      </Modal>
-    </Fragment>
+    </>
   );
 };
 
-export default RaceCourseForm;
+export default NewsForm;

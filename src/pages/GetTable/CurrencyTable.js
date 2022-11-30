@@ -2,6 +2,7 @@ import React, { useEffect ,Fragment } from "react"
 import { fetchcurrency ,STATUSES } from "../../redux/getReducer/getCurrency";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
+import { BiEdit } from "react-icons/bi";
 import { remove } from "../../redux/postReducer/PostJockey";
 import { Link, useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
@@ -34,9 +35,7 @@ const CurrencyTable = () => {
             icon: "success",
           });
           const res = axios.delete(`${window.env.API_URL}/deleteCurrency/${Id}`)
-      window.location.reload();
-      history("/currencylist");
-          history("/currencylist");
+           window.location.reload();
         } else {
           swal("Your imaginary file is safe!");
         }
@@ -122,7 +121,11 @@ const CurrencyTable = () => {
 
                           
                             <td className="table_delete_btn1">
-                       {/* <Link to={`/editjockey/${item._id}`}> <BiEdit /></Link>  */}
+                             <BiEdit onClick={() => history('/editcurrency',{
+                                state:{
+                                  currencyid:item
+                                }
+                              })} />
                               <MdDelete
                                 style={{
                                   fontSize: "22px",

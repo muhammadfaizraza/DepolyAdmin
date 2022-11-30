@@ -47,7 +47,7 @@ const Racecourse = () => {
           icon: "success",
         });
         const res = axios.delete(`${window.env.API_URL}/deletecourse/${Id}`);
-          window.location.reload();
+          // window.location.reload();
       } else {
         swal("Your imaginary file is safe!");
       }
@@ -134,14 +134,12 @@ const Racecourse = () => {
                             </td>
 
                             <td className="table_delete_btn1">
-                            {/* <BiEdit   onClick={() => navigate('/editracecourse',{
+                            <BiEdit   onClick={() => navigate('/editracecourse',{
                                 state:{
                                   courseid:item._id
                                 }
-                              })}/> */}
-                              {/* <Link to={`/editracecourse/${item._Id}`}>
-                                <BiEdit />
-                              </Link> */}
+                              })}/>
+                              
                               <MdDelete
                                 style={{
                                   fontSize: "22px",

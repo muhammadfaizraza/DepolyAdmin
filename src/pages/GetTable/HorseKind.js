@@ -2,18 +2,18 @@ import React, { useEffect ,Fragment } from "react";
 import { fetchHorseKind , STATUSES } from "../../redux/getReducer/getHorseKind";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+import {BiEdit} from 'react-icons/bi'
 
 const HorseKind = () => {
 
     const dispatch = useDispatch();
- 
+    const history = useNavigate();
     const { data: HorseKind, status } = useSelector((state) => state.HorseKind);
     useEffect(() => {
       dispatch(fetchHorseKind());
@@ -116,15 +116,21 @@ const HorseKind = () => {
     
                           
     
-                              
-                                <td className="table_delete_btn1">
-                           {/* <Link to={`/editjockey/${item._id}`}> <BiEdit /></Link>  */}
-                               <MdDelete style={{
-                                  fontSize: "22px",
-                                }}
-                                    onClick={() => handleRemove(item._id)}
-                                  />
-                                </td>
+    <td className="table_delete_btn1">
+
+<BiEdit onClick={() => history('/edithorsekind',{
+    state:{
+      horseid:item
+    }
+  })} />
+
+    <MdDelete
+    style={{
+      fontSize: "22px",
+    }}
+      onClick={() => handleRemove(item._id)}
+    />
+  </td>
                               </tr>
                             </>
                           );

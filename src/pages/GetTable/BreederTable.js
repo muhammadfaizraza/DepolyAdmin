@@ -18,25 +18,30 @@ const BreederTable = () => {
   useEffect(() => {
     dispatch(fetchbreeder());
   }, [dispatch]);
-  const handleRemove = (Id) => {
-    swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this imaginary file!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        swal("Poof! Your imaginary file has been deleted!", {
-          icon: "success",
-        });
-        const res = axios.delete(`${window.env.API_URL}/deleteBreeder/${Id}`);
-        window.location.reload();
-      } else {
-        swal("Your imaginary file is safe!");
-      }
-    });
+
+  const handleRemove = async (Id) => {
+    try {
+      const res = await axios.delete(`${window.env.API_URL}/deleteBreeder/${Id}`);
+      swal({
+        title: "Success!",
+        text: "Data has been Deleted successfully ",
+        icon: "success",
+        button: "OK",
+      });
+      history("/breederlist");
+      dispatch(fetchbreeder());
+    } catch (error) {
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
+    }
+    dispatch(fetchbreeder());
   };
+  
 
   if (status === STATUSES.LOADING) {
     return (

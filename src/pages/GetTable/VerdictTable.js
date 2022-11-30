@@ -9,6 +9,7 @@ import { fetchverdict, STATUSES } from "../../redux/getReducer/getVerdict";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import { BiEdit } from "react-icons/bi";
+import axios from "axios";
 
 const VerdictTable = () => {
   const dispatch = useDispatch();
@@ -17,26 +18,25 @@ const VerdictTable = () => {
   useEffect(() => {
     dispatch(fetchverdict());
   }, [dispatch]);
-  const handleRemove = (Id) => {
-    swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this data!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        swal(" Your data file has been deleted!", {
-          icon: "success",
-        });
-        dispatch(remove(Id));
-        history("/verdict");
-      } else {
-        swal("Your imaginary file is safe!");
-      }
-    });
-    dispatch(remove(Id));
-    history("/verdict");
+  const handleRemove = async (Id) => {
+    try {
+      const res = await axios.delete(`${window.env.API_URL}/softdeleteVerdict/${Id}`)
+      swal({
+        title: "Success!",
+        text: "Data has been Deleted successfully ",
+        icon: "success",
+        button: "OK",
+      });
+      dispatch(fetchverdict());
+    } catch (error) {
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
+    }
   };
 
   if (status === STATUSES.LOADING) {

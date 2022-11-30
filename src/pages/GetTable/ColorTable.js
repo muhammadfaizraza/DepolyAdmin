@@ -18,28 +18,26 @@ const ColorTable = () => {
     useEffect(() => {
       dispatch(fetchcolor());
     }, [dispatch]);
-    const handleRemove =  (Id) => {
-      swal({
-        title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this imaginary file!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-       
-        if (willDelete) {
-          swal("Poof! Your imaginary file has been deleted!", {
-            icon: "success",
-          });
-          const res = axios.delete(`${window.env.API_URL}/deleteColor/${Id}`)
-          window.location.reload();
-          history("/colorlist");
-        } else {
-          swal("Your imaginary file is safe!");
-        }
-      });
-      dispatch(remove(Id));
+    const handleRemove = async (Id) => {
+      try {
+        const res = await axios.delete(`${window.env.API_URL}/deleteColor/${Id}`)
+        swal({
+          title: "Success!",
+          text: "Data has been Deleted successfully ",
+          icon: "success",
+          button: "OK",
+        });
+        history("/colorlist");
+        dispatch(fetchcolor());
+      } catch (error) {
+        const err = error.response.data.message;
+        swal({
+          title: "Error!",
+          text: err,
+          icon: "error",
+          button: "OK",
+        });
+      }
       history("/colorlist");
     };
   

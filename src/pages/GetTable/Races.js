@@ -15,7 +15,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
-
+import axios from "axios";
 
 const Prize = (data) => {
   return (
@@ -64,38 +64,40 @@ const Races = () => {
 
   const [AllRace, setAllRace] = useState(race)
 
-  const handleRemove = async (Id) => {
-    swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this imaginary file!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        swal("Poof! Your imaginary file has been deleted!", {
-          icon: "success",
-        });
-        dispatch(remove(Id));
-      } else {
-        swal("Your Data is safe!");
-      }
-    });
-  };
+ 
   useEffect(() => {
     dispatch(fetchrace());
     dispatch(fetchtobePublishRace());
   }, [dispatch]);
-
-  const handleAwaited = async() => {
-    await setPublishRace(!PublishRace)
-    setAllRace(tobePublishRace)
+  const handleRemove = async (Id) => {
+    try {
+      const res = await axios.delete(`${window.env.API_URL}/deleterace/${Id}`)
+      swal({
+        title: "Success!",
+        text: "Data has been Deleted successfully ",
+        icon: "success",
+        button: "OK",
+      });
+      dispatch(fetchrace());
+    } catch (error) {
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
+    }
+  };
+  // const handleAwaited = async() => {
+  //   await setPublishRace(!PublishRace)
+  //   setAllRace(tobePublishRace)
     
-  }
-  const handleAll = () => {
-    setAllRace(race)
-    setPublishRace(!PublishRace)
-  }
+  // }
+  // const handleAll = () => {
+  //   setAllRace(race)
+  //   setPublishRace(!PublishRace)
+  // }
   const GoToPublish = (RaceId) => {
     history("/publishrace", {
       state: {

@@ -18,23 +18,24 @@ const EquiptmentTable = () => {
     dispatch(fetchequipment());
   }, [dispatch]);
   const handleRemove = async (Id) => {
-    swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this imaginary file!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        swal(" Your imaginary file has been deleted!", {
-          icon: "success",
-        });
-        const res = axios.delete(`${window.env.API_URL}/deleteEquipment/${Id}`);
-        window.location.reload();
-      } else {
-        swal("Your imaginary file is safe!");
-      }
-    });
+    try {
+      const res = await axios.delete(`${window.env.API_URL}/deleteEquipment/${Id}`)
+      swal({
+        title: "Success!",
+        text: "Data has been Deleted successfully ",
+        icon: "success",
+        button: "OK",
+      });
+      dispatch(fetchequipment());
+    } catch (error) {
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
+    }
   };
 
   if (status === STATUSES.LOADING) {

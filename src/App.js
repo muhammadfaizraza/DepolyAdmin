@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import '.././src/Components/CSS/mediaquery.css'
 import "./Components/CSS/home.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -110,115 +110,127 @@ function App() {
   //   window.addEventListener("beforeunload", unloadCallback);
   //   return () => window.removeEventListener("beforeunload", unloadCallback);
   // }, []);
+
+  const [userIsDesktop, setUserIsDesktop] = useState(true);
+  useEffect(() => {
+    window.innerWidth > 1024 ? setUserIsDesktop(true) : setUserIsDesktop(false);
+  }, [userIsDesktop]);
+
   return (
     <>
-      <Provider store={store}>
-        <div className="App">
-          <ToastContainer />
-          <BrowserRouter>
-            <Header />
-            <div style={{display: "flex"}}>
-            <Sidebar />
-            <Routes>
-                <Route exact path="/" element={<Login />} />
-                <Route element={<ProtectedRoute />}>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path='/setting' element={<Setting/>} />
-                <Route path='/AdminProfile' element={<AdminProfile />} />
-                <Route path='/subscriberlist' element={<SubscriberList />} />
-                <Route path='/AddRole' element={<AdminRole />} />
-                <Route path="/racecourse" element={<RaceCourse />} />
-                <Route path="/races" element={<Races />} />
-                <Route path="/competition" element={<Competition />} />
-                <Route path="/statistics" element={<Statistic />} />
-                <Route path="/horse" element={<Horse />} />
-                <Route path="/jockey" element={<Jockey />} />
-                <Route path="/trainer" element={<Trainer />} />
-                <Route path="/news" element={<News />} />
-                <Route path="/ads" element={<Ads />} />
-                <Route path="/sponsor" element={<Sponsor />} />
-                <Route path="/newsform" element={<FormData />} />
-                <Route path="/adsform" element={<AdsForm />} />
-                <Route path="/sponsorform" element={<SponsorForm />} />
-                <Route path="/trainerform" element={<PostTrainer />} />
-                <Route path="/horseform" element={<PostHorse />} />
-                <Route path="/publishrace" element={<HorseData />} />
-                <Route path="/racecourseform" element={<RaceCourseForm />} />
-                <Route path="/jockeyform" element={<JockeyForm />} />
-                <Route path="/raceform" element={<RaceForm />} />
-                <Route path="/addhorse" element={<SelectHorse />} />
-                <Route path="/owner" element={<Owner />} />
-                <Route path="/ownerform" element={<OwnerForm />} />
-                <Route path="/sliderform" element={<SliderForm />} />
-                <Route path="/resultform" element={<ResultForm/>}/>
-                <Route path="/resultrace" element={<RacesResult/>}/>
-                <Route path="/color" element={<Color/>}/>
-                <Route path="/Nationalitylist"element={<NationalityTable/>} />
-                <Route path="/colorlist"element={<ColorTable/>} />
-                <Route path="/breederlist"element={<BreederTable/>} />
-                <Route path="/currencylist"element={<CurrencyTable/>} />
-                <Route path="/racetype" element={<Racetype/>}/>
-                <Route path="/racetypeform" element={<Racetypeform/>}/>
-                <Route path='/gender' element={<Gender/>} />
-                <Route path='/racename' element={<Racename/>} />
-                <Route path="racenameform" element={<Racenameform/>}/>
-                <Route path='/horsekindform' element={<Horsekindform/>}/>
-                <Route path='/ground' element={<GroundType/>}/>
-                <Route path='/groundlist' element={<GroundTypeTable/>}/>
-                <Route path="tracklength" element={<Tracklength/>} />
-                <Route path='/tracklengthform' element={<Tracklengthform/>}/>
-                <Route path='/horsekind' element={<HorseKind/>}/>
-                <Route path='/genderlist' element={<GenderTable/>} />
-                <Route path="/nationality" element={<Nationality/>}/>
-                <Route path="/currency" element={<Currency/>}/>
-                <Route path="/meeting" element={<MeetingType/>}/>
-                <Route path="/equipment" element={<Equipment/>}/>
-                <Route path="/equipmentlist" element={<EquiptmentTable/>}/>
-                <Route path="/breeder" element={<Breeder/>}/>
-                <Route path="/getmeeting" element={<GetMeetingType/>}/>
-                <Route path="/meeting" element={<MeetingType/>}/>
-                <Route path="/slider" element={<Slider />} />
-                <Route path="/addverdict" element={<Verdict />} />
-                <Route path="/verdict" element={<Verdicts />} />
-                <Route path="/verdictlist" element={<VerdictTable />} />
-                <Route path="/racekindform" element={<RaceKindForm />} />
-                <Route path="/racekind" element={<RaceKind />} />
-                <Route path="/fullpublishrace" element={<PublishRace />} />
-                <Route path="/testTable" element={<TestTable />} />
-                <Route path="/racecard" element={<RaceCard />} />
-                <Route path="*" element={<NotFound />} />
+    {
+     userIsDesktop ?  <Provider store={store}>
+     <div className="App">
+       <ToastContainer />
+       <BrowserRouter>
+         <Header />
+         <div style={{display: "flex"}}>
+         <Sidebar />
+         <Routes>
+             <Route exact path="/" element={<Login />} />
+             <Route element={<ProtectedRoute />}>
+             <Route path="/dashboard" element={<Dashboard />} />
+             <Route path='/setting' element={<Setting/>} />
+             <Route path='/AdminProfile' element={<AdminProfile />} />
+             <Route path='/subscriberlist' element={<SubscriberList />} />
+             <Route path='/AddRole' element={<AdminRole />} />
+             <Route path="/racecourse" element={<RaceCourse />} />
+             <Route path="/races" element={<Races />} />
+             <Route path="/competition" element={<Competition />} />
+             <Route path="/statistics" element={<Statistic />} />
+             <Route path="/horse" element={<Horse />} />
+             <Route path="/jockey" element={<Jockey />} />
+             <Route path="/trainer" element={<Trainer />} />
+             <Route path="/news" element={<News />} />
+             <Route path="/ads" element={<Ads />} />
+             <Route path="/sponsor" element={<Sponsor />} />
+             <Route path="/newsform" element={<FormData />} />
+             <Route path="/adsform" element={<AdsForm />} />
+             <Route path="/sponsorform" element={<SponsorForm />} />
+             <Route path="/trainerform" element={<PostTrainer />} />
+             <Route path="/horseform" element={<PostHorse />} />
+             <Route path="/publishrace" element={<HorseData />} />
+             <Route path="/racecourseform" element={<RaceCourseForm />} />
+             <Route path="/jockeyform" element={<JockeyForm />} />
+             <Route path="/raceform" element={<RaceForm />} />
+             <Route path="/addhorse" element={<SelectHorse />} />
+             <Route path="/owner" element={<Owner />} />
+             <Route path="/ownerform" element={<OwnerForm />} />
+             <Route path="/sliderform" element={<SliderForm />} />
+             <Route path="/resultform" element={<ResultForm/>}/>
+             <Route path="/resultrace" element={<RacesResult/>}/>
+             <Route path="/color" element={<Color/>}/>
+             <Route path="/Nationalitylist"element={<NationalityTable/>} />
+             <Route path="/colorlist"element={<ColorTable/>} />
+             <Route path="/breederlist"element={<BreederTable/>} />
+             <Route path="/currencylist"element={<CurrencyTable/>} />
+             <Route path="/racetype" element={<Racetype/>}/>
+             <Route path="/racetypeform" element={<Racetypeform/>}/>
+             <Route path='/gender' element={<Gender/>} />
+             <Route path='/racename' element={<Racename/>} />
+             <Route path="racenameform" element={<Racenameform/>}/>
+             <Route path='/horsekindform' element={<Horsekindform/>}/>
+             <Route path='/ground' element={<GroundType/>}/>
+             <Route path='/groundlist' element={<GroundTypeTable/>}/>
+             <Route path="tracklength" element={<Tracklength/>} />
+             <Route path='/tracklengthform' element={<Tracklengthform/>}/>
+             <Route path='/horsekind' element={<HorseKind/>}/>
+             <Route path='/genderlist' element={<GenderTable/>} />
+             <Route path="/nationality" element={<Nationality/>}/>
+             <Route path="/currency" element={<Currency/>}/>
+             <Route path="/meeting" element={<MeetingType/>}/>
+             <Route path="/equipment" element={<Equipment/>}/>
+             <Route path="/equipmentlist" element={<EquiptmentTable/>}/>
+             <Route path="/breeder" element={<Breeder/>}/>
+             <Route path="/getmeeting" element={<GetMeetingType/>}/>
+             <Route path="/meeting" element={<MeetingType/>}/>
+             <Route path="/slider" element={<Slider />} />
+             <Route path="/addverdict" element={<Verdict />} />
+             <Route path="/verdict" element={<Verdicts />} />
+             <Route path="/verdictlist" element={<VerdictTable />} />
+             <Route path="/racekindform" element={<RaceKindForm />} />
+             <Route path="/racekind" element={<RaceKind />} />
+             <Route path="/fullpublishrace" element={<PublishRace />} />
+             <Route path="/testTable" element={<TestTable />} />
+             <Route path="/racecard" element={<RaceCard />} />
+             <Route path="*" element={<NotFound />} />
 
-                {/* Edit Pages */}
-                <Route path="/editjockey" element={<EditJockey />} />
-                <Route path="/editracecourse" element={<EditRacecourse/>}/>
-                <Route path="/editowner" element={<EditOwner/>}/>
-                <Route path="/editslider" element={<EditSlider/>}/>
-                <Route path="/editsponsor" element={<EditSponsor/>}/>
-                <Route path="/editcolor" element={<EditColor />}/>
-                <Route path="/editbreeder" element={<EditBreeder />}/>
-                <Route path="/editcurrency" element={<EditCurrency />}/>
-                <Route path="/editgender" element={<EditGender/>}/>
-                <Route path="/editequipment" element={<EditEquipment/>}/>
-                <Route path="/editads" element={<EditAds/>}/>
-                <Route path="/editnationality" element={<EditNationality/>}/>
-                <Route path="/editnews" element={<EditNews />}/>
-                <Route path="/edittrainer" element={<EditTrainer/>}/>
-                <Route path="/edithorse" element={<EditHorse />}/>
-                <Route path="/editgroundtype" element={<EditGroundType />}/>
-                <Route path="/edittrack" element={<EditTrack />}/>
-                <Route path="/editracename" element={<EditRaceName />}/>
-                <Route path="/editracetype" element={<EditRaceType />}/>
-                <Route path="/editracekind" element={<EditRaceKind />}/>
-                <Route path="/editmeetingtype" element={<EditMeetingType />}/>
-                <Route path="/editverdict" element={<EditVerdict />}/>
+             {/* Edit Pages */}
+             <Route path="/editjockey" element={<EditJockey />} />
+             <Route path="/editracecourse" element={<EditRacecourse/>}/>
+             <Route path="/editowner" element={<EditOwner/>}/>
+             <Route path="/editslider" element={<EditSlider/>}/>
+             <Route path="/editsponsor" element={<EditSponsor/>}/>
+             <Route path="/editcolor" element={<EditColor />}/>
+             <Route path="/editbreeder" element={<EditBreeder />}/>
+             <Route path="/editcurrency" element={<EditCurrency />}/>
+             <Route path="/editgender" element={<EditGender/>}/>
+             <Route path="/editequipment" element={<EditEquipment/>}/>
+             <Route path="/editads" element={<EditAds/>}/>
+             <Route path="/editnationality" element={<EditNationality/>}/>
+             <Route path="/editnews" element={<EditNews />}/>
+             <Route path="/edittrainer" element={<EditTrainer/>}/>
+             <Route path="/edithorse" element={<EditHorse />}/>
+             <Route path="/editgroundtype" element={<EditGroundType />}/>
+             <Route path="/edittrack" element={<EditTrack />}/>
+             <Route path="/editracename" element={<EditRaceName />}/>
+             <Route path="/editracetype" element={<EditRaceType />}/>
+             <Route path="/editracekind" element={<EditRaceKind />}/>
+             <Route path="/editmeetingtype" element={<EditMeetingType />}/>
+             <Route path="/editverdict" element={<EditVerdict />}/>
 
-              </Route>
-            </Routes>
-            </div>
-           
-          </BrowserRouter>
-        </div>
-      </Provider>
+           </Route>
+         </Routes>
+         </div>
+        
+       </BrowserRouter>
+     </div>
+   </Provider>:<h1 style={{
+      display:'flex',
+      justifyContent:'center',
+      alignItem:'center'    }}>Not Available in this device</h1>
+    }
+     
     </>
   );
 }

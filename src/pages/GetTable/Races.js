@@ -16,6 +16,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+import { BiEdit } from "react-icons/bi";
 
 const Prize = (data) => {
   return (
@@ -289,7 +290,19 @@ const Races = () => {
                                 <button  className="Approvedbtn resultbtn" onClick={() => GoToPublish(item._id)}>Click</button>
                               </td>:null
                               }
-                              <td>
+                              <td
+                                className="table_delete_btn1"
+                                style={{ textAlign: "center" }}
+                              >
+                                <BiEdit
+                                  onClick={() =>
+                                    history("/editrace", {
+                                      state: {
+                                        fullraceid: item,
+                                      },
+                                    })
+                                  }
+                                />
                                 <MdDelete
                                   onClick={() => handleRemove(item._id)}
                                 />

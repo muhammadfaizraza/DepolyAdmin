@@ -20,7 +20,7 @@ const HorseKind = () => {
     }, [dispatch]);
     const handleRemove = async (Id) => {
       try {
-        const res = await axios.delete(`${window.env.API_URL}/deleteHorseKind/${Id}`)
+        const res = await axios.delete(`${window.env.API_URL}/softdeleteHorseKind/${Id}`)
         swal({
           title: "Success!",
           text: "Data has been Deleted successfully ",

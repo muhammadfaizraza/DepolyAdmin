@@ -39,7 +39,7 @@ const News = () => {
   }, []);
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/deletenews/${Id}`)
+      const res = await axios.delete(`${window.env.API_URL}/softdeletenews/${Id}`)
       swal({
         title: "Success!",
         text: "Data has been Deleted successfully ",

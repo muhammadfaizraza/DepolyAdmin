@@ -33,7 +33,7 @@ const Statistic = () => {
   
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/deleteJockey/${Id}`)
+      const res = await axios.delete(`${window.env.API_URL}/softdeleteJockey/${Id}`)
       swal({
         title: "Success!",
         text: "Data has been Deleted successfully ",

@@ -31,7 +31,7 @@ const Ads = () => {
 
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/deleteAds/${Id}`)
+      const res = await axios.delete(`${window.env.API_URL}/softdeleteAds/${Id}`)
       swal({
         title: "Success!",
         text: "Data has been Deleted successfully ",
@@ -51,11 +51,7 @@ const Ads = () => {
   };
   
 
-  let handleEdit = (Id) => {
-
-    dispatch(edit(Id));
-    history('/adsforms')
-  }
+ 
   if (status === STATUSES.LOADING) {
         return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
   }

@@ -24,7 +24,7 @@ const CurrencyTable = () => {
 
     const handleRemove = async (Id) => {
       try {
-        const res = await axios.delete(`${window.env.API_URL}/deleteCurrency/${Id}`)
+        const res = await axios.delete(`${window.env.API_URL}/softdeleteCurrency/${Id}`)
         swal({
           title: "Success!",
           text: "Data has been Deleted successfully ",

@@ -1,50 +1,46 @@
 import React, { useState, useEffect } from "react";
 import "../../Components/CSS/forms.css";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import { fetchSinglejockey } from "../../redux/getReducer/getSingleJockey";
 import swal from "sweetalert";
 import axios from "axios";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+import DateTimePicker from "react-datetime-picker";
 
 const NewsForm = () => {
-  const dispatch = useDispatch();
   const history = useNavigate();
   const { state } = useLocation();
 
-  const { jockeyid } = state;
-  const { data: singlejockey } = useSelector((state) => state.singlejockey);
-  
+  const { fullraceid } = state;
+  console.log( fullraceid)
+  const [DayNTime, setDayNTime] = useState("");
+
   const [state1, setState] = useState({
-		NameEn: '',
-    NameAr:'',
-		MaximumJockeyWeight: '',
-    MiniumumJockeyWeight: ''
+		MeetingCode: '',
+    DescriptionEn:'',
+		DescriptionAr: '',
+    WeatherDegree: '',
     
 	});
   const [image,setImage] = useState();
 
   const fileSelected = (event) => {
     const image = event.target.files[0];
-    setImage(singlejockey.image, image);
+    setImage(image, image);
   };
   
-  useEffect(() => {
-    dispatch(fetchSinglejockey({ jockeyid }));
-  }, []);
-
 
   useEffect(() => {
-		if (singlejockey) {
+		if (fullraceid) {
 			setState({
-				NameEn: singlejockey.NameEn,
-        NameAr: singlejockey.NameAr,
-				MaximumJockeyWeight: singlejockey.MaximumJockeyWeight,
-        MiniumumJockeyWeight: singlejockey.MiniumumJockeyWeight
+				MeetingCode: fullraceid.MeetingCode,
+        DescriptionEn: fullraceid.DescriptionEn,
+				DescriptionAr: fullraceid.DescriptionAr,
+        WeatherDegree: fullraceid.WeatherDegree,
 			});
 		} else {
-			dispatch(fetchSinglejockey({ jockeyid }));
 		}
-	}, [singlejockey]);
+	}, [fullraceid]);
 
 
   const submit = async (event) => {
@@ -53,13 +49,14 @@ const NewsForm = () => {
       
       const formData = new FormData();
       formData.append("image", image);
-      formData.append("NameEn", state1.NameEn);
-      formData.append("NameAr", state1.NameAr);
-      formData.append("MaximumJockeyWeight", state1.MaximumJockeyWeight);
-      formData.append("MiniumumJockeyWeight", state1.MiniumumJockeyWeight);
+      formData.append("MeetingCode", state1.MeetingCode);
+      formData.append("DescriptionEn", state1.DescriptionEn);
+      formData.append("DescriptionAr", state1.DescriptionAr);
+      formData.append("WeatherDegree", state1.WeatherDegree);
+      formData.append("DayNTime", DayNTime);
 
-      const response = await axios.put(`${window.env.API_URL}/updateJockey/${jockeyid}`, formData);
-      history("/jockey");
+      const response = await axios.put(`${window.env.API_URL}/updaterace/${fullraceid._id}`, formData);
+      history("/races");
       swal({
         title: "Success!",
         text: "Data has been Updated successfully ",
@@ -67,9 +64,17 @@ const NewsForm = () => {
         button: "OK",
       });
     } catch (error) {
-      alert(error.message);
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
     }
   };
+
+  var today = new Date();
   return (
     <>
       <div className="page">
@@ -79,89 +84,130 @@ const NewsForm = () => {
               marginTop: "30px",
             }}
           >
-            <div className="Headers">Edit Jockey</div>
+            <div className="Headers">Edit Race</div>
             <div className="form">
               <form onSubmit={submit}>
-                <div className="row mainrow">
+              <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='NameEn'
-										id='NameEn'
-										className='group__control'
-										placeholder='Name'
-										value={state1.NameEn}
-										onChange={(e) =>
-											setState({ ...state1, NameEn: e.target.value })
-										}
-									/>
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Meeting Code"
+                      className="mb-3"
+                      
+                      onChange={(e) =>
+                        setState({ ...state1, MeetingCode: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Details"  value={state1.MeetingCode}/>
+                    </FloatingLabel>
+
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="ملاحظات"
+                      className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='NameAr'
-										id='NameAr'
-										className='group__control'
-										value={state1.NameAr}
-										onChange={(e) =>
-											setState({ ...state1, NameAr: e.target.value })
-										}
-                    ></input>
+                      onChange={(e) =>
+                        setState({ ...state1, MeetingCode: e.target.value })
+                      }
+                    >
+                      <Form.Control type="text" placeholder="ملاحظات"   value={state1.MeetingCode}/>
+                    </FloatingLabel>
                   </div>
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='number'
-										name='MiniumumJockeyWeight'
-										id='MiniumumJockeyWeight'
-										className='group__control'
-										placeholder=''
-										value={state1.MiniumumJockeyWeight}
-										onChange={(e) =>
-											setState({ ...state1, MiniumumJockeyWeight: e.target.value })
-										}
-									/>
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Description"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, DescriptionEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Details"   value={state1.DescriptionEn}/>
+                    </FloatingLabel>
+
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="ملاحظات"
+                      className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
-                      type="number"
-                      placeholder="اسم المسار"
-                    ></input>
+                      onChange={(e) =>
+                        setState({ ...state1, DescriptionAr: e.target.value })
+                      }
+                    >
+                      <Form.Control type="text" placeholder="ملاحظات"   value={state1.DescriptionAr}/>
+                    </FloatingLabel>
                   </div>
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='number'
-										name='MaximumJockeyWeight'
-										id='MaximumJockeyWeight'
-										className='group__control'
-										placeholder='Post title'
-										value={state1.MaximumJockeyWeight}
-										onChange={(e) =>
-											setState({ ...state1, MaximumJockeyWeight: e.target.value })
-										}
-									/>
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Weather Degree"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, WeatherDegree: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="number" placeholder="Weather Degree"   value={state1.WeatherDegree}/>
+                    </FloatingLabel>
+
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="ملاحظات"
+                      className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
-                      type="number"
-                      placeholder="اسم المسار"
-                    ></input>
+                      onChange={(e) =>
+                        setState({ ...state1, WeatherDegree: e.target.value })
+                      }
+                    >
+                      <Form.Control type="text" placeholder="ملاحظات"   value={state1.WeatherDegree}/>
+                    </FloatingLabel>
                   </div>
                 </div>
-
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <DateTimePicker
+                      onChange={setDayNTime}
+                      value={DayNTime}
+                      monthPlaceholder="Date "
+                      dayPlaceholder="&"
+                      minDate={today}
+                      maxDate={new Date("02-29-2023")}
+                      yearPlaceholder="Time"
+                    />
+                    <span className="spanForm"> |</span>
+                  </div>
+                  <div className="col-sm"  style={{ direction: "rtl" }}>
+                    <DateTimePicker
+                      onChange={setDayNTime}
+                      value={DayNTime}
+                      monthPlaceholder="Date "
+                      dayPlaceholder="&"
+                      minDate={today}
+                      maxDate={new Date("02-29-2023")}
+                      yearPlaceholder="Time"
+                     
+                    />
+                  </div>
+                </div>
+                
                 <div className="ButtonSection">
                   <input type="file" size="60" onChange={fileSelected} />
                   <button type="submit" className="SubmitButton">

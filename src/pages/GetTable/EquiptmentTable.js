@@ -19,7 +19,7 @@ const EquiptmentTable = () => {
   }, [dispatch]);
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/deleteEquipment/${Id}`)
+      const res = await axios.delete(`${window.env.API_URL}/softdeleteEquipment/${Id}`)
       swal({
         title: "Success!",
         text: "Data has been Deleted successfully ",

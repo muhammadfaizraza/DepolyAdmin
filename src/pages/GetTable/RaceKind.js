@@ -22,7 +22,7 @@ const RaceKind = () => {
   
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/deleteRaceKind/${Id}`)
+      const res = await axios.delete(`${window.env.API_URL}/softdeleteRaceKind/${Id}`)
       swal({
         title: "Success!",
         text: "Data has been Deleted successfully ",

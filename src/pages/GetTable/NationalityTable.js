@@ -25,7 +25,7 @@ const NationalityTable = () => {
   }, [dispatch]);
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/deleteNationality/${Id}`)
+      const res = await axios.delete(`${window.env.API_URL}/softdeleteNationality/${Id}`)
       swal({
         title: "Success!",
         text: "Data has been Deleted successfully ",

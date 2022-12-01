@@ -21,7 +21,7 @@ const BreederTable = () => {
 
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/deleteBreeder/${Id}`);
+      const res = await axios.delete(`${window.env.API_URL}/softdeleteBreeder/${Id}`);
       swal({
         title: "Success!",
         text: "Data has been Deleted successfully ",

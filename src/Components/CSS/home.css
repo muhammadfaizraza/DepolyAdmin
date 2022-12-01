@@ -1,8 +1,8 @@
 .page{
-    display: flex;
-    gap: 22px;
-    width: 85vw;
-    /* margin-left: 13px; */
+  display: flex;
+  gap: 22px;
+  margin-inline: auto;
+  width: 87%;
 }
 
 .mainhomescreen{

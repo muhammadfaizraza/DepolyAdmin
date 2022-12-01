@@ -2,7 +2,7 @@ import React, { useState, Fragment, useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import Select from "react-select";
-import { fetchnationality } from "../../../redux/getReducer/getNationality";
+import { fetchcategory } from "../../../redux/getReducer/getCategory";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
@@ -16,8 +16,24 @@ const TrainerForm = () => {
   const history = useNavigate();
   const dispatch = useDispatch();
 
-  const { data: nationality } = useSelector((state) => state.nationality);
+  const { data: category } = useSelector((state) => state.category);
+  useEffect(() => {
+    dispatch(fetchcategory());
+  }, []);
 
+
+  let AllCategory =
+  category === undefined ? (
+      <></>
+    ) : (
+      category.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameEn,
+          label: item.NameEn,
+        };
+      })
+    );
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
   const [DescEn, setDescEn] = useState("");
@@ -35,7 +51,6 @@ const TrainerForm = () => {
     event.preventDefault();
     try {
       const formData = new FormData();
-      formData.append("image", image);
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
       formData.append("DescEn", DescEn);
@@ -44,9 +59,8 @@ const TrainerForm = () => {
       formData.append("pickCount", pickCount);
       formData.append("TriCount", TriCount);
       formData.append("StartDate", StartDate);
-      formData.append("CompetitionCategory", CompetitionCategory);
+      formData.append("CompetitionCategory", CompetitionCategory.id);
       formData.append("CompetitionCode", CompetitionCode);
-      formData.append("image", image);
       await axios.post(
         `${window.env.API_URL}/uploadCompetiton?keyword=&page=`,
         formData
@@ -109,23 +123,7 @@ const TrainerForm = () => {
   };
 
   var today = new Date();
-  useEffect(() => {
-    dispatch(fetchnationality());
-  }, []);
-
-
-  let AllNationality =
-    nationality === undefined ? (
-      <></>
-    ) : (
-      nationality.map(function (item) {
-        return {
-          id: item._id,
-          value: item.NameEn,
-          label: item.NameEn,
-        };
-      })
-    );
+  
 
   return (
     <Fragment>
@@ -248,7 +246,7 @@ const TrainerForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="Name"
+                      label="Competition Code"
                       className="mb-3"
                       onChange={(e) => setCompetitionCode(e.target.value)}
                       name="Name"
@@ -301,6 +299,33 @@ const TrainerForm = () => {
                     </FloatingLabel>
                   </div>
                 </div>
+
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Tri Count"
+                      className="mb-3"
+                      onChange={(e) => setTriCount(e.target.value)}
+                      value={TriCount}
+                    >
+                      <Form.Control type="number" placeholder="Pick Count" />
+                    </FloatingLabel>
+
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="تفاصيل"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control type="text" placeholder="تفاصيل" />
+                    </FloatingLabel>
+                  </div>
+                </div>
                 <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
@@ -333,7 +358,7 @@ const TrainerForm = () => {
                       placeholder={<div>Select Competition Category</div>}
                       defaultValue={CompetitionCategory}
                       onChange={setCompetitionCategory}
-                      options={AllNationality}
+                      options={AllCategory}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -358,7 +383,7 @@ const TrainerForm = () => {
                       className="selectdir"
                       defaultValue={CompetitionCategory}
                       onChange={setCompetitionCategory}
-                      options={AllNationality}
+                      options={AllCategory}
                       isClearable={true}
                       isSearchable={true}
                     />

@@ -20,7 +20,7 @@ const ColorTable = () => {
   }, [dispatch]);
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/deleteColor/${Id}`);
+      const res = await axios.delete(`${window.env.API_URL}/softdeleteColor/${Id}`);
       swal({
         title: "Success!",
         text: "Data has been Deleted successfully ",

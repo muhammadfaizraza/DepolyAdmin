@@ -83,7 +83,6 @@ const HorseEntry = [
   }, [items ,InputData]);
   
   const addItem = () => {
-    
     if(HorseLength === ItemLength){
       toast('No Horse ')
     }
@@ -105,13 +104,14 @@ const HorseEntry = [
     try {
       
       const response = await axios.post(`${window.env.API_URL}addracehorses/${RaceId}`, {HorseEntry:items});
+      setitems([]);
+      setGate(1)
       history("/fullpublishrace", {
         state: {
           RaceId: RaceId
         },
       });
-      setitems([]);
-      setGate(1)
+     
       swal({
         title: "Success",
         text: "Data has been added successfully ",
@@ -127,6 +127,7 @@ const HorseEntry = [
         button: "OK",
       });
     }
+    setitems([]);
   };
 
   return (

@@ -89,6 +89,8 @@ const PublishRace = () => {
     try {
       const response = await axios.post(`${window.env.API_URL}addverdicts/${RaceId}`, {VerdictEntry:items});
       const response1 = await axios.put(`${window.env.API_URL}/publishrace/${RaceId}`);
+      setitems([]);
+      setGate(1)
       history("/races");
       swal({
         title: "Success",

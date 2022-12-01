@@ -21,7 +21,7 @@ const Color = () => {
       formData.append("shortCode", shortCode);
 
       await axios.post(`${window.env.API_URL}/uploadCompetitionCategory`, formData);
-      history("/colorlist");
+      history("/CategoryListing");
       swal({
         title: "Success!",
         text: "Data has been added successfully ",

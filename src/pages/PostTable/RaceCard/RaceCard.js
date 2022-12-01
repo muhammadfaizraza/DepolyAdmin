@@ -69,7 +69,7 @@ const Nationality = () => {
         `${window.env.API_URL}/uploadRaceCard`,formData
       );
       const CardId = response.data.data._id;
-      history("/publishrace", {
+      history("/publishracecard", {
         state: {
           CardId: CardId,
         },

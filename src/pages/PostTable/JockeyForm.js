@@ -3,7 +3,7 @@ import DatePicker from "react-date-picker";
 import "../../Components/CSS/forms.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import { add } from "../../redux/postReducer/PostJockey";
 import { fetchnationality } from "../../redux/getReducer/getNationality";
 import swal from "sweetalert";
@@ -17,6 +17,8 @@ import Form from "react-bootstrap/Form";
 const NewsForm = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
+  const {pathname} = useLocation();
+
   const { data: nationality } = useSelector((state) => state.nationality);
   var today = new Date();
 
@@ -62,7 +64,9 @@ const NewsForm = () => {
         icon: "success",
         button: "OK",
       });
-      history("/jockey");
+      if(pathname === '/racetypeform'){
+        history("/jockey");
+      }
     } catch (error) {
       const err = error.response.data.message;
       swal({

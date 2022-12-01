@@ -1,13 +1,12 @@
 import React, { Fragment, useState, useEffect } from "react";
 import "../../Components/CSS/forms.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useLocation } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 import Select from "react-select";
 import { fetchnationality } from "../../redux/getReducer/getNationality";
 import { fetchcolor } from "../../redux/getReducer/getColor";
-import { fetchTrackLength } from "../../redux/getReducer/getTracklength";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
@@ -20,9 +19,10 @@ import { Modal } from "react-bootstrap";
 const RaceCourseForm = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
+  const {pathname} = useLocation();
+
   const { data: nationality } = useSelector((state) => state.nationality);
   const { data: color } = useSelector((state) => state.color);
-  const { data: trackLength } = useSelector((state) => state.trackLength);
 
   let AllNationality =
     nationality === undefined ? (
@@ -50,18 +50,7 @@ const RaceCourseForm = () => {
       })
     );
 
-  let AllTrack =
-    trackLength === undefined ? (
-      <></>
-    ) : (
-      trackLength.map(function (item) {
-        return {
-          id: item._id,
-          value: item.TrackNameEn,
-          label: item.TrackNameEn,
-        };
-      })
-    );
+ 
 
     
   const [TrackNameEn, setTrackNameEn] = useState("");
@@ -93,7 +82,9 @@ const RaceCourseForm = () => {
         icon: "success",
         button: "OK",
       });
-      history("/racecourse");
+      if(pathname === '/racecourseform'){
+        history("/racecourse");
+      }
     } catch (error) {
       
       const err = error.response.data.message;
@@ -109,7 +100,6 @@ const RaceCourseForm = () => {
   useEffect(() => {
     dispatch(fetchnationality());
     dispatch(fetchcolor());
-    dispatch(fetchTrackLength());
     if (!image) {
       setPreview(undefined);
       return;
@@ -135,7 +125,6 @@ const RaceCourseForm = () => {
   const FetchNew = () => {
     dispatch(fetchnationality());
     dispatch(fetchcolor());
-    dispatch(fetchTrackLength());
   };
 
   return (

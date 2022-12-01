@@ -39,7 +39,7 @@ const Slider = () => {
   const history = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchSlider({ pagenumber }));
+    dispatch(fetchSlider());
   }, []);
   const handleRemove = async (Id) => {
     try {

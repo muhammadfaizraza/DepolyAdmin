@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import { add } from "../../../redux/postReducer/postRace";
-import Moment from "moment";
 import "react-toastify/dist/ReactToastify.css";
 import { fetchjockey } from "../../../redux/getReducer/getJockeySlice";
 import { useState } from "react";
@@ -14,6 +12,7 @@ import { fetchRaceType } from "../../../redux/getReducer/getRacetype";
 import { fetchRaceName } from "../../../redux/getReducer/getRaceName";
 import { fetchTrackLength } from "../../../redux/getReducer/getTracklength";
 import { fetchRaceKind } from "../../../redux/getReducer/getRaceKind";
+import { fetchgroundtype } from "../../../redux/getReducer/getGroundType";
 import Select from "react-select";
 import swal from "sweetalert";
 import DateTimePicker from "react-datetime-picker";
@@ -24,15 +23,17 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { AiOutlineReload } from "react-icons/ai";
 import { Modal } from "react-bootstrap";
+
 import Racename from "../Racenameform";
 import MeetingTypePopUp from "../MeetingType";
 import RaceTypePopup from '../Racetypeform'
 import TrackLengthPopup from '../Tracklengthform'
+import GroundTypePopup from '../GroundType'
+import RaceKindPopup from '../RaceKind'
+import RaceCoursePopup from '../RaceCourseForm'
+import JockeyPopup from '../JockeyForm'
+import SponsorPopup from '../SponsorForm'
 
-// const RaceKinds = [
-//   { id: "1", value: "Flat", label: "Flat" },
-//   { id: "2", value: "Turf", label: "Turf" },
-// ];
 const WeatherTypes = [
   { id: "1", value: "Sunny", label: "Sunny" },
   { id: "2", value: "Cloudy", label: "Cloudy" },
@@ -42,10 +43,6 @@ const RaceStatuss = [
   { id: "2", value: "Due", label: "Due" },
   { id: "2", value: "Live", label: "Live" },
   { id: "2", value: "End", label: "End" },
-];
-const GroundTypes = [
-  { id: "1", value: "Green", label: "Green" },
-  { id: "2", value: "Flat", label: "Flat" },
 ];
 
 const RaceForm = () => {
@@ -57,6 +54,7 @@ const RaceForm = () => {
   const { data: RaceName } = useSelector((state) => state.RaceName);
   const { data: trackLength } = useSelector((state) => state.trackLength);
   const { data: raceKinds, status } = useSelector((state) => state.raceKinds);
+  const { data: groundtype } = useSelector((state) => state.groundtype);
 
   const history = useNavigate();
   const dispatch = useDispatch();
@@ -182,19 +180,42 @@ const RaceForm = () => {
       })
     );
 
+    let GroundrTypeAll =
+    groundtype === undefined ? (
+      <></>
+    ) : (
+      groundtype.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameEn,
+          label: item.NameEn,
+        };
+      })
+    );
+
+
+
+//  Modal functionalities Here
   const [showName, setShowName] = useState(false);
   const [showType, setShowType] = useState(false);
   const [showRaceType, setShowRaceType] = useState(false);
   const [showTrackLength, setShowTrackLength] = useState(false);
+  const [showGroundType, setShowGroundType] = useState(false);
+  const [showRaceKind, setShowRaceKind] = useState(false);
+  const [showRaceCourse, setShowRaceCourse] = useState(false);
+  const [showJockey, setShowJockey] = useState(false);
+  const [showSponsor, setShowSponsor] = useState(false);
 
-  const handleCloseTrackLength = () => setShowName(false);
+  
   const handleCloseName = () => setShowName(false);
   const handleCloseType = () => setShowType(false);
   const handleCloseRaceType = () => setShowRaceType(false);
-
-  const handleShowTrackLength = async () => {
-    await setTrackLength(true);
-  };
+  const handleCloseTrackLength = () => setShowTrackLength(false);
+  const handleCloseGroundType = () => setShowGroundType(false);
+  const handleCloseRaceKind = () => setShowRaceKind(false);
+  const handleCloseRaceCourse = () => setShowRaceCourse(false);
+  const handleCloseJockey= () => setShowJockey(false);
+  const handleCloseSponsor = () => setShowSponsor(false);
 
   const handleShowName = async () => {
     await setShowName(true);
@@ -206,6 +227,32 @@ const RaceForm = () => {
   const handleShowRaceType = async () => {
     await setShowRaceType(true);
   };
+  const handleShowTrackLength = async () => {
+    await setShowTrackLength(true);
+  };
+
+  const handleShowGroundType = async () => {
+    await setShowGroundType(true);
+  };
+
+  const handleShowRaceKind = async () => {
+    await setShowRaceKind(true);
+  };
+
+  const handleShowRaceCourse = async () => {
+    await setShowRaceCourse(true);
+  };
+
+  const handleShowJockey = async () => {
+    await setShowJockey(true);
+  };
+
+  const handleShowSponsor = async () => {
+    await setShowSponsor(true);
+  };
+
+  // Modal functionalities End Here
+
 
   const FetchNew = () => {
     dispatch(fetchracecourse());
@@ -216,6 +263,7 @@ const RaceForm = () => {
     dispatch(fetchRaceName());
     dispatch(fetchTrackLength());
     dispatch(fetchRaceKind());
+    dispatch(fetchgroundtype());
   };
 
   const [MeetingType, setMeetingType] = useState("");
@@ -359,23 +407,18 @@ const RaceForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <>
-                          <button className="addmore" onClick={handleShowType}>
+                        <button className="addmore" onClick={handleShowType}>
                             +
                           </button>
-                        </>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                        <>
-                          {/* <button className="addmore" onClick={handleShow}>+</button> */}
-                          <button className="addmore" onClick={FetchNew}>
+                        <button className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
                           </button>
-                        </>
                       </OverlayTrigger>{" "}
                       |
                     </span>
@@ -406,22 +449,18 @@ const RaceForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <>
-                          <button className="addmore" onClick={handleShowName}>
+                        <button className="addmore" onClick={handleShowName}>
                             +
                           </button>
-                        </>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                        <>
-                          <button className="addmore" onClick={FetchNew}>
+                         <button className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
                           </button>
-                        </>
                       </OverlayTrigger>{" "}
                       |
                     </span>
@@ -556,25 +595,22 @@ const RaceForm = () => {
                       isSearchable={true}
                     />
                     <span className="spanForm">
-                      <OverlayTrigger
+                    <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                       
                       >
-                        <>
-                          <button className="addmore" onClick={handleShowType}>
+                        <button className="addmore" onClick={handleShowRaceType}>
                             +
                           </button>
-                        </>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                        <>
-                          <button className="addmore" onClick={FetchNew}>
+                         <button className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
                           </button>
-                        </>
                       </OverlayTrigger>{" "}
                       |
                     </span>
@@ -588,7 +624,7 @@ const RaceForm = () => {
                           اكتب للبحث عن الجنسية
                         </div>
                       }
-                      defaultValue={RaceType}
+                      defaultValue={RaceTyp}
                       onChange={setRaceType}
                       options={RaceTypes}
                       isClearable={true}
@@ -609,15 +645,20 @@ const RaceForm = () => {
                     <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
-                       
                       >
-                        <button
-                          className="addmore" 
-                          onClick={() => history("/tracklengthform")}
-                        >
-                          +
-                        </button>
+                        <button className="addmore" onClick={handleShowTrackLength}>
+                            +
+                          </button>
                       </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <button className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </button>
+                      </OverlayTrigger>{" "}
                       |
                     </span>
                   </div>
@@ -632,7 +673,7 @@ const RaceForm = () => {
                       }
                       defaultValue={TrackLength}
                       onChange={setTrackLength}
-                      options={GroundTypes}
+                      options={TrackLenght}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -644,18 +685,36 @@ const RaceForm = () => {
                       placeholder={<div>Ground type</div>}
                       defaultValue={Ground}
                       onChange={setGround}
-                      options={GroundTypes}
+                      options={GroundrTypeAll}
                       isClearable={true}
                       isSearchable={true}
                     />{" "}
-                    <span className="spanForm"> |</span>
+                   <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <button className="addmore" onClick={handleShowGroundType}>
+                            +
+                          </button>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <button className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </button>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
                   </div>
 
                   <div className="col-sm">
                     <Select
                       placeholder={<div>طقس</div>}
                       className="selectdir"
-                      options={GroundTypes}
+                      options={GroundrTypeAll}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -671,7 +730,25 @@ const RaceForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />{" "}
-                    <span className="spanForm"> |</span>
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <button className="addmore" onClick={handleShowRaceKind}>
+                            +
+                          </button>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <button className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </button>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -723,13 +800,19 @@ const RaceForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button
-                          className="addmore"
-                          onClick={() => history("/racecourseform")}
-                        >
-                          +
-                        </button>
+                        <button className="addmore" onClick={handleShowRaceCourse}>
+                            +
+                          </button>
                       </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <button className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </button>
+                      </OverlayTrigger>{" "}
                       |
                     </span>
                   </div>
@@ -758,13 +841,19 @@ const RaceForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button
-                          className="addmore"
-                          onClick={() => history("/jockeyform")}
-                        >
-                          +
-                        </button>
+                        <button className="addmore" onClick={handleShowJockey}>
+                            +
+                          </button>
                       </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <button className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </button>
+                      </OverlayTrigger>{" "}
                       |
                     </span>
                   </div>
@@ -818,13 +907,19 @@ const RaceForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button
-                          className="addmore"
-                          onClick={() => history("/sponsorform")}
-                        >
-                          +
-                        </button>
+                        <button className="addmore" onClick={handleShowSponsor}>
+                            +
+                          </button>
                       </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <button className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </button>
+                      </OverlayTrigger>{" "}
                       |
                     </span>
                   </div>
@@ -877,7 +972,7 @@ const RaceForm = () => {
                     />
                     <span className="spanForm"> |</span>
                   </div>
-                  <div className="col-sm">
+                  <div className="col-sm"  style={{ direction: "rtl" }}>
                     <DateTimePicker
                       onChange={setDayNTime}
                       value={DayNTime}
@@ -886,7 +981,7 @@ const RaceForm = () => {
                       minDate={today}
                       maxDate={new Date("02-29-2023")}
                       yearPlaceholder="Time"
-                      style={{ direction: "rtl" }}
+                     
                     />
                   </div>
                 </div>
@@ -1057,6 +1152,10 @@ const RaceForm = () => {
           </div>
         </div>
       </div>
+
+
+      {/*  ------------Modal Popup ------------------ */}
+
       <Modal
         show={showName}
         onHide={handleCloseName}
@@ -1099,6 +1198,93 @@ const RaceForm = () => {
           <RaceTypePopup />
         </Modal.Body>
       </Modal>
+      <Modal
+        show={showTrackLength}
+        onHide={handleCloseTrackLength}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Track Length</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <TrackLengthPopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showRaceKind}
+        onHide={handleCloseRaceKind}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Race Kind</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <RaceKindPopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showRaceCourse}
+        onHide={handleCloseRaceCourse}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Create Race Course</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <RaceCoursePopup />
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={showJockey}
+        onHide={handleCloseJockey}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Create Jockey</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <JockeyPopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showSponsor}
+        onHide={handleCloseSponsor}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Sponsor</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <SponsorPopup />
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={showGroundType}
+        onHide={handleCloseGroundType}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Ground Type</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <GroundTypePopup />
+        </Modal.Body>
+      </Modal>
+ 
       
     </>
   );

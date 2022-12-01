@@ -20,14 +20,14 @@ const CategoryTable = () => {
 
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/deleteColor/${Id}`);
+      const res = await axios.delete(`${window.env.API_URL}/softdeleteCompetitionCategory/${Id}`);
       swal({
         title: "Success!",
         text: "Data has been Deleted successfully ",
         icon: "success",
         button: "OK",
       });
-      history("/colorlist");
+      history("/CategoryListing");
       dispatch(fetchcategory());
     } catch (error) {
       const err = error.response.data.message;
@@ -38,7 +38,7 @@ const CategoryTable = () => {
         button: "OK",
       });
     }
-    history("/colorlist");
+    history("/CategoryListing");
   };
 
   if (status === STATUSES.LOADING) {
@@ -69,7 +69,7 @@ const CategoryTable = () => {
             }}
           >
             <div className="Header ">
-              <h4>Color Listings</h4>
+              <h4>Category Listings</h4>
 
               <div>
                 <h6
@@ -80,8 +80,8 @@ const CategoryTable = () => {
                   }}
                 ></h6>
 
-                <Link to="/color">
-                  <button>Add Color</button>
+                <Link to="/addCategory">
+                  <button>Add Category</button>
                 </Link>
               </div>
             </div>

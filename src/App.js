@@ -101,6 +101,7 @@ import NotFound from "./Components/Common/NotFound";
 import AddCompetition from "./pages/PostTable/Competition/AddCompetition";
 import AddCategory from "./pages/PostTable/Competition/AddCategory";
 import CompetitionCategory from "./pages/GetTable/CompetitionCategory";
+import PublishRaceCard from "./pages/PostTable/RaceCard/PublishRaceCard";
 
 
 function App() {
@@ -200,6 +201,7 @@ function App() {
              <Route path="/addcompetition" element={<AddCompetition />} />
              <Route path="/addCategory" element={<AddCategory />} />
              <Route path="/CategoryListing" element={<CompetitionCategory />} />
+             <Route path="/publishracecard" element={<PublishRaceCard />} />
 
              <Route path="*" element={<NotFound />} />
 

@@ -10,8 +10,8 @@ import { fetchnationality } from "../../redux/getReducer/getNationality";
 import Select from "react-select";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
 
 const OwnerForm = () => {
   const dispatch = useDispatch();
@@ -59,25 +59,49 @@ const OwnerForm = () => {
   const [preview, setPreview] = useState();
 
   const convert = (num) => {
+    if (num) {
+      var date = new Date(num);
+      var months = [
+        "يناير",
+        "فبراير",
+        "مارس",
+        "إبريل",
+        "مايو",
+        "يونيو",
+        "يوليو",
+        "أغسطس",
+        "سبتمبر",
+        "أكتوبر",
+        "نوفمبر",
+        "ديسمبر",
+      ];
+      var days = [
+        "اﻷحد",
+        "اﻷثنين",
+        "الثلاثاء",
+        "اﻷربعاء",
+        "الخميس",
+        "الجمعة",
+        "السبت",
+      ];
+      var delDateString =
+        days[date.getDay()] +
+        " " +
+        date.getDate() +
+        " " +
+        months[date.getMonth()] +
+        " " +
+        date.getFullYear();
 
-    if(num ){
-     var date = new Date(num);
-     var months = ["يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو",
-       "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
-     ];
-     var days = ["اﻷحد", "اﻷثنين", "الثلاثاء", "اﻷربعاء", "الخميس", "الجمعة", "السبت"];
-     var delDateString = days[date.getDay()] +  " " + date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear();
-     
-     return delDateString;
+      return delDateString;
     }
-    
-   };
+  };
   useEffect(() => {
     dispatch(fetchcolor());
     dispatch(fetchnationality());
   }, [dispatch]);
 
-    const submit = async (event) => {
+  const submit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("Ownerimage", Ownerimage);
@@ -92,20 +116,19 @@ const OwnerForm = () => {
     formData.append("image", image);
     // image.forEach((image) => {
     // formData.append("image", image);
-    // 
+    //
 
     // });
     try {
-      await axios.post(`${window.env.API_URL}/createowner`,formData);
+      await axios.post(`${window.env.API_URL}/createowner`, formData);
       swal({
         title: "Success!",
-        text: 'Data has been added successfully',
+        text: "Data has been added successfully",
         icon: "success",
         button: "OK",
       });
       history("/owner");
     } catch (error) {
-      
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -128,14 +151,14 @@ const OwnerForm = () => {
 
     return () => URL.revokeObjectURL(objectUrl);
   }, [Ownerimage]);
-    const onSelectFile = (e) => {
-      setOwnerimage(e.target.files[0]);
-    };
-    const onSelectFile1 = (e) => {
-      setimage(e.target.files[0]);
-    };
+  const onSelectFile = (e) => {
+    setOwnerimage(e.target.files[0]);
+  };
+  const onSelectFile1 = (e) => {
+    setimage(e.target.files[0]);
+  };
 
-    const createServiceImagesChange = (e) => {
+  const createServiceImagesChange = (e) => {
     const files = Array.from(e.target.files);
     setimage([]);
     files.forEach((file) => {
@@ -147,7 +170,6 @@ const OwnerForm = () => {
       };
       reader.readAsDataURL(file);
     });
-    
   };
 
   return (
@@ -162,114 +184,91 @@ const OwnerForm = () => {
             <div className="Headers">Add Owner</div>
             <div className="form">
               <form onSubmit={submit}>
-              <div className="row mainrow">
-              <div className="col-sm">
-               
-                <FloatingLabel
-        controlId="floatingInput"
-        label="Name"
-        className="mb-3"
-onChange={(e) => setNameEn(e.target.value)}
-                  name="Name"
-                  value={NameEn}
-> 
-        <Form.Control type="text" placeholder="Name" />
-      </FloatingLabel>
-                
-                
-                <span className="spanForm"> |</span>
-              </div>
-
-              <div className="col-sm">
-              <FloatingLabel
-        controlId="floatingInput"
-        label="اسم"
-        className="mb-3 floatingInputAr"
-onChange={(e) => setNameAr(e.target.value)}
-                  name="Name"
-                  value={NameAr}
-                  style={{ direction: "rtl" }}
-               
-             
-> 
-        <Form.Control type="text" placeholder="اسم"     />
-      </FloatingLabel>
-              </div>
-            </div>
-            <div className="row  mainrow">
+                <div className="row mainrow">
                   <div className="col-sm">
-               
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Name"
+                      className="mb-3"
+                      onChange={(e) => setNameEn(e.target.value)}
+                      name="Name"
+                      value={NameEn}
+                    >
+                      <Form.Control type="text" placeholder="Name" />
+                    </FloatingLabel>
 
-
-
-<FloatingLabel
-        controlId="floatingInput"
-        label="Title"
-        className="mb-3"
-        onChange={(e) => setTitleEn(e.target.value)}
-     
-        value={TitleEn}
-> 
-        <Form.Control type="text" placeholder="Title" />
-      </FloatingLabel>
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                  
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
+                      onChange={(e) => setNameAr(e.target.value)}
+                      name="Name"
+                      value={NameAr}
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control type="text" placeholder="اسم" />
+                    </FloatingLabel>
+                  </div>
+                </div>
+                <div className="row  mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Title"
+                      className="mb-3"
+                      onChange={(e) => setTitleEn(e.target.value)}
+                      value={TitleEn}
+                    >
+                      <Form.Control type="text" placeholder="Title" />
+                    </FloatingLabel>
+                    <span className="spanForm"> |</span>
+                  </div>
 
-<FloatingLabel
-        controlId="floatingInput"
-        label="عنوان"
-        className="mb-3 floatingInputAr"
-onChange={(e) => setTitleAr(e.target.value)}
-                  name="Name"
-                  value={TitleAr}
-                  style={{ direction: "rtl" }}
-               
-             
-> 
-        <Form.Control type="text" placeholder="عنوان"     />
-      </FloatingLabel>
-
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="عنوان"
+                      className="mb-3 floatingInputAr"
+                      onChange={(e) => setTitleAr(e.target.value)}
+                      name="Name"
+                      value={TitleAr}
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control type="text" placeholder="عنوان" />
+                    </FloatingLabel>
                   </div>
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
-                 
-
-<FloatingLabel
-        controlId="floatingInput"
-        label="Short Name"
-        className="mb-3"
-        onChange={(e) => setShortEn(e.target.value)}
-     
-        value={ShortEn}
-> 
-        <Form.Control type="text" placeholder="Short Name" />
-      </FloatingLabel>
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Short Name"
+                      className="mb-3"
+                      onChange={(e) => setShortEn(e.target.value)}
+                      value={ShortEn}
+                    >
+                      <Form.Control type="text" placeholder="Short Name" />
+                    </FloatingLabel>
 
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                 
-
-
-
-<FloatingLabel
-        controlId="floatingInput"
-        label="اسم قصير"
-        className="mb-3 floatingInputAr"
-onChange={(e) => setShortAr(e.target.value)}
-                  name="Name"
-                  value={ShortAr}
-                  style={{ direction: "rtl" }}
-               
-             
-> 
-        <Form.Control type="text" placeholder="اسم قصير"     />
-      </FloatingLabel>
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم قصير"
+                      className="mb-3 floatingInputAr"
+                      onChange={(e) => setShortAr(e.target.value)}
+                      name="Name"
+                      value={ShortAr}
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control type="text" placeholder="اسم قصير" />
+                    </FloatingLabel>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -278,62 +277,30 @@ onChange={(e) => setShortAr(e.target.value)}
                       onChange={setRegistrationDate}
                       value={RegistrationDate}
                       dayPlaceholder=""
-                      maxDate={today}
+                      minDate={today}
                       monthPlaceholder="Registration Date"
                       yearPlaceholder=""
                     />
                     <span className="spanForm"> |</span>
                   </div>
 
-                  <div className="col-sm" style={{direction:"rtl"}}>
-                    <input
-   style={{direction:"rtl"}}
-                     
-                      placeholder="تاريخ التسجيل"
-                     value={convert(RegistrationDate)}
+                  <div className="col-sm" style={{ direction: "rtl" }}>
+                  <DatePicker
+                      onChange={setRegistrationDate}
+                      value={RegistrationDate}
+                      dayPlaceholder=""
+                      minDate={today}
+                      monthPlaceholder="تاريخ التسجيل"
+                      yearPlaceholder=""
+                      style={{ direction: "rtl" }}
                     />
-                   
+                    {/* <input
+                      style={{ direction: "rtl" }}
+                      placeholder="تاريخ التسجيل"
+                      value={convert(RegistrationDate)}
+                    /> */}
                   </div>
                 </div>
-                {/* <div className="row mainrow">
-                  <div className="col-sm">
-                    <Select
-                    
-                      placeholder={<div>Select Color</div>}
-                      defaultValue={SilkColor}
-                      onChange={setimage}
-                      options={AllColor}
-                      isClearable={true}
-                      isSearchable={true}
-                    /><span className="spanForm">
-                      
-                      <OverlayTrigger
-          
-         
-          overlay={
-            <Tooltip id={`tooltip-top`}>
-              Add more
-            </Tooltip>
-          }
-        >
-          <button className="addmore" onClick={()=> history('/color')}>+</button>
-        </OverlayTrigger> 
-                      
-                       |</span>
-                  </div>
-                  <div className="col-sm">
-                    <Select
-                      required
-                      placeholder={<div>حدد نوع الجنس</div>}
-                      className='selectdir'
-                      defaultValue={SilkColor}
-                      onChange={setimage}
-                      options={AllColor}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                  </div>
-                </div> */}
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
@@ -375,27 +342,8 @@ onChange={(e) => setShortAr(e.target.value)}
                     />
                   </div>
                 </div>
-                {/* <div className="row mainrow">
-                  <div className="col-sm">
-                    <input
-                      placeholder=" Rating"
-                      onChange={(e) => setNameEn(e.target.value)}
-                      name="Name"
-                      value={NameEn}
-                      required
-                    ></input>
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      onChange={(e) => setNameAr(e.target.value)}
-                      value={NameAr}
-                      placeholder="اسم "
-                    ></input>
-                  </div>
-                </div> */}
+               
+                <div className="SelectOwnerimage">
                 <label className="Multiplecaplabel">Select Multiple Caps</label>
                 <input
                   type="file"
@@ -405,8 +353,10 @@ onChange={(e) => setShortAr(e.target.value)}
                   multiple
                 />
                 <div className="ButtonSection">
-                  <div>
-                  <label className="Multipleownerlabel">Select Owner image</label>
+                  <div >
+                    <label className="Multipleownerlabel">
+                      Select Owner image
+                    </label>
 
                     <input
                       type="file"
@@ -421,12 +371,12 @@ onChange={(e) => setShortAr(e.target.value)}
                   <button
                     type="submit"
                     className="SubmitButton"
-                    disabled={isSubmitData}
+                    // disabled={isSubmitData}
                   >
                     Add Owner
                   </button>
                 </div>
-                
+                </div>
               </form>
             </div>
           </div>

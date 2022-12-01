@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 const Racetypeform = () => {
@@ -10,6 +10,7 @@ const Racetypeform = () => {
   const [shortCode, setshortCode] = useState("");
 
   const history = useNavigate();
+  const {pathname} = useLocation();
 
   const submit = async (event) => {
     event.preventDefault();
@@ -26,7 +27,10 @@ const Racetypeform = () => {
         icon: "success",
         button: "OK",
       });
-      history("/racekind");
+      if(pathname === '/racekindform'){
+        history("/racekind");
+      }
+      
     } catch (error) {
       const err = error.response.data.message;
       swal({

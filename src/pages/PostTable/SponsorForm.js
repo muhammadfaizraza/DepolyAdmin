@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../Components/CSS/forms.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { add } from "../../redux/postReducer/PostSponsor";
+import { useNavigate ,useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
@@ -12,6 +11,9 @@ import swal from "sweetalert";
 const SponsorForm = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
+
+  const {pathname} = useLocation();
+
   const [TitleEn, setTitleEn] = useState("");
   const [TitleAr, setTitleAr] = useState("");
   const [DescriptionAr, setDescriptionAr] = useState("");
@@ -42,7 +44,9 @@ const SponsorForm = () => {
         icon: "success",
         button: "OK",
       });
-      history("/sponsor");
+      if(pathname === '/sponsorform'){
+        history("/sponsor");      }
+    
     } catch (error) {
       const err = error.response.data.message;
       swal({

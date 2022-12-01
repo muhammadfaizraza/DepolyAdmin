@@ -38,8 +38,6 @@
   margin: 25px;
 }
 .form-group > input::placeholder {
-
-
  text-align: center;
 font-weight: 500;
 letter-spacing: 2px;

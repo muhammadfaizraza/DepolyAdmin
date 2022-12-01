@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import swal from 'sweetalert';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useLocation } from 'react-router-dom';
 
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
@@ -11,6 +11,7 @@ const GroundType = () => {
     const [NameAr, setNameAr] = useState("");
     const [shortCode,setshortCode]= useState("") 
     const history = useNavigate()
+    const {pathname} = useLocation();
 
     const submit = async (event) => {
         event.preventDefault();
@@ -21,7 +22,9 @@ const GroundType = () => {
           formData.append("shortCode",shortCode);
     
           await axios.post(`${window.env.API_URL}uploadGroundType`, formData)
-          history('/groundlist')
+          if(pathname === '/ground'){
+            history('/groundlist')
+          }
           swal({
             title: "Success!",
             text: "Data has been added successfully ",

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { fetchjockey, STATUSES } from "../../redux/getReducer/getJockeySlice";
+import { fetchcompetition, STATUSES } from "../../redux/getReducer/getCompetition";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
 import { Link, useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import swal from "sweetalert";
@@ -26,30 +25,33 @@ const Statistic = () => {
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { data: jockey, status } = useSelector((state) => state.jockey);
+  const history = useNavigate();
+
+  const { data: competition, status } = useSelector((state) => state.competition);
   useEffect(() => {
-    dispatch(fetchjockey()); 
+    dispatch(fetchcompetition()); 
   }, [dispatch]);
   
   const handleRemove = async (Id) => {
-    // try {
-    //   const res = await axios.delete(`${window.env.API_URL}/deleteJockey/${Id}`)
-    //   swal({
-    //     title: "Success!",
-    //     text: "Data has been Deleted successfully ",
-    //     icon: "success",
-    //     button: "OK",
-    //   });
-    //   dispatch(fetchjockey());
-    // } catch (error) {
-    //   const err = error.response.data.message;
-    //   swal({
-    //     title: "Error!",
-    //     text: err,
-    //     icon: "error",
-    //     button: "OK",
-    //   });
-    // }
+    try {
+      const res = await axios.delete(`${window.env.API_URL}/softdeleteCompetiton/${Id}`)
+      swal({
+        title: "Success!",
+        text: "Data has been Deleted successfully ",
+        icon: "success",
+        button: "OK",
+      });
+      history("/CategoryListing");
+      dispatch(fetchcompetition());
+    } catch (error) {
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
+    }
   };
 
   if (status === STATUSES.LOADING) {
@@ -101,53 +103,40 @@ const Statistic = () => {
                   <table>
                     <thead>
                       <tr>
-                        <th>Jockey Name</th>
+                        <th>Competition Name</th>
                         <th>Name Arabic </th>
-                        <th>Short Name </th>
-                        <th>Short Name Arabic</th>
-                        <th>Age</th>
-                        <th>Rating</th>
-                        <th>License Date </th>
-                        <th>Remarks</th>
-                        <th>Remarks Arabic </th>
-                        <th>Min Weight</th>
-                        <th>Max Weight</th>
-                        <th>Nationality</th>
-                        <th>Image</th>
+                        <th>Competition Category </th>
+                        <th>Competition Code</th>
+                        <th>Description </th>
+                        <th>Description Arabic</th>
+                        <th>Short Code</th>
+                        <th>Pick Count</th>
+                        <th>Tri Count</th>
+                        <th>Start Date </th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {jockey.map((item, index) => {
+                      {competition.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
-                              <td>{item.ShortNameEn}</td>
-                              <td>{item.ShortNameAr === '' ? <>N/A</> : item.ShortNameAr}</td>
-                              <td>
-                                {" "}
-                                <Moment fromNow ago>
-                                  {item.DOB}
-                                </Moment>
-                              </td>
-                              <td>{item.Rating} </td>
-
+                              <td>{item.CompetitionCategory}</td>
+                              <td>{item.CompetitionCode === '' ? <>N/A</> : item.CompetitionCode}</td>
+                              
+                              <td>{item.DescEn}</td>
+                              <td>{item.DescAr} </td>
+                              <td>{item.shortCode}</td>
+                              <td>{item.pickCount}</td>
+                              <td>{item.TriCount}</td>
                               <td>
                                 <Moment format="YYYY/MM/DD">
-                                  {item.JockeyLicenseDate}
+                                  {item.StartDate}
                                 </Moment>{" "}
                               </td>
-                              <td>{item.RemarksEn}</td>
-                              <td>{item.RemarksAr} </td>
-                              <td>{item.MiniumumJockeyWeight} KG</td>
-                              <td>{item.MaximumJockeyWeight} KG</td>
-                              <td>{item.JockeyNationalityData.NameEn}</td>
-                              <td>
-                                <img src={item.image} alt="" />
-                              </td>
-
+                             
                               <td className="table_delete_btn1">
                                   <BiEdit onClick={() => navigate('/competitionlisting',{
                                 state:{

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,useLocation } from "react-router-dom";
 import Select from "react-select";
 import { fetchracecourse } from "../../redux/getReducer/getRaceCourseSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +23,9 @@ const Tracklengthform = () => {
   const [preview, setPreview] = useState();
   const [RailPosition, setRailPosition] = useState();
 
+  const {pathname} = useLocation();
   const history = useNavigate();
+
   const submit = async (event) => {
     event.preventDefault();
     try {
@@ -41,7 +43,10 @@ const Tracklengthform = () => {
         icon: "success",
         button: "OK",
       });
-      history("/tracklength");
+      if(pathname === '/tracklengthform'){
+        history("/tracklength");
+      }
+     
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -72,7 +77,7 @@ const Tracklengthform = () => {
     const objectUrl = URL.createObjectURL(RaceCourseImage);
     setPreview(objectUrl);
     return () => URL.revokeObjectURL(objectUrl);
-  }, [RaceCourseImage]);
+  }, [RaceCourseImage ,dispatch]);
 
   let courseoptions =
     racecourse === undefined ? (

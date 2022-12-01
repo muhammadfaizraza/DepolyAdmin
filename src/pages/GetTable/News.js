@@ -35,7 +35,7 @@ const News = () => {
   const history = useNavigate();
   const { data: allnews, status } = useSelector((state) => state.news);
   useEffect(() => {
-    dispatch(fetchNews({ pagenumber }));
+    dispatch(fetchNews());
   }, []);
   const handleRemove = async (Id) => {
     try {

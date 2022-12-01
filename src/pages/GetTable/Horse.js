@@ -147,7 +147,7 @@ const Horse = () => {
 
                               <td>{item.SexModelData.NameEn}</td>
 
-                              <td>{item.ColorIDData.NameEn} </td>
+                              <td>{item.ColorIDData === null ? <>N/A</> : item.ColorIDData.NameEn} </td>
                               {/* <td>{item.KindOfHorse === '' ? <>N/A</>: item.KindOfHorse}</td> */}
                               <td>{item.PurchasePrice}</td>
                               <td>

@@ -341,6 +341,7 @@ const NewsForm = () => {
                       <Form.Control
                         type="number"
                         placeholder="Jockey Minimum Weight"
+                        min='0'
                       />
                     </FloatingLabel>
 
@@ -375,6 +376,7 @@ const NewsForm = () => {
                       <Form.Control
                         type="number"
                         placeholder="Jockey Maximum Weight"
+                        min='0'
                       />
                     </FloatingLabel>
 
@@ -392,6 +394,7 @@ const NewsForm = () => {
                       <Form.Control
                         type="number"
                         placeholder="الحد الأدنى لوزن الجوكي"
+                        min='0'
                       />
                     </FloatingLabel>
                   </div>
@@ -446,6 +449,7 @@ const NewsForm = () => {
                       <Form.Control
                         type="number"
                         placeholder="Jockey Allowance"
+                        min='0'
                       />
                     </FloatingLabel>
 
@@ -463,6 +467,7 @@ const NewsForm = () => {
                       <Form.Control
                         type="number"
                         placeholder="الحد الأدنى لوزن الجوكي"
+                        min='0'
                       />
                     </FloatingLabel>
                   </div>

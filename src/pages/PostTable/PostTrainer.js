@@ -43,12 +43,11 @@ const TrainerForm = () => {
       formData.append("image", image);
       formData.append("NameEn", NameEn);
       formData.append("Detail", Detail);
-      formData.append("Remarks", "2");
+      formData.append("Remarks", Remarks);
       formData.append("NameAr", NameAr);
       formData.append("DOB", DOB);
       formData.append("Age", Age);
       formData.append("TitleAr", TitleAr);
-      formData.append("Rating", Rating);
       formData.append("NationalityId", NationalityId.id);
       formData.append("TitleEn", TitleEn);
       formData.append("TrainerLicenseDate", TrainerLicenseDate);
@@ -263,30 +262,6 @@ const TrainerForm = () => {
                     </FloatingLabel>
                   </div>
                 </div>
-                {/* <div className="row mainrow">
-                  <div className="col-sm">
-                    <input
-                      placeholder=" Age"
-                      onChange={(e) => setAge(e.target.value)}
-                      name="Name"
-                      value={Age}
-                      type='number'
-                      required
-                    ></input>
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <input
-                    onChange={(e) => setAge(e.target.value)}
-                    name="Name"
-                    type='number'
-                    value={Age}
-                    style={{ direction: "rtl" }}
-                    placeholder="اسم "
-                    ></input>
-                  </div>
-                </div> */}
                 <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
@@ -339,27 +314,7 @@ const TrainerForm = () => {
                     </FloatingLabel>
                   </div>
                 </div>
-                {/* <div className="row mainrow">
-                  <div className="col-sm">
-                    <input
-                      placeholder="Rating"
-                      onChange={(e) => setRating(e.target.value)}
-                      name="Rating"
-                      value={Rating}
-                      type='number'
-                      required
-                    ></input>
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="طول المسار"
-                      type='number'
-                    ></input>
-                  </div>
-                </div> */}
+               
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select

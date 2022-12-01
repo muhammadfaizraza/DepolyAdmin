@@ -121,19 +121,14 @@ const Racecourse = () => {
                       return (
                         <>
                           <tr className="tr_table_class">
-                            <td>{item.TrackNameEn}</td>
-                            <td>{item.TrackNameAr}</td>
-                            {/* <td>{item.GroundTypeEn}</td>
-                            <td>{item.GroundTypeAr}</td> */}
-                            <td>{item.NationalityDataRaceCourse.NameEn}</td>
-                            {/* <td>{item.NationalityDataRaceCourse === null ? <></>: <>{item.NationalityDataRaceCourse.TrackNameEn}</>}</td> */}
-                            <td>{item.ColorCodeData.NameEn}</td>
+                            <td>{item.TrackNameEn === null ? <>N/A</> : item.TrackNameEn }</td>
+                            <td>{item.TrackNameAr === null ? <>N/A</> : item.TrackNameAr}</td>
+                            <td>{item.NationalityDataRaceCourse.NameEn === null ? <>N/A</> : item.NationalityDataRaceCourse.NameEn}</td>
+                            <td>{item.ColorCodeData === null ? <>N/A</> : item.ColorCodeData.NameEn}</td>
                             <td>{item.shortCode} </td>
-
                             <td>
                               <img src={item.image} alt="" />
                             </td>
-
                             <td className="table_delete_btn1">
                             <BiEdit   onClick={() => navigate('/editracecourse',{
                                 state:{

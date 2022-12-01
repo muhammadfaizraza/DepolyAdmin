@@ -123,7 +123,7 @@ const Statistic = () => {
                             <tr className="tr_table_class">
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
-                              <td>{item.CompetitionCategory}</td>
+                              <td>{item.CompetitionCategory === null ? <>N/A</> : item.CompetitionCategoryData.NameEn}</td>
                               <td>{item.CompetitionCode === '' ? <>N/A</> : item.CompetitionCode}</td>
                               
                               <td>{item.DescEn}</td>

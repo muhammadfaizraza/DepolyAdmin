@@ -192,7 +192,7 @@ const Horse = () => {
                                   onClick={() =>
                                     history("/edithorse", {
                                       state: {
-                                        horseid: item._id,
+                                        horseid: item,
                                       },
                                     })
                                   }

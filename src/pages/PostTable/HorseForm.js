@@ -285,7 +285,6 @@ const HorseForm = () => {
   }, [image]);
   
   const onSelectFile = (e) => {
-    // I've kept this example simple by using the first image instead of multiple
     setimage(e.target.files[0]);
   
   };

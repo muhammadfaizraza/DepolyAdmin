@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "../../Components/CSS/forms.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import { fetchSinglejockey } from "../../redux/getReducer/getSingleJockey";
 import swal from "sweetalert";
 import axios from "axios";
 import Select from "react-select";
@@ -11,6 +10,9 @@ import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import ReactStars from "react-rating-stars-component";
+import { fetchTrainer } from "../../redux/getReducer/getTrainerSlice";
+import { fetchOwner } from "../../redux/getReducer/getOwnerSlice";
+import { fetchbreeder } from "../../redux/getReducer/getBreeder";
 
 
 const NewsForm = () => {
@@ -18,40 +20,96 @@ const NewsForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
 
-  const { jockeyid } = state;
-  const { data: singlejockey } = useSelector((state) => state.singlejockey);
-  
+  const { data: trainer } = useSelector((state) => state.trainer);
+  const { data: owner } = useSelector((state) => state.owner);
+  const { data: breeder } = useSelector((state) => state.breeder);
+
+
+  const { horseid } = state;
+  console.log(horseid)
+
+  const [Breeder, setBreeder] = useState("");
+  const [ActiveTrainer, setActiveTrainer] = useState("");
+  const [ActiveOwner, setActiveOwner] = useState("");
+
+
+  useEffect(() => {
+    dispatch(fetchOwner());
+    dispatch(fetchTrainer());
+    dispatch(fetchbreeder());
+  }, [dispatch]);
+
+  let traineroption =
+    trainer === undefined ? (
+      <></>
+    ) : (
+      trainer.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameEn,
+          label: item.NameEn,
+        };
+      })
+    );
+
+  let owneroption =
+    owner === undefined ? (
+      <></>
+    ) : (
+      owner.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameEn,
+          label: item.NameEn,
+        };
+      })
+    );
+    
+    let AllBreeder =
+    breeder === undefined ? (
+      <></>
+    ) : (
+      breeder.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameEn,
+          label: item.NameEn,
+        };
+      })
+    );
   const [state1, setState] = useState({
 		NameEn: '',
     NameAr:'',
-		MaximumJockeyWeight: '',
-    MiniumumJockeyWeight: ''
+    PurchasePrice:'',
+    STARS:'',
+    Remarks:'',
+    ActiveOwner:'',
+    ActiveTrainer:'',
+    Breeder:''
     
 	});
   const [image,setImage] = useState();
 
   const fileSelected = (event) => {
     const image = event.target.files[0];
-    setImage(singlejockey.image, image);
+    setImage(image, image);
   };
   
-  useEffect(() => {
-    dispatch(fetchSinglejockey({ jockeyid }));
-  }, []);
 
 
   useEffect(() => {
-		if (singlejockey) {
+		if (horseid) {
 			setState({
-				NameEn: singlejockey.NameEn,
-        NameAr: singlejockey.NameAr,
-				MaximumJockeyWeight: singlejockey.MaximumJockeyWeight,
-        MiniumumJockeyWeight: singlejockey.MiniumumJockeyWeight
+				NameEn: horseid.NameEn,
+        NameAr: horseid.NameAr,
+        Breeder:horseid.BreederData.NameEn,
+        PurchasePrice :horseid.PurchasePrice,
+        STARS:horseid.STARS,
+        Remarks:horseid.Remarks
 			});
 		} else {
-			dispatch(fetchSinglejockey({ jockeyid }));
 		}
-	}, [singlejockey]);
+	}, [horseid]);
 
 
   const submit = async (event) => {
@@ -59,14 +117,19 @@ const NewsForm = () => {
     try {
       
       const formData = new FormData();
-      formData.append("image", image);
+      formData.append("Horseimage", image);
       formData.append("NameEn", state1.NameEn);
       formData.append("NameAr", state1.NameAr);
-      formData.append("MaximumJockeyWeight", state1.MaximumJockeyWeight);
-      formData.append("MiniumumJockeyWeight", state1.MiniumumJockeyWeight);
+      formData.append("PurchasePrice", state1.PurchasePrice);
+      formData.append("STARS", state1.STARS);
+      formData.append("Remarks", state1.Remarks);
+      formData.append("Breeder", Breeder.id);
+      formData.append("ActiveTrainer", ActiveTrainer.id);
+      formData.append("ActiveOwner", ActiveOwner.id);
 
-      const response = await axios.put(`${window.env.API_URL}/updateJockey/${jockeyid}`, formData);
-      history("/jockey");
+
+      const response = await axios.put(`${window.env.API_URL}/updatehorse/${horseid._id}`, formData);
+      history("/horse");
       swal({
         title: "Success!",
         text: "Data has been Updated successfully ",
@@ -74,7 +137,13 @@ const NewsForm = () => {
         button: "OK",
       });
     } catch (error) {
-      alert(error.message);
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
     }
   };
   return (
@@ -89,81 +158,77 @@ const NewsForm = () => {
             <div className="Headers">Edit Horse</div>
             <div className="form">
               <form onSubmit={submit}>
-
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='NameEn'
-										id='NameEn'
-										className='group__control'
-										placeholder='Name'
-										value={state1.NameEn}
-										onChange={(e) =>
-											setState({ ...state1, NameEn: e.target.value })
-										}
-									/>
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Name"
+                      className="mb-3"
+                      
+                      onChange={(e) =>
+                        setState({ ...state1, NameEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Details"  value={state1.NameEn}/>
+                    </FloatingLabel>
+
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="ملاحظات"
+                      className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='NameAr'
-										id='NameAr'
-										className='group__control'
-										value={state1.NameAr}
-										onChange={(e) =>
-											setState({ ...state1, NameAr: e.target.value })
-										}
-                    ></input>
+                      onChange={(e) =>
+                        setState({ ...state1, NameEn: e.target.value })
+                      }
+                    >
+                      <Form.Control type="text" placeholder="ملاحظات"   value={state1.NameEn}/>
+                    </FloatingLabel>
                   </div>
                 </div>
-
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='NameEn'
-										id='NameEn'
-										className='group__control'
-										placeholder='Remarks'
-										value={state1.NameEn}
-										onChange={(e) =>
-											setState({ ...state1, NameEn: e.target.value })
-										}
-									/>
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Remarks"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, Remarks: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Details"   value={state1.Remarks}/>
+                    </FloatingLabel>
+
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="ملاحظات"
+                      className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='NameAr'
-										id='NameAr'
-										className='group__control'
-										value={state1.NameAr}
-										onChange={(e) =>
-											setState({ ...state1, NameAr: e.target.value })
-										}
-                    ></input>
+                      onChange={(e) =>
+                        setState({ ...state1, Remarks: e.target.value })
+                      }
+                    >
+                      <Form.Control type="text" placeholder="ملاحظات"   value={state1.Remarks}/>
+                    </FloatingLabel>
                   </div>
                 </div>
-
+                
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
-                      placeholder={<div>Select Owner</div>}
-                      defaultValue={state1.ColorCode}
-                      value={state1.ColorCode}
-                      onChange={(e) =>
-                        setState({ ...state1, ColorCode: e.target.value })
-                      }
-                      // options={AllColor}
+                      placeholder={<div>Type to search Active trainer</div>}
+                      defaultValue={ActiveTrainer}
+                      onChange={setActiveTrainer}
+                      options={traineroption}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -171,32 +236,28 @@ const NewsForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <>
-                          {/* <span className="addmore" onClick={handleShow}>+</span> */}
-                        </>
+                        <button
+                          className="addmore"
+                          onClick={() => history("/trainerform")}
+                        >
+                          +
+                        </button>
                       </OverlayTrigger>
-                      <OverlayTrigger
-                        overlay={
-                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
-                        }
-                      >
-                        <>
-                          {/* <button className="addmore" onClick={FetchNew}><AiOutlineReload /></button> */}
-                        </>
-                      </OverlayTrigger>{" "}
                       |
                     </span>
                   </div>
+
                   <div className="col-sm">
                     <Select
-                      required
-                      placeholder="تقييم الحصان"
                       className="selectdir"
-                      value={state1.ColorCode}
-                      onChange={(e) =>
-                        setState({ ...state1, ColorCode: e.target.value })
+                      placeholder={
+                        <div style={{ direction: "rtl" }}>
+                          اكتب للبحث عن المدرب النشط
+                        </div>
                       }
-                      // options={AllColor}
+                      defaultValue={ActiveTrainer}
+                      onChange={setActiveTrainer}
+                      options={traineroption}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -206,13 +267,51 @@ const NewsForm = () => {
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
-                      placeholder={<div>Select Owner</div>}
-                      defaultValue={state1.ColorCode}
-                      value={state1.ColorCode}
-                      onChange={(e) =>
-                        setState({ ...state1, ColorCode: e.target.value })
+                      placeholder={<div>Type to search Active Owner</div>}
+                      defaultValue={ActiveOwner}
+                      onChange={setActiveOwner}
+                      options={owneroption}
+                      isClearable={true}
+                      isSearchable={true}
+                    /><span className="spanForm">
+                      
+                      <OverlayTrigger
+          
+         
+          overlay={
+            <Tooltip id={`tooltip-top`}>
+              Add more
+            </Tooltip>
+          }
+        >
+          <button className="addmore" onClick={()=> history('/ownerform')}>+</button>
+        </OverlayTrigger> 
+
+                       |</span>
+                  </div>
+
+                  <div className="col-sm">
+                    <Select         className='selectdir'
+                      placeholder={
+                        <div style={{ direction: "rtl" }}>
+                         اكتب للبحث عن المالك النشط
+                        </div>
                       }
-                      // options={AllColor}
+                      defaultValue={ActiveOwner}
+                      onChange={setActiveOwner}
+                      options={owneroption}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Select Breeder</div>}
+                      defaultValue={Breeder}
+                      onChange={setBreeder}
+                      options={AllBreeder}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -220,49 +319,40 @@ const NewsForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <>
-                          {/* <span className="addmore" onClick={handleShow}>+</span> */}
-                        </>
+                        <button
+                          className="addmore"
+                          onClick={() => history("/breeder")}
+                        >
+                          +
+                        </button>
                       </OverlayTrigger>
-                      <OverlayTrigger
-                        overlay={
-                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
-                        }
-                      >
-                        <>
-                          {/* <button className="addmore" onClick={FetchNew}><AiOutlineReload /></button> */}
-                        </>
-                      </OverlayTrigger>{" "}
                       |
                     </span>
                   </div>
                   <div className="col-sm">
                     <Select
                       required
-                      placeholder="تقييم الحصان"
+                      placeholder={<div>حدد نوع الجنس</div>}
                       className="selectdir"
-                      value={state1.ColorCode}
-                      onChange={(e) =>
-                        setState({ ...state1, ColorCode: e.target.value })
-                      }
-                      // options={AllColor}
+                      defaultValue={Breeder}
+                      onChange={setBreeder}
+                      options={AllBreeder}
                       isClearable={true}
                       isSearchable={true}
                     />
                   </div>
                 </div>
-
                 <div className="row mainrow">
                   <div className="col-sm">
                   <input
 										type='number'
-										name='MaximumJockeyWeight'
-										id='MaximumJockeyWeight'
+										name='Purchased'
+										id='Purchased'
 										className='group__control'
 										placeholder='Purchased Price'
-										value={state1.MaximumJockeyWeight}
+										value={state1.PurchasePrice}
 										onChange={(e) =>
-											setState({ ...state1, MaximumJockeyWeight: e.target.value })
+											setState({ ...state1, PurchasePrice: e.target.value })
 										}
 									/>
                     <span className="spanForm"> |</span>
@@ -273,6 +363,10 @@ const NewsForm = () => {
                       style={{ direction: "rtl" }}
                       type="number"
                       placeholder="اسم المسار"
+                       value={state1.PurchasePrice}
+										  onChange={(e) =>
+											setState({ ...state1, PurchasePrice: e.target.value })
+										}
                     ></input>
                   </div>
                 </div>
@@ -283,7 +377,10 @@ const NewsForm = () => {
                     <div className="starcss">
                     <ReactStars
                       count={5}
-                      // onChange={setSTARS}
+                      onChange={(e) =>
+                        setState({ ...state1, STARS: e.target.value })
+                      }
+                      value={state1.STARS}
                       size={44}
                       a11y= {true}
                       isHalf= {true}

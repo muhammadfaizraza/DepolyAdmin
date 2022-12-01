@@ -43,7 +43,6 @@ let groundtypeopt =
     })
   );
   const { trackid } = state;
-  console.log(trackid);
   const [image, setImage] = useState();
   const [GroundType, setGroundType] = useState();
   const [RaceCourse, setRaceCourse] = useState("");

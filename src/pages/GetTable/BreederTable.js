@@ -170,7 +170,7 @@ const BreederTable = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2 style={{fontFamily: "inter"}}>Currency</h2>
+          <h2 style={{fontFamily: "inter"}}>Breeder</h2>
         </Modal.Header>
         <Modal.Body>
           <BreederPopup data={modaldata} />

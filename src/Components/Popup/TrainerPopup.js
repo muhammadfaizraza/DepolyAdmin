@@ -6,6 +6,7 @@ import '../CSS/modal.css'
 
 
 const TrainerPopup = (data) => {
+    console.log(data)
 
     return (
         <div className="form">
@@ -39,33 +40,7 @@ const TrainerPopup = (data) => {
           </div>
 
 
-          <div className="row mainrow">
-            <div className="col-sm">
-            <FloatingLabel
-                controlId="floatingInput"
-                label="Detail"
-                className="mb-3"
-              
-              >
-                <Form.Control type="text" placeholder="Description" value={data.data.DescriptionEn} readOnly/>
-              </FloatingLabel>
-           
-              <span className="spanForm"> |</span>
-            </div>
-
-            <div className="col-sm">
-            <FloatingLabel
-                controlId="floatingInput"
-                label="اسم"
-                className="mb-3"
-             
-              
-              >
-                <Form.Control type="text" placeholder="Description" value={data.data.DescriptionAr} readOnly />
-              </FloatingLabel>
-              
-            </div>
-          </div>
+     
           
           <div className="row mainrow">
             <div className="col-sm">
@@ -85,7 +60,7 @@ const TrainerPopup = (data) => {
             <div className="col-sm">
             <FloatingLabel
                 controlId="floatingInput"
-                label="اسم"
+                label="عنوان"
                 className="mb-3"
                
               
@@ -108,20 +83,9 @@ const TrainerPopup = (data) => {
                 <Form.Control type="text" placeholder="Description" value={data.data.Remarks} readOnly/>
               </FloatingLabel>
             
-              <span className="spanForm"> |</span>
             </div>
 
-            <div className="col-sm">
-            <FloatingLabel
-                controlId="floatingInput"
-                label="اسم"
-                className="mb-3"
-            
-              
-              >
-                <Form.Control type="text" placeholder="Description" value={data.data.ShortEn} readOnly/>
-              </FloatingLabel>
-            </div>
+          
           </div>
 
           <div className="row mainrow">
@@ -132,7 +96,7 @@ const TrainerPopup = (data) => {
                 className="mb-3"
               
               >
-                <Form.Control type="text" placeholder="Description" value={data.data.ShortEn} readOnly  />
+                <Form.Control type="text" placeholder="Description" value={data.data.ShortNameEn} readOnly  />
               </FloatingLabel>
             
               <span className="spanForm"> |</span>
@@ -146,10 +110,26 @@ const TrainerPopup = (data) => {
              
               
               >
-                <Form.Control type="text" placeholder="Description" value={data.data.ShortAr} readOnly />
+                <Form.Control type="text" placeholder="Description" value={data.data.ShortNameAr=== undefined ? <>N/A</> :  data.data.ShortNameAr} readOnly />
               </FloatingLabel>
               
             </div>
+          </div>
+          <div className="row mainrow">
+            <div className="col-sm">
+            <FloatingLabel
+                controlId="floatingInput"
+                label="Detail"
+                className="mb-3"
+              
+              >
+                <Form.Control type="text" placeholder="Description" value={data.data.Detail} readOnly/>
+              </FloatingLabel>
+           
+     
+            </div>
+
+           
           </div>
 
           <div className="ButtonSection">

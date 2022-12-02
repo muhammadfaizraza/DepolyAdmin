@@ -237,7 +237,7 @@ const Trainer = () => {
           <TrainerPopup data={modaldata} />
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={handleClose}>Close</button>
+        <button onClick={handleClose} className="modalClosebtn">Close</button>
         </Modal.Footer>
       </Modal>
     </>

@@ -22,7 +22,8 @@ const Sidebar = () => {
     {
       !userInfo && !userToken ? <></> :   <>
       {pathname !== "/" ? (
-        <div className="sidebar">
+        <div className="adminsidebar">
+          <div className="sidebar">
           <Link to="/dashboard" className="mylink">
             Dashboard
           </Link>
@@ -648,6 +649,7 @@ const Sidebar = () => {
               Setting
             </Link>
           </div>
+        </div>
         </div>
       ) : null}
       </>

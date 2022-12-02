@@ -80,11 +80,10 @@ const NewsForm = () => {
                   <FloatingLabel
                       controlId="floatingInput"
                       label="Name"
-                      className="mb-3 floatingInputAr"
+                      className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, NameEn: e.target.value })
                       }
-                      style={{ direction: "rtl" }}
 
                     >
                       <Form.Control type="text" placeholder="Description" value={state1.NameEn}/>

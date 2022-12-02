@@ -87,3 +87,8 @@ cursor: pointer;
     border-top-right-radius: var(--bs-accordion-inner-border-radius);
     border-radius: 0px 20px 20px 0px;
 }
+
+.adminsidebar{
+    /* width: 15% !important;
+    background-color: #00A3FF; */
+}

@@ -104,7 +104,7 @@ const HorseEntry = [
     try {
       
       const response = await axios.post(`${window.env.API_URL}addracehorses/${RaceId}`, {HorseEntry:items});
-      setitems([]);
+      localStorage.removeItem('list')
       setGate(1)
       history("/fullpublishrace", {
         state: {

@@ -244,7 +244,7 @@ const RaceCourseForm = () => {
                         }
                       >
                         <>
-                        <button className="addmore" onClick={FetchNew}><AiOutlineReload /></button>
+                        <span className="addmore" onClick={FetchNew}><AiOutlineReload /></span>
                         </>
                       </OverlayTrigger> |</span>
                   </div>
@@ -293,7 +293,7 @@ const RaceCourseForm = () => {
                         }
                       >
                         <>
-                        <button className="addmore" onClick={FetchNew}><AiOutlineReload /></button>
+                        <span className="addmore" onClick={FetchNew}><AiOutlineReload /></span>
                         </>
                       </OverlayTrigger> |</span>
                   </div>

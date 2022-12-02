@@ -407,18 +407,18 @@ const RaceForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button className="addmore" onClick={handleShowType}>
+                        <span className="addmore" onClick={handleShowType}>
                             +
-                          </button>
+                          </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                        <button className="addmore" onClick={FetchNew}>
+                        <span className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
-                          </button>
+                          </span>
                       </OverlayTrigger>{" "}
                       |
                       
@@ -451,18 +451,18 @@ const RaceForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button className="addmore" onClick={handleShowName}>
+                        <span className="addmore" onClick={handleShowName}>
                             +
-                          </button>
+                          </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <button className="addmore" onClick={FetchNew}>
+                         <span className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
-                          </button>
+                          </span>
                       </OverlayTrigger>{" "}
                       |
                     </span>
@@ -582,7 +582,6 @@ const RaceForm = () => {
                       onChange={(e) => setWeatherDegree(e.target.value)}
                       value={WeatherDegree}
                       type="number"
-                      
                     ></input>
                   </div>
                 </div>
@@ -601,18 +600,18 @@ const RaceForm = () => {
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                        
                       >
-                        <button className="addmore" onClick={handleShowRaceType}>
+                        <span className="addmore" onClick={handleShowRaceType}>
                             +
-                          </button>
+                          </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <button className="addmore" onClick={FetchNew}>
+                         <span className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
-                          </button>
+                          </span>
                       </OverlayTrigger>{" "}
                       |
                     </span>
@@ -648,18 +647,18 @@ const RaceForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button className="addmore" onClick={handleShowTrackLength}>
+                        <span className="addmore" onClick={handleShowTrackLength}>
                             +
-                          </button>
+                          </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <button className="addmore" onClick={FetchNew}>
+                         <span className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
-                          </button>
+                          </span>
                       </OverlayTrigger>{" "}
                       |
                     </span>
@@ -695,18 +694,18 @@ const RaceForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button className="addmore" onClick={handleShowGroundType}>
+                        <span className="addmore" onClick={handleShowGroundType}>
                             +
-                          </button>
+                          </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <button className="addmore" onClick={FetchNew}>
+                         <span className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
-                          </button>
+                          </span>
                       </OverlayTrigger>{" "}
                       |
                     </span>
@@ -736,18 +735,18 @@ const RaceForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button className="addmore" onClick={handleShowRaceKind}>
+                        <span className="addmore" onClick={handleShowRaceKind}>
                             +
-                          </button>
+                          </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <button className="addmore" onClick={FetchNew}>
+                         <span className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
-                          </button>
+                          </span>
                       </OverlayTrigger>{" "}
                       |
                     </span>
@@ -802,18 +801,18 @@ const RaceForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button className="addmore" onClick={handleShowRaceCourse}>
+                        <span className="addmore" onClick={handleShowRaceCourse}>
                             +
-                          </button>
+                          </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <button className="addmore" onClick={FetchNew}>
+                         <span className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
-                          </button>
+                          </span>
                       </OverlayTrigger>{" "}
                       |
                     </span>
@@ -843,18 +842,18 @@ const RaceForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button className="addmore" onClick={handleShowJockey}>
+                        <span className="addmore" onClick={handleShowJockey}>
                             +
-                          </button>
+                          </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <button className="addmore" onClick={FetchNew}>
+                         <span className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
-                          </button>
+                          </span>
                       </OverlayTrigger>{" "}
                       |
                     </span>
@@ -909,18 +908,18 @@ const RaceForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button className="addmore" onClick={handleShowSponsor}>
+                        <span className="addmore" onClick={handleShowSponsor}>
                             +
-                          </button>
+                          </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <button className="addmore" onClick={FetchNew}>
+                         <span className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
-                          </button>
+                          </span>
                       </OverlayTrigger>{" "}
                       |
                     </span>

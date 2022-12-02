@@ -15,12 +15,13 @@ const NewsForm = () => {
 
   const { jockeyid } = state;
   const { data: singlejockey } = useSelector((state) => state.singlejockey);
-  
+  console.log(jockeyid)
   const [state1, setState] = useState({
 		NameEn: '',
     NameAr:'',
 		MaximumJockeyWeight: '',
-    MiniumumJockeyWeight: ''
+    MiniumumJockeyWeight: '',
+    image:''
     
 	});
   const [image,setImage] = useState();
@@ -28,7 +29,7 @@ const NewsForm = () => {
 
   const fileSelected = (event) => {
     const image = event.target.files[0];
-    setImage(singlejockey.image, image);
+    setImage(image, image);
   };
   
   useEffect(() => {
@@ -42,7 +43,8 @@ const NewsForm = () => {
 				NameEn: singlejockey.NameEn,
         NameAr: singlejockey.NameAr,
 				MaximumJockeyWeight: singlejockey.MaximumJockeyWeight,
-        MiniumumJockeyWeight: singlejockey.MiniumumJockeyWeight
+        MiniumumJockeyWeight: singlejockey.MiniumumJockeyWeight,
+        image:singlejockey.image
 			});
 		} else {
 			dispatch(fetchSinglejockey({ jockeyid }));
@@ -58,6 +60,8 @@ const NewsForm = () => {
     setPreview(objectUrl)
     return () => URL.revokeObjectURL(objectUrl)
 }, [image])
+
+console.log(preview,'preview')
   const submit = async (event) => {
     event.preventDefault();
     try {
@@ -69,7 +73,7 @@ const NewsForm = () => {
       formData.append("MaximumJockeyWeight", state1.MaximumJockeyWeight);
       formData.append("MiniumumJockeyWeight", state1.MiniumumJockeyWeight);
 
-      const response = await axios.put(`${window.env.API_URL}/updateJockey/${jockeyid}`, formData);
+      const response = await axios.put(`${window.env.API_URL}/updateJockey/${jockeyid._id}`, formData);
       history("/jockey");
       swal({
         title: "Success!",
@@ -189,7 +193,6 @@ const NewsForm = () => {
                       onChange={(e) =>
                         setState({ ...state1, MaximumJockeyWeight: e.target.value })
                       }
-                     
                     >
                       <Form.Control type="text" placeholder="Description" value={state1.MaximumJockeyWeight}/>
                     </FloatingLabel>

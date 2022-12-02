@@ -77,7 +77,7 @@ const Tracklengthform = () => {
         icon: "error",
         button: "OK",
       });
-      return;
+      
     }
     const objectUrl = URL.createObjectURL(RaceCourseImage);
     setPreview(objectUrl);
@@ -251,7 +251,11 @@ const Tracklengthform = () => {
                 </div>
               </div>
               <div className="ButtonSection">
+           
                 <div>
+                <label className="Multipleownerlabel">
+                      Select Gif Image
+                    </label>
                   <input
                     type="file"
                     onChange={onSelectFile}

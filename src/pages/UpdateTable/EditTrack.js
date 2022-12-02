@@ -199,7 +199,7 @@ let groundtypeopt =
                     >
                       <button
                         className="addmore"
-                        onClick={() => history("/racecourseform")}
+                        onClick={() => history("/groundlist")}
                       >
                         +
                       </button>
@@ -224,7 +224,7 @@ let groundtypeopt =
               <div className="row mainrow">
                 <div className="col-sm">
                   <Select
-                    placeholder={<div>Select Ground Type</div>}
+                    placeholder={<div>Select Race Course</div>}
                     defaultValue={RaceCourse}
                     onChange={setRaceCourse}
                     options={courseoptions}
@@ -250,9 +250,9 @@ let groundtypeopt =
                     required
                     placeholder={<div>نوع الأرض</div>}
                     className="selectdir"
-                    defaultValue={GroundType}
-                    onChange={setGroundType}
-                    options={groundtypeopt}
+                    defaultValue={RaceCourse}
+                    onChange={setRaceCourse}
+                    options={courseoptions}
                     isClearable={true}
                     isSearchable={true}
                   />

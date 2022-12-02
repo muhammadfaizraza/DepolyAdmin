@@ -65,12 +65,12 @@ const BreederPopup = (data) => {
 
                
 
-                <div className="ButtonSection">
+            
                 <div>
                
                 <img src={data.data.image}  className="PreviewImage" alt=""/>
 
-                </div>
+       
                
                 </div>
             

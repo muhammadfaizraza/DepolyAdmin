@@ -8,7 +8,7 @@ import { BiEdit } from "react-icons/bi";
 import swal from "sweetalert";
 import JockeyPopup from "../../Components/Popup/JockeyPopup";
 import { Modal } from "react-bootstrap";
-import { BsFillEyeFill } from "react-icons/bs";
+import { BsEyeFill, BsFillEyeFill } from "react-icons/bs";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Moment from "react-moment";
 import axios from "axios";
@@ -157,6 +157,7 @@ const Statistic = () => {
                                   <MdDelete
                                   onClick={() => handleRemove(item._id)}
                                 />
+                                <BsEyeFill onClick={() => handleShow(item)}/>
                               </td>
                             </tr>
                           </>

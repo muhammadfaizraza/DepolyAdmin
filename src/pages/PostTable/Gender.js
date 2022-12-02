@@ -18,7 +18,7 @@ const Gender = () => {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
-      formData.append("shortCode", shortCode);
+      // formData.append("shortCode", shortCode);
 
       await axios.post(`${window.env.API_URL}/uploadSex`, formData);
       swal({

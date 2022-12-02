@@ -125,13 +125,13 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="Title"
+                      label="Name"
                       className="mb-3"
                       onChange={(e) =>
-                        setState({ ...state1, TitleEn: e.target.value })
+                        setState({ ...state1, NameEn: e.target.value })
                       }
                     >
-                      <Form.Control type="text" placeholder="Details"  	value={state1.TitleEn}/>
+                      <Form.Control type="text" placeholder="Details"  	value={state1.NameEn}/>
                     </FloatingLabel>
                 
                     <span className="spanForm"> |</span>
@@ -144,10 +144,10 @@ const NewsForm = () => {
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
-                        setState({ ...state1, TitleAr: e.target.value })
+                        setState({ ...state1, NameAr: e.target.value })
                       }
                     >
-                      <Form.Control type="text" placeholder="Details"value={state1.TitleAr} />
+                      <Form.Control type="text" placeholder="Details"value={state1.NameAr} />
                     </FloatingLabel>
                   
                   </div>

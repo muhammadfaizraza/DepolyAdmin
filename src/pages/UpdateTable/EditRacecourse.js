@@ -75,7 +75,8 @@ const NewsForm = () => {
     );
 
   const [image, setImage] = useState();
-
+  const [NationalityId, setNationalityId] = useState("");
+  const [ColorCode, setColorCode] = useState("");
   const fileSelected = (event) => {
     const image = event.target.files[0];
     setImage(singleracecourse.image, image);
@@ -232,44 +233,26 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <Select
                       placeholder={<div>Select Color</div>}
-                      defaultValue={state1.ColorCode}
-                      value={state1.ColorCode}
-                      onChange={(e) =>
-                        setState({ ...state1, ColorCode: e.target.value })
-                      }
+                      defaultValue={ColorCode}
+                      value={ColorCode}
+                      onChange={setColorCode}
                       options={AllColor}
                       isClearable={true}
                       isSearchable={true}
                     />
-                    <span className="spanForm">
-                      <OverlayTrigger
-                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
-                      >
-                        <>
-                          {/* <span className="addmore" onClick={handleShow}>+</span> */}
-                        </>
-                      </OverlayTrigger>
-                      <OverlayTrigger
-                        overlay={
-                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
-                        }
-                      >
-                        <>
-                          {/* <button className="addmore" onClick={FetchNew}><AiOutlineReload /></button> */}
-                        </>
-                      </OverlayTrigger>{" "}
-                      |
-                    </span>
+                      <span className="spanForm">
+                      
+                    
+                      |</span>
                   </div>
                   <div className="col-sm">
                     <Select
                       required
                       placeholder="تقييم الحصان"
                       className="selectdir"
-                      value={state1.ColorCode}
-                      onChange={(e) =>
-                        setState({ ...state1, ColorCode: e.target.value })
-                      }
+                      defaultValue={ColorCode}
+                      value={ColorCode}
+                      onChange={setColorCode}
                       options={AllColor}
                       isClearable={true}
                       isSearchable={true}
@@ -277,54 +260,20 @@ const NewsForm = () => {
                   </div>
                 </div>
 
-                {/* <div className="row mainrow">
-                  <div className="col-sm">
-                    <Select
-                      placeholder={<div>Type to search Country</div>}
-                      defaultValue={Country}
-                      onChange={setCountry}
-                      options={CountryEn}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <Select
-                      placeholder={<div>اكتب للبحث عن الدولة</div>}
-                      options={CountryAr}
-                      isClearable={true}
-                      isSearchable={true}
-                      className="selectdir"
-                    />
-                  </div>
-                </div> */}
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
                       placeholder={<div>Type to search Nationality</div>}
-                      value={state1.NationalityId}
-                      onChange={(e) =>
-                        setState({ ...state1, NationalityId: e.target.value })
-                      }
+                      defaultValue={NationalityId}
+                      onChange={setNationalityId}
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
                     />
                     <span className="spanForm">
-                      <OverlayTrigger
-                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
-                      >
-                        <button
-                          className="addmore"
-                          onClick={() => history("/nationality")}
-                        >
-                          +
-                        </button>
-                      </OverlayTrigger>
-                      |
-                    </span>
+                      
+                    
+                      |</span>
                   </div>
 
                   <div className="col-sm">
@@ -335,10 +284,8 @@ const NewsForm = () => {
                           اكتب للبحث عن الجنسية
                         </div>
                       }
-                      value={state1.NationalityId}
-                      onChange={(e) =>
-                        setState({ ...state1, NationalityId: e.target.value })
-                      }
+                      defaultValue={NationalityId}
+                      onChange={setNationalityId}
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}

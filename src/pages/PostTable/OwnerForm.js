@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { add } from "../../redux/postReducer/PostOwner";
+import { useNavigate , useLocation } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 import DatePicker from "react-date-picker";
@@ -16,6 +15,7 @@ import Form from "react-bootstrap/Form";
 const OwnerForm = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
+  const { pathname } = useLocation();
 
   const { data: color } = useSelector((state) => state.color);
   const { data: nationality } = useSelector((state) => state.nationality);
@@ -127,7 +127,9 @@ const OwnerForm = () => {
         icon: "success",
         button: "OK",
       });
-      history("/owner");
+      if(pathname === '/ownerform'){
+        history("/owner");
+      }
     } catch (error) {
       const err = error.response.data.message;
       swal({

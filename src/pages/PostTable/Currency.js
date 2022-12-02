@@ -3,7 +3,7 @@ import swal from "sweetalert";
 import axios from "axios";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useLocation } from "react-router-dom";
 
 const Currency = () => {
   const [NameEn, setNameEn] = useState("");
@@ -12,6 +12,7 @@ const Currency = () => {
   const [Rate, setRate] = useState("");
 
   const history = useNavigate();
+  const { pathname } = useLocation();
 
   const submit = async (event) => {
     event.preventDefault();
@@ -23,7 +24,9 @@ const Currency = () => {
       // formData.append("shortCode", shortCode);
       formData.append("Rate", Rate);
       await axios.post(`${window.env.API_URL}uploadCurrency`, formData);
-      history("/currencylist");
+      if(pathname === '/currency'){
+        history("/currencylist");
+      }
       swal({
         title: "Success!",
         text: "Data has been added successfully ",

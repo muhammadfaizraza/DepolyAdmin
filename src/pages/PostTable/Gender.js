@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
@@ -11,6 +11,7 @@ const Gender = () => {
   const [shortCode, setshortCode] = useState("");
 
   const history = useNavigate();
+  const { pathname } = useLocation();
 
   const submit = async (event) => {
     event.preventDefault();
@@ -27,7 +28,9 @@ const Gender = () => {
         icon: "success",
         button: "OK",
       });
-      history("/genderlist");
+      if(pathname === '/gender'){
+        history("/genderlist");
+      }
     } catch (error) {
       const err = error.response.data.message;
       swal({

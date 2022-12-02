@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useLocation} from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
@@ -11,6 +11,7 @@ const Equipment = () => {
   const [shortCode, setshortCode] = useState("");
 
   const history = useNavigate();
+  const { pathname } = useLocation();
 
   const submit = async (event) => {
     event.preventDefault();
@@ -22,8 +23,9 @@ const Equipment = () => {
       // formData.append("shortCode",shortCode);
 
       await axios.post(`${window.env.API_URL}/uploadEquipment`, formData);
-
-      history("/equipmentlist");
+      if(pathname === '/equipment'){
+        history("/equipmentlist");
+      }
       swal({
         title: "Success!",
         text: "Data has been added successfully ",

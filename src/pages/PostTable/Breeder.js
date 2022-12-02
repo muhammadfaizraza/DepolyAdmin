@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
@@ -14,6 +14,7 @@ const Breeder = () => {
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
   const history = useNavigate();
+  const { pathname } = useLocation();
 
   const submit = async (event) => {
     event.preventDefault();
@@ -28,8 +29,9 @@ const Breeder = () => {
       formData.append("image", image);
 
       await axios.post(`${window.env.API_URL}/uploadBreeder`, formData);
-
-      history("/breederlist");
+      if(pathname === '/breeder'){
+        history("/breederlist");
+      }
       swal({
         title: "Success!",
         text: "Data has been added successfully ",

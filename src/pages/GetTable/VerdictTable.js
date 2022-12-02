@@ -1,7 +1,7 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
+
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -10,8 +10,21 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import { BiEdit } from "react-icons/bi";
 import axios from "axios";
+import { Modal } from "react-bootstrap";
+import VerdictPopup from "../../Components/Popup/VerdictPopup";
+import { BsEyeFill } from "react-icons/bs";
+
 
 const VerdictTable = () => {
+  const [show, setShow] = useState(false);
+  const [modaldata, setmodaldata] = useState();
+  const handleClose = () => setShow(false);
+  const handleShow = async (data) => {
+    setmodaldata(data);
+    await setShow(true);
+  };
+
+  
   const dispatch = useDispatch();
   const history = useNavigate();
   const { data: verdict, status } = useSelector((state) => state.verdict);
@@ -123,6 +136,7 @@ const VerdictTable = () => {
                                   }}
                                   onClick={() => handleRemove(item._id)}
                                 />
+                                <BsEyeFill  onClick={() => handleShow(item)}/>
                               </td>
                             </tr>
                           </>
@@ -137,6 +151,26 @@ const VerdictTable = () => {
           <span className="plusIconStyle"></span>
         </div>
       </div>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2 style={{fontFamily:"inter"}}>TrackLength </h2>
+        </Modal.Header>
+        <Modal.Body>
+          <VerdictPopup data={modaldata} />
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
+    
     </Fragment>
   );
 };

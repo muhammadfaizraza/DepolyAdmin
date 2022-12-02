@@ -16,6 +16,7 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+import { BsEyeFill } from "react-icons/bs";
 
 
 const Racecourse = () => {
@@ -142,6 +143,7 @@ const Racecourse = () => {
                                 }}
                                 onClick={() => handleRemove(item._id)}
                               />
+                              <BsEyeFill onClick={() => handleShow(item)}/>
                             </td>
                           </tr>
                         </>
@@ -162,7 +164,7 @@ const Racecourse = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2>Race Course </h2>
+          <h2 style={{fontFamily:"inter"}}> Race Course </h2>
         </Modal.Header>
         <Modal.Body>
           <RacecoursePopup data={modaldata} />

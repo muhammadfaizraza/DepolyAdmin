@@ -59,13 +59,13 @@ const TrackLengthPopup = (data) => {
 
               <FloatingLabel
                   controlId="floatingInput"
-                  label="Rail Position"
+                  label="Track Name"
                   className="mb-3"
                 
                 
                
                 >
-                  <Form.Control type="text" placeholder="Description" readOnly value={data.data.RailPosition}/>
+                  <Form.Control type="text" placeholder="Description" readOnly value={data.data.RaceCourseData.TrackNameEn}/>
                 </FloatingLabel>
              
                 <span className="spanForm"> |</span>
@@ -74,17 +74,51 @@ const TrackLengthPopup = (data) => {
               <div className="col-sm">
               <FloatingLabel
                   controlId="floatingInput"
-                  label="اسم"
+                  label="اسم المسار"
                   className="mb-3 "
                 
                 >
-                  <Form.Control type="text" placeholder="اسم" readOnly value={data.data.NameAr} style={{direction:"rtl"}}/>
+                  <Form.Control type="text" placeholder="اسم" readOnly value={data.data.RaceCourseData.TrackNameAr} style={{direction:"rtl"}}/>
+                </FloatingLabel>
+                
+              </div>
+            </div>
+
+
+                
+            <div className="row mainrow">
+              <div className="col-sm">
+
+              <FloatingLabel
+                  controlId="floatingInput"
+                  label="Ground Type"
+                  className="mb-3"
+                
+                
+               
+                >
+                  <Form.Control type="text" placeholder="Description" readOnly value={data.data.GroundTypeModelData.NameEn}/>
+                </FloatingLabel>
+             
+                <span className="spanForm"> |</span>
+              </div>
+
+              <div className="col-sm">
+              <FloatingLabel
+                  controlId="floatingInput"
+                  label="اسم المسار"
+                  className="mb-3 "
+                
+                >
+                  <Form.Control type="text" placeholder="اسم" readOnly value={data.data.GroundTypeModelData.NameAr}style={{direction:"rtl"}}/>
                 </FloatingLabel>
                 
               </div>
             </div>
         </div>
       </div>
+         
+      <img src={data.data.RaceCourseData.image}  className="PreviewImage" alt=""/>
     </div>
   </div>
   )

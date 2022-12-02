@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { fetchTrainer } from "../../redux/getReducer/getTrainerSlice";
-import { add } from "../../redux/postReducer/PostHorse";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -13,21 +12,25 @@ import { fetchnationality } from "../../redux/getReducer/getNationality";
 import { fetchgender } from "../../redux/getReducer/getGenderSlice";
 import { fetchHorseKind } from "../../redux/getReducer/getHorseKind";
 import DatePicker from "react-date-picker";
-import Moment from "react-moment";
 import swal from "sweetalert";
 import axios from "axios";
 import ReactStars from "react-rating-stars-component";
-
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import { Modal } from "react-bootstrap";
+import { AiOutlineReload } from "react-icons/ai";
 
-const Gender = [
-  { id: "1", value: "Male", label: "Male" },
-  { id: "2", value: "Female", label: "Female" },
-  { id: "3", value: "Cross Gender", label: "Cross Gender" },
-];
+import BreederPopup from './Breeder';
+import ColorPopup from './Color';
+import GenderPopup from './Gender';
+import OwnerPopup from "./OwnerForm";
+import TrainerPopup from "../GetTable/Trainer";
+
+
+
+
 const Gelted = [
   { id: "0", value: "false", label: "false" },
   { id: "1", value: "true", label: "true" },
@@ -36,7 +39,6 @@ const HorseStatusAll = [
   { id: "0", value: "false", label: "false" },
   { id: "1", value: "true", label: "true" },
 ];
-
 const Foals = [
   { id: "0", value: "1", label: "1" },
   { id: "1", value: "2", label: "2" },
@@ -53,7 +55,6 @@ const Foals = [
 const HorseForm = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
-  const [isClearable, setIsClearable] = useState(true);
 
   const { data: trainer } = useSelector((state) => state.trainer);
   const { data: owner } = useSelector((state) => state.owner);
@@ -179,14 +180,54 @@ const HorseForm = () => {
       })
     );
 
-  // let jockeyoption =  jockey === undefined ? <></> : jockey.map(function (item) {
-  //   return {
-  //     id: item._id,
-  //     value: item.Name,
-  //     label: item.Name,
-  //   };
-  // });
+    
+    // Modal functionalities End Here
 
+    const [showBreeder, setShowBreeder] = useState(false);
+    const [showColor, setShowColor] = useState(false);
+    const [showGender, setShowGender] = useState(false);
+    const [showActiveOwner, setShowActiveOwner] = useState(false);
+    const [showActiveTrainer, setShowActiveTrainer] = useState(false);
+  
+    
+ 
+    const handleCloseBreeder = () => setShowBreeder(false);
+    const handleCloseColor = () => setShowColor(false);
+    const handleCloseGender = () => setShowGender(false);
+    const handleCloseActiveOwner = () => setShowActiveOwner(false);
+    const handleCloseActiveTrainer= () => setShowActiveTrainer(false);
+  
+    const handleShowBreeder = async () => {
+      await setShowBreeder(true);
+    };
+  
+    const handleShowColor = async () => {
+      await setShowColor(true);
+    };
+  
+    const handleShowGender = async () => {
+      await setShowGender(true);
+    };
+  
+    const handleShowActiveOwner = async () => {
+      await setShowActiveOwner(true);
+    };
+  
+    const handleShowActiveTrainer = async () => {
+      await setShowActiveTrainer(true);
+    };
+  
+  
+    const FetchNew = () => {
+      dispatch(fetchOwner());
+      dispatch(fetchTrainer());
+      dispatch(fetchcolor());
+      dispatch(fetchbreeder());
+      dispatch(fetchnationality());
+      dispatch(fetchgender());
+    };
+    // Modal functionalities End Here
+  
 
   const [ActiveOwner, setActiveOwner] = useState("");
   const [Age, setAge] = useState("");
@@ -439,25 +480,6 @@ const HorseForm = () => {
                     />
                   </div>
                 </div>
-
-                {/* <div className="row mainrow">
-                  <div className="col-sm">
-                    <input
-                      placeholder="Over All Rating"
-                      type="number"
-                      onChange={(e) => setOverAllRating(e.target.value)}
-                      value={OverAllRating}
-                    ></input><span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <input
-                      placeholder="تقييم عام"
-                      style={{ direction: "rtl" }}
-                      type="number"
-                    ></input>
-                  </div>
-                </div> */}
                 <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
@@ -623,17 +645,23 @@ const HorseForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                    <span className="spanForm">
+                     <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button
-                          className="addmore"
-                          onClick={() => history("/breeder")}
-                        >
-                          +
-                        </button>
+                        <span className="addmore" onClick={handleShowBreeder}>
+                            +
+                          </span>
                       </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <span className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </span>
+                      </OverlayTrigger>{" "}
                       |
                     </span>
                   </div>
@@ -660,17 +688,23 @@ const HorseForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                    <span className="spanForm">
+                     <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button
-                          className="addmore"
-                          onClick={() => history("/color")}
-                        >
-                          +
-                        </button>
+                        <span className="addmore" onClick={handleShowColor}>
+                            +
+                          </span>
                       </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <span className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </span>
+                      </OverlayTrigger>{" "}
                       |
                     </span>
                   </div>
@@ -697,17 +731,23 @@ const HorseForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                    <span className="spanForm">
+                     <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button
-                          className="addmore"
-                          onClick={() => history("/gender")}
-                        >
-                          +
-                        </button>
+                        <span className="addmore" onClick={handleShowGender}>
+                            +
+                          </span>
                       </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <span className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </span>
+                      </OverlayTrigger>{" "}
                       |
                     </span>
                   </div>
@@ -718,7 +758,7 @@ const HorseForm = () => {
                       className="selectdir"
                       defaultValue={Sex}
                       onChange={setSex}
-                      options={Gender}
+                      options={AllGender}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -799,7 +839,7 @@ const HorseForm = () => {
                     />
                   </div>
                 </div>
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
                     <Select
                       placeholder={<div>Type to search Owner</div>}
@@ -835,7 +875,7 @@ const HorseForm = () => {
                       isSearchable={true}
                     />
                   </div>
-                </div>
+                </div> */}
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
@@ -845,21 +885,26 @@ const HorseForm = () => {
                       options={owneroption}
                       isClearable={true}
                       isSearchable={true}
-                    /><span className="spanForm">
-                      
+                    /> 
+                     <span className="spanForm">
                       <OverlayTrigger
-          
-         
-          overlay={
-            <Tooltip id={`tooltip-top`}>
-              Add more
-            </Tooltip>
-          }
-        >
-          <button className="addmore" onClick={()=> history('/ownerform')}>+</button>
-        </OverlayTrigger> 
-
-                       |</span>
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span className="addmore" onClick={handleShowActiveOwner}>
+                            +
+                          </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <span className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </span>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -1039,6 +1084,78 @@ const HorseForm = () => {
           </div>
         </div>
       </div>
+
+      <Modal
+        show={showBreeder}
+        onHide={handleCloseBreeder}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Race Breeder</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <BreederPopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showColor}
+        onHide={handleCloseColor}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Color</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <ColorPopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showActiveOwner}
+        onHide={handleCloseActiveOwner}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Owner</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <OwnerPopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showActiveTrainer}
+        onHide={handleCloseActiveTrainer}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Trainer</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <TrainerPopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showGender}
+        onHide={handleCloseGender}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Gender</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <GenderPopup />
+        </Modal.Body>
+      </Modal>
+
     </Fragment>
   );
 };

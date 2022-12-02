@@ -421,6 +421,7 @@ const RaceForm = () => {
                           </button>
                       </OverlayTrigger>{" "}
                       |
+                      
                     </span>
                   </div>
 
@@ -430,6 +431,7 @@ const RaceForm = () => {
                       defaultValue={MeetingType}
                       className="selectdir"
                       options={MeetingTypes}
+                      onChange={setMeetingType}
                       isClearable={true}
                       isSearchable={true}
                     />

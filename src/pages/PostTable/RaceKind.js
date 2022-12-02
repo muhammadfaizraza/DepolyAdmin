@@ -18,7 +18,7 @@ const Racetypeform = () => {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
-      formData.append("shortCode", shortCode);
+      // formData.append("shortCode", shortCode);
 
       await axios.post(`${window.env.API_URL}/uploadRaceKind`, formData);
       swal({
@@ -27,7 +27,7 @@ const Racetypeform = () => {
         icon: "success",
         button: "OK",
       });
-      if(pathname === '/racekindform'){
+      if(pathname === '/RaceKindform'){
         history("/racekind");
       }
       
@@ -84,7 +84,7 @@ const Racetypeform = () => {
                 </div>
               </div>
 
-              <div className="row mainrow">
+              {/* <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
@@ -113,7 +113,7 @@ const Racetypeform = () => {
                     />
                   </FloatingLabel>
                 </div>
-              </div>
+              </div> */}
 
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
                 <button Name="submit" className="SubmitButton">

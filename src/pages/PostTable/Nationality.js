@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useLocation} from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
@@ -18,13 +18,15 @@ const Nationality = () => {
   const [preview, setPreview] = useState();
 
   const history = useNavigate();
+  const { pathname } = useLocation();
+
   const submit = async (event) => {
     event.preventDefault();
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
-      formData.append("shortCode", shortCode);
+      // formData.append("shortCode", shortCode);
       formData.append("Abbrev", Abbrev);
       formData.append("AltName", AltName);
       formData.append("Label", Label);
@@ -32,7 +34,9 @@ const Nationality = () => {
       formData.append("Value", Value);
       formData.append("image", image);
       await axios.post(`${window.env.API_URL}/uploadNationality`, formData);
-      history("/nationalitylist");
+      if(pathname === '/nationality'){
+        history("/nationalitylist");
+      }
       swal({
         title: "Success!",
         text: "Data has been added successfully ",
@@ -104,7 +108,7 @@ const Nationality = () => {
                 </div>
               </div>
 
-              <div className="row mainrow">
+              {/* <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
@@ -133,7 +137,7 @@ const Nationality = () => {
                     />
                   </FloatingLabel>
                 </div>
-              </div>
+              </div> */}
 
               <div className="row mainrow">
                 <div className="col-sm">

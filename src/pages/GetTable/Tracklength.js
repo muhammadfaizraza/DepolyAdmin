@@ -21,7 +21,7 @@ useEffect(() => {
 }, [dispatch]);
 const handleRemove = async (Id) => {
   try {
-    const res = await axios.delete(`${window.env.API_URL}/deleteTrackLength/${Id}`)
+    const res = await axios.delete(`${window.env.API_URL}/softdeleteTrackLength/${Id}`)
     swal({
       title: "Success!",
       text: "Data has been Deleted successfully ",

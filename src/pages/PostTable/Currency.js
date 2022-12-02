@@ -20,7 +20,7 @@ const Currency = () => {
 
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
-      formData.append("shortCode", shortCode);
+      // formData.append("shortCode", shortCode);
       formData.append("Rate", Rate);
       await axios.post(`${window.env.API_URL}uploadCurrency`, formData);
       history("/currencylist");
@@ -82,36 +82,7 @@ const Currency = () => {
                 </div>
               </div>
 
-              <div className="row mainrow">
-                <div className="col-sm">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="Short Code"
-                    className="mb-3"
-                    onChange={(e) => setshortCode(e.target.value)}
-                    value={shortCode}
-                  >
-                    <Form.Control type="text" placeholder="Short Code" />
-                  </FloatingLabel>
-
-                  <span className="spanForm"> |</span>
-                </div>
-
-                <div className="col-sm">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="رمز قصير"
-                    className="mb-3 floatingInputAr "
-                    style={{ direction: "rtl", left: "initial", right: 0 }}
-                  >
-                    <Form.Control
-                      type="text"
-                      placeholder="رمز قصير"
-                      style={{ left: "%" }}
-                    />
-                  </FloatingLabel>
-                </div>
-              </div>
+             
 
               <div className="row mainrow">
                 <div className="col-sm">
@@ -125,10 +96,10 @@ const Currency = () => {
                     <Form.Control type="number" placeholder="Rate" />
                   </FloatingLabel>
 
-                  <span className="spanForm"> |</span>
+                  {/* <span className="spanForm"> |</span> */}
                 </div>
 
-                <div className="col-sm">
+                {/* <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="معدل"
@@ -143,7 +114,7 @@ const Currency = () => {
                       style={{ left: "%" }}
                     />
                   </FloatingLabel>
-                </div>
+                </div> */}
               </div>
 
               <div className="ButtonSection" style={{ justifyContent: "end" }}>

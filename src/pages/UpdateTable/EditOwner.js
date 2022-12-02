@@ -3,14 +3,24 @@ import "../../Components/CSS/forms.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
+import Select from "react-select";
+import DatePicker from "react-date-picker";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+import { useSelector } from "react-redux";
 
 const NewsForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
+  const { data: nationality } = useSelector((state) => state.nationality);
 
   const { ownerid } = state;
-  console.log(ownerid);
   const [image,setImage] = useState();
+  const [preview,setPreview] = useState();
+  const [NationalityID, setNationalityID] = useState("");
+  const [RegistrationDate, setRegistrationDate] = useState("");
 
   const [state1, setState] = useState({
 		NameAr: '',
@@ -40,6 +50,15 @@ const NewsForm = () => {
 		}
 	}, [ownerid]);
 
+  useEffect(() => {
+    if (image === undefined) {
+      setPreview(ownerid.image)
+      return
+  }  
+    const objectUrl = URL.createObjectURL(image)
+    setPreview(objectUrl)
+    return () => URL.revokeObjectURL(objectUrl)
+}, [image])
   const fileSelected = (event) => {
     const image = event.target.files[0];
     setImage(image);
@@ -56,6 +75,8 @@ const NewsForm = () => {
       formData.append("ShortEn", state1.ShortEn);
       formData.append("ShortAr", state1.ShortAr);
       formData.append("Ownerimage", image);
+      formData.append("NationalityID", NationalityID.id);
+      // formData.append("RegistrationDate", RegistrationDate);
 
       const response = await axios.put(`${window.env.API_URL}/updateOwner/${ownerid._id}`, formData);
       history("/owner");
@@ -75,6 +96,18 @@ const NewsForm = () => {
       });
     }
   };
+  let AllNationality =
+  nationality === undefined ? (
+    <></>
+  ) : (
+    nationality.map(function (item) {
+      return {
+        id: item._id,
+        value: item.NameEn,
+        label: item.NameEn,
+      };
+    })
+  );
   return (
     <>
       <div className="page">
@@ -86,108 +119,155 @@ const NewsForm = () => {
           >
             <div className="Headers">Edit Owner</div>
             <div className="form">
-              <form onSubmit={submit}>
+            <form onSubmit={submit}>
                 <div className="row mainrow">
+                  
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='TitleEn'
-										id='TitleEn'
-										className='group__control'
-										placeholder='Name'
-										value={state1.NameEn}
-										onChange={(e) =>
-											setState({ ...state1, NameEn: e.target.value })
-										}
-									/>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Title"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, TitleEn: e.target.value })
+                      }
+                    >
+                      <Form.Control type="text" placeholder="Details"  	value={state1.TitleEn}/>
+                    </FloatingLabel>
+                
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='TitleAr'
-										id='TitleAr'
-										className='group__control'
-										value={state1.NameAr}
-										onChange={(e) =>
-											setState({ ...state1, NameAr: e.target.value })
-										}
-                    ></input>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, TitleAr: e.target.value })
+                      }
+                    >
+                      <Form.Control type="text" placeholder="Details"value={state1.TitleAr} />
+                    </FloatingLabel>
+                  
                   </div>
                 </div>
 
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='TitleEn'
-										id='TitleEn'
-										className='group__control'
-										placeholder='Description'
-										value={state1.TitleEn}
-										onChange={(e) =>
-											setState({ ...state1, TitleEn: e.target.value })
-										}
-									/>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Title"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, TitleEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description"value={state1.TitleEn}/>
+                    </FloatingLabel>
+               
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='TitleAr'
-										id='TitleAr'
-										className='group__control'
-										value={state1.TitleAr}
-										onChange={(e) =>
-											setState({ ...state1, TitleAr: e.target.value })
-										}
-                    ></input>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, TitleAr: e.target.value })
+                      }
+                    >
+                      <Form.Control type="text" placeholder="Description"value={state1.TitleAr}/>
+                    </FloatingLabel>
+                    
                   </div>
                 </div>
 
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='TitleEn'
-										id='TitleEn'
-										className='group__control'
-										placeholder='Second Title'
-										value={state1.ShortEn}
-										onChange={(e) =>
-											setState({ ...state1, ShortEn: e.target.value })
-										}
-									/>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Short Name "
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, ShortEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description"value={state1.ShortEn}/>
+                    </FloatingLabel>
+               
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='TitleAr'
-										id='TitleAr'
-										className='group__control'
-										value={state1.ShortAr}
-										onChange={(e) =>
-											setState({ ...state1, ShortAr: e.target.value })
-										}
-                    ></input>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, ShortAr: e.target.value })
+                      }
+                    >
+                      <Form.Control type="text" placeholder="Description"value={state1.ShortAr}/>
+                    </FloatingLabel>
+                    
                   </div>
                 </div>
                 
 
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Type to search Nationality</div>}
+                      defaultValue={NationalityID}
+                      onChange={setNationalityID}
+                      options={AllNationality}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <button
+                          className="addmore"
+                          onClick={() => history("/nationality")}
+                        >
+                          +
+                        </button>
+                      </OverlayTrigger>
+                      |
+                    </span>
+                  </div>
+
+                  <div className="col-sm">
+                    <Select
+                      className="selectdir"
+                      placeholder={
+                        <div style={{ direction: "rtl" }}>
+                          اكتب للبحث عن الجنسية
+                        </div>
+                      }
+                      defaultValue={NationalityID}
+                      onChange={setNationalityID}
+                      options={AllNationality}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
+
                 <div className="ButtonSection">
-                  <input type="file" size="60" onChange={fileSelected} />
+                <div>
+                <input type='file' onChange={fileSelected} className="formInput"/>
+                <img src={preview}  className="PreviewImage" alt=""/>
+
+                </div>
                   <button type="submit" className="SubmitButton">
-                   Update
+                  Update
                   </button>
                 </div>
               </form>

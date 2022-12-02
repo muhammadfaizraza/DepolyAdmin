@@ -126,11 +126,16 @@ const NewsForm = () => {
         button: "OK",
       });
     } catch (error) {
-      alert(error.message);
+      const err = error.response.data.message;
+        swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
     }
   };
 
-  console.log(singleracecourse,'singleracecourse')
   return (
     <>
       <div className="page">
@@ -184,7 +189,7 @@ const NewsForm = () => {
                   </div>
                 </div>
 
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
@@ -222,7 +227,7 @@ const NewsForm = () => {
                       />
                     </FloatingLabel>
                   </div>
-                </div>
+                </div> */}
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select

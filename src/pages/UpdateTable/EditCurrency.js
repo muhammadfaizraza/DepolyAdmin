@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
 
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
 const NewsForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
@@ -52,7 +54,13 @@ const NewsForm = () => {
         button: "OK",
       });
     } catch (error) {
-      alert(error.message);
+      const err = error.response.data.message;
+        swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
     }
   };
   return (
@@ -69,104 +77,79 @@ const NewsForm = () => {
               <form onSubmit={submit}>
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='NameEn'
-										id='NameEn'
-										className='group__control'
-										placeholder='Name'
-										value={state1.NameEn}
-										onChange={(e) =>
-											setState({ ...state1, NameEn: e.target.value })
-										}
-									/>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Name"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, NameEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.NameEn}/>
+                    </FloatingLabel>
+                 
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='NameAr'
-										id='NameAr'
-										className='group__control'
-										value={state1.NameAr}
-										onChange={(e) =>
-											setState({ ...state1, NameAr: e.target.value })
-										}
-                    ></input>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, NameAr: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.NameAr}/>
+                    </FloatingLabel>
+                  
                   </div>
                 </div>
 
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='NameEn'
-										id='NameEn'
-										className='group__control'
-										placeholder='Short Code'
-										value={state1.shortCode}
-										onChange={(e) =>
-											setState({ ...state1, shortCode: e.target.value })
-										}
-									/>
-                    <span className="spanForm"> |</span>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Short Code"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, shortCode: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.shortCode}/>
+                    </FloatingLabel>
+                
                   </div>
 
-                  <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='NameAr'
-										id='NameAr'
-										className='group__control'
-										value={state1.shortCode}
-										onChange={(e) =>
-											setState({ ...state1, shortCode: e.target.value })
-										}
-                    ></input>
-                  </div>
-                </div>
+                  
+                </div> */}
 
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='number'
-										name='MiniumumJockeyWeight'
-										id='MiniumumJockeyWeight'
-										className='group__control'
-										placeholder='Rate'
-										value={state1.Rate}
-										onChange={(e) =>
-											setState({ ...state1, Rate: e.target.value })
-										}
-									/>
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      type="number"
-                      placeholder="اسم المسار"
-                      value={state1.Rate}
-							  			onChange={(e) =>
-											setState({ ...state1, Rate: e.target.value })
-										}
-                    ></input>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Rate"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, Rate: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="number" placeholder="Description" value={state1.Rate}/>
+                    </FloatingLabel>
+                  
                   </div>
                 </div>
                 
 
-                <div className="ButtonSection">
-                  {/* <input type="file" size="60" onChange={fileSelected} /> */}
-                  <button type="submit" className="SubmitButton">
-                  Update
-                  </button>
-                </div>
+                <div className="ButtonSection" style={{ justifyContent: "end" }}>
+                <button type="submit" className="SubmitButton">
+                 Update
+                </button>
+              </div>
               </form>
             </div>
           </div>

@@ -60,7 +60,22 @@ const RaceCourseForm = () => {
   const [ColorCode, setColorCode] = useState("");
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
+
+
   const [show, setShow] = useState(false);
+  const [showNationality, setShowNationality] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleCloseNationality = () => setShowNationality(false);
+
+  const handleShow = async () => {
+    await setShow(true);
+  };
+  
+  const handleShowNationality = async () => {
+    await setShowNationality(true);
+  };
+
 
   const submit = async (event) => {
     event.preventDefault();
@@ -107,7 +122,6 @@ const RaceCourseForm = () => {
 
     const objectUrl = URL.createObjectURL(image);
     setPreview(objectUrl);
-
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl);
   }, [image]);
@@ -117,11 +131,7 @@ const RaceCourseForm = () => {
     
   };
 
-  const handleClose = () => setShow(false);
-
-  const handleShow = async () => {
-    await setShow(true);
-  };
+  
   const FetchNew = () => {
     dispatch(fetchnationality());
     dispatch(fetchcolor());
@@ -253,29 +263,6 @@ const RaceCourseForm = () => {
                   </div>
                 </div>
 
-                {/* <div className="row mainrow">
-                  <div className="col-sm">
-                    <Select
-                      placeholder={<div>Type to search Country</div>}
-                      defaultValue={Country}
-                      onChange={setCountry}
-                      options={CountryEn}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <Select
-                      placeholder={<div>اكتب للبحث عن الدولة</div>}
-                      options={CountryAr}
-                      isClearable={true}
-                      isSearchable={true}
-                      className="selectdir"
-                    />
-                  </div>
-                </div> */}
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
@@ -287,18 +274,28 @@ const RaceCourseForm = () => {
                       isSearchable={true}
                     />
                     <span className="spanForm">
-                      <OverlayTrigger
-                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      <OverlayTrigger 
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>
+                            Add more
+                          </Tooltip>
+                        }
                       >
-                        <button
-                          className="addmore"
-                          onClick={() => history("/nationality")}
-                        >
-                          +
-                        </button>
-                      </OverlayTrigger>
-                      |
-                    </span>
+                        <>
+                        <span className="addmore" onClick={handleShowNationality}>+</span>
+                        </>
+                      </OverlayTrigger> 
+                      <OverlayTrigger 
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>
+                            Fetch New
+                          </Tooltip>
+                        }
+                      >
+                        <>
+                        <button className="addmore" onClick={FetchNew}><AiOutlineReload /></button>
+                        </>
+                      </OverlayTrigger> |</span>
                   </div>
 
                   <div className="col-sm">
@@ -352,9 +349,10 @@ const RaceCourseForm = () => {
           <ColorPopUp />
         </Modal.Body>
       </Modal>
-      {/* <Modal
-        show={show}
-        onHide={handleClose}
+
+      <Modal
+        show={showNationality}
+        onHide={handleCloseNationality}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -365,7 +363,7 @@ const RaceCourseForm = () => {
         <Modal.Body>
           <NationalityPopUp />
         </Modal.Body>
-      </Modal> */}
+      </Modal>
     </Fragment>
   );
 };

@@ -22,7 +22,7 @@ const Breeder = () => {
 
       formData.append("NameAr", NameAr);
       formData.append("NameEn", NameEn);
-      formData.append("shortCode", shortCode);
+      // formData.append("shortCode", shortCode);
       formData.append("DescriptionAr", DescriptionAr);
       formData.append("DescriptionEn", DescriptionEn);
       formData.append("image", image);
@@ -102,7 +102,7 @@ const Breeder = () => {
                 </div>
               </div>
 
-              <div className="row mainrow">
+              {/* <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
@@ -131,7 +131,7 @@ const Breeder = () => {
                     />
                   </FloatingLabel>
                 </div>
-              </div>
+              </div> */}
 
               <div className="row mainrow">
                 <div className="col-sm">

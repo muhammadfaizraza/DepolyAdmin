@@ -4,6 +4,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
 
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+
 const NewsForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
@@ -50,7 +53,13 @@ const NewsForm = () => {
         button: "OK",
       });
     } catch (error) {
-      alert(error.message);
+      const err = error.response.data.message;
+        swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
     }
   };
   return (

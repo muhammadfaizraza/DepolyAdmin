@@ -77,7 +77,6 @@ const Nationality = () => {
   const Publish = async (event) => {
     event.preventDefault();
     try {
-
       const response = await axios.post(
         `${window.env.API_URL}/addracesinracecard/${'be9704d5-a531-4a6b-974e-29297c384cb2'}`,[RaceData[0].id]
       );

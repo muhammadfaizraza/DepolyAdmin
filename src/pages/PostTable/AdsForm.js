@@ -171,7 +171,7 @@ onChange={(e) => setTitleAr(e.target.value)}
                 <div>
             <input type='file' onChange={onSelectFile} className="formInput"/>
             {image &&  <img src={preview}  className="PreviewImage" alt=""/> }
-        </div>
+                </div>
 
                   <button type='submit' className='SubmitButton' disabled={isSubmitData}>Create Ads</button>
 

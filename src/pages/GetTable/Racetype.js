@@ -21,7 +21,7 @@ const Racetype = () => {
   }, [dispatch]);
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/deleteRaceType/${Id}`)
+      const res = await axios.delete(`${window.env.API_URL}/softdeleteRaceType/${Id}`)
       swal({
         title: "Success!",
         text: "Data has been Deleted successfully ",

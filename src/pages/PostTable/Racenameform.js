@@ -97,7 +97,7 @@ onChange={(e) => setNameAr(e.target.value)}
               </div>
             </div>
 
-            <div className="row mainrow">
+            {/* <div className="row mainrow">
               <div className="col-sm">
           
                 
@@ -130,7 +130,7 @@ onChange={(e) => setNameAr(e.target.value)}
         <Form.Control type="text" placeholder="اسم"  style={{left:'%'}}   />
       </FloatingLabel>
               </div>
-            </div>
+            </div> */}
 
 
             <div className='ButtonSection ' style={{justifyContent:"end"}}>

@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
 
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
 const NewsForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
@@ -11,6 +13,7 @@ const NewsForm = () => {
   const { sliderid } = state;
   console.log(sliderid);
   const [image,setImage] = useState();
+  const [preview,setPreview] = useState();
 
   const [state1, setState] = useState({
 		TitleEn: '',
@@ -34,7 +37,15 @@ const NewsForm = () => {
 			alert('No Data')
 		}
 	}, [sliderid]);
-
+  useEffect(() => {
+    if (image === undefined) {
+      setPreview(sliderid.image)
+      return
+  }  
+    const objectUrl = URL.createObjectURL(image)
+    setPreview(objectUrl)
+    return () => URL.revokeObjectURL(objectUrl)
+}, [image])
   const fileSelected = (event) => {
     const image = event.target.files[0];
     setImage(image, image);
@@ -78,58 +89,66 @@ const NewsForm = () => {
           >
             <div className="Headers">Edit Slider</div>
             <div className="form">
-              <form onSubmit={submit}>
+            <form onSubmit={submit}>
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='TitleEn'
-										id='TitleEn'
-										className='group__control'
-										placeholder='Name'
-										value={state1.TitleEn}
-										onChange={(e) =>
-											setState({ ...state1, TitleEn: e.target.value })
-										}
-									/>
+
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Name"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, TitleEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.TitleEn}/>
+                    </FloatingLabel>
+                 
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='TitleAr'
-										id='TitleAr'
-										className='group__control'
-										value={state1.TitleAr}
-										onChange={(e) =>
-											setState({ ...state1, TitleAr: e.target.value })
-										}
-                    ></input>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, TitleAr: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.TitleAr}/>
+                    </FloatingLabel>
+                    
                   </div>
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										
-										className='group__control'
-										placeholder='Url'
-										value={state1.Url}
-										onChange={(e) =>
-											setState({ ...state1, Url: e.target.value })
-										}
-									/>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="URL"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, Url: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.Url}/>
+                    </FloatingLabel>
+                 
+									
                   </div>
                 </div>
                 
-
                 <div className="ButtonSection">
-                  <input type="file" size="60" onChange={fileSelected} />
+                <div>
+                <input type='file' onChange={fileSelected} className="formInput"/>
+                <img src={preview}  className="PreviewImage" alt=""/>
+
+                </div>
                   <button type="submit" className="SubmitButton">
-                   Update
+                  Update
                   </button>
                 </div>
               </form>

@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment,useState } from "react";
 import { fetchbreeder, STATUSES } from "../../redux/getReducer/getBreeder";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
@@ -10,8 +10,19 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+import { Modal } from "react-bootstrap";
+import { BsEyeFill } from "react-icons/bs";
+import BreederPopup from "../../Components/Popup/BreederPopup";
 
 const BreederTable = () => {
+
+  const [show, setShow] = useState(false);
+  const [modaldata, setmodaldata] = useState();
+  const handleClose = () => setShow(false);
+  const handleShow = async (data) => {
+    setmodaldata(data);
+    await setShow(true);
+  };
   const dispatch = useDispatch();
   const history = useNavigate();
   const { data: breeder, status } = useSelector((state) => state.breeder);
@@ -135,6 +146,8 @@ const BreederTable = () => {
                                   }}
                                   onClick={() => handleRemove(item._id)}
                                 />
+                                <BsEyeFill onClick={() => handleShow(item)
+                                }/>
                               </td>
                             </tr>
                           </>
@@ -149,6 +162,25 @@ const BreederTable = () => {
           <span className="plusIconStyle"></span>
         </div>
       </div>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2 style={{fontFamily: "inter"}}>Currency</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <BreederPopup data={modaldata} />
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
     </Fragment>
   );
 };

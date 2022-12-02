@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -6,10 +6,14 @@ import { useNavigate } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
+
 const Color = () => {
+
+
+
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
-  const [shortCode, setshortCode] = useState("");
+
   const history = useNavigate();
 
   const submit = async (event) => {
@@ -39,6 +43,7 @@ const Color = () => {
     }
   };
   return (
+    <Fragment>
     <div className="page">
       <div className="rightsidedata">
         <div
@@ -121,6 +126,8 @@ const Color = () => {
         </div>
       </div>
     </div>
+  
+    </Fragment>
   );
 };
 

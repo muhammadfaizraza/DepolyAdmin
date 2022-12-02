@@ -1,6 +1,6 @@
 import React from 'react'
-
-
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
 import '../CSS/modal.css'
 
 
@@ -9,27 +9,163 @@ const SponsorModal = (data) => {
 
 
     return (
-      <div  >
-      <div >
-          <h2>Title</h2>
+        <div className="form">
+     
+            <div className="row mainrow">
+              <div className="col-sm">
 
-      <p>{data.data.TitleAr}</p>
-      </div>
-      <div style={{direction:"rtl"}}>
-      <h2>عنوان</h2>
-          <p>{data.data.TitleAr}</p>
-          </div>
-          <div >
-          <h2>Description</h2>
+              <FloatingLabel
+                  controlId="floatingInput"
+                  label="Title"
+                  className="mb-3"
+               
+                >
+                  <Form.Control type="text" placeholder="Title" value={data.data.TitleEn} readOnly />
+                </FloatingLabel>
+             
+                <span className="spanForm"> |</span>
+              </div>
 
-      <p>{data.data.DescriptionEn}</p>
-      </div>  
-      <div style={{direction:"rtl"}}>
-      <h2>وصف</h2>
-          <p>{data.data.DescriptionAr}</p>
-          </div>
-      <img src={data.data.image} width="50" height='100' alt=""/>
-  </div>
+              <div className="col-sm">
+              <FloatingLabel
+                  controlId="floatingInput"
+                  label="عنوان"
+                  className="mb-3"
+                
+                 
+                >
+                  <Form.Control type="text" placeholder="Description" value={data.data.TitleAr} readOnly />
+                </FloatingLabel>
+                
+              </div>
+            </div>
+
+            <div className="row mainrow">
+              <div className="col-sm">
+
+              <FloatingLabel
+                  controlId="floatingInput"
+                  label="Description"
+                  className="mb-3"
+               
+                
+                >
+                  <Form.Control type="text" placeholder="Description" value={data.data.DescriptionEn} readOnly />
+                </FloatingLabel>
+             
+                <span className="spanForm"> |</span>
+              </div>
+
+              <div className="col-sm">
+              <FloatingLabel
+                  controlId="floatingInput"
+                  label="وصف"
+                  className="mb-3"
+                
+                 
+                >
+                  <Form.Control type="text" placeholder="وصف"  value={data.data.DescriptionAr} readOnly/>
+                </FloatingLabel>
+                
+              </div>
+            </div>
+            <div className="row mainrow">
+              <div className="col-sm">
+              <FloatingLabel
+                  controlId="floatingInput"
+                  label="URL"
+                  className="mb-3"
+               
+                >
+                  <Form.Control type="text" placeholder="Url"  value={data.data.Url} readOnly/>
+                </FloatingLabel>
+             
+                                
+              </div>
+            </div>
+            
+         
+            
+           
+            <img src={data.data.image}  className="PreviewImage" alt=""/>
+
+   
+            
+        
+          {/* <form onSubmit={submit}>
+            <div className="row mainrow">
+              <div className="col-sm">
+              <input
+                                    type='text'
+                                    name='TitleEn'
+                                    id='TitleEn'
+                                    className='group__control'
+                                    placeholder='Name'
+                                    value={state1.TitleEn}
+                                    onChange={(e) =>
+                                        setState({ ...state1, TitleEn: e.target.value })
+                                    }
+                                />
+                <span className="spanForm"> |</span>
+              </div>
+
+              <div className="col-sm">
+                <input
+                  style={{ direction: "rtl" }}
+                  placeholder="اسم "
+                  type='text'
+                                    name='TitleAr'
+                                    id='TitleAr'
+                                    className='group__control'
+                                    value={state1.TitleAr}
+                                    onChange={(e) =>
+                                        setState({ ...state1, TitleAr: e.target.value })
+                                    }
+                ></input>
+              </div>
+            </div>
+
+            <div className="row mainrow">
+              <div className="col-sm">
+              <input
+                                    type='text'
+                                    name='TitleEn'
+                                    id='TitleEn'
+                                    className='group__control'
+                                    placeholder='Description'
+                                    value={state1.DescriptionEn}
+                                    onChange={(e) =>
+                                        setState({ ...state1, DescriptionEn: e.target.value })
+                                    }
+                                />
+                <span className="spanForm"> |</span>
+              </div>
+
+              <div className="col-sm">
+                <input
+                  style={{ direction: "rtl" }}
+                  placeholder="اسم "
+                  type='text'
+                                    name='TitleAr'
+                                    id='TitleAr'
+                                    className='group__control'
+                                    value={state1.DescriptionAr}
+                                    onChange={(e) =>
+                                        setState({ ...state1, DescriptionAr: e.target.value })
+                                    }
+                ></input>
+              </div>
+            </div>
+            
+
+            <div className="ButtonSection">
+              <input type="file" size="60" onChange={fileSelected} />
+              <button type="submit" className="SubmitButton">
+              Update
+              </button>
+            </div>
+          </form> */}
+        </div>
   
   
   )

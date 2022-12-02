@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment ,useState} from "react";
 import {
   fetchnationality,
   STATUSES,
@@ -13,8 +13,20 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import ScrollContainer from "react-indiana-drag-scroll";
 import axios from "axios";
+import { Modal } from "react-bootstrap";
+import NationalityPopup from "../../Components/Popup/NationalityPopup";
+import { BsEyeFill } from "react-icons/bs";
 
 const NationalityTable = () => {
+//for Modal 
+  const [show, setShow] = useState(false);
+  const [modaldata, setmodaldata] = useState();
+  const handleClose = () => setShow(false);
+  const handleShow = async (data) => {
+    setmodaldata(data);
+    await setShow(true);
+  };
+
   const dispatch = useDispatch();
   const history = useNavigate();
   const { data: nationality, status } = useSelector(
@@ -142,6 +154,7 @@ const NationalityTable = () => {
                                   }}
                                   onClick={() => handleRemove(item._id)}
                                 />
+                                <BsEyeFill onClick={() => handleShow(item)} />
                               </td>
                             </tr>
                           </>
@@ -156,6 +169,25 @@ const NationalityTable = () => {
           <span className="plusIconStyle"></span>
         </div>
       </div>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2 style={{fontFamily: "inter"}}>Nationality</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <NationalityPopup data={modaldata} />
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
     </Fragment>
   );
 };

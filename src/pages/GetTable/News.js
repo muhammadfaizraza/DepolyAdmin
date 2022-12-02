@@ -150,6 +150,7 @@ const News = () => {
                               <MdDelete
                                 onClick={() => handleRemove(item._id)}
                               />
+                              <BsFillEyeFill onClick={() => handleShow(item)}/>
                             </td>
                           </tr>
                         );

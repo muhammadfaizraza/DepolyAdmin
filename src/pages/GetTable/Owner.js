@@ -15,9 +15,11 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import swal from "sweetalert";
+import { BsEyeFill } from 'react-icons/bs';
 
 
 const Owner = () => {
+  
 
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -156,6 +158,7 @@ const Owner = () => {
                               <MdDelete
                                 onClick={() => handleRemove(item._id)}
                               />
+                              <BsEyeFill  onClick={()=> handleShow(item)}/>
                             </td>
                        </tr>
                      </>
@@ -171,6 +174,25 @@ const Owner = () => {
       
        </div>
      </div>
+     <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Owner </h2>
+        </Modal.Header>
+        <Modal.Body>
+          <OwnerPopup data={modaldata} />
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
     </>
   )
 }

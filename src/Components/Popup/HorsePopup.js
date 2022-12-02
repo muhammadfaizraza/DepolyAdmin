@@ -23,34 +23,34 @@ const HorsePopup = (data) => {
                     <div >
                     <h2>Age</h2>
 
-                <p>{data.data.Age }</p>
+                <p></p>
                 </div>
                 <div >
                     <h2>Sex</h2>
 
-                <p>{data.data.Sex }</p>
+                <p></p>
                 </div>
                 <div >
                     <h2>Color</h2>
 
-                <p>{data.data.Color }</p>
+                <p></p>
                 </div>
                 <div >
                     <h2>Kind</h2>
 
-                <p>{data.data.KindOfHorse }</p>
+                <p></p>
                 </div>
             
                 <div >
                     <h2>Breeder</h2>
 
-                <p>{data.data.Breeder }</p>
+                <p></p>
                 </div>
                 
                 <div >
                     <h2>Dam</h2>
 
-                <p>{data.data.Dam }</p>
+                <p></p>
                 </div>
                 
                 <div >
@@ -73,6 +73,9 @@ const HorsePopup = (data) => {
                 <img src={data.data.HorseImage} width="50" height='100' alt=""/>
             </div>
             </div>
+       <div>
+        hello
+       </div>
         </>
     );
 };

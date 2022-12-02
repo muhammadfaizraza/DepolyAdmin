@@ -12,6 +12,7 @@ import { Modal } from "react-bootstrap";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+import { BsEyeFill } from "react-icons/bs";
 
 const News = () => {
   const [show, setShow] = useState(false);
@@ -138,6 +139,7 @@ const News = () => {
                               <MdDelete
                                 onClick={() => handleRemove(item._id)}
                               />
+                              <BsEyeFill onClick={()=> handleShow(item)}/>
                             </td>
                           </tr>
                         </>

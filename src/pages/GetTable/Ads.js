@@ -14,13 +14,18 @@ import HorseAnimation from "../../assets/horselottie.json";
 import {BiEdit} from 'react-icons/bi'
 import axios from "axios";
 import swal from "sweetalert";
+import { BsEyeFill } from "react-icons/bs";
 
 
 const Ads = () => {
-
+  //for Modal
   const [show, setShow] = useState(false);
-  const [modaldata, setmodaldata] = useState()
+  const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
+  const handleShow = async (data) => {
+    setmodaldata(data);
+    await setShow(true);
+  };
 
   const history = useNavigate()
   const dispatch = useDispatch();
@@ -139,6 +144,7 @@ const Ads = () => {
                                 }}
                                   onClick={() => handleRemove(item._id)}
                                 />
+                                <BsEyeFill onClick={() => handleShow(item)}/>
                               </td>
                           
 
@@ -158,20 +164,26 @@ const Ads = () => {
 
         </div>
       </div>
-      <Modal show={show} onHide={handleClose}   size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered>
-                <Modal.Header closeButton>
-                    <h2>Ads </h2>
-                </Modal.Header>
-                <Modal.Body>
-                <AdsPopup data={modaldata} />
-                </Modal.Body>
-                <Modal.Footer>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2 style={{fontFamily:"inter"}}>Advertisement </h2>
+        </Modal.Header>
+        <Modal.Body>
+          <AdsPopup data={modaldata} />
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
 
-                <button onClick={handleClose}  className='modalClosebtn'>Close</button>
-                </Modal.Footer>
-            </Modal> 
     </>
   );
 };

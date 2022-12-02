@@ -1,4 +1,4 @@
-import React, { useEffect ,Fragment } from "react"
+import React, { useEffect ,Fragment,useState } from "react"
 import { fetchcurrency ,STATUSES } from "../../redux/getReducer/getCurrency";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
@@ -10,10 +10,20 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+import { Modal } from "react-bootstrap";
+import { BsEyeFill } from "react-icons/bs";
+import CurrencyPopup from "../../Components/Popup/CurrencyPopup";
 
 
 
 const CurrencyTable = () => {
+  const [show, setShow] = useState(false);
+  const [modaldata, setmodaldata] = useState();
+  const handleClose = () => setShow(false);
+  const handleShow = async (data) => {
+    setmodaldata(data);
+    await setShow(true);
+  };
 
     const dispatch = useDispatch();
     const history = useNavigate();
@@ -131,7 +141,7 @@ const CurrencyTable = () => {
                                 }}
                                 onClick={() => handleRemove(item._id)}
                               />
-                         
+                                 <BsEyeFill onClick={() => handleShow(item)}/>
                             </td>
                           </tr>
                         </>
@@ -151,7 +161,25 @@ const CurrencyTable = () => {
 
 
 
-
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2 style={{fontFamily: "inter"}}>Currency</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <CurrencyPopup data={modaldata} />
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
 
 
 

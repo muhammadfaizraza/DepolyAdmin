@@ -9,11 +9,12 @@ import swal from "sweetalert";
 import remove from "../../redux/postReducer/PostSlider";
 import { fetchSlider, STATUSES } from "../../redux/getReducer/getSliderSlice";
 import "../../Components/CSS/Table.css";
-import { BsFillEyeFill } from "react-icons/bs";
+import { BsEyeFill, BsFillEyeFill } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+
 
 
 const Slider = () => {
@@ -157,6 +158,7 @@ const Slider = () => {
                               <MdDelete
                                 onClick={() => handleRemove(item._id)}
                               />
+                              <BsEyeFill  onClick={() => handleShow(item)}/> 
                             </td>
                           </tr>
                         </>

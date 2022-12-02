@@ -14,6 +14,7 @@ import HorsePopup from "../../Components/Popup/HorsePopup";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+import {BsEyeFill} from "react-icons/bs"
 
 const Horse = () => {
   const [show, setShow] = useState(false);
@@ -200,6 +201,7 @@ const Horse = () => {
                                 <MdDelete
                                   onClick={() => handleRemove(item._id)}
                                 />
+                                <BsEyeFill onClick={() => setShow(true)}/>
                               </td>
                             </tr>
                           </tbody>
@@ -250,7 +252,7 @@ const Horse = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2>Jockey </h2>
+          <h2>Horse </h2>
         </Modal.Header>
         <Modal.Body>
           <HorsePopup data={modaldata} />

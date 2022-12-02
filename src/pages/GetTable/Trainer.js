@@ -14,6 +14,7 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BiEdit } from "react-icons/bi";
+import { BsEyeFill } from "react-icons/bs";
 
 const Trainer = () => {
   const [show, setShow] = useState(false);
@@ -208,6 +209,7 @@ const Trainer = () => {
                               <MdDelete
                                 onClick={() => handleRemove(item._id)}
                               />
+                              <BsEyeFill onClick={() => handleShow(item) }/>
                             </td>
                             </tr>
                           </>
@@ -229,7 +231,7 @@ const Trainer = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2>Jockey </h2>
+          <h2 style={{fontFamily:"inter"}}>Trainer </h2>
         </Modal.Header>
         <Modal.Body>
           <TrainerPopup data={modaldata} />

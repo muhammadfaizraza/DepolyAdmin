@@ -582,7 +582,7 @@ const RaceForm = () => {
                       onChange={(e) => setWeatherDegree(e.target.value)}
                       value={WeatherDegree}
                       type="number"
-                      required
+                      
                     ></input>
                   </div>
                 </div>

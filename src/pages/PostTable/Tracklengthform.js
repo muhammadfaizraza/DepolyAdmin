@@ -71,7 +71,12 @@ const Tracklengthform = () => {
     }
 
     if (!RaceCourseImage.name.match(/\.(gif)$/)) {
-      alert("select valid image.");
+      swal({
+        title: "Error!",
+        text: "Enter Gif Image",
+        icon: "error",
+        button: "OK",
+      });
       return;
     }
     const objectUrl = URL.createObjectURL(RaceCourseImage);
@@ -139,7 +144,7 @@ const Tracklengthform = () => {
                     value={TrackLength}
                     style={{ direction: "rtl" }}
                   >
-                    <Form.Control type="text" placeholder="طول المسار" />
+                    <Form.Control type="number" placeholder="طول المسار" />
                   </FloatingLabel>
                 </div>
               </div>

@@ -55,7 +55,7 @@ const TrainerForm = () => {
       formData.append("NameAr", NameAr);
       formData.append("DescEn", DescEn);
       formData.append("DescAr", DescAr);
-      formData.append("shortCode", shortCode);
+      // formData.append("shortCode", shortCode);
       formData.append("pickCount", pickCount);
       formData.append("TriCount", TriCount);
       formData.append("StartDate", StartDate);

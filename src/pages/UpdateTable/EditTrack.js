@@ -124,7 +124,7 @@ let groundtypeopt =
                       }
                      
                     >
-                      <Form.Control type="text" placeholder="Description" value={state1.TrackLength}/>
+                      <Form.Control type="number" placeholder="Description" value={state1.TrackLength}/>
                     </FloatingLabel>
                     
                     <span className="spanForm"> |</span>
@@ -142,7 +142,7 @@ let groundtypeopt =
                       }
                      
                     >
-                      <Form.Control type="text" placeholder="Description" value={state1.TrackLength}/>
+                      <Form.Control type="number" placeholder="Description" value={state1.TrackLength}/>
                     </FloatingLabel>
                     
                   </div>

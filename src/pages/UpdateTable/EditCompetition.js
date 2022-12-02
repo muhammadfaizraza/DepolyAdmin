@@ -1,81 +1,100 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import "../../Components/CSS/forms.css";
+import { useNavigate, useLocation } from "react-router-dom";
+import swal from "sweetalert";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
 import Select from "react-select";
-import { fetchcategory } from "../../../redux/getReducer/getCategory";
+import DatePicker from "react-date-picker";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
-import DatePicker from "react-date-picker";
-import swal from "sweetalert";
+import { useSelector } from "react-redux";
+import { fetchcategory } from '../../redux/getReducer/getCategory'
 
-const TrainerForm = () => {
-  // const dispatch = useDispatch();
+const NewsForm = () => {
   const history = useNavigate();
-  const dispatch = useDispatch();
-
+  const { state } = useLocation();
+  
+  const { competitionid } = state;
+  console.log(competitionid);
   const { data: category } = useSelector((state) => state.category);
-  useEffect(() => {
-    dispatch(fetchcategory());
-  }, []);
 
-
-  let AllCategory =
-  category === undefined ? (
-      <></>
-    ) : (
-      category.map(function (item) {
-        return {
-          id: item._id,
-          value: item.NameEn,
-          label: item.NameEn,
-        };
-      })
-    );
-  const [NameEn, setNameEn] = useState("");
-  const [NameAr, setNameAr] = useState("");
-  const [DescEn, setDescEn] = useState("");
-  const [DescAr, setDescAr] = useState("");
-  const [shortCode, setshortCode] = useState("");
-  const [pickCount, setpickCount] = useState("");
-  const [TriCount, setTriCount] = useState("");
-  const [StartDate, setStartDate] = useState("");
+  const [image,setImage] = useState();
+  const [preview,setPreview] = useState();
   const [CompetitionCategory, setCompetitionCategory] = useState("");
-  const [CompetitionCode, setCompetitionCode] = useState("");
-  const [preview, setPreview] = useState();
-  const [image, setImage] = useState();
+  const [StartDate, setStartDate] = useState("");
 
+  const [state1, setState] = useState({
+		NameAr: '',
+    NameEn:'',
+    DescEn: '',
+    DescAr:'',
+    TriCount: '',
+    pickCount:'',
+    StartDate:'',
+    CompetitionCode:'',
+	});
+ 
+
+  useEffect(() => {
+		if (competitionid) {
+			setState({
+				NameEn: competitionid.NameEn,
+        NameAr: competitionid.NameAr,
+				DescEn:competitionid.DescEn,
+        DescAr:competitionid.DescAr,
+        TriCount: competitionid.TriCount,
+        pickCount: competitionid.pickCount,
+        StartDate: competitionid.StartDate,
+        CompetitionCode: competitionid.CompetitionCode
+			});
+		} else {
+			alert('No Data')
+		}
+	}, [competitionid]);
+
+  useEffect(() => {
+    if (image === undefined) {
+      setPreview(competitionid.image)
+      return
+  }  
+    const objectUrl = URL.createObjectURL(image)
+    setPreview(objectUrl)
+    return () => URL.revokeObjectURL(objectUrl)
+}, [image])
+  const fileSelected = (event) => {
+    const image = event.target.files[0];
+    setImage(image);
+  };
   const submit = async (event) => {
     event.preventDefault();
     try {
+      
       const formData = new FormData();
-      formData.append("NameEn", NameEn);
-      formData.append("NameAr", NameAr);
-      formData.append("DescEn", DescEn);
-      formData.append("DescAr", DescAr);
-      formData.append("shortCode", shortCode);
-      formData.append("pickCount", pickCount);
-      formData.append("TriCount", TriCount);
+      formData.append("NameEn", state1.NameEn);
+      formData.append("NameAr", state1.NameAr);
+      formData.append("DescEn", state1.DescEn);
+      formData.append("DescAr", state1.DescAr);
+      formData.append("TriCount", state1.TriCount);
+      formData.append("pickCount", state1.pickCount);
       formData.append("StartDate", StartDate);
-      formData.append("CompetitionCategory", CompetitionCategory.id);
-      formData.append("CompetitionCode", CompetitionCode);
-      await axios.post(
-        `${window.env.API_URL}/uploadCompetiton?keyword=&page=`,
-        formData
-      );
+      formData.append("CompetitionCode", state1.CompetitionCode);
+      formData.append("CompetitionCategory", CompetitionCategory);
 
+      // formData.append("RegistrationDate", RegistrationDate);
+
+      const response = await axios.put(`${window.env.API_URL}/updateCompetiton/${competitionid._id}`, formData);
+      history("/competitionlisting");
       swal({
-        title: "success!",
-        text: "Data Submitted !",
+        title: "Success!",
+        text: "Data has been Updated successfully ",
         icon: "success",
         button: "OK",
       });
-      history("/competitionlisting");
     } catch (error) {
       const err = error.response.data.message;
-      swal({
+        swal({
         title: "Error!",
         text: err,
         icon: "error",
@@ -83,6 +102,20 @@ const TrainerForm = () => {
       });
     }
   };
+  let AllCategory =
+  category === undefined ? (
+    <></>
+  ) : (
+    category.map(function (item) {
+      return {
+        id: item._id,
+        value: item.NameEn,
+        label: item.NameEn,
+      };
+    })
+  );
+  console.log(AllCategory)
+  var today = new Date();
 
   const convert = (num) => {
     if (num) {
@@ -121,12 +154,8 @@ const TrainerForm = () => {
       return delDateString;
     }
   };
-
-  var today = new Date();
-  
-
   return (
-    <Fragment>
+    <>
       <div className="page">
         <div className="rightsidedata">
           <div
@@ -134,35 +163,40 @@ const TrainerForm = () => {
               marginTop: "30px",
             }}
           >
-            <div className="Headers">Add Competition</div>
+            <div className="Headers">Edit Competition</div>
             <div className="form">
-              <form onSubmit={submit}>
+            <form onSubmit={submit}>
                 <div className="row mainrow">
+                  
                   <div className="col-sm">
-                    <FloatingLabel
+                  <FloatingLabel
                       controlId="floatingInput"
                       label="Name"
                       className="mb-3"
-                      onChange={(e) => setNameEn(e.target.value)}
-                      name="Name"
-                      value={NameEn}
+                      onChange={(e) =>
+                        setState({ ...state1, NameEn: e.target.value })
+                      }
                     >
-                      <Form.Control type="text" placeholder="Name" />
+                      <Form.Control type="text" placeholder="Details"  	value={state1.NameEn}/>
                     </FloatingLabel>
+                
                     <span className="spanForm"> |</span>
                   </div>
+                  
+
                   <div className="col-sm">
-                    <FloatingLabel
+                  <FloatingLabel
                       controlId="floatingInput"
                       label="اسم"
                       className="mb-3 floatingInputAr"
-                      onChange={(e) => setNameAr(e.target.value)}
-                      name="Name"
-                      value={NameAr}
                       style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, NameAr: e.target.value })
+                      }
                     >
-                      <Form.Control type="text" placeholder="اسم" />
+                      <Form.Control type="text" placeholder="Details"value={state1.NameAr} />
                     </FloatingLabel>
+                  
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -185,152 +219,144 @@ const TrainerForm = () => {
                     />
                   </div>
                 </div>
-                <div className="row  mainrow">
+                <div className="row mainrow">
+                  
                   <div className="col-sm">
-                    <FloatingLabel
+                  <FloatingLabel
                       controlId="floatingInput"
                       label="Title"
                       className="mb-3"
-                      onChange={(e) => setDescEn(e.target.value)}
-                      value={DescEn}
+                      onChange={(e) =>
+                        setState({ ...state1, DescEn: e.target.value })
+                      }
                     >
-                      <Form.Control type="text" placeholder="Description" />
+                      <Form.Control type="text" placeholder="Details"  	value={state1.DescEn}/>
                     </FloatingLabel>
+                
                     <span className="spanForm"> |</span>
                   </div>
+                  
 
                   <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="عنوان"
-                      className="mb-3 floatingInputAr"
-                      onChange={(e) => setDescAr(e.target.value)}
-                      name="Name"
-                      value={DescAr}
-                      style={{ direction: "rtl" }}
-                    >
-                      <Form.Control type="text" placeholder="عنوان" />
-                    </FloatingLabel>
-                  </div>
-                </div>
-                {/* <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Short Name"
-                      className="mb-3"
-                      onChange={(e) => setshortCode(e.target.value)}
-                      value={shortCode}
-                    >
-                      <Form.Control type="text" placeholder="Short Code" />
-                    </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="اسم قصير"
-                      className="mb-3 floatingInputAr"
-                      onChange={(e) => setshortCode(e.target.value)}
-                      name="Name"
-                      value={shortCode}
-                      style={{ direction: "rtl" }}
-                    >
-                      <Form.Control type="text" placeholder="اسم قصير" />
-                    </FloatingLabel>
-                  </div>
-                </div> */}
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Competition Code"
-                      className="mb-3"
-                      onChange={(e) => setCompetitionCode(e.target.value)}
-                      name="Name"
-                      value={CompetitionCode}
-                    >
-                      <Form.Control
-                        type="text"
-                        placeholder="Competition Code"
-                      />
-                    </FloatingLabel>
-                    <span className="spanForm"> |</span>
-                  </div>
-                  <div className="col-sm">
-                    <FloatingLabel
+                  <FloatingLabel
                       controlId="floatingInput"
                       label="اسم"
                       className="mb-3 floatingInputAr"
-                      onChange={(e) => setCompetitionCode(e.target.value)}
-                      name="Name"
-                      value={CompetitionCode}
                       style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, DescAr: e.target.value })
+                      }
                     >
-                      <Form.Control type="text" placeholder="اسم" />
+                      <Form.Control type="text" placeholder="Details"value={state1.DescAr} />
                     </FloatingLabel>
-                  </div>
-                </div>
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Pick Count"
-                      className="mb-3"
-                      onChange={(e) => setpickCount(e.target.value)}
-                      value={pickCount}
-                    >
-                      <Form.Control type="number" placeholder="Pick Count" />
-                    </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="تفاصيل"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                    >
-                      <Form.Control type="text" placeholder="تفاصيل" />
-                    </FloatingLabel>
-                  </div>
-                </div>
-
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Tri Count"
-                      className="mb-3"
-                      onChange={(e) => setTriCount(e.target.value)}
-                      value={TriCount}
-                    >
-                      <Form.Control type="number" placeholder="Pick Count" />
-                    </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="تفاصيل"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                    >
-                      <Form.Control type="text" placeholder="تفاصيل" />
-                    </FloatingLabel>
+                  
                   </div>
                 </div>
                 
                 <div className="row mainrow">
+                  
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Competition Code"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, CompetitionCode: e.target.value })
+                      }
+                    >
+                      <Form.Control type="text" placeholder="Details"  	value={state1.CompetitionCode}/>
+                    </FloatingLabel>
+                
+                    <span className="spanForm"> |</span>
+                  </div>
+                  
+
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, CompetitionCode: e.target.value })
+                      }
+                    >
+                      <Form.Control type="text" placeholder="Details"value={state1.CompetitionCode} />
+                    </FloatingLabel>
+                  
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Pick Count"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, pickCount: e.target.value })
+                      }
+                    >
+                      <Form.Control type="text" placeholder="Details"  	value={state1.pickCount}/>
+                    </FloatingLabel>
+                
+                    <span className="spanForm"> |</span>
+                  </div>
+                  
+
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, pickCount: e.target.value })
+                      }
+                    >
+                      <Form.Control type="text" placeholder="Details"value={state1.pickCount} />
+                    </FloatingLabel>
+                  
+                  </div>
+                </div>
+
+                <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Tri Count"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, TriCount: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description"value={state1.TriCount}/>
+                    </FloatingLabel>
+               
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, TriCount: e.target.value })
+                      }
+                    >
+                      <Form.Control type="text" placeholder="Description"value={state1.TriCount}/>
+                    </FloatingLabel>
+                    
+                  </div>
+                </div>
+                
+
+                <div className="row mainrow">
                   <div className="col-sm">
                     <Select
-                      placeholder={<div>Select Competition Category</div>}
+                      placeholder={<div>Select Comprtition Category</div>}
                       defaultValue={CompetitionCategory}
                       onChange={setCompetitionCategory}
                       options={AllCategory}
@@ -351,11 +377,15 @@ const TrainerForm = () => {
                       |
                     </span>
                   </div>
+
                   <div className="col-sm">
                     <Select
-                      required
-                      placeholder={<div>حدد جيلتي</div>}
                       className="selectdir"
+                      placeholder={
+                        <div style={{ direction: "rtl" }}>
+                          اكتب للبحث عن الجنسية
+                        </div>
+                      }
                       defaultValue={CompetitionCategory}
                       onChange={setCompetitionCategory}
                       options={AllCategory}
@@ -365,21 +395,18 @@ const TrainerForm = () => {
                   </div>
                 </div>
 
-                <div
-                  className="ButtonSection "
-                  style={{ justifyContent: "end" }}
-                >
-                  <button Name="submit" className="SubmitButton">
-                    Add Competition
-                  </button>
-                </div>
+                <div className="ButtonSection" style={{ justifyContent: "end" }}>
+                <button type="submit" className="SubmitButton">
+                  Update
+                </button>
+              </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 
-export default TrainerForm;
+export default NewsForm;

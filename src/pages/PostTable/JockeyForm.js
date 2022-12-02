@@ -64,7 +64,7 @@ const NewsForm = () => {
         icon: "success",
         button: "OK",
       });
-      if(pathname === '/racetypeform'){
+      if(pathname === '/jockeyform'){
         history("/jockey");
       }
     } catch (error) {

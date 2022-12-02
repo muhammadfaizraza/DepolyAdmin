@@ -10,41 +10,42 @@ const NewsForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
 
-  const { racenameid } = state;
-  console.log(racenameid);
+  const { categoryid } = state;
+  console.log(categoryid);
 
   const [state1, setState] = useState({
-    NameEn: "",
-    NameAr: "",
-    shortCode: "",
-  });
+		NameEn: '',
+    NameAr:'',
+		shortCode: '',
+    
+	});
+ 
 
   useEffect(() => {
-    if (racenameid) {
-      setState({
-        NameEn: racenameid.NameEn,
-        NameAr: racenameid.NameAr,
-        shortCode: racenameid.shortCode,
-      });
-    } else {
-      alert("No Data");
-    }
-  }, [racenameid]);
+		if (categoryid) {
+			setState({
+				NameEn: categoryid.NameEn,
+        NameAr: categoryid.NameAr,
+				shortCode: categoryid.shortCode,
+   
+			});
+		} else {
+			alert('No Data')
+		}
+	}, [categoryid]);
 
 
   const submit = async (event) => {
     event.preventDefault();
     try {
+      
       const formData = new FormData();
       formData.append("NameEn", state1.NameEn);
       formData.append("NameAr", state1.NameAr);
-      formData.append("shortCode", state1.shortCode);
+    //   formData.append("shortCode", state1.shortCode);
 
-      const response = await axios.put(
-        `${window.env.API_URL}/updateRaceName/${racenameid._id}`,
-        formData
-      );
-      history("/racename");
+      const response = await axios.put(`${window.env.API_URL}/updateCompetitionCategory/${categoryid._id}`, formData);
+      history("/CategoryListing");
       swal({
         title: "Success!",
         text: "Data has been Updated successfully ",
@@ -53,12 +54,12 @@ const NewsForm = () => {
       });
     } catch (error) {
       const err = error.response.data.message;
-        swal({
-        title: "Error!",
-        text: err,
-        icon: "error",
-        button: "OK",
-      });
+      swal({
+      title: "Error!",
+      text: err,
+      icon: "error",
+      button: "OK",
+    });
     }
   };
   return (
@@ -70,20 +71,21 @@ const NewsForm = () => {
               marginTop: "30px",
             }}
           >
-            <div className="Headers">Edit Race Name</div>
+            <div className="Headers">Edit Category</div>
             <div className="form">
-            <form onSubmit={submit}>
+              <form onSubmit={submit}>
                 <div className="row mainrow">
                   <div className="col-sm">
 
                   <FloatingLabel
                       controlId="floatingInput"
                       label="Name"
-                      className="mb-3"
+                      className="mb-3 floatingInputAr"
                       onChange={(e) =>
                         setState({ ...state1, NameEn: e.target.value })
                       }
-                    
+                      style={{ direction: "rtl" }}
+
                     >
                       <Form.Control type="text" placeholder="Description" value={state1.NameEn}/>
                     </FloatingLabel>
@@ -95,8 +97,7 @@ const NewsForm = () => {
                   <FloatingLabel
                       controlId="floatingInput"
                       label="اسم"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
+                      className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, NameAr: e.target.value })
                       }

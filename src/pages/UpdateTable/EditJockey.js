@@ -92,81 +92,99 @@ const NewsForm = () => {
               <form onSubmit={submit}>
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='NameEn'
-										id='NameEn'
-										className='group__control'
-										placeholder='Name'
-										value={state1.NameEn}
-										onChange={(e) =>
-											setState({ ...state1, NameEn: e.target.value })
-										}
-									/>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 "
+                      onChange={(e) =>
+                        setState({ ...state1, NameEn: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.NameEn}/>
+                    </FloatingLabel>
+                  
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='NameAr'
-										id='NameAr'
-										className='group__control'
-										value={state1.NameAr}
-										onChange={(e) =>
-											setState({ ...state1, NameAr: e.target.value })
-										}
-                    ></input>
+                      onChange={(e) =>
+                        setState({ ...state1, NameAr: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.NameAr}/>
+                    </FloatingLabel>
                   </div>
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='number'
-										name='MiniumumJockeyWeight'
-										id='MiniumumJockeyWeight'
-										className='group__control'
-										placeholder=''
-										value={state1.MiniumumJockeyWeight}
-										onChange={(e) =>
-											setState({ ...state1, MiniumumJockeyWeight: e.target.value })
-										}
-									/>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Miniumum Jockey Weight"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, MiniumumJockeyWeight: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="number" placeholder="Description" value={state1.MiniumumJockeyWeight}/>
+                    </FloatingLabel>
+                 
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
-                      type="number"
-                      placeholder="اسم المسار"
-                    ></input>
+                      onChange={(e) =>
+                        setState({ ...state1, MiniumumJockeyWeight: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.MiniumumJockeyWeight}/>
+                    </FloatingLabel>
                   </div>
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='number'
-										name='MaximumJockeyWeight'
-										id='MaximumJockeyWeight'
-										className='group__control'
-										placeholder='Post title'
-										value={state1.MaximumJockeyWeight}
-										onChange={(e) =>
-											setState({ ...state1, MaximumJockeyWeight: e.target.value })
-										}
-									/>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Maximum Jockey Weight"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, MaximumJockeyWeight: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.MaximumJockeyWeight}/>
+                    </FloatingLabel>
+                  
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
-                      type="number"
-                      placeholder="اسم المسار"
-                    ></input>
+                      onChange={(e) =>
+                        setState({ ...state1, MaximumJockeyWeight: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.MaximumJockeyWeight}/>
+                    </FloatingLabel>
+                    
                   </div>
                 </div>
 

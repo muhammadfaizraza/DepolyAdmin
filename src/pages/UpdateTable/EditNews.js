@@ -120,8 +120,8 @@ const NewsForm = () => {
                   <FloatingLabel
                       controlId="floatingInput"
                       label="اسم"
-                      
-                      className="mb-3"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
                       onChange={(e) =>
                         setState({ ...state1, TitleAr: e.target.value })
                       }
@@ -153,7 +153,8 @@ const NewsForm = () => {
                   <FloatingLabel
                       controlId="floatingInput"
                       label="اسم"
-                      className="mb-3"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
                       onChange={(e) =>
                         setState({ ...state1, DescriptionAr: e.target.value })
                       }
@@ -185,7 +186,8 @@ const NewsForm = () => {
                   <FloatingLabel
                       controlId="floatingInput"
                       label="اسم"
-                      className="mb-3"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
                       onChange={(e) =>
                         setState({ ...state1, SecondTitleAr: e.target.value })
                       }

@@ -112,9 +112,9 @@ const CategoryTable = () => {
                               <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
-                                    history("/editcolor", {
+                                    history("/editcategory", {
                                       state: {
-                                        colorid: item,
+                                        categoryid: item,
                                       },
                                     })
                                   }

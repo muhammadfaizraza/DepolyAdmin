@@ -114,65 +114,71 @@ let groundtypeopt =
               <form onSubmit={submit}>
                 <div className="row mainrow">
                   <div className="col-sm">
-                    <input
-                      type="text"
-                      name="TitleEn"
-                      id="TitleEn"
-                      className="group__control"
-                      placeholder="Track Length"
-                      value={state1.TrackLength}
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Track Length"
+                      className="mb-3"
+                   
                       onChange={(e) =>
                         setState({ ...state1, TrackLength: e.target.value })
                       }
-                    />
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.TrackLength}/>
+                    </FloatingLabel>
+                    
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
+
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type="text"
-                      name="TitleAr"
-                      id="TitleAr"
-                      className="group__control"
-                      value={state1.TrackLength}
                       onChange={(e) =>
                         setState({ ...state1, TrackLength: e.target.value })
                       }
-                    ></input>
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.TrackLength}/>
+                    </FloatingLabel>
+                    
                   </div>
                 </div>
 
                 <div className="row mainrow">
                   <div className="col-sm">
-                    <input
-                      type="text"
-                      name="TitleEn"
-                      id="TitleEn"
-                      className="group__control"
-                      placeholder="Rail Position"
-                      value={state1.RailPosition}
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Rail Position"
+                      className="mb-3 "
                       onChange={(e) =>
                         setState({ ...state1, RailPosition: e.target.value })
                       }
-                    />
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.RailPosition}/>
+                    </FloatingLabel>
+                    
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type="text"
-                      name="TitleAr"
-                      id="TitleAr"
-                      className="group__control"
-                      value={state1.RailPosition}
                       onChange={(e) =>
                         setState({ ...state1, RailPosition: e.target.value })
                       }
-                    ></input>
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.RailPosition}/>
+                    </FloatingLabel>
+                    
                   </div>
                 </div>
 

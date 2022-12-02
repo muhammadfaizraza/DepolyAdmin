@@ -153,11 +153,12 @@ const NewsForm = () => {
                   <FloatingLabel
                       controlId="floatingInput"
                       label="اسم"
-                      className="mb-3"
+                      className="mb-3 floatingInputAr"
                       onChange={(e) =>
                         setState({ ...state1, DescriptionAr: e.target.value })
                       }
-                      
+                      style={{ direction: "rtl" }}
+
                     >
                       <Form.Control type="text" placeholder="Description" value={state1.DescriptionAr}/>
                     </FloatingLabel>

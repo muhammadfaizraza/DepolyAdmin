@@ -18,7 +18,7 @@ const Color = () => {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
-      formData.append("shortCode", shortCode);
+      // formData.append("shortCode", shortCode);
 
       await axios.post(`${window.env.API_URL}/uploadCompetitionCategory`, formData);
       history("/CategoryListing");
@@ -80,7 +80,7 @@ const Color = () => {
                 </div>
               </div>
 
-              <div className="row mainrow">
+              {/* <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
@@ -109,7 +109,7 @@ const Color = () => {
                     />
                   </FloatingLabel>
                 </div>
-              </div>
+              </div> */}
 
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
                 <button Name="submit" className="SubmitButton">

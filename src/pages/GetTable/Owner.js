@@ -44,7 +44,7 @@ const Owner = () => {
   },[dispatch]);
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteOwner/${Id}`)
+      const res = await axios.delete(`${window.env.API_URL}/deleteOwner/${Id}`)
       swal({
         title: "Success!",
         text: "Data has been Deleted successfully ",

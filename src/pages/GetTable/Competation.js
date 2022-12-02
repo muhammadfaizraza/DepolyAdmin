@@ -138,9 +138,9 @@ const Statistic = () => {
                               </td>
                              
                               <td className="table_delete_btn1">
-                                  <BiEdit onClick={() => navigate('/competitionlisting',{
+                                  <BiEdit onClick={() => navigate('/editcompetition',{
                                 state:{
-                                  competitionid:item._id
+                                  competitionid:item
                                 }
                               })}/>
                                   <MdDelete

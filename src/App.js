@@ -57,6 +57,8 @@ import EditMeetingType from "./pages/UpdateTable/EditMeetingType";
 import EditVerdict from "./pages/UpdateTable/EditVerdict";
 import EditHorseKind from "./pages/UpdateTable/EditHorseKind";
 import EditRace from "./pages/UpdateTable/EditRace";
+import EditCategory from "./pages/UpdateTable/EditCategory";
+import EditCompetition from "./pages/UpdateTable/EditCompetition";
 
 import ResultForm from "./pages/PostTable/Result/ResultForm";
 import RacesResult from "./pages/PostTable/Result/ResultRaces";
@@ -231,6 +233,8 @@ function App() {
              <Route path="/editverdict" element={<EditVerdict />}/>
              <Route path="/edithorsekind" element={<EditHorseKind />}/>
              <Route path="/editrace" element={<EditRace />}/>
+             <Route path="/editcategory" element={<EditCategory />}/>
+             <Route path="/editcompetition" element={<EditCompetition />}/>
 
            </Route>
          </Routes>

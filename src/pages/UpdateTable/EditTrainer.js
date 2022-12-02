@@ -7,6 +7,7 @@ import DatePicker from "react-date-picker";
 
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+
 const NewsForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
@@ -26,6 +27,8 @@ const NewsForm = () => {
     TrainerLicenseDate:'',
     Detail:''
 	});
+  const [preview,setPreview] = useState();
+
   const [image,setImage] = useState();
   const [TrainerLicenseDate,setTrainerLicenseDate] = useState();
 
@@ -54,7 +57,15 @@ const NewsForm = () => {
 		}
 	}, [trainerid]);
 
-
+  useEffect(() => {
+    if (image === undefined) {
+      setPreview(trainerid.image)
+      return
+  }  
+    const objectUrl = URL.createObjectURL(image)
+    setPreview(objectUrl)
+    return () => URL.revokeObjectURL(objectUrl)
+}, [image])
   const submit = async (event) => {
     event.preventDefault();
     try {
@@ -65,6 +76,7 @@ const NewsForm = () => {
       formData.append("NameAr", state1.NameAr);
       formData.append("TitleEn", state1.TitleEn);
       formData.append("TitleAr", state1.TitleAr);
+      formData.append("Remarks", state1.Remarks);
       formData.append("ShortNameEn", state1.ShortNameEn);
       formData.append("ShortNameAr", state1.ShortNameAr);
       formData.append("Detail", state1.Detail);
@@ -103,193 +115,198 @@ const NewsForm = () => {
               <form onSubmit={submit}>
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='NameEn'
-										id='NameEn'
-										className='group__control'
-										placeholder='Name'
-										value={state1.NameEn}
-										onChange={(e) =>
-											setState({ ...state1, NameEn: e.target.value })
-										}
-									/>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Name"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, NameEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.NameEn}/>
+                    </FloatingLabel>
+                  
                     <span className="spanForm"> |</span>
                   </div>
 
-                  <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='NameAr'
-										id='NameAr'
-										className='group__control'
-										value={state1.NameAr}
-										onChange={(e) =>
-											setState({ ...state1, NameAr: e.target.value })
-										}
-                    ></input>
+                  <div className="col-sm" >
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, NameAr: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.NameAr}/>
+                    </FloatingLabel>
+                   
                   </div>
                 </div>
 
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='NameEn'
-										id='NameEn'
-										className='group__control'
-										placeholder='Remarks'
-										value={state1.Remarks}
-										onChange={(e) =>
-											setState({ ...state1, Remarks: e.target.value })
-										}
-									/>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Remarks"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, Remarks: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.Remarks}/>
+                    </FloatingLabel>
+                
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='NameAr'
-										id='NameAr'
-										className='group__control'
-										value={state1.NameAr}
-										onChange={(e) =>
-											setState({ ...state1, NameAr: e.target.value })
-										}
-                    ></input>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, NameAr: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.NameAr}/>
+                    </FloatingLabel>
+                    
                   </div>
-                </div>
+                </div> */}
 
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='NameEn'
-										id='NameEn'
-										className='group__control'
-										placeholder='Detail'
-										value={state1.Detail}
-										onChange={(e) =>
-											setState({ ...state1, Detail: e.target.value })
-										}
-									/>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Detail"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, Detail: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.Detail}/>
+                    </FloatingLabel>
+                 
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='NameAr'
-										id='NameAr'
-										className='group__control'
-										value={state1.Detail}
-										onChange={(e) =>
-											setState({ ...state1, Detail: e.target.value })
-										}
-                    ></input>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, NameAr: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.NameAr}/>
+                    </FloatingLabel>
+                    
                   </div>
                 </div>
                 
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='NameEn'
-										id='NameEn'
-										className='group__control'
-										placeholder='Title English'
-										value={state1.TitleEn}
-										onChange={(e) =>
-											setState({ ...state1, TitleEn: e.target.value })
-										}
-									/>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Title English"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, TitleEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.TitleEn}/>
+                    </FloatingLabel>
+                  
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='NameAr'
-										id='NameAr'
-										className='group__control'
-										value={state1.TitleAr}
-										onChange={(e) =>
-											setState({ ...state1, TitleAr: e.target.value })
-										}
-                    ></input>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, TitleAr: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.TitleAr}/>
+                    </FloatingLabel>
+                    
                   </div>
                 </div>
 
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='NameEn'
-										id='NameEn'
-										className='group__control'
-										placeholder='Remarks'
-										value={state1.Remarks}
-										onChange={(e) =>
-											setState({ ...state1, Remarks: e.target.value })
-										}
-									/>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Remarks"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, Remarks: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.Remarks}/>
+                    </FloatingLabel>
+                  
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='NameAr'
-										id='NameAr'
-										className='group__control'
-										value={state1.NameAr}
-										onChange={(e) =>
-											setState({ ...state1, NameAr: e.target.value })
-										}
-                    ></input>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, NameAr: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.NameAr}/>
+                    </FloatingLabel>
                   </div>
                 </div>
 
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='text'
-										name='NameEn'
-										id='NameEn'
-										className='group__control'
-										placeholder='Short Name'
-										value={state1.ShortNameEn}
-										onChange={(e) =>
-											setState({ ...state1, ShortNameEn: e.target.value })
-										}
-									/>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Short Name"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, ShortNameEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.ShortNameEn}/>
+                    </FloatingLabel>
+                  
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type='text'
-										name='NameAr'
-										id='NameAr'
-										className='group__control'
-										value={state1.ShortNameAr}
-										onChange={(e) =>
-											setState({ ...state1, ShortNameAr: e.target.value })
-										}
-                    ></input>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, ShortNameAr: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.ShortNameAr}/>
+                    </FloatingLabel>
+                    
                   </div>
                 </div>
 
@@ -314,9 +331,12 @@ const NewsForm = () => {
                     />
                   </div>
                 </div>
-
                 <div className="ButtonSection">
-                  <input type="file" size="60" onChange={fileSelected} />
+                <div>
+                <input type='file' onChange={fileSelected} className="formInput"/>
+                <img src={preview}  className="PreviewImage" alt=""/>
+
+                </div>
                   <button type="submit" className="SubmitButton">
                   Update
                   </button>

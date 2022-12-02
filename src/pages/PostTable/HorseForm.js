@@ -1073,7 +1073,7 @@ const HorseForm = () => {
                   </div>
                   <button
                     type="submit"
-                    disabled={isSubmitData}
+                  
                     className="SubmitButton"
                   >
                     Add Horse

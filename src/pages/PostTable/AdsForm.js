@@ -173,7 +173,7 @@ onChange={(e) => setTitleAr(e.target.value)}
             {image &&  <img src={preview}  className="PreviewImage" alt=""/> }
                 </div>
 
-                  <button type='submit' className='SubmitButton' disabled={isSubmitData}>Create Ads</button>
+                  <button type='submit' className='SubmitButton' >Create Ads</button>
 
                 </div>
               </form>

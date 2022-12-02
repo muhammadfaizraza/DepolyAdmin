@@ -101,6 +101,7 @@ const News = () => {
                       <th>Title Arabic</th>
                       <th>Description </th>
                       <th>Description Arabic</th>
+                      <th>Url</th>
                       <th>Image</th>
                       <th style={{ textAlign: "center" }}>Action</th>
                     </tr>
@@ -114,7 +115,7 @@ const News = () => {
                             <td>{item.TitleAr}</td>
                             <td>{item.DescriptionEn}</td>
                             <td>{item.DescriptionAr}</td>
-
+                            <td>{item.Url}</td>
                             <td>
                               <img
                                 src={item.image}

@@ -12,6 +12,7 @@ const NewsForm = () => {
 
   const { sponsorid } = state;  
   console.log(sponsorid,'sponsorid');
+  const [preview,setPreview] = useState();
 
   const [image,setImage] = useState();
   const [state1, setState] = useState({
@@ -38,6 +39,15 @@ const NewsForm = () => {
 		}
 	}, [sponsorid]);
 
+  useEffect(() => {
+    if (image === undefined) {
+      setPreview(sponsorid.image)
+      return
+  }  
+    const objectUrl = URL.createObjectURL(image)
+    setPreview(objectUrl)
+    return () => URL.revokeObjectURL(objectUrl)
+}, [image])
   const fileSelected = (event) => {
     const image = event.target.files[0];
     setImage(image);
@@ -82,7 +92,104 @@ const NewsForm = () => {
           >
             <div className="Headers">Edit Sponsor</div>
             <div className="form">
-              <form onSubmit={submit}>
+            <form onSubmit={submit}>
+                <div className="row mainrow">
+                  <div className="col-sm">
+
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Title"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, TitleEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.TitleEn}/>
+                    </FloatingLabel>
+                 
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, TitleAr: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.TitleAr}/>
+                    </FloatingLabel>
+                    
+                  </div>
+                </div>
+
+                <div className="row mainrow">
+                  <div className="col-sm">
+
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Description"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, DescriptionEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.DescriptionEn}/>
+                    </FloatingLabel>
+                 
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, DescriptionEn: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.DescriptionEn}/>
+                    </FloatingLabel>
+                    
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="URL"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, Url: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.Url}/>
+                    </FloatingLabel>
+                 
+									
+                  </div>
+                </div>
+                
+                <div className="ButtonSection">
+                <div>
+                <input type='file' onChange={fileSelected} className="formInput"/>
+                <img src={preview}  className="PreviewImage" alt=""/>
+
+                </div>
+                  <button type="submit" className="SubmitButton">
+                  Update
+                  </button>
+                </div>
+              </form>
+              {/* <form onSubmit={submit}>
                 <div className="row mainrow">
                   <div className="col-sm">
                   <input
@@ -154,7 +261,7 @@ const NewsForm = () => {
                   Update
                   </button>
                 </div>
-              </form>
+              </form> */}
             </div>
           </div>
         </div>

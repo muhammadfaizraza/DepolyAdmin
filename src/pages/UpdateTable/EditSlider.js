@@ -95,7 +95,7 @@ const NewsForm = () => {
 
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="Name"
+                      label="Title"
                       className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, TitleEn: e.target.value })

@@ -14,6 +14,7 @@ const SponsorForm = () => {
 
   const {pathname} = useLocation();
 
+  const [Url, setUrl] = useState();
   const [TitleEn, setTitleEn] = useState("");
   const [TitleAr, setTitleAr] = useState("");
   const [DescriptionAr, setDescriptionAr] = useState("");
@@ -34,6 +35,8 @@ const SponsorForm = () => {
       formData.append("TitleAr", TitleAr);
       formData.append("DescriptionAr", DescriptionAr);
       formData.append("DescriptionEn", DescriptionEn);
+      formData.append("Url", Url);
+
       const response = await axios.post(
         `${window.env.API_URL}uploadSponsor?keyword=&page=`,
         formData
@@ -150,6 +153,25 @@ const SponsorForm = () => {
                       <Form.Control type="text" placeholder="التفاصيل" />
                     </FloatingLabel>
                   </div>
+                </div>
+
+
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Sponsor URL"
+                      className="mb-3"
+                      onChange={(e) => setUrl(e.target.value)}
+                      name="Name"
+                      value={Url}
+                    >
+                      <Form.Control type="text" placeholder="Title" />
+                    </FloatingLabel>
+
+                  </div>
+
+                
                 </div>
 
                 <div className="ButtonSection">

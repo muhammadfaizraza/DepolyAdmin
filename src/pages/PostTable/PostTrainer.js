@@ -387,7 +387,7 @@ const TrainerForm = () => {
 
                   <button
                     type="submit"
-                    disabled={isSubmitData}
+                   
                     className="SubmitButton"
                   >
                     Add Trainer

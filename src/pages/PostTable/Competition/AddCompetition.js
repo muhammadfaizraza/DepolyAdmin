@@ -170,7 +170,7 @@ const TrainerForm = () => {
                     <DatePicker
                       onChange={setStartDate}
                       value={StartDate}
-                      maxDate={today}
+                      minDate={today}
                       dayPlaceholder=" "
                       monthPlaceholder="Start Date "
                       yearPlaceholder=""
@@ -295,7 +295,7 @@ const TrainerForm = () => {
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="تفاصيل" />
+                      <Form.Control type="number" placeholder="تفاصيل" />
                     </FloatingLabel>
                   </div>
                 </div>
@@ -322,7 +322,7 @@ const TrainerForm = () => {
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="تفاصيل" />
+                      <Form.Control type="number" placeholder="تفاصيل" />
                     </FloatingLabel>
                   </div>
                 </div>

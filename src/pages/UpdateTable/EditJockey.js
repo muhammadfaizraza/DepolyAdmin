@@ -24,6 +24,7 @@ const NewsForm = () => {
     
 	});
   const [image,setImage] = useState();
+  const [preview,setPreview] = useState();
 
   const fileSelected = (event) => {
     const image = event.target.files[0];
@@ -48,7 +49,15 @@ const NewsForm = () => {
 		}
 	}, [singlejockey]);
 
-
+  useEffect(() => {
+    if (image === undefined) {
+      setPreview(jockeyid.image)
+      return
+  }  
+    const objectUrl = URL.createObjectURL(image)
+    setPreview(objectUrl)
+    return () => URL.revokeObjectURL(objectUrl)
+}, [image])
   const submit = async (event) => {
     event.preventDefault();
     try {
@@ -189,7 +198,11 @@ const NewsForm = () => {
                 </div>
 
                 <div className="ButtonSection">
-                  <input type="file" size="60" onChange={fileSelected} />
+                <div>
+                <input type='file' onChange={fileSelected} className="formInput"/>
+                <img src={preview}  className="PreviewImage" alt=""/>
+
+                </div>
                   <button type="submit" className="SubmitButton">
                   Update
                   </button>

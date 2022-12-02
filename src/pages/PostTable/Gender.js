@@ -80,7 +80,7 @@ const Gender = () => {
                 </div>
               </div>
 
-              <div className="row mainrow">
+              {/* <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
@@ -109,7 +109,7 @@ const Gender = () => {
                     />
                   </FloatingLabel>
                 </div>
-              </div>
+              </div> */}
 
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
                 <button Name="submit" className="SubmitButton">

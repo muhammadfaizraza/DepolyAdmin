@@ -26,7 +26,6 @@ const NewsForm = () => {
 
 
   const { horseid } = state;
-  console.log(horseid)
 
   const [Breeder, setBreeder] = useState("");
   const [ActiveTrainer, setActiveTrainer] = useState("");
@@ -89,12 +88,21 @@ const NewsForm = () => {
     
 	});
   const [image,setImage] = useState();
+  const [preview,setPreview] = useState();
 
   const fileSelected = (event) => {
     const image = event.target.files[0];
     setImage(image, image);
   };
-  
+  useEffect(() => {
+    if (image === undefined) {
+      setPreview(horseid.image)
+      return
+  }  
+    const objectUrl = URL.createObjectURL(image)
+    setPreview(objectUrl)
+    return () => URL.revokeObjectURL(objectUrl)
+}, [image])
 
 
   useEffect(() => {
@@ -183,10 +191,10 @@ const NewsForm = () => {
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
-                        setState({ ...state1, NameEn: e.target.value })
+                        setState({ ...state1, NameAr: e.target.value })
                       }
                     >
-                      <Form.Control type="text" placeholder="ملاحظات"   value={state1.NameEn}/>
+                      <Form.Control type="text" placeholder="ملاحظات"   value={state1.NameAr}/>
                     </FloatingLabel>
                   </div>
                 </div>
@@ -344,30 +352,35 @@ const NewsForm = () => {
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
-                  <input
-										type='number'
-										name='Purchased'
-										id='Purchased'
-										className='group__control'
-										placeholder='Purchased Price'
-										value={state1.PurchasePrice}
-										onChange={(e) =>
-											setState({ ...state1, PurchasePrice: e.target.value })
-										}
-									/>
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Purchased Price"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, PurchasePrice: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="number" placeholder="Details"   value={state1.PurchasePrice}/>
+                    </FloatingLabel>
+                 
                     <span className="spanForm"> |</span>
                   </div>
 
                   <div className="col-sm">
-                    <input
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="نوع الجنس"
+                      className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
-                      type="number"
-                      placeholder="اسم المسار"
-                       value={state1.PurchasePrice}
-										  onChange={(e) =>
-											setState({ ...state1, PurchasePrice: e.target.value })
-										}
-                    ></input>
+                      onChange={(e) =>
+                        setState({ ...state1, PurchasePrice: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="number" placeholder="Details"   value={state1.PurchasePrice}/>
+                    </FloatingLabel>
+                    
                   </div>
                 </div>
 
@@ -397,7 +410,10 @@ const NewsForm = () => {
                 </div>
 
                 <div className="ButtonSection">
-                  <input type="file" size="60" onChange={fileSelected} />
+                <div>
+                <input type='file' onChange={fileSelected} className="formInput"/>
+                <img src={preview}  className="PreviewImage" alt=""/>
+                </div>
                   <button type="submit" className="SubmitButton">
                   Update
                   </button>

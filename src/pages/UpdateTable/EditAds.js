@@ -54,7 +54,6 @@ const NewsForm = () => {
     setImage(image);
   };
 
-  console.log(image)
   const submit = async (event) => {
     event.preventDefault();
     try {

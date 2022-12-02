@@ -346,42 +346,46 @@ const HorseForm = () => {
     // WinningAmount === "" ||
     // OverAllRating === "" ||
     image === null || image === undefined;
+    var today = new Date();
 
-  const convert = (num) => {
-    var date = new Date(num);
-    var months = [
-      "يناير",
-      "فبراير",
-      "مارس",
-      "إبريل",
-      "مايو",
-      "يونيو",
-      "يوليو",
-      "أغسطس",
-      "سبتمبر",
-      "أكتوبر",
-      "نوفمبر",
-      "ديسمبر",
-    ];
-    var days = [
-      "اﻷحد",
-      "اﻷثنين",
-      "الثلاثاء",
-      "اﻷربعاء",
-      "الخميس",
-      "الجمعة",
-      "السبت",
-    ];
-    var delDateString =
-      days[date.getDay()] +
-      ", " +
-      date.getDate() +
-      " " +
-      months[date.getMonth()] +
-      ", " +
-      date.getFullYear();
-    return delDateString;
-  };
+    const convert = (num) => {
+      if (num) {
+        var date = new Date(num);
+        var months = [
+          "يناير",
+          "فبراير",
+          "مارس",
+          "إبريل",
+          "مايو",
+          "يونيو",
+          "يوليو",
+          "أغسطس",
+          "سبتمبر",
+          "أكتوبر",
+          "نوفمبر",
+          "ديسمبر",
+        ];
+        var days = [
+          "اﻷحد",
+          "اﻷثنين",
+          "الثلاثاء",
+          "اﻷربعاء",
+          "الخميس",
+          "الجمعة",
+          "السبت",
+        ];
+        var delDateString =
+          days[date.getDay()] +
+          " " +
+          date.getDate() +
+          " " +
+          months[date.getMonth()] +
+          " " +
+          date.getFullYear();
+  
+        return delDateString;
+      }
+    };
 
   const DateMax =   new Date();
   return (
@@ -427,28 +431,33 @@ const HorseForm = () => {
                   </div>
                 </div>
                 <div className="row mainrow">
-                  <div className="col-sm">
+                <div className="col-sm">
                     <DatePicker
                       onChange={setDOB}
                       value={DOB}
-                      // minDate={DateMin}
-                      maxDate={DateMax}
-                      dayPlaceholder="  "
-                      monthPlaceholder="Date Of Birth"
+                      dayPlaceholder=""
+                      minDate={today}
+                      monthPlaceholder="Registration Date"
                       yearPlaceholder=""
                     />
-
                     <span className="spanForm"> |</span>
                   </div>
 
-                  <div className="col-sm">
-                    <input
-                      type="text"
-                      placeholder="Date Of Birth"
+                  <div className="col-sm" style={{ direction: "rtl" }}>
+                  <DatePicker
                       onChange={setDOB}
                       value={DOB}
+                      dayPlaceholder=""
+                      minDate={today}
+                      monthPlaceholder="تاريخ التسجيل"
+                      yearPlaceholder=""
                       style={{ direction: "rtl" }}
                     />
+                    {/* <input
+                      style={{ direction: "rtl" }}
+                      placeholder="تاريخ التسجيل"
+                      value={convert(RegistrationDate)}
+                    /> */}
                   </div>
                 </div>
                 <div className="row mainrow">

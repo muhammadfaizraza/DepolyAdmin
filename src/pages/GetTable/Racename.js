@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment ,useState} from "react";
 import { fetchRaceName, STATUSES } from "../../redux/getReducer/getRaceName";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
@@ -10,8 +10,20 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BiEdit } from "react-icons/bi";
+import { BsEyeFill } from "react-icons/bs";
+import RaceNamePopup from "../../Components/Popup/RaceNamePopup";
+import { Modal } from "react-bootstrap";
 
 const Racename = () => {
+
+//for Modal
+  const [show, setShow] = useState(false);
+  const [modaldata, setmodaldata] = useState();
+  const handleClose = () => setShow(false);
+  const handleShow = async (data) => {
+    setmodaldata(data);
+    await setShow(true);
+  };
   const dispatch = useDispatch();
   const history = useNavigate();
 
@@ -121,7 +133,7 @@ const Racename = () => {
                                     }}
                                     onClick={() => handleRemove(item._id)}
                                   />
-                             
+                             <BsEyeFill onClick={ () => handleShow(item) }/>
                                 </td>
                             </tr>
                           </>
@@ -136,6 +148,26 @@ const Racename = () => {
           <span className="plusIconStyle"></span>
         </div>
       </div>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2 style={{fontFamily: "inter"}}>Race Name</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <RaceNamePopup data={modaldata} />
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
+
     </Fragment>
   );
 };

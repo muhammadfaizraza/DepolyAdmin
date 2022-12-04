@@ -10,6 +10,11 @@
     padding: 15px;
     color: white;
     background:  linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%) !important;
+    height: 59px;
+}
+.modal-header >h2 {
+    
+    font-size: 22px;
 }
 .modalImage{
 

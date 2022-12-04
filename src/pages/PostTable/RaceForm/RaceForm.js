@@ -395,9 +395,10 @@ const RaceForm = () => {
               <form onSubmit={submit}>
                 <div className="row mainrow">
                   <div className="col-sm">
+                      
                     <Select
-                      placeholder={<div>Meeting Type</div>}
-                      defaultValue={MeetingType}
+                     placeholder={<div>Meeting Type</div>}
+                     defaultValue={MeetingType}
                       onChange={setMeetingType}
                       options={MeetingTypes}
                       isClearable={true}
@@ -427,7 +428,7 @@ const RaceForm = () => {
 
                   <div className="col-sm">
                     <Select
-                      placeholder={<div>طقس</div>}
+                      placeholder={<div>نوع الاجتماع</div>}
                       defaultValue={MeetingType}
                       className="selectdir"
                       options={MeetingTypes}
@@ -470,7 +471,7 @@ const RaceForm = () => {
 
                   <div className="col-sm">
                     <Select
-                      placeholder={<div>طقس</div>}
+                      placeholder={<div>اسم العرق</div>}
                       className="selectdir"
                       defaultValue={RaceNameEn}
                       onChange={setRaceNameEn}

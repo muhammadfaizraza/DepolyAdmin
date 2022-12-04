@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment ,useState} from "react";
 import { fetchMeeting, STATUSES } from "../../redux/getReducer/getMeeting";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
@@ -10,8 +10,22 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BiEdit } from "react-icons/bi";
+import { BsEyeFill } from "react-icons/bs";
+import { Modal } from "react-bootstrap";
+import MeetingPopup from "../../Components/Popup/MeetingPopup";
 
 const GetMeetingType = () => {
+
+//for Modal
+const [show, setShow] = useState(false);
+const [modaldata, setmodaldata] = useState();
+const handleClose = () => setShow(false);
+const handleShow = async (data) => {
+  setmodaldata(data);
+  await setShow(true);
+};
+
+
   const dispatch = useDispatch();
   const history = useNavigate();
   const { data: meeting, status } = useSelector((state) => state.meeting);
@@ -124,6 +138,7 @@ const GetMeetingType = () => {
                                   }}
                                   onClick={() => handleRemove(item._id)}
                                 />
+                                <BsEyeFill onClick={() => handleShow(item)}/>
                               </td>
                             </tr>
                           </>
@@ -138,6 +153,25 @@ const GetMeetingType = () => {
           <span className="plusIconStyle"></span>
         </div>
       </div>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2 style={{fontFamily: "inter"}}>Meeting Type</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <MeetingPopup data={modaldata} />
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>  
     </Fragment>
   );
 };

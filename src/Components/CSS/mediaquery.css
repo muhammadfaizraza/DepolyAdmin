@@ -103,10 +103,8 @@
     }
     
     .SubmitButton {
-       
-        font-size: 13px;
-    }
-    .div_maintb td:nth-child(1) {
+        font-size: 15.5px;
+    }    .div_maintb td:nth-child(1) {
       
         padding-right: 70px;
         font-size: 13px;

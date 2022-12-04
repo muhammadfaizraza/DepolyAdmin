@@ -85,7 +85,7 @@ const RaceCourseForm = () => {
       formData.append("TrackNameEn", TrackNameEn);
       formData.append("TrackNameAr", TrackNameAr);
       formData.append("ColorCode", ColorCode.id);
-      formData.append("NationalityId", NationalityId.id);
+      formData.append("NationalityID", NationalityId.id);
       // formData.append("shortCode", shortCode);
       const response = await axios.post(
         `${window.env.API_URL}/createcourse?keyword=&page=`,

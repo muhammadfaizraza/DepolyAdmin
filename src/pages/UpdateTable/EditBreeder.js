@@ -166,6 +166,24 @@ const NewsForm = () => {
                   </div>
                 </div> 
 
+                <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Short Code"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, shortCode: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.shortCode}/>
+                    </FloatingLabel>
+                 
+									
+                  </div>
+                </div>
+
                
 
                 <div className="ButtonSection">

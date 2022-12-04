@@ -44,8 +44,8 @@ const Nationality = () => {
         button: "OK",
       });
     } catch (error) {
-      const err = error.message;
-      swal({
+      const err = error.response.data.message;
+        swal({
         title: "Error!",
         text: err,
         icon: "error",

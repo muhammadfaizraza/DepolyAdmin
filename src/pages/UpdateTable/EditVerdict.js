@@ -105,7 +105,7 @@ const NewsForm = () => {
                     ></input>
                   </div>
                 </div>
-                {/* <div className="row mainrow">
+                <div className="row mainrow">
                   <div className="col-sm">
                     <input
                       type="text"
@@ -119,7 +119,7 @@ const NewsForm = () => {
                       }
                     />
                   </div>
-                </div> */}
+                </div>
 
                 <div className="ButtonSection">
                   <button type="submit" className="SubmitButton">

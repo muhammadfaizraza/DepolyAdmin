@@ -109,7 +109,7 @@ const NewsForm = () => {
                   </div>
                 </div>
 
-                {/* <div className="row mainrow">
+                <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
@@ -126,7 +126,7 @@ const NewsForm = () => {
                   </div>
 
                   
-                </div> */}
+                </div>
 
                 <div className="row mainrow">
                   <div className="col-sm">

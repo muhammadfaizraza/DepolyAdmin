@@ -26,7 +26,6 @@ const LocalItem = () => {
 
 const RaceForm = () => {
   const [InputData, SetinputData] = useState("");
-  const [InputData2, SetinputData2] = useState('');
   const [Gate , setGate] = useState(1)
   const [EquipmentData, SetEquipmentData] = useState("");
   const [JockeyData, SetJockeyData] = useState("");
@@ -152,34 +151,7 @@ const HorseEntry = [
               </div>
             </div>
             <div className="myselectdata">
-              <div className="myselectiondata displaynew">
-                <span>0</span>
-                <span>
-                  <Select
-                    defaultValue={InputData2}
-                    onChange={SetinputData2}
-                    options={horseoptions[0]}
-                    isClearable={false}
-                    isSearchable={true}
-                  />
-                </span>
-                <span>
-                  <Select
-                    defaultValue={InputData2}
-                    onChange={SetinputData2}
-                    options={AllJockey}
-                    isClearable={false}
-                    isSearchable={true}
-                  />
-                </span>
-                <span>
-                  {JockeyData.weight === undefined ? (
-                    <></>
-                  ) : (
-                    <>{JockeyData.weight} KG</>
-                  )}{" "}
-                </span>
-              </div>
+              
               {items.map((e, i) => {
                 return (
                   <div className="myselectiondata">

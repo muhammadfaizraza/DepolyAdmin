@@ -8,15 +8,19 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-// import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,useLocation } from "react-router-dom";
 import DatePicker from "react-date-picker";
-// import { add } from "../../redux/postReducer/PostTrainer";
 import swal from "sweetalert";
+import { AiOutlineReload } from "react-icons/ai";
+import { Modal } from "react-bootstrap";
+
+import NationalityPopup from "./Nationality"
+
 const TrainerForm = () => {
   // const dispatch = useDispatch();
   const history = useNavigate();
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
 
   const { data: nationality } = useSelector((state) => state.nationality);
   const [NameEn, setNameEn] = useState("");
@@ -34,6 +38,14 @@ const TrainerForm = () => {
   const [preview, setPreview] = useState();
   const [image, setImage] = useState();
   const [NationalityId, setNationalityId] = useState("");
+
+  const [showActivenationality, setShowActivenationality] = useState(false);
+
+  const handleCloseActivenationality= () => setShowActivenationality(false);
+
+  const handleShowActivenationality = async () => {
+    await setShowActivenationality(true);
+  };
 
   
   const submit = async (event) => {
@@ -64,7 +76,9 @@ const TrainerForm = () => {
         icon: "success",
         button: "OK",
       });
-      history("/trainer");
+      if(pathname === '/trainerform'){
+        history("/trainer");
+      }
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -127,7 +141,9 @@ const TrainerForm = () => {
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl);
   }, [image]);
-
+  const FetchNew = () => {
+    dispatch(fetchnationality());
+  };
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
   };
@@ -325,17 +341,23 @@ const TrainerForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                    <span className="spanForm">
+                  <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button
-                          className="addmore"
-                          onClick={() => history("/nationality")}
-                        >
-                          +
-                        </button>
+                        <span className="addmore" onClick={handleShowActivenationality}>
+                            +
+                          </span>
                       </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <span className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </span>
+                      </OverlayTrigger>{" "}
                       |
                     </span>
                   </div>
@@ -398,6 +420,20 @@ const TrainerForm = () => {
           </div>
         </div>
       </div>
+      <Modal
+        show={showActivenationality}
+        onHide={handleCloseActivenationality}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Nationality</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <NationalityPopup />
+        </Modal.Body>
+      </Modal>
     </Fragment>
   );
 };

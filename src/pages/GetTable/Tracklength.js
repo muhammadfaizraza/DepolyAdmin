@@ -118,7 +118,7 @@ if (status === STATUSES.ERROR) {
                             <>
                               <tr className="tr_table_class">
                                 <td>{item.TrackLength}</td>
-                                <td>{item.RaceCourseData.TrackNameEn}</td>
+                                <td>{item.TrackLengthRaceCourseData.TrackNameEn}</td>
                                 <td><img src={item.RaceCourseImage}/></td>
                                 <td className="table_delete_btn1">
                                 <BiEdit

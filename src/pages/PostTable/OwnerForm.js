@@ -11,6 +11,10 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import { AiOutlineReload } from "react-icons/ai";
+import { Modal } from "react-bootstrap";
+
+import NationalityPopup from "./Nationality"
 
 const OwnerForm = () => {
   const dispatch = useDispatch();
@@ -57,7 +61,14 @@ const OwnerForm = () => {
   const [Ownerimage, setOwnerimage] = useState();
   const [image, setimage] = useState([]);
   const [preview, setPreview] = useState();
+  const [showActivenationality, setShowActivenationality] = useState(false);
 
+  const handleCloseActivenationality= () => setShowActivenationality(false);
+
+  const handleShowActivenationality = async () => {
+    await setShowActivenationality(true);
+  };
+  
   const convert = (num) => {
     if (num) {
       var date = new Date(num);
@@ -153,6 +164,10 @@ const OwnerForm = () => {
 
     return () => URL.revokeObjectURL(objectUrl);
   }, [Ownerimage]);
+
+  const FetchNew = () => {
+    dispatch(fetchnationality());
+  };
   const onSelectFile = (e) => {
     setOwnerimage(e.target.files[0]);
   };
@@ -317,13 +332,19 @@ const OwnerForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button
-                          className="addmore"
-                          onClick={() => history("/nationality")}
-                        >
-                          +
-                        </button>
+                        <span className="addmore" onClick={handleShowActivenationality}>
+                            +
+                          </span>
                       </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <span className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </span>
+                      </OverlayTrigger>{" "}
                       |
                     </span>
                   </div>
@@ -385,6 +406,20 @@ const OwnerForm = () => {
           <div></div>
         </div>
       </div>
+      <Modal
+        show={showActivenationality}
+        onHide={handleCloseActivenationality}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Nationality</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <NationalityPopup />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

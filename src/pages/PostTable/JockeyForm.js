@@ -13,6 +13,10 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import { AiOutlineReload } from "react-icons/ai";
+import { Modal } from "react-bootstrap";
+
+import NationalityPopup from "./Nationality";
 
 const NewsForm = () => {
   const dispatch = useDispatch();
@@ -37,6 +41,14 @@ const NewsForm = () => {
   const [image, setImage] = useState();
   const [NationalityID, setNationalityID] = useState("");
   const [preview, setPreview] = useState();
+
+  const [showActivenationality, setShowActivenationality] = useState(false);
+
+  const handleCloseActivenationality= () => setShowActivenationality(false);
+
+  const handleShowActivenationality = async () => {
+    await setShowActivenationality(true);
+  };
 
   const submit = async (event) => {
     event.preventDefault();
@@ -90,7 +102,9 @@ const NewsForm = () => {
 
     return () => URL.revokeObjectURL(objectUrl);
   }, [image, dispatch]);
-
+  const FetchNew = () => {
+    dispatch(fetchnationality());
+  };
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
   };
@@ -147,7 +161,8 @@ const NewsForm = () => {
         };
       })
     );
-    
+
+   
   return (
     <>
       <div className="page">
@@ -413,13 +428,19 @@ const NewsForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button
-                          className="addmore"
-                          onClick={() => history("/nationality")}
-                        >
-                          +
-                        </button>
+                        <span className="addmore" onClick={handleShowActivenationality}>
+                            +
+                          </span>
                       </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <span className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </span>
+                      </OverlayTrigger>{" "}
                       |
                     </span>
                   </div>
@@ -494,6 +515,20 @@ const NewsForm = () => {
           </div>
         </div>
       </div>
+      <Modal
+        show={showActivenationality}
+        onHide={handleCloseActivenationality}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Nationality</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <NationalityPopup />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

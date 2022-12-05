@@ -55,7 +55,7 @@ const RaceCourseForm = () => {
     
   const [TrackNameEn, setTrackNameEn] = useState("");
   const [TrackNameAr, setTrackNameAr] = useState("");
-  const [shortCode, setshortCode] = useState("");
+  // const [shortCode, setshortCode] = useState("");
   const [NationalityId, setNationalityId] = useState("");
   const [ColorCode, setColorCode] = useState("");
   const [image, setImage] = useState();
@@ -183,7 +183,7 @@ const RaceCourseForm = () => {
                 </div>
                 
 
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
@@ -212,7 +212,7 @@ const RaceCourseForm = () => {
                       />
                     </FloatingLabel>
                   </div>
-                </div>
+                </div> */}
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select

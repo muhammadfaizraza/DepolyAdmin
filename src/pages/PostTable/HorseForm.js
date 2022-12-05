@@ -26,8 +26,8 @@ import BreederPopup from './Breeder';
 import ColorPopup from './Color';
 import GenderPopup from './Gender';
 import OwnerPopup from "./OwnerForm";
-import TrainerPopup from "../GetTable/Trainer";
-
+import TrainerPopup from "./PostTrainer";
+import NationalityPopup from "./Nationality";
 
 
 
@@ -188,7 +188,8 @@ const HorseForm = () => {
     const [showGender, setShowGender] = useState(false);
     const [showActiveOwner, setShowActiveOwner] = useState(false);
     const [showActiveTrainer, setShowActiveTrainer] = useState(false);
-  
+    const [showActivenationality, setShowActivenationality] = useState(false);
+
     
  
     const handleCloseBreeder = () => setShowBreeder(false);
@@ -196,7 +197,8 @@ const HorseForm = () => {
     const handleCloseGender = () => setShowGender(false);
     const handleCloseActiveOwner = () => setShowActiveOwner(false);
     const handleCloseActiveTrainer= () => setShowActiveTrainer(false);
-  
+    const handleCloseActivenationality= () => setShowActivenationality(false);
+
     const handleShowBreeder = async () => {
       await setShowBreeder(true);
     };
@@ -215,6 +217,10 @@ const HorseForm = () => {
   
     const handleShowActiveTrainer = async () => {
       await setShowActiveTrainer(true);
+    };
+
+    const handleShowActivenationality = async () => {
+      await setShowActivenationality(true);
     };
   
   
@@ -970,13 +976,19 @@ const HorseForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button
-                          className="addmore"
-                          onClick={() => history("/nationality")}
-                        >
-                          +
-                        </button>
+                        <span className="addmore" onClick={handleShowActivenationality}>
+                            +
+                          </span>
                       </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <span className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </span>
+                      </OverlayTrigger>{" "}
                       |
                     </span>
                   </div>
@@ -1041,13 +1053,19 @@ const HorseForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button
-                          className="addmore"
-                          onClick={() => history("/trainerform")}
-                        >
-                          +
-                        </button>
+                        <span className="addmore" onClick={handleShowActiveTrainer}>
+                            +
+                          </span>
                       </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <span className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </span>
+                      </OverlayTrigger>{" "}
                       |
                     </span>
                   </div>
@@ -1102,7 +1120,7 @@ const HorseForm = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2>Race Breeder</h2>
+          <h2> Breeder</h2>
         </Modal.Header>
         <Modal.Body>
           <BreederPopup />
@@ -1162,6 +1180,20 @@ const HorseForm = () => {
         </Modal.Header>
         <Modal.Body>
           <GenderPopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showActivenationality}
+        onHide={handleCloseActivenationality}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Nationality</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <NationalityPopup />
         </Modal.Body>
       </Modal>
 

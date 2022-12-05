@@ -10,6 +10,10 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-date-picker";
 import swal from "sweetalert";
+import { AiOutlineReload } from "react-icons/ai";
+import { Modal } from "react-bootstrap";
+
+import CategoryPopup from "./AddCategory"
 
 const TrainerForm = () => {
   // const dispatch = useDispatch();
@@ -20,7 +24,9 @@ const TrainerForm = () => {
   useEffect(() => {
     dispatch(fetchcategory());
   }, []);
-
+  const FetchNew = () => {
+    dispatch(fetchcategory());
+  };
 
   let AllCategory =
   category === undefined ? (
@@ -46,6 +52,14 @@ const TrainerForm = () => {
   const [CompetitionCode, setCompetitionCode] = useState("");
   const [preview, setPreview] = useState();
   const [image, setImage] = useState();
+
+  const [showCategory, setShowCategory] = useState(false);
+
+  const handleCloseCategory= () => setShowCategory(false);
+
+  const handleShowCategory = async () => {
+    await setShowCategory(true);
+  };
 
   const submit = async (event) => {
     event.preventDefault();
@@ -337,17 +351,23 @@ const TrainerForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                    <span className="spanForm">
+                 <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <button
-                          className="addmore"
-                          onClick={() => history("/nationality")}
-                        >
-                          +
-                        </button>
+                        <span className="addmore" onClick={handleShowCategory}>
+                            +
+                          </span>
                       </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <span className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </span>
+                      </OverlayTrigger>{" "}
                       |
                     </span>
                   </div>
@@ -378,6 +398,20 @@ const TrainerForm = () => {
           </div>
         </div>
       </div>
+      <Modal
+        show={showCategory}
+        onHide={handleCloseCategory}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Category</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <CategoryPopup />
+        </Modal.Body>
+      </Modal>
     </Fragment>
   );
 };

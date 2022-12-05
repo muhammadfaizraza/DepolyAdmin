@@ -69,30 +69,36 @@ const RaceForm = () => {
 const HorseLength = horse.length;
 const ItemLength = items.length;
 
-const HorseEntry = [
-    `${Gate},${InputData.id},${JockeyData.id},${JockeyData.weight},${EquipmentData.id}`,
-  ];
+
   useEffect(() => {
     dispatch(fetchHorse());
     dispatch(fetchjockey());
     dispatch(fetchequipment());
   }, [dispatch]);
+
   useEffect(() => {
     localStorage.setItem("lists", JSON.stringify(items));
   }, [items ,InputData]);
   
-  const addItem = () => {
+  const addItem = (e) => {
+    e.preventDefault();
+     let HorseEntry = [
+      `${Gate},${InputData.value},${JockeyData.value},${EquipmentData.value}`,
+    ];
     if(HorseLength === ItemLength){
       toast('No Horse ')
     }
-    else if(InputData.id !== undefined){
+
+    else  if (InputData === "" || JockeyData === "" || EquipmentData === "") {
+      toast('Select Values ')
+    }
+    else {
       setitems([...items, HorseEntry]);
-      setGate(Gate+1)
+      setGate(Gate + 1);
     }
-    else{
-      setitems([...items, items]);
-      setGate(1)
-    }
+    SetinputData("");
+    SetJockeyData("");
+    SetEquipmentData("");
   };
   const Remove = () => {
     setitems([]);
@@ -151,11 +157,49 @@ const HorseEntry = [
               </div>
             </div>
             <div className="myselectdata">
-              
+            <div className="myselectiondata">
+                <span onChange={setGate} value={1}>
+                  1
+                </span>
+                <span>
+                      <Select
+                        defaultValue={InputData}
+                        onChange={SetinputData}
+                        options={horseoptions}
+                        isClearable={false}
+                        isSearchable={true}
+                      />
+                    </span>
+                    <span>
+                      <Select
+                        defaultValue={JockeyData}
+                        onChange={SetJockeyData}
+                        options={AllJockey}
+                        isClearable={false}
+                        isSearchable={true}
+                      />
+                    </span>
+                    <span>
+                      {JockeyData.weight === undefined ? (
+                        <></>
+                      ) : (
+                        <>{JockeyData.weight} KG</>
+                      )}{" "}
+                    </span>
+                    <span>
+                  <Select
+                    defaultValue={EquipmentData}
+                    onChange={SetEquipmentData}
+                    options={AllEquipment}
+                    isClearable={false}
+                    isSearchable={true}
+                  />
+                   </span>
+              </div>
               {items.map((e, i) => {
                 return (
                   <div className="myselectiondata">
-                    <span onChange={setGate} value={i + 1}>{i + 1}</span>
+                    <span onChange={setGate} value={i + 1}>{i + 2}</span>
                     <span>
                       <Select
                         defaultValue={InputData}
@@ -189,7 +233,7 @@ const HorseEntry = [
                     isClearable={false}
                     isSearchable={true}
                   />
-                </span>
+                   </span>
                   </div>
                 );
               })}

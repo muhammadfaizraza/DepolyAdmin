@@ -10,11 +10,30 @@ import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { fetchgroundtype } from "../../redux/getReducer/getGroundType";
+import { Modal } from "react-bootstrap";
+import { AiOutlineReload } from "react-icons/ai";
+
+import RaceCoursePopup from "./RaceCourseForm";
+import GroundTypePopup from "./GroundType";
 
 const Tracklengthform = () => {
   const dispatch = useDispatch();
   const { data: racecourse } = useSelector((state) => state.racecourse);
   const { data: groundtype } = useSelector((state) => state.groundtype);
+
+    const [showGroundType, setShowGroundType] = useState(false);
+    const [showActiveRaceCourse, setShowActiveRaceCourse] = useState(false);
+
+    const handleCloseGroundType= () => setShowGroundType(false);
+    const handleCloseActiveRaceCourse= () => setShowActiveRaceCourse(false);
+
+    const handleShowGroundType = async () => {
+      await setShowGroundType(true);
+    };
+  
+    const handleShowRaceCourse = async () => {
+      await setShowActiveRaceCourse(true);
+    };
 
   const [TrackLength, setTrackLength] = useState();
   const [RaceCourse, setRaceCourse] = useState("");
@@ -84,6 +103,10 @@ const Tracklengthform = () => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [RaceCourseImage ,dispatch]);
 
+  const FetchNew = () => {
+    dispatch(fetchgroundtype());
+    dispatch(fetchracecourse());
+  };
   let courseoptions =
     racecourse === undefined ? (
       <></>
@@ -185,19 +208,25 @@ const Tracklengthform = () => {
                     isClearable={true}
                     isSearchable={true}
                   />
-                  <span className="spanForm">
-                    <OverlayTrigger
-                      overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
-                    >
-                      <button
-                        className="addmore"
-                        onClick={() => history("/racecourseform")}
+                 <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        +
-                      </button>
-                    </OverlayTrigger>
-                    |
-                  </span>
+                        <span className="addmore" onClick={handleShowRaceCourse}>
+                            +
+                          </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <span className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </span>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
                 </div>
                 <div className="col-sm">
                   <Select
@@ -223,19 +252,25 @@ const Tracklengthform = () => {
                     isClearable={true}
                     isSearchable={true}
                   />
-                  <span className="spanForm">
-                    <OverlayTrigger
-                      overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
-                    >
-                      <button
-                        className="addmore"
-                        onClick={() => history("/racecourseform")}
+                <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        +
-                      </button>
-                    </OverlayTrigger>
-                    |
-                  </span>
+                        <span className="addmore" onClick={handleShowGroundType}>
+                            +
+                          </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <span className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </span>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
                 </div>
                 <div className="col-sm">
                   <Select
@@ -274,6 +309,34 @@ const Tracklengthform = () => {
           </div>
         </div>
       </div>
+      <Modal
+        show={showGroundType}
+        onHide={handleCloseGroundType}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Ground Type</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <GroundTypePopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showActiveRaceCourse}
+        onHide={handleCloseActiveRaceCourse}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>RaceCourse</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <RaceCoursePopup />
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

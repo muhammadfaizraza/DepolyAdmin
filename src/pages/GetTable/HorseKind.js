@@ -183,6 +183,7 @@ const HorseKind = () => {
             Close
           </button>
         </Modal.Footer>
+      
       </Modal>
      </Fragment>
   )

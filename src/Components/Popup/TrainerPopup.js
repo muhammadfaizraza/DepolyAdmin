@@ -30,10 +30,11 @@ const TrainerPopup = (data) => {
             <FloatingLabel
                 controlId="floatingInput"
                 label="اسم"
-                className="mb-3"
+                className="mb-3 floatingInputAr"
+                style={{ direction: "rtl", left: "initial", right: 0 }}
              
               >
-                <Form.Control type="text" placeholder="Description" value={data.data.NameAr} readOnly/>
+                <Form.Control type="text" placeholder="Name" value={data.data.NameAr}    style={{ left: "%" }} readOnly/>
               </FloatingLabel>
              
             </div>
@@ -61,32 +62,17 @@ const TrainerPopup = (data) => {
             <FloatingLabel
                 controlId="floatingInput"
                 label="عنوان"
-                className="mb-3"
-               
+                className="mb-3 floatingInputAr"
+                style={{ direction: "rtl", left: "initial", right: 0 }}
               
               >
-                <Form.Control type="text" placeholder="Description" value={data.data.TitleAr} readOnly/>
+                <Form.Control type="text" placeholder="Description" value={data.data.TitleAr}  style={{ left: "%" }} readOnly/>
               </FloatingLabel>
               
             </div>
           </div>
 
-          <div className="row mainrow">
-            <div className="col-sm">
-            <FloatingLabel
-                controlId="floatingInput"
-                label="Remarks"
-                className="mb-3"
-              
-              
-              >
-                <Form.Control type="text" placeholder="Description" value={data.data.Remarks} readOnly/>
-              </FloatingLabel>
-            
-            </div>
-
-          
-          </div>
+         
 
           <div className="row mainrow">
             <div className="col-sm">
@@ -106,11 +92,12 @@ const TrainerPopup = (data) => {
             <FloatingLabel
                 controlId="floatingInput"
                 label="اسم"
-                className="mb-3"
+                className="mb-3 floatingInputAr"
+                style={{ direction: "rtl", left: "initial", right: 0 }}
              
               
               >
-                <Form.Control type="text" placeholder="Description" value={data.data.ShortNameAr=== undefined ? <>N/A</> :  data.data.ShortNameAr} readOnly />
+                <Form.Control type="text" placeholder="Description" value={data.data.ShortNameAr=== undefined ? <>N/A</> :  data.data.ShortNameAr}  style={{ left: "%" }} readOnly />
               </FloatingLabel>
               
             </div>
@@ -131,9 +118,56 @@ const TrainerPopup = (data) => {
 
            
           </div>
+          <div className="row mainrow">
+            <div className="col-sm">
+            <FloatingLabel
+                controlId="floatingInput"
+                label="Remarks"
+                className="mb-3"
+              
+              
+              >
+                <Form.Control type="text" placeholder="Description" value={data.data.Remarks} readOnly/>
+              </FloatingLabel>
+            
+            </div>
 
+          
+          </div>
+          <div className="row mainrow">
+            <div className="col-sm">
+            <FloatingLabel
+                controlId="floatingInput"
+                label="Date Of Birth"
+                className="mb-3"
+              
+              
+              >
+                <Form.Control type="text" placeholder="Description" value={data.data.DOB} readOnly/>
+              </FloatingLabel>
+            
+            </div>
+
+          
+          </div>
+          <div className="row mainrow">
+            <div className="col-sm">
+            <FloatingLabel
+                controlId="floatingInput"
+                label="License Date"
+                className="mb-3"
+              
+              
+              >
+                <Form.Control type="text" placeholder="Description" value={data.data.TrainerLicenseDate} readOnly/>
+              </FloatingLabel>
+            
+            </div>
+
+          
+          </div>
           <div className="ButtonSection">
-          <div>
+          <div className='modalPreview'>
       
           <img src={data.data.image} className="PreviewImage" alt=""/>
 

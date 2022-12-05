@@ -182,6 +182,7 @@ const Ads = () => {
             Close
           </button>
         </Modal.Footer>
+      
       </Modal>
 
     </>

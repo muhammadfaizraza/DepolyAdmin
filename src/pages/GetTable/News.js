@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { fetchNews, STATUSES } from "../../redux/getReducer/getNewsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostNewsSlice";
 import swal from "sweetalert";
 import { Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -94,7 +93,9 @@ const News = () => {
                     alignItems: "center",
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
-                ></h6>
+                >
+
+                </h6>
 
                 <Link to="/newsform">
                   <button>Add News</button>
@@ -181,6 +182,8 @@ const News = () => {
             Close
           </button>
         </Modal.Footer>
+
+
       </Modal>
     </>
   );

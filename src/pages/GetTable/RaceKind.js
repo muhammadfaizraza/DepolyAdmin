@@ -2,7 +2,6 @@ import React, { useEffect, Fragment ,useState } from "react";
 import { fetchRaceKind, STATUSES } from "../../redux/getReducer/getRaceKind";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -91,7 +90,9 @@ const handleShow = async (data) => {
                     alignItems: "center",
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
-                ></h6>
+                >
+
+                </h6>
 
                 <Link to="/RaceKindform">
                   <button>Add Race Type</button>
@@ -162,11 +163,12 @@ const handleShow = async (data) => {
         <Modal.Body>
           <RaceKindpopup data={modaldata} />
         </Modal.Body>
-        <Modal.Footer>
+         <Modal.Footer>
           <button onClick={handleClose} className="modalClosebtn">
             Close
           </button>
         </Modal.Footer>
+     
       </Modal>
     </Fragment>
   );

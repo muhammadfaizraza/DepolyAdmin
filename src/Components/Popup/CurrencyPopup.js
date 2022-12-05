@@ -26,11 +26,12 @@ const CurrencyPopup = (data) => {
         <FloatingLabel
             controlId="floatingInput"
             label="اسم"
-            className="mb-3"
+            className="mb-3 floatingInputAr"
+            style={{ direction: "rtl", left: "initial", right: 0 }}
           
            
           >
-            <Form.Control type="text" placeholder="اسم" value={data.data.NameAr} readOnly />
+            <Form.Control type="text" placeholder="اسم" value={data.data.NameAr}  style={{ left: "%" }} readOnly />
           </FloatingLabel>
         
         </div>
@@ -51,7 +52,23 @@ const CurrencyPopup = (data) => {
         
         </div>
       </div>
-      
+      <div className="row mainrow">
+      <div className="col-sm">
+
+      <FloatingLabel
+          controlId="floatingInput"
+          label="Short Code"
+          className="mb-3"
+        
+        
+       
+        >
+          <Form.Control type="text" placeholder="Description" readOnly value={data.data.shortCode}/>
+        </FloatingLabel>
+     
+      </div>
+
+    </div>
 
      
 

@@ -177,6 +177,7 @@ if (status === STATUSES.ERROR) {
             Close
           </button>
         </Modal.Footer>
+      
       </Modal>
     
      </Fragment>

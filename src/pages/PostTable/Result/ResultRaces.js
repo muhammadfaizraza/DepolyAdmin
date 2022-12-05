@@ -237,11 +237,8 @@ const Races = () => {
         <Modal.Body>
           <RacePopup data={modaldata} />
         </Modal.Body>
-        <Modal.Footer>
-          <button onClick={handleClose} className="modalClosebtn">
-            Close
-          </button>
-        </Modal.Footer>
+       
+       
       </Modal>
     </>
   );

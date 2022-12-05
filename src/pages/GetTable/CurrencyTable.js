@@ -174,11 +174,13 @@ const CurrencyTable = () => {
         <Modal.Body>
           <CurrencyPopup data={modaldata} />
         </Modal.Body>
-        <Modal.Footer>
+        
+    <Modal.Footer>
           <button onClick={handleClose} className="modalClosebtn">
             Close
           </button>
         </Modal.Footer>
+      
       </Modal>
 
 

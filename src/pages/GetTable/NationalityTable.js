@@ -182,7 +182,9 @@ const NationalityTable = () => {
         <Modal.Body>
           <NationalityPopup data={modaldata} />
         </Modal.Body>
-        <Modal.Footer>
+      
+      
+    <Modal.Footer>
           <button onClick={handleClose} className="modalClosebtn">
             Close
           </button>

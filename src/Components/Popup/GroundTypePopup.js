@@ -4,13 +4,7 @@ import Form from "react-bootstrap/Form";
 
 const GroundTypePopup = (data) => {
   return (
-    <div className="page">
-    <div className="rightsidedata">
-      <div
-        style={{
-          marginTop: "30px",
-        }}
-      >
+   
         
         <div className="form">
    
@@ -35,13 +29,33 @@ const GroundTypePopup = (data) => {
               <FloatingLabel
                   controlId="floatingInput"
                   label="اسم"
-                  className="mb-3 "
+                  className="mb-3 floatingInputAr"
+                  style={{ direction: "rtl", left: "initial", right: 0 }}
                 
                 >
-                  <Form.Control type="text" placeholder="اسم" readOnly value={data.data.NameAr} style={{direction:"rtl"}}/>
+                  <Form.Control type="text" placeholder="اسم" readOnly value={data.data.NameAr} style={{ left: "%" }}/>
                 </FloatingLabel>
                 
               </div>
+            </div>
+
+            <div className="row mainrow">
+              <div className="col-sm">
+
+              <FloatingLabel
+                  controlId="floatingInput"
+                  label="Short Code"
+                  className="mb-3"
+                
+                
+               
+                >
+                  <Form.Control type="text" placeholder="Description" readOnly value={data.data.shortCode}/>
+                </FloatingLabel>
+             
+              </div>
+
+            
             </div>
    
             
@@ -49,9 +63,8 @@ const GroundTypePopup = (data) => {
            
        
         </div>
-      </div>
-    </div>
-  </div>
+    
+
   )
 }
 

@@ -30,11 +30,11 @@ console.log(data)
               <FloatingLabel
                   controlId="floatingInput"
                   label="اسم"
-                  className="mb-3"
-                  
+                  className="mb-3 floatingInputAr"
+                  style={{ direction: "rtl", left: "initial", right: 0 }}
                  
                 >
-                  <Form.Control type="text" placeholder="اسم"  value={data.data.TitleAr}  readOnly/>
+                  <Form.Control type="text" placeholder="اسم"  value={data.data.TitleAr}    style={{ left: "%" }} readOnly/>
                 </FloatingLabel>
                 
               </div>

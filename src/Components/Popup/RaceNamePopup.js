@@ -34,10 +34,11 @@ const RaceNamePopup = (data) => {
               <FloatingLabel
                   controlId="floatingInput"
                   label="اسم"
-                  className="mb-3 "
+                  className="mb-3 floatingInputAr"
+                  style={{ direction: "rtl", left: "initial", right: 0 }}
                 
                 >
-                  <Form.Control type="text" placeholder="اسم" readOnly value={data.data.NameAr} style={{direction:"rtl"}}/>
+                  <Form.Control type="text" placeholder="اسم" readOnly value={data.data.NameAr}    style={{ left: "%" }}/>
                 </FloatingLabel>
                 
               </div>

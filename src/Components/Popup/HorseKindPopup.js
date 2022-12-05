@@ -4,13 +4,7 @@ import Form from "react-bootstrap/Form";
 
 const HorseKindPopup = (data) => {
   return (
-<div className="page">
-        <div className="rightsidedata">
-          <div
-            style={{
-              marginTop: "30px",
-            }}
-          >
+
             
             <div className="form">
        
@@ -35,10 +29,10 @@ const HorseKindPopup = (data) => {
                   <FloatingLabel
                       controlId="floatingInput"
                       label="اسم"
-                      className="mb-3 "
-                    
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl", left: "initial", right: 0 }}
                     >
-                      <Form.Control type="text" placeholder="اسم" readOnly value={data.data.NameAr} style={{direction:"rtl"}}/>
+                      <Form.Control type="text" placeholder="اسم" readOnly value={data.data.NameAr}     style={{ left: "%" }}/>
                     </FloatingLabel>
                     
                   </div>
@@ -49,9 +43,7 @@ const HorseKindPopup = (data) => {
                
            
             </div>
-          </div>
-        </div>
-      </div>
+     
   )
 }
 

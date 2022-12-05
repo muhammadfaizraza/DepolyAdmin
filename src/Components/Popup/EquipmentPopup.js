@@ -35,6 +35,25 @@ const EquipmentPopup = (data) => {
           </FloatingLabel>
         
         </div>
+
+      </div>
+      <div className='row mainrow'>
+      <div className="col-sm">
+        <FloatingLabel
+            controlId="floatingInput"
+            label="Short Code"
+            className="mb-3"
+          
+          
+          >
+            <Form.Control type="text" placeholder="Name"  value={data.data.shortCode} readOnly/>
+          </FloatingLabel>
+        
+        
+  
+        </div>
+
+
       </div>
 
       

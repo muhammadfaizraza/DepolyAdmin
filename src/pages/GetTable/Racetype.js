@@ -168,6 +168,7 @@ const Racetype = () => {
             Close
           </button>
         </Modal.Footer>
+     
       </Modal>
 
     </Fragment>

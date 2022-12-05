@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Form from "react-bootstrap/Form";
+    import FloatingLabel from "react-bootstrap/FloatingLabel";
+    import Form from "react-bootstrap/Form";
 
 
 const NewsPopup = (data) => {
@@ -32,11 +32,11 @@ console.log(data)
                         <FloatingLabel
                             controlId="floatingInput"
                             label="عنوان"
-
-                            className="mb-3"
+                            style={{ direction: "rtl", left: "initial", right: 0 }}
+                            className="mb-3 floatingInputAr"
 
                         >
-                            <Form.Control type="text" placeholder="عنوان" value={data.data.TitleAr} readOnly />
+                            <Form.Control type="text" placeholder="عنوان" value={data.data.TitleAr}  readOnly style={{ left: "%" }} />
                         </FloatingLabel>
 
                     </div>
@@ -61,10 +61,11 @@ console.log(data)
                         <FloatingLabel
                             controlId="floatingInput"
                             label="وصف"
-                            className="mb-3"
+                            className="mb-3 floatingInputAr"
+                            style={{ direction: "rtl", left: "initial", right: 0 }}
 
                         >
-                            <Form.Control type="text" placeholder="وصف" value={data.data.DescriptionAr} readOnly  />
+                            <Form.Control type="text" placeholder="وصف" value={data.data.DescriptionAr}     style={{ left: "%" }} readOnly  />
                         </FloatingLabel>
 
                     </div>
@@ -89,10 +90,12 @@ console.log(data)
                         <FloatingLabel
                             controlId="floatingInput"
                             label="عنوان"
-                            className="mb-3"
+                            className="mb-3 floatingInputAr"
+                            style={{ direction: "rtl", left: "initial", right: 0 }}
                            
                         >
-                            <Form.Control type="text" placeholder="Description" value={data.data.SecondTitleAr} readOnly/>
+                            <Form.Control type="text" placeholder="Description" value={data.data.SecondTitleAr}  
+    style={{ left: "%" }} readOnly/>
                         </FloatingLabel>
 
                     </div>
@@ -100,7 +103,7 @@ console.log(data)
 
 
                 <div className="ButtonSection">
-                    <div>
+                    <div className="modalPreview">
 
                         <img src={data.data.image} className="PreviewImage" alt="" />
 

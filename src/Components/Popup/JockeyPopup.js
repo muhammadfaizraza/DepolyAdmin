@@ -33,10 +33,11 @@ console.log(data)
          <FloatingLabel
              controlId="floatingInput"
              label="اسم"
-             className="mb-3"
+             className="mb-3 floatingInputAr"
+             style={{ direction: "rtl", left: "initial", right: 0 }}  
           
            >
-             <Form.Control type="text" placeholder="Description" value={data.data.NameAr} readOnly/>
+             <Form.Control type="text" placeholder="Description" value={data.data.NameAr}   style={{ left: "%" }} readOnly/>
            </FloatingLabel>
           
          </div>
@@ -64,11 +65,13 @@ console.log(data)
          <FloatingLabel
              controlId="floatingInput"
              label="عنوان"
-             className="mb-3"
+             className="mb-3 floatingInputAr"
+             style={{ direction: "rtl", left: "initial", right: 0 }} 
+
             
            
            >
-             <Form.Control type="text" placeholder="Description" value={data.data.RemarksAr} readOnly/>
+             <Form.Control type="text" placeholder="Description" value={data.data.RemarksAr} style={{ left: "%" }}  readOnly/>
            </FloatingLabel>
            
          </div>
@@ -94,11 +97,11 @@ console.log(data)
          <FloatingLabel
              controlId="floatingInput"
              label="اسم"
-             className="mb-3"
-          
+             className="mb-3 floatingInputAr"
+             style={{ direction: "rtl", left: "initial", right: 0 }} 
            
            >
-             <Form.Control type="text" placeholder="Description" value={data.data.ShortNameAr=== undefined ? <>N/A</> :  data.data.ShortNameAr} readOnly />
+             <Form.Control type="text" placeholder="Description" value={data.data.ShortNameAr=== undefined ? <>N/A</> :  data.data.ShortNameAr} readOnly     style={{ left: "%" }} />
            </FloatingLabel>
            
          </div>
@@ -200,7 +203,7 @@ console.log(data)
        
        </div>   
        <div className="ButtonSection">
-       <div>
+       <div className="modalPreview">
    
        <img src={data.data.image} className="PreviewImage" alt=""/>
 

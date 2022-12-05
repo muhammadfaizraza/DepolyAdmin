@@ -28,7 +28,7 @@ import GenderPopup from './Gender';
 import OwnerPopup from "./OwnerForm";
 import TrainerPopup from "./PostTrainer";
 import NationalityPopup from "./Nationality";
-
+import HorseKindPopup from "./Horsekindform";
 
 
 const Gelted = [
@@ -189,6 +189,7 @@ const HorseForm = () => {
     const [showActiveOwner, setShowActiveOwner] = useState(false);
     const [showActiveTrainer, setShowActiveTrainer] = useState(false);
     const [showActivenationality, setShowActivenationality] = useState(false);
+    const [showHorseKind, setShowHorseKind] = useState(false);
 
     
  
@@ -198,6 +199,7 @@ const HorseForm = () => {
     const handleCloseActiveOwner = () => setShowActiveOwner(false);
     const handleCloseActiveTrainer= () => setShowActiveTrainer(false);
     const handleCloseActivenationality= () => setShowActivenationality(false);
+    const handleCloseHorseKind= () => setShowHorseKind(false);
 
     const handleShowBreeder = async () => {
       await setShowBreeder(true);
@@ -222,6 +224,10 @@ const HorseForm = () => {
     const handleShowActivenationality = async () => {
       await setShowActivenationality(true);
     };
+
+    const handleShowHorseKind = async () => {
+      await setShowHorseKind(true);
+    };
   
   
     const FetchNew = () => {
@@ -231,6 +237,8 @@ const HorseForm = () => {
       dispatch(fetchbreeder());
       dispatch(fetchnationality());
       dispatch(fetchgender());
+      dispatch(fetchHorseKind());
+
     };
     // Modal functionalities End Here
   
@@ -532,7 +540,25 @@ const HorseForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                    <span className="spanForm"> |</span>
+                     <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span className="addmore" onClick={handleShowHorseKind}>
+                            +
+                          </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                         <span className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </span>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -1196,6 +1222,20 @@ const HorseForm = () => {
         </Modal.Header>
         <Modal.Body>
           <NationalityPopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showHorseKind}
+        onHide={handleCloseHorseKind}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Horse Kind</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <HorseKindPopup />
         </Modal.Body>
       </Modal>
 

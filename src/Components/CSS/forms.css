@@ -329,6 +329,15 @@ margin-top: 10px;
   margin-bottom: 10px;
 }
 
+<<<<<<< HEAD
+=======
+  width: 7rem;
+  height: 7rem;
+  margin: 19px;
+  border-radius: 50px;
+
+}
+>>>>>>> ebe0350d919ca4c2deae2e82151aef12326019e4
 span.react-date-picker__inputGroup__divider {
   display: none !important;
 }
@@ -628,4 +637,7 @@ input:-webkit-autofill:active {
 
 td.table_delete_btn1 {
   padding: 10px 30px !important;
+}
+.fileinputdata{
+  width: 200px;
 }

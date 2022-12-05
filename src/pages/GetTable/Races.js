@@ -60,6 +60,14 @@ const Races = () => {
     setmodaldata(data);
     await setShow(true);
   };
+
+  const [showRacePopup, setShowRacePopup] = useState(false);
+  const [modaldataPopup, setmodaldataPopup] = useState();
+  const handleCloseRacePopup = () => setShowRacePopup(false);
+  const handleShowRacePopup = async (data) => {
+    setmodaldataPopup(data);
+    await setShowRacePopup(true);
+  };
   
 
   
@@ -175,14 +183,14 @@ const Races = () => {
                       <th>Race Name</th>
                       <th>Race Name Arabic </th>
                       <th>Race Type</th>
-                      <th>Racecource</th>
+                      <th>Race Cource</th>
                       <th>Description</th>
                       <th>Description Arabic</th>
                       <th>Track Length</th>
                       <th>Number of Horses</th>
                       <th>Weather in Degree</th>
                       <th>Weather Type</th>
-                      <th>Day and Time</th>
+                      <th>Day & Time</th>
                       {/* <th>Total Horses</th> */}
                       <th>Race Status</th>
                       <th>Prize Money</th>
@@ -318,7 +326,11 @@ const Races = () => {
                                 <MdDelete
                                   onClick={() => handleRemove(item._id)}
                                 />
+<<<<<<< HEAD
                                 <BsEyeFill onClick={() => handleShows(item)} /> 
+=======
+                                <BsEyeFill onClick={() => handleShowRacePopup(item)} /> 
+>>>>>>> ebe0350d919ca4c2deae2e82151aef12326019e4
                               </td>
                             </tr>
                           </tbody>
@@ -353,8 +365,13 @@ const Races = () => {
       </Modal>
 
       <Modal
+<<<<<<< HEAD
         show={shows}
         onHide={handleCloses}
+=======
+        show={showRacePopup}
+        onHide={handleCloseRacePopup}
+>>>>>>> ebe0350d919ca4c2deae2e82151aef12326019e4
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -363,10 +380,14 @@ const Races = () => {
           <h2 style={{fontFamily: "inter"}}>Race</h2>
         </Modal.Header>
         <Modal.Body>
-          <RaceDetailPopup data={modaldata} />
+          <RaceDetailPopup data={modaldataPopup} />
         </Modal.Body>
          <Modal.Footer>
+<<<<<<< HEAD
           <button onClick={handleCloses} className="modalClosebtn">
+=======
+          <button onClick={handleCloseRacePopup} className="modalClosebtn">
+>>>>>>> ebe0350d919ca4c2deae2e82151aef12326019e4
             Close
           </button>
         </Modal.Footer>

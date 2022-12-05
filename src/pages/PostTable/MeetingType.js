@@ -25,7 +25,7 @@ const MeetingType = () => {
         await axios.post(`${window.env.API_URL}/uploadMeetingType`, formData)
         swal({
           title: "Success!",
-          text: "Data has been added successfully ",
+          text: "Data has been added Successfully ",
           icon: "success",
           button: "OK",
         });

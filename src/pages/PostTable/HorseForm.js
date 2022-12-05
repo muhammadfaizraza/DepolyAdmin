@@ -302,8 +302,8 @@ const HorseForm = () => {
         formData
       );
       swal({
-        title: "success!",
-        text: "Data Submitted !",
+        title: "Success!",
+        text: "Data has been added Successfully",
         icon: "success",
         button: "OK",
       });

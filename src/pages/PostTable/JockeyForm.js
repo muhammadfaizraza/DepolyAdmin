@@ -71,8 +71,8 @@ const NewsForm = () => {
 
       await axios.post(`${window.env.API_URL}/uploadJockey`, formData);
       swal({
-        title: "success!",
-        text: "Data Submitted !",
+        title: "Success!",
+        text: "Data has been added Successfully",
         icon: "success",
         button: "OK",
       });

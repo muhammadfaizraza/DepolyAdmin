@@ -204,7 +204,7 @@ const NewsForm = () => {
                     <DatePicker
                       onChange={setStartDate}
                       value={StartDate}
-                      maxDate={today}
+                      minDate={today}
                       dayPlaceholder=" "
                       monthPlaceholder="Start Date "
                       yearPlaceholder=""

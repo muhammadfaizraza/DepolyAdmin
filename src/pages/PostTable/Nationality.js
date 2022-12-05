@@ -39,7 +39,7 @@ const Nationality = () => {
       }
       swal({
         title: "Success!",
-        text: "Data has been added successfully ",
+        text: "Data has been added Successfully ",
         icon: "success",
         button: "OK",
       });

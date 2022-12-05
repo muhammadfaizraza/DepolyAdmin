@@ -2,7 +2,7 @@ import React, { useEffect, Fragment ,useState} from "react";
 import { fetchRaceName, STATUSES } from "../../redux/getReducer/getRaceName";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
+
 import { Link, useNavigate  } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -90,7 +90,9 @@ const Racename = () => {
                     alignItems: "center",
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
-                ></h6>
+                >
+
+                </h6>
 
                 <Link to="/racenameform">
                   <button>Add Race Name</button>
@@ -161,11 +163,12 @@ const Racename = () => {
         <Modal.Body>
           <RaceNamePopup data={modaldata} />
         </Modal.Body>
-        <Modal.Footer>
+         <Modal.Footer>
           <button onClick={handleClose} className="modalClosebtn">
             Close
           </button>
         </Modal.Footer>
+     
       </Modal>
 
     </Fragment>

@@ -30,11 +30,12 @@ const SponsorModal = (data) => {
               <FloatingLabel
                   controlId="floatingInput"
                   label="عنوان"
-                  className="mb-3"
+                  className="mb-3 floatingInputAr"
+                  style={{ direction: "rtl", left: "initial", right: 0 }}
                 
                  
                 >
-                  <Form.Control type="text" placeholder="Description" value={data.data.TitleAr} readOnly />
+                  <Form.Control type="text" placeholder="Description" value={data.data.TitleAr} style={{ left: "%" }} readOnly />
                 </FloatingLabel>
                 
               </div>
@@ -60,11 +61,12 @@ const SponsorModal = (data) => {
               <FloatingLabel
                   controlId="floatingInput"
                   label="وصف"
-                  className="mb-3"
+                  className="mb-3 floatingInputAr"
+                  style={{ direction: "rtl", left: "initial", right: 0 }}
                 
                  
                 >
-                  <Form.Control type="text" placeholder="وصف"  value={data.data.DescriptionAr} readOnly/>
+                  <Form.Control type="text" placeholder="وصف"  value={data.data.DescriptionAr} style={{ left: "%" }}  readOnly/>
                 </FloatingLabel>
                 
               </div>

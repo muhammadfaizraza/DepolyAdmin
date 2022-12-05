@@ -168,11 +168,14 @@ const GroundTypeTable = () => {
         <Modal.Body>
           <GroundTypePopup data={modaldata} />
         </Modal.Body>
+    
+
         <Modal.Footer>
           <button onClick={handleClose} className="modalClosebtn">
             Close
           </button>
         </Modal.Footer>
+    
       </Modal>
     </Fragment>
   );

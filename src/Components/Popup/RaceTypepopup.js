@@ -34,14 +34,16 @@ const RaceTypepopup = (data) => {
                 <FloatingLabel
                   controlId="floatingInput"
                   label="نوع السباق"
-                  className="mb-3 "
+                  className="mb-3 floatingInputAr"
+                  style={{ direction: "rtl", left: "initial", right: 0 }}
                 >
                   <Form.Control
                     type="text"
                     placeholder="اسم"
                     readOnly
+                    
                     value={data.data.NameAr}
-                    style={{ direction: "rtl" }}
+                    style={{ direction: "rtl" ,   left: "%"   }}
                   />
                 </FloatingLabel>
               </div>

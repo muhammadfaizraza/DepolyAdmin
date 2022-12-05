@@ -159,16 +159,13 @@ const VerdictTable = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2 style={{fontFamily:"inter"}}>TrackLength </h2>
+          <h2 style={{fontFamily:"inter"}}>Verdict </h2>
         </Modal.Header>
         <Modal.Body>
           <VerdictPopup data={modaldata} />
         </Modal.Body>
-        <Modal.Footer>
-          <button onClick={handleClose} className="modalClosebtn">
-            Close
-          </button>
-        </Modal.Footer>
+     
+     
       </Modal>
     
     </Fragment>

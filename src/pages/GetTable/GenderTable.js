@@ -158,12 +158,14 @@ const GenderTable = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2 style={{fontFamily: "inter"}}>Nationality</h2>
+          <h2 style={{fontFamily: "inter"}}>Gender</h2>
         </Modal.Header>
         <Modal.Body>
           <GenderPopup data={modaldata} />
         </Modal.Body>
-        <Modal.Footer>
+   
+        
+    <Modal.Footer>
           <button onClick={handleClose} className="modalClosebtn">
             Close
           </button>

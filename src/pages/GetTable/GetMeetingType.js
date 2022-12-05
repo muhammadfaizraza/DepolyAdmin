@@ -171,6 +171,7 @@ const handleShow = async (data) => {
             Close
           </button>
         </Modal.Footer>
+   
       </Modal>  
     </Fragment>
   );

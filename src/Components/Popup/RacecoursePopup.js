@@ -135,7 +135,7 @@ const RacecoursePopup = (data) => {
                             controlId="floatingInput"
                             label="Color"
                             className="mb-3"
-                            name="Nationality"
+                          
 
                         >
                             <Form.Control
@@ -194,9 +194,9 @@ const RacecoursePopup = (data) => {
                 <div className="ButtonSection">
                     <div>
                      
-                        {/* {image && (
-                      <img src={preview} className="PreviewImage" alt="" />
-                    )} */}
+                   
+                      <img src={data.data.image} className="PreviewImage" alt="" />
+                
                     </div>
 
 

@@ -86,7 +86,9 @@ const EquiptmentTable = () => {
                     alignItems: "center",
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
-                ></h6>
+                >
+
+                </h6>
 
                 <Link to="/equipment">
                   <button>Add Equipment</button>
@@ -163,7 +165,8 @@ const EquiptmentTable = () => {
         <Modal.Body>
           <EquipmentPopup data={modaldata} />
         </Modal.Body>
-        <Modal.Footer>
+        
+    <Modal.Footer>
           <button onClick={handleClose} className="modalClosebtn">
             Close
           </button>

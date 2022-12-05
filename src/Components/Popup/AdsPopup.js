@@ -32,11 +32,12 @@ const AdsPopup = (data) => {
                         <FloatingLabel
                             controlId="floatingInput"
                             label="اسم"
+                            style={{ direction: "rtl", left: "initial", right: 0 }} 
 
-                            className="mb-3"
+                            className="mb-3 floatingInputAr "
 
                         >
-                            <Form.Control type="text" placeholder="Details" value={data.data.TitleAr} readOnly/>
+                            <Form.Control type="text" placeholder="Details" value={data.data.TitleAr}  style={{ left: "%" }} readOnly/>
                         </FloatingLabel>
 
                     </div>
@@ -60,11 +61,12 @@ const AdsPopup = (data) => {
                     <div className="col-sm">
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="اسم"
-                            className="mb-3"
+                            label="الوصف"
+                            className="mb-3 floatingInputAr"
+                            style={{ direction: "rtl", left: "initial", right: 0 }} 
 
                         >
-                            <Form.Control type="text" placeholder="Description" value={data.data.DescriptionAr} readOnly />
+                            <Form.Control type="text" placeholder="Description"   style={{ left: "%" }}  value={data.data.DescriptionAr} readOnly />
                         </FloatingLabel>
 
                     </div>
@@ -72,7 +74,7 @@ const AdsPopup = (data) => {
 
 
                 <div className="ButtonSection">
-                    <div>
+                    <div className="modalPreview">
 
                         <img src={data.data.image} className="PreviewImage" alt="" />
 

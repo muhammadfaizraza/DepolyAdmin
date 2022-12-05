@@ -80,7 +80,7 @@ const NewsForm = () => {
       formData.append("pickCount", state1.pickCount);
       formData.append("StartDate", StartDate);
       formData.append("CompetitionCode", state1.CompetitionCode);
-      formData.append("CompetitionCategory", CompetitionCategory);
+      formData.append("CompetitionCategory", CompetitionCategory.id);
 
       // formData.append("RegistrationDate", RegistrationDate);
 
@@ -297,7 +297,7 @@ const NewsForm = () => {
                         setState({ ...state1, pickCount: e.target.value })
                       }
                     >
-                      <Form.Control type="text" placeholder="Details"  	value={state1.pickCount}/>
+                      <Form.Control type="number" placeholder="Details"  	value={state1.pickCount}/>
                     </FloatingLabel>
                 
                     <span className="spanForm"> |</span>
@@ -314,7 +314,7 @@ const NewsForm = () => {
                         setState({ ...state1, pickCount: e.target.value })
                       }
                     >
-                      <Form.Control type="text" placeholder="Details"value={state1.pickCount} />
+                      <Form.Control type="number" placeholder="Details"value={state1.pickCount} />
                     </FloatingLabel>
                   
                   </div>
@@ -331,7 +331,7 @@ const NewsForm = () => {
                       }
                     
                     >
-                      <Form.Control type="text" placeholder="Description"value={state1.TriCount}/>
+                      <Form.Control type="number" placeholder="Description"value={state1.TriCount}/>
                     </FloatingLabel>
                
                     <span className="spanForm"> |</span>
@@ -346,7 +346,7 @@ const NewsForm = () => {
                         setState({ ...state1, TriCount: e.target.value })
                       }
                     >
-                      <Form.Control type="text" placeholder="Description"value={state1.TriCount}/>
+                      <Form.Control type="number" placeholder="Description"value={state1.TriCount}/>
                     </FloatingLabel>
                     
                   </div>

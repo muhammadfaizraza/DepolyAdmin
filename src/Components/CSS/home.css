@@ -4,7 +4,7 @@
   margin-inline: auto;
   width: 87%;
   overflow: auto;
-  height: fit-content;
+  /* height: fit-content; */
   overflow-x: hidden;
   max-height: 100%;
 }

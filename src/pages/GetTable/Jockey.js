@@ -143,7 +143,7 @@ const Statistic = () => {
                               <td>{item.RemarksAr} </td>
                               <td>{item.MiniumumJockeyWeight} KG</td>
                               <td>{item.MaximumJockeyWeight} KG</td>
-                              <td>{item.JockeyNationalityData.NameEn}</td>
+                              <td>{item.JockeyNationalityData === null ? <></> : item.JockeyNationalityData.NameEn}</td>
                               <td>
                                 <img src={item.image} alt="" />
                               </td>

@@ -140,7 +140,7 @@ const Horse = () => {
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
                               <td>
-                                {" "}
+                           
                                 <Moment fromNow ago>
                                   {item.Age}
                                 </Moment>
@@ -201,7 +201,7 @@ const Horse = () => {
                                 <MdDelete
                                   onClick={() => handleRemove(item._id)}
                                 />
-                                <BsEyeFill onClick={() => setShow(true)}/>
+                                <BsEyeFill onClick={() => handleShow(item)}/>
                               </td>
                             </tr>
                           </tbody>

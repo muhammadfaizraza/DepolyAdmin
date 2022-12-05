@@ -1,12 +1,12 @@
-import React from 'react'
+import React,{Fragment} from 'react'
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
 const HorseKindPopup = (data) => {
+  console.log(data)
   return (
 
-            
-            <div className="form">
+            <Fragment>            <div className="form">
        
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -44,6 +44,34 @@ const HorseKindPopup = (data) => {
            
             </div>
      
+     <div className="form">
+       
+     <div className="row mainrow">
+       <div className="col-sm">
+
+       <FloatingLabel
+           controlId="floatingInput"
+           label="Short Name"
+           className="mb-3"
+         
+         
+        
+         >
+           <Form.Control type="text" placeholder="Description" readOnly value={data.data.shortName}/>
+         </FloatingLabel>
+      
+       
+       </div>
+
+     </div>
+
+     
+
+    
+
+ </div>
+ </Fragment>
+
   )
 }
 

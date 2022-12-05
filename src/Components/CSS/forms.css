@@ -635,3 +635,7 @@ input:-webkit-autofill:active {
  
   opacity: 1;
 }
+
+td.table_delete_btn1 {
+  padding: 10px 30px !important;
+}

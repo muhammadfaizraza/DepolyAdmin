@@ -8,6 +8,11 @@
 body::-webkit-scrollbar {
     width: 0.1em;
   }
+  .page::-webkit-scrollbar {
+    width: 0.5em;
+    background: linear-gradient(45deg, rgb(48, 8, 139), darksalmon);
+
+  }
   .adminsidebar::-webkit-scrollbar {
     width: 0.1em;
   }

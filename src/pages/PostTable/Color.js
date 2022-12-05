@@ -19,27 +19,36 @@ const Color = () => {
 
   const submit = async (event) => {
     event.preventDefault();
-    try {
-      const formData = new FormData();
-      formData.append("NameEn", NameEn);
-      formData.append("NameAr", NameAr);
-      // formData.append("shortCode", shortCode);
-
-      await axios.post(`${window.env.API_URL}/uploadColor`, formData);
-      if(pathname === '/color'){
-        history("/colorlist");
+    if( NameEn !== '' && NameAr !== ''){
+      try {
+        const formData = new FormData();
+        formData.append("NameEn", NameEn);
+        formData.append("NameAr", NameAr);
+        // formData.append("shortCode", shortCode);
+        await axios.post(`${window.env.API_URL}/uploadColor`, formData);
+        if(pathname === '/color'){
+          history("/colorlist");
+        }
+        swal({
+          title: "Success!",
+          text: "Data has been added successfully ",
+          icon: "success",
+          button: "OK",
+        });
+      } catch (error) {
+        const err = error.response.data.message;
+        swal({
+          title: "Error!",
+          text: err,
+          icon: "error",
+          button: "OK",
+        });
       }
-      swal({
-        title: "Success!",
-        text: "Data has been added successfully ",
-        icon: "success",
-        button: "OK",
-      });
-    } catch (error) {
-      const err = error.response.data.message;
+    }
+    else{
       swal({
         title: "Error!",
-        text: err,
+        text: 'Please Enter Name',
         icon: "error",
         button: "OK",
       });

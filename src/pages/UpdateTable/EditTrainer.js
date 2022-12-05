@@ -276,7 +276,7 @@ const NewsForm = () => {
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
-                        setState({ ...state1, NameAr: e.target.value })
+                        setState({ ...state1, Remarks: e.target.value })
                       }
                     
                     >

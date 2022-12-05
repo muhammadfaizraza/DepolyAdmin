@@ -46,11 +46,11 @@ const Dashboard = () => {
        <div className='DashboardCard'>
         <div className='OngoingRaces'>
           <p>Ongoing Races </p>
-          <h3>0{race.length}</h3>
+          <h3>{race.length < 10 ? <>0</> : <></>}{race.length}</h3>
         </div>
         <div className='ResultAwaited'>
         <p>Result Awaited</p>
-        <h3>0{tobePublishRace.length}</h3>
+        <h3>{tobePublishRace.length < 10 ? <>0</> : <></>}{tobePublishRace.length}</h3>
         </div>
         <div className='CompetitionsRaces'>
         <p>Competitions</p>

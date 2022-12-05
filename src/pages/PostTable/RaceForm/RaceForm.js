@@ -995,9 +995,9 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setFirstPrice(e.target.value)}
                       value={FirstPrice}
-                     
+                      min='0'
                     >
-                      <Form.Control  type="number" placeholder="Enter 1st Prize" />
+                      <Form.Control  type="number" min='0' placeholder="Enter 1st Prize" />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
                   </div>
@@ -1008,6 +1008,7 @@ const RaceForm = () => {
                       value={FirstPrice}
                       onChange={(e) => setFirstPrice(e.target.value)}
                       type='number'
+                      min='0'
                     ></input>
                   </div>
                 </div>
@@ -1021,7 +1022,7 @@ const RaceForm = () => {
                       value={SecondPrice}
                      
                     >
-                      <Form.Control  type="number" placeholder="Enter 2nd Prize" />
+                      <Form.Control  type="number" min='0' placeholder="Enter 2nd Prize" />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
                   </div>
@@ -1032,6 +1033,7 @@ const RaceForm = () => {
                       value={SecondPrice}
                       onChange={(e) => setSecondPrice(e.target.value)}
                       type='number'
+                      min='0'
                     ></input>
                   </div>
                 </div>
@@ -1045,7 +1047,7 @@ const RaceForm = () => {
                       value={ThirdPrice}
                      
                     >
-                      <Form.Control  type="number" placeholder="Enter 3rd Prize" />
+                      <Form.Control  type="number" min='0' placeholder="Enter 3rd Prize" />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -1057,6 +1059,7 @@ const RaceForm = () => {
                       onChange={(e) => setThirdPrice(e.target.value)}
                       value={ThirdPrice}
                       type='number'
+                      min='0'
                     ></input>
                   </div>
                 </div>
@@ -1070,7 +1073,7 @@ const RaceForm = () => {
                       value={FourthPrice}
                      
                     >
-                      <Form.Control  type="number" placeholder="Enter 4th Prize" />
+                      <Form.Control  type="number" min='0' placeholder="Enter 4th Prize" />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -1082,6 +1085,7 @@ const RaceForm = () => {
                       onChange={(e) => setFourthPrice(e.target.value)}
                       value={FourthPrice}
                       type='number'
+                      min='0'
                     ></input>
                   </div>
                 </div>
@@ -1095,7 +1099,7 @@ const RaceForm = () => {
                       value={FifthPrice}
                      
                     >
-                      <Form.Control  type="number" placeholder="Enter 5th Prize" />
+                      <Form.Control  type="number" min='0' placeholder="Enter 5th Prize" />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
                   </div>
@@ -1106,6 +1110,7 @@ const RaceForm = () => {
                       onChange={(e) => setFifthPrice(e.target.value)}
                       value={FifthPrice}
                       type='number'
+                      min='0'
                     ></input>
                   </div>
                 </div>
@@ -1130,6 +1135,7 @@ const RaceForm = () => {
                       onChange={(e) => setSixthPrice(e.target.value)}
                       value={SixthPrice}
                       type='number'
+                      min='0'
                     ></input>
                   </div>
                 </div>

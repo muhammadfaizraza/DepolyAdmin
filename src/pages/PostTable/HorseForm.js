@@ -605,6 +605,7 @@ const HorseForm = () => {
                     >
                       <Form.Control
                         type="number"
+                        min='0'
                         placeholder="Purchase Price"
                       />
                     </FloatingLabel>
@@ -618,6 +619,7 @@ const HorseForm = () => {
                       className="mb-3 floatingInputAr"
                       onChange={(e) => setPurchasePrice(e.target.value)}
                       value={PurchasePrice}
+                      min='0'
                       style={{ direction: "rtl" }}
                     >
                       <Form.Control type="number" placeholder="سعر الشراء" />

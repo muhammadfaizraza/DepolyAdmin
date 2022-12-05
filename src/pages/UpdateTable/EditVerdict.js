@@ -108,7 +108,7 @@ const NewsForm = () => {
                 <div className="row mainrow">
                   <div className="col-sm">
                     <input
-                      type="text"
+                      type="number"
                       name="MiniumumJockeyWeight"
                       id="MiniumumJockeyWeight"
                       className="group__control"

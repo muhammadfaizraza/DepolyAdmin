@@ -131,7 +131,7 @@ const HorseKind = () => {
 
 <BiEdit onClick={() => history('/edithorsekind',{
     state:{
-      horseid:item
+      horsekindid:item
     }
   })} />
 

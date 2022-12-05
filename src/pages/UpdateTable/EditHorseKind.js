@@ -10,8 +10,8 @@ const NewsForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
 
-  const { horseid } = state;
-  console.log(horseid);
+  const { horsekindid } = state;
+  console.log(horsekindid);
 
   const [state1, setState] = useState({
     NameEn: "",
@@ -20,16 +20,16 @@ const NewsForm = () => {
   });
 
   useEffect(() => {
-    if (horseid) {
+    if (horsekindid) {
       setState({
-        NameEn: horseid.NameEn,
-        NameAr: horseid.NameAr,
-        shortName: horseid.shortName,
+        NameEn: horsekindid.NameEn,
+        NameAr: horsekindid.NameAr,
+        shortName: horsekindid.shortName,
       });
     } else {
       alert("No Data");
     }
-  }, [horseid]);
+  }, [horsekindid]);
 
 
   const submit = async (event) => {
@@ -41,7 +41,7 @@ const NewsForm = () => {
       formData.append("shortName", state1.shortName);
 
       const response = await axios.put(
-        `${window.env.API_URL}/updateHorseKind/${horseid._id}`,
+        `${window.env.API_URL}/updateHorseKind/${horsekindid._id}`,
         formData
       );
       history("/horsekind");
@@ -114,11 +114,11 @@ const NewsForm = () => {
                       label="Short Name"
                       className="mb-3"
                       onChange={(e) =>
-                        setState({ ...state1, shortCode: e.target.value })
+                        setState({ ...state1, shortName: e.target.value })
                       }
                     
                     >
-                      <Form.Control type="text" placeholder="Description" value={state1.shortCode}/>
+                      <Form.Control type="text" placeholder="Description" value={state1.shortName}/>
                     </FloatingLabel>
                  
 									

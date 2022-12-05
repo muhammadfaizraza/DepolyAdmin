@@ -224,7 +224,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="Title"
+                      label="Description"
                       className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, DescEn: e.target.value })
@@ -240,7 +240,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="وصف"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
@@ -274,7 +274,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="المنافسة"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
@@ -307,7 +307,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="انتقاء"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
@@ -340,7 +340,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"className="mb-3 floatingInputAr"
+                      label="تريكونت"className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
                         setState({ ...state1, TriCount: e.target.value })

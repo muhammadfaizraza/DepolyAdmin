@@ -61,6 +61,15 @@ const Races = () => {
     await setShow(true);
   };
   
+
+  
+  const [shows, setShows] = useState(false);
+  const [modaldatas, setmodaldatas] = useState();
+  const handleCloses = () => setShows(false);
+  const handleShows = async (data) => {
+    setmodaldatas(data);
+    await setShows(true);
+  };
   const dispatch = useDispatch();
   const { data: race, status } = useSelector((state) => state.race);
   const { data: tobePublishRace } = useSelector((state) => state.tobePublishRace);
@@ -309,7 +318,7 @@ const Races = () => {
                                 <MdDelete
                                   onClick={() => handleRemove(item._id)}
                                 />
-                                <BsEyeFill onClick={() => handleShow(item)} /> 
+                                <BsEyeFill onClick={() => handleShows(item)} /> 
                               </td>
                             </tr>
                           </tbody>
@@ -344,8 +353,8 @@ const Races = () => {
       </Modal>
 
       <Modal
-        show={show}
-        onHide={handleClose}
+        show={shows}
+        onHide={handleCloses}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -357,7 +366,7 @@ const Races = () => {
           <RaceDetailPopup data={modaldata} />
         </Modal.Body>
          <Modal.Footer>
-          <button onClick={handleClose} className="modalClosebtn">
+          <button onClick={handleCloses} className="modalClosebtn">
             Close
           </button>
         </Modal.Footer>

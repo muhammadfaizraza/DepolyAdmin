@@ -12,6 +12,13 @@ console.log(data)
     return (
         <Fragment>
             <div className="form">
+            <div className="modalPreview">
+
+<img src={data.data.image} className="PreviewImage" alt="" />
+
+
+
+</div>
 
                 <div className="row mainrow">
 
@@ -102,14 +109,8 @@ console.log(data)
                 </div>
 
 
-                <div className="ButtonSection">
-                    <div className="modalPreview">
-
-                        <img src={data.data.image} className="PreviewImage" alt="" />
-
-                    </div>
-
-                </div>
+         
+                 
 
             </div>
         </Fragment>

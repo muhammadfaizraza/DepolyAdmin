@@ -174,7 +174,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="عنوان"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
@@ -207,7 +207,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="اسم قصير"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>

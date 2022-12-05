@@ -68,6 +68,25 @@ const CompetitionPopup = (data) => {
         
       </div>
     </div>
+    <div className="row mainrow">
+      <div className="col-sm">
+
+      <FloatingLabel
+          controlId="floatingInput"
+          label="Competition Code"
+          className="mb-3"
+        
+        
+       
+        >
+          <Form.Control type="text" placeholder="Description" readOnly value={data.data.CompetitionCode}/>
+        </FloatingLabel>
+     
+      </div>
+
+      
+    </div>
+
 
 
     <div className="row mainrow">
@@ -88,9 +107,62 @@ const CompetitionPopup = (data) => {
 
     </div>
 
-    
-   
+    <div className="row mainrow">
+      <div className="col-sm">
 
+      <FloatingLabel
+          controlId="floatingInput"
+          label="TriCount"
+          className="mb-3"
+        
+        
+       
+        >
+          <Form.Control type="text" placeholder="Description" readOnly value={data.data.TriCount}/>
+        </FloatingLabel>
+     
+      </div>
+
+      
+    </div>
+   
+    <div className="row mainrow">
+      <div className="col-sm">
+
+      <FloatingLabel
+          controlId="floatingInput"
+          label="pickCount"
+          className="mb-3"
+        
+        
+       
+        >
+          <Form.Control type="text" placeholder="Description" readOnly value={data.data.pickCount}/>
+        </FloatingLabel>
+     
+      </div>
+
+      
+    </div>
+
+    <div className="row mainrow">
+      <div className="col-sm">
+
+      <FloatingLabel
+          controlId="floatingInput"
+          label="Competition Category"
+          className="mb-3"
+        
+        
+       
+        >
+          <Form.Control type="text" placeholder="Description" readOnly value={data.data.CompetitionCategoryData.NameEn}/>
+        </FloatingLabel>
+     
+      </div>
+
+      
+    </div>
 </div>
   )
 }

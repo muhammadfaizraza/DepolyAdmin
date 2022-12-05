@@ -149,7 +149,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="ملاحظات"
+                      label="رمز الاجتماع"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
@@ -180,7 +180,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="ملاحظات"
+                      label="وصف"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
@@ -211,14 +211,14 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="ملاحظات"
+                      label="درجة الطقس"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
                         setState({ ...state1, WeatherDegree: e.target.value })
                       }
                     >
-                      <Form.Control type="text" placeholder="ملاحظات"   value={state1.WeatherDegree}/>
+                      <Form.Control type="text" placeholder="درجة الطقس"   value={state1.WeatherDegree}/>
                     </FloatingLabel>
                   </div>
                 </div>
@@ -277,7 +277,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="First Price"
+                      label="First Prize"
                       className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, FirstPrice: e.target.value })
@@ -293,7 +293,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="ملاحظات"
+                      label="السعر الأول"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
@@ -308,7 +308,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="Second Price"
+                      label="Second Prize"
                       className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, SecondPrice: e.target.value })
@@ -324,7 +324,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="ملاحظات"
+                      label="الجائزة الثانية"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
@@ -339,7 +339,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="Third Price"
+                      label="Third Prize"
                       className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, ThirdPrice: e.target.value })
@@ -355,7 +355,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="ملاحظات"
+                      label="الجائزة الثالثة"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
@@ -370,7 +370,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="Fourth Price"
+                      label="Fourth Prize"
                       className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, FourthPrice: e.target.value })
@@ -386,7 +386,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="ملاحظات"
+                      label="الجائزة الرابعة"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
@@ -401,7 +401,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="Fifth Price"
+                      label="Fifth Prize"
                       className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, FifthPrice: e.target.value })
@@ -417,14 +417,14 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="ملاحظات"
+                      label="الجائزة الخامسة"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
                         setState({ ...state1, FifthPrice: e.target.value })
                       }
                     >
-                      <Form.Control type="text" placeholder="ملاحظات"   value={state1.FifthPrice}/>
+                      <Form.Control type="text" placeholder="الجائزة الخامسة"   value={state1.FifthPrice}/>
                     </FloatingLabel>
                   </div>
                 </div>
@@ -432,7 +432,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="Sixth Price"
+                      label="Sixth Prize"
                       className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, SixthPrice: e.target.value })
@@ -448,7 +448,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="ملاحظات"
+                      label="الجائزة السادسة"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>

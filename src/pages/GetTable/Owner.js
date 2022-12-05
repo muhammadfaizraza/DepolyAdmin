@@ -110,12 +110,12 @@ const Owner = () => {
                <thead>
                  <tr>
                  <th>Owner Name</th>
-                  <th>NameAr</th>
+                  <th>Owner Name Arabic</th>
                 <th>Title</th>
                 <th>Title Arabic</th>
                 <th>Short Name</th>
                 <th>Short Name Arabic</th>
-                   <th>Registeration</th>
+                   <th>Registeration Date</th>
                    <th>Nationality</th>
                    {/* <th>Silk Color</th> */}
                    <th>Image</th>

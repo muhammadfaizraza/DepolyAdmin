@@ -103,7 +103,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="Description"
+                      label="Name"
                       className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, NameEn: e.target.value })
@@ -152,7 +152,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="وصف"
                       className="mb-3 floatingInputAr"
                       onChange={(e) =>
                         setState({ ...state1, DescriptionAr: e.target.value })

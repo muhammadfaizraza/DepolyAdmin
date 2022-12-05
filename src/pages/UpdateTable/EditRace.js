@@ -21,7 +21,6 @@ const NewsForm = () => {
   const { state } = useLocation();
 
   const { fullraceid } = state;
-  console.log( fullraceid)
   const [DayNTime, setDayNTime] = useState("");
   const [RaceStatus, setRaceStatus] = useState("");
 

@@ -354,3 +354,7 @@ td:last-child {
 /* .myselectiondata > span:nth-child(4) {
     max-width: 150px !important;
 } */
+
+img.PreviewHorseImage {
+    margin-top: 15px;
+}

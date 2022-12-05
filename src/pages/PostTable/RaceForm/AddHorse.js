@@ -148,7 +148,7 @@ const ItemLength = items.length;
                 <span>Gate #</span>
                 <span>Horse Name</span>
                 <span>Jockey Name</span>
-                <span>Jockey Weight</span>
+                {/* <span>Jockey Weight</span> */}
                 <span>Equipment</span>
               </div>
             </div>
@@ -175,13 +175,13 @@ const ItemLength = items.length;
                         isSearchable={true}
                       />
                     </span>
-                    <span>
+                    {/* <span>
                       {JockeyData.weight === undefined ? (
                         <></>
                       ) : (
                         <>{JockeyData.weight} KG</>
                       )}{" "}
-                    </span>
+                    </span> */}
                     <span>
                   <Select
                     defaultValue={EquipmentData}
@@ -214,13 +214,13 @@ const ItemLength = items.length;
                         isSearchable={true}
                       />
                     </span>
-                    <span>
+                    {/* <span>
                       {JockeyData.weight === undefined ? (
                         <></>
                       ) : (
                         <>{JockeyData.weight} KG</>
                       )}{" "}
-                    </span>
+                    </span> */}
                     <span>
                   <Select
                     defaultValue={EquipmentData}

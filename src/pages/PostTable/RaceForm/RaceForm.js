@@ -140,6 +140,7 @@ const RaceForm = () => {
         };
       })
     );
+    console.log(MeetingTypes ,'MeetingTypes')
 
   let RaceTypes =
     RaceType === undefined ? (
@@ -192,7 +193,6 @@ const RaceForm = () => {
         };
       })
     );
-
 
 
 //  Modal functionalities Here
@@ -340,7 +340,7 @@ const RaceForm = () => {
       formData.append("Sponsor", Sponsor.id);
       formData.append("WeatherDegree", WeatherDegree);
       formData.append("TrackLength", TrackLength.id);
-      formData.append("ActiveJockeyForTheRace", ActiveJockeyForTheRace.id);
+      // formData.append("ActiveJockeyForTheRace", ActiveJockeyForTheRace.id);
       formData.append("image", image);
       const response = await axios.post(
         `${window.env.API_URL}/createrace`,

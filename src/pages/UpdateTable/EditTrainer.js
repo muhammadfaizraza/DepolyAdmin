@@ -150,7 +150,72 @@ const NewsForm = () => {
                    
                   </div>
                 </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Short Name"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, ShortNameEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.ShortNameEn}/>
+                    </FloatingLabel>
+                  
+                    <span className="spanForm"> |</span>
+                  </div>
 
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, ShortNameAr: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.ShortNameAr}/>
+                    </FloatingLabel>
+                    
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Title English"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, TitleEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.TitleEn}/>
+                    </FloatingLabel>
+                  
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, TitleAr: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.TitleAr}/>
+                    </FloatingLabel>
+                    
+                  </div>
+                </div>
                 {/* <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
@@ -198,10 +263,10 @@ const NewsForm = () => {
                       <Form.Control type="text" placeholder="Description" value={state1.Detail}/>
                     </FloatingLabel>
                  
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
                       label="اسم"
@@ -215,42 +280,10 @@ const NewsForm = () => {
                       <Form.Control type="text" placeholder="Description" value={state1.NameAr}/>
                     </FloatingLabel>
                     
-                  </div>
+                  </div> */}
                 </div>
                 
-                <div className="row mainrow">
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="Title English"
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, TitleEn: e.target.value })
-                      }
-                    
-                    >
-                      <Form.Control type="text" placeholder="Description" value={state1.TitleEn}/>
-                    </FloatingLabel>
-                  
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="اسم"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                      onChange={(e) =>
-                        setState({ ...state1, TitleAr: e.target.value })
-                      }
-                    
-                    >
-                      <Form.Control type="text" placeholder="Description" value={state1.TitleAr}/>
-                    </FloatingLabel>
-                    
-                  </div>
-                </div>
+                
 
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -266,10 +299,10 @@ const NewsForm = () => {
                       <Form.Control type="text" placeholder="Description" value={state1.Remarks}/>
                     </FloatingLabel>
                   
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
                       label="اسم"
@@ -282,42 +315,10 @@ const NewsForm = () => {
                     >
                       <Form.Control type="text" placeholder="Description" value={state1.NameAr}/>
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
 
-                <div className="row mainrow">
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="Short Name"
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, ShortNameEn: e.target.value })
-                      }
-                    
-                    >
-                      <Form.Control type="text" placeholder="Description" value={state1.ShortNameEn}/>
-                    </FloatingLabel>
-                  
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="اسم"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                      onChange={(e) =>
-                        setState({ ...state1, ShortNameAr: e.target.value })
-                      }
-                    
-                    >
-                      <Form.Control type="text" placeholder="Description" value={state1.ShortNameAr}/>
-                    </FloatingLabel>
-                    
-                  </div>
-                </div>
+                
 
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -330,15 +331,15 @@ const NewsForm = () => {
                       yearPlaceholder=""
                     />
 
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  <div className="col-sm" style={{ direction: "rtl" }}>
+                  {/* <div className="col-sm" style={{ direction: "rtl" }}>
                     <input
                       
                       placeholder="تاريخ الولادة"
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="ButtonSection">
                 <div>

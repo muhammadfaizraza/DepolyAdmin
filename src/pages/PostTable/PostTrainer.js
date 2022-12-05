@@ -319,7 +319,7 @@ const TrainerForm = () => {
                     <span className="spanForm"> |</span>
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
                       label="ملاحظات"
@@ -328,7 +328,7 @@ const TrainerForm = () => {
                     >
                       <Form.Control type="text" placeholder="ملاحظات" />
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
                
                 <div className="row mainrow">

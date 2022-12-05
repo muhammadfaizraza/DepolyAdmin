@@ -23,11 +23,10 @@ const Racenameform = () => {
         formData.append("NameEn", NameEn);
         formData.append("NameAr" , NameAr)
         // formData.append("shortCode",shortCode);
-  
         await axios.post(`${window.env.API_URL}/uploadRaceName`, formData)
         swal({
           title: "Success!",
-          text: "Data has been added successfully ",
+          text: "Data has been added successfully",
           icon: "success",
           button: "OK",
         });

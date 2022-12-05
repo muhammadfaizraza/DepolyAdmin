@@ -275,7 +275,7 @@ const HorseForm = () => {
       formData.append("ActiveOwner", ActiveOwner.id);
       // formData.append("ActiveJockey", ActiveJockey.id);
       // formData.append("Owner", Owner.id);
-      formData.append("HorseStatus", HorseStatus);
+      formData.append("HorseStatus", HorseStatus.value);
       // formData.append("Jockey", Jockey.id);
       // formData.append("Trainer", Trainer.id);
       // formData.append("Trainer", ActiveTrainer.id);

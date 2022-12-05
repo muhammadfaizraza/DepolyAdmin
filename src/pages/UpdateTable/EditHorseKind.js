@@ -111,7 +111,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="Short Code"
+                      label="Short Name"
                       className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, shortCode: e.target.value })

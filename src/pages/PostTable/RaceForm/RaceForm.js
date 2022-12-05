@@ -1119,7 +1119,7 @@ const RaceForm = () => {
                       value={SixthPrice}
                      
                     >
-                      <Form.Control  type="number" placeholder="Enter 6th Prize" />
+                      <Form.Control  type="number" min='0' placeholder="Enter 6th Prize" />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
                   </div>

@@ -135,7 +135,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="عنوان"
+                      label="العنوان الفرعي        "
                       className="mb-3 floatingInputAr"
                       onChange={(e) => setSecondTitleAr(e.target.value)}
                       name="Name"
@@ -165,7 +165,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="التفاصيل"
+                      label="وصف"
                       className="mb-3 floatingInputAr"
                       onChange={(e) => setDescriptionAr(e.target.value)}
                       value={DescriptionAr}

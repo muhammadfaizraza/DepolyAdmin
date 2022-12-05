@@ -103,7 +103,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="Description"
+                      label="Name"
                       className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, NameEn: e.target.value })
@@ -120,7 +120,8 @@ const NewsForm = () => {
                   <FloatingLabel
                       controlId="floatingInput"
                       label="اسم"
-                      className="mb-3"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
                       onChange={(e) =>
                         setState({ ...state1, NameAr: e.target.value })
                       }
@@ -152,12 +153,13 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="وصف"
                       className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
                       onChange={(e) =>
                         setState({ ...state1, DescriptionAr: e.target.value })
                       }
-                      style={{ direction: "rtl" }}
+                     
 
                     >
                       <Form.Control type="text" placeholder="Description" value={state1.DescriptionAr}/>
@@ -177,7 +179,7 @@ const NewsForm = () => {
                       }
                     
                     >
-                      <Form.Control type="text" placeholder="Description" value={state1.shortCode}/>
+                      <Form.Control type="number" placeholder="Description" value={state1.shortCode}/>
                     </FloatingLabel>
                  
 									

@@ -285,13 +285,13 @@ const Nationality = () => {
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
-                    label="معدل"
+                    label="القيمة"
                     className="mb-3 floatingInputAr "
                     style={{ direction: "rtl", left: "initial", right: 0 }}
                   >
                     <Form.Control
                       type="text"
-                      placeholder="معدل"
+                      placeholder="القيمة"
                       style={{ left: "%" }}
                     />
                   </FloatingLabel>
@@ -303,7 +303,7 @@ const Nationality = () => {
                   <input
                     type="file"
                     onChange={onSelectFile}
-                    className="formInput"
+                    className="formInput fileinputdata"
                   />
                   {image && (
                     <img src={preview} className="PreviewImage" alt="" />

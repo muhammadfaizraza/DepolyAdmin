@@ -34,6 +34,7 @@ const NewsForm = () => {
     pickCount:'',
     StartDate:'',
     CompetitionCode:'',
+    shortCode:''
 	});
  
 
@@ -47,7 +48,8 @@ const NewsForm = () => {
         TriCount: competitionid.TriCount,
         pickCount: competitionid.pickCount,
         StartDate: competitionid.StartDate,
-        CompetitionCode: competitionid.CompetitionCode
+        CompetitionCode: competitionid.CompetitionCode,
+        shortCode: competitionid.shortCode
 			});
 		} else {
 			alert('No Data')
@@ -81,6 +83,7 @@ const NewsForm = () => {
       formData.append("StartDate", StartDate);
       formData.append("CompetitionCode", state1.CompetitionCode);
       formData.append("CompetitionCategory", CompetitionCategory.id);
+      formData.append("shortCode", state1.shortCode);
 
       // formData.append("RegistrationDate", RegistrationDate);
 
@@ -394,7 +397,25 @@ const NewsForm = () => {
                     />
                   </div>
                 </div>
+                <div className="row mainrow">
+                  
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Short Code"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, shortCode: e.target.value })
+                      }
+                    >
+                      <Form.Control type="number" placeholder="Details"  	value={state1.shortCode}/>
+                    </FloatingLabel>
+                
+                  </div>
+                  
 
+                  
+                </div>
                 <div className="ButtonSection" style={{ justifyContent: "end" }}>
                 <button type="submit" className="SubmitButton">
                   Update

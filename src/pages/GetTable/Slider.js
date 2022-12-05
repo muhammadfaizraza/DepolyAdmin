@@ -14,6 +14,7 @@ import { BiEdit } from "react-icons/bi";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+import ScrollContainer from "react-indiana-drag-scroll";
 
 
 
@@ -111,11 +112,10 @@ const Slider = () => {
                 </Link>
               </div>
             </div>
-            <>
-              <div className="div_maintb">
-                {" "}
-                <table>
-                  <thead>
+            <div className="div_maintb">
+              <ScrollContainer className="scroll-container">
+                <table striped bordered hover>
+                <thead>
                     <tr>
                       <th>Title</th>
                       <th>Title Arabic </th>
@@ -166,8 +166,10 @@ const Slider = () => {
                     })}
                   </tbody>
                 </table>
-              </div>
-            </>
+              </ScrollContainer>
+            </div>
+             
+            
           </div>
         </div>
       </div>

@@ -829,7 +829,7 @@ const RaceForm = () => {
                     />
                   </div>
                 </div>
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
                     <Select
                       placeholder={<div>Active Jockey For The Race</div>}
@@ -871,7 +871,7 @@ const RaceForm = () => {
                       isSearchable={true}
                     />
                   </div>
-                </div>
+                </div> */}
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select

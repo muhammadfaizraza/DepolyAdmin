@@ -152,11 +152,11 @@ const NewsForm = () => {
                       label="اسم"
                       className="mb-3"
                       onChange={(e) =>
-                        setState({ ...state1, DescriptionEn: e.target.value })
+                        setState({ ...state1, DescriptionAr: e.target.value })
                       }
                      
                     >
-                      <Form.Control type="text" placeholder="Description" value={state1.DescriptionEn}/>
+                      <Form.Control type="text" placeholder="Description" value={state1.DescriptionAr}/>
                     </FloatingLabel>
                     
                   </div>

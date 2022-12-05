@@ -83,7 +83,7 @@ const ItemLength = items.length;
   const addItem = (e) => {
     e.preventDefault();
      let HorseEntry = [
-      `${Gate},${InputData.value},${JockeyData.value},${EquipmentData.value}`,
+      `${Gate},${InputData.id},${JockeyData.id},${JockeyData.weight},${EquipmentData.id}`,
     ];
     if(HorseLength === ItemLength){
       toast('No Horse ')

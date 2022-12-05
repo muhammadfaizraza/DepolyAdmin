@@ -14,6 +14,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import { toast } from 'react-toastify';
 
 
 const LocalItem = () => {
@@ -28,10 +29,8 @@ const LocalItem = () => {
 
 const PublishRace = () => {
   const [InputData, SetinputData] = useState("");
-  const [InputData2, SetinputData2] = useState("");
   const [VerdictName, SetVerdictName] = useState('');
   const [Gate , setGate] = useState(1)
-  const [JockeyData, SetJockeyData] = useState("");
   const [items, setitems] = useState(LocalItem());
   const { data: jockey } = useSelector((state) => state.jockey);
   const { data: horse } = useSelector((state) => state.horse);
@@ -64,7 +63,6 @@ const PublishRace = () => {
   });
 
   const dispatch = useDispatch();
-  const VerdictEntry = [`${VerdictName.id},${Gate},${InputData.id}`];
 
   useEffect(() => {
     dispatch(fetchHorse());
@@ -76,9 +74,26 @@ const PublishRace = () => {
     localStorage.setItem("verdict", JSON.stringify(items));
   }, [items]);
 
-  const addItem = () => {
-    setitems([...items, VerdictEntry]);
+  const verdictLength = verdict.length;
+  const ItemLength = items.length;
+
+
+  const addItem = (e) => {
+    e.preventDefault();
+    let VerdictEntry = [`${VerdictName.id},${Gate},${InputData.id}`];
+    if(verdictLength === ItemLength){
+      toast('No Verdict ')
+    }
+    else  if (VerdictName === "" || InputData === "") {
+      toast('Select Values ')
+    }
+    else {
+      setitems([...items, VerdictEntry]);
     setGate(Gate + 1)
+    }
+    SetVerdictName("");
+    SetinputData("");
+  
   };
   const Remove = () => {
     setitems([]);

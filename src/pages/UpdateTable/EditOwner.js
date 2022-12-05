@@ -22,6 +22,18 @@ const NewsForm = () => {
   const [NationalityID, setNationalityID] = useState("");
   const [RegistrationDate, setRegistrationDate] = useState("");
 
+  let AllNationality =
+    nationality === undefined ? (
+      <></>
+    ) : (
+      nationality.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameEn,
+          label: item.NameEn,
+        };
+      })
+    );
   const [state1, setState] = useState({
 		NameAr: '',
     NameEn:'',
@@ -75,7 +87,7 @@ const NewsForm = () => {
       formData.append("ShortEn", state1.ShortEn);
       formData.append("ShortAr", state1.ShortAr);
       formData.append("Ownerimage", image);
-      formData.append("NationalityID", NationalityID.id);
+      // formData.append("NationalityID", NationalityID.id);
       // formData.append("RegistrationDate", RegistrationDate);
 
       const response = await axios.put(`${window.env.API_URL}/updateOwner/${ownerid._id}`, formData);
@@ -96,18 +108,7 @@ const NewsForm = () => {
       });
     }
   };
-  let AllNationality =
-  nationality === undefined ? (
-    <></>
-  ) : (
-    nationality.map(function (item) {
-      return {
-        id: item._id,
-        value: item.NameEn,
-        label: item.NameEn,
-      };
-    })
-  );
+
   return (
     <>
       <div className="page">
@@ -219,7 +220,7 @@ const NewsForm = () => {
                   </div>
                 </div>
                 
-
+{/* 
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
@@ -260,7 +261,7 @@ const NewsForm = () => {
                       isSearchable={true}
                     />
                   </div>
-                </div>
+                </div> */}
 
                 <div className="ButtonSection">
                 <div>

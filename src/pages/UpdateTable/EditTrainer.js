@@ -4,17 +4,18 @@ import { useNavigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
 import DatePicker from "react-date-picker";
-
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import { fetchnationality } from "../../redux/getReducer/getNationality";
+import { useDispatch } from "react-redux";
 
 const NewsForm = () => {
   const history = useNavigate();
+  const dispatch = useDispatch();
   const { state } = useLocation();
   var today = new Date();
 
   const { trainerid } = state;
-  console.log(trainerid,'id')
 
   const [state1, setState] = useState({
 		NameEn: '',
@@ -57,6 +58,9 @@ const NewsForm = () => {
 		}
 	}, [trainerid]);
 
+  useEffect(() => {
+    dispatch(fetchnationality());
+  });
   useEffect(() => {
     if (image === undefined) {
       setPreview(trainerid.image)

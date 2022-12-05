@@ -84,9 +84,7 @@ const PublishRace = () => {
     if(verdictLength === ItemLength){
       toast('No Verdict ')
     }
-    else  if (VerdictName === "" || InputData === "") {
-      toast('Select Values ')
-    }
+    
     else {
       setitems([...items, VerdictEntry]);
     setGate(Gate + 1)

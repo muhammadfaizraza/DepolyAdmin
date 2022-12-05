@@ -100,11 +100,12 @@ const ItemLength = items.length;
     setitems([]);
     setGate(1)
   };
+
   const submit = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.post(`${window.env.API_URL}addracehorses/${RaceId}`, {HorseEntry:items});
-      localStorage.removeItem('list')
+      localStorage.removeItem('lists')
       setGate(1)
       history("/fullpublishrace", {
         state: {
@@ -147,7 +148,7 @@ const ItemLength = items.length;
                 <span>Gate #</span>
                 <span>Horse Name</span>
                 <span>Jockey Name</span>
-                <span>Jockey Weight</span>
+                {/* <span>Jockey Weight</span> */}
                 <span>Equipment</span>
               </div>
             </div>
@@ -174,13 +175,13 @@ const ItemLength = items.length;
                         isSearchable={true}
                       />
                     </span>
-                    <span>
+                    {/* <span>
                       {JockeyData.weight === undefined ? (
                         <></>
                       ) : (
                         <>{JockeyData.weight} KG</>
                       )}{" "}
-                    </span>
+                    </span> */}
                     <span>
                   <Select
                     defaultValue={EquipmentData}
@@ -213,13 +214,13 @@ const ItemLength = items.length;
                         isSearchable={true}
                       />
                     </span>
-                    <span>
+                    {/* <span>
                       {JockeyData.weight === undefined ? (
                         <></>
                       ) : (
                         <>{JockeyData.weight} KG</>
                       )}{" "}
-                    </span>
+                    </span> */}
                     <span>
                   <Select
                     defaultValue={EquipmentData}

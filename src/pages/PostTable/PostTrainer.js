@@ -60,7 +60,7 @@ const TrainerForm = () => {
       formData.append("DOB", DOB);
       formData.append("Age", Age);
       formData.append("TitleAr", TitleAr);
-      formData.append("NationalityId", NationalityId.id);
+      formData.append("NationalityID", NationalityId.id);
       formData.append("TitleEn", TitleEn);
       formData.append("TrainerLicenseDate", TrainerLicenseDate);
       formData.append("ShortNameEn", ShortNameEn);

@@ -294,7 +294,7 @@ const HorseForm = () => {
       formData.append("Rds", Rds.value);
       formData.append("STARS", STARS);
       formData.append("isGelted", isGelted.id);
-      formData.append("NationalityId", NationalityId.id);
+      formData.append("NationalityID", NationalityId.id);
       formData.append("CreationId", NationalityId.id);
       formData.append("PurchasePrice", PurchasePrice);
       const response = await axios.post(

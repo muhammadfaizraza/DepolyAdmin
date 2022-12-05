@@ -27,6 +27,7 @@ const NewsForm = () => {
 
   const { horseid } = state;
 
+  console.log(horseid)
   const [Breeder, setBreeder] = useState("");
   const [ActiveTrainer, setActiveTrainer] = useState("");
   const [ActiveOwner, setActiveOwner] = useState("");
@@ -84,25 +85,26 @@ const NewsForm = () => {
     Remarks:'',
     ActiveOwner:'',
     ActiveTrainer:'',
-    Breeder:''
+    Breeder:'',
+    HorseHorseImage:''
     
 	});
-  const [image,setImage] = useState();
+  const [HorseImage,setHorseImage] = useState();
   const [preview,setPreview] = useState();
 
   const fileSelected = (event) => {
-    const image = event.target.files[0];
-    setImage(image, image);
+    const HorseImage = event.target.files[0];
+    setHorseImage(HorseImage, HorseImage);
   };
   useEffect(() => {
-    if (image === undefined) {
-      setPreview(horseid.image)
+    if (HorseImage === undefined) {
+      setPreview(horseid.HorseImage)
       return
   }  
-    const objectUrl = URL.createObjectURL(image)
+    const objectUrl = URL.createObjectURL(HorseImage)
     setPreview(objectUrl)
     return () => URL.revokeObjectURL(objectUrl)
-}, [image])
+}, [HorseImage])
 
 
   useEffect(() => {
@@ -113,7 +115,8 @@ const NewsForm = () => {
         Breeder:horseid.BreederData.NameEn,
         PurchasePrice :horseid.PurchasePrice,
         STARS:horseid.STARS,
-        Remarks:horseid.Remarks
+        Remarks:horseid.Remarks,
+        HorseImage:horseid.HorseImage
 			});
 		} else {
 		}
@@ -125,15 +128,15 @@ const NewsForm = () => {
     try {
       
       const formData = new FormData();
-      formData.append("Horseimage", image);
+      formData.append("HorseImage", HorseImage);
       formData.append("NameEn", state1.NameEn);
       formData.append("NameAr", state1.NameAr);
       formData.append("PurchasePrice", state1.PurchasePrice);
       formData.append("STARS", state1.STARS);
       formData.append("Remarks", state1.Remarks);
-      formData.append("Breeder", Breeder.id);
-      formData.append("ActiveTrainer", ActiveTrainer.id);
-      formData.append("ActiveOwner", ActiveOwner.id);
+      // formData.append("Breeder", Breeder.id);
+      // formData.append("ActiveTrainer", ActiveTrainer.id);
+      // formData.append("ActiveOwner", ActiveOwner.id);
 
 
       const response = await axios.put(`${window.env.API_URL}/updatehorse/${horseid._id}`, formData);
@@ -412,7 +415,7 @@ const NewsForm = () => {
                 <div className="ButtonSection">
                 <div>
                 <input type='file' onChange={fileSelected} className="formInput"/>
-                <img src={preview}  className="PreviewImage" alt=""/>
+                <img src={preview}  className="PreviewHorseImage" alt=""/>
                 </div>
                   <button type="submit" className="SubmitButton">
                   Update

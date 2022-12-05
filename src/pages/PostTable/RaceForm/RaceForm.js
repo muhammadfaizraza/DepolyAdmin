@@ -321,7 +321,7 @@ const RaceForm = () => {
       formData.append("MeetingType", MeetingType.id);
       formData.append("MeetingCode", MeetingCode);
       formData.append("Ground", Ground.id);
-      formData.append("RaceNameAr", RaceNameAr);
+      // formData.append("RaceNameAr", RaceNameAr);
       formData.append("RaceType", RaceTyp.id);
       formData.append("RaceKind", RaceKind.id);
       formData.append("DescriptionEn", DescriptionEn);

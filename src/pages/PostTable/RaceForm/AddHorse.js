@@ -62,9 +62,6 @@ const RaceForm = () => {
     };
   });
   const dispatch = useDispatch();
-  
-
-
 
 const HorseLength = horse.length;
 const ItemLength = items.length;
@@ -88,7 +85,6 @@ const ItemLength = items.length;
     if(HorseLength === ItemLength){
       toast('No Horse ')
     }
-
     else  if (InputData === "" || JockeyData === "" || EquipmentData === "") {
       toast('Select Values ')
     }
@@ -107,7 +103,6 @@ const ItemLength = items.length;
   const submit = async (event) => {
     event.preventDefault();
     try {
-      
       const response = await axios.post(`${window.env.API_URL}addracehorses/${RaceId}`, {HorseEntry:items});
       localStorage.removeItem('list')
       setGate(1)
@@ -240,7 +235,7 @@ const ItemLength = items.length;
 
               <div className="addbtn">
                 <button className="AddAnother" onClick={addItem}>
-                  <AiOutlinePlus /> Add Another{" "}
+                Save & Add Another{" "}
                 </button>
               </div>
               <div className="sbmtbtndiv">
@@ -255,7 +250,7 @@ const ItemLength = items.length;
                     onClick={submit}
                    
                   >
-                    Save & Add Horses
+                    Next & Add Verdict
                   </button>
                 </div>
               </div>

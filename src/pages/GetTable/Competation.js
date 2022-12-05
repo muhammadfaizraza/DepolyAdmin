@@ -7,12 +7,13 @@ import { BiEdit } from "react-icons/bi";
 import swal from "sweetalert";
 import JockeyPopup from "../../Components/Popup/JockeyPopup";
 import { Modal } from "react-bootstrap";
-import { BsFillEyeFill } from "react-icons/bs";
+import { BsEyeFill, BsFillEyeFill } from "react-icons/bs";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Moment from "react-moment";
 import axios from "axios";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
+import CompetitionPopup from "../../Components/Popup/CompetitionPopup";
 
 
 const Statistic = () => {
@@ -146,6 +147,7 @@ const Statistic = () => {
                                   <MdDelete
                                   onClick={() => handleRemove(item._id)}
                                 />
+                                <BsEyeFill onClick={() => handleShow(item) } /> 
                               </td>
                             </tr>
                           </>
@@ -168,11 +170,17 @@ const Statistic = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2>Jockey </h2>
+          <h2>Competition </h2>
         </Modal.Header>
         <Modal.Body>
-          <JockeyPopup data={modaldata} />
+          <CompetitionPopup data={modaldata} />
         </Modal.Body>
+        
+    <Modal.Footer>
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
+        </Modal.Footer>
   
       </Modal>
     </>

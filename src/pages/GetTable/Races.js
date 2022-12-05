@@ -17,6 +17,8 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BiEdit } from "react-icons/bi";
+import RaceDetailPopup from "../../Components/Popup/RaceDetailPopup";
+import { BsEyeFill } from "react-icons/bs";
 
 const Prize = (data) => {
   return (
@@ -307,6 +309,7 @@ const Races = () => {
                                 <MdDelete
                                   onClick={() => handleRemove(item._id)}
                                 />
+                                <BsEyeFill onClick={() => handleShow(item)} /> 
                               </td>
                             </tr>
                           </tbody>
@@ -339,7 +342,29 @@ const Races = () => {
           </button>
         </Modal.Footer>
       </Modal>
+
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>  
+          <h2 style={{fontFamily: "inter"}}>Race</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <RaceDetailPopup data={modaldata} />
+        </Modal.Body>
+         <Modal.Footer>
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
+        </Modal.Footer>
+     
+      </Modal>
     </>
+
   );
 };
 export default Races;

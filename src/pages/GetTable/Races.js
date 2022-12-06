@@ -326,11 +326,7 @@ const Races = () => {
                                 <MdDelete
                                   onClick={() => handleRemove(item._id)}
                                 />
-<<<<<<< HEAD
-                                <BsEyeFill onClick={() => handleShows(item)} /> 
-=======
                                 <BsEyeFill onClick={() => handleShowRacePopup(item)} /> 
->>>>>>> ebe0350d919ca4c2deae2e82151aef12326019e4
                               </td>
                             </tr>
                           </tbody>
@@ -365,13 +361,8 @@ const Races = () => {
       </Modal>
 
       <Modal
-<<<<<<< HEAD
-        show={shows}
-        onHide={handleCloses}
-=======
         show={showRacePopup}
         onHide={handleCloseRacePopup}
->>>>>>> ebe0350d919ca4c2deae2e82151aef12326019e4
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -383,11 +374,7 @@ const Races = () => {
           <RaceDetailPopup data={modaldataPopup} />
         </Modal.Body>
          <Modal.Footer>
-<<<<<<< HEAD
-          <button onClick={handleCloses} className="modalClosebtn">
-=======
           <button onClick={handleCloseRacePopup} className="modalClosebtn">
->>>>>>> ebe0350d919ca4c2deae2e82151aef12326019e4
             Close
           </button>
         </Modal.Footer>

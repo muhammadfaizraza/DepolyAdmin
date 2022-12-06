@@ -25,7 +25,7 @@ const AdsForm = () => {
     try {
       const formData = new FormData();
       formData.append("image", image);
-      formData.append("TitleEn", TitleEn);
+      formData.append("TitleEn", TitleEn+ ' ');
       formData.append("TitleAr", TitleAr + ' ');
       formData.append("DescriptionAr", DescriptionAr + ' ');
       formData.append("DescriptionEn", DescriptionEn);

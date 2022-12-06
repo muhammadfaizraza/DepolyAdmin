@@ -938,7 +938,7 @@ const RaceForm = () => {
                     />
                   </div>
                 </div>
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
@@ -960,7 +960,7 @@ const RaceForm = () => {
                       <Form.Control type="text" placeholder=" أدخل كاب" />
                     </FloatingLabel>
                   </div>
-                </div>
+                </div> */}
                 <div className="row mainrow">
                   <div className="col-sm">
                     <DateTimePicker
@@ -972,9 +972,9 @@ const RaceForm = () => {
                       maxDate={new Date("02-29-2023")}
                       yearPlaceholder="Time"
                     />
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
-                  <div className="col-sm"  style={{ direction: "rtl" }}>
+                  {/* <div className="col-sm"  style={{ direction: "rtl" }}>
                     <DateTimePicker
                       onChange={setDayNTime}
                       value={DayNTime}
@@ -985,7 +985,7 @@ const RaceForm = () => {
                       yearPlaceholder="Time"
                      
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -999,9 +999,9 @@ const RaceForm = () => {
                     >
                       <Form.Control  type="number" min='0' placeholder="Enter 1st Prize" />
                     </FloatingLabel>
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <input
                       style={{ direction: "rtl" }}
                       placeholder="الجائزة الأولى "
@@ -1010,7 +1010,7 @@ const RaceForm = () => {
                       type='number'
                       min='0'
                     ></input>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -1024,9 +1024,9 @@ const RaceForm = () => {
                     >
                       <Form.Control  type="number" min='0' placeholder="Enter 2nd Prize" />
                     </FloatingLabel>
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <input
                       style={{ direction: "rtl" }}
                       placeholder="الجائزة الثانية "
@@ -1035,7 +1035,7 @@ const RaceForm = () => {
                       type='number'
                       min='0'
                     ></input>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -1050,9 +1050,9 @@ const RaceForm = () => {
                       <Form.Control  type="number" min='0' placeholder="Enter 3rd Prize" />
                     </FloatingLabel>
 
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <input
                       placeholder="الجائزة الثالثة"
                       style={{ direction: "rtl" }}
@@ -1061,7 +1061,7 @@ const RaceForm = () => {
                       type='number'
                       min='0'
                     ></input>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -1076,9 +1076,9 @@ const RaceForm = () => {
                       <Form.Control  type="number" min='0' placeholder="Enter 4th Prize" />
                     </FloatingLabel>
 
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <input
                       style={{ direction: "rtl" }}
                       placeholder="الجائزة الرابعة "
@@ -1087,7 +1087,7 @@ const RaceForm = () => {
                       type='number'
                       min='0'
                     ></input>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -1101,9 +1101,9 @@ const RaceForm = () => {
                     >
                       <Form.Control  type="number" min='0' placeholder="Enter 5th Prize" />
                     </FloatingLabel>
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <input
                       style={{ direction: "rtl" }}
                       placeholder="الجائزة الخامسة "
@@ -1112,7 +1112,7 @@ const RaceForm = () => {
                       type='number'
                       min='0'
                     ></input>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -1126,9 +1126,9 @@ const RaceForm = () => {
                     >
                       <Form.Control  type="number" min='0' placeholder="Enter 6th Prize" />
                     </FloatingLabel>
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <input
                       style={{ direction: "rtl" }}
                       placeholder="الجائزة السادسة"
@@ -1137,7 +1137,7 @@ const RaceForm = () => {
                       type='number'
                       min='0'
                     ></input>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="ButtonSection">
                   <div>

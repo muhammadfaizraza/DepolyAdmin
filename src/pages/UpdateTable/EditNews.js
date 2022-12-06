@@ -47,6 +47,7 @@ const NewsForm = () => {
     const image = event.target.files[0];
     setImage(image);
   };
+
   useEffect(() => {
     if (image === undefined) {
       setPreview(newsid.image)
@@ -55,11 +56,11 @@ const NewsForm = () => {
     const objectUrl = URL.createObjectURL(image)
     setPreview(objectUrl)
     return () => URL.revokeObjectURL(objectUrl)
-}, [image])
+}, [image]);
+
   const submit = async (event) => {
     event.preventDefault();
     try {
-      
       const formData = new FormData();
       formData.append("TitleEn", state1.TitleEn);
       formData.append("TitleAr", state1.TitleAr + ' ');
@@ -131,6 +132,38 @@ const NewsForm = () => {
                   
                   </div>
                 </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Second Title "
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, SecondTitleEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description"value={state1.SecondTitleEn}/>
+                    </FloatingLabel>
+               
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="العنوان الثاني"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, SecondTitleAr: e.target.value })
+                      }
+                    >
+                      <Form.Control type="text" placeholder="Description"value={state1.SecondTitleAr}/>
+                    </FloatingLabel>
+                    
+                  </div>
+                </div>
 
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -165,38 +198,7 @@ const NewsForm = () => {
                   </div>
                 </div>
 
-                <div className="row mainrow">
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="Second Title "
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, SecondTitleEn: e.target.value })
-                      }
-                    
-                    >
-                      <Form.Control type="text" placeholder="Description"value={state1.SecondTitleEn}/>
-                    </FloatingLabel>
-               
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="العنوان الثاني"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                      onChange={(e) =>
-                        setState({ ...state1, SecondTitleAr: e.target.value })
-                      }
-                    >
-                      <Form.Control type="text" placeholder="Description"value={state1.SecondTitleAr}/>
-                    </FloatingLabel>
-                    
-                  </div>
-                </div>
+                
                 
 
                 <div className="ButtonSection">

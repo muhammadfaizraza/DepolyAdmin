@@ -252,7 +252,7 @@ const Sidebar = () => {
                
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="7">
+            {/* <Accordion.Item eventKey="7">
               <Accordion.Header>Statistics</Accordion.Header>
               <Accordion.Body className="AccordionBody">
                 <div>
@@ -287,7 +287,7 @@ const Sidebar = () => {
                   </Link>
                 </div>
               </Accordion.Body>
-            </Accordion.Item>
+            </Accordion.Item> */}
             <Accordion.Item eventKey="8">
               <Accordion.Header>News</Accordion.Header>
               <Accordion.Body className="AccordionBody">

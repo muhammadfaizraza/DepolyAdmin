@@ -23,19 +23,21 @@ const NewsForm = () => {
   const { fullraceid } = state;
   const [DayNTime, setDayNTime] = useState("");
   const [RaceStatus, setRaceStatus] = useState("");
-
+  console.log(fullraceid)
   const [state1, setState] = useState({
 		MeetingCode: '',
     DescriptionEn:'',
 		DescriptionAr: '',
     WeatherDegree: '',
+    RaceStatus:'',
     FirstPrice:'',
     SecondPrice:'',
     ThirdPrice:'',
     FourthPrice:'',
     FifthPrice:'',
     SixthPrice:'',
-    RaceStatus:''
+    RaceStatus:'',
+    DayNTime:''
     
 	});
   const [image,setImage] = useState();
@@ -61,6 +63,8 @@ const NewsForm = () => {
         FifthPrice: fullraceid.FifthPrice,
         SixthPrice: fullraceid.SixthPrice,
         RaceStatus: fullraceid.RaceStatus,
+        RaceStatus:fullraceid.RaceStatus,
+        DayNTime:fullraceid.DayNTime
 			});
 		} else {
 		}
@@ -87,13 +91,15 @@ const NewsForm = () => {
       formData.append("DescriptionAr", state1.DescriptionAr + ' ');
       formData.append("WeatherDegree", state1.WeatherDegree);
       formData.append("FirstPrice", state1.FirstPrice);
+      formData.append("RaceStatus", (RaceStatus.value ===  undefined ? state1.RaceStatus : RaceStatus.value));
       formData.append("SecondPrice", state1.SecondPrice);
       formData.append("ThirdPrice", state1.ThirdPrice);
       formData.append("FourthPrice", state1.FourthPrice);
       formData.append("FifthPrice", state1.FifthPrice);
       formData.append("SixthPrice", state1.SixthPrice);
-      formData.append("DayNTime", DayNTime);
-      formData.append("RaceStatus", RaceStatus.value);
+      formData.append("DayNTime", (DayNTime ===  '' ? state1.DayNTime : DayNTime));
+
+
 
       const response = await axios.put(`${window.env.API_URL}/updaterace/${fullraceid._id}`, formData);
       history("/races");
@@ -286,10 +292,10 @@ const NewsForm = () => {
                       <Form.Control type="number" placeholder="Weather Degree"   value={state1.FirstPrice}/>
                     </FloatingLabel>
 
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
                       label="السعر الأول"
@@ -301,7 +307,7 @@ const NewsForm = () => {
                     >
                       <Form.Control type="text" placeholder="ملاحظات"   value={state1.FirstPrice}/>
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -317,10 +323,10 @@ const NewsForm = () => {
                       <Form.Control type="number" placeholder="Weather Degree"   value={state1.SecondPrice}/>
                     </FloatingLabel>
 
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
                       label="الجائزة الثانية"
@@ -332,7 +338,7 @@ const NewsForm = () => {
                     >
                       <Form.Control type="text" placeholder="ملاحظات"   value={state1.SecondPrice}/>
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -348,10 +354,10 @@ const NewsForm = () => {
                       <Form.Control type="number" placeholder="Weather Degree"   value={state1.ThirdPrice}/>
                     </FloatingLabel>
 
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
                       label="الجائزة الثالثة"
@@ -363,7 +369,7 @@ const NewsForm = () => {
                     >
                       <Form.Control type="text" placeholder="ملاحظات"   value={state1.ThirdPrice}/>
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -379,10 +385,10 @@ const NewsForm = () => {
                       <Form.Control type="number" placeholder="Weather Degree"   value={state1.FourthPrice}/>
                     </FloatingLabel>
 
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
                       label="الجائزة الرابعة"
@@ -394,7 +400,7 @@ const NewsForm = () => {
                     >
                       <Form.Control type="text" placeholder="ملاحظات"   value={state1.FourthPrice}/>
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -407,13 +413,13 @@ const NewsForm = () => {
                       }
                     
                     >
-                      <Form.Control type="number" placeholder="Weather Degree"   value={state1.FifthPrice}/>
+                      <Form.Control type="number" placeholder="Prize"   value={state1.FifthPrice}/>
                     </FloatingLabel>
 
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
                       label="الجائزة الخامسة"
@@ -425,7 +431,7 @@ const NewsForm = () => {
                     >
                       <Form.Control type="text" placeholder="الجائزة الخامسة"   value={state1.FifthPrice}/>
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -441,10 +447,10 @@ const NewsForm = () => {
                       <Form.Control type="number" placeholder="Weather Degree"   value={state1.SixthPrice}/>
                     </FloatingLabel>
 
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
                       label="الجائزة السادسة"
@@ -456,7 +462,7 @@ const NewsForm = () => {
                     >
                       <Form.Control type="text" placeholder="ملاحظات"   value={state1.SixthPrice}/>
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="ButtonSection">
                 <div>

@@ -17,7 +17,7 @@ const Horsekindform = () => {
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
-      formData.append("NameAr", NameAr);
+      formData.append("NameAr", NameAr + ' ');
       formData.append("shortName",shortCode);
 
       await axios.post(`${window.env.API_URL}/uploadHorseKind`, formData);

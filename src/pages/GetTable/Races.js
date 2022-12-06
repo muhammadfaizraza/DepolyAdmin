@@ -150,8 +150,8 @@ const Races = () => {
             }}
           >
             <div className="Header ">
-              <h4>Race Listings</h4>
-              <div>
+            <h4> Race Listings</h4>
+            <div>
                 <h6
                   style={{
                     marginRight: "100px",

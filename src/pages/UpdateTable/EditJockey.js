@@ -69,7 +69,7 @@ console.log(preview,'preview')
       const formData = new FormData();
       formData.append("image", image);
       formData.append("NameEn", state1.NameEn);
-      formData.append("NameAr", state1.NameAr);
+      formData.append("NameAr", state1.NameAr + ' ');
       formData.append("MaximumJockeyWeight", state1.MaximumJockeyWeight);
       formData.append("MiniumumJockeyWeight", state1.MiniumumJockeyWeight);
 

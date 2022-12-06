@@ -23,7 +23,7 @@ const Color = () => {
       try {
         const formData = new FormData();
         formData.append("NameEn", NameEn);
-        formData.append("NameAr", NameAr);
+        formData.append("NameAr", NameAr + ' ');
         // formData.append("shortCode", shortCode);
         await axios.post(`${window.env.API_URL}/uploadColor`, formData);
         if(pathname === '/color'){
@@ -87,7 +87,7 @@ const Color = () => {
                     controlId="floatingInput"
                     label="اسم"
                     className="mb-3 floatingInputAr"
-                    onChange={(e) => setNameAr(e.target.value)}
+                    onChange={(e) => setNameAr(e.target.value )}
                     name="Name"
                     value={NameAr}
                     style={{ direction: "rtl" }}

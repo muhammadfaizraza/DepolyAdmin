@@ -41,7 +41,7 @@ const Dashboard = () => {
   
       <div className='rightsidedata'>
         <div className='dashboardheader'>
-          <h2>Dashboard</h2>
+          <h4 className='topheading'>Dashboard</h4>
         </div>
        <div className='DashboardCard'>
         <div className='OngoingRaces'>

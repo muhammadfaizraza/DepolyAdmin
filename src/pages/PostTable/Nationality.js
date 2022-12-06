@@ -25,7 +25,7 @@ const Nationality = () => {
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
-      formData.append("NameAr", NameAr);
+      formData.append("NameAr", NameAr + ' ');
       // formData.append("shortCode", shortCode);
       formData.append("Abbrev", Abbrev);
       formData.append("AltName", AltName);
@@ -143,21 +143,21 @@ const Nationality = () => {
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
-                    label="Write Abbreviation"
+                    label=" Abbreviation"
                     className="mb-3"
                     onChange={(e) => setAbbrev(e.target.value)}
                     value={Abbrev}
                   >
                     <Form.Control
                       type="text"
-                      placeholder="Write Abbreviation"
+                      placeholder=" Abbreviation"
                     />
                   </FloatingLabel>
 
-                  <span className="spanForm"> |</span>
+                  {/* <span className="spanForm"> |</span> */}
                 </div>
 
-                <div className="col-sm">
+                {/* <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="اكتب الاختصار"
@@ -170,14 +170,14 @@ const Nationality = () => {
                       style={{ left: "%" }}
                     />
                   </FloatingLabel>
-                </div>
+                </div> */}
               </div>
 
               <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
-                    label="Write Alternative Name"
+                    label=" Alternative Name"
                     className="mb-3"
                     onChange={(e) => setAltName(e.target.value)}
                     value={AltName}
@@ -188,10 +188,10 @@ const Nationality = () => {
                     />
                   </FloatingLabel>
 
-                  <span className="spanForm"> |</span>
+                  {/* <span className="spanForm"> |</span> */}
                 </div>
 
-                <div className="col-sm">
+                {/* <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="اكتب الاسم البديل"
@@ -204,7 +204,7 @@ const Nationality = () => {
                       style={{ left: "%" }}
                     />
                   </FloatingLabel>
-                </div>
+                </div> */}
               </div>
 
               <div className="row mainrow">
@@ -218,10 +218,10 @@ const Nationality = () => {
                   >
                     <Form.Control type="text" placeholder="Label" />
                   </FloatingLabel>{" "}
-                  <span className="spanForm"> |</span>
+                  {/* <span className="spanForm"> |</span> */}
                 </div>
 
-                <div className="col-sm">
+                {/* <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="مُلصَق"
@@ -234,7 +234,7 @@ const Nationality = () => {
                       style={{ left: "%" }}
                     />
                   </FloatingLabel>
-                </div>
+                </div> */}
               </div>
 
               <div className="row mainrow">
@@ -249,9 +249,9 @@ const Nationality = () => {
                   >
                     <Form.Control type="number" placeholder="Off Set" />
                   </FloatingLabel>
-                  <span className="spanForm"> |</span>
+                  {/* <span className="spanForm"> |</span> */}
                 </div>
-
+{/* 
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
@@ -265,7 +265,7 @@ const Nationality = () => {
                       style={{ left: "%" }}
                     />
                   </FloatingLabel>
-                </div>
+                </div> */}
               </div>
 
               <div className="row mainrow">
@@ -279,10 +279,10 @@ const Nationality = () => {
                   >
                     <Form.Control type="text" placeholder="Value" />
                   </FloatingLabel>
-                  <span className="spanForm"> |</span>
+                  {/* <span className="spanForm"> |</span> */}
                 </div>
 
-                <div className="col-sm">
+                {/* <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="القيمة"
@@ -295,7 +295,7 @@ const Nationality = () => {
                       style={{ left: "%" }}
                     />
                   </FloatingLabel>
-                </div>
+                </div> */}
               </div>
 
               <div className="ButtonSection">

@@ -75,9 +75,9 @@ const NewsForm = () => {
       
       const formData = new FormData();
       formData.append("NameEn", state1.NameEn);
-      formData.append("NameAr", state1.NameAr);
+      formData.append("NameAr", state1.NameAr + ' ');
       formData.append("DescEn", state1.DescEn);
-      formData.append("DescAr", state1.DescAr);
+      formData.append("DescAr", state1.DescAr + ' ');
       formData.append("TriCount", state1.TriCount);
       formData.append("pickCount", state1.pickCount);
       formData.append("StartDate", StartDate);

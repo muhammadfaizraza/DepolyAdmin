@@ -26,8 +26,8 @@ const AdsForm = () => {
       const formData = new FormData();
       formData.append("image", image);
       formData.append("TitleEn", TitleEn);
-      formData.append("TitleAr", TitleAr);
-      formData.append("DescriptionAr", DescriptionAr);
+      formData.append("TitleAr", TitleAr + ' ');
+      formData.append("DescriptionAr", DescriptionAr + ' ');
       formData.append("DescriptionEn", DescriptionEn);
       await axios.post(`${window.env.API_URL}/uploadAds`, formData);
       swal({

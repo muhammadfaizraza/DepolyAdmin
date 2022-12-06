@@ -278,15 +278,12 @@ const HorseForm = () => {
       formData.append("image", image);
       formData.append("NameEn", NameEn);
       formData.append("DOB", DOB);
-      formData.append("NameAr", NameAr);
+      formData.append("NameAr", NameAr + ' ');
       formData.append("Remarks", Remarks);
       formData.append("ActiveOwner", ActiveOwner.id);
       // formData.append("ActiveJockey", ActiveJockey.id);
       // formData.append("Owner", Owner.id);
       formData.append("HorseStatus", HorseStatus.value);
-      // formData.append("Jockey", Jockey.id);
-      // formData.append("Trainer", Trainer.id);
-      // formData.append("Trainer", ActiveTrainer.id);
       formData.append("ActiveTrainer", ActiveTrainer.id);
       formData.append("Sex", Sex.id);
       formData.append("Breeder", Breeder.id);

@@ -56,7 +56,7 @@ const NewsForm = () => {
       
       const formData = new FormData();
       formData.append("TitleEn", state1.TitleEn);
-      formData.append("TitleAr", state1.TitleAr);
+      formData.append("TitleAr", state1.TitleAr + ' ');
       formData.append("Url", state1.Url);
       formData.append("image", image);
 

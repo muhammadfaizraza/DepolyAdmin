@@ -67,7 +67,7 @@ const NewsForm = () => {
       const formData = new FormData();
       formData.append("image", image);
       formData.append("NameEn", state1.NameEn);
-      formData.append("NameAr", state1.NameAr);
+      formData.append("NameAr", state1.NameAr + ' ');
       formData.append("shortCode", state1.shortCode);
       formData.append("AltName", state1.AltName);
       formData.append("Abbrev", state1.Abbrev);
@@ -179,7 +179,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="Abbrev"
+                      label="Abbrevation"
                       className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, Abbrev: e.target.value })

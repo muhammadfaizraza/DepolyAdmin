@@ -110,7 +110,7 @@ const NewsForm = () => {
       const formData = new FormData();
       formData.append("image", image);
       formData.append("TrackNameEn", state1.TrackNameEn);
-      formData.append("TrackNameAr", state1.TrackNameAr);
+      formData.append("TrackNameAr", state1.TrackNameAr + ' ');
       formData.append("shortCode", state1.shortCode);
       formData.append("NationalityId", state1.NationalityId);
       formData.append("ColorCode", state1.ColorCode);

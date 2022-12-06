@@ -56,7 +56,7 @@ const TrainerForm = () => {
       formData.append("NameEn", NameEn);
       formData.append("Detail", Detail);
       formData.append("Remarks", Remarks);
-      formData.append("NameAr", NameAr);
+      formData.append("NameAr", NameAr + ' ');
       formData.append("DOB", DOB);
       formData.append("Age", Age);
       formData.append("TitleAr", TitleAr);
@@ -64,7 +64,7 @@ const TrainerForm = () => {
       formData.append("TitleEn", TitleEn);
       formData.append("TrainerLicenseDate", TrainerLicenseDate);
       formData.append("ShortNameEn", ShortNameEn);
-      formData.append("ShortNameAr", ShortNameAr);
+      formData.append("ShortNameAr", ShortNameAr + ' ');
       await axios.post(
         `${window.env.API_URL}/uploadtrainer?keyword=&page=`,
         formData

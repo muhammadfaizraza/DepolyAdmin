@@ -117,11 +117,11 @@ const OwnerForm = () => {
     const formData = new FormData();
     formData.append("Ownerimage", Ownerimage);
     formData.append("NameEn", NameEn);
-    formData.append("NameAr", NameAr);
+    formData.append("NameAr", NameAr + ' ');
     formData.append("TitleEn", TitleEn);
-    formData.append("TitleAr", TitleAr);
+    formData.append("TitleAr", TitleAr + ' ');
     formData.append("ShortEn", ShortEn);
-    formData.append("ShortAr", ShortAr);
+    formData.append("ShortAr", ShortAr + ' ');
     formData.append("NationalityID", NationalityID.id);
     formData.append("RegistrationDate", RegistrationDate);
     formData.append("image", image);

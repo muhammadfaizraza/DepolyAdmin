@@ -57,9 +57,9 @@ const NewsForm = () => {
       formData.append("image", image);
       formData.append("NameEn", NameEn);
       formData.append("ShortNameEn", ShortNameEn);
-      formData.append("ShortNameAr", ShortNameAr);
+      formData.append("ShortNameAr", ShortNameAr + ' ');
       formData.append("JockeyAllowance", JockeyAllowance);
-      formData.append("NameAr", NameAr);
+      formData.append("NameAr", NameAr + ' ');
       formData.append("DOB", DOB);
       formData.append("RemarksEn", RemarksEn);
       formData.append("NationalityID", NationalityID.ID);

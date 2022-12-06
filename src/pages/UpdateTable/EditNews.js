@@ -62,11 +62,11 @@ const NewsForm = () => {
       
       const formData = new FormData();
       formData.append("TitleEn", state1.TitleEn);
-      formData.append("TitleAr", state1.TitleAr);
+      formData.append("TitleAr", state1.TitleAr + ' ');
       formData.append("DescriptionEn", state1.DescriptionEn);
-      formData.append("DescriptionAr", state1.DescriptionAr);
+      formData.append("DescriptionAr", state1.DescriptionAr + ' ');
       formData.append("SecondTitleEn", state1.SecondTitleEn);
-      formData.append("SecondTitleAr", state1.SecondTitleAr);
+      formData.append("SecondTitleAr", state1.SecondTitleAr + ' ');
       formData.append("image", image);
 
       const response = await axios.put(`${window.env.API_URL}/updatenews/${newsid._id}`, formData);

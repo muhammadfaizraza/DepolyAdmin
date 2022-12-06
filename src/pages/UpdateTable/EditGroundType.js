@@ -36,7 +36,7 @@ const NewsForm = () => {
     try {
       const formData = new FormData();
       formData.append("NameEn", state1.NameEn);
-      formData.append("NameAr", state1.NameAr);
+      formData.append("NameAr", state1.NameAr + ' ');
       formData.append("shortCode", state1.shortCode);
 
       const response = await axios.put(

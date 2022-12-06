@@ -64,10 +64,10 @@ const NewsForm = () => {
       const formData = new FormData();
       formData.append("image",image);
       formData.append("NameEn", state1.NameEn);
-      formData.append("NameAr", state1.NameAr);
+      formData.append("NameAr", state1.NameAr + ' ');
       formData.append("shortCode", state1.shortCode);
       formData.append("DescriptionEn", state1.DescriptionEn);
-      formData.append("DescriptionAr", state1.DescriptionAr);
+      formData.append("DescriptionAr", state1.DescriptionAr + ' ');
 
       const response = await axios.put(`${window.env.API_URL}/updateBreeder/${breederid._id}`, formData);
       history("/breederlist");

@@ -83,7 +83,7 @@ const RaceCourseForm = () => {
       const formData = new FormData();
       formData.append("image", image);
       formData.append("TrackNameEn", TrackNameEn);
-      formData.append("TrackNameAr", TrackNameAr);
+      formData.append("TrackNameAr", TrackNameAr + ' ');
       formData.append("ColorCode", ColorCode.id);
       formData.append("NationalityID", NationalityId.id);
       // formData.append("shortCode", shortCode);

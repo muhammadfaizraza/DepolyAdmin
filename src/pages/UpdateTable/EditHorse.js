@@ -130,7 +130,7 @@ const NewsForm = () => {
       const formData = new FormData();
       formData.append("HorseImage", HorseImage);
       formData.append("NameEn", state1.NameEn);
-      formData.append("NameAr", state1.NameAr);
+      formData.append("NameAr", state1.NameAr + ' ');
       formData.append("PurchasePrice", state1.PurchasePrice);
       formData.append("STARS", state1.STARS);
       formData.append("Remarks", state1.Remarks);

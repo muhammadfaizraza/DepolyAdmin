@@ -21,10 +21,10 @@ const Breeder = () => {
     try {
       const formData = new FormData();
 
-      formData.append("NameAr", NameAr);
+      formData.append("NameAr", NameAr + ' ');
       formData.append("NameEn", NameEn);
       // formData.append("shortCode", shortCode);
-      formData.append("DescriptionAr", DescriptionAr);
+      formData.append("DescriptionAr", DescriptionAr + ' ');
       formData.append("DescriptionEn", DescriptionEn);
       formData.append("image", image);
 

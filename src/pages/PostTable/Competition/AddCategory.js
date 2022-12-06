@@ -49,7 +49,8 @@ const Color = () => {
             marginTop: "30px",
           }}
         >
-          <div className="Headers">Create Category</div>
+          <div className="Headers">
+            Create Category</div>
           <div className="form">
             <form onSubmit={submit}>
               <div className="row mainrow">

@@ -21,7 +21,7 @@ const SliderForm = () => {
       const formData = new FormData();
       formData.append("image", image);
       formData.append("TitleEn", TitleEn);
-      formData.append("TitleAr", TitleAr);
+      formData.append("TitleAr", TitleAr + ' ');
       formData.append("Url", Url);
       const response = await axios.post(
         `${window.env.API_URL}/uploadSlider`,

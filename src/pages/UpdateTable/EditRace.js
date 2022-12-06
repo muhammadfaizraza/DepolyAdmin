@@ -84,7 +84,7 @@ const NewsForm = () => {
       formData.append("image", image);
       formData.append("MeetingCode", state1.MeetingCode);
       formData.append("DescriptionEn", state1.DescriptionEn);
-      formData.append("DescriptionAr", state1.DescriptionAr);
+      formData.append("DescriptionAr", state1.DescriptionAr + ' ');
       formData.append("WeatherDegree", state1.WeatherDegree);
       formData.append("FirstPrice", state1.FirstPrice);
       formData.append("SecondPrice", state1.SecondPrice);

@@ -26,10 +26,10 @@ const NewsForm = () => {
       const formData = new FormData();
       formData.append("image", image);
       formData.append("TitleEn", TitleEn);
-      formData.append("TitleAr", TitleAr);
+      formData.append("TitleAr", TitleAr + ' ');
       formData.append("SecondTitleEn", SecondTitleEn);
-      formData.append("SecondTitleAr", SecondTitleAr);
-      formData.append("DescriptionAr", DescriptionAr);
+      formData.append("SecondTitleAr", SecondTitleAr + ' ');
+      formData.append("DescriptionAr", DescriptionAr + ' ');
       formData.append("DescriptionEn", DescriptionEn);
       const response = await axios.post(
         `${window.env.API_URL}/uploadnews?keyword=&page=`,

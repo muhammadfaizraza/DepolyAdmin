@@ -184,8 +184,9 @@ const NewsForm = () => {
                       onChange={(e) => setNameEn(e.target.value)}
                       name="Name"
                       value={NameEn}
+                     
                     >
-                      <Form.Control type="text" placeholder="Name" />
+                      <Form.Control type="text" placeholder="Name"  required/>
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -200,8 +201,9 @@ const NewsForm = () => {
                       name="Name"
                       value={NameAr}
                       style={{ direction: "rtl" }}
+                     
                     >
-                      <Form.Control type="text" placeholder="اسم" />
+                      <Form.Control type="text" placeholder="اسم"  required/>
                     </FloatingLabel>
                   </div>
                 </div>
@@ -214,8 +216,9 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setShortNameEn(e.target.value)}
                       value={ShortNameEn}
+                     
                     >
-                      <Form.Control type="text" placeholder="Short Name" />
+                      <Form.Control type="text" placeholder="Short Name"  required/>
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -231,7 +234,7 @@ const NewsForm = () => {
                       value={ShortNameAr}
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="اسم قصير" />
+                      <Form.Control type="text" placeholder="اسم قصير"  required/>
                     </FloatingLabel>
                   </div>
                 </div>
@@ -244,8 +247,9 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setRemarksEn(e.target.value)}
                       value={RemarksEn}
+                    
                     >
-                      <Form.Control type="text" placeholder="Remarks" />
+                      <Form.Control type="text" placeholder="Remarks"   required/>
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -261,7 +265,7 @@ const NewsForm = () => {
                       value={RemarksAr}
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="ملاحظات" />
+                      <Form.Control type="text" placeholder="ملاحظات"   required/>
                     </FloatingLabel>
                   </div>
                 </div>
@@ -325,7 +329,7 @@ const NewsForm = () => {
                       onChange={(e) => setRating(e.target.value)}
                       value={Rating}
                     >
-                      <Form.Control type="number" placeholder="Rating" />
+                      <Form.Control type="number" placeholder="Rating" required/>
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -357,6 +361,7 @@ const NewsForm = () => {
                         type="number"
                         placeholder="Jockey Minimum Weight"
                         min='0'
+                        required
                       />
                     </FloatingLabel>
 
@@ -392,6 +397,7 @@ const NewsForm = () => {
                         type="number"
                         placeholder="Jockey Maximum Weight"
                         min='0'
+                        required
                       />
                     </FloatingLabel>
 
@@ -471,6 +477,7 @@ const NewsForm = () => {
                         type="number"
                         placeholder="Jockey Allowance"
                         min='0'
+                        required
                       />
                     </FloatingLabel>
 

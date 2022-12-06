@@ -159,7 +159,7 @@ const RaceCourseForm = () => {
                       name="Name"
                       value={TrackNameEn}
                     >
-                      <Form.Control type="text" placeholder="Track Name" />
+                      <Form.Control type="text" placeholder="Track Name" required/>
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
                   </div>
@@ -177,6 +177,7 @@ const RaceCourseForm = () => {
                         type="text"
                         placeholder="رمز قصير"
                         style={{ left: "%" }}
+                        required
                       />
                     </FloatingLabel>
                   </div>

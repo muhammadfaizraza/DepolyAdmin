@@ -421,7 +421,7 @@ const HorseForm = () => {
                       name="Name"
                       value={NameEn}
                     >
-                      <Form.Control type="text" placeholder=" Horse Name" />
+                      <Form.Control type="text" placeholder=" Horse Name" required/>
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -436,8 +436,9 @@ const HorseForm = () => {
                       name="Name"
                       value={NameAr}
                       style={{ direction: "rtl" }}
+
                     >
-                      <Form.Control type="text" placeholder="اسم" />
+                      <Form.Control type="text" placeholder="اسم" required/>
                     </FloatingLabel>
                   </div>
                 </div>
@@ -508,6 +509,7 @@ const HorseForm = () => {
                       className="mb-3"
                       onChange={(e) => setRemarks(e.target.value)}
                       value={Remarks}
+                      required
                     >
                       <Form.Control type="text" placeholder="Details" />
                     </FloatingLabel>
@@ -630,6 +632,7 @@ const HorseForm = () => {
                         type="number"
                         min='0'
                         placeholder="Purchase Price"
+                        required
                       />
                     </FloatingLabel>
 

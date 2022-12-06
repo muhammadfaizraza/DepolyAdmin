@@ -211,7 +211,7 @@ const OwnerForm = () => {
                       name="Name"
                       value={NameEn}
                     >
-                      <Form.Control type="text" placeholder="Name" />
+                      <Form.Control type="text" placeholder="Name" required/>
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -227,7 +227,7 @@ const OwnerForm = () => {
                       value={NameAr}
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="اسم" />
+                      <Form.Control type="text" placeholder="اسم" required />
                     </FloatingLabel>
                   </div>
                 </div>
@@ -240,7 +240,7 @@ const OwnerForm = () => {
                       onChange={(e) => setTitleEn(e.target.value)}
                       value={TitleEn}
                     >
-                      <Form.Control type="text" placeholder="Title" />
+                      <Form.Control type="text" placeholder="Title" required/>
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
                   </div>
@@ -255,7 +255,7 @@ const OwnerForm = () => {
                       value={TitleAr}
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="عنوان" />
+                      <Form.Control type="text" placeholder="عنوان" required/>
                     </FloatingLabel>
                   </div>
                 </div>
@@ -268,7 +268,7 @@ const OwnerForm = () => {
                       onChange={(e) => setShortEn(e.target.value)}
                       value={ShortEn}
                     >
-                      <Form.Control type="text" placeholder="Short Name" />
+                      <Form.Control type="text" placeholder="Short Name" required />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -284,7 +284,7 @@ const OwnerForm = () => {
                       value={ShortAr}
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="اسم قصير" />
+                      <Form.Control type="text" placeholder="اسم قصير" required/>
                     </FloatingLabel>
                   </div>
                 </div>

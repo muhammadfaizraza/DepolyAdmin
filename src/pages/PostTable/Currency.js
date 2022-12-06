@@ -64,7 +64,7 @@ const Currency = () => {
                     name="Name"
                     value={NameEn}
                   >
-                    <Form.Control type="text" placeholder="Name" />
+                    <Form.Control type="text" placeholder="Name" required/>
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
@@ -80,7 +80,7 @@ const Currency = () => {
                     value={NameAr}
                     style={{ direction: "rtl" }}
                   >
-                    <Form.Control type="text" placeholder="اسم" />
+                    <Form.Control type="text" placeholder="اسم" required/>
                   </FloatingLabel>
                 </div>
               </div>
@@ -96,7 +96,7 @@ const Currency = () => {
                     onChange={(e) => setRate(e.target.value)}
                     value={Rate}
                   >
-                    <Form.Control type="number" placeholder="Rate" />
+                    <Form.Control type="number" placeholder="Rate" required/>
                   </FloatingLabel>
 
                   {/* <span className="spanForm"> |</span> */}

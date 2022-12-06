@@ -86,7 +86,7 @@ const submit = async (event) => {
                     name="Name"
                     
                   >
-                    <Form.Control     onChange={handleChange} value={registeration.NameEn} name="NameEn" type="text" placeholder="Name" />
+                    <Form.Control   required  onChange={handleChange} value={registeration.NameEn} name="NameEn" type="text" placeholder="Name" />
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
@@ -102,7 +102,7 @@ const submit = async (event) => {
                    
                     style={{ direction: "rtl" }}
                   >
-                    <Form.Control name="NameAr"   onChange={handleChange}  value={registeration.NameAr} type="text" placeholder="اسم" />
+                    <Form.Control name="NameAr"   onChange={handleChange}  value={registeration.NameAr} type="text" placeholder="اسم" required/>
                   </FloatingLabel>
                 </div>
               </div>

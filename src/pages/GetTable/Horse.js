@@ -111,7 +111,7 @@ const Horse = () => {
                     <thead>
                       <tr>
                         <th>Name</th>
-                        <th>Name Ar</th>
+                        <th>Name Arabic</th>
                         <th>Age</th>
                         <th>Sex</th>
                         <th>Color</th>

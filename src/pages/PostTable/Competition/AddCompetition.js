@@ -276,14 +276,15 @@ const TrainerForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="كود المنافسة
+                      "
                       className="mb-3 floatingInputAr"
                       onChange={(e) => setCompetitionCode(e.target.value)}
                       name="Name"
                       value={CompetitionCode}
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="اسم" />
+                      <Form.Control type="text" placeholder="كود المنافسة" />
                     </FloatingLabel>
                   </div>
                 </div>
@@ -332,11 +333,11 @@ const TrainerForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="تفاصيل"
+                      label="ثلاثي العد"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="number" placeholder="تفاصيل" />
+                      <Form.Control type="number" placeholder="ثلاثي العد" />
                     </FloatingLabel>
                   </div>
                 </div>

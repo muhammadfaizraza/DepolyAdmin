@@ -8,52 +8,62 @@ import Form from "react-bootstrap/Form";
 
 
 const Color = () => {
+  const [registeration, setregisteration] = useState({
+    NameEn: '',
+    NameAr: '',
+ })
+ const [records, setrecords] = useState('')
+
+ const handleChange = (e) => {
+  const name = e.target.name
+  const value = e.target.value
+  setregisteration({ ...registeration, [name]: value })
+  if(e.target.value === ''){
+    setrecords('Enter VALUE',e.target.name)
+  }
+  else{
+    setrecords('')
+  }
+}
+
+console.log(registeration.NameAr)
+
+const submit = async (event) => {
+
+  event.preventDefault();
+  try {
+    const formData = new FormData();
+    formData.append("NameEn", registeration.NameEn);
+    formData.append("NameAr", registeration.NameAr + ' ');
+    // formData.append("shortCode", shortCode);
+
+    await axios.post(`${window.env.API_URL}/uploadColor`, formData);
+    swal({
+      title: "Success!",
+      text: "Data has been added Successfully ",
+      icon: "success",
+      button: "OK",
+    });
+    if(pathname === '/gender'){
+      history("/genderlist");
+    }
+  } catch (error) {
+    const err = error.response.data.message;
+    swal({
+      title: "Error!",
+      text: err,
+      icon: "error",
+      button: "OK",
+    });
+  }
+};
 
 
-
-  const [NameEn, setNameEn] = useState("");
-  const [NameAr, setNameAr] = useState("");
 
   const history = useNavigate();
   const { pathname } = useLocation();
 
-  const submit = async (event) => {
-    event.preventDefault();
-    if( NameEn !== '' && NameAr !== ''){
-      try {
-        const formData = new FormData();
-        formData.append("NameEn", NameEn);
-        formData.append("NameAr", NameAr + ' ');
-        // formData.append("shortCode", shortCode);
-        await axios.post(`${window.env.API_URL}/uploadColor`, formData);
-        if(pathname === '/color'){
-          history("/colorlist");
-        }
-        swal({
-          title: "Success!",
-          text: "Data has been added successfully ",
-          icon: "success",
-          button: "OK",
-        });
-      } catch (error) {
-        const err = error.response.data.message;
-        swal({
-          title: "Error!",
-          text: err,
-          icon: "error",
-          button: "OK",
-        });
-      }
-    }
-    else{
-      swal({
-        title: "Error!",
-        text: 'Please Enter Name',
-        icon: "error",
-        button: "OK",
-      });
-    }
-  };
+ 
   return (
     <Fragment>
     <div className="page">
@@ -72,61 +82,32 @@ const Color = () => {
                     controlId="floatingInput"
                     label="Name"
                     className="mb-3"
-                    onChange={(e) => setNameEn(e.target.value)}
+                
                     name="Name"
-                    value={NameEn}
+                    
                   >
-                    <Form.Control type="text" placeholder="Name" />
+                    <Form.Control     onChange={handleChange} value={registeration.NameEn} name="NameEn" type="text" placeholder="Name" />
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
                 </div>
-
+                
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="اسم"
                     className="mb-3 floatingInputAr"
-                    onChange={(e) => setNameAr(e.target.value )}
+                  
                     name="Name"
-                    value={NameAr}
+                   
                     style={{ direction: "rtl" }}
                   >
-                    <Form.Control type="text" placeholder="اسم" />
+                    <Form.Control name="NameAr"   onChange={handleChange}  value={registeration.NameAr} type="text" placeholder="اسم" />
                   </FloatingLabel>
                 </div>
               </div>
 
-              {/* <div className="row mainrow">
-                <div className="col-sm">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="Short Code"
-                    className="mb-3"
-                    onChange={(e) => setshortCode(e.target.value)}
-                    value={shortCode}
-                  >
-                    <Form.Control type="text" placeholder="Short Code" />
-                  </FloatingLabel>
-
-                  <span className="spanForm"> |</span>
-                </div>
-
-                <div className="col-sm">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="رمز قصير"
-                    className="mb-3 floatingInputAr "
-                    style={{ direction: "rtl", left: "initial", right: 0 }}
-                  >
-                    <Form.Control
-                      type="text"
-                      placeholder="رمز قصير"
-                      style={{ left: "%" }}
-                    />
-                  </FloatingLabel>
-                </div>
-              </div> */}
+          
 
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
                 <button Name="submit" className="SubmitButton">

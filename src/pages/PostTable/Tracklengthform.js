@@ -289,7 +289,7 @@ const Tracklengthform = () => {
            
                 <div>
                 <label className="Multipleownerlabel">
-                      Select Gif Image
+                      Select GIF Image
                     </label>
                   <input
                     type="file"

@@ -637,3 +637,31 @@ td.table_delete_btn1 {
 padding: 20px;
 font-weight: 500;
 }
+
+.form input#floatingInput:required {
+  border-color: #800000 !important;
+  border-width: 3px !important;
+  
+}
+
+.form :required:invalid {
+  border-color: #c00000 !important;
+}
+.has-success .input#floatingInput {
+  border-bottom: 2px solid #168b3f !important;
+}
+
+.has-danger  {
+  border-bottom: 2px solid #dc1d34 !important; 
+}
+.email-field {
+  outline: 0;
+}
+
+.input#floatingInput:valid {
+  border: 1px solid green;
+}
+
+.input#floatingInput:invalid {
+  border: 1px solid red;
+}

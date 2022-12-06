@@ -397,6 +397,9 @@ const TrainerForm = () => {
                 </div>
                 <div className="ButtonSection">
                   <div>
+                  <label className="Multipleownerlabel">
+                      Select Trainer image
+                    </label>
                     <input
                       type="file"
                       onChange={onSelectFile}

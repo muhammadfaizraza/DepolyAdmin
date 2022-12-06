@@ -1114,6 +1114,9 @@ const HorseForm = () => {
 
                 <div className="ButtonSection">
                   <div>
+                  <label className="Multipleownerlabel">
+                      Select Horse image
+                    </label>
                     <input
                       type="file"
                       onChange={onSelectFile}

@@ -8,7 +8,7 @@ import Form from "react-bootstrap/Form";
 const Nationality = () => {
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
-  const [shortCode, setshortCode] = useState("");
+
   const [Abbrev, setAbbrev] = useState("");
   const [AltName, setAltName] = useState("");
   const [Label, setLabel] = useState("");
@@ -17,12 +17,27 @@ const Nationality = () => {
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
 
+
+  //for errors
+
+
+
+
+const [error, setError] = useState(false)
+const [field, setField] = useState('');
+
+
   const history = useNavigate();
   const { pathname } = useLocation();
 
+
   const submit = async (event) => {
+
+  
     event.preventDefault();
+
     try {
+
       const formData = new FormData();
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr + ' ');
@@ -33,7 +48,20 @@ const Nationality = () => {
       formData.append("Offset", Offset);
       formData.append("Value", Value);
       formData.append("image", image);
-      await axios.post(`${window.env.API_URL}/uploadNationality`, formData);
+    
+        
+      if (!field) {
+        setError(true);
+        return null;
+      }
+    
+              await axios.post(`${window.env.API_URL}/uploadNationality`, formData);
+          
+            
+     
+   
+
+  
       if(pathname === '/nationality'){
         history("/nationalitylist");
       }
@@ -44,15 +72,22 @@ const Nationality = () => {
         button: "OK",
       });
     } catch (error) {
+  
       const err = error.response.data.message;
         swal({
         title: "Error!",
         text: err,
         icon: "error",
         button: "OK",
+
       });
+
     }
-  };
+  
+  
+
+}
+ 
   useEffect(() => {
     if (!image) {
       setPreview(undefined);
@@ -87,10 +122,10 @@ const Nationality = () => {
                     name="Name"
                     value={NameEn}
                   >
-                    <Form.Control type="text" placeholder="Name" />
+                    <Form.Control type="text" placeholder="Name" required  oninvalid="('Please Enter valid email')"/>
                   </FloatingLabel>
 
-                  <span className="spanForm"> |</span>
+                  <span className="spanForm"> |</span >
                 </div>
 
                 <div className="col-sm">
@@ -103,8 +138,9 @@ const Nationality = () => {
                     value={NameAr}
                     style={{ direction: "rtl" }}
                   >
-                    <Form.Control type="text" placeholder="اسم" />
+                    <Form.Control type="text" placeholder="اسم" required />
                   </FloatingLabel>
+            
                 </div>
               </div>
 
@@ -151,9 +187,9 @@ const Nationality = () => {
                     <Form.Control
                       type="text"
                       placeholder=" Abbreviation"
-                    />
+                      required/>
                   </FloatingLabel>
-
+                
                   {/* <span className="spanForm"> |</span> */}
                 </div>
 
@@ -185,10 +221,11 @@ const Nationality = () => {
                     <Form.Control
                       type="text"
                       placeholder="Write Alternative Name"
-                    />
+                      required/>
                   </FloatingLabel>
 
                   {/* <span className="spanForm"> |</span> */}
+
                 </div>
 
                 {/* <div className="col-sm">
@@ -216,7 +253,7 @@ const Nationality = () => {
                     onChange={(e) => setLabel(e.target.value)}
                     value={Label}
                   >
-                    <Form.Control type="text" placeholder="Label" />
+                    <Form.Control type="text" placeholder="Label" required/>
                   </FloatingLabel>{" "}
                   {/* <span className="spanForm"> |</span> */}
                 </div>
@@ -247,7 +284,7 @@ const Nationality = () => {
                     value={Offset}
                     type="number"
                   >
-                    <Form.Control type="number" placeholder="Off Set" />
+                    <Form.Control type="number" placeholder="Off Set" required/>
                   </FloatingLabel>
                   {/* <span className="spanForm"> |</span> */}
                 </div>
@@ -277,7 +314,7 @@ const Nationality = () => {
                     onChange={(e) => setValue(e.target.value)}
                     value={Value}
                   >
-                    <Form.Control type="text" placeholder="Value" />
+                    <Form.Control type="text" placeholder="Value" required/>
                   </FloatingLabel>
                   {/* <span className="spanForm"> |</span> */}
                 </div>
@@ -300,6 +337,9 @@ const Nationality = () => {
 
               <div className="ButtonSection">
                 <div>
+                <label className="Multipleownerlabel">
+                      Select Nationality Flag image
+                    </label>
                   <input
                     type="file"
                     onChange={onSelectFile}

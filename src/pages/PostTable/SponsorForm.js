@@ -176,6 +176,9 @@ const SponsorForm = () => {
 
                 <div className="ButtonSection">
                   <div>
+                  <label className="Multipleownerlabel">
+                      Select Sponsor image
+                    </label>
                     <input
                       type="file"
                       onChange={onSelectFile}

@@ -178,6 +178,9 @@ const NewsForm = () => {
 
                 <div className="ButtonSection">
                   <div>
+                  <label className="Multipleownerlabel">
+                      Select Image
+                    </label>
                     <input
                       type="file"
                       onChange={onSelectFile}

@@ -124,6 +124,9 @@ const SliderForm = () => {
 
                 <div className="ButtonSection">
                   <div>
+                  <label className="Multipleownerlabel">
+                      Select Slider image
+                    </label>
                     <input
                       type="file"
                       onChange={onSelectFile}

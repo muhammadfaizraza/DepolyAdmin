@@ -169,6 +169,9 @@ onChange={(e) => setTitleAr(e.target.value)}
 
                 <div className='ButtonSection'>
                 <div>
+                <label className="Multipleownerlabel">
+                      Select Ads image
+                    </label>
             <input type='file' onChange={onSelectFile} className="formInput"/>
             {image &&  <img src={preview}  className="PreviewImage" alt=""/> }
                 </div>

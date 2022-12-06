@@ -316,6 +316,9 @@ const RaceCourseForm = () => {
                 </div>
                 <div className="ButtonSection">
                   <div>
+                  <label className="Multipleownerlabel">
+                      Select Race Course image
+                    </label>
                     <input
                       type="file"
                       onChange={onSelectFile}

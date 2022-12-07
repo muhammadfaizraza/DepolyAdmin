@@ -63,7 +63,7 @@ const Racetypeform = () => {
                     name="Name"
                     value={NameEn}
                   >
-                    <Form.Control type="text" placeholder="Name" />
+                    <Form.Control type="text" placeholder="Name" required/>
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
@@ -79,7 +79,7 @@ const Racetypeform = () => {
                     value={NameAr}
                     style={{ direction: "rtl" }}
                   >
-                    <Form.Control type="text" placeholder="اسم" />
+                    <Form.Control type="text" placeholder="اسم" required/>
                   </FloatingLabel>
                 </div>
               </div>

@@ -105,7 +105,7 @@ const SponsorForm = () => {
                       name="Name"
                       value={TitleEn}
                     >
-                      <Form.Control type="text" placeholder="Title" />
+                      <Form.Control type="text" placeholder="Title" required />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -121,7 +121,7 @@ const SponsorForm = () => {
                       value={TitleAr}
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="عنوان" />
+                      <Form.Control type="text" placeholder="عنوان" required/>
                     </FloatingLabel>
                   </div>
                 </div>
@@ -135,7 +135,7 @@ const SponsorForm = () => {
                       onChange={(e) => setDescriptionEn(e.target.value)}
                       value={DescriptionEn}
                     >
-                      <Form.Control type="text" placeholder="Description" />
+                      <Form.Control type="text" placeholder="Description" required />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -150,7 +150,7 @@ const SponsorForm = () => {
                       value={DescriptionAr}
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="التفاصيل" />
+                      <Form.Control type="text" placeholder="التفاصيل" required />
                     </FloatingLabel>
                   </div>
                 </div>
@@ -166,7 +166,7 @@ const SponsorForm = () => {
                       name="Name"
                       value={Url}
                     >
-                      <Form.Control type="text" placeholder="Title" />
+                      <Form.Control type="text" placeholder="Title" required/>
                     </FloatingLabel>
 
                   </div>
@@ -176,6 +176,9 @@ const SponsorForm = () => {
 
                 <div className="ButtonSection">
                   <div>
+                  <label className="Multipleownerlabel">
+                      Select Sponsor image
+                    </label>
                     <input
                       type="file"
                       onChange={onSelectFile}

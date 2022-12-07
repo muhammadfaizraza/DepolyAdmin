@@ -97,6 +97,7 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setTitleEn(e.target.value)}
                       value={TitleEn}
+                      required
                     >
                       <Form.Control type="text" placeholder="Title" />
                     </FloatingLabel>
@@ -112,8 +113,9 @@ const NewsForm = () => {
                       name="Name"
                       value={TitleAr}
                       style={{ direction: "rtl" }}
+                      
                     >
-                      <Form.Control type="text" placeholder="عنوان" />
+                      <Form.Control type="text" placeholder="عنوان" required />
                     </FloatingLabel>
                   </div>
                 </div>
@@ -126,7 +128,7 @@ const NewsForm = () => {
                       onChange={(e) => setSecondTitleEn(e.target.value)}
                       value={SecondTitleEn}
                     >
-                      <Form.Control type="text" placeholder="Sub-Title" />
+                      <Form.Control type="text" placeholder="Sub-Title" required />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -142,7 +144,7 @@ const NewsForm = () => {
                       value={SecondTitleAr}
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="عنوان" />
+                      <Form.Control type="text" placeholder="عنوان" required/>
                     </FloatingLabel>
                   </div>
                 </div>
@@ -156,7 +158,7 @@ const NewsForm = () => {
                       onChange={(e) => setDescriptionEn(e.target.value)}
                       value={DescriptionEn}
                     >
-                      <Form.Control type="text" placeholder="Description" />
+                      <Form.Control type="text" placeholder="Description" required/>
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -171,13 +173,16 @@ const NewsForm = () => {
                       value={DescriptionAr}
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="التفاصيل" />
+                      <Form.Control type="text" placeholder="التفاصيل" required />
                     </FloatingLabel>
                   </div>
                 </div>
 
                 <div className="ButtonSection">
                   <div>
+                  <label className="Multipleownerlabel">
+                      Select Image
+                    </label>
                     <input
                       type="file"
                       onChange={onSelectFile}

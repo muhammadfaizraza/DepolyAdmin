@@ -83,7 +83,7 @@ const SliderForm = () => {
                       name="Name"
                       value={TitleEn}
                     >
-                      <Form.Control type="text" placeholder="Title" />
+                      <Form.Control type="text" placeholder="Title" required/>
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -99,7 +99,7 @@ const SliderForm = () => {
                       value={TitleAr}
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="عنوان" />
+                      <Form.Control type="text" placeholder="عنوان" required/>
                     </FloatingLabel>
                   </div>
                 </div>
@@ -114,7 +114,7 @@ const SliderForm = () => {
                       name="Name"
                       value={Url}
                     >
-                      <Form.Control type="text" placeholder="Title" />
+                      <Form.Control type="text" placeholder="Title" required/>
                     </FloatingLabel>
 
                   </div>
@@ -124,6 +124,9 @@ const SliderForm = () => {
 
                 <div className="ButtonSection">
                   <div>
+                  <label className="Multipleownerlabel">
+                      Select Slider image
+                    </label>
                     <input
                       type="file"
                       onChange={onSelectFile}

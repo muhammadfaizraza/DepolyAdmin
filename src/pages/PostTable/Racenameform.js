@@ -71,7 +71,7 @@ onChange={(e) => setNameEn(e.target.value)}
                   name="Name"
                   value={NameEn}
 > 
-        <Form.Control type="text" placeholder="Name" />
+        <Form.Control type="text" placeholder="Name" required/>
       </FloatingLabel>
                 
                 
@@ -91,7 +91,7 @@ onChange={(e) => setNameAr(e.target.value)}
                
              
 > 
-        <Form.Control type="text" placeholder="اسم"     />
+        <Form.Control type="text" placeholder="اسم" required />
       </FloatingLabel>
               </div>
             </div>

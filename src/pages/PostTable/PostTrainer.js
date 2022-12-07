@@ -184,7 +184,7 @@ const TrainerForm = () => {
                       name="Name"
                       value={NameEn}
                     >
-                      <Form.Control type="text" placeholder="Name" />
+                      <Form.Control type="text" placeholder="Name" required/>
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -200,7 +200,7 @@ const TrainerForm = () => {
                       value={NameAr}
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="اسم" />
+                      <Form.Control type="text" placeholder="اسم" required/>
                     </FloatingLabel>
                   </div>
                 </div>
@@ -230,7 +230,7 @@ const TrainerForm = () => {
                       onChange={(e) => setTitleEn(e.target.value)}
                       value={TitleEn}
                     >
-                      <Form.Control type="text" placeholder="Title" />
+                      <Form.Control type="text" placeholder="Title" required/>
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
                   </div>
@@ -245,7 +245,7 @@ const TrainerForm = () => {
                       value={TitleAr}
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="عنوان" />
+                      <Form.Control type="text" placeholder="عنوان" required/>
                     </FloatingLabel>
                   </div>
                 </div>
@@ -258,7 +258,7 @@ const TrainerForm = () => {
                       onChange={(e) => setShortNameEn(e.target.value)}
                       value={ShortNameEn}
                     >
-                      <Form.Control type="text" placeholder="Short Name" />
+                      <Form.Control type="text" placeholder="Short Name" required/>
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -274,7 +274,7 @@ const TrainerForm = () => {
                       value={ShortNameAr}
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="اسم قصير" />
+                      <Form.Control type="text" placeholder="اسم قصير" required/>
                     </FloatingLabel>
                   </div>
                 </div>
@@ -287,7 +287,7 @@ const TrainerForm = () => {
                       onChange={(e) => setDetail(e.target.value)}
                       value={Detail}
                     >
-                      <Form.Control type="text" placeholder="Details" />
+                      <Form.Control type="text" placeholder="Details" required/>
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -313,7 +313,7 @@ const TrainerForm = () => {
                       onChange={(e) => setRemarks(e.target.value)}
                       value={Remarks}
                     >
-                      <Form.Control type="text" placeholder="Details" />
+                      <Form.Control type="text" placeholder="Details" required/>
                     </FloatingLabel>
 
       
@@ -397,6 +397,9 @@ const TrainerForm = () => {
                 </div>
                 <div className="ButtonSection">
                   <div>
+                  <label className="Multipleownerlabel">
+                      Select Trainer image
+                    </label>
                     <input
                       type="file"
                       onChange={onSelectFile}

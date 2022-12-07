@@ -164,6 +164,9 @@ const Breeder = () => {
               </div>
               <div className="ButtonSection">
                 <div>
+                <label className="Multipleownerlabel">
+                      Select Breeder image
+                    </label>
                   <input
                     type="file"
                     onChange={onSelectFile}

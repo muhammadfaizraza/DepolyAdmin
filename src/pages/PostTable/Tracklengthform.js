@@ -153,7 +153,7 @@ const Tracklengthform = () => {
                     onChange={(e) => setTrackLength(e.target.value)}
                     value={TrackLength}
                   >
-                    <Form.Control type="number" placeholder="Track Length" />
+                    <Form.Control type="number" placeholder="Track Length" required/>
                   </FloatingLabel>
                   <span className="spanForm"> |</span>
                 </div>
@@ -167,7 +167,7 @@ const Tracklengthform = () => {
                     value={TrackLength}
                     style={{ direction: "rtl" }}
                   >
-                    <Form.Control type="number" placeholder="طول المسار" />
+                    <Form.Control type="number" placeholder="طول المسار" required/>
                   </FloatingLabel>
                 </div>
               </div>
@@ -180,7 +180,7 @@ const Tracklengthform = () => {
                     onChange={(e) => setRailPosition(e.target.value)}
                     value={RailPosition}
                   >
-                    <Form.Control type="text" placeholder="Rail Position" />
+                    <Form.Control type="text" placeholder="Rail Position" required/>
                   </FloatingLabel>
                   <span className="spanForm"> |</span>
                 </div>
@@ -194,7 +194,7 @@ const Tracklengthform = () => {
                     value={RailPosition}
                     style={{ direction: "rtl" }}
                   >
-                    <Form.Control type="text" placeholder="طول المسار" />
+                    <Form.Control type="text" placeholder="طول المسار" required/>
                   </FloatingLabel>
                 </div>
               </div>
@@ -289,7 +289,7 @@ const Tracklengthform = () => {
            
                 <div>
                 <label className="Multipleownerlabel">
-                      Select Gif Image
+                      Select GIF Image
                     </label>
                   <input
                     type="file"

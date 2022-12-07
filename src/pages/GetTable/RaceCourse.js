@@ -17,6 +17,7 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BsEyeFill } from "react-icons/bs";
+import Pagination from "./Pagination";
 
 
 const Racecourse = () => {
@@ -31,6 +32,15 @@ const Racecourse = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const { data: racecourse, status } = useSelector((state) => state.racecourse);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = racecourse.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchracecourse());
   }, [dispatch]);
@@ -118,7 +128,7 @@ const Racecourse = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {racecourse.map((item, index) => {
+                    {currentPosts.map((item, index) => {
                       return (
                         <>
                           <tr className="tr_table_class">
@@ -133,7 +143,7 @@ const Racecourse = () => {
                             <td className="table_delete_btn1">
                             <BiEdit   onClick={() => navigate('/editracecourse',{
                                 state:{
-                                  courseid:item._id
+                                  courseid:item
                                 }
                               })}/>
                               
@@ -154,6 +164,11 @@ const Racecourse = () => {
               </ScrollContainer>
             </div>
           </div>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={racecourse.length}
+          paginate={paginate}
+        />
         </div>
       </div>
       <Modal

@@ -49,8 +49,6 @@ const Prize = (data) => {
 
 const Races = () => {
   const history = useNavigate();
-  const [PublishRace, setPublishRace] = useState(true);
-
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -71,16 +69,18 @@ const Races = () => {
   };
   
   const dispatch = useDispatch();
-  const { data: race, status } = useSelector((state) => state.race);
+  const { data: tobePublishRace ,status } = useSelector((state) => state.tobePublishRace);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8)
  
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = race.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = tobePublishRace.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
+  console.log(tobePublishRace.length,'tobePublishRace');
+  
   useEffect(() => {
     dispatch(fetchrace());
     dispatch(fetchtobePublishRace());
@@ -139,7 +139,7 @@ const Races = () => {
             }}
           >
             <div className="Header ">
-            <h4> Race Listings</h4>
+            <h4> Race To Be Published</h4>
             <div>
                 <h6
                   style={{
@@ -148,7 +148,9 @@ const Races = () => {
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
                 >
+                 
                 </h6>
+
                 <Link to="/raceform">
                   <button>Add Race</button>
                 </Link>
@@ -179,20 +181,17 @@ const Races = () => {
                       <th>Race Status</th>
                       <th>Prize Money</th>
                       <th>image</th>
-                      {
-                        !PublishRace ? <th>Publish</th>: <></>
-                      }
+                      <th>Publish</th>
                       <th>Action</th>
                     </tr>
                   </thead>
-                  {race === undefined ? (
-                    <h3
-                      style={{
-                        textAlign: "center",
-                      }}
+                      {tobePublishRace === undefined || tobePublishRace.length === 0 ? (
+                    <div>
+                      <h3 className="notdatadiv"
                     >
-                      No Data
+                      No Race
                     </h3>
+                    </div>
                   ) : (
                     <>
                       {currentPosts.map((item) => {
@@ -279,6 +278,8 @@ const Races = () => {
                                   Click
                                 </button>
                               </td>
+                             
+
                               <td>
                                 {" "}
                                 <img
@@ -289,11 +290,14 @@ const Races = () => {
                                   }}
                                 />{" "}
                               </td>
-                              {
-                                !PublishRace ? <td>
-                                <button  className="Approvedbtn resultbtn" onClick={() => GoToPublish(item._id)}>Click</button>
-                              </td>:null
-                              }
+                              <td>
+                                <button
+                                  className="Approvedbtn resultbtn"
+                                  onClick={() => GoToPublish(item._id)}
+                                >
+                                  Click
+                                </button>
+                              </td>
                               <td
                                 className="table_delete_btn1"
                                 style={{ textAlign: "center" }}
@@ -324,7 +328,7 @@ const Races = () => {
           </div>
           <Pagination
           postsPerPage={postsPerPage}
-          totalPosts={race.length}
+          totalPosts={tobePublishRace.length}
           paginate={paginate}
         />
         </div>

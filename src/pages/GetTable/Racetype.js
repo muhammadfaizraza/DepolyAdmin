@@ -13,6 +13,7 @@ import { BiEdit } from "react-icons/bi";
 import { BsEyeFill } from "react-icons/bs";
 import RaceTypepopup from "../../Components/Popup/RaceTypepopup";
 import { Modal } from "react-bootstrap";
+import Pagination from "./Pagination";
 
 const Racetype = () => {
   const [show, setShow] = useState(false);
@@ -27,6 +28,15 @@ const Racetype = () => {
   const history = useNavigate();
 
   const { data: RaceType, status } = useSelector((state) => state.RaceType);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = RaceType.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchRaceType());
   }, [dispatch]);
@@ -110,7 +120,7 @@ const Racetype = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {RaceType.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
@@ -148,6 +158,11 @@ const Racetype = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={RaceType.length}
+          paginate={paginate}
+        />
         </div>
       </div>
       <Modal

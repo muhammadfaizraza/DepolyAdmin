@@ -15,6 +15,7 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import ScrollContainer from "react-indiana-drag-scroll";
+import Pagination from "./Pagination";
 
 
 
@@ -38,6 +39,15 @@ const Slider = () => {
     setPageNumber((pagenumber) => pagenumber + 1);
   };
   const { data: slider, status } = useSelector((state) => state.slider);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = slider.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   const history = useNavigate();
 
   useEffect(() => {
@@ -125,7 +135,7 @@ const Slider = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {slider.map((item, index) => {
+                    {currentPosts.map((item, index) => {
                       return (
                         <>
                           <tr className="tr_table_class">
@@ -171,6 +181,11 @@ const Slider = () => {
              
             
           </div>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={slider.length}
+          paginate={paginate}
+        />
         </div>
       </div>
       <Modal

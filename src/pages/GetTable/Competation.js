@@ -14,6 +14,7 @@ import axios from "axios";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import CompetitionPopup from "../../Components/Popup/CompetitionPopup";
+import Pagination from "./Pagination";
 
 
 const Statistic = () => {
@@ -29,6 +30,15 @@ const Statistic = () => {
   const history = useNavigate();
 
   const { data: competition, status } = useSelector((state) => state.competition);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = competition.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchcompetition()); 
   }, [dispatch]);
@@ -118,7 +128,7 @@ const Statistic = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {competition.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
@@ -160,6 +170,11 @@ const Statistic = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={competition.length}
+          paginate={paginate}
+        />
         </div>
       </div>
       <Modal

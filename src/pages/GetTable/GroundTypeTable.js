@@ -15,6 +15,7 @@ import { BiEdit } from "react-icons/bi";
 import { BsEyeFill } from "react-icons/bs";
 import { Modal } from "react-bootstrap";
 import GroundTypePopup from "../../Components/Popup/GroundTypePopup";
+import Pagination from "./Pagination";
 
 const GroundTypeTable = () => {
 
@@ -31,6 +32,13 @@ const GroundTypeTable = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data: groundtype, status } = useSelector((state) => state.groundtype);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = groundtype.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
   useEffect(() => {
     dispatch(fetchgroundtype());
   }, [dispatch]);
@@ -115,7 +123,7 @@ const GroundTypeTable = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {groundtype.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
@@ -153,6 +161,11 @@ const GroundTypeTable = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={groundtype.length}
+          paginate={paginate}
+        />
         </div>
       </div>
       <Modal

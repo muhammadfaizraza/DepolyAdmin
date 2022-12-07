@@ -36,13 +36,24 @@ const Sidebar = () => {
               >
                 <div>
                   <Link to="/races" className="mylink">
-                    View Listings
+                     Race Listings
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/racesPublish" className="mylink">
+                    To Be Publish Race
                   </Link>
                 </div>
                 <div>
                   {" "}
                   <Link to="/raceform" className="mylink">
                     Add New
+                  </Link>
+                </div>
+                <div>
+                  {" "}
+                  <Link to="/racecardlisting" className="mylink">
+                     Race Card Listings
                   </Link>
                 </div>
                 <div>

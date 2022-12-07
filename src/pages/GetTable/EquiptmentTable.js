@@ -12,6 +12,7 @@ import HorseAnimation from "../../assets/horselottie.json";
 import { BsEyeFill } from "react-icons/bs";
 import { Modal } from "react-bootstrap";
 import EquipmentPopup from "../../Components/Popup/EquipmentPopup";
+import Pagination from "./Pagination";
 
 const EquiptmentTable = () => {
 //for Modal
@@ -25,6 +26,15 @@ const EquiptmentTable = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const { data: equipment, status } = useSelector((state) => state.equipment);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = equipment.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
+
   useEffect(() => {
     dispatch(fetchequipment());
   }, [dispatch]);
@@ -110,7 +120,7 @@ const EquiptmentTable = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {equipment.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
@@ -149,6 +159,11 @@ const EquiptmentTable = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={equipment.length}
+          paginate={paginate}
+        />
         </div>
       </div>
 

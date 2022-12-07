@@ -13,6 +13,7 @@ import { BiEdit } from "react-icons/bi";
 import { BsEyeFill } from "react-icons/bs";
 import { Modal } from "react-bootstrap";
 import MeetingPopup from "../../Components/Popup/MeetingPopup";
+import Pagination from "./Pagination";
 
 const GetMeetingType = () => {
 
@@ -29,6 +30,15 @@ const handleShow = async (data) => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const { data: meeting, status } = useSelector((state) => state.meeting);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = meeting.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchMeeting());
   }, [dispatch]);
@@ -113,7 +123,7 @@ const handleShow = async (data) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {meeting.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
@@ -151,6 +161,11 @@ const handleShow = async (data) => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={meeting.length}
+          paginate={paginate}
+        />
         </div>
       </div>
       <Modal

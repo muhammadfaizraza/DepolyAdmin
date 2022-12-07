@@ -12,6 +12,8 @@ import { BiEdit } from "react-icons/bi";
 import { Modal } from "react-bootstrap";
 import CategoryPopup from "../../Components/Popup/CategoryPopup";
 import { BsEyeFill } from "react-icons/bs";
+import Pagination from "./Pagination";
+
 const CategoryTable = () => {
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -23,6 +25,15 @@ const CategoryTable = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const { data: category, status } = useSelector((state) => state.category);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = category.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchcategory());
   }, [dispatch]);
@@ -109,7 +120,7 @@ const CategoryTable = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {category.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
@@ -147,6 +158,11 @@ const CategoryTable = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={category.length}
+          paginate={paginate}
+        />
         </div>
       </div>
       <Modal

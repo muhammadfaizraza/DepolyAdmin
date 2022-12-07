@@ -13,6 +13,7 @@ import axios from "axios";
 import { Modal } from "react-bootstrap";
 import { BsEyeFill } from "react-icons/bs";
 import BreederPopup from "../../Components/Popup/BreederPopup";
+import Pagination from "./Pagination";
 
 const BreederTable = () => {
 
@@ -25,7 +26,17 @@ const BreederTable = () => {
   };
   const dispatch = useDispatch();
   const history = useNavigate();
+
   const { data: breeder, status } = useSelector((state) => state.breeder);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = breeder.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
+
   useEffect(() => {
     dispatch(fetchbreeder());
   }, [dispatch]);
@@ -116,7 +127,7 @@ const BreederTable = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {breeder.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
@@ -160,6 +171,11 @@ const BreederTable = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={breeder.length}
+          paginate={paginate}
+        />
         </div>
       </div>
       <Modal

@@ -19,13 +19,14 @@ const Nationality = () => {
   const [NameEn, setNameEn] = useState('');
   const [NameAr, setNameAr] = useState('');
 
-  const [RaceData, setRaceData] = useState("");
+  const [RaceData, setRaceData] = useState([]);
   const { data: racecourse } = useSelector((state) => state.racecourse);
   const {state} = useLocation();
   const {CardId ,RaceCourseId} = state;
   console.log(CardId,'id is this')
   console.log(RaceCourseId,'RaceCourseId is this')
 
+  console.log(FetchData)
   let AllFetchData =
     FetchData === undefined ? (
       <></>
@@ -33,8 +34,8 @@ const Nationality = () => {
       FetchData.map(function (item) {
         return {
           id: item._id,
-          value: item.RaceNameModelData.shortCode,
-          label: item.RaceNameModelData.NameEn,
+          value: item.ThirdPrice,
+          label: item.ThirdPrice,
         };
       })
     );
@@ -74,18 +75,20 @@ const Nationality = () => {
       });
     }
   };
-
+  // let AllIn = [RaceData.id]
+  // console.log(AllIn,'AllIn')
   const Publish = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        `${window.env.API_URL}/addracesinracecard/${CardId}`,[RaceData[0].id]
-      );
-      setFetchData(response.data.data);
-      const msg = response.data.data.length;
+      console.log(RaceData)
+      // const response = await axios.post(
+      //   `${window.env.API_URL}/addracesinracecard/${CardId}`,[RaceData[0].id]
+      // );
+      // setFetchData(response.data.data);
+      // const msg = response.data.data.length;
       swal({
         // title: "Success!",
-        text: `${msg} Data Found`,
+        // text: `${msg} Data Found`,
         icon: "success",
         button: "OK",
       });
@@ -139,7 +142,7 @@ const Nationality = () => {
                 isMulti
                 options={AllFetchData}
                 onChange={setRaceData}
-                value={RaceData}
+                value={RaceData.id}
                 className='multidropdown'
               />
              

@@ -59,6 +59,7 @@ import EditHorseKind from "./pages/UpdateTable/EditHorseKind";
 import EditRace from "./pages/UpdateTable/EditRace";
 import EditCategory from "./pages/UpdateTable/EditCategory";
 import EditCompetition from "./pages/UpdateTable/EditCompetition";
+import EditRaceCard from "./pages/UpdateTable/EditRaceCard";
 
 import ResultForm from "./pages/PostTable/Result/ResultForm";
 import RacesResult from "./pages/PostTable/Result/ResultRaces";
@@ -73,6 +74,7 @@ import BreederTable from "./pages/GetTable/BreederTable";
 import CurrencyTable from "./pages/GetTable/CurrencyTable";
 import Gender from "./pages/PostTable/Gender";
 import GenderTable from "./pages/GetTable/GenderTable";
+import RaceCardListing from "./pages/GetTable/RaceCardListing";
 import HorseKind from "./pages/GetTable/HorseKind";
 import Horsekindform from "./pages/PostTable/Horsekindform";
 import Racetype from "./pages/GetTable/Racetype";
@@ -95,6 +97,7 @@ import Equipment from "./pages/PostTable/Equipment";
 import EquiptmentTable from "./pages/GetTable/EquiptmentTable";
 import Verdicts from "./pages/PostTable/Verdicts";
 import VerdictTable from "./pages/GetTable/VerdictTable";
+import RaceToBePublish from "./pages/GetTable/RacesToPublish";
 import GroundType from "./pages/PostTable/GroundType";
 import GroundTypeTable from "./pages/GetTable/GroundTypeTable";
 import TestTable from './pages/PostTable/RaceForm/RaceTwo'
@@ -205,6 +208,8 @@ function App() {
              <Route path="/addCategory" element={<AddCategory />} />
              <Route path="/CategoryListing" element={<CompetitionCategory />} />
              <Route path="/publishracecard" element={<PublishRaceCard />} />
+             <Route path="/racecardlisting" element={<RaceCardListing />} />
+             <Route path="/racesPublish" element={<RaceToBePublish />} />
 
              <Route path="*" element={<NotFound />} />
 
@@ -235,6 +240,7 @@ function App() {
              <Route path="/editrace" element={<EditRace />}/>
              <Route path="/editcategory" element={<EditCategory />}/>
              <Route path="/editcompetition" element={<EditCompetition />}/>
+             <Route path="/editraceCard" element={<EditRaceCard />}/>
 
            </Route>
          </Routes>

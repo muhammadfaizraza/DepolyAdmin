@@ -32,7 +32,7 @@ const getResultSlice = createSlice({
 export const {setResult, setStatus} = getResultSlice.actions;
 export default getResultSlice.reducer;
 export const fetchResult = createAsyncThunk('getResult/fetch', async () => {
-    const res = await axios.get(`${window.env.API_URL}/GetRaceResultToBeAnnounced?keyword=&limit=&page=`);
+    const res = await axios.get(`${window.env.API_URL}/GetRaceResultToBeAnnounced`);
     const data = res.data;
     return data.data;
 })

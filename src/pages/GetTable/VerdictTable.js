@@ -1,7 +1,6 @@
 import React, { useEffect, Fragment,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -13,6 +12,7 @@ import axios from "axios";
 import { Modal } from "react-bootstrap";
 import VerdictPopup from "../../Components/Popup/VerdictPopup";
 import { BsEyeFill } from "react-icons/bs";
+import Pagination from "./Pagination";
 
 
 const VerdictTable = () => {
@@ -28,6 +28,15 @@ const VerdictTable = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const { data: verdict, status } = useSelector((state) => state.verdict);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = verdict.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchverdict());
   }, [dispatch]);
@@ -111,7 +120,7 @@ const VerdictTable = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {verdict.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
@@ -149,6 +158,11 @@ const VerdictTable = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={verdict.length}
+          paginate={paginate}
+        />
         </div>
       </div>
       <Modal

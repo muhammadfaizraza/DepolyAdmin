@@ -15,6 +15,7 @@ import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BiEdit } from "react-icons/bi";
 import { BsEyeFill } from "react-icons/bs";
+import Pagination from "./Pagination";
 
 const Trainer = () => {
   const [show, setShow] = useState(false);
@@ -30,16 +31,16 @@ const Trainer = () => {
 
   const { data: trainer, status } = useSelector((state) => state.trainer);
   
-  const [items, setItems] = useState([]);
-
-  const [pageCount, setpageCount] = useState(0);
-
-  let limit = 8;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = trainer.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    dispatch(fetchTrainer({ limit }));
-    setpageCount(Math.ceil(trainer / limit));
-    setItems(trainer);
+    dispatch(fetchTrainer());
   }, []);
   const handleRemove = async (Id) => {
     try {
@@ -62,10 +63,7 @@ const Trainer = () => {
     }
   };
 
-  const handlePageClick = async (data) => {
-    let currentPage = data.selected + 1;
-    setItems(trainer);
-  };
+
   if (status === STATUSES.LOADING) {
     return (
       <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
@@ -138,7 +136,7 @@ const Trainer = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {trainer.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
@@ -221,6 +219,11 @@ const Trainer = () => {
               </div>
             </>
           </div>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={trainer.length}
+          paginate={paginate}
+        />
         </div>
       </div>
       <Modal

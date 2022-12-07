@@ -14,6 +14,7 @@ import Moment from "react-moment";
 import axios from "axios";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
+import Pagination from "./Pagination";
 
 
 const Statistic = () => {
@@ -27,6 +28,15 @@ const Statistic = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data: jockey, status } = useSelector((state) => state.jockey);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = jockey.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchjockey()); 
   }, [dispatch]);
@@ -118,7 +128,7 @@ const Statistic = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {jockey.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
@@ -170,6 +180,11 @@ const Statistic = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={jockey.length}
+          paginate={paginate}
+        />
         </div>
       </div>
       <Modal

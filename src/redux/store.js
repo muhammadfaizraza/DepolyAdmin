@@ -45,6 +45,7 @@ import getResultSlice from './getReducer/getResultSlice';
 import getVerdict from './getReducer/getVerdict';
 import getCategory from './getReducer/getCategory';
 import getCompetition from './getReducer/getCompetition';
+import getRaceCard from './getReducer/getRaceCard';
 
 const store = configureStore({
     reducer: {
@@ -93,7 +94,8 @@ const store = configureStore({
         Result:getResultSlice,
         verdict:getVerdict,
         category:getCategory,
-        competition:getCompetition
+        competition:getCompetition,
+        raceCard:getRaceCard
     },
 });
 

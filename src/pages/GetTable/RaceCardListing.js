@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { fetchSponsor, STATUSES } from "../../redux/getReducer/getSponsorSlice";
+import {
+  fetchraceCard,
+  STATUSES,
+} from "../../redux/getReducer/getRaceCard";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostSponsor";
+import { remove } from "../../redux/postReducer/PostRaceCourse";
 import swal from "sweetalert";
-import { Link ,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
-import ScrollContainer from "react-indiana-drag-scroll";
-import SponserPopup from "../../Components/Popup/SponserPopup";
 import { Modal } from "react-bootstrap";
+import RacecoursePopup from "../../Components/Popup/RacecoursePopup";
+import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BsEyeFill } from "react-icons/bs";
 import Pagination from "./Pagination";
 
-const News = () => {
+
+const Racecourse = () => {
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -25,30 +29,31 @@ const News = () => {
   };
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { data: sponsor, status } = useSelector((state) => state.sponsor);
+  const navigate = useNavigate()
+  const { data: raceCard, status } = useSelector((state) => state.raceCard);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8)
   
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = sponsor.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = raceCard.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
-
+  console.log(raceCard,'raceCard')
   useEffect(() => {
-    dispatch(fetchSponsor());
-  }, []);
+    dispatch(fetchraceCard());
+  }, [dispatch]);
+
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeletesponsor/${Id}`)
+      const res = await axios.delete(`${window.env.API_URL}/softdeleteRaceCard/${Id}`)
       swal({
         title: "Success!",
         text: "Data has been Deleted successfully ",
         icon: "success",
         button: "OK",
       });
-      dispatch(fetchSponsor());
+      dispatch(fetchraceCard());
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -59,10 +64,9 @@ const News = () => {
       });
     }
   };
+
   if (status === STATUSES.LOADING) {
-    return (
-      <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
-    );
+    <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
   }
 
   if (status === STATUSES.ERROR) {
@@ -76,7 +80,7 @@ const News = () => {
       </h2>
     );
   }
-
+  
   return (
     <>
       <div className="page">
@@ -87,7 +91,7 @@ const News = () => {
             }}
           >
             <div className="Header ">
-              <h4>Sponsor Listings</h4>
+              <h4>Race Card Listing</h4>
 
               <div>
                 <h6
@@ -96,25 +100,25 @@ const News = () => {
                     alignItems: "center",
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
-                ></h6>
+                >
+                  
+                </h6>
 
-                <Link to="/sponsorform">
-                  <button>Add Sponsor</button>
+                <Link to="/racecard">
+                  <button>Add Race Card</button>
                 </Link>
               </div>
             </div>
-            <div className="div_maintb">
-              <ScrollContainer className="scroll-container">
+
+            <div class="div_maintb">
+              <ScrollContainer>
                 <table striped bordered hover>
                   <thead>
                     <tr>
-                      <th>Title </th>
-                      <th>Title Arabic</th>
-                      <th>Description </th>
-                      <th>Description Arabic</th>
-                      <th>Url</th>
-                      <th>Image</th>
-                      <th style={{ textAlign: "center" }}>Action</th>
+                      <th>Race Card Name</th>
+                      <th>Race Card Name Arabic </th>
+                      <th>Race Course</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -122,34 +126,23 @@ const News = () => {
                       return (
                         <>
                           <tr className="tr_table_class">
-                            <td>{item.TitleEn}</td>
-                            <td>{item.TitleAr}</td>
-                            <td>{item.DescriptionEn}</td>
-                            <td>{item.DescriptionAr}</td>
-                            <td>{item.Url}</td>
-                            <td>
-                              <img
-                                src={item.image}
-                                alt=""
-                                style={{
-                                  width: "30px",
-                                  height: "30px",
-                                }}
-                              />
-                            </td>
-                            <td
-                              className="table_delete_btn1"
-                              style={{ textAlign: "center" }}
-                            >
-                              <BiEdit onClick={() => navigate('/editsponsor',{
+                            <td>{item.RaceCardNameEn === null ? <>N/A</> : item.RaceCardNameEn }</td>
+                            <td>{item.RaceCardNameAr === null ? <>N/A</> : item.RaceCardNameAr}</td>
+                            <td>{item.RaceCardCourseData.TrackNameEn === null ? <>N/A</> : item.RaceCardCourseData.TrackNameEn}</td>                   
+                            <td className="table_delete_btn1">
+                            <BiEdit   onClick={() => navigate('/editraceCard',{
                                 state:{
-                                  sponsorid:item
+                                  racecardid:item
                                 }
-                              })} />
+                              })}/>
+                              
                               <MdDelete
+                                style={{
+                                  fontSize: "22px",
+                                }}
                                 onClick={() => handleRemove(item._id)}
                               />
-                              <BsEyeFill onClick={()=> handleShow(item)}/>
+                              <BsEyeFill onClick={() => handleShow(item)}/>
                             </td>
                           </tr>
                         </>
@@ -162,7 +155,7 @@ const News = () => {
           </div>
           <Pagination
           postsPerPage={postsPerPage}
-          totalPosts={sponsor.length}
+          totalPosts={raceCard.length}
           paginate={paginate}
         />
         </div>
@@ -175,20 +168,18 @@ const News = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2>Sponsor </h2>
+          <h2 style={{fontFamily:"inter"}}> Race Course </h2>
         </Modal.Header>
         <Modal.Body>
-          <SponserPopup data={modaldata} />
+          <RacecoursePopup data={modaldata} />
         </Modal.Body>
-
         <Modal.Footer>
           <button onClick={handleClose} className="modalClosebtn">
             Close
           </button>
         </Modal.Footer>
-
       </Modal>
     </>
   );
 };
-export default News;
+export default Racecourse;

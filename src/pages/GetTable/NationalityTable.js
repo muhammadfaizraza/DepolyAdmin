@@ -16,6 +16,7 @@ import axios from "axios";
 import { Modal } from "react-bootstrap";
 import NationalityPopup from "../../Components/Popup/NationalityPopup";
 import { BsEyeFill } from "react-icons/bs";
+import Pagination from "./Pagination";
 
 const NationalityTable = () => {
 //for Modal 
@@ -32,6 +33,15 @@ const NationalityTable = () => {
   const { data: nationality, status } = useSelector(
     (state) => state.nationality
   );
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = nationality.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchnationality());
   }, [dispatch]);
@@ -121,7 +131,7 @@ const NationalityTable = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {nationality.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
@@ -167,6 +177,11 @@ const NationalityTable = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={nationality.length}
+          paginate={paginate}
+        />
         </div>
       </div>
       <Modal

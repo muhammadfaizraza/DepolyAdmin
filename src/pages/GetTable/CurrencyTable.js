@@ -13,6 +13,7 @@ import axios from "axios";
 import { Modal } from "react-bootstrap";
 import { BsEyeFill } from "react-icons/bs";
 import CurrencyPopup from "../../Components/Popup/CurrencyPopup";
+import Pagination from "./Pagination";
 
 
 
@@ -28,6 +29,15 @@ const CurrencyTable = () => {
     const dispatch = useDispatch();
     const history = useNavigate();
     const { data: currency, status } = useSelector((state) => state.currency);
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(8)
+    
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = currency.slice(indexOfFirstPost, indexOfLastPost);
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
     useEffect(() => {
       dispatch(fetchcurrency());
     }, [dispatch]);
@@ -115,19 +125,15 @@ const CurrencyTable = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {currency.map((item, index) => {
+                    {currentPosts.map((item, index) => {
                       return (
                         <>
                           <tr className="tr_table_class">
                             <td>{item.NameEn}</td>
                             <td>{item.NameAr}</td>
 
-<td>{item.shortCode} </td>
-<td>{item.Rate} </td>
-
-
-                      
-
+                            <td>{item.shortCode} </td>
+                            <td>{item.Rate} </td>
                           
                             <td className="table_delete_btn1">
                              <BiEdit onClick={() => history('/editcurrency',{
@@ -155,6 +161,11 @@ const CurrencyTable = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={currency.length}
+          paginate={paginate}
+        />
         </div>
       </div>
 

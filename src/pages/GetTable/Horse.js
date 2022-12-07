@@ -15,6 +15,7 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import {BsEyeFill} from "react-icons/bs"
+import Pagination from "./Pagination";
 
 const Horse = () => {
   const [show, setShow] = useState(false);
@@ -27,17 +28,18 @@ const Horse = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const { data: horse, status } = useSelector((state) => state.horse);
-  const [pagenumber, setPageNumber] = useState(1);
 
-  const previousPageHandler = () => {
-    setPageNumber((pagenumber) => pagenumber - 1);
-  };
-  const nextPageHandler = () => {
-    setPageNumber((pagenumber) => pagenumber + 1);
-  };
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = horse.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
 
   useEffect(() => {
-    dispatch(fetchHorse({ pagenumber }));
+    dispatch(fetchHorse());
   }, [dispatch]);
 
   const handleRemove = async (Id) => {
@@ -132,7 +134,7 @@ const Horse = () => {
                       </tr>
                     </thead>
 
-                    {horse.map((item) => {
+                    {currentPosts.map((item) => {
                       return (
                         <>
                           <tbody>
@@ -142,7 +144,7 @@ const Horse = () => {
                               <td>
                            
                                 <Moment fromNow ago>
-                                  {item.Age}
+                                  {item.DOB}
                                 </Moment>
                               </td>
 
@@ -213,37 +215,14 @@ const Horse = () => {
               </div>
             </>
           </div>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={horse.length}
+          paginate={paginate}
+        />
         </div>
       </div>
-      {/* <div
-        style={{
-          display: "flex",
-          marginTop: "20px",
-          justifyContent: "space-between",
-        }}
-      >
-        <button
-          className="button btn btn-primary"
-          onClick={previousPageHandler}
-          disabled={pagenumber === 1}
-        >
-          Previous
-        </button>
-        <p
-          style={{
-            marginTop: "20px",
-          }}
-        >
-          Page {pagenumber}
-        </p>
-        <button
-          className="button btn btn-primary"
-          onClick={nextPageHandler}
-          disabled={horse.length <= 1}
-        >
-          Next
-        </button>
-      </div> */}
+    
       <Modal
         show={show}
         onHide={handleClose}

@@ -12,6 +12,7 @@ import { BsFillEyeFill } from "react-icons/bs";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+import Pagination from "./Pagination";
 
 const News = () => {
   const [show, setShow] = useState(false);
@@ -22,17 +23,19 @@ const News = () => {
     await setShow(true);
   };
   const dispatch = useDispatch();
-  const [pagenumber, setPageNumber] = useState(1);
-
-  const previousPageHandler = () => {
-    setPageNumber((pagenumber) => pagenumber - 1);
-  };
-  const nextPageHandler = () => {
-    setPageNumber((pagenumber) => pagenumber + 1);
-  };
 
   const history = useNavigate();
   const { data: allnews, status } = useSelector((state) => state.news);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = allnews.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
+
   useEffect(() => {
     dispatch(fetchNews());
   }, []);
@@ -122,7 +125,7 @@ const News = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {allnews.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <tr className="tr_table_class" key={index}>
                             <td>{item.TitleEn}</td>
@@ -162,6 +165,11 @@ const News = () => {
               </div>
             </>
           </div>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={allnews.length}
+          paginate={paginate}
+        />
         </div>
       </div>
       <Modal

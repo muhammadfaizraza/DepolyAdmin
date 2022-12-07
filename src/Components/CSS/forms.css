@@ -96,7 +96,7 @@ form {
 }
 
 .updateButton {
-  margin-top: 1.5rem;
+  /* margin-top: 1.5rem; */
   width: 186px;
   height: 51px;
   background: linear-gradient(89.98deg, #010306 23.67%, #4d5a62 97.94%);

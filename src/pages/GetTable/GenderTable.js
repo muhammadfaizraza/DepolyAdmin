@@ -13,6 +13,7 @@ import axios from "axios";
 import { Modal } from "react-bootstrap";
 import { BsEyeFill } from "react-icons/bs";
 import GenderPopup from "../../Components/Popup/GenderPopup";
+import Pagination from "./Pagination";
 
 const GenderTable = () => {
 
@@ -27,6 +28,15 @@ const GenderTable = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const { data: gender, status } = useSelector((state) => state.gender);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = gender.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchgender());
   }, [dispatch]);
@@ -110,7 +120,7 @@ const GenderTable = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {gender.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
@@ -148,6 +158,11 @@ const GenderTable = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={gender.length}
+          paginate={paginate}
+        />
         </div>
       </div>
       <Modal

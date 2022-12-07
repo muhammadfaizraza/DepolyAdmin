@@ -13,6 +13,7 @@ import { BiEdit } from "react-icons/bi";
 import { BsEyeFill } from "react-icons/bs";
 import TrackLengthPopup from "../../Components/Popup/TrackLengthPopup";
 import { Modal } from "react-bootstrap";
+import Pagination from "./Pagination";
 
 const Tracklength = () => {
   const [show, setShow] = useState(false);
@@ -27,6 +28,15 @@ const Tracklength = () => {
 const dispatch =useDispatch() ;
 const navigate = useNavigate();
 const { data: trackLength, status } = useSelector((state) => state.trackLength);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = trackLength.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
 useEffect(() => {
   dispatch(fetchTrackLength());
 }, [dispatch]);
@@ -113,7 +123,7 @@ if (status === STATUSES.ERROR) {
                         </tr>
                       </thead>
                       <tbody>
-                        {trackLength.map((item, index) => {
+                        {currentPosts.map((item, index) => {
                           return (
                             <>
                               <tr className="tr_table_class">
@@ -150,6 +160,11 @@ if (status === STATUSES.ERROR) {
                 </>
               </div>
               <span className="plusIconStyle"></span>
+              <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={trackLength.length}
+          paginate={paginate}
+        />
             </div>
           </div>
     

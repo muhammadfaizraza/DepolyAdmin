@@ -16,6 +16,7 @@ import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import swal from "sweetalert";
 import { BsEyeFill } from 'react-icons/bs';
+import Pagination from "./Pagination";
 
 
 const Owner = () => {
@@ -40,6 +41,14 @@ const Owner = () => {
   };
   const { data: owner, status } = useSelector((state) => state.owner);
  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = owner.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
  
   useEffect(() => {
     dispatch(fetchOwner({pagenumber}));
@@ -123,7 +132,7 @@ const Owner = () => {
                  </tr>
                </thead>
                <tbody>
-                 {owner.map((item, index) => {
+                 {currentPosts.map((item, index) => {
                    return (
                      <>
                        <tr className="tr_table_class">
@@ -171,7 +180,11 @@ const Owner = () => {
  
            </>
          </div>
-      
+         <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={owner.length}
+          paginate={paginate}
+        />
        </div>
      </div>
      <Modal

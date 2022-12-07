@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
 import '../Components/CSS/home.css'
 import { fetchrace, STATUSES } from "../redux/getReducer/getRaceSlice";
-import { fetchtobePublishRace } from "../redux/getReducer/getToBePublishRace";
+import { fetchResult } from "../redux/getReducer/getResultSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Lottie from "lottie-react";
 import HorseAnimation from "../assets/horselottie.json";
@@ -11,11 +11,11 @@ const Dashboard = () => {
 
   const dispatch = useDispatch();
   const { data: race, status } = useSelector((state) => state.race);
-  const { data: tobePublishRace } = useSelector((state) => state.tobePublishRace);
-
+  const { data: tobeRaceResult } = useSelector((state) => state.tobeRaceResult);
+  console.log(tobeRaceResult)
   useEffect(() => {
     dispatch(fetchrace());
-    dispatch(fetchtobePublishRace());
+    dispatch(fetchResult());
   }, [dispatch]);
   if (status === STATUSES.LOADING) {
         return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
@@ -50,7 +50,7 @@ const Dashboard = () => {
         </div>
         <div className='ResultAwaited'>
         <p>Result Awaited</p>
-        <h3>{tobePublishRace.length < 10 ? <>0</> : <></>}{tobePublishRace.length}</h3>
+        <h3>{tobeRaceResult ===  undefined ? <>00</> : <>00</>}</h3>
         </div>
         <div className='CompetitionsRaces'>
         <p>Competitions</p>

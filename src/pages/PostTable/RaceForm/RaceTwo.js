@@ -1,243 +1,226 @@
-import React, { useEffect } from "react";
+import React, { useEffect,Fragment } from "react";
 import Moment from "moment";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  fetchjockey,
-  setjockey,
-} from "../../../redux/getReducer/getJockeySlice";
+import { fetchjockey } from "../../../redux/getReducer/getJockeySlice";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { fetchHorse } from "../../../redux/getReducer/getHorseSlice";
-import {
-  fetchequipment,
-  setequipment,
-} from "../../../redux/getReducer/getEquipment";
-import { toast } from "react-toastify";
-
+import { fetchHorse ,STATUSES } from "../../../redux/getReducer/getHorseSlice";
+import { fetchverdict } from '../../../redux/getReducer/getVerdict'
 import Select from "react-select";
 import swal from "sweetalert";
 import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
+import { toast } from 'react-toastify';
 
-const Gelted = [
-  { id: "0", value: "false", label: "false" },
-  { id: "1", value: "true", label: "true" },
-];
-const HorseStatusAll = [
-  { id: "0", value: "false", label: "false" },
-  { id: "1", value: "true", label: "true" },
-];
-const Foals = [
-  { id: "0", value: "1", label: "1" },
-  { id: "1", value: "2", label: "2" },
-  { id: "2", value: "3", label: "3" },
-  { id: "3", value: "4", label: "4" },
-  { id: "4", value: "5", label: "5" },
-  { id: "5", value: "6", label: "6" },
-  { id: "6", value: "7", label: "7" },
-  { id: "7", value: "8", label: "8" },
-  { id: "8", value: "9", label: "9" },
-  { id: "9", value: "10", label: "10" },
-];
+
 const LocalItem = () => {
-  const list = localStorage.getItem("lists");
+
+  const list = localStorage.getItem("verdict");
   if (list) {
-    return JSON.parse(localStorage.getItem("lists"));
+    return JSON.parse(localStorage.getItem("verdict"));
   } else {
     return [];
   }
 };
 
-const RaceForm = () => {
+const PublishRace = () => {
   const [InputData, SetinputData] = useState("");
-  const [Gate, setGate] = useState(1);
-  const [isDisabled, setIsDisabled] = useState(false);
-
-  const [EquipmentData, SetEquipmentData] = useState("");
-  const [JockeyData, SetJockeyData] = useState("");
+  const [VerdictName, SetVerdictName] = useState('');
+  const [Gate , setGate] = useState(1)
   const [items, setitems] = useState(LocalItem());
   const { data: jockey } = useSelector((state) => state.jockey);
   const { data: horse } = useSelector((state) => state.horse);
-  const { data: equipment } = useSelector((state) => state.equipment);
+  const { data: verdict } = useSelector((state) => state.verdict);
 
   const history = useNavigate();
   const { state } = useLocation();
-  const { RaceId } = "state";
+  const { RaceId } = state;
+  let horseoptions = horse.map(function (item) {
+    return {
+      id: item._id,
+      value: item.NameEn,
+      label: item.NameEn,
+    };
+  });
+  let AllJockey = jockey.map(function (item) {
+    return {
+      id: item._id,
+      value: item.NameEn,
+      label: item.NameEn,
+    };
+  });
+
+  let AllVerdict = verdict.map(function (item) {
+    return {
+      id: item._id,
+      value: item.NameEn,
+      label: item.NameEn,
+    };
+  });
 
   const dispatch = useDispatch();
-
-  const HorseLength = horse.length;
-  const ItemLength = items.length;
 
   useEffect(() => {
     dispatch(fetchHorse());
     dispatch(fetchjockey());
-    dispatch(fetchequipment());
+    dispatch(fetchverdict());
   }, [dispatch]);
+
   useEffect(() => {
-    localStorage.setItem("lists", JSON.stringify(items));
-  }, [items, InputData]);
+    localStorage.setItem("verdict", JSON.stringify(items));
+  }, [items]);
+
+  const verdictLength = verdict.length;
+  const ItemLength = items.length;
+
 
   const addItem = (e) => {
     e.preventDefault();
-    let HorseEntry = [
-      `${Gate},${InputData.value},${JockeyData.value},${EquipmentData.value}`,
-    ];
-    if (InputData === "" || JockeyData === "" || EquipmentData === "") {
-      alert("do");
-    } else {
-      setitems([...items, HorseEntry]);
-      setGate(Gate + 1);
+    let VerdictEntry = [`${VerdictName.id},${Gate},${InputData.id}`];
+    if(verdictLength === ItemLength){
+      toast('No Verdict ')
     }
+    
+    else {
+      setitems([...items, VerdictEntry]);
+    setGate(Gate + 1)
+    }
+    SetVerdictName("");
     SetinputData("");
-    SetJockeyData("");
-    SetEquipmentData("");
+  
   };
   const Remove = () => {
     setitems([]);
-    setGate(1);
+    setGate(1)
   };
-  
-  // const deleteBook=(isbn)=>{
-  //   const filteredBooks=books.filter((element,index)=>{
-  //     return element.isbn !== isbn
-  //   })
-  //   setbooks(filteredBooks);
-  // }
+  const submit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(`${window.env.API_URL}addverdicts/${RaceId}`, {VerdictEntry:items});
+      const response1 = await axios.put(`${window.env.API_URL}/publishrace/${RaceId}`);
+      setitems([]);
+      setGate(1)
+      history("/races");
+      swal({
+        title: "Success",
+        text: "Data has been added successfully ",
+        icon: "success",
+        button: "OK",
+      });
+    } catch (error) {
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
+    }
+  };
 
-  const submit = (event) => {
-    console.log({ HorseEntry: items });
-  };
+  
+
   return (
-    <>
+    <Fragment>
       <div className="page">
         <div className="rightsidedata">
           <div
-            style={{
-              marginTop: "30px",
-            }}
+            className="Header"
+            style={{ marginTop: "2px", marginLeft: "12px" }}
           >
-            <div className="Header ">
-              <h4>Add Horse</h4>
-            </div>
-            <div className="myselecthorse">
-              <div className="myselecthorsedata">
-                <span>Gate #</span>
-                <span>Horse Name</span>
-                <span>Jockey Name</span>
-                <span>Jockey Weight</span>
-                <span>Equipment</span>
-              </div>
-            </div>
-            <div className="myselectdata">
-              <div className="myselectiondata">
-                <span onChange={setGate} value={1}>
-                  1
-                </span>
-                <span>
-                  <Select
-                    defaultValue={InputData}
-                    onChange={SetinputData}
-                    options={Gelted}
-                    isClearable={false}
-                    isSearchable={true}
-                  />
-                </span>
-                <span>
-                  <Select
-                    defaultValue={JockeyData}
-                    onChange={SetJockeyData}
-                    options={Foals}
-                    isClearable={false}
-                    isDisabled={isDisabled}
-                    isSearchable={true}
-                  />
-                </span>
+            <h4>Verdict Selection</h4>
+            <button onClick={addItem}>Add Verdict</button>
+          </div>
 
-                <span>
-                  <Select
-                    defaultValue={EquipmentData}
-                    onChange={SetEquipmentData}
-                    options={HorseStatusAll}
-                    isClearable={false}
-                    isSearchable={true}
-                  />
-                </span>
-              </div>
-              {items.map((e, i) => {
+          <Tabs defaultActiveKey="0" id="justify-tab-example" className="mb-3">
+
+           {
+            items.map((data,index) => {
+              return(
+                <Tab eventKey={index} title={`Verdict # ${index + 1 }`} className="Verdicttab">
+                <div className="myselecthorse">
+                  <div className="myselecthorsedata">
+                    <span>Rank #</span>
+                    <span>Verdict Name</span>
+                    <span>Horse Name</span>
+                    {/* <span>Jockey Name</span> */}
+                  </div>
+                </div>
+                {items.map((e, i) => {
                 return (
                   <div className="myselectiondata">
-                    <span onChange={setGate} value={i + 1}>
-                      {i + 2}
+                    <span >{i + 1}</span>
+                    {/* <span>
+                      <input type='text' value={VerdictName} onChange={() => SetVerdictName(e.target.value)} placeholder='Verdict Name' className='textverdict' />
+                    </span> */}
+                     <span>
+                      <Select
+                        defaultValue={VerdictName}
+                        onChange={SetVerdictName}
+                        options={AllVerdict}
+                        isClearable={false}
+                        isSearchable={true}
+                      />
                     </span>
                     <span>
                       <Select
                         defaultValue={InputData}
                         onChange={SetinputData}
-                        options={Gelted}
-                        isClearable={false}
-                        isSearchable={true}
-                      />
-                    </span>
-                    <span>
-                      <Select
-                        defaultValue={JockeyData}
-                        onChange={SetJockeyData}
-                        options={Foals}
+                        options={horseoptions}
                         isClearable={false}
                         isSearchable={true}
                       />
                     </span>
                     {/* <span>
-                      {JockeyData.weight === undefined ? (
-                        <></>
-                      ) : (
-                        <>{JockeyData.weight} KG</>
-                      )}{" "}
-                    </span> */}
-                    <span>
                       <Select
-                        defaultValue={EquipmentData}
-                        onChange={SetEquipmentData}
-                        options={HorseStatusAll}
+                        defaultValue={JockeyData}
+                        onChange={SetJockeyData}
+                        options={AllJockey}
                         isClearable={false}
                         isSearchable={true}
                       />
-                    </span>
+                    </span> */}
+                    {/* <span>
+                      <Select
+                        defaultValue={InputData}
+                        onChange={SetinputData}
+                        options={horseoptions}
+                        isClearable={false}
+                        isSearchable={true}
+                      />
+                    </span> */}
                   </div>
                 );
               })}
 
-              <div className="addbtn">
-                <button className="AddAnother" onClick={addItem}>
-                 {/* Save <AiOutlinePlus /> Add Another{" "} */}
-                 Save & Add Another{" "}
+                </Tab> 
+              )
+            })
+           }
 
-                </button>
-              </div>
-              <div className="sbmtbtndiv">
-                <div className="RaceButtonDiv">
-                  <button className="updateButton" onClick={Remove}>
-                    Remove
-                  </button>
-
-                  <button
+          </Tabs>
+          <button
                     className="SubmitButton"
                     type="submit"
                     onClick={submit}
                   >
-                    Save & Next
+                    Publish
                   </button>
-                </div>
-              </div>
-            </div>
-          </div>
+                  <button
+                    className="SubmitButton"
+                   
+                    onClick={Remove}
+                  >
+                    Remove
+                  </button>
         </div>
       </div>
-    </>
+    </Fragment>
   );
 };
 
-export default RaceForm;
+export default PublishRace;

@@ -22,8 +22,9 @@ const Nationality = () => {
   const [RaceData, setRaceData] = useState("");
   const { data: racecourse } = useSelector((state) => state.racecourse);
   const {state} = useLocation();
-  const {CardId} = state;
+  const {CardId ,RaceCourseId} = state;
   console.log(CardId,'id is this')
+  console.log(RaceCourseId,'RaceCourseId is this')
 
   let AllFetchData =
     FetchData === undefined ? (
@@ -52,7 +53,7 @@ const Nationality = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        `${window.env.API_URL}/getracesthroughracecourseandtime/${CardId}/${FormaredDate}`
+        `${window.env.API_URL}/getracesthroughracecourseandtime/${RaceCourseId}/${FormaredDate}`
       );
       setFetchData(response.data.data);
       const msg = response.data.data.length;
@@ -78,7 +79,7 @@ const Nationality = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        `${window.env.API_URL}/addracesinracecard/${'be9704d5-a531-4a6b-974e-29297c384cb2'}`,[RaceData[0].id]
+        `${window.env.API_URL}/addracesinracecard/${CardId}`,[RaceData[0].id]
       );
       setFetchData(response.data.data);
       const msg = response.data.data.length;

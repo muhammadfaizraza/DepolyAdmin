@@ -72,6 +72,7 @@ const Nationality = () => {
       history("/publishracecard", {
         state: {
           CardId: CardId,
+          RaceCourseId: Race.id
         },
       });
       swal({

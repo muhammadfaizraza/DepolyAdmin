@@ -43,10 +43,7 @@ const NewsForm = () => {
   const [image,setImage] = useState();
   const [preview,setPreview] = useState();
 
-  const fileSelected = (event) => {
-    const image = event.target.files[0];
-    setImage(image, image);
-  };
+  
   
 
   useEffect(() => {
@@ -64,12 +61,17 @@ const NewsForm = () => {
         SixthPrice: fullraceid.SixthPrice,
         RaceStatus: fullraceid.RaceStatus,
         RaceStatus:fullraceid.RaceStatus,
-        DayNTime:fullraceid.DayNTime
+        DayNTime:fullraceid.DayNTime,
+        image:fullraceid.image
 			});
+
 		} else {
 		}
 	}, [fullraceid]);
-
+  const fileSelected = (event) => {
+    const image = event.target.files[0];
+    setImage(image, image);
+  };
   useEffect(() => {
     if (image === undefined) {
       setPreview(fullraceid.image)
@@ -83,9 +85,8 @@ const NewsForm = () => {
   const submit = async (event) => {
     event.preventDefault();
     try {
-      
       const formData = new FormData();
-      formData.append("image", image);
+      formData.append("image",  (image ===  undefined ? state1.image : image));
       formData.append("MeetingCode", state1.MeetingCode);
       formData.append("DescriptionEn", state1.DescriptionEn);
       formData.append("DescriptionAr", state1.DescriptionAr + ' ');
@@ -98,8 +99,6 @@ const NewsForm = () => {
       formData.append("FifthPrice", state1.FifthPrice);
       formData.append("SixthPrice", state1.SixthPrice);
       formData.append("DayNTime", (DayNTime ===  '' ? state1.DayNTime : DayNTime));
-
-
 
       const response = await axios.put(`${window.env.API_URL}/updaterace/${fullraceid._id}`, formData);
       history("/races");

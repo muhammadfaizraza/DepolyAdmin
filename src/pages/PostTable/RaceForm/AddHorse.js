@@ -242,7 +242,7 @@ const ItemLength = items.length;
 
               <div className="addbtn">
                 <button className="AddAnother" onClick={addItem}>
-                Save & Add Another{" "}
+                Save & Add Another
                 </button>
               </div>
               <div className="sbmtbtndiv">

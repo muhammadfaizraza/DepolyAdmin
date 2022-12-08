@@ -6,9 +6,31 @@ import { useNavigate } from "react-router-dom";
 import { add } from "../../redux/postReducer/PostAds";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-import { Validate } from "../../utils/TextInputValidation";
+
 
 import swal from "sweetalert";
+
+const Validate = async (Language, GivenValue, FieldName) => {
+  const ArabicRegex = /[\u0600-\u06FF]/gm;
+  const EnglishRegex = /[a-z0-9.\-]/gim;
+
+  if (GivenValue === " ") {
+    return `${FieldName} Is Empty`;
+  } else if (Language === "en") {
+    if (EnglishRegex.test(GivenValue.trim()) === true) {
+      return true 
+    } else {
+      return `${FieldName} Should Have Only English Letter`;
+    }
+  } else if (Language === "ar") {
+    if (ArabicRegex.test(GivenValue.trim()) === true) {
+      return true
+    } else {
+      return `${FieldName} Should Have Only Arabic Letter`;
+    }
+  }
+};
+
 
 const AdsForm = () => {
   const dispatch = useDispatch();
@@ -22,35 +44,37 @@ const AdsForm = () => {
 
   const submit = async (event) => {
     event.preventDefault();
-    // try {
+     //try {
     const formData = new FormData();
-    Validate("en", TitleEn, "English Title");
+    Validate("en", TitleEn, "English Title")
+   
+  alert(Validate.FieldName)
     
 
-    // formData.append("image", image);
-    // formData.append("TitleEn", TitleEn + " ");
-    // formData.append("TitleAr", TitleAr + " ");
-    // formData.append("DescriptionAr", DescriptionAr + " ");
-    // formData.append("DescriptionEn", DescriptionEn);
-    // await axios.post(`${window.env.API_URL}/uploadAds`, formData);
-    // swal({
-    //   title: "Success!",
-    //   text: "Data has been added Successfully",
-    //   icon: "success",
-    //   button: "OK",
-    // });
+  //    formData.append("image", image);
+  //    formData.append("TitleEn", TitleEn + " ");
+  //    formData.append("TitleAr", TitleAr + " ");
+  //    formData.append("DescriptionAr", DescriptionAr + " ");
+  //    formData.append("DescriptionEn", DescriptionEn);
+  //    await axios.post(`${window.env.API_URL}/uploadAds`, formData);
+  //    swal({
+  //      title: "Success!",
+  //      text: "Data has been added Successfully",
+  //      icon: "success",
+  //      button: "OK",
+  //    });
 
-    // history("/ads");
-    // } catch (error) {
-    //   const err = error.response.data.message;
-    //   swal({
-    //     title: "Error!",
-    //     text: err,
-    //     icon: "error",
-    //     button: "OK",
-    //   });
-    // }
-  };
+  //    history("/ads");
+  //    } catch (error) {
+  //      const err = Validate;
+  //      swal({
+  //        title: "Error!",
+  //        text: err,
+  //        icon: "error",
+  //        button: "OK",
+  //      });
+  //    }
+ };
 
   const isSubmitData =
     TitleAr === "" ||

@@ -157,7 +157,7 @@ style={{ left: "%" }} readOnly/>
 
 
             >
-                <Form.Control type="text" placeholder="Second-Title" value={data.data.HorseModels.length}readOnly />
+                <Form.Control type="text" placeholder="Second-Title" value={data.data.RaceAndHorseModelData.length}readOnly />
             </FloatingLabel>
 
 

@@ -258,7 +258,7 @@ const Races = () => {
                                 {item.DescriptionAr}
                               </td>
                               <td>{item.TrackLengthData.TrackLength}</td>
-                              <td>{item.HorseModels.length}</td>
+                              <td>{item.RaceAndHorseModelData.length}</td>
                               <td>{item.WeatherDegree}</td>
                               <td>{item.WeatherType}</td>
                               <td>

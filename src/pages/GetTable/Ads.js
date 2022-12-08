@@ -102,7 +102,9 @@ const Ads = () => {
                       alignItems: "center",
                       color: "rgba(0, 0, 0, 0.6)",
                     }}
-                  ></h6>
+                  >
+                    
+                  </h6>
 
                   <Link to="/adsform">
                     <button>Create Ad</button>

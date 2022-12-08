@@ -5,12 +5,14 @@ const Validate = async (Language, GivenValue, FieldName) => {
   if (GivenValue === " ") {
     return `${FieldName} Is Empty`;
   } else if (Language === "en") {
-    if (EnglishRegex.test(GivenValue.trim()) === false) {
+    if (EnglishRegex.test(GivenValue.trim()) === true) {
+      return true 
     } else {
       return `${FieldName} Should Have Only English Letter`;
     }
   } else if (Language === "ar") {
-    if (ArabicRegex.test(GivenValue.trim()) === false) {
+    if (ArabicRegex.test(GivenValue.trim()) === true) {
+      return true
     } else {
       return `${FieldName} Should Have Only Arabic Letter`;
     }

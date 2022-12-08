@@ -78,7 +78,7 @@ const NewsForm = () => {
       history("/nationalitylist");
       swal({
         title: "Success!",
-        text: "Data has been Updated successfully ",
+        text: "Data has been Updated Successfully ",
         icon: "success",
         button: "OK",
       });

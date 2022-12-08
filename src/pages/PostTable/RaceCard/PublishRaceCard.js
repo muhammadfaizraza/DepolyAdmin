@@ -92,10 +92,11 @@ const Nationality = () => {
     try {
       const response = await axios.post(
         `${window.env.API_URL}/addracesinracecard/${CardId}`,{RaceEntry:selectedValue});
-     history('/racecardlisting')
+        const msgdata = response.data.msg
+        history('/racecardlisting')
       swal({
         title: "Success!",
-        text: "Data has been added Successfully ",
+        text: msgdata,
         icon: "success",
         button: "OK",
       });

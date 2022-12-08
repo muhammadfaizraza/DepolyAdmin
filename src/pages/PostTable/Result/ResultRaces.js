@@ -20,7 +20,7 @@ const Races = () => {
   const handleClose = () => setShow(false);
   
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const history = useNavigate()
   const { data: Result, status } = useSelector((state) => state.Result);
   const handleRemove = async (Id) => {
     swal({
@@ -207,10 +207,14 @@ const Races = () => {
                                 }}/>{" "}
                               </td>
                               <td>
-                               <button className="Approvedbtn resultbtn"  onClick={() => navigate('/resultform')}> Add Result</button>
-                                {/* <MdDelete
-                                  onClick={() => handleRemove(item._id)}
-                                /> */}
+                               <button className="Approvedbtn resultbtn"   onClick={() =>
+                                    history("/resultform", {
+                                      state: {
+                                        fullresultid: item._id,
+                                      },
+                                    })
+                                  }> Add Result</button>
+                                
                               </td>
                             </tr>
                           </tbody>

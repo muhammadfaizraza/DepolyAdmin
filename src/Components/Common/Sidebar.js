@@ -149,15 +149,16 @@ const Sidebar = () => {
                   </Link>{" "}
                 </div>
                 <div>
-                  <Link to="/ground" className="mylink">
-                    Add Ground Type
-                  </Link>{" "}
-                </div>
-                <div>
                   <Link to="/groundlist" className="mylink">
                     Ground Type Listing
                   </Link>{" "}
                 </div>
+                <div>
+                  <Link to="/ground" className="mylink">
+                    Add Ground Type
+                  </Link>{" "}
+                </div>
+                
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="2">

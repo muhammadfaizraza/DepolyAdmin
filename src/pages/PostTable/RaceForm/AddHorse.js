@@ -99,6 +99,9 @@ const ItemLength = items.length;
   const Remove = () => {
     setitems([]);
     setGate(1)
+    SetinputData("");
+    SetJockeyData("");
+    SetEquipmentData("");
   };
 
   const submit = async (event) => {
@@ -159,6 +162,7 @@ const ItemLength = items.length;
                 </span>
                 <span>
                       <Select
+                        className="dropdown multidropdown"
                         defaultValue={InputData}
                         onChange={SetinputData}
                         options={horseoptions}
@@ -168,6 +172,7 @@ const ItemLength = items.length;
                     </span>
                     <span>
                       <Select
+                        className="dropdown multidropdown"
                         defaultValue={JockeyData}
                         onChange={SetJockeyData}
                         options={AllJockey}
@@ -184,6 +189,7 @@ const ItemLength = items.length;
                     </span> */}
                     <span>
                   <Select
+                    className="dropdown multidropdown"
                     defaultValue={EquipmentData}
                     onChange={SetEquipmentData}
                     options={AllEquipment}

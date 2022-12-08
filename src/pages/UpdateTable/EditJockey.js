@@ -149,10 +149,10 @@ console.log(preview,'preview')
                       <Form.Control type="number" placeholder="Description" value={state1.MiniumumJockeyWeight}/>
                     </FloatingLabel>
                  
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
                       label="الحد الأدنى من وزن الجوكي"
@@ -165,7 +165,7 @@ console.log(preview,'preview')
                     >
                       <Form.Control type="text" placeholder="Description" value={state1.MiniumumJockeyWeight}/>
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -178,13 +178,13 @@ console.log(preview,'preview')
                       }
                      
                     >
-                      <Form.Control type="text" placeholder="Description" value={state1.MaximumJockeyWeight}/>
+                      <Form.Control type="number" placeholder="Description" value={state1.MaximumJockeyWeight}/>
                     </FloatingLabel>
                   
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
                       label="أقصى وزن للجوكي"
@@ -197,7 +197,7 @@ console.log(preview,'preview')
                       <Form.Control type="text" placeholder="Description" value={state1.MaximumJockeyWeight}/>
                     </FloatingLabel>
                     
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="ButtonSection">

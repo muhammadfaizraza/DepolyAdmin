@@ -468,6 +468,7 @@ border: none !important;
 }
 button.Approvedbtn.resultbtn{
   color: #000;
+  margin-left: -30px;
 
 }
 input#floatingInput {
@@ -674,3 +675,11 @@ font-weight: 500;
 /* .cell::-webkit-scrollbar {
   width: 0.4em;
 } */
+
+.page-link:active{
+background-color: #00A3FF;
+}
+
+.addresultform{
+  border: none !important;
+}

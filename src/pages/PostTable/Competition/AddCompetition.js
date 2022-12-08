@@ -289,60 +289,6 @@ const TrainerForm = () => {
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Pick Count"
-                      className="mb-3"
-                      onChange={(e) => setpickCount(e.target.value)}
-                      value={pickCount}
-                    >
-                      <Form.Control type="number" placeholder="Pick Count" />
-                    </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="تفاصيل"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                    >
-                      <Form.Control type="number" placeholder="تفاصيل" />
-                    </FloatingLabel>
-                  </div>
-                </div>
-
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Tri Count"
-                      className="mb-3"
-                      onChange={(e) => setTriCount(e.target.value)}
-                      value={TriCount}
-                    >
-                      <Form.Control type="number" placeholder="Pick Count" />
-                    </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="تفاصيل"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                    >
-                      <Form.Control type="number" placeholder="تفاصيل" />
-                    </FloatingLabel>
-                  </div>
-                </div>
-                
-                <div className="row mainrow">
-                  <div className="col-sm">
                     <Select
                       placeholder={<div>Select Competition Category</div>}
                       defaultValue={CompetitionCategory}
@@ -384,6 +330,61 @@ const TrainerForm = () => {
                     />
                   </div>
                 </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Pick Count"
+                      className="mb-3"
+                      onChange={(e) => setpickCount(e.target.value)}
+                      value={pickCount}
+                    >
+                      <Form.Control type="number" placeholder="Pick Count" />
+                    </FloatingLabel>
+
+                    {/* <span className="spanForm"> |</span> */}
+                  </div>
+{/* 
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="تفاصيل"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control type="number" placeholder="تفاصيل" />
+                    </FloatingLabel>
+                  </div> */}
+                </div>
+
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Tri Count"
+                      className="mb-3"
+                      onChange={(e) => setTriCount(e.target.value)}
+                      value={TriCount}
+                    >
+                      <Form.Control type="number" placeholder="Pick Count" />
+                    </FloatingLabel>
+
+                    {/* <span className="spanForm"> |</span> */}
+                  </div>
+{/* 
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="تفاصيل"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control type="number" placeholder="تفاصيل" />
+                    </FloatingLabel>
+                  </div> */}
+                </div>
+                
+                
 
                 <div
                   className="ButtonSection "

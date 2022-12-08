@@ -4,8 +4,19 @@ import axios from "axios";
 import { useNavigate , useLocation} from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import Select from "react-select";
+
+const Offsets = [
+  { id: "0", value: "false", label: "false" },
+  { id: "1", value: "true", label: "true" },
+];
 
 const Nationality = () => {
+
+
+
+
+
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
 
@@ -18,13 +29,11 @@ const Nationality = () => {
   const [preview, setPreview] = useState();
 
 
-  //for errors
 
 
 
 
-const [error, setError] = useState(false)
-const [field, setField] = useState('');
+
 
 
   const history = useNavigate();
@@ -50,12 +59,8 @@ const [field, setField] = useState('');
       formData.append("image", image);
     
         
-      if (!field) {
-        setError(true);
-        return null;
-      }
-    
-              await axios.post(`${window.env.API_URL}/uploadNationality`, formData);
+      
+   await axios.post(`${window.env.API_URL}/uploadNationality`, formData);
           
             
      
@@ -122,7 +127,7 @@ const [field, setField] = useState('');
                     name="Name"
                     value={NameEn}
                   >
-                    <Form.Control type="text" placeholder="Name" required  oninvalid="('Please Enter valid email')"/>
+                    <Form.Control type="text" placeholder="Name" required   />
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span >
@@ -275,35 +280,30 @@ const [field, setField] = useState('');
               </div>
 
               <div className="row mainrow">
-                <div className="col-sm">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="Off Set"
-                    className="mb-3"
-                    onChange={(e) => setOffset(e.target.value)}
-                    value={Offset}
-                    type="number"
-                  >
-                    <Form.Control type="number" placeholder="Off Set" required/>
-                  </FloatingLabel>
-                  {/* <span className="spanForm"> |</span> */}
-                </div>
-{/* 
-                <div className="col-sm">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="معدل"
-                    className="mb-3 floatingInputAr "
-                    style={{ direction: "rtl", left: "initial", right: 0 }}
-                  >
-                    <Form.Control
-                      type="number"
-                      placeholder="معدل"
-                      style={{ left: "%" }}
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Offset</div>}
+                      defaultValue={Offset}
+                      onChange={setOffset}
+                      options={Offsets}
+                      isClearable={true}
+                      isSearchable={true}
                     />
-                  </FloatingLabel>
-                </div> */}
-              </div>
+                    <span className="spanForm"> |</span>
+                  </div>
+                  <div className="col-sm">
+                    <Select
+                      required
+                      placeholder={<div>حدد جيلتي</div>}
+                      className="selectdir"
+                      defaultValue={Offset}
+                      onChange={setOffset}
+                      options={Offsets}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
 
               <div className="row mainrow">
                 <div className="col-sm">

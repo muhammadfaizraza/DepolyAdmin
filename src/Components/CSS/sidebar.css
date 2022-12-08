@@ -94,7 +94,7 @@ cursor: pointer;
 }
 
 .adminsidebar {
-    height: 100vh;
+ 
     overflow: auto;
     margin-top: 20px;
 }

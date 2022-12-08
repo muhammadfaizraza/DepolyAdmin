@@ -7,10 +7,14 @@ import { add } from "../../redux/postReducer/PostNewsSlice";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import swal from "sweetalert";
+import { useQuill } from 'react-quilljs';
+import 'quill/dist/quill.snow.css';
 
 const NewsForm = () => {
   // const dispatch = useDispatch();
+
   const history = useNavigate();
+  const { quill, quillRef } = useQuill();
   const [TitleEn, setTitleEn] = useState("");
   const [TitleAr, setTitleAr] = useState("");
   const [SecondTitleEn, setSecondTitleEn] = useState("");
@@ -148,35 +152,9 @@ const NewsForm = () => {
                     </FloatingLabel>
                   </div>
                 </div>
-
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Description"
-                      className="mb-3"
-                      onChange={(e) => setDescriptionEn(e.target.value)}
-                      value={DescriptionEn}
-                    >
-                      <Form.Control type="text" placeholder="Description" required/>
-                    </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="وصف"
-                      className="mb-3 floatingInputAr"
-                      onChange={(e) => setDescriptionAr(e.target.value)}
-                      value={DescriptionAr}
-                      style={{ direction: "rtl" }}
-                    >
-                      <Form.Control type="text" placeholder="التفاصيل" required />
-                    </FloatingLabel>
-                  </div>
-                </div>
+                <div style={{ width: 500, height: 300 }}>
+      <div ref={quillRef} />
+    </div>
 
                 <div className="ButtonSection">
                   <div>

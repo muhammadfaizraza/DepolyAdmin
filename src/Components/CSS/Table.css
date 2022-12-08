@@ -362,6 +362,8 @@ td:last-child {
 img.PreviewHorseImage {
     margin-top: 15px;
     margin-left: 20px;
+    width: 150px;
+    height: 150px;
 }
 
 .authclass {

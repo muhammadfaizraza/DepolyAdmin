@@ -12,6 +12,9 @@ import swal from "sweetalert";
 import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+
 const LocalItem = () => {
   const list = localStorage.getItem("lists");
   if (list) {
@@ -112,10 +115,13 @@ const RaceForm = () => {
             </div>
             <div className="myselecthorse">
               <div className="myselecthorsedata">
-                <span>Position #</span>
+                <span>Rank #</span>
                 <span>Horse Name</span>
                 <span>Prize</span>
+                <span>Points</span>
+                <span>BonusPoints</span>
               </div>
+
             </div>
             <div className="myselectdata">
               <div className="myselectiondata">
@@ -129,14 +135,22 @@ const RaceForm = () => {
                     isSearchable={true}
                   />
                 </span>
-
                 <span>
-                  {JockeyData.weight === undefined ? (
-                    <></>
-                  ) : (
-                    <>{JockeyData.weight} KG</>
-                  )}{" "}
+                  <input type='' placeholder="Prize" className="resultforminput"/>
                 </span>
+                <span>
+                <input type='' placeholder="Points"  className="resultforminput"/>
+                </span>
+                <span>
+                <input type='' placeholder="BonusPoints"  className="resultforminput"/>
+                </span>
+
+                
+              </div>
+              <div className="addbtn">
+                <button className="AddAnother" onClick={addItem}>
+                Save & Add Another{" "}
+                </button>
               </div>
               <div className="sbmtbtndiv">
                 <div className="RaceButtonDiv">

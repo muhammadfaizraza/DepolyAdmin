@@ -9,7 +9,7 @@ body::-webkit-scrollbar {
     width: 0.1em;
   }
   .page::-webkit-scrollbar {
-    width: 0.5em;
+    width: 0.1em;
     background: linear-gradient(45deg, rgb(48, 8, 139), darksalmon);
 
   }
@@ -21,6 +21,7 @@ body::-webkit-scrollbar {
   }
   body::-webkit-scrollbar-thumb {
     background: linear-gradient(45deg, rgb(48, 8, 139), darksalmon);
+    width: 0.1em;
   }
    .rightsidedata::-webkit-scrollbar {
     width: 0.1em;
@@ -30,6 +31,7 @@ body::-webkit-scrollbar {
   }
    .rightsidedata::-webkit-scrollbar-thumb {
     background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
+    width: 0.1em;
   }
 
   

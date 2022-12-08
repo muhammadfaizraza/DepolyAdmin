@@ -47,7 +47,7 @@ const Sidebar = () => {
                 <div>
                   {" "}
                   <Link to="/raceform" className="mylink">
-                    Add New
+                    Add New Race
                   </Link>
                 </div>
                 <div>

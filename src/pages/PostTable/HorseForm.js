@@ -298,7 +298,7 @@ const HorseForm = () => {
       formData.append("Cap", Cap);
       formData.append("Rds", Rds.value);
       formData.append("STARS", STARS);
-      formData.append("isGelted", isGelted.id);
+      formData.append("isGelded", isGelted.id);
       formData.append("NationalityID", NationalityId.id);
       formData.append("CreationId", NationalityId.id);
       formData.append("PurchasePrice", PurchasePrice);

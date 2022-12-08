@@ -165,6 +165,23 @@ style={{ left: "%" }} readOnly/>
 
         
     </div>
+    <div className="row mainrow">
+        <div className="col-sm">
+            <FloatingLabel
+                controlId="floatingInput"
+                label="Day & Time"
+                className="mb-3"
+
+
+            >
+                <Form.Control type="text" placeholder="Second-Title" value={data.data.DayNTime}readOnly />
+            </FloatingLabel>
+
+
+        </div>
+
+        
+    </div>
 
 
       

@@ -124,6 +124,11 @@
       
        
     }
+    .DashboardCard {
+        gap: 35px !important;
+        margin: 1rem !important;
+    }
+
     .AccordionBody > div > .mylink {
      
         font-size: 12.5px;
@@ -211,6 +216,6 @@
     
     .rightsidedata {
    
-        margin-left: 30px;
+        margin-left: 0px;
     }
 }

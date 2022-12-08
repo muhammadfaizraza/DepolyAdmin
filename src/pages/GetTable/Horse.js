@@ -160,7 +160,7 @@ const Horse = () => {
                                   <>{item.BreederData.NameEn}</>
                                 )}
                               </td>
-                              <td>{item.Remarks}</td>
+                              <td className='cell'>{item.Remarks}</td>
                               {/* <td>
                                 {item.OwnerModels === undefined ? (
                                   <>No Data</>

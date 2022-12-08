@@ -643,6 +643,22 @@ const Sidebar = () => {
                 </div>
               </Accordion.Body>
             </Accordion.Item>
+            <Accordion.Item eventKey="14">
+              <Accordion.Header>SEO</Accordion.Header>
+              <Accordion.Body className="AccordionBody">
+                <div>
+                  <Link to="/seolisting" className="mylink">
+                    View Listing
+                  </Link>
+                </div>
+                <div>
+                  {" "}
+                  <Link to="/seoform" className="mylink">
+                    Add New
+                  </Link>
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
           </Accordion>
           <hr />
           <div className="SettingSec">

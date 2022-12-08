@@ -665,3 +665,12 @@ font-weight: 500;
 .input#floatingInput:invalid {
   border: 1px solid red;
 }
+
+/* .cell {
+  max-width: 80px; 
+  white-space : nowrap;
+  overflow : hidden;
+} */
+/* .cell::-webkit-scrollbar {
+  width: 0.4em;
+} */

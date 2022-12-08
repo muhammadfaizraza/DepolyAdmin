@@ -60,6 +60,7 @@ import EditRace from "./pages/UpdateTable/EditRace";
 import EditCategory from "./pages/UpdateTable/EditCategory";
 import EditCompetition from "./pages/UpdateTable/EditCompetition";
 import EditRaceCard from "./pages/UpdateTable/EditRaceCard";
+import EditSeo from "./pages/UpdateTable/EditSeo";
 
 import ResultForm from "./pages/PostTable/Result/ResultForm";
 import RacesResult from "./pages/PostTable/Result/ResultRaces";
@@ -108,6 +109,8 @@ import AddCompetition from "./pages/PostTable/Competition/AddCompetition";
 import AddCategory from "./pages/PostTable/Competition/AddCategory";
 import CompetitionCategory from "./pages/GetTable/CompetitionCategory";
 import PublishRaceCard from "./pages/PostTable/RaceCard/PublishRaceCard";
+import Seolisting from "./pages/GetTable/Seolisting";
+import SEOForm from "./pages/PostTable/SEOForm";
 
 
 function App() {
@@ -210,6 +213,8 @@ function App() {
              <Route path="/publishracecard" element={<PublishRaceCard />} />
              <Route path="/racecardlisting" element={<RaceCardListing />} />
              <Route path="/racesPublish" element={<RaceToBePublish />} />
+             <Route path="/seolisting" element={<Seolisting />} />
+             <Route path="/seoform" element={<SEOForm />} />
 
              <Route path="*" element={<NotFound />} />
 
@@ -241,6 +246,7 @@ function App() {
              <Route path="/editcategory" element={<EditCategory />}/>
              <Route path="/editcompetition" element={<EditCompetition />}/>
              <Route path="/editraceCard" element={<EditRaceCard />}/>
+             <Route path="/editseo" element={<EditSeo />}/>
 
            </Route>
          </Routes>

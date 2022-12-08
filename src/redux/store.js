@@ -46,6 +46,7 @@ import getVerdict from './getReducer/getVerdict';
 import getCategory from './getReducer/getCategory';
 import getCompetition from './getReducer/getCompetition';
 import getRaceCard from './getReducer/getRaceCard';
+import getSeo from './getReducer/getSeo';
 
 const store = configureStore({
     reducer: {
@@ -95,7 +96,8 @@ const store = configureStore({
         verdict:getVerdict,
         category:getCategory,
         competition:getCompetition,
-        raceCard:getRaceCard
+        raceCard:getRaceCard,
+        Seo: getSeo
     },
 });
 

@@ -106,6 +106,9 @@ tbody, td, tfoot, th, thead, tr {
     font-size: 14px;
     line-height: 17px;
     color: #000000;
+    max-width: 80px; 
+    white-space : nowrap;
+    overflow : hidden;
 }
 
 .div_maintb th {

@@ -4,6 +4,7 @@ import React from "react";
 
 const RacePopup = (data) => {
 
+    console.log(data,'datadatadata')
     
 
 
@@ -61,6 +62,7 @@ const RacePopup = (data) => {
 
                 <p>{data.data.Horses.length}</p>
                 </div>
+                
                 
                 <div >
                     <h2>Race Status</h2>

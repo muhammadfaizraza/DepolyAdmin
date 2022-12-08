@@ -11,13 +11,19 @@ import dateFormat from "dateformat";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
+const LocalItem = () => {
+  const list = localStorage.getItem("cards");
+  if (list) {
+    return JSON.parse(localStorage.getItem("cards"));
+  } else {
+    return [];
+  }
+};
 
 const Nationality = () => {
   const [Race, setRace] = useState("");
   const [DayNTime, setDayNTime] = useState("");
   const [FetchData, setFetchData] = useState([]);
-  const [NameEn, setNameEn] = useState('');
-  const [NameAr, setNameAr] = useState('');
 
   const [RaceData, setRaceData] = useState([]);
   const { data: racecourse } = useSelector((state) => state.racecourse);
@@ -34,8 +40,8 @@ const Nationality = () => {
       FetchData.map(function (item) {
         return {
           id: item._id,
-          value: item.ThirdPrice,
-          label: item.ThirdPrice,
+          value: item.MeetingCode,
+          label: item.MeetingCode,
         };
       })
     );
@@ -44,11 +50,17 @@ const Nationality = () => {
   const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
   const FormaredDate = dateFormat(DayNTime, "isoDateTime");
-  var today = new Date();
-
+  const history = useNavigate();
+  const [selectedValue, setSelectedValue] = useState([]);
+ 
+  const handleChange = (e) => {
+    setSelectedValue(Array.isArray(e) ? e.map(x => x.id) : []);
+  }
+  
   useEffect(() => {
     dispatch(fetchracecourse());
   }, [dispatch]);
+
 
   const FatchRace = async (event) => {
     event.preventDefault();
@@ -75,25 +87,20 @@ const Nationality = () => {
       });
     }
   };
-  // let AllIn = [RaceData.id]
-  // console.log(AllIn,'AllIn')
   const Publish = async (event) => {
     event.preventDefault();
     try {
-      console.log(RaceData)
-      // const response = await axios.post(
-      //   `${window.env.API_URL}/addracesinracecard/${CardId}`,[RaceData[0].id]
-      // );
-      // setFetchData(response.data.data);
-      // const msg = response.data.data.length;
+      const response = await axios.post(
+        `${window.env.API_URL}/addracesinracecard/${CardId}`,{RaceEntry:selectedValue});
+        const msgdata = response.data.msg
+        history('/racecardlisting')
       swal({
-        // title: "Success!",
-        // text: `${msg} Data Found`,
+        title: "Success!",
+        text: msgdata,
         icon: "success",
         button: "OK",
       });
     } catch (error) {
-      console.log(error);
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -123,8 +130,8 @@ const Nationality = () => {
                   yearPlaceholder="Time"
                   dateFormat="dd MMMM yyyy"
                   onChange={setDayNTime}
-                  minDate={today}
-                  maxDate={new Date("02-29-2023")}
+                  // minDate={today}
+                  // maxDate={new Date("02-29-2023")}
                   value={DayNTime}
                 />
               </div>
@@ -136,16 +143,24 @@ const Nationality = () => {
             </div>
 
             <div className="row mainrow">
-              <Select
+              {/* <Select
                 closeMenuOnSelect={false}
                 components={animatedComponents}
                 isMulti
                 options={AllFetchData}
                 onChange={setRaceData}
                 value={RaceData.id}
-                className='multidropdown'
+               '
+              /> */}
+               <Select
+                className="dropdown multidropdown"
+                placeholder="Select Option"
+                value={AllFetchData.filter(obj => selectedValue.includes(obj.id))} // set selected values
+                options={AllFetchData} // set list of the data
+                onChange={handleChange} // assign onChange function
+                isMulti
+                isClearable   
               />
-             
             </div>
 
             <div className="ButtonSection " style={{ justifyContent: "end" }}>

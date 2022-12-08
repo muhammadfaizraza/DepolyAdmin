@@ -12,6 +12,9 @@ import swal from "sweetalert";
 import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+
 const LocalItem = () => {
   const list = localStorage.getItem("lists");
   if (list) {
@@ -22,9 +25,15 @@ const LocalItem = () => {
 };
 
 const RaceForm = () => {
+
+  const [HorseID, SetHorseID] = useState("");
+  const [Prize, SetPrize] = useState("");
+  const [Points, SetPoints] = useState("");
+  const [BonusPoints, SetBonusPoints] = useState("");
+  const [Rank, setRank] = useState("");
+
   const [InputData, SetinputData] = useState("");
   const [InputData2, SetinputData2] = useState("");
-  const [Gate, setGate] = useState("");
   const [JockeyData, SetJockeyData] = useState("");
   const [items, setitems] = useState(LocalItem());
   const { data: jockey } = useSelector((state) => state.jockey);
@@ -32,7 +41,9 @@ const RaceForm = () => {
 
   const history = useNavigate();
   const { state } = useLocation();
-  // const { RaceId } = state;
+  const { fullresultid } = state;
+
+  console.log(fullresultid,'fullresultid');
 
   let horseoptions = horse.map(function (item) {
     return {
@@ -41,18 +52,11 @@ const RaceForm = () => {
       label: item.NameEn,
     };
   });
-  let AllJockey = jockey.map(function (item) {
-    return {
-      id: item._id,
-      value: item.NameEn,
-      label: item.NameEn,
-      weight: item.MaximumJockeyWeight,
-    };
-  });
+
 
   const dispatch = useDispatch();
   const HorseEntry = [
-    `1,${InputData.id},${JockeyData.id},${JockeyData.weight}`,
+    `1,${HorseID.id},${Prize},${Points},${Points}`,
   ];
 
   useEffect(() => {
@@ -72,15 +76,17 @@ const RaceForm = () => {
   const submit = async (event) => {
     event.preventDefault();
     try {
+
+      const formData = new FormData();
+      formData.append("HorseID", HorseID.id);
+      formData.append("Prize", Prize);
+      formData.append("Points", Points);
+      formData.append("BonusPoints", BonusPoints);
+      formData.append("Rank", Rank);
+
+      const response = await axios.post(`${window.env.API_URL}createraceresult/${fullresultid}`,formData);
       
-      // const response = await axios.post(`${window.env.API_URL}addracehorses/${RaceId}`, {HorseEntry:items});
-      // const response1 = await axios.put(`${window.env.API_URL}/publishrace/${RaceId}`);
-      // history("/fullpublishrace", {
-      //   state: {
-      //     RaceId: RaceId
-      //   },
-      // });
-      // history("/races");
+      history("/races");
       swal({
         title: "Success",
         text: "Data has been added successfully ",
@@ -112,37 +118,48 @@ const RaceForm = () => {
             </div>
             <div className="myselecthorse">
               <div className="myselecthorsedata">
-                <span>Position #</span>
+                <span>Rank #</span>
                 <span>Horse Name</span>
                 <span>Prize</span>
+                <span>Points</span>
+                <span>BonusPoints</span>
               </div>
+
             </div>
             <div className="myselectdata">
               <div className="myselectiondata">
                 <span>1</span>
                 <span>
                   <Select
-                    defaultValue={InputData2}
-                    onChange={SetinputData2}
-                    options={horseoptions[0]}
+                    defaultValue={HorseID}
+                    onChange={SetHorseID}
+                    options={horseoptions}
                     isClearable={false}
                     isSearchable={true}
                   />
                 </span>
-
                 <span>
-                  {JockeyData.weight === undefined ? (
-                    <></>
-                  ) : (
-                    <>{JockeyData.weight} KG</>
-                  )}{" "}
+                  <input type='number' value={Prize} onChange={(e) => SetPrize(e.target.value)} placeholder="Prize" className="resultforminput"/>
                 </span>
+                <span>
+                <input type='number'  value={Points} onChange={(e) => SetPoints(e.target.value)} placeholder="Points"  className="resultforminput"/>
+                </span>
+                <span>
+                <input type='number'  value={BonusPoints} onChange={(e) => SetBonusPoints(e.target.value)} placeholder="BonusPoints"  className="resultforminput"/>
+                </span>
+
+                
+              </div>
+              <div className="addbtn">
+                <button className="AddAnother" onClick={addItem}>
+                Save & Add Another{" "}
+                </button>
               </div>
               <div className="sbmtbtndiv">
                 <div className="RaceButtonDiv">
                   <button className="updateButton">Back</button>
 
-                  <button className="SubmitButton" type="submit">
+                  <button className="SubmitButton" type="submit" onClick={submit}>
                     Save
                   </button>
                 </div>

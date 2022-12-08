@@ -298,7 +298,7 @@ const HorseForm = () => {
       formData.append("Cap", Cap);
       formData.append("Rds", Rds.value);
       formData.append("STARS", STARS);
-      formData.append("isGelted", isGelted.id);
+      formData.append("isGelded", isGelted.id);
       formData.append("NationalityID", NationalityId.id);
       formData.append("CreationId", NationalityId.id);
       formData.append("PurchasePrice", PurchasePrice);
@@ -636,9 +636,9 @@ const HorseForm = () => {
                       />
                     </FloatingLabel>
 
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
                       label="سعر الشراء"
@@ -650,7 +650,7 @@ const HorseForm = () => {
                     >
                       <Form.Control type="number" placeholder="سعر الشراء" />
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -1059,8 +1059,8 @@ const HorseForm = () => {
                           اكتب للبحث عن الجنسية
                         </div>
                       }
-                      defaultValue={NationalityId}
-                      onChange={setNationalityId}
+                      efaultValue={CreationId}
+                      onChange={setCreationId}
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}

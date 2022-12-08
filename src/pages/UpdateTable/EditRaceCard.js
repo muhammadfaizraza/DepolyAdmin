@@ -107,11 +107,11 @@ console.log(racecardid)
                       label="Race Card Name"
                       className="mb-3 "
                       onChange={(e) =>
-                        setState({ ...state1, RailPosition: e.target.value })
+                        setState({ ...state1, RaceCardNameEn: e.target.value })
                       }
                      
                     >
-                      <Form.Control type="text" placeholder="Description" value={state1.RailPosition}/>
+                      <Form.Control type="text" placeholder="Description" value={state1.RaceCardNameEn}/>
                     </FloatingLabel>
                     
                     <span className="spanForm"> |</span>
@@ -124,11 +124,11 @@ console.log(racecardid)
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
-                        setState({ ...state1, RailPosition: e.target.value })
+                        setState({ ...state1, RaceCardNameAr: e.target.value })
                       }
                      
                     >
-                      <Form.Control type="text" placeholder="Description" value={state1.RailPosition}/>
+                      <Form.Control type="text" placeholder="Description" value={state1.RaceCardNameAr}/>
                     </FloatingLabel>
                     
                   </div>

@@ -7,7 +7,8 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import DateTimePicker from "react-datetime-picker";
 import Select from "react-select";
-
+import { fetchracecourse } from "../../redux/getReducer/getRaceCourseSlice";
+import { useSelector , useDispatch } from "react-redux";
 
 const RaceStatuss = [
   { id: "1", value: "Cancel", label: "Cancel" },
@@ -19,11 +20,29 @@ const RaceStatuss = [
 const NewsForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
+  const dispatch = useDispatch();
+  const { data: racecourse } = useSelector((state) => state.racecourse);
 
   const { fullraceid } = state;
   const [DayNTime, setDayNTime] = useState("");
   const [RaceStatus, setRaceStatus] = useState("");
+  const [RaceCourse, setRaceCourse] = useState("");
   console.log(fullraceid)
+
+  let racecourses =
+  racecourse === undefined ? (
+    <></>
+  ) : (
+    racecourse.map(function (item) {
+      return {
+        id: item._id,
+        value: item.TrackNameEn,
+        label: item.TrackNameEn,
+      };
+    })
+  );
+
+
   const [state1, setState] = useState({
 		MeetingCode: '',
     DescriptionEn:'',
@@ -36,8 +55,8 @@ const NewsForm = () => {
     FourthPrice:'',
     FifthPrice:'',
     SixthPrice:'',
-    RaceStatus:'',
-    DayNTime:''
+    DayNTime:'',
+    RaceCourse:''
     
 	});
   const [image,setImage] = useState();
@@ -62,6 +81,7 @@ const NewsForm = () => {
         RaceStatus: fullraceid.RaceStatus,
         RaceStatus:fullraceid.RaceStatus,
         DayNTime:fullraceid.DayNTime,
+        RaceCourse:fullraceid.RaceCourse,
         image:fullraceid.image
 			});
 
@@ -73,6 +93,7 @@ const NewsForm = () => {
     setImage(image, image);
   };
   useEffect(() => {
+    dispatch(fetchracecourse());
     if (image === undefined) {
       setPreview(fullraceid.image)
       return
@@ -93,6 +114,7 @@ const NewsForm = () => {
       formData.append("WeatherDegree", state1.WeatherDegree);
       formData.append("FirstPrice", state1.FirstPrice);
       formData.append("RaceStatus", (RaceStatus.value ===  undefined ? state1.RaceStatus : RaceStatus.value));
+      formData.append("RaceCourse", RaceCourse.id === undefined ? state1.RaceCourse : RaceCourse.id);
       formData.append("SecondPrice", state1.SecondPrice);
       formData.append("ThirdPrice", state1.ThirdPrice);
       formData.append("FourthPrice", state1.FourthPrice);
@@ -275,7 +297,29 @@ const NewsForm = () => {
                     />
                   </div>
                 </div>
-               
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Race Course</div>}
+                      defaultValue={RaceCourse}
+                      onChange={setRaceCourse}
+                      options={racecourses}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                   <span className="spanForm">|</span>
+                  </div>
+
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>دورة السباق</div>}
+                      className="selectdir"
+                      options={racecourses}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
                 
                 <div className="row mainrow">
                   <div className="col-sm">

@@ -155,10 +155,10 @@ const Tracklengthform = () => {
                   >
                     <Form.Control type="number" placeholder="Track Length" required/>
                   </FloatingLabel>
-                  <span className="spanForm"> |</span>
+                  {/* <span className="spanForm"> |</span> */}
                 </div>
 
-                <div className="col-sm">
+                {/* <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="طول المسار"
@@ -169,7 +169,7 @@ const Tracklengthform = () => {
                   >
                     <Form.Control type="number" placeholder="طول المسار" required/>
                   </FloatingLabel>
-                </div>
+                </div> */}
               </div>
               <div className="row mainrow">
                 <div className="col-sm">

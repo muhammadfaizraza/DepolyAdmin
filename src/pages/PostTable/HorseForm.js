@@ -263,13 +263,15 @@ const HorseForm = () => {
   const [OverAllRating, setOverAllRating] = useState("");
   const [image, setimage] = useState();
   const [Foal, setFoal] = useState("");
-  const [Cap, setCap] = useState("");
+ 
   const [STARS, setSTARS] = useState(0);
   const [isGelted, setisGelted] = useState(false);
   const [NationalityId, setNationalityId] = useState("");
   const [PurchasePrice, setPurchasePrice] = useState("");
   const [Rds, setRds] = useState("");
+  const [Height,setHeight] = useState("");
   const [preview, setPreview] = useState();
+
 
   const submit = async (event) => {
     event.preventDefault();
@@ -278,6 +280,8 @@ const HorseForm = () => {
       formData.append("image", image);
       formData.append("NameEn", NameEn);
       formData.append("DOB", DOB);
+      formData.append("Height",Height)
+
       formData.append("NameAr", NameAr + ' ');
       formData.append("Remarks", Remarks);
       formData.append("ActiveOwner", ActiveOwner.id);
@@ -295,7 +299,7 @@ const HorseForm = () => {
       // formData.append("WinningAmount", WinningAmount);
       // formData.append("OverAllRating", OverAllRating);
       formData.append("Foal", Foal.value);
-      formData.append("Cap", Cap);
+
       formData.append("Rds", Rds.value);
       formData.append("STARS", STARS);
       formData.append("isGelded", isGelted.id);
@@ -527,6 +531,24 @@ const HorseForm = () => {
                       <Form.Control type="text" placeholder="ملاحظات" />
                     </FloatingLabel>
                   </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Height"
+                      className="mb-3"
+                      onChange={(e) => setHeight(e.target.value)}
+                      name="Name"
+                      value={Height}
+                    >
+                      <Form.Control type="number" placeholder="" required/>
+                    </FloatingLabel>
+
+                    
+                  </div>
+
+              
                 </div>
 
                 <div className="row mainrow">

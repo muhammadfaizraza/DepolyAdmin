@@ -683,3 +683,13 @@ background-color: #00A3FF;
 .addresultform{
   border: none !important;
 }
+.quill {
+  height: 170px;
+  margin: 0 19px;
+  border-radius: 13px !important;
+  width: 95%;
+}
+.QuillAr{
+  text-align: right;
+  direction: rtl;
+}

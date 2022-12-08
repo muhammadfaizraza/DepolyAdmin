@@ -7,14 +7,33 @@ import { add } from "../../redux/postReducer/PostNewsSlice";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import swal from "sweetalert";
-import { useQuill } from 'react-quilljs';
-import 'quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
+
+
+
+const modules = {
+  toolbar: [
+    [{ 'header': [1, 2, false] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+    [{ 'direction': 'rtl' }] // this is rtl support
+  ],
+}
+
+const formats = [
+  'header',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent',
+  'link', 'image'
+]
 
 const NewsForm = () => {
   // const dispatch = useDispatch();
 
   const history = useNavigate();
-  const { quill, quillRef } = useQuill();
+
   const [TitleEn, setTitleEn] = useState("");
   const [TitleAr, setTitleAr] = useState("");
   const [SecondTitleEn, setSecondTitleEn] = useState("");
@@ -117,7 +136,7 @@ const NewsForm = () => {
                       name="Name"
                       value={TitleAr}
                       style={{ direction: "rtl" }}
-                      
+
                     >
                       <Form.Control type="text" placeholder="عنوان" required />
                     </FloatingLabel>
@@ -148,17 +167,27 @@ const NewsForm = () => {
                       value={SecondTitleAr}
                       style={{ direction: "rtl" }}
                     >
-                      <Form.Control type="text" placeholder="عنوان" required/>
+                      <Form.Control type="text" placeholder="عنوان" required />
                     </FloatingLabel>
                   </div>
                 </div>
-                <div style={{ width: 500, height: 300 }}>
-      <div ref={quillRef} />
-    </div>
+<div className="row ">
+  <div className="col-sm">
+                <ReactQuill theme="snow"
+                  modules={modules}
+                  formats={formats} value={DescriptionEn} onChange={setDescriptionEn} />
+       </div>
+       <div className="col-sm">
+                <ReactQuill theme="snow"
+                className="QuillAr"
+                  modules={modules}
+                  formats={formats} value={DescriptionAr} onChange={setDescriptionAr} />
+</div>
+</div>
 
                 <div className="ButtonSection">
                   <div>
-                  <label className="Multipleownerlabel">
+                    <label className="Multipleownerlabel">
                       Select Image
                     </label>
                     <input

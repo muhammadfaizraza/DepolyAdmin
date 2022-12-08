@@ -14,6 +14,7 @@ import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import Pagination from "./Pagination";
 
+
 const News = () => {
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -132,7 +133,7 @@ const News = () => {
 
                             <td>{item.SecondTitleEn}</td>
 
-                            <td>{item.DescriptionEn}</td>
+                            <td>{ }</td>
 
                             <td>{item.TitleAr}</td>
                             <td>{item.DescriptionAr}</td>

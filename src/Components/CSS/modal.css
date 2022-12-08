@@ -66,3 +66,6 @@ margin-right: 12px;
 
     border-radius: 20px;
 }
+.modal-content {
+    height: fit-content !important;
+}

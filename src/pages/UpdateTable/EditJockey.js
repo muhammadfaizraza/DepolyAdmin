@@ -14,7 +14,7 @@ const NewsForm = () => {
   const { state } = useLocation();
 
   const { jockeyid } = state;
-  const { data: singlejockey } = useSelector((state) => state.singlejockey);
+
   console.log(jockeyid)
   const [state1, setState] = useState({
 		NameEn: '',
@@ -33,23 +33,23 @@ const NewsForm = () => {
   };
   
   useEffect(() => {
-    dispatch(fetchSinglejockey({ jockeyid }));
+    dispatch(fetchSinglejockey());
   }, []);
 
 
   useEffect(() => {
-		if (singlejockey) {
+		if (jockeyid) {
 			setState({
-				NameEn: singlejockey.NameEn,
-        NameAr: singlejockey.NameAr,
-				MaximumJockeyWeight: singlejockey.MaximumJockeyWeight,
-        MiniumumJockeyWeight: singlejockey.MiniumumJockeyWeight,
-        image:singlejockey.image
+				NameEn: jockeyid.NameEn,
+        NameAr: jockeyid.NameAr,
+				MaximumJockeyWeight: jockeyid.MaximumJockeyWeight,
+        MiniumumJockeyWeight: jockeyid.MiniumumJockeyWeight,
+        image:jockeyid.image
 			});
 		} else {
 			dispatch(fetchSinglejockey({ jockeyid }));
 		}
-	}, [singlejockey]);
+	}, [jockeyid]);
 
   useEffect(() => {
     if (image === undefined) {

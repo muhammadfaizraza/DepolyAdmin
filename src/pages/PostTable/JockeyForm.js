@@ -319,107 +319,6 @@ const NewsForm = () => {
                     />
                   </div>
                 </div>
-
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Rating"
-                      className="mb-3"
-                      onChange={(e) => setRating(e.target.value)}
-                      value={Rating}
-                    >
-                      <Form.Control type="number" placeholder="Rating" required/>
-                    </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="معدل"
-                      className="mb-3 floatingInputAr"
-                      name="Name"
-                      style={{ direction: "rtl" }}
-                    >
-                      <Form.Control type="number" placeholder="معدل" />
-                    </FloatingLabel>
-                  </div>
-                </div>
-
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Jockey Minimum Weight"
-                      className="mb-3"
-                      onChange={(e) => setMiniumumJockeyWeight(e.target.value)}
-                      value={MiniumumJockeyWeight}
-                    >
-                      <Form.Control
-                        type="number"
-                        placeholder="Jockey Minimum Weight"
-                        min='0'
-                        required
-                      />
-                    </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="الحد الأدنى لوزن الجوكي"
-                      className="mb-3 floatingInputAr"
-                      value={MiniumumJockeyWeight}
-                      style={{ direction: "rtl" }}
-                    >
-                      <Form.Control
-                        type="number"
-                        placeholder="الحد الأدنى لوزن الجوكي"
-                      />
-                    </FloatingLabel>
-                  </div>
-                </div>
-
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Jockey Maximum Weight"
-                      className="mb-3"
-                      onChange={(e) => setMaximumJockeyWeight(e.target.value)}
-                      value={MaximumJockeyWeight}
-                    >
-                      <Form.Control
-                        type="number"
-                        placeholder="Jockey Maximum Weight"
-                        min='0'
-                        required
-                      />
-                    </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="الحد الأدنى لوزن الجوكي"
-                      className="mb-3 floatingInputAr"
-                      value={MaximumJockeyWeight}
-                      style={{ direction: "rtl" }}
-                    >
-                      <Form.Control
-                        type="number"
-                        placeholder="الحد الأدنى لوزن الجوكي"
-                        min='0'
-                      />
-                    </FloatingLabel>
-                  </div>
-                </div>
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
@@ -463,6 +362,107 @@ const NewsForm = () => {
                     />
                   </div>
                 </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Rating"
+                      className="mb-3"
+                      onChange={(e) => setRating(e.target.value)}
+                      value={Rating}
+                    >
+                      <Form.Control type="number" placeholder="Rating" required/>
+                    </FloatingLabel>
+
+                    {/* <span className="spanForm"> |</span> */}
+                  </div>
+{/* 
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="معدل"
+                      className="mb-3 floatingInputAr"
+                      name="Name"
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control type="number" placeholder="معدل" />
+                    </FloatingLabel>
+                  </div> */}
+                </div>
+
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Jockey Minimum Weight"
+                      className="mb-3"
+                      onChange={(e) => setMiniumumJockeyWeight(e.target.value)}
+                      value={MiniumumJockeyWeight}
+                    >
+                      <Form.Control
+                        type="number"
+                        placeholder="Jockey Minimum Weight"
+                        min='0'
+                        required
+                      />
+                    </FloatingLabel>
+
+                    {/* <span className="spanForm"> |</span> */}
+                  </div>
+
+                  {/* <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="الحد الأدنى لوزن الجوكي"
+                      className="mb-3 floatingInputAr"
+                      value={MiniumumJockeyWeight}
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control
+                        type="number"
+                        placeholder="الحد الأدنى لوزن الجوكي"
+                      />
+                    </FloatingLabel>
+                  </div> */}
+                </div>
+                
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Jockey Maximum Weight"
+                      className="mb-3"
+                      onChange={(e) => setMaximumJockeyWeight(e.target.value)}
+                      value={MaximumJockeyWeight}
+                    >
+                      <Form.Control
+                        type="number"
+                        placeholder="Jockey Maximum Weight"
+                        min='0'
+                        required
+                      />
+                    </FloatingLabel>
+
+                    {/* <span className="spanForm"> |</span> */}
+                  </div>
+
+                  {/* <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="الحد الأدنى لوزن الجوكي"
+                      className="mb-3 floatingInputAr"
+                      value={MaximumJockeyWeight}
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control
+                        type="number"
+                        placeholder="الحد الأدنى لوزن الجوكي"
+                        min='0'
+                      />
+                    </FloatingLabel>
+                  </div> */}
+                </div>
+                
 
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -481,10 +481,10 @@ const NewsForm = () => {
                       />
                     </FloatingLabel>
 
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
                       label="الحد الأدنى لوزن الجوكي"
@@ -498,7 +498,7 @@ const NewsForm = () => {
                         min='0'
                       />
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="ButtonSection">

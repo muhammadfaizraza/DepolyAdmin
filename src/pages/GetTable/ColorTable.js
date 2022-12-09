@@ -16,8 +16,9 @@ import {BsEyeFill} from "react-icons/bs"
 import Pagination from "./Pagination";
 
 const ColorTable = () => {
-  const [show, setShow] = useState(false);
+  
   const [modaldata, setmodaldata] = useState();
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = async (data) => {
     setmodaldata(data);

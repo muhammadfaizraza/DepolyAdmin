@@ -17,9 +17,9 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
 const LocalItem = () => {
-  const list = localStorage.getItem("lists");
+  const list = localStorage.getItem("results");
   if (list) {
-    return JSON.parse(localStorage.getItem("lists"));
+    return JSON.parse(localStorage.getItem("results"));
   } else {
     return [];
   }
@@ -27,25 +27,13 @@ const LocalItem = () => {
 
 const RaceForm = () => {
 
-
-
-
-  const [registeration, setregisteration] = useState({
- })
-
- const [records, setrecords] = useState({})
-
   const [HorseID, SetHorseID] = useState("");
   const [Prize, SetPrize] = useState("");
   const [Points, SetPoints] = useState("");
   const [BonusPoints, SetBonusPoints] = useState("");
   const [Rank, setRank] = useState(1 + 1);
 
-  const [InputData, SetinputData] = useState("");
-  const [InputData2, SetinputData2] = useState("");
-
   const [items, setitems] = useState(LocalItem());
-  const { data: jockey } = useSelector((state) => state.jockey);
   const { data: horse } = useSelector((state) => state.horse);
 
   const history = useNavigate();
@@ -61,69 +49,40 @@ const RaceForm = () => {
       label: item.NameEn,
     };
   });
-
-  const HorseLength = horse.length;
-  const ItemLength = items.length;
   const dispatch = useDispatch();
   const ResultEntry = [
     `${Rank},${HorseID.id},${Prize},${Points},${BonusPoints}`,
   ];
-  const handleChange = (e) => {
-    const name = e.target.name
-    const value = e.target.value
-
-
-    setregisteration({ ...registeration, [name]: value })
- }
- console.log(registeration)
+  
+  
   useEffect(() => {
     dispatch(fetchHorse());
-    dispatch(fetchjockey());
   }, [dispatch]);
+
   useEffect(() => {
-    localStorage.setItem("lists", JSON.stringify(items));
+    localStorage.setItem("results", JSON.stringify(items));
   }, [items]);
-  // const addItem = () => {
-  //   if(HorseLength === ItemLength){
-  //     toast('No Horse ')
-  //   }
-  //   else  if (InputData === "" || JockeyData === "" || EquipmentData === "") {
-  //     toast('Select Values ')
-  //   }
-  //   else {
-  //     setitems([...items, HorseEntry]);
-  //     setGate(Gate + 1);
-  //   }
-  //   setitems([...items, HorseEntry]);
-  //   SetinputData("");
-  // };
+
 
   const addItem = (e) => {
     e.preventDefault();
-    //  let HorseEntry = [
-    //   `${Rank},${InputData.id},${HorseID.id},${Prize},${Points}`,
-    // ];
-    if(HorseLength === ItemLength){
-      toast('No Horse ')
-    }
- 
-    else {
-      setitems([...items, ResultEntry]);
-      setRank(Rank + 1);
-    }
-    SetinputData("");
-    SetHorseID("");
-    SetPrize("");
+     let ResultEntry = [
+      `${Rank},${HorseID.id},${Prize},${Points},${BonusPoints}`,
+    ];
+    setitems([...items, ResultEntry]);
+    setRank(Rank + 1);
+    // SetinputData("");
+    // SetJockeyData("");
+    // SetEquipmentData("");
   };
+ 
   const Remove = () => {
     setitems([]);
   };
 
   const submit = async (event) => {
     event.preventDefault();
-    try {
-
-      
+    try { 
       const response = await axios.post(`${window.env.API_URL}createraceresult/${fullresultid}`,{ResultEntry:items});
       
       history("/races");
@@ -179,13 +138,13 @@ const RaceForm = () => {
                   />
                 </span>
                 <span>
-                  <input type='number' value={Prize} onChange={handleChange} placeholder="Prize" className="resultforminput"/>
+                  <input type='number' value={Prize} onChange={(e) => SetPrize(e.target.value)} placeholder="Prize" className="resultforminput"/>
                 </span>
                 <span>
-                <input type='number'  value={Points} onChange={handleChange} placeholder="Points"  className="resultforminput"/>
+                <input type='number'  value={Points} onChange={(e) => SetPoints(e.target.value)} placeholder="Points"  className="resultforminput"/>
                 </span>
                 <span>
-                <input type='number'  value={BonusPoints} onChange={handleChange} placeholder="BonusPoints"  className="resultforminput"/>
+                <input type='number'  value={BonusPoints} onChange={(e) => SetBonusPoints(e.target.value)} placeholder="BonusPoints"  className="resultforminput"/>
                 </span>
 
                 

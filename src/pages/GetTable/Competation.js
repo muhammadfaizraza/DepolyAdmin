@@ -43,6 +43,16 @@ const Statistic = () => {
     dispatch(fetchcompetition()); 
   }, [dispatch]);
   
+
+  const GoToPublish = (competitionId) => {
+    history("/competitionrace", {
+      state: {
+        competitionId: competitionId,
+      },
+    });
+  }
+
+
   const handleRemove = async (Id) => {
     try {
       const res = await axios.delete(`${window.env.API_URL}/softdeleteCompetiton/${Id}`)
@@ -124,6 +134,7 @@ const Statistic = () => {
                         <th>Pick Count</th>
                         <th>Tri Count</th>
                         <th>Start Date </th>
+                        <th>Add Races</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -147,7 +158,15 @@ const Statistic = () => {
                                   {item.StartDate}
                                 </Moment>{" "}
                               </td>
-                             
+                              <td>
+                                <button
+                                  className="Approvedbtn resultbtn"
+                                  onClick={() => GoToPublish(item._id)}
+                                >
+                                  Click
+                                </button>
+                              </td>
+
                               <td className="table_delete_btn1">
                                   <BiEdit onClick={() => navigate('/editcompetition',{
                                 state:{

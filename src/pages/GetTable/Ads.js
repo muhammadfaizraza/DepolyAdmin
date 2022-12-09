@@ -38,7 +38,7 @@ const Ads = () => {
   const history = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchAds({aaa}));
+    dispatch(fetchAds());
   }, []);
 
   const handleRemove = async (Id) => {

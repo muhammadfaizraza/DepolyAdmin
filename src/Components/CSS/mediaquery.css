@@ -39,9 +39,6 @@
     
 }
 @media (max-width:1600px) and (min-width:1320px) {
-
-
-
     .accordion-button:not(.collapsed) {
        
         font-size: 13.5px;

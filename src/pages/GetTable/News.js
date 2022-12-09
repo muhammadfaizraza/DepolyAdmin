@@ -13,7 +13,7 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import Pagination from "./Pagination";
-import {htmlToText} from 'html-to-text'
+
 
 const News = () => {
   const [show, setShow] = useState(false);
@@ -133,8 +133,8 @@ const News = () => {
                             <td>{item.SecondTitleEn}</td>
                             <td>{item.SecondTitleAr}</td>
 
-                            <td>{htmlToText(item.DescriptionEn)}</td>
-                            <td>{htmlToText(item.DescriptionAr)}</td>
+                            <td>{item.DescriptionEn}</td>
+                            <td>{item.DescriptionAr}</td>
                             
                             <td>
                               <img src={item.image} alt="" />

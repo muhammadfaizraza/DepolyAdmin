@@ -38,12 +38,12 @@ const Nationality = () => {
       race.map(function (item) {
         return {
           id: item._id,
-          value: item.MeetingCode,
-          label: item.MeetingCode,
+          value: item.RaceNameModelData.NameEn,
+          label: item.RaceNameModelData.NameEn,
         };
       })
     );
-
+console.log(race,'AllFetchData')
     let AllFetchCompetition =
     competition === undefined ? (
       <></>
@@ -76,6 +76,8 @@ const Nationality = () => {
   const Publish = async (event) => {
     event.preventDefault();
     try {
+
+      console.log({RaceEntry:selectedValue},'selectedValue')
       const response = await axios.post(
         `${window.env.API_URL}/addraceincompetition/${competitionId}`,{RaceEntry:selectedValue});
         const msgdata = response.data.msg

@@ -45,11 +45,11 @@ const Statistic = () => {
   
 
   const GoToPublish = (competitionId) => {
-    history("/competitionrace", {
-      state: {
-        competitionId: competitionId,
-      },
-    });
+    // history("/competitionrace", {
+    //   state: {
+    //     competitionId: competitionId,
+    //   },
+    // });
   }
 
 

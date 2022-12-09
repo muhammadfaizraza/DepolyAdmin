@@ -31,7 +31,7 @@ const RaceForm = () => {
   const [Prize, SetPrize] = useState("");
   const [Points, SetPoints] = useState("");
   const [BonusPoints, SetBonusPoints] = useState("");
-  const [Rank, setRank] = useState(1 + 1);
+  const [Rank, setRank] = useState(1);
 
   const [items, setitems] = useState(LocalItem());
   const { data: horse } = useSelector((state) => state.horse);
@@ -42,6 +42,7 @@ const RaceForm = () => {
 
   console.log(fullresultid,'fullresultid');
 
+
   let horseoptions = horse.map(function (item) {
     return {
       id: item._id,
@@ -49,10 +50,12 @@ const RaceForm = () => {
       label: item.NameEn,
     };
   });
+
+  const horseLength = horse.length;
+  const ItemLength = items.length;
+  
+  console.log()
   const dispatch = useDispatch();
-  const ResultEntry = [
-    `${Rank},${HorseID.id},${Prize},${Points},${BonusPoints}`,
-  ];
   
   
   useEffect(() => {
@@ -67,25 +70,35 @@ const RaceForm = () => {
   const addItem = (e) => {
     e.preventDefault();
      let ResultEntry = [
-      `${Rank},${HorseID.id},${Prize},${Points},${BonusPoints}`,
+      `${'1'},${HorseID.id},${Prize},${Points},${BonusPoints}`,
     ];
+
+    if(horseLength === ItemLength){
+      toast('No Horse ')
+    }
+    else  if (HorseID === "" || BonusPoints === "") {
+      toast('Select Values ')
+    }
+    else {
     setitems([...items, ResultEntry]);
     setRank(Rank + 1);
-    // SetinputData("");
-    // SetJockeyData("");
-    // SetEquipmentData("");
+    setRank("");
+    }
+    
   };
-  const HorseId = HorseID.id
  
   const Remove = () => {
     setitems([]);
+    SetBonusPoints("");
+    SetPoints("");
+    SetPrize("");
+    SetHorseID("");
   };
 
   const submit = async (event) => {
     event.preventDefault();
     try { 
-      const response = await axios.post(`${window.env.API_URL}createraceresult/${fullresultid},${HorseId}`);
-      
+      const response = await axios.post(`${window.env.API_URL}createraceresult/${fullresultid}`,{ResultEntry:items});
       history("/races");
       swal({
         title: "Success",
@@ -128,7 +141,7 @@ const RaceForm = () => {
             </div>
             <div className="myselectdata">
               <div className="myselectiondata">
-                <span>1</span>
+                <span onChange={setRank} value={1}>1</span>
                 <span>
                   <Select
                     defaultValue={HorseID}
@@ -150,50 +163,54 @@ const RaceForm = () => {
 
                 
               </div>
-              {/* {items.map((e, i) => {
-                return (
+            
+            {
+              items.map((data,i) => {
+                return(
+                  <div className="myselectdata">
                   <div className="myselectiondata">
-                  <span  onChange={setRank} value={i + 1}>{i + 2}</span>
-                  <span>
-                    <Select
-                      defaultValue={HorseID}
-                      onChange={SetHorseID}
-                      options={horseoptions}
-                      isClearable={false}
-                      isSearchable={true}
-                    />
-                  </span>
-                  <span>
-                    <input type='number'  onChange={(e) => SetPrize(e.target.value)} placeholder="Prize" className="resultforminput"/>
-                  </span>
-                  <span>
-                  <input type='number'  onChange={(e) => SetPoints(e.target.value)} placeholder="Points"  className="resultforminput"/>
-                  </span>
-                  <span>
-                  <input type='number'   onChange={(e) => SetBonusPoints(e.target.value)} placeholder="BonusPoints"  className="resultforminput"/>
-                  </span>
-  
+                    <span onChange={setRank} value={i+1}>{i + 2}</span>
+                    <span>
+                      <Select
+                        defaultValue={HorseID}
+                        onChange={SetHorseID}
+                        options={horseoptions}
+                        isClearable={false}
+                        isSearchable={true}
+                      />
+                    </span>
+                    <span>
+                      <input type='number' value={Prize} onChange={(e) => SetPrize(e.target.value)} placeholder="Prize" className="resultforminput"/>
+                    </span>
+                    <span>
+                    <input type='number'  value={Points} onChange={(e) => SetPoints(e.target.value)} placeholder="Points"  className="resultforminput"/>
+                    </span>
+                    <span>
+                    <input type='number'  value={BonusPoints} onChange={(e) => SetBonusPoints(e.target.value)} placeholder="BonusPoints"  className="resultforminput"/>
+                    </span>
+    
+                    
+                  </div>
                   
                 </div>
-                );
-              })} */}
-              <div className="addbtn">
-                <button className="AddAnother" onClick={addItem}>
-                Save & Add Another
-                </button>
-              </div>
-              <div className="sbmtbtndiv">
-                <div className="RaceButtonDiv">
-                <button className="updateButton" onClick={Remove}>
-                    Remove
-                  </button>
-                  <button className="updateButton">Back</button>
-
-                  <button className="SubmitButton" type="submit" onClick={submit}>
-                    Save
-                  </button>
-                </div>
-              </div>
+                )
+              })
+            }
+            <div className="addbtn">
+                    <button className="AddAnother" onClick={addItem}>
+                    Save & Add Another
+                    </button>
+                  </div>
+                  <div className="sbmtbtndiv">
+                    <div className="RaceButtonDiv">
+                    <button className="updateButton" onClick={Remove}>
+                        Remove
+                      </button>    
+                      <button className="SubmitButton" type="submit" onClick={submit}>
+                        Save
+                      </button>
+                    </div>
+                  </div>
             </div>
           </div>
         </div>

@@ -269,6 +269,7 @@ const HorseForm = () => {
   const [NationalityId, setNationalityId] = useState("");
   const [PurchasePrice, setPurchasePrice] = useState("");
   const [Rds, setRds] = useState("");
+  const [KindHorse, setKindHorse] = useState("");
   const [Height,setHeight] = useState("");
   const [preview, setPreview] = useState();
 
@@ -292,10 +293,10 @@ const HorseForm = () => {
       formData.append("Sex", Sex.id);
       formData.append("Breeder", Breeder.id);
       formData.append("ColorID", ColorID.id);
-      formData.append("HorseKind", "9fff4d8f-7f08-4d3f-9342-a3df4a8abcef");
-      // formData.append("Dam", Dam.id);
-      // formData.append("Sire", Sire.id);
-      // formData.append("GSire", GSire.id);
+      formData.append("KindHorse", KindHorse.id);
+      formData.append("Dam", Dam.id);
+      formData.append("Sire", Sire.id);
+      formData.append("GSire", GSire.id);
       // formData.append("WinningAmount", WinningAmount);
       // formData.append("OverAllRating", OverAllRating);
       formData.append("Foal", Foal.value);
@@ -555,8 +556,8 @@ const HorseForm = () => {
                   <div className="col-sm">
                     <Select
                       placeholder={<div>Select Horse Kind</div>}
-                      defaultValue={HorseKind}
-                      onChange={setHorseKind}
+                      defaultValue={KindHorse}
+                      onChange={setKindHorse}
                       options={horsekindoptions}
                       isClearable={true}
                       isSearchable={true}
@@ -586,8 +587,8 @@ const HorseForm = () => {
                       required
                       placeholder={<div>حدد جيلتي</div>}
                       className="selectdir"
-                      defaultValue={HorseKind}
-                      onChange={setHorseKind}
+                      defaultValue={KindHorse}
+                      onChange={setKindHorse}
                       options={horsekindoptions}
                       isClearable={true}
                       isSearchable={true}

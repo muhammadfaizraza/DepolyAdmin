@@ -75,6 +75,7 @@ const RaceForm = () => {
     // SetJockeyData("");
     // SetEquipmentData("");
   };
+  const HorseId = HorseID.id
  
   const Remove = () => {
     setitems([]);
@@ -83,7 +84,7 @@ const RaceForm = () => {
   const submit = async (event) => {
     event.preventDefault();
     try { 
-      const response = await axios.post(`${window.env.API_URL}createraceresult/${fullresultid}`,{ResultEntry:items});
+      const response = await axios.post(`${window.env.API_URL}createraceresult/${fullresultid},${HorseId}`);
       
       history("/races");
       swal({

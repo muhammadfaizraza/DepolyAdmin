@@ -5,14 +5,15 @@ import { fetchResult } from "../redux/getReducer/getResultSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Lottie from "lottie-react";
 import HorseAnimation from "../assets/horselottie.json";
-
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { data: race, status } = useSelector((state) => state.race);
-  const { data: tobeRaceResult } = useSelector((state) => state.tobeRaceResult);
-  console.log(tobeRaceResult)
+  const { data: Result } = useSelector((state) => state.Result);
+  console.log(Result)
   useEffect(() => {
     dispatch(fetchrace());
     dispatch(fetchResult());
@@ -44,13 +45,17 @@ const Dashboard = () => {
           <h4 className='topheading'>Dashboard</h4>
         </div>
        <div className='DashboardCard'>
-        <div className='OngoingRaces'>
+        <div className='OngoingRaces' onClick={() => {
+          navigate('/races')
+        }}>
           <p>Ongoing Races </p>
           <h3>{race.length < 10 ? <>0</> : <></>}{race.length}</h3>
         </div>
-        <div className='ResultAwaited'>
+        <div className='ResultAwaited' onClick={() => {
+          navigate('/resultrace')
+        }}>
         <p>Result Awaited</p>
-        <h3>{tobeRaceResult ===  undefined ? <>00</> : <>00</>}</h3>
+        <h3>{Result.length < 10 ? <>0</> : <></>}{Result.length}</h3>
         </div>
         <div className='CompetitionsRaces'>
         <p>Competitions</p>

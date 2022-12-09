@@ -2,7 +2,6 @@ import React, { Fragment, useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import { useNavigate , useLocation } from "react-router-dom";
-
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 

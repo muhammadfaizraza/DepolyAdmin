@@ -34,6 +34,14 @@ const Login = () => {
     toast(error || customError)
   }
 
+  useEffect(() => {
+    if (userInfo) {
+      window.location.reload(); 
+
+      navigate('/dashboard')
+    }
+  }, [navigate, userInfo])
+
   // const AllFilled = (register.Email !== '') && (register.password !== "")
   // 
   return (

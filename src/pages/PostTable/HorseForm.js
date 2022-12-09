@@ -292,7 +292,7 @@ const HorseForm = () => {
       formData.append("Sex", Sex.id);
       formData.append("Breeder", Breeder.id);
       formData.append("ColorID", ColorID.id);
-      formData.append("KindOfHorse", KindOfHorse.id);
+      formData.append("HorseKind", KindOfHorse.id);
       formData.append("Dam", Dam.id);
       formData.append("Sire", Sire.id);
       formData.append("GSire", GSire.id);

@@ -111,6 +111,7 @@ import CompetitionCategory from "./pages/GetTable/CompetitionCategory";
 import PublishRaceCard from "./pages/PostTable/RaceCard/PublishRaceCard";
 import Seolisting from "./pages/GetTable/Seolisting";
 import SEOForm from "./pages/PostTable/SEOForm";
+import PublishRaceCompetition from "./pages/PostTable/Competition/PublishRaceCompetition";
 
 
 function App() {
@@ -215,6 +216,7 @@ function App() {
              <Route path="/racesPublish" element={<RaceToBePublish />} />
              <Route path="/seolisting" element={<Seolisting />} />
              <Route path="/seoform" element={<SEOForm />} />
+             <Route path="/competitionrace" element={<PublishRaceCompetition />} />
 
              <Route path="*" element={<NotFound />} />
 

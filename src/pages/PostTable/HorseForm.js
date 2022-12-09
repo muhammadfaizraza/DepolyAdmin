@@ -10,7 +10,7 @@ import { fetchcolor } from "../../redux/getReducer/getColor";
 import { fetchbreeder } from "../../redux/getReducer/getBreeder";
 import { fetchnationality } from "../../redux/getReducer/getNationality";
 import { fetchgender } from "../../redux/getReducer/getGenderSlice";
-import { fetchHorseKind } from "../../redux/getReducer/getHorseKind";
+import { fetchHorseKind, setHorseKind } from "../../redux/getReducer/getHorseKind";
 import DatePicker from "react-date-picker";
 import swal from "sweetalert";
 import axios from "axios";
@@ -254,7 +254,7 @@ const HorseForm = () => {
   const [HorseStatus, setHorseStatus] = useState("");
   const [Sex, setSex] = useState("");
   const [ColorID, setColor] = useState("");
-  const [KindOfHorse, setKindOfHorse] = useState("");
+
   const [Dam, setDam] = useState("");
   const [Sire, setSire] = useState("");
   const [DOB, setDOB] = useState("");
@@ -292,7 +292,7 @@ const HorseForm = () => {
       formData.append("Sex", Sex.id);
       formData.append("Breeder", Breeder.id);
       formData.append("ColorID", ColorID.id);
-      formData.append("KindOfHorse", KindOfHorse.id);
+      formData.append("HorseKind", HorseKind.id);
       formData.append("Dam", Dam.id);
       formData.append("Sire", Sire.id);
       formData.append("GSire", GSire.id);
@@ -302,7 +302,7 @@ const HorseForm = () => {
 
       formData.append("Rds", Rds.value);
       formData.append("STARS", STARS);
-      formData.append("isGelded", isGelted.id);
+      formData.append("isGelded", isGelted.id); 
       formData.append("NationalityID", NationalityId.id);
       formData.append("CreationId", NationalityId.id);
       formData.append("PurchasePrice", PurchasePrice);
@@ -542,7 +542,7 @@ const HorseForm = () => {
                       name="Name"
                       value={Height}
                     >
-                      <Form.Control type="number" placeholder="" required/>
+                      <Form.Control type="number" placeholder="Height" required/>
                     </FloatingLabel>
 
                     
@@ -555,8 +555,8 @@ const HorseForm = () => {
                   <div className="col-sm">
                     <Select
                       placeholder={<div>Select Horse Kind</div>}
-                      defaultValue={KindOfHorse}
-                      onChange={setKindOfHorse}
+                      defaultValue={HorseKind}
+                      onChange={setHorseKind}
                       options={horsekindoptions}
                       isClearable={true}
                       isSearchable={true}
@@ -586,8 +586,8 @@ const HorseForm = () => {
                       required
                       placeholder={<div>حدد جيلتي</div>}
                       className="selectdir"
-                      defaultValue={KindOfHorse}
-                      onChange={setKindOfHorse}
+                      defaultValue={HorseKind}
+                      onChange={setHorseKind}
                       options={horsekindoptions}
                       isClearable={true}
                       isSearchable={true}

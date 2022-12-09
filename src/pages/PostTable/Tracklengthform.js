@@ -90,14 +90,18 @@ const Tracklengthform = () => {
     }
 
     if (!RaceCourseImage.name.match(/\.(gif)$/)) {
+   
       swal({
         title: "Error!",
         text: "Enter Gif Image",
         icon: "error",
         button: "OK",
+    
       });
       
+      return false
     }
+  
     const objectUrl = URL.createObjectURL(RaceCourseImage);
     setPreview(objectUrl);
     return () => URL.revokeObjectURL(objectUrl);

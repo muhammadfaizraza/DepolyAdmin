@@ -105,7 +105,7 @@ const handleShow = async (data) => {
                 </h6>
 
                 <Link to="/RaceKindform">
-                  <button>Add Race Type</button>
+                  <button>Add Race Kind</button>
                 </Link>
               </div>
             </div>

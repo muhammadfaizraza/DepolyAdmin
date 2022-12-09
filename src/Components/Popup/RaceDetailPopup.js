@@ -112,7 +112,7 @@ style={{ left: "%" }} readOnly/>
 
 
             >
-                <Form.Control type="text" placeholder="Second-Title" value={data.data.RaceCourseData.TrackNameEn}readOnly />
+                <Form.Control type="text" placeholder="Second-Title" value={data.data.RaceCourseData === null ? <>N/A</> : <>{data.data.RaceCourseData.TrackNameEn}</>}readOnly />
             </FloatingLabel>
 
             <span className="spanForm"> |</span>

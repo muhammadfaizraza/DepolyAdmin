@@ -10,7 +10,7 @@ import { fetchcolor } from "../../redux/getReducer/getColor";
 import { fetchbreeder } from "../../redux/getReducer/getBreeder";
 import { fetchnationality } from "../../redux/getReducer/getNationality";
 import { fetchgender } from "../../redux/getReducer/getGenderSlice";
-import { fetchHorseKind } from "../../redux/getReducer/getHorseKind";
+import { fetchHorseKind, setHorseKind } from "../../redux/getReducer/getHorseKind";
 import DatePicker from "react-date-picker";
 import swal from "sweetalert";
 import axios from "axios";
@@ -63,7 +63,7 @@ const HorseForm = () => {
   const { data: breeder } = useSelector((state) => state.breeder);
   const { data: nationality } = useSelector((state) => state.nationality);
   const { data: gender } = useSelector((state) => state.gender);
-  const { data: HorseKind } = useSelector((state) => state.HorseKind);
+  const { data: HorseKind} = useSelector((state) => state.HorseKind);
 
   useEffect(() => {
     dispatch(fetchOwner());
@@ -241,7 +241,6 @@ const HorseForm = () => {
 
     };
     // Modal functionalities End Here
-  
 
   const [ActiveOwner, setActiveOwner] = useState("");
   const [Age, setAge] = useState("");
@@ -254,7 +253,8 @@ const HorseForm = () => {
   const [HorseStatus, setHorseStatus] = useState("");
   const [Sex, setSex] = useState("");
   const [ColorID, setColor] = useState("");
-  const [KindOfHorse, setKindOfHorse] = useState("");
+
+
   const [Dam, setDam] = useState("");
   const [Sire, setSire] = useState("");
   const [DOB, setDOB] = useState("");
@@ -263,12 +263,13 @@ const HorseForm = () => {
   const [OverAllRating, setOverAllRating] = useState("");
   const [image, setimage] = useState();
   const [Foal, setFoal] = useState("");
- 
+
   const [STARS, setSTARS] = useState(0);
   const [isGelted, setisGelted] = useState(false);
   const [NationalityId, setNationalityId] = useState("");
   const [PurchasePrice, setPurchasePrice] = useState("");
   const [Rds, setRds] = useState("");
+  const [KindHorse, setKindHorse] = useState("");
   const [Height,setHeight] = useState("");
   const [preview, setPreview] = useState();
 
@@ -292,7 +293,7 @@ const HorseForm = () => {
       formData.append("Sex", Sex.id);
       formData.append("Breeder", Breeder.id);
       formData.append("ColorID", ColorID.id);
-      formData.append("HorseKind", KindOfHorse.id);
+      formData.append("KindHorse", KindHorse.id);
       formData.append("Dam", Dam.id);
       formData.append("Sire", Sire.id);
       formData.append("GSire", GSire.id);
@@ -302,7 +303,7 @@ const HorseForm = () => {
 
       formData.append("Rds", Rds.value);
       formData.append("STARS", STARS);
-      formData.append("isGelded", isGelted.id);
+      formData.append("isGelded", isGelted.id); 
       formData.append("NationalityID", NationalityId.id);
       formData.append("CreationId", NationalityId.id);
       formData.append("PurchasePrice", PurchasePrice);
@@ -542,7 +543,7 @@ const HorseForm = () => {
                       name="Name"
                       value={Height}
                     >
-                      <Form.Control type="number" placeholder="" required/>
+                      <Form.Control type="number" placeholder="Height" required/>
                     </FloatingLabel>
 
                     
@@ -555,8 +556,8 @@ const HorseForm = () => {
                   <div className="col-sm">
                     <Select
                       placeholder={<div>Select Horse Kind</div>}
-                      defaultValue={KindOfHorse}
-                      onChange={setKindOfHorse}
+                      defaultValue={KindHorse}
+                      onChange={setKindHorse}
                       options={horsekindoptions}
                       isClearable={true}
                       isSearchable={true}
@@ -586,8 +587,8 @@ const HorseForm = () => {
                       required
                       placeholder={<div>حدد جيلتي</div>}
                       className="selectdir"
-                      defaultValue={KindOfHorse}
-                      onChange={setKindOfHorse}
+                      defaultValue={KindHorse}
+                      onChange={setKindHorse}
                       options={horsekindoptions}
                       isClearable={true}
                       isSearchable={true}

@@ -116,7 +116,7 @@ const NewsForm = () => {
                       }
                     
                     >
-                      <Form.Control type="text"  placeholder="Description" value={state1.shortCode}/>
+                      <Form.Control type="number"  placeholder="Description" value={state1.shortCode}/>
                     </FloatingLabel>
                  
 									

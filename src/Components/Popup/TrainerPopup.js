@@ -95,7 +95,7 @@ const TrainerPopup = (data) => {
             <div className="col-sm">
             <FloatingLabel
                 controlId="floatingInput"
-                label="اسم"
+                label="اسم قصير"
                 className="mb-3 floatingInputAr"
                 style={{ direction: "rtl", left: "initial", right: 0 }}
              

@@ -240,7 +240,7 @@ const Races = () => {
                               </td>
                               <td
                                 style={{
-                                  maxWidth: "400px",
+                                  maxHeight: "400px",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
                                   whiteSpace: "nowrap",
@@ -250,7 +250,7 @@ const Races = () => {
                               </td>
                               <td
                                 style={{
-                                  maxWidth: "400px",
+                                  maxHeight: "400px",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
                                   whiteSpace: "nowrap",
@@ -339,7 +339,7 @@ const Races = () => {
       >
         <Modal.Header closeButton>
           <h2>Race Prize </h2>
-        </Modal.Header>
+        </Modal.Header> 
         <Modal.Body>
           <Prize data={modaldata} />
         </Modal.Body>

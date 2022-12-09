@@ -372,7 +372,7 @@ const NewsForm = () => {
                       >
                         <button
                           className="addmore"
-                          onClick={() => history("/nationality")}
+                          onClick={() => history("/addCategory")}
                         >
                           +
                         </button>

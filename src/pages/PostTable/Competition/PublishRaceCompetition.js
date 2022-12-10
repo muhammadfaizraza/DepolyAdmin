@@ -59,6 +59,20 @@ console.log(competitionId,'competitionId');
         };
       })
     );
+
+    let AllFetchCompetitionAr =
+    competition === undefined ? (
+      <></>
+    ) : (
+      competition.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameAr,
+          label: item.NameAr,
+        };
+      })
+    );
+    
     
   // const history = useNavigate();
   const dispatch = useDispatch();
@@ -131,7 +145,7 @@ console.log(competitionId,'competitionId');
                       className="selectdir"
                       defaultValue={Competition}
                       onChange={setCompetition}
-                      options={AllFetchData}
+                      options={AllFetchCompetitionAr}
                       isClearable={true}
                       isSearchable={true}
                     />

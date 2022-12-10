@@ -35,9 +35,19 @@ const Gelted = [
   { id: "0", value: "false", label: "false" },
   { id: "1", value: "true", label: "true" },
 ];
+
+const GeltedAr = [
+  { id: "0", value: "خاطئة", label: "خاطئة" },
+  { id: "1", value: "حقيقي", label: "حقيقي" },
+];
 const HorseStatusAll = [
   { id: "0", value: "false", label: "false" },
   { id: "1", value: "true", label: "true" },
+];
+
+const HorseStatusAllAr = [
+  { id: "0", value: "خاطئة", label: "خاطئة" },
+  { id: "1", value: "حقيقي", label: "حقيقي" },
 ];
 const Foals = [
   { id: "0", value: "1", label: "1" },
@@ -294,9 +304,9 @@ const HorseForm = () => {
       formData.append("Breeder", Breeder.id);
       formData.append("ColorID", ColorID.id);
       formData.append("KindHorse", KindHorse.id);
-      formData.append("Dam", Dam.id);
-      formData.append("Sire", Sire.id);
-      formData.append("GSire", GSire.id);
+      formData.append("Dam", Dam === '' ? <>{null}</> : Dam.id);
+      formData.append("Sire",Sire === '' ?  <>{null}</> : Sire.id);
+      formData.append("GSire",GSire === '' ?  <>{null}</> : GSire.id);
       // formData.append("WinningAmount", WinningAmount);
       // formData.append("OverAllRating", OverAllRating);
       formData.append("Foal", Foal.value);
@@ -615,7 +625,7 @@ const HorseForm = () => {
                       className="selectdir"
                       defaultValue={HorseStatus}
                       onChange={setHorseStatus}
-                      options={HorseStatusAll}
+                      options={HorseStatusAllAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -694,7 +704,7 @@ const HorseForm = () => {
                       className="selectdir"
                       defaultValue={Rds}
                       onChange={setRds}
-                      options={Gelted}
+                      options={GeltedAr}
                       isClearable={true}
                       isSearchable={true}
                     />

@@ -159,6 +159,19 @@ const TrainerForm = () => {
         };
       })
     );
+
+    let AllNationalityAr =
+    nationality === undefined ? (
+      <></>
+    ) : (
+      nationality.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameAr,
+          label: item.NameAr,
+        };
+      })
+    );
   const isSubmitData = NameEn === "";
 
   return (
@@ -217,7 +230,43 @@ const TrainerForm = () => {
                   </div>
 
                   <div className="col-sm" style={{ direction: "rtl" }}>
-                    <input value={convert(DOB)} placeholder="تاريخ الولادة" />
+                  <DatePicker
+                       onChange={setDOB}
+                       value={DOB}
+                       maxDate={today}
+                      dayPlaceholder="  "
+                      monthPlaceholder="تاريخ الولادة"
+                      yearPlaceholder=""
+                      style={{ direction: "rtl" }}
+                    />
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <DatePicker
+                      onChange={setTrainerLicenseDate}
+                      value={TrainerLicenseDate}
+                      dayPlaceholder="  "
+                      maxDate={today}
+                      monthPlaceholder="License Date"
+                      yearPlaceholder=""
+                    />
+
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm" style={{ direction: "rtl" }}>
+
+                  <DatePicker
+                      onChange={setTrainerLicenseDate}
+                      value={TrainerLicenseDate}
+                      dayPlaceholder="  "
+                      maxDate={today}
+                      monthPlaceholder="تاريخ التسجيل"
+                      yearPlaceholder=""
+                      style={{ direction: "rtl" }}
+                    />
+                   
                   </div>
                 </div>
                 <div className="row  mainrow">
@@ -303,32 +352,7 @@ const TrainerForm = () => {
                     </FloatingLabel>
                   </div>
                 </div>
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Remarks"
-                      className="mb-3"
-                      onChange={(e) => setRemarks(e.target.value)}
-                      value={Remarks}
-                    >
-                      <Form.Control type="text" placeholder="Details" required/>
-                    </FloatingLabel>
-
-      
-                  </div>
-
-                  {/* <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="ملاحظات"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                    >
-                      <Form.Control type="text" placeholder="ملاحظات" />
-                    </FloatingLabel>
-                  </div> */}
-                </div>
+                
                
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -367,7 +391,7 @@ const TrainerForm = () => {
                       className="selectdir"
                       defaultValue={NationalityId}
                       onChange={setNationalityId}
-                      options={AllNationality}
+                      options={AllNationalityAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -375,24 +399,29 @@ const TrainerForm = () => {
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
-                    <DatePicker
-                      onChange={setTrainerLicenseDate}
-                      value={TrainerLicenseDate}
-                      dayPlaceholder="  "
-                      maxDate={today}
-                      monthPlaceholder="License Date"
-                      yearPlaceholder=""
-                    />
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Remarks"
+                      className="mb-3"
+                      onChange={(e) => setRemarks(e.target.value)}
+                      value={Remarks}
+                    >
+                      <Form.Control type="text" placeholder="Details" required/>
+                    </FloatingLabel>
 
-                    <span className="spanForm"> |</span>
+      
                   </div>
 
-                  <div className="col-sm" style={{ direction: "rtl" }}>
-                    <input
-                      value={convert(TrainerLicenseDate)}
-                      placeholder="تاريخ الولادة"
-                    />
-                  </div>
+                  {/* <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="ملاحظات"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control type="text" placeholder="ملاحظات" />
+                    </FloatingLabel>
+                  </div> */}
                 </div>
                 <div className="ButtonSection">
                   <div>

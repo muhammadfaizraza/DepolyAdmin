@@ -19,7 +19,7 @@ const Verdicts = () => {
           const formData = new FormData();
           formData.append("NameEn", NameEn);
           formData.append("NameAr" , NameAr + ' ')
-          formData.append("shortCode",'1000');
+          // formData.append("shortCode",'1000');
     
           await axios.post(`${window.env.API_URL}uploadVerdict`, formData)
           history('/verdictlist')

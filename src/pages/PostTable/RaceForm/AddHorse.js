@@ -106,31 +106,37 @@ const ItemLength = items.length;
 
   const submit = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post(`${window.env.API_URL}addracehorses/${RaceId}`, {HorseEntry:items});
-      localStorage.removeItem('lists')
-      setGate(1)
-      history("/fullpublishrace", {
-        state: {
-          RaceId: RaceId
-        },
-      });
-     
-      swal({
-        title: "Success",
-        text: "Data has been added successfully ",
-        icon: "success",
-        button: "OK",
-      });
-    } catch (error) {
-      const err = error.response.data.message;
-      swal({
-        title: "Error!",
-        text: err,
-        icon: "error",
-        button: "OK",
-      });
+    if (InputData === "" || JockeyData === "" || EquipmentData === "") {
+      toast('Please Add and Save Horse ')
     }
+    else{
+      try {
+        const response = await axios.post(`${window.env.API_URL}addracehorses/${RaceId}`, {HorseEntry:items});
+        localStorage.removeItem('lists')
+        setGate(1)
+        history("/fullpublishrace", {
+          state: {
+            RaceId: RaceId
+          },
+        });
+       
+        swal({
+          title: "Success",
+          text: "Data has been added successfully ",
+          icon: "success",
+          button: "OK",
+        });
+      } catch (error) {
+        const err = error.response.data.message;
+        swal({
+          title: "Error!",
+          text: err,
+          icon: "error",
+          button: "OK",
+        });
+      }
+    }
+    
     setitems([]);
   };
 

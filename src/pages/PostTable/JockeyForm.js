@@ -162,7 +162,18 @@ const NewsForm = () => {
       })
     );
 
-   
+    let AllNationalityAr =
+    nationality === undefined ? (
+      <></>
+    ) : (
+      nationality.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameAr,
+          label: item.NameAr,
+        };
+      })
+    );
   return (
     <>
       <div className="page">
@@ -270,6 +281,7 @@ const NewsForm = () => {
                   </div>
                 </div>
 
+
                 <div className="row mainrow">
                   <div className="col-sm">
                     <DatePicker
@@ -277,24 +289,24 @@ const NewsForm = () => {
                       value={DOB}
                       dayPlaceholder="  "
                       maxDate={today}
-                      monthPlaceholder="Date Of Birth"
+                      monthPlaceholder="Date of Birth "
                       yearPlaceholder=""
                     />
-
                     <span className="spanForm"> |</span>
                   </div>
 
-                  <div className="col-sm">
-                    <input
-                      type="text"
-                      placeholder="Date Of Birth"
-                      onChange={setDOB}
-                      value={convert(DOB)}
+                  <div className="col-sm" style={{ direction: "rtl" }}>
+                  <DatePicker
+                       onChange={setDOB}
+                       value={DOB}
+                       maxDate={today}
+                      dayPlaceholder="  "
+                      monthPlaceholder="تاريخ الولادة"
+                      yearPlaceholder=""
                       style={{ direction: "rtl" }}
                     />
                   </div>
                 </div>
-
                 <div className="row mainrow">
                   <div className="col-sm">
                     <DatePicker
@@ -302,23 +314,30 @@ const NewsForm = () => {
                       value={JockeyLicenseDate}
                       dayPlaceholder="  "
                       maxDate={today}
-                      monthPlaceholder="Jockey License Date"
+                      monthPlaceholder="License Date"
                       yearPlaceholder=""
                     />
 
                     <span className="spanForm"> |</span>
                   </div>
 
-                  <div className="col-sm">
-                    <input
-                      type="text"
+                  <div className="col-sm" style={{ direction: "rtl" }}>
+
+                  <DatePicker
                       onChange={setJockeyLicenseDate}
-                      value={convert(JockeyLicenseDate)}
+                      value={JockeyLicenseDate}
+                      dayPlaceholder="  "
+                      maxDate={today}
+                      monthPlaceholder="تاريخ التسجيل"
+                      yearPlaceholder=""
                       style={{ direction: "rtl" }}
-                      placeholder="Jockey Licence Date"
                     />
+                   
                   </div>
                 </div>
+
+                
+
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
@@ -356,7 +375,7 @@ const NewsForm = () => {
                       className="selectdir"
                       defaultValue={NationalityID}
                       onChange={setNationalityID}
-                      options={AllNationality}
+                      options={AllNationalityAr}
                       isClearable={true}
                       isSearchable={true}
                     />

@@ -43,8 +43,8 @@ const submit = async (event) => {
       icon: "success",
       button: "OK",
     });
-    if(pathname === '/gender'){
-      history("/genderlist");
+    if(pathname === '/color'){
+      history("/colorlist");
     }
   } catch (error) {
     const err = error.response.data.message;

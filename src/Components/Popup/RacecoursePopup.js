@@ -56,7 +56,7 @@ const RacecoursePopup = (data) => {
                                 type="text"
                                 placeholder="رمز قصير"
                                 style={{ left: "%" }}
-                                value={data.data.TrackNameEn} readOnly
+                                value={data.data.TrackNameAr} readOnly
                             />
                         </FloatingLabel>
                     </div>

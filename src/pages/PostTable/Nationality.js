@@ -11,6 +11,11 @@ const Offsets = [
   { id: "1", value: "true", label: "true" },
 ];
 
+const OffsetsAr = [
+  { id: "0", value: "خاطئة", label: "خاطئة" },
+  { id: "1", value: "حقيقي", label: "حقيقي" },
+];
+
 const Nationality = () => {
 
 
@@ -54,7 +59,7 @@ const Nationality = () => {
       formData.append("Abbrev", Abbrev);
       formData.append("AltName", AltName);
       formData.append("Label", Label);
-      formData.append("Offset", Offset);
+      formData.append("Offset", Offset.id);
       formData.append("Value", Value);
       formData.append("image", image);
     
@@ -298,7 +303,7 @@ const Nationality = () => {
                       className="selectdir"
                       defaultValue={Offset}
                       onChange={setOffset}
-                      options={Offsets}
+                      options={OffsetsAr}
                       isClearable={true}
                       isSearchable={true}
                     />

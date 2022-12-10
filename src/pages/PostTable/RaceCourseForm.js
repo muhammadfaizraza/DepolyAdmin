@@ -36,7 +36,18 @@ const RaceCourseForm = () => {
         };
       })
     );
-
+    let AllNationalityAr =
+    nationality === undefined ? (
+      <></>
+    ) : (
+      nationality.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameAr,
+          label: item.NameAr,
+        };
+      })
+    );
   let AllColor =
     color === undefined ? (
       <></>
@@ -50,6 +61,18 @@ const RaceCourseForm = () => {
       })
     );
 
+    let AllColorAr =
+    color === undefined ? (
+      <></>
+    ) : (
+      color.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameAr,
+          label: item.NameAr,
+        };
+      })
+    );
  
 
     
@@ -257,7 +280,7 @@ const RaceCourseForm = () => {
                       defaultValue={ColorCode}
                       value={ColorCode}
                       onChange={setColorCode}
-                      options={AllColor}
+                      options={AllColorAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -309,7 +332,7 @@ const RaceCourseForm = () => {
                       }
                       defaultValue={NationalityId}
                       onChange={setNationalityId}
-                      options={AllNationality}
+                      options={AllNationalityAr}
                       isClearable={true}
                       isSearchable={true}
                     />

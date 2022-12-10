@@ -40,6 +40,21 @@ const TrainerForm = () => {
         };
       })
     );
+
+    let AllCategoryAr =
+  category === undefined ? (
+      <></>
+    ) : (
+      category.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameAr,
+          label: item.NameAr,
+        };
+      })
+    );
+
+
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
   const [DescEn, setDescEn] = useState("");
@@ -324,7 +339,7 @@ const TrainerForm = () => {
                       className="selectdir"
                       defaultValue={CompetitionCategory}
                       onChange={setCompetitionCategory}
-                      options={AllCategory}
+                      options={AllCategoryAr}
                       isClearable={true}
                       isSearchable={true}
                     />

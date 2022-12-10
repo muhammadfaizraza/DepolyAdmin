@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate ,useLocation} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Select from "react-select";
 import { fetchrace } from "../../../redux/getReducer/getRaceSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,11 +9,10 @@ import makeAnimated from "react-select/animated";
 import dateFormat from "dateformat";
 import { fetchcompetition } from "../../../redux/getReducer/getCompetition";
 
-
 const LocalItem = () => {
-  const list = localStorage.getItem("cards");
+  const list = localStorage.getItem("competition");
   if (list) {
-    return JSON.parse(localStorage.getItem("cards"));
+    return JSON.parse(localStorage.getItem("competition"));
   } else {
     return [];
   }
@@ -21,15 +20,14 @@ const LocalItem = () => {
 
 const Nationality = () => {
   const [Competition, setCompetition] = useState("");
-  const [DayNTime, setDayNTime] = useState("");
 
   const { data: race } = useSelector((state) => state.race);
   const { data: competition } = useSelector((state) => state.competition);
 
-  const {state} = useLocation();
-  const {competitionId} = state;
+  const { state } = useLocation();
+  const { competitionId } = state;
 
-  console.log(competitionId._id,'id is this')
+  console.log(competitionId._id, "id is this");
 
   let AllFetchData =
     race === undefined ? (
@@ -43,11 +41,8 @@ const Nationality = () => {
         };
       })
     );
-    
-console.log(competitionId,'competitionId');
 
-
-    let AllFetchCompetition =
+  let AllFetchCompetition =
     competition === undefined ? (
       <></>
     ) : (
@@ -60,7 +55,7 @@ console.log(competitionId,'competitionId');
       })
     );
 
-    let AllFetchCompetitionAr =
+  let AllFetchCompetitionAr =
     competition === undefined ? (
       <></>
     ) : (
@@ -72,33 +67,48 @@ console.log(competitionId,'competitionId');
         };
       })
     );
-    
-    
+
   // const history = useNavigate();
   const dispatch = useDispatch();
-  const animatedComponents = makeAnimated();
-  const FormaredDate = dateFormat(DayNTime, "isoDateTime");
   const history = useNavigate();
   const [selectedValue, setSelectedValue] = useState([]);
- 
+  const [RaceModelId, SetRaceModelId] = useState("");
+  // const [BonusPoints, SetBonusPoints] = useState("");
+  // const [Points, SetPoints] = useState("");
+  const [items, setitems] = useState("");
+
+
   const handleChange = (e) => {
-    setSelectedValue(Array.isArray(e) ? e.map(x => x.id) : []);
-  }
-  
+    setSelectedValue(Array.isArray(e) ? e.map((x) => x.id) : []);
+  };
+
   useEffect(() => {
     dispatch(fetchrace());
-    dispatch(fetchcompetition())
+    dispatch(fetchcompetition());
   }, [dispatch]);
+  useEffect(() => {
+    localStorage.setItem("competition", JSON.stringify(items));
+  }, [items]);
 
+  const id = competitionId._id
+
+
+  const addItem = (e) => {
+    e.preventDefault();
+    let CastRaces = [`${RaceModelId.id},${"34"},${"534"}`];
+
+    setitems([...items, CastRaces]);
+  };
   const Publish = async (event) => {
     event.preventDefault();
     try {
-
-      console.log({RaceEntry:selectedValue},'selectedValue')
+      console.log({ RaceEntry: items }, "selectedValue");
       const response = await axios.post(
-        `${window.env.API_URL}/addraceincompetition/${competitionId._id}`,{RaceEntry:selectedValue});
-        const msgdata = response.data.msg
-        history('/competitionlisting')
+        `${window.env.API_URL}/addraceincompetition/${id}`,
+        { CastRaces: items }
+      );
+      const msgdata = response.data.msg;
+      // history('/competitionlisting')
       swal({
         title: "Success!",
         text: msgdata,
@@ -126,99 +136,109 @@ console.log(competitionId,'competitionId');
         >
           <div className="Headers">Create Competition</div>
           <div className="form">
+            <div className="cast">
+              <h4 className="pickCountstyle">Add Races for Cast</h4>
+              {competitionId.pickCount > 0 ? (
+                <>
+                  <div className="row mainrow">
+                    {/* <div className="col-sm">
+                      <Select
+                        placeholder={<div>Select Comprtition</div>}
+                        defaultValue={Competition}
+                        onChange={setCompetition}
+                        options={AllFetchCompetition}
+                        isClearable={true}
+                        isSearchable={true}
+                      />
+                      <span className="spanForm">|</span>
+                    </div> */}
+                    <div className="col-sm">
+                    <Select
+                    defaultValue={RaceModelId}
+                    onChange={SetRaceModelId}
+                    options={AllFetchData}
+                    isClearable={false}
+                    isSearchable={true}
+                  />
+                      {/* <Select
+                        defaultValue={RaceModelId}
+                        onChange={SetRaceModelId}
+                        options={AllFetchData}
+                        isClearable={false}
+                        isSearchable={true}
+                      /> */}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <h4 className="pickCountstyle">
+                  No {competitionId.pickCount}Cast
+                </h4>
+              )}
+
             
-          <div className="cast">
-            <h4 className="pickCountstyle">Add Races for TriCast</h4>
-            {
-              competitionId.pickCount > 0 ? <>
-              <div className="row mainrow">
-                  <div className="col-sm">
-                    <Select
-                      placeholder={<div>Select Comprtition</div>}
-                      defaultValue={Competition}
-                      onChange={setCompetition}
-                      options={AllFetchCompetition}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                  <span className="spanForm">|</span>
-                  </div>
-                  <div className="col-sm">
-                    <Select
-                      required
-                      placeholder={<div>حدد نوع الجنس</div>}
-                      className="selectdir"
-                      defaultValue={Competition}
-                      onChange={setCompetition}
-                      options={AllFetchCompetitionAr}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                  </div>
-                </div>
-              </>  :   <h4 className="pickCountstyle">No TriCast</h4>
-            }
-          
-
-            <div className="row mainrow">
-               <Select
-                className="dropdown multidropdown"
-                placeholder="Select Option"
-                value={AllFetchData.filter(obj => selectedValue.includes(obj.id))} // set selected values
-                options={AllFetchData} // set list of the data
-                onChange={handleChange} // assign onChange function
-                isMulti
-                isClearable   
-              />
             </div>
-          </div>
-          <div className="tricomp">
-          <h4 className="pickCountstyle">Add Races for PickSix</h4>
-          {
-            competitionId.TriCount > 0 ? <>
-            <div className="row mainrow">
-                  <div className="col-sm">
+            <div className="tricomp">
+              <h4 className="pickCountstyle">Add Races for PickSix</h4>
+              {competitionId.TriCount > 0 ? (
+                <>
+                  <div className="row mainrow">
+                    <div className="col-sm">
                     <Select
-                      placeholder={<div>Select Comprtition</div>}
-                      defaultValue={Competition}
-                      onChange={setCompetition}
-                      options={AllFetchCompetition}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                  <span className="spanForm">|</span>
+                    defaultValue={RaceModelId}
+                    onChange={SetRaceModelId}
+                    options={AllFetchData}
+                    isClearable={false}
+                    isSearchable={true}
+                  />
+                      <span className="spanForm">|</span>
+                    </div>
+                    <div className="col-sm">
+                      <Select
+                        required
+                        placeholder={<div>حدد نوع الجنس</div>}
+                        className="selectdir"
+                        defaultValue={Competition}
+                        onChange={setCompetition}
+                        options={AllFetchCompetitionAr}
+                        isClearable={true}
+                        isSearchable={true}
+                      />
+                    </div>
                   </div>
-                  <div className="col-sm">
+{
+    items.map((data,i) => {
+      return(
+<div className="row mainrow">
                     <Select
-                      required
-                      placeholder={<div>حدد نوع الجنس</div>}
-                      className="selectdir"
-                      defaultValue={Competition}
-                      onChange={setCompetition}
-                      options={AllFetchCompetitionAr}
-                      isClearable={true}
-                      isSearchable={true}
+                      className="dropdown multidropdown"
+                      placeholder="Select Option"
+                      value={AllFetchData.filter((obj) =>
+                        selectedValue.includes(obj.id)
+                      )} // set selected values
+                      options={AllFetchData} // set list of the data
+                      onChange={handleChange} // assign onChange function
+                      isMulti
+                      isClearable
                     />
                   </div>
-          </div>
-          
-          <div className="row mainrow">
-               <Select
-                className="dropdown multidropdown"
-                placeholder="Select Option"
-                value={AllFetchData.filter(obj => selectedValue.includes(obj.id))} // set selected values
-                options={AllFetchData} // set list of the data
-                onChange={handleChange} // assign onChange function
-                isMulti
-                isClearable   
-              />
+      )
+    })
+}
+                  
+                  
+                </>
+              ) : (
+                <h4 className="pickCountstyle">
+                  No Pick{competitionId.TriCount}
+                </h4>
+              )}
             </div>
-            </>:   <h4 className="pickCountstyle">No PickSix</h4>
-          }
-          
-
-          </div>
-
+            <div className="addbtn">
+                    <button className="AddAnother" onClick={addItem}>
+                    Save & Add Another
+                    </button>
+                  </div>
             <div className="ButtonSection " style={{ justifyContent: "end" }}>
               <button Name="submit" className="SubmitButton" onClick={Publish}>
                 Publish

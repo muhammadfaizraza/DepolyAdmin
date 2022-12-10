@@ -211,7 +211,7 @@ const Races = () => {
                                <button className="Approvedbtn resultbtn"   onClick={() =>
                                     history("/resultform", {
                                       state: {
-                                        fullresultid: item._id,
+                                        RaceId: item._id,
                                       },
                                     })
                                   }> Add Result</button>

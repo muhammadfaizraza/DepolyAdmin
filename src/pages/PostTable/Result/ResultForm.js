@@ -12,9 +12,8 @@ import swal from "sweetalert";
 import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 import { toast } from 'react-toastify';
-
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Form from "react-bootstrap/Form";
+// import FloatingLabel from "react-bootstrap/FloatingLabel";
+// import Form from "react-bootstrap/Form";
 
 const LocalItem = () => {
   const list = localStorage.getItem("results");
@@ -38,10 +37,9 @@ const RaceForm = () => {
 
   const history = useNavigate();
   const { state } = useLocation();
-  const { fullresultid } = state;
+  const { RaceId } = state;
 
-  console.log(fullresultid,'fullresultid');
-
+  console.log(RaceId,'RaceId');
 
   let horseoptions = horse.map(function (item) {
     return {
@@ -97,7 +95,7 @@ const RaceForm = () => {
   const submit = async (event) => {
     event.preventDefault();
     try { 
-      const response = await axios.post(`${window.env.API_URL}createraceresult/${fullresultid}`,{ResultEntry:items});
+      const response = await axios.post(`${window.env.API_URL}createraceresult/${RaceId}`,{ResultEntry:items});
       history("/races");
       swal({
         title: "Success",

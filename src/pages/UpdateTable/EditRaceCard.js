@@ -30,7 +30,7 @@ const NewsForm = () => {
   );
 
 
-  const { racecardid } = state;
+  const { RaceId } = state;
   const [image, setImage] = useState();
   const [RaceCourse, setRaceCourse] = useState("");
 
@@ -40,18 +40,18 @@ const NewsForm = () => {
     RaceCardCourse:""
 
   });
-console.log(racecardid)
+console.log(RaceId)
   useEffect(() => {
-    if (racecardid) {
+    if (RaceId) {
       setState({
-        RaceCardNameEn: racecardid.RaceCardNameEn,
-        RaceCardNameAr: racecardid.RaceCardNameAr,
-        RaceCardCourse: racecardid.RaceCardCourse,
+        RaceCardNameEn: RaceId.RaceCardNameEn,
+        RaceCardNameAr: RaceId.RaceCardNameAr,
+        RaceCardCourse: RaceId.RaceCardCourse,
       });
     } else {
       alert("No Data");
     }
-  }, [racecardid]);
+  }, [RaceId]);
 
   const fileSelected = (event) => {
     const image = event.target.files[0];
@@ -66,7 +66,7 @@ console.log(racecardid)
       formData.append("RaceCourse",RaceCourse.id);
 
       const response = await axios.put(
-        `${window.env.API_URL}/updateRaceCard/${racecardid._id}`,
+        `${window.env.API_URL}/updateRaceCard/${RaceId._id}`,
         formData
       );
       history("/racecardlisting");

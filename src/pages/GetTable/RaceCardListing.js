@@ -132,7 +132,7 @@ const Racecourse = () => {
                             <td className="table_delete_btn1">
                             <BiEdit   onClick={() => navigate('/editraceCard',{
                                 state:{
-                                  racecardid:item
+                                  RaceId:item
                                 }
                               })}/>
                               

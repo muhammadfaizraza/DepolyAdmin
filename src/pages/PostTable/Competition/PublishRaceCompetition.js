@@ -126,7 +126,12 @@ console.log(competitionId,'competitionId');
         >
           <div className="Headers">Create Competition</div>
           <div className="form">
-          <div className="row mainrow">
+            
+          <div className="cast">
+            <h4 className="pickCountstyle">Add Races for TriCast</h4>
+            {
+              competitionId.pickCount > 0 ? <>
+              <div className="row mainrow">
                   <div className="col-sm">
                     <Select
                       placeholder={<div>Select Comprtition</div>}
@@ -151,6 +156,9 @@ console.log(competitionId,'competitionId');
                     />
                   </div>
                 </div>
+              </>  :   <h4 className="pickCountstyle">No TriCast</h4>
+            }
+          
 
             <div className="row mainrow">
                <Select
@@ -163,6 +171,53 @@ console.log(competitionId,'competitionId');
                 isClearable   
               />
             </div>
+          </div>
+          <div className="tricomp">
+          <h4 className="pickCountstyle">Add Races for PickSix</h4>
+          {
+            competitionId.TriCount > 0 ? <>
+            <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Select Comprtition</div>}
+                      defaultValue={Competition}
+                      onChange={setCompetition}
+                      options={AllFetchCompetition}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  <span className="spanForm">|</span>
+                  </div>
+                  <div className="col-sm">
+                    <Select
+                      required
+                      placeholder={<div>حدد نوع الجنس</div>}
+                      className="selectdir"
+                      defaultValue={Competition}
+                      onChange={setCompetition}
+                      options={AllFetchCompetitionAr}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+          </div>
+          
+          <div className="row mainrow">
+               <Select
+                className="dropdown multidropdown"
+                placeholder="Select Option"
+                value={AllFetchData.filter(obj => selectedValue.includes(obj.id))} // set selected values
+                options={AllFetchData} // set list of the data
+                onChange={handleChange} // assign onChange function
+                isMulti
+                isClearable   
+              />
+            </div>
+            </>:   <h4 className="pickCountstyle">No PickSix</h4>
+          }
+          
+
+          </div>
 
             <div className="ButtonSection " style={{ justifyContent: "end" }}>
               <button Name="submit" className="SubmitButton" onClick={Publish}>

@@ -106,7 +106,7 @@ const ItemLength = items.length;
 
   const submit = async (event) => {
     event.preventDefault();
-    if (InputData === "" || JockeyData === "" || EquipmentData === "") {
+    if (ItemLength === 0) {
       toast('Please Add and Save Horse ')
     }
     else{
@@ -137,7 +137,6 @@ const ItemLength = items.length;
       }
     }
     
-    setitems([]);
   };
 
   return (

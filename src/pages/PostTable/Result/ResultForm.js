@@ -164,7 +164,7 @@ const RaceForm = () => {
             {
               items.map((data,i) => {
                 return(
-                  <div className="myselectdata">
+                  <div className="myselectdata" key={i}>
                   <div className="myselectiondata">
                     <span onChange={setRank} value={i+1}>{i + 2}</span>
                     <span>

@@ -304,9 +304,9 @@ const HorseForm = () => {
       formData.append("Breeder", Breeder.id);
       formData.append("ColorID", ColorID.id);
       formData.append("KindHorse", KindHorse.id);
-      formData.append("Dam", Dam === '' ? <>{null}</> : Dam.id);
-      formData.append("Sire",Sire === '' ?  <>{null}</> : Sire.id);
-      formData.append("GSire",GSire === '' ?  <>{null}</> : GSire.id);
+      formData.append("Dam", Dam === '' ? '' : Dam.id);
+      formData.append("Sire",Sire === '' ?  '' : Sire.id);
+      formData.append("GSire",GSire === '' ?  '' : GSire.id);
       // formData.append("WinningAmount", WinningAmount);
       // formData.append("OverAllRating", OverAllRating);
       formData.append("Foal", Foal.value);

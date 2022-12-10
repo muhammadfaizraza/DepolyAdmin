@@ -70,7 +70,7 @@ const RaceForm = () => {
   const addItem = (e) => {
     e.preventDefault();
      let ResultEntry = [
-      `${'1'},${HorseID.id},${Prize},${Points},${BonusPoints}`,
+      `${Rank},${HorseID.id},${Prize},${Points},${BonusPoints}`,
     ];
 
     if(horseLength === ItemLength){
@@ -82,7 +82,6 @@ const RaceForm = () => {
     else {
     setitems([...items, ResultEntry]);
     setRank(Rank + 1);
-    setRank("");
     }
     
   };

@@ -45,11 +45,11 @@ const Statistic = () => {
   
 
   const GoToPublish = (competitionId) => {
-    // history("/competitionrace", {
-    //   state: {
-    //     competitionId: competitionId,
-    //   },
-    // });
+    history("/competitionrace", {
+      state: {
+        competitionId: competitionId,
+      },
+    });
   }
 
 
@@ -62,7 +62,7 @@ const Statistic = () => {
         icon: "success",
         button: "OK",
       });
-      history("/CategoryListing");
+      history("/competitionlisting");
       dispatch(fetchcompetition());
     } catch (error) {
       const err = error.response.data.message;
@@ -143,9 +143,9 @@ const Statistic = () => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.NameEn}</td>
-                              <td>{item.NameAr}</td>
-                              <td>{item.CompetitionCategory === null ? <>N/A</> : item.CompetitionCategoryData.NameEn}</td>
+                              <td>{item.NameEn === null ? <>N/A</>: item.NameEn}</td>
+                              <td>{item.NameAr === null ? <>N/A</>:item.NameAr}</td>
+                              <td>{item.CompetitionCategory.NameEn === null ? <>N/A</> : item.CompetitionCategoryData.NameEn}</td>
                               <td>{item.CompetitionCode === '' ? <>N/A</> : item.CompetitionCode}</td>
                               
                               <td>{item.DescEn}</td>
@@ -161,7 +161,7 @@ const Statistic = () => {
                               <td>
                                 <button
                                   className="Approvedbtn resultbtn"
-                                  onClick={() => GoToPublish(item._id)}
+                                  onClick={() => GoToPublish(item)}
                                 >
                                   Click
                                 </button>

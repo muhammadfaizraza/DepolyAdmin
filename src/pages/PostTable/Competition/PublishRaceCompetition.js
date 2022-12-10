@@ -29,7 +29,7 @@ const Nationality = () => {
   const {state} = useLocation();
   const {competitionId} = state;
 
-  console.log(competitionId,'id is this')
+  console.log(competitionId._id,'id is this')
 
   let AllFetchData =
     race === undefined ? (
@@ -43,7 +43,10 @@ const Nationality = () => {
         };
       })
     );
-console.log(race,'AllFetchData')
+    
+console.log(competitionId,'competitionId');
+
+
     let AllFetchCompetition =
     competition === undefined ? (
       <></>
@@ -79,7 +82,7 @@ console.log(race,'AllFetchData')
 
       console.log({RaceEntry:selectedValue},'selectedValue')
       const response = await axios.post(
-        `${window.env.API_URL}/addraceincompetition/${competitionId}`,{RaceEntry:selectedValue});
+        `${window.env.API_URL}/addraceincompetition/${competitionId._id}`,{RaceEntry:selectedValue});
         const msgdata = response.data.msg
         history('/competitionlisting')
       swal({

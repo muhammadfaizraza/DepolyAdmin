@@ -338,6 +338,8 @@ const TrainerForm = () => {
                       className="mb-3"
                       onChange={(e) => setpickCount(e.target.value)}
                       value={pickCount}
+                      min='0'
+                      max='9'
                     >
                       <Form.Control type="number" placeholder="Pick Count" />
                     </FloatingLabel>
@@ -365,6 +367,8 @@ const TrainerForm = () => {
                       className="mb-3"
                       onChange={(e) => setTriCount(e.target.value)}
                       value={TriCount}
+                      min='0'
+                      max='9'
                     >
                       <Form.Control type="number" placeholder="Pick Count" />
                     </FloatingLabel>

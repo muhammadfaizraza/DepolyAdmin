@@ -47,11 +47,11 @@ const AdsForm = () => {
      try {
     const formData = new FormData();
      formData.append("image", image);
-     formData.append("TitleEn", TitleEn + " ");
-     formData.append("TitleAr", TitleAr + " ");
-     formData.append("DescriptionAr", DescriptionAr + " ");
+     formData.append("TitleEn", TitleEn);
+     formData.append("TitleAr", TitleAr);
+     formData.append("DescriptionAr", DescriptionAr);
      formData.append("DescriptionEn", DescriptionEn);
-     await axios.post(`${window.env.API_URL}/uploadAds`, formData);
+    const res = await axios.post(`${window.env.API_URL}/uploadAds`, formData);
      swal({
        title: "Success!",
        text: "Data has been added Successfully",
@@ -61,7 +61,7 @@ const AdsForm = () => {
 
      history("/ads");
      } catch (error) {
-       const err = Validate;
+      const err = error.response.data.message;
        swal({
          title: "Error!",
          text: err,

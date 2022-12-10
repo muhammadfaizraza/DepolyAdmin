@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate , useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import TextInputValidation from "../../utils/TextInputValidation";
 
 const Breeder = () => {
+  //for error 
+  const [Error, setError] = useState("");
+  const [ErrorAr, setErrorAr] = useState("");
+  const [ErrorDesc, setErrorDesc] = useState("");
+  const [ErrorDescAr, setErrorDescAr] = useState("");
+
+
+
+
+
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
   const [shortCode, setshortCode] = useState("");
@@ -29,7 +40,7 @@ const Breeder = () => {
       formData.append("image", image);
 
       await axios.post(`${window.env.API_URL}/uploadBreeder`, formData);
-      if(pathname === '/breeder'){
+      if (pathname === '/breeder') {
         history("/breederlist");
       }
       swal({
@@ -62,6 +73,60 @@ const Breeder = () => {
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl);
   }, [image]);
+
+  const Name = (JSON.stringify(
+    TextInputValidation(
+      "en",
+      NameEn,
+      " English Name"
+    )
+  ));
+  const obj = JSON.parse(Name);
+  console.log(obj.status, 'aszxZ2dasd')
+  const arName = (JSON.stringify(
+    TextInputValidation(
+      "ar",
+      NameAr,
+      "Name Arabic"
+    )
+  ));
+  
+  const objAr = JSON.parse(arName);
+
+
+  const Description = (JSON.stringify(
+    TextInputValidation(
+      "en",
+      DescriptionEn,
+      " English Description"
+    )
+  ));
+  const Desc = JSON.parse(Description);
+
+  const arDescription = (JSON.stringify(
+    TextInputValidation(
+      "ar",
+      DescriptionAr,
+      " Arabic Description"
+    )
+  ));
+  
+  const DescAr = JSON.parse(arDescription);
+
+  const styles = {
+    popup: {
+      color: Error.status === true ? "green" : "red",
+
+    }
+  };
+  const stylesAr = {
+    popupAr: {
+      color: ErrorAr.status === true ? "green" : "red",
+
+    }
+  };
+  console.log(Error.status)
+
   return (
     <div className="page">
       <div className="rightsidedata">
@@ -82,11 +147,17 @@ const Breeder = () => {
                     onChange={(e) => setNameEn(e.target.value)}
                     name="Name"
                     value={NameEn}
-                  >
+                    onBlur={() =>
+                      setError(obj)
+
+                    } >
                     <Form.Control type="text" placeholder="Name" />
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
+                  <span className="error" style={styles.popup}
+                  >{Error.message}</span>
+
                 </div>
 
                 <div className="col-sm">
@@ -98,9 +169,13 @@ const Breeder = () => {
                     name="Name"
                     value={NameAr}
                     style={{ direction: "rtl" }}
+
+
                   >
-                    <Form.Control type="text" placeholder="اسم" />
+                    <Form.Control type="text" placeholder="اسم" onBlur={() =>
+                      setErrorAr(objAr)} />
                   </FloatingLabel>
+                  <span className="errorAr" style={stylesAr.popupAr} >{ErrorAr.message}</span>
                 </div>
               </div>
 
@@ -143,10 +218,19 @@ const Breeder = () => {
                     className="mb-3"
                     onChange={(e) => setDescriptionEn(e.target.value)}
                     value={DescriptionEn}
+                    onBlur={() =>
+                      setErrorDesc(Desc)
+
+                    }
                   >
+
                     <Form.Control type="text" placeholder="Description" />
                   </FloatingLabel>
                   <span className="spanForm"> |</span>
+                  <span className="error" style={styles.popup}
+                  >{ErrorDesc.message}</span>
+
+
                 </div>
 
                 <div className="col-sm">
@@ -157,16 +241,22 @@ const Breeder = () => {
                     onChange={(e) => setDescriptionAr(e.target.value)}
                     value={DescriptionAr}
                     style={{ direction: "rtl" }}
+                    onBlur={() =>
+                      setErrorDescAr(DescAr)
+
+                    }
                   >
                     <Form.Control type="text" placeholder="وصف" />
                   </FloatingLabel>
+                  <span className="errorAr" style={styles.popup}
+                  >{ErrorDescAr.message}</span>
                 </div>
               </div>
               <div className="ButtonSection">
                 <div>
-                <label className="Multipleownerlabel">
-                      Select Breeder image
-                    </label>
+                  <label className="Multipleownerlabel">
+                    Select Breeder image
+                  </label>
                   <input
                     type="file"
                     onChange={onSelectFile}

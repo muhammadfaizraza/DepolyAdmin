@@ -572,7 +572,7 @@ table.Prizeclass {
 .spanForm {
   display: flex;
   font-size: 2rem;
-  margin-top: -52px;
+  margin-top: -53px;
   font-weight: 100;
   color: lightgray;
   justify-content: flex-end;
@@ -700,4 +700,16 @@ background-color: #00A3FF;
 .pickCountstyle{
 margin: 34px;
 font-size: 15.59px;
+}
+.error {
+ 
+  font-size: 11px;
+}
+.errorAr {
+
+  font-size: 11px;
+
+  direction: rtl;
+  display: flex;
+
 }

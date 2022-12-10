@@ -3,9 +3,13 @@ import swal from "sweetalert";
 import axios from "axios";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-import { useNavigate , useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import TextInputValidation from "../../utils/TextInputValidation";
 
 const Currency = () => {
+  const [Error, setError] = useState("")
+  const [ErrorAr, setErrorAr] = useState("")
+
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
   const [shortCode, setshortCode] = useState("");
@@ -13,6 +17,26 @@ const Currency = () => {
 
   const history = useNavigate();
   const { pathname } = useLocation();
+
+
+  //for Errors
+  const data1 = (JSON.stringify(
+    TextInputValidation(
+      "en",
+      NameEn,
+      "Name English"
+    )
+  ));
+
+  const obj = JSON.parse(data1);
+  const data2 = (JSON.stringify(
+    TextInputValidation(
+      "ar",
+      NameAr,
+      "Name Arabic"
+    )
+  ));
+  const objAr = JSON.parse(data2);
 
   const submit = async (event) => {
     event.preventDefault();
@@ -24,7 +48,7 @@ const Currency = () => {
       // formData.append("shortCode", shortCode);
       formData.append("Rate", Rate);
       await axios.post(`${window.env.API_URL}uploadCurrency`, formData);
-      if(pathname === '/currency'){
+      if (pathname === '/currency') {
         history("/currencylist");
       }
       swal({
@@ -41,6 +65,18 @@ const Currency = () => {
         icon: "error",
         button: "OK",
       });
+    }
+  };
+  const styles = {
+    popup: {
+      color: Error.status === true ? "green" : "red",
+
+    }
+  };
+  const stylesAr = {
+    popupAr: {
+      color: ErrorAr.status === true ? "green" : "red",
+
     }
   };
   return (
@@ -63,11 +99,18 @@ const Currency = () => {
                     onChange={(e) => setNameEn(e.target.value)}
                     name="Name"
                     value={NameEn}
+                    onBlur={() =>
+                      setError(obj)
+
+                    }
                   >
-                    <Form.Control type="text" placeholder="Name" required/>
+                    <Form.Control type="text" placeholder="Name" required />
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
+                  <span className="error" style={styles.popup}
+                  >{Error.message}</span>
+
                 </div>
 
                 <div className="col-sm">
@@ -79,13 +122,18 @@ const Currency = () => {
                     name="Name"
                     value={NameAr}
                     style={{ direction: "rtl" }}
+                    onBlur={() =>
+                      setErrorAr(objAr)
+
+                    }
                   >
-                    <Form.Control type="text" placeholder="اسم" required/>
+                    <Form.Control type="text" placeholder="اسم" required />
                   </FloatingLabel>
+                  <span className="errorAr" style={stylesAr.popupAr} >{ErrorAr.message}</span>
                 </div>
               </div>
 
-             
+
 
               <div className="row mainrow">
                 <div className="col-sm">
@@ -96,7 +144,8 @@ const Currency = () => {
                     onChange={(e) => setRate(e.target.value)}
                     value={Rate}
                   >
-                    <Form.Control type="number" placeholder="Rate" required/>
+                    <Form.Control type="number" placeholder="Rate" required />
+
                   </FloatingLabel>
 
                   {/* <span className="spanForm"> |</span> */}

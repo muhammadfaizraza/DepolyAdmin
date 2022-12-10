@@ -7,6 +7,10 @@ import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
 
 const Color = () => {
+  //for errors
+  const [Error , setError] =useState("")
+  const [ErrorAr , setErrorAr] =useState("")
+  
   const [registeration, setregisteration] = useState({
     NameEn: "",
     NameAr: "",
@@ -19,10 +23,34 @@ const Color = () => {
     setregisteration({ ...registeration, [name]: value });
   };
 
-  console.log(registeration.NameAr);
+
+  const data1 =  (JSON.stringify(
+    TextInputValidation(
+      "en",
+      registeration.NameEn,
+      " English Name"
+    )
+  ));
+
+  console.log(data1,'asdasd')
+
+  const obj = JSON.parse(data1);
+  console.log(obj.status,'aszxZ2dasd')
+ const data2 =  (JSON.stringify(
+    TextInputValidation(
+      "ar",
+      registeration.NameAr,
+      "Name Arabic"
+    )
+  ));
+  console.log(data2,'asdasd')
+
+  const objAr = JSON.parse(data2);
 
   const submit = async (event) => {
+
     event.preventDefault();
+    
     // alert(
     //   JSON.stringify(TextInputValidation("en", registeration.NameEn, "Title English"))
     // );
@@ -48,6 +76,19 @@ const Color = () => {
         icon: "error",
         button: "OK",
       });
+    }
+  };
+  //conditional styling for errors
+  const styles = {
+    popup:{
+      color: Error.status === true ? "green" : "red",
+ 
+    }
+  };
+  const stylesAr = {
+    popupAr:{
+      color: ErrorAr.status === true ? "green" : "red",
+ 
     }
   };
 
@@ -82,20 +123,15 @@ const Color = () => {
                         type="text"
                         placeholder="Name"
                         onBlur={() =>
-                          alert(
-                            JSON.stringify(
-                              TextInputValidation(
-                                "en",
-                                registeration.NameEn,
-                                "Title English"
-                              )
-                            )
-                          )
+                         setError(obj)
+                              
                         }
                       />
                     </FloatingLabel>
-
+                 
                     <span className="spanForm"> |</span>
+                    <span className="error" style={styles.popup}
+                    >{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -113,10 +149,17 @@ const Color = () => {
                         type="text"
                         placeholder="اسم"
                         required
+                        onBlur={() =>
+                          setErrorAr(objAr)
+                               
+                         }
+                     
                       />
                     </FloatingLabel>
+                    <span className="errorAr" style={stylesAr.popupAr} >{ErrorAr.message}</span>
                   </div>
                 </div>
+                
 
                 <div
                   className="ButtonSection "

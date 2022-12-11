@@ -75,8 +75,7 @@ const Nationality = () => {
   const [RaceModelId, SetRaceModelId] = useState("");
   // const [BonusPoints, SetBonusPoints] = useState("");
   // const [Points, SetPoints] = useState("");
-  const [items, setitems] = useState("");
-
+  const [items, setitems] = useState(LocalItem());
 
   const handleChange = (e) => {
     setSelectedValue(Array.isArray(e) ? e.map((x) => x.id) : []);
@@ -90,8 +89,7 @@ const Nationality = () => {
     localStorage.setItem("competition", JSON.stringify(items));
   }, [items]);
 
-  const id = competitionId._id
-
+  const id = competitionId._id;
 
   const addItem = (e) => {
     e.preventDefault();
@@ -153,13 +151,13 @@ const Nationality = () => {
                       <span className="spanForm">|</span>
                     </div> */}
                     <div className="col-sm">
-                    <Select
-                    defaultValue={RaceModelId}
-                    onChange={SetRaceModelId}
-                    options={AllFetchData}
-                    isClearable={false}
-                    isSearchable={true}
-                  />
+                      <Select
+                        defaultValue={RaceModelId}
+                        onChange={SetRaceModelId}
+                        options={AllFetchData}
+                        isClearable={false}
+                        isSearchable={true}
+                      />
                       {/* <Select
                         defaultValue={RaceModelId}
                         onChange={SetRaceModelId}
@@ -169,14 +167,32 @@ const Nationality = () => {
                       /> */}
                     </div>
                   </div>
+                  {items.map((data, i) => {
+                    return (
+                      <div className="row mainrow">
+                    <div className="col-sm">
+                      <Select
+                        defaultValue={RaceModelId}
+                        onChange={SetRaceModelId}
+                        options={AllFetchData}
+                        isClearable={false}
+                        isSearchable={true}
+                      />
+                    </div>
+                  </div>
+                    );
+                  })}
+                  <div className="addbtn">
+                    <button className="AddAnother" onClick={addItem}>
+                      Save & Add Another
+                    </button>
+                  </div>
                 </>
               ) : (
                 <h4 className="pickCountstyle">
                   No {competitionId.pickCount}Cast
                 </h4>
               )}
-
-            
             </div>
             <div className="tricomp">
               <h4 className="pickCountstyle">Add Races for PickSix</h4>
@@ -184,13 +200,13 @@ const Nationality = () => {
                 <>
                   <div className="row mainrow">
                     <div className="col-sm">
-                    <Select
-                    defaultValue={RaceModelId}
-                    onChange={SetRaceModelId}
-                    options={AllFetchData}
-                    isClearable={false}
-                    isSearchable={true}
-                  />
+                      <Select
+                        defaultValue={RaceModelId}
+                        onChange={SetRaceModelId}
+                        options={AllFetchData}
+                        isClearable={false}
+                        isSearchable={true}
+                      />
                       <span className="spanForm">|</span>
                     </div>
                     <div className="col-sm">
@@ -206,27 +222,23 @@ const Nationality = () => {
                       />
                     </div>
                   </div>
-{
-    items.map((data,i) => {
-      return(
-<div className="row mainrow">
-                    <Select
-                      className="dropdown multidropdown"
-                      placeholder="Select Option"
-                      value={AllFetchData.filter((obj) =>
-                        selectedValue.includes(obj.id)
-                      )} // set selected values
-                      options={AllFetchData} // set list of the data
-                      onChange={handleChange} // assign onChange function
-                      isMulti
-                      isClearable
-                    />
-                  </div>
-      )
-    })
-}
-                  
-                  
+                  {/* {items.map((data, i) => {
+                    return (
+                      <div className="row mainrow">
+                        <Select
+                          className="dropdown multidropdown"
+                          placeholder="Select Option"
+                          value={AllFetchData.filter((obj) =>
+                            selectedValue.includes(obj.id)
+                          )} // set selected values
+                          options={AllFetchData} // set list of the data
+                          onChange={handleChange} // assign onChange function
+                          isMulti
+                          isClearable
+                        />
+                      </div>
+                    );
+                  })} */}
                 </>
               ) : (
                 <h4 className="pickCountstyle">
@@ -234,11 +246,7 @@ const Nationality = () => {
                 </h4>
               )}
             </div>
-            <div className="addbtn">
-                    <button className="AddAnother" onClick={addItem}>
-                    Save & Add Another
-                    </button>
-                  </div>
+
             <div className="ButtonSection " style={{ justifyContent: "end" }}>
               <button Name="submit" className="SubmitButton" onClick={Publish}>
                 Publish

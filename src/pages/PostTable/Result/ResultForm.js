@@ -90,6 +90,7 @@ const RaceForm = () => {
     SetPoints("");
     SetPrize("");
     SetHorseID("");
+    setRank(1);
   };
 
   const submit = async (event) => {
@@ -141,6 +142,7 @@ const RaceForm = () => {
                 <span onChange={setRank} value={1}>1</span>
                 <span>
                   <Select
+                   className="dropdown multidropdown"
                     defaultValue={HorseID}
                     onChange={SetHorseID}
                     options={horseoptions}
@@ -177,13 +179,13 @@ const RaceForm = () => {
                       />
                     </span>
                     <span>
-                      <input type='number' value={Prize} onChange={(e) => SetPrize(e.target.value)} placeholder="Prize" className="resultforminput"/>
+                      <input type='number' value={i[1]} placeholder="Prize" className="resultforminput"/>
                     </span>
                     <span>
-                    <input type='number'  value={Points} onChange={(e) => SetPoints(e.target.value)} placeholder="Points"  className="resultforminput"/>
+                    <input type='number'  value={i[2]}  placeholder="Points"  className="resultforminput"/>
                     </span>
                     <span>
-                    <input type='number'  value={BonusPoints} onChange={(e) => SetBonusPoints(e.target.value)} placeholder="BonusPoints"  className="resultforminput"/>
+                    <input type='number'  value={i[3]} placeholder="BonusPoints"  className="resultforminput"/>
                     </span>
     
                     

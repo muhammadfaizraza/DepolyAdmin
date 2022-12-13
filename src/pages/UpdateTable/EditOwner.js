@@ -81,11 +81,11 @@ const NewsForm = () => {
       
       const formData = new FormData();
       formData.append("NameEn", state1.NameEn);
-      formData.append("NameAr", state1.NameAr + ' ');
+      formData.append("NameAr", state1.NameAr);
       formData.append("TitleEn", state1.TitleEn);
-      formData.append("TitleAr", state1.TitleAr + ' ');
+      formData.append("TitleAr", state1.TitleAr);
       formData.append("ShortEn", state1.ShortEn);
-      formData.append("ShortAr", state1.ShortAr + ' ');
+      formData.append("ShortAr", state1.ShortAr);
       formData.append("Ownerimage", state1.image);
       // formData.append("NationalityID", NationalityID.id);
       // formData.append("RegistrationDate", RegistrationDate);

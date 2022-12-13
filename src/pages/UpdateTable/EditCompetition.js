@@ -34,7 +34,8 @@ const NewsForm = () => {
     pickCount:'',
     StartDate:'',
     CompetitionCode:'',
-    shortCode:''
+    shortCode:'',
+    CompetitionCategory:''
 	});
  
 
@@ -49,7 +50,8 @@ const NewsForm = () => {
         pickCount: competitionid.pickCount,
         StartDate: competitionid.StartDate,
         CompetitionCode: competitionid.CompetitionCode,
-        shortCode: competitionid.shortCode
+        shortCode: competitionid.shortCode,
+        CompetitionCategory:competitionid.CompetitionCategory
 			});
 		} else {
 			alert('No Data')
@@ -75,14 +77,14 @@ const NewsForm = () => {
       
       const formData = new FormData();
       formData.append("NameEn", state1.NameEn);
-      formData.append("NameAr", state1.NameAr + ' ');
+      formData.append("NameAr", state1.NameAr);
       formData.append("DescEn", state1.DescEn);
-      formData.append("DescAr", state1.DescAr + ' ');
+      formData.append("DescAr", state1.DescAr);
       formData.append("TriCount", state1.TriCount);
       formData.append("pickCount", state1.pickCount);
       formData.append("StartDate", StartDate);
       formData.append("CompetitionCode", state1.CompetitionCode);
-      formData.append("CompetitionCategory", CompetitionCategory.id);
+      // formData.append("CompetitionCategory", (CompetitionCategory ===  undefined ? state1.CompetitionCategory : CompetitionCategory.id) );
       formData.append("shortCode", state1.shortCode);
 
       // formData.append("RegistrationDate", RegistrationDate);
@@ -356,7 +358,7 @@ const NewsForm = () => {
                 </div>
                 
 
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
                     <Select
                       placeholder={<div>Select Competition Category</div>}
@@ -396,7 +398,7 @@ const NewsForm = () => {
                       isSearchable={true}
                     />
                   </div>
-                </div>
+                </div> */}
                 <div className="row mainrow">
                   
                   <div className="col-sm">

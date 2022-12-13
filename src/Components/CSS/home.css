@@ -61,10 +61,10 @@ line-height: 19px;
     font-style: normal;
     font-weight: 300;
     font-family: 'Inter';
-font-style: normal;
-font-weight: 300;
-font-size: 20px;
-line-height: 24px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24px;
     font-size: 20px;
     line-height: 24px;
     width: 360.35px;
@@ -115,6 +115,14 @@ line-height: 24px;
     background: linear-gradient(89.98deg, #C8C8C8 23.67%, #8D8D8D 97.94%);  
     border-radius: 20px;
 }
+.CompetitionsRaces > h3 {
+  padding: 10px;
+  position: top;
+  top: 16%;
+  position: relative;
+  right: -2%;
+  font-size: 40px;
+}
 .CompetitionsRaces{
     display: flex;
     align-items: center;
@@ -122,12 +130,13 @@ line-height: 24px;
     color: #fff;
     font-family: 'Inter';
     font-style: normal;
+    cursor: pointer;
     font-weight: 300;
     font-family: 'Inter';
-font-style: normal;
-font-weight: 300;
-font-size: 20px;
-line-height: 24px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24px;
     font-size: 20px;
     line-height: 24px;
     width: 360.35px;
@@ -146,11 +155,10 @@ line-height: 24px;
     font-weight: 300;
     font-size: 20px;
     font-family: 'Inter';
-font-style: normal;
-font-weight: 300;
-font-size: 20px;
-line-height: 24px;
-
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24px;
     line-height: 24px;
     width: 360.35px;
     height: 246.19px;
@@ -165,10 +173,10 @@ line-height: 24px;
     color: #fff;
     font-family: 'Inter';
     font-family: 'Inter';
-font-style: normal;
-font-weight: 300;
-font-size: 20px;
-line-height: 24px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24px;
     font-style: normal;
     font-weight: 300;
     font-size: 20px;
@@ -267,4 +275,6 @@ line-height: 24px;
     border: none;
     padding: 10px;
   }
-  
+  .tricomp{
+    margin-top: 20px;
+  }

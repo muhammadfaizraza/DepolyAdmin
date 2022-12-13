@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import makeAnimated from "react-select/animated";
 import dateFormat from "dateformat";
 import { fetchcompetition } from "../../../redux/getReducer/getCompetition";
+import { toast } from 'react-toastify';
 
 const LocalItem = () => {
   const list = localStorage.getItem("competition");
@@ -18,16 +19,22 @@ const LocalItem = () => {
   }
 };
 
+const LocalItemTri = () => {
+  const listtri = localStorage.getItem("competitiontri");
+  if (listtri) {
+    return JSON.parse(localStorage.getItem("competitiontri"));
+  } else {
+    return [];
+  }
+};
+
 const Nationality = () => {
-  const [Competition, setCompetition] = useState("");
 
   const { data: race } = useSelector((state) => state.race);
   const { data: competition } = useSelector((state) => state.competition);
 
   const { state } = useLocation();
   const { competitionId } = state;
-
-  console.log(competitionId._id, "id is this");
 
   let AllFetchData =
     race === undefined ? (
@@ -73,9 +80,16 @@ const Nationality = () => {
   const history = useNavigate();
   const [selectedValue, setSelectedValue] = useState([]);
   const [RaceModelId, SetRaceModelId] = useState("");
-  // const [BonusPoints, SetBonusPoints] = useState("");
-  // const [Points, SetPoints] = useState("");
+  const [Points, SetPoints] = useState("");
+  const [BonusPoints, SetBonusPoints] = useState("");
+
+  const [RaceModelIdTri, SetRaceModelIdTri] = useState("");
+  const [PointsTri, SetPointsTri] = useState("");
+  const [BonusPointsTri, SetBonusPointsTri] = useState("");
+
+  const [Rank, setRank] = useState(1);
   const [items, setitems] = useState(LocalItem());
+  const [itemsTri, setitemsTri] = useState(LocalItemTri());
 
   const handleChange = (e) => {
     setSelectedValue(Array.isArray(e) ? e.map((x) => x.id) : []);
@@ -87,23 +101,52 @@ const Nationality = () => {
   }, [dispatch]);
   useEffect(() => {
     localStorage.setItem("competition", JSON.stringify(items));
-  }, [items]);
+    localStorage.setItem("competitiontri", JSON.stringify(itemsTri));
+  }, [items,itemsTri]);
 
   const id = competitionId._id;
 
   const addItem = (e) => {
     e.preventDefault();
-    let CastRaces = [`${RaceModelId.id},${"34"},${"534"}`];
-
-    setitems([...items, CastRaces]);
+    if (RaceModelId === "" || Points === "" || BonusPoints === "") {
+      toast('Select Values ')
+    }
+    else if(competitionId.pickCount > items.length){
+      let CastRaces = [`${RaceModelId.id},${Points},${BonusPoints}`];
+      setitems([...items, CastRaces]);
+    }
+    else{
+      console.log('No More Count')
+    }
+   
   };
+
+  console.log(competitionId.pickCount,'pickCount');
+  console.log(competitionId.TriCount,'TriCount')
+
+
+  const addItemTri = (e) => {
+    e.preventDefault();
+    if (RaceModelIdTri === "" || PointsTri === "" || BonusPointsTri === "") {
+      toast('Select Values ')
+    }
+    else if(competitionId.TriCount > itemsTri.length){
+      let PickRaces = [`${RaceModelIdTri.id},${PointsTri},${BonusPointsTri}`];
+      setitemsTri([...itemsTri, PickRaces]);
+    }
+    else{
+      toast('No More Count')
+    }
+  };
+
   const Publish = async (event) => {
     event.preventDefault();
     try {
-      console.log({ RaceEntry: items }, "selectedValue");
+      console.log({ CastRaces: items },
+                  { PickRaces: itemsTri }, "selectedValue");
       const response = await axios.post(
         `${window.env.API_URL}/addraceincompetition/${id}`,
-        { CastRaces: items }
+        { CastRaces: items, PickRaces: itemsTri },
       );
       const msgdata = response.data.msg;
       // history('/competitionlisting')
@@ -124,6 +167,21 @@ const Nationality = () => {
     }
   };
 
+  const Remove = () => {
+    setitems([]);
+    SetBonusPoints("");
+    SetPoints("");
+    SetRaceModelId("");
+    setRank(1);
+  };
+  const RemoveTri = () => {
+    setitemsTri([]);
+    SetBonusPointsTri("");
+    SetPointsTri("");
+    SetRaceModelIdTri("");
+    setRank(1);
+  };
+
   return (
     <div className="page">
       <div className="rightsidedata">
@@ -133,44 +191,59 @@ const Nationality = () => {
           }}
         >
           <div className="Headers">Create Competition</div>
+          <div className="myselecthorse">
+            <div className="myselecthorsedata">
+              <span>Number #</span>
+              <span>Race Name</span>
+              <span>Points</span>
+              <span>BonusPoints</span>
+            </div>
+          </div>
           <div className="form">
             <div className="cast">
               <h4 className="pickCountstyle">Add Races for Cast</h4>
               {competitionId.pickCount > 0 ? (
                 <>
-                  <div className="row mainrow">
-                    {/* <div className="col-sm">
+                  <div className="myselectiondata">
+                    <span onChange={setRank} value={1}>
+                      1
+                    </span>
+                    <span>
                       <Select
-                        placeholder={<div>Select Comprtition</div>}
-                        defaultValue={Competition}
-                        onChange={setCompetition}
-                        options={AllFetchCompetition}
-                        isClearable={true}
-                        isSearchable={true}
-                      />
-                      <span className="spanForm">|</span>
-                    </div> */}
-                    <div className="col-sm">
-                      <Select
+                        className="dropdown multidropdown"
                         defaultValue={RaceModelId}
                         onChange={SetRaceModelId}
                         options={AllFetchData}
                         isClearable={false}
                         isSearchable={true}
                       />
-                      {/* <Select
-                        defaultValue={RaceModelId}
-                        onChange={SetRaceModelId}
-                        options={AllFetchData}
-                        isClearable={false}
-                        isSearchable={true}
-                      /> */}
-                    </div>
+                    </span>
+
+                    <span>
+                      <input
+                        type="number"
+                        value={Points}
+                        onChange={(e) => SetPoints(e.target.value)}
+                        placeholder="Points"
+                        className="resultforminput"
+                      />
+                    </span>
+                    <span>
+                      <input
+                        type="number"
+                        value={BonusPoints}
+                        onChange={(e) => SetBonusPoints(e.target.value)}
+                        placeholder="BonusPoints"
+                        className="resultforminput"
+                      />
+                    </span>
                   </div>
-                  {items.map((data, i) => {
+                  {items.map((item, i) => {
                     return (
-                      <div className="row mainrow">
-                    <div className="col-sm">
+                      <div className="myselectdata" key={i}>
+                  <div className="myselectiondata">
+                    <span onChange={setRank} value={i+1}>{i + 2}</span>
+                    <span>
                       <Select
                         defaultValue={RaceModelId}
                         onChange={SetRaceModelId}
@@ -178,13 +251,27 @@ const Nationality = () => {
                         isClearable={false}
                         isSearchable={true}
                       />
-                    </div>
+                    </span>
+
+                    <span>
+                    <input type='number'  value={i[1]}  placeholder="Points"  className="resultforminput"/>
+                    </span>
+                    <span>
+                    <input type='number'  value={i[2]} placeholder="BonusPoints"  className="resultforminput"/>
+                    </span>
+    
+                    
                   </div>
+                  
+                </div>
                     );
                   })}
                   <div className="addbtn">
                     <button className="AddAnother" onClick={addItem}>
                       Save & Add Another
+                    </button>
+                    <button className="updateButton" onClick={Remove}>
+                      Remove
                     </button>
                   </div>
                 </>
@@ -198,47 +285,88 @@ const Nationality = () => {
               <h4 className="pickCountstyle">Add Races for PickSix</h4>
               {competitionId.TriCount > 0 ? (
                 <>
-                  <div className="row mainrow">
-                    <div className="col-sm">
+                  <div className="myselectiondata">
+                    <span onChange={setRank} value={1}>
+                      1
+                    </span>
+                    <span>
                       <Select
-                        defaultValue={RaceModelId}
-                        onChange={SetRaceModelId}
+                        className="dropdown multidropdown"
+                        defaultValue={RaceModelIdTri}
+                        onChange={SetRaceModelIdTri}
                         options={AllFetchData}
                         isClearable={false}
                         isSearchable={true}
                       />
-                      <span className="spanForm">|</span>
-                    </div>
-                    <div className="col-sm">
-                      <Select
-                        required
-                        placeholder={<div>حدد نوع الجنس</div>}
-                        className="selectdir"
-                        defaultValue={Competition}
-                        onChange={setCompetition}
-                        options={AllFetchCompetitionAr}
-                        isClearable={true}
-                        isSearchable={true}
+                    </span>
+
+                    <span>
+                      <input
+                        type="number"
+                        value={PointsTri}
+                        onChange={(e) => SetPointsTri(e.target.value)}
+                        placeholder="Points"
+                        className="resultforminput"
                       />
-                    </div>
+                    </span>
+                    <span>
+                      <input
+                        type="number"
+                        value={BonusPointsTri}
+                        onChange={(e) => SetBonusPointsTri(e.target.value)}
+                        placeholder="BonusPoints"
+                        className="resultforminput"
+                      />
+                    </span>
                   </div>
-                  {/* {items.map((data, i) => {
+                  {itemsTri.map((item, index) => {
                     return (
-                      <div className="row mainrow">
-                        <Select
-                          className="dropdown multidropdown"
-                          placeholder="Select Option"
-                          value={AllFetchData.filter((obj) =>
-                            selectedValue.includes(obj.id)
-                          )} // set selected values
-                          options={AllFetchData} // set list of the data
-                          onChange={handleChange} // assign onChange function
-                          isMulti
-                          isClearable
-                        />
-                      </div>
+                      <span key={index}>
+                        <div className="myselectiondata">
+                          <span onChange={setRank} value={1}>
+                            1
+                          </span>
+                          <span>
+                            <Select
+                              className="dropdown multidropdown"
+                              defaultValue={RaceModelIdTri}
+                              onChange={SetRaceModelIdTri}
+                              options={AllFetchData}
+                              isClearable={false}
+                              isSearchable={true}
+                            />
+                          </span>
+
+                          <span>
+                            <input
+                              type="number"
+                              value={PointsTri}
+                              onChange={(e) => SetPointsTri(e.target.value)}
+                              placeholder="Points"
+                              className="resultforminput"
+                            />
+                          </span>
+                          <span>
+                            <input
+                              type="number"
+                              value={BonusPointsTri}
+                              onChange={(e) => SetBonusPointsTri(e.target.value)}
+                              placeholder="BonusPoints"
+                              className="resultforminput"
+                            />
+                          </span>
+                        </div>
+                      </span>
                     );
-                  })} */}
+                  })}
+                  <div className="addbtn">
+                    <button className="AddAnother" onClick={addItemTri}>
+                      Save & Add Another
+                    </button>
+                    <button className="updateButton" onClick={RemoveTri}>
+                      Remove
+                    </button>
+                  </div>
                 </>
               ) : (
                 <h4 className="pickCountstyle">

@@ -8,7 +8,7 @@ const TextInputValidation = (Language, GivenValue, FieldName) => {
   if (GivenValue === " ") {
     return (Answer = {
       status: false,
-      message: ` ${FieldName} is required`,
+      message: ` ${FieldName} is required `,
     });
   } else if (Language === "en") {
     if (EnglishRegex.test(GivenValue) === true) {

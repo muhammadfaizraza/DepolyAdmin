@@ -15,8 +15,17 @@ import ColorPopUp from "../PostTable/Color";
 import NationalityPopUp from "../PostTable/Nationality";
 import { AiOutlineReload } from 'react-icons/ai'
 import { Modal } from "react-bootstrap";
+import TextInputValidation from "../../utils/TextInputValidation";
 
 const RaceCourseForm = () => {
+  const [Error , setError] =useState("");
+  const [ErrorAr , setErrorAr] =useState("");
+  const [ErrorColor , setErrorColor] =useState("")
+  const [ErrorNationality , setErrorNationality] =useState("")
+ 
+
+  
+
   const dispatch = useDispatch();
   const history = useNavigate();
   const {pathname} = useLocation();
@@ -160,6 +169,30 @@ const RaceCourseForm = () => {
     dispatch(fetchcolor());
   };
 
+  const data1 =  (JSON.stringify(
+    TextInputValidation(
+      "en",
+      TrackNameEn,
+      "Track Name English"
+    )
+  ));
+
+
+  const obj = JSON.parse(data1);
+  console.log(obj.status,'aszxZ2dasd')
+ const data2 =  (JSON.stringify(
+    TextInputValidation(
+      "ar",
+    TrackNameAr,
+      "Track Name Arabic"
+    )
+  ));
+
+
+  const objAr = JSON.parse(data2);
+
+
+
   return (
     <Fragment>
       <div className="page">
@@ -181,10 +214,12 @@ const RaceCourseForm = () => {
                       onChange={(e) => setTrackNameEn(e.target.value)}
                       name="Name"
                       value={TrackNameEn}
+                      onBlur={() => setError(obj)}
                     >
                       <Form.Control type="text" placeholder="Track Name" required/>
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
+                    <span className="error">{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -195,6 +230,7 @@ const RaceCourseForm = () => {
                       value={TrackNameAr}
                       className="mb-3 floatingInputAr "
                       style={{ direction: "rtl", left: "initial", right: 0 }}
+                      onBlur={() => setErrorAr(objAr)}
                     >
                       <Form.Control
                         type="text"
@@ -203,6 +239,8 @@ const RaceCourseForm = () => {
                         required
                       />
                     </FloatingLabel>
+                    <span className="errorAr">{ErrorAr.message}</span>
+
                   </div>
                 </div>
                 
@@ -247,6 +285,8 @@ const RaceCourseForm = () => {
                       options={AllColor}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => ColorCode === "" ?  setErrorColor("Color is required "):setErrorColor(" ")}
+                  
                     />
                     <span className="spanForm">
                       <OverlayTrigger 
@@ -271,6 +311,8 @@ const RaceCourseForm = () => {
                         <span className="addmore" onClick={FetchNew}><AiOutlineReload /></span>
                         </>
                       </OverlayTrigger> |</span>
+                      <span className="error">{ErrorColor}</span>
+
                   </div>
                   <div className="col-sm">
                     <Select
@@ -283,6 +325,7 @@ const RaceCourseForm = () => {
                       options={AllColorAr}
                       isClearable={true}
                       isSearchable={true}
+
                     />
                   </div>
                 </div>
@@ -296,6 +339,9 @@ const RaceCourseForm = () => {
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => NationalityId === "" ?  setErrorNationality("Nationality is required "):setErrorNationality(" ")}
+                  
+
                     />
                     <span className="spanForm">
                       <OverlayTrigger 
@@ -320,6 +366,7 @@ const RaceCourseForm = () => {
                         <span className="addmore" onClick={FetchNew}><AiOutlineReload /></span>
                         </>
                       </OverlayTrigger> |</span>
+                      <span className="error">{ErrorNationality}</span>
                   </div>
 
                   <div className="col-sm">

@@ -108,12 +108,12 @@ const NewsForm = () => {
   };
 
   const data1 = JSON.stringify(
-    TextInputValidation("en", TitleEn, "Slider Title English")
+    TextInputValidation("en", TitleEn, "News Title English")
   );
 
   const obj = JSON.parse(data1);
   const data2 = JSON.stringify(
-    TextInputValidation("ar", TitleAr, "Slider Title Arabic")
+    TextInputValidation("ar", TitleAr, "News Title Arabic")
   );
   const objAr = JSON.parse(data2);
   const data3 = JSON.stringify(

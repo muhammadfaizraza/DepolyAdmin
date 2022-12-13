@@ -167,9 +167,8 @@ input::file-selector-button {
   border-radius: 20px;
   width: 97%;
   margin: 0px auto !important;
-  margin-top: 15px !important;
+  margin-top: 25px !important;
 }
-
 
 
 .css-1s2u09g-control:focus {
@@ -703,18 +702,19 @@ margin: 34px;
 font-size: 15.59px;
 }
 .error {
- 
   font-size: 11px;
-  color:red;
+  position: absolute;
+  color: red;
+  top: 45px;
 }
 .errorAr {
-
   font-size: 11px;
-
   direction: rtl;
   display: flex;
-  color:red;
-
+  color: red;
+  position: absolute;
+  top: 45px;
+  right: 0;
 }
 
 .addbtn.competitionaddbtn {

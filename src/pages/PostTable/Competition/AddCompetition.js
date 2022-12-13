@@ -420,7 +420,7 @@ const TrainerForm = () => {
 
                     >
                       <Form.Control type="number" placeholder="Pick Count" />
-                    </FloatingLabel>
+                  </FloatingLabel>
 
                     {/* <span className="spanForm"> |</span> */}
                     <span className="error">{ErrorPickCount}</span>

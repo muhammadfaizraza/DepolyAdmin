@@ -106,7 +106,7 @@ const NewsForm = () => {
     }
   };
 
- 
+
   useEffect(() => {
     dispatch(fetchnationality());
     if (!image) {
@@ -320,7 +320,7 @@ const NewsForm = () => {
                       value={RemarksEn}
                       onBlur={() => setErrorRemarks(Remark)}
                     >
-                      <Form.Control 
+                      <Form.Control
                         type="text"
                         placeholder="Remarks"
                         required
@@ -364,8 +364,8 @@ const NewsForm = () => {
                       onBlur={() =>
                         DOB === ""
                           ? setErrorDateofBirth(
-                              "Jockey Date Of Birth is required"
-                            )
+                            "Jockey Date Of Birth is required"
+                          )
                           : setErrorDateofBirth(" ")
                       }
                     />
@@ -397,8 +397,8 @@ const NewsForm = () => {
                       onBlur={() =>
                         DOB === ""
                           ? setErrorLicenseDate(
-                              "Jockey License Date is required"
-                            )
+                            "Jockey License Date is required"
+                          )
                           : setErrorLicenseDate(" ")
                       }
                     />
@@ -474,8 +474,8 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setRating(e.target.value)}
                       value={Rating}
-                      onBlur={(e) => Rating === "" ?  setErrorRating("Jockey Rating is required "):setErrorRating(" ")}
-                   
+                      onBlur={(e) => Rating === "" ? setErrorRating("Jockey Rating is required ") : setErrorRating(" ")}
+
                     >
                       <Form.Control
                         type="number"
@@ -483,7 +483,7 @@ const NewsForm = () => {
                         required
                       />
                     </FloatingLabel>
-<span className="error">{ErrorRating}</span>
+                    <span className="error">{ErrorRating}</span>
                     {/* <span className="spanForm"> |</span> */}
                   </div>
                   {/* 
@@ -508,7 +508,7 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setMiniumumJockeyWeight(e.target.value)}
                       value={MiniumumJockeyWeight}
-                      onBlur={(e) => MiniumumJockeyWeight === "" ?  setErrorMinWeight("Jockey Rating is required "):setErrorMinWeight(" ")}
+                      onBlur={(e) => MiniumumJockeyWeight === "" ? setErrorMinWeight("Jockey Rating is required ") : setErrorMinWeight(" ")}
                     >
                       <Form.Control
                         type="number"
@@ -517,7 +517,7 @@ const NewsForm = () => {
                         required
                       />
                     </FloatingLabel>
-<span className="error">{ErrorMinWeight}</span>
+                    <span className="error">{ErrorMinWeight}</span>
                     {/* <span className="spanForm"> |</span> */}
                   </div>
 
@@ -545,7 +545,7 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setMaximumJockeyWeight(e.target.value)}
                       value={MaximumJockeyWeight}
-                      onBlur={(e) => MaximumJockeyWeight === "" ?  setErrorMaxWeight("Jockey Rating is required "):setErrorMaxWeight(" ")}
+                      onBlur={(e) => MaximumJockeyWeight === "" ? setErrorMaxWeight("Jockey Rating is required ") : setErrorMaxWeight(" ")}
                     >
                       <Form.Control
                         type="number"
@@ -584,7 +584,7 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setJockeyAllowance(e.target.value)}
                       value={JockeyAllowance}
-                      onBlur={(e) => JockeyAllowance === "" ?  setErrorAllowance("Jockey Rating is required "):setErrorAllowance(" ")}
+                      onBlur={(e) => JockeyAllowance === "" ? setErrorAllowance("Jockey Rating is required ") : setErrorAllowance(" ")}
                     >
                       <Form.Control
                         type="number"
@@ -593,7 +593,7 @@ const NewsForm = () => {
                         required
                       />
                     </FloatingLabel>
-<span className="error">{ErrorAllowance}</span>
+                    <span className="error">{ErrorAllowance}</span>
                     {/* <span className="spanForm"> |</span> */}
                   </div>
 

@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import TextInputValidation from "../../utils/TextInputValidation";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
 const GroundType = () => {
+
+  const [ErrorNameEn, setErrorNameEn] = useState("");
+  const [ErrorNameAr, setErrorNameAr] = useState("");
+
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
   const [shortCode, setshortCode] = useState("");
@@ -41,6 +45,28 @@ const GroundType = () => {
       });
     }
   };
+  const data1 =  (JSON.stringify(
+    TextInputValidation(
+      "en",
+      NameEn,
+      "Ground Type English"
+    )
+  ));
+
+  console.log(data1,'asdasd')
+
+  const obj = JSON.parse(data1);
+  console.log(obj.status,'aszxZ2dasd')
+ const data2 =  (JSON.stringify(
+    TextInputValidation(
+      "ar",
+      NameAr,
+      "Ground Type Arabic"
+    )
+  ));
+
+
+  const objAr = JSON.parse(data2);
   return (
     <div className="page">
       <div className="rightsidedata">
@@ -61,11 +87,14 @@ const GroundType = () => {
                     onChange={(e) => setNameEn(e.target.value)}
                     name="Name"
                     value={NameEn}
+                    onBlur={() => setErrorNameEn(obj)}
+
                   >
                     <Form.Control type="text" placeholder="Name" required/>
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
+                  <span className="error">{ErrorNameEn.message}</span>
                 </div>
 
                 <div className="col-sm">
@@ -77,9 +106,12 @@ const GroundType = () => {
                     name="Name"
                     value={NameAr}
                     style={{ direction: "rtl" }}
+                    onBlur={() => setErrorNameAr(objAr)}
+                  
                   >
                     <Form.Control type="text" placeholder="اسم" required/>
                   </FloatingLabel>
+                  <span className="errorAr">{ErrorNameAr.message}</span>
                 </div>
               </div>
 

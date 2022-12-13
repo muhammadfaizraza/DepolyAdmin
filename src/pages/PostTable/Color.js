@@ -43,7 +43,7 @@ const Color = () => {
       "Color Name Arabic"
     )
   ));
-  console.log(data2,'asdasd')
+
 
   const objAr = JSON.parse(data2);
 

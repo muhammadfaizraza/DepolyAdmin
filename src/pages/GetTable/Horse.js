@@ -18,6 +18,9 @@ import {BsEyeFill} from "react-icons/bs"
 import Pagination from "./Pagination";
 
 const Horse = () => {
+//for errors
+
+
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);

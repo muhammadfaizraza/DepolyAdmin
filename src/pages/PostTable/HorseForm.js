@@ -21,7 +21,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { Modal } from "react-bootstrap";
 import { AiOutlineReload } from "react-icons/ai";
-
+import TextInputValidation from "../../utils/TextInputValidation";
 import BreederPopup from './Breeder';
 import ColorPopup from './Color';
 import GenderPopup from './Gender';
@@ -63,6 +63,32 @@ const Foals = [
 ];
 
 const HorseForm = () => {
+
+  //for error
+  const [Error, setError] = useState("");
+  const [ErrorAr, setErrorAr] = useState("");
+  const [ErrorRemarks, setErrorRemarks] = useState("");
+  const [ErrorHeight, setErrorHeight] = useState("");
+  const [ErrorRds, setErrorRds] = useState("");
+  const [ErrorHorseKind, setErrorHorseKind] = useState("");
+  const [ErrorHorseStatus, setErrorHorseStatus] = useState("");
+   const [ErrorPurchase, setErrorPurchase] = useState("");
+   const [ErrorFoal, setErrorFoal] = useState("");
+     const [ErrorBreeder, setErrorBreeder] = useState("");
+     const [ErrorColor, setErrorColor] = useState("");
+     const [ErrorGender, setErrorGender] = useState("");
+     
+     const [ErrorOwner, setErrorOwner] = useState("");
+     const [ErrorTrainer, setErrorTrainer] = useState("");
+     const [ErrorGelded, setErrorGelded] = useState("");
+     const [ErrorNationality, setErrorNationality] = useState("");
+     const [ErrorCreationid, setErrorCreationid] = useState("");
+     
+  const [ErrorRegistration, setErrorRegistration] = useState("");
+
+
+
+
   const dispatch = useDispatch();
   const history = useNavigate();
 
@@ -355,65 +381,32 @@ const HorseForm = () => {
     setimage(e.target.files[0]);
   
   };
-  const isSubmitData =
-    // ActiveOwner === "" ||
-    // Age === "" ||
-    // NameEn === "" ||
-    // NameAr === "" ||
-    // Owner === "" ||
-    // ActiveTrainer === "" ||
-    // Remarks === "" ||
-    // Sex === "" ||
-    // Color === "" ||
-    // KindOfHorse === "" ||
-    // Dam === "" ||
-    // Sire === "" ||
-    // GSire === "" ||
-    // WinningAmount === "" ||
-    // OverAllRating === "" ||
-    image === null || image === undefined;
+
     var today = new Date();
 
-    const convert = (num) => {
-      if (num) {
-        var date = new Date(num);
-        var months = [
-          "يناير",
-          "فبراير",
-          "مارس",
-          "إبريل",
-          "مايو",
-          "يونيو",
-          "يوليو",
-          "أغسطس",
-          "سبتمبر",
-          "أكتوبر",
-          "نوفمبر",
-          "ديسمبر",
-        ];
-        var days = [
-          "اﻷحد",
-          "اﻷثنين",
-          "الثلاثاء",
-          "اﻷربعاء",
-          "الخميس",
-          "الجمعة",
-          "السبت",
-        ];
-        var delDateString =
-          days[date.getDay()] +
-          " " +
-          date.getDate() +
-          " " +
-          months[date.getMonth()] +
-          " " +
-          date.getFullYear();
-  
-        return delDateString;
-      }
-    };
+    
+    const data1 = JSON.stringify(
+      TextInputValidation("en", NameEn, "Horse English Name ")
+    );
+    const obj = JSON.parse(data1);
+    
+    const data2 = JSON.stringify(
+      TextInputValidation("ar", NameAr, "Horse Arabic Name ")
+    );
+    const objAr = JSON.parse(data2);
 
-  const DateMax =   new Date();
+ 
+    const data3 = JSON.stringify(
+      TextInputValidation("en", Remarks, "Horse Remarks  ")
+    );
+    const remark = JSON.parse(data3);
+    
+
+ 
+
+
+
+    const DateMax =   new Date();
   return (
     <Fragment>
       <div className="page">
@@ -435,11 +428,13 @@ const HorseForm = () => {
                       onChange={(e) => setNameEn(e.target.value)}
                       name="Name"
                       value={NameEn}
+                      onBlur={() => setError(obj)}
                     >
                       <Form.Control type="text" placeholder=" Horse Name" required/>
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className="error">{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -451,10 +446,12 @@ const HorseForm = () => {
                       name="Name"
                       value={NameAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() => setErrorAr(objAr)}
 
                     >
                       <Form.Control type="text" placeholder="اسم" required/>
                     </FloatingLabel>
+                    <span className="errorAr">{ErrorAr.message}</span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -466,8 +463,16 @@ const HorseForm = () => {
                       minDate={today}
                       monthPlaceholder="Registration Date"
                       yearPlaceholder=""
+                      onBlur={() =>
+                        DOB === ""
+                          ? setErrorRegistration(
+                              "Horse Registration Date is required"
+                            )
+                          : setErrorRegistration(" ")
+                      }
                     />
                     <span className="spanForm"> |</span>
+                    <span className="error">{ErrorRegistration}</span>
                   </div>
 
                   <div className="col-sm" style={{ direction: "rtl" }}>
@@ -499,8 +504,10 @@ const HorseForm = () => {
                       classNamePrefix="select"
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={(e) => Foal === "" ?  setErrorFoal("Foal is required "):setErrorFoal(" ")}
                     />
                     <span className="spanForm"> |</span>
+                    <span className="error">{ErrorFoal}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -513,8 +520,12 @@ const HorseForm = () => {
                       options={Foals}
                       isClearable={true}
                       isSearchable={true}
+      
+                   
                     />
+                
                   </div>
+
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -525,10 +536,12 @@ const HorseForm = () => {
                       onChange={(e) => setRemarks(e.target.value)}
                       value={Remarks}
                       required
+                      onBlur={() => setErrorRemarks(remark)}
+
                     >
                       <Form.Control type="text" placeholder="Details" />
                     </FloatingLabel>
-
+<span className="error">{ErrorRemarks.message}</span>
                     <span className="spanForm"> |</span>
                   </div>
 
@@ -552,10 +565,12 @@ const HorseForm = () => {
                       onChange={(e) => setHeight(e.target.value)}
                       name="Name"
                       value={Height}
+                      onBlur={(e) => Height === "" ?  setErrorHeight("Horse Height is required "):setErrorHeight(" ")}
+                   
                     >
                       <Form.Control type="number" placeholder="Height" required/>
                     </FloatingLabel>
-
+<span className="error">{ErrorHeight}</span>
                     
                   </div>
 
@@ -571,6 +586,8 @@ const HorseForm = () => {
                       options={horsekindoptions}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => setKindHorse === "" ?  setErrorHorseKind("Horse Kind is required "):setErrorHorseKind(" ")}
+                      
                     />
                      <span className="spanForm">
                       <OverlayTrigger
@@ -591,6 +608,7 @@ const HorseForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
+                    <span className="error">{ErrorHorseKind}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -615,8 +633,12 @@ const HorseForm = () => {
                       options={HorseStatusAll}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => HorseStatus === "" ?  setErrorHorseStatus("Horse Status is required "):setErrorHorseStatus(" ")}
+                     
+                      
                     />
                     <span className="spanForm"> |</span>
+                    <span className="error">{ErrorHorseStatus}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -660,6 +682,8 @@ const HorseForm = () => {
                       className="mb-3"
                       onChange={(e) => setPurchasePrice(e.target.value)}
                       value={PurchasePrice}
+                      onBlur={() => PurchasePrice === "" ?  setErrorPurchase("Horse Purchase Price is required "):setErrorPurchase(" ")}
+                      
                     >
                       <Form.Control
                         type="number"
@@ -668,6 +692,7 @@ const HorseForm = () => {
                         required
                       />
                     </FloatingLabel>
+                    <span className="error">{ErrorPurchase}</span>
 
                     {/* <span className="spanForm"> |</span> */}
                   </div>
@@ -694,8 +719,11 @@ const HorseForm = () => {
                       options={Gelted}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => Rds === "" ?  setErrorRds("Horse Rds is required "):setErrorRds(" ")}
+
                     />
                     <span className="spanForm"> |</span>
+                 <span className="error">{ErrorRds}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -720,6 +748,8 @@ const HorseForm = () => {
                       options={AllBreeder}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => Rds === "" ?  setErrorBreeder("Horse Breeder is required "):setErrorBreeder(" ")}
+
                     />
                      <span className="spanForm">
                       <OverlayTrigger
@@ -740,6 +770,7 @@ const HorseForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
+                    <span className="error">{ErrorBreeder}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -763,6 +794,8 @@ const HorseForm = () => {
                       options={AllColor}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => Rds === "" ?  setErrorColor("Horse Color is required "):setErrorColor(" ")}
+
                     />
                      <span className="spanForm">
                       <OverlayTrigger
@@ -783,6 +816,7 @@ const HorseForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
+                    <span className="error">{ErrorColor}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -794,9 +828,11 @@ const HorseForm = () => {
                       options={AllColor}
                       isClearable={true}
                       isSearchable={true}
+               
                     />
                   </div>
                 </div>
+               
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
@@ -806,6 +842,9 @@ const HorseForm = () => {
                       options={AllGender}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => Sex === "" ?  setErrorGender("Horse Gender is required "):setErrorGender(" ")}
+
+                    
                     />
                      <span className="spanForm">
                       <OverlayTrigger
@@ -826,6 +865,7 @@ const HorseForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
+                    <span className="error">{ErrorGender}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -961,6 +1001,8 @@ const HorseForm = () => {
                       options={owneroption}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => ActiveOwner === "" ?  setErrorOwner("Horse Owner is required "):setErrorOwner(" ")}
+
                     /> 
                      <span className="spanForm">
                       <OverlayTrigger
@@ -981,6 +1023,7 @@ const HorseForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
+                    <span className="error">{ErrorOwner}</span>
                   </div>
 
                   <div className="col-sm">
@@ -1007,8 +1050,11 @@ const HorseForm = () => {
                       options={Gelted}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => isGelted === "" ?  setErrorGelded("Gelded is required "):setErrorGelded(" ")}
+
                     />
                     <span className="spanForm"> |</span>
+                    <span className="error">{ErrorGelded}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -1032,6 +1078,7 @@ const HorseForm = () => {
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
+                       onBlur={() => NationalityId === "" ?  setErrorNationality("Horse Nationality is required "):setErrorNationality(" ")}
                     />
                     <span className="spanForm">
                       <OverlayTrigger
@@ -1049,9 +1096,11 @@ const HorseForm = () => {
                          <span className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
                           </span>
-                      </OverlayTrigger>{" "}
+                      </OverlayTrigger>
                       |
                     </span>
+                    <span className="error">{ErrorNationality}</span>
+
                   </div>
 
                   <div className="col-sm">
@@ -1080,8 +1129,12 @@ const HorseForm = () => {
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => CreationId === "" ?  setErrorCreationid("Horse Creation is required "):setErrorCreationid(" ")}
                     />
                     <span className="spanForm"> |</span>
+                    <span className="error">{ErrorCreationid}</span>
+
+  
                   </div>
 
                   <div className="col-sm">
@@ -1097,6 +1150,7 @@ const HorseForm = () => {
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
+
                     />
                   </div>
                 </div>
@@ -1109,6 +1163,8 @@ const HorseForm = () => {
                       options={traineroption}
                       isClearable={true}
                       isSearchable={true}
+                      
+        onBlur={() => ActiveTrainer === "" ?  setErrorTrainer("Horse Trainer is required "):setErrorTrainer(" ")}
                     />
                     <span className="spanForm">
                       <OverlayTrigger
@@ -1129,6 +1185,7 @@ const HorseForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
+                    <span className="error">{ErrorTrainer}</span>
                   </div>
 
                   <div className="col-sm">

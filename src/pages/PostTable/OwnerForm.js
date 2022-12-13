@@ -144,7 +144,7 @@ const OwnerForm = () => {
     formData.append("Ownerimage", Ownerimage);
     formData.append("NameEn", NameEn);
     formData.append("NameAr", NameAr);
-    formData.append("TitleEn", TitleEn + ' ');
+    formData.append("TitleEn", TitleEn);
     formData.append("TitleAr", TitleAr);
     formData.append("ShortEn", ShortEn);
     formData.append("ShortAr", ShortAr);

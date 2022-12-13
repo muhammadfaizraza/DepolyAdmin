@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate ,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
@@ -11,8 +11,6 @@ const Horsekindform = () => {
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
   const [ErrorShortName, setErrorShortName] = useState("");
-
-
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
@@ -26,8 +24,8 @@ const Horsekindform = () => {
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
-      formData.append("NameAr", NameAr + ' ');
-      formData.append("shortName",shortName);
+      formData.append("NameAr", NameAr + " ");
+      formData.append("shortName", shortName);
 
       await axios.post(`${window.env.API_URL}/uploadHorseKind`, formData);
       swal({
@@ -36,7 +34,7 @@ const Horsekindform = () => {
         icon: "success",
         button: "OK",
       });
-      if(pathname === '/horsekindform'){
+      if (pathname === "/horsekindform") {
         history("/horsekind");
       }
     } catch (error) {
@@ -50,32 +48,18 @@ const Horsekindform = () => {
     }
   };
 
-
-    
-  const data1 = (JSON.stringify(
-    TextInputValidation(
-      "en",
-      NameEn,
-      "Horse Kind Name English"
-    )
-  ));
+  const data1 = JSON.stringify(
+    TextInputValidation("en", NameEn, "Horse Kind Name English")
+  );
 
   const obj = JSON.parse(data1);
-  const data2 = (JSON.stringify(
-    TextInputValidation(
-      "ar",
-      NameAr,
-      "Horse Kind Name Arabic"
-    )
-  ));
+  const data2 = JSON.stringify(
+    TextInputValidation("ar", NameAr, "Horse Kind Name Arabic")
+  );
   const objAr = JSON.parse(data2);
-  const data3 = (JSON.stringify(
-    TextInputValidation(
-      "en",
-      shortName,
-      "Horse Kind Short Name Arabic"
-    )
-  ));
+  const data3 = JSON.stringify(
+    TextInputValidation("en", shortName, "Horse Kind Short Name English")
+  );
   const shotName = JSON.parse(data3);
 
   return (
@@ -100,7 +84,7 @@ const Horsekindform = () => {
                     value={NameEn}
                     onBlur={() => setError(obj)}
                   >
-                    <Form.Control type="text" placeholder="Name" required/>
+                    <Form.Control type="text" placeholder="Name" required />
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
@@ -118,46 +102,39 @@ const Horsekindform = () => {
                     style={{ direction: "rtl" }}
                     onBlur={() => setErrorAr(objAr)}
                   >
-                    <Form.Control type="text" placeholder="اسم" required/>
+                    <Form.Control type="text" placeholder="اسم" required />
                   </FloatingLabel>
                   <span className="errorAr">{ErrorAr.message}</span>
                 </div>
               </div>
 
               <div className="row mainrow">
-              <div className="col-sm">
-             
-                
-                
-                <FloatingLabel
-        controlId="floatingInput"
-        label="Short Name"
-        className="mb-3"
-        onChange={(e) => setshortName(e.target.value)}
-        value={shortName}
-        onBlur={() => setshortName(shotName)}
-> 
-        <Form.Control type="text" placeholder="ShortCode" />
-      </FloatingLabel>
-                <span className="spanForm"> |</span>
-                <span className="error">{shortName.message}</span>
-              </div>
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Short Name"
+                    className="mb-3"
+                    onChange={(e) => setshortName(e.target.value)}
+                    value={shortName}
+                    onBlur={() => setErrorShortName(shotName)}
+                  >
+                    <Form.Control type="text" placeholder="ShortCode" />
+                  </FloatingLabel>
+                  <span className="spanForm"> |</span>
+                  <span className="error">{ErrorShortName.message}</span>
+                </div>
 
-              <div className="col-sm">
-           
-                        <FloatingLabel
-        controlId="floatingInput"
-        label="اسم قصير"
-        className="mb-3 floatingInputAr"
-
-                  style={{ direction: "rtl" }}
-               
-              
-> 
-        <Form.Control type="text" placeholder="التفاصيل"     />
-      </FloatingLabel>
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="اسم قصير"
+                    className="mb-3 floatingInputAr"
+                    style={{ direction: "rtl" }}
+                  >
+                    <Form.Control type="text" placeholder="التفاصيل" />
+                  </FloatingLabel>
+                </div>
               </div>
-            </div>
 
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
                 <button type="submit" className="SubmitButton">

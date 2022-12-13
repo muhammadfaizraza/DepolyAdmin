@@ -1,102 +1,130 @@
 
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import swal from 'sweetalert';
 import axios from 'axios';
-import { useNavigate,useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';  
+import Form from 'react-bootstrap/Form';
+import TextInputValidation from '../../utils/TextInputValidation';
 
 const Racenameform = () => {
-    const [NameEn, setNameEn] = useState("");
-    const [NameAr, setNameAr] = useState("");
-    const [shortCode,setshortCode]= useState("") 
-  
-  const history =useNavigate()
-  const {pathname} = useLocation();
+  //for errors
+  const [Error, setError] = useState("");
+  const [ErrorAr, setErrorAr] = useState("");
 
-  
-  
-    const submit = async (event) => {
-      event.preventDefault();
-      try {
-        const formData = new FormData();
-        formData.append("NameEn", NameEn);
-        formData.append("NameAr" , NameAr + ' ')
-        // formData.append("shortCode",shortCode);
-        await axios.post(`${window.env.API_URL}/uploadRaceName`, formData)
-        swal({
-          title: "Success!",
-          text: "Data has been added successfully",
-          icon: "success",
-          button: "OK",
-        });
-        if(pathname === '/racenameform'){
-          history('/racename')
-        }
-       
-      } catch (error) {
-        const err = error.response.data.message;
-        swal({
-          title: "Error!",
-          text: err,
-          icon: "error",
-          button: "OK",
-        });
+
+
+  const [NameEn, setNameEn] = useState("");
+  const [NameAr, setNameAr] = useState("");
+  const [shortCode, setshortCode] = useState("")
+
+  const history = useNavigate()
+  const { pathname } = useLocation();
+
+
+
+  const submit = async (event) => {
+    event.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("NameEn", NameEn);
+      formData.append("NameAr", NameAr + ' ')
+      // formData.append("shortCode",shortCode);
+      await axios.post(`${window.env.API_URL}/uploadRaceName`, formData)
+      swal({
+        title: "Success!",
+        text: "Data has been added successfully",
+        icon: "success",
+        button: "OK",
+      });
+      if (pathname === '/racenameform') {
+        history('/racename')
       }
-    };
+
+    } catch (error) {
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
+    }
+  };
 
 
 
+  const data1 = (JSON.stringify(
+    TextInputValidation(
+      "en",
+      NameEn,
+      "Race Name English"
+    )
+  ));
+
+  const obj = JSON.parse(data1);
+  const data2 = (JSON.stringify(
+    TextInputValidation(
+      "ar",
+      NameAr,
+      "Race Name Arabic"
+    )
+  ));
+  const objAr = JSON.parse(data2);
   return (
     <div className="page">
-   
-    <div className="rightsidedata">
-      <div
-        style={{
-          marginTop: "30px",
-        }}
-      >
-        <div className="Headers">Create Race Name</div>
-        <div className="form">
-          
-          <form onSubmit={submit}>
-            <div className="row mainrow">
-              <div className="col-sm">
-               
-                <FloatingLabel
-        controlId="floatingInput"
-        label="Name"
-        className="mb-3"
-onChange={(e) => setNameEn(e.target.value)}
-                  name="Name"
-                  value={NameEn}
-> 
-        <Form.Control type="text" placeholder="Name" required/>
-      </FloatingLabel>
-                
-                
-                <span className="spanForm"> |</span>
+
+      <div className="rightsidedata">
+        <div
+          style={{
+            marginTop: "30px",
+          }}
+        >
+          <div className="Headers">Create Race Name</div>
+          <div className="form">
+
+            <form onSubmit={submit}>
+              <div className="row mainrow">
+                <div className="col-sm">
+
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Name"
+                    className="mb-3"
+                    onChange={(e) => setNameEn(e.target.value)}
+                    name="Name"
+                    value={NameEn}
+                    onBlur={() => setError(obj)}
+
+                  >
+                    <Form.Control type="text" placeholder="Name" required />
+                  </FloatingLabel>
+
+
+                  <span className="spanForm"> |</span>
+                  <span className='error'>{Error.message}</span>
+                </div>
+
+                <div className="col-sm">
+
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="اسم"
+                    className="mb-3 floatingInputAr"
+                    onChange={(e) => setNameAr(e.target.value)}
+                    name="Name"
+                    value={NameAr}
+                    style={{ direction: "rtl" }}
+                    onBlur={() => setErrorAr(objAr)}
+
+                  >
+                    <Form.Control type="text" placeholder="اسم" required />
+                  </FloatingLabel>
+                  <span className='errorAr'>{ErrorAr.message}</span>
+                </div>
               </div>
 
-              <div className="col-sm">
-           
-                       <FloatingLabel
-        controlId="floatingInput"
-        label="اسم"
-        className="mb-3 floatingInputAr"
-onChange={(e) => setNameAr(e.target.value)}
-                  name="Name"
-                  value={NameAr}
-                  style={{ direction: "rtl" }}
-               
-             
-> 
-        <Form.Control type="text" placeholder="اسم" required />
-      </FloatingLabel>
-              </div>
-            </div>
-
-            {/* <div className="row mainrow">
+              {/* <div className="row mainrow">
               <div className="col-sm">
           
                 
@@ -132,17 +160,17 @@ onChange={(e) => setNameAr(e.target.value)}
             </div> */}
 
 
-            <div className='ButtonSection ' style={{justifyContent:"end"}}>
-     
+              <div className='ButtonSection ' style={{ justifyContent: "end" }}>
 
-              <button Name='submit' className='SubmitButton'>Add Race Name</button>
 
-            </div>
-          </form>
+                <button Name='submit' className='SubmitButton'>Add Race Name</button>
+
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   )
 }
 

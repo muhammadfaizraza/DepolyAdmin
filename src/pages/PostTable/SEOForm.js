@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import { useNavigate , useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import TextInputValidation from "../../utils/TextInputValidation";
 
 const Breeder = () => {
    //for error
    const [Error, setError] = useState("")
    const [ErrorAr, setErrorAr] = useState("")
+   const [ErrorTitle, setErrorTitle] = useState("")
+   const [ErrorTitleAr, setErrorTitleAr] = useState("")
 
   const [KeyWord, setKeyWord] = useState("");
   const [KeyWordAr, setKeyWordAr] = useState("");
@@ -48,7 +51,27 @@ const Breeder = () => {
       });
     }
   };
+//function for errors
+ 
+  const data1 = JSON.stringify(
+    TextInputValidation("en", KeyWord, "SEO Keyword English")
+  );
+  const keyword = JSON.parse(data1);
 
+  const data2 = JSON.stringify(
+    TextInputValidation("ar", KeyWordAr, "SEO Keyword Arabic")
+  );
+
+  const KeyWordar = JSON.parse(data2);
+  const data3 = JSON.stringify(
+    TextInputValidation("en", TitleEn, "SEO Title English ")
+  );
+  const title = JSON.parse(data3)
+  const data4 = JSON.stringify(
+    TextInputValidation("ar", TitleAr, "SEO Title Arabic")
+  );
+
+  const titlear =JSON.parse(data4);
 
   return (
     <div className="page">
@@ -70,25 +93,29 @@ const Breeder = () => {
                     onChange={(e) => setKeyWord(e.target.value)}
                     name="Name"
                     value={KeyWord}
+                    onBlur={() => setError(keyword)}
                   >
                     <Form.Control type="text" placeholder="Name" />
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
+                <span className="error">{Error.message}</span>
                 </div>
 
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
-                    label="الكلمة الرئيسية       "
+                    label="الكلمة الرئيسية"
                     className="mb-3 floatingInputAr"
                     onChange={(e) => setKeyWordAr(e.target.value)}
                     name="Name"
                     value={KeyWordAr}
                     style={{ direction: "rtl" }}
+                    onBlur={() => setErrorAr(KeyWordar)}
                   >
                     <Form.Control type="text" placeholder="اسم" />
                   </FloatingLabel>
+               <span className="errorAr">{ErrorAr.message}</span>
                 </div>
               </div>
 
@@ -131,10 +158,12 @@ const Breeder = () => {
                     className="mb-3"
                     onChange={(e) => setTitleEn(e.target.value)}
                     value={TitleEn}
+                    onBlur={() => setErrorTitle(title)}
                   >
                     <Form.Control type="text" placeholder="Description" />
                   </FloatingLabel>
                   <span className="spanForm"> |</span>
+              <span className="error">{ErrorTitle.message}</span>
                 </div>
 
                 <div className="col-sm">
@@ -145,9 +174,11 @@ const Breeder = () => {
                     onChange={(e) => setTitleAr(e.target.value)}
                     value={TitleAr}
                     style={{ direction: "rtl" }}
+                    onBlur={() => setErrorTitleAr(titlear)}
                   >
                     <Form.Control type="text" placeholder="عنوان" />
                   </FloatingLabel>
+                  <span className="errorAr">{ErrorTitleAr.message}</span>
                 </div>
               </div>
               <div className="ButtonSection " style={{ justifyContent: "end" }}>

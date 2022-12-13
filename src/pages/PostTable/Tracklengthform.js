@@ -12,11 +12,22 @@ import Form from "react-bootstrap/Form";
 import { fetchgroundtype } from "../../redux/getReducer/getGroundType";
 import { Modal } from "react-bootstrap";
 import { AiOutlineReload } from "react-icons/ai";
+import TextInputValidation from "../../utils/TextInputValidation";
 
 import RaceCoursePopup from "./RaceCourseForm";
 import GroundTypePopup from "./GroundType";
 
 const Tracklengthform = () => {
+
+  const [ErrorTrackLength, setErrorTrackLength] = useState("");
+  const [ErrorRaceCourse, setErrorRaceCourse] = useState("");
+
+  const [ErrorGroundType, setErrorGroundType] = useState("");
+ 
+  const [ErrorRailPosition, setErrorRailPosition] = useState("");
+
+
+
   const dispatch = useDispatch();
   const { data: racecourse } = useSelector((state) => state.racecourse);
   const { data: groundtype } = useSelector((state) => state.groundtype);
@@ -136,7 +147,12 @@ const Tracklengthform = () => {
         };
       })
     );
-
+    
+  const data1 = JSON.stringify(
+    TextInputValidation("en", RailPosition, "Rail Position ")
+    
+  );
+  const position = JSON.parse(data1)
   return (
     <div className="page">
       <div className="rightsidedata">
@@ -156,9 +172,12 @@ const Tracklengthform = () => {
                     className="mb-3"
                     onChange={(e) => setTrackLength(e.target.value)}
                     value={TrackLength}
+                    onBlur={(e) => TrackLength === "" ?  setErrorTrackLength("Track Length is required "):setErrorTrackLength(" ")}
+
                   >
                     <Form.Control type="number" placeholder="Track Length" required/>
                   </FloatingLabel>
+                  <span className="error">{ErrorTrackLength}</span>
                   {/* <span className="spanForm"> |</span> */}
                 </div>
 
@@ -183,10 +202,13 @@ const Tracklengthform = () => {
                     className="mb-3"
                     onChange={(e) => setRailPosition(e.target.value)}
                     value={RailPosition}
+                    onBlur={() => setErrorRailPosition(position)}
                   >
                     <Form.Control type="text" placeholder="Rail Position" required/>
                   </FloatingLabel>
                   <span className="spanForm"> |</span>
+                  <span className="error">{ErrorRailPosition.message}</span>
+
                 </div>
 
                 <div className="col-sm">
@@ -197,6 +219,7 @@ const Tracklengthform = () => {
                     name="Name"
                     value={RailPosition}
                     style={{ direction: "rtl" }}
+
                   >
                     <Form.Control type="text" placeholder="طول المسار" required/>
                   </FloatingLabel>
@@ -211,6 +234,7 @@ const Tracklengthform = () => {
                     options={courseoptions}
                     isClearable={true}
                     isSearchable={true}
+                    onBlur={() => RaceCourse === "" ?  setErrorRaceCourse("Race Course is required "):setErrorRaceCourse(" ")}
                   />
                  <span className="spanForm">
                       <OverlayTrigger
@@ -231,6 +255,7 @@ const Tracklengthform = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
+                    <span className="error">{ErrorRaceCourse}</span>
                 </div>
                 <div className="col-sm">
                   <Select
@@ -242,6 +267,7 @@ const Tracklengthform = () => {
                     options={courseoptions}
                     isClearable={true}
                     isSearchable={true}
+
                   />
                 </div>
               </div>
@@ -255,6 +281,8 @@ const Tracklengthform = () => {
                     options={groundtypeopt}
                     isClearable={true}
                     isSearchable={true}
+                    onBlur={() => GroundType === "" ?  setErrorGroundType(" Ground Type is required "):setErrorGroundType(" ")}
+
                   />
                 <span className="spanForm">
                       <OverlayTrigger
@@ -275,6 +303,7 @@ const Tracklengthform = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
+                    <span className="error">{ErrorGroundType}</span>
                 </div>
                 <div className="col-sm">
                   <Select

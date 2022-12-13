@@ -5,12 +5,18 @@ import { useNavigate } from 'react-router-dom';
 
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
+import TextInputValidation from '../../utils/TextInputValidation';
 
 const Verdicts = () => {
 
+    //for errors
+    const [Error , setError] =useState("")
+    const [ErrorAr , setErrorAr] =useState("")
+    
+    
     const [NameEn, setNameEn] = useState("");
     const [NameAr, setNameAr] = useState("");
-    const [shortCode,setshortCode]= useState("") 
+
     const history = useNavigate()
 
     const submit = async (event) => {
@@ -40,6 +46,29 @@ const Verdicts = () => {
           });
         }
       };
+      
+  const data1 =  (JSON.stringify(
+    TextInputValidation(
+      "en",
+      NameEn,
+      "Verdict Name"
+    )
+  ));
+
+  console.log(data1,'asdasd')
+
+  const obj = JSON.parse(data1);
+  console.log(obj.status,'aszxZ2dasd')
+ const data2 =  (JSON.stringify(
+    TextInputValidation(
+      "ar",
+      NameAr,
+      "Verdict Name Arabic"
+    )
+  ));
+
+
+  const objAr = JSON.parse(data2);
 
   return (
     <div className="page">
@@ -64,12 +93,14 @@ const Verdicts = () => {
 onChange={(e) => setNameEn(e.target.value)}
                   name="Name"
                   value={NameEn}
+                  onBlur={() => setError(obj)}
 > 
         <Form.Control type="text" placeholder="Name" required/>
       </FloatingLabel>
                 
                 
                 <span className="spanForm"> |</span>
+                <span className="error">{Error.message}</span>
               </div>
 
               <div className="col-sm">
@@ -82,11 +113,12 @@ onChange={(e) => setNameAr(e.target.value)}
                   name="Name"
                   value={NameAr}
                   style={{ direction: "rtl" }}
-               
+               onBlur={() => setErrorAr(objAr)}
              
 > 
         <Form.Control type="text" placeholder="اسم"   required  />
       </FloatingLabel>
+      <span className="errorAr">{ErrorAr.message}</span>
               </div>
             </div>
 

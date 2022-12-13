@@ -1,6 +1,6 @@
 const TextInputValidation = (Language, GivenValue, FieldName) => {
-  const ArabicRegex = /[\u0600-\u06FF]/gm;
-  const EnglishRegex = /[a-z0-9.\-s]/gim;
+  const ArabicRegex = /^[\u0621-\u064A\u0660-\u0669 ]+$/;
+  const EnglishRegex = /^[A-Za-z\s]*$/;
   let Answer = {
     status: false,
     message: "",
@@ -8,10 +8,10 @@ const TextInputValidation = (Language, GivenValue, FieldName) => {
   if (GivenValue === " ") {
     return (Answer = {
       status: false,
-      message: `${FieldName} Is Empty`,
+      message: ` ${FieldName} is required`,
     });
   } else if (Language === "en") {
-    if (EnglishRegex.test(GivenValue.trim()) === true) {
+    if (EnglishRegex.test(GivenValue) === true) {
       return (Answer = {
         status: true,
         message: '',
@@ -24,7 +24,7 @@ const TextInputValidation = (Language, GivenValue, FieldName) => {
 
     }
   } else if (Language === "ar") {
-    if (ArabicRegex.test(GivenValue.trim()) === true) {
+    if (ArabicRegex.test(GivenValue) === true) {
       return (Answer = {
         status: true,
         message: '',

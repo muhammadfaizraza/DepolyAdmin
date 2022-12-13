@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react";
 import "../../Components/CSS/forms.css";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+
 import { useNavigate ,useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import TextInputValidation from "../../utils/TextInputValidation";
 
 import swal from "sweetalert";
 
 const SponsorForm = () => {
-  const dispatch = useDispatch();
+     //for error
+ const [Error, setError] = useState("");
+ const [ErrorAr, setErrorAr] = useState("");
+ const [descError, setdescError] = useState("");
+ const [descErrorAr, setdescErrorAr] = useState("");
+
+  
   const history = useNavigate();
 
   const {pathname} = useLocation();
@@ -37,7 +44,8 @@ const SponsorForm = () => {
       formData.append("DescriptionEn", DescriptionEn);
       formData.append("Url", Url);
 
-      const response = await axios.post(
+     
+      await axios.post(
         `${window.env.API_URL}uploadSponsor?keyword=&page=`,
         formData
       );
@@ -76,14 +84,46 @@ const SponsorForm = () => {
   const onSelectFile = (e) => {
     setImage(e.target.files[0])(image, "image");
   };
-  const isSubmitData =
-    TitleAr === "" ||
-    TitleEn === "" ||
-    DescriptionAr === "" ||
-    DescriptionEn === "" ||
-    image === null ||
-    image === undefined;
-  return (
+
+
+
+    const data1 = (JSON.stringify(
+      TextInputValidation(
+        "en",
+        TitleEn,
+        "Slider Title English"
+      )
+    ));
+  
+    const obj = JSON.parse(data1);
+    const data2 = (JSON.stringify(
+      TextInputValidation(
+        "ar",
+        TitleAr,
+        "Slider Title Arabic"
+      )
+    ));
+    const objAr = JSON.parse(data2);
+    const data3 = (JSON.stringify(
+      TextInputValidation(
+        "en",
+        DescriptionEn,
+        "Slider Description English"
+      )
+    ));
+  
+    const description = JSON.parse(data3);
+    const data4 = (JSON.stringify(
+      TextInputValidation(
+        "ar",
+        DescriptionAr,
+        "Slider Description Arabic"
+      )
+    ));
+    const descriptionAr = JSON.parse(data4);
+
+
+    return (
     <>
       <div className="page">
         <div className="rightsidedata">
@@ -104,11 +144,17 @@ const SponsorForm = () => {
                       onChange={(e) => setTitleEn(e.target.value)}
                       name="Name"
                       value={TitleEn}
+                      onBlur={() =>
+                        setError(obj)
+  
+                      }
                     >
                       <Form.Control type="text" placeholder="Title" required />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className="error" 
+                  >{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -120,9 +166,14 @@ const SponsorForm = () => {
                       name="Name"
                       value={TitleAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() =>
+                        setErrorAr(objAr)
+                             
+                       }
                     >
                       <Form.Control type="text" placeholder="عنوان" required/>
                     </FloatingLabel>
+                    <span className="errorAr" >{ErrorAr.message}</span>
                   </div>
                 </div>
 
@@ -134,11 +185,13 @@ const SponsorForm = () => {
                       className="mb-3"
                       onChange={(e) => setDescriptionEn(e.target.value)}
                       value={DescriptionEn}
+                      onBlur={() => setdescError(description)}
                     >
                       <Form.Control type="text" placeholder="Description" required />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className="error">{descError.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -149,9 +202,12 @@ const SponsorForm = () => {
                       onChange={(e) => setDescriptionAr(e.target.value)}
                       value={DescriptionAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() => setdescErrorAr(descriptionAr)}
+                      
                     >
                       <Form.Control type="text" placeholder="التفاصيل" required />
                     </FloatingLabel>
+                    <span className="errorAr">{descErrorAr.message}</span>
                   </div>
                 </div>
 

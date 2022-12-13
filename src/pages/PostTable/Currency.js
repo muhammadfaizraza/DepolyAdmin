@@ -7,6 +7,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import TextInputValidation from "../../utils/TextInputValidation";
 
 const Currency = () => {
+  //for error
   const [Error, setError] = useState("")
   const [ErrorAr, setErrorAr] = useState("")
 
@@ -33,7 +34,7 @@ const Currency = () => {
     TextInputValidation(
       "ar",
       NameAr,
-      "Name Arabic"
+      "Currency Name Arabic"
     )
   ));
   const objAr = JSON.parse(data2);

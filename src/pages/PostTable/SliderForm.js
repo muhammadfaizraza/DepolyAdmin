@@ -5,9 +5,13 @@ import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import TextInputValidation from "../../utils/TextInputValidation";
 
 const SliderForm = () => {
-  const dispatch = useDispatch();
+   //for error
+ const [Error, setError] = useState("")
+ const [ErrorAr, setErrorAr] = useState("")
+
   const history = useNavigate();
   const [TitleEn, setTitleEn] = useState("");
   const [TitleAr, setTitleAr] = useState("");
@@ -15,6 +19,25 @@ const SliderForm = () => {
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
 
+
+    //error Function
+  const data1 = (JSON.stringify(
+    TextInputValidation(
+      "en",
+      TitleEn,
+      "Slider Title"
+    )
+  ));
+
+  const obj = JSON.parse(data1);
+  const data2 = (JSON.stringify(
+    TextInputValidation(
+      "ar",
+      TitleAr,
+      "Slider Title Arabic"
+    )
+  ));
+  const objAr = JSON.parse(data2);
   const submit = async (event) => {
     event.preventDefault();
     try {
@@ -23,7 +46,7 @@ const SliderForm = () => {
       formData.append("TitleEn", TitleEn);
       formData.append("TitleAr", TitleAr + ' ');
       formData.append("Url", Url);
-      const response = await axios.post(
+      await axios.post(
         `${window.env.API_URL}/uploadSlider`,
         formData
       );
@@ -34,7 +57,7 @@ const SliderForm = () => {
         icon: "success",
         button: "OK",
       });
-    }  catch (error) {
+    } catch (error) {
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -82,11 +105,17 @@ const SliderForm = () => {
                       onChange={(e) => setTitleEn(e.target.value)}
                       name="Name"
                       value={TitleEn}
+                      onBlur={() =>
+                        setError(obj)
+  
+                      }
                     >
-                      <Form.Control type="text" placeholder="Title" required/>
+                      <Form.Control type="text" placeholder="Title" required />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className="error" 
+                  >{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -98,9 +127,14 @@ const SliderForm = () => {
                       name="Name"
                       value={TitleAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() =>
+                        setErrorAr(objAr)
+                             
+                       }
                     >
-                      <Form.Control type="text" placeholder="عنوان" required/>
+                      <Form.Control type="text" placeholder="عنوان" required />
                     </FloatingLabel>
+                    <span className="errorAr" >{ErrorAr.message}</span>
                   </div>
                 </div>
 
@@ -114,17 +148,17 @@ const SliderForm = () => {
                       name="Name"
                       value={Url}
                     >
-                      <Form.Control type="text" placeholder="Title" required/>
+                      <Form.Control type="text" placeholder="Title" required />
                     </FloatingLabel>
 
                   </div>
 
-                
+
                 </div>
 
                 <div className="ButtonSection">
                   <div>
-                  <label className="Multipleownerlabel">
+                    <label className="Multipleownerlabel">
                       Select Slider image
                     </label>
                     <input

@@ -704,6 +704,7 @@ font-size: 15.59px;
 .error {
  
   font-size: 11px;
+  color:red;
 }
 .errorAr {
 
@@ -711,5 +712,6 @@ font-size: 15.59px;
 
   direction: rtl;
   display: flex;
+  color:red;
 
 }

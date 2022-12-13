@@ -13,8 +13,17 @@ import { BsEyeFill } from "react-icons/bs";
 import HorseKindPopup from "../../Components/Popup/HorseKindPopup";
 import { Modal } from "react-bootstrap";
 import Pagination from "./Pagination";
+import TextInputValidation from "../../utils/TextInputValidation";
+
 
 const HorseKind = () => {
+
+  const [ErrorName, setErrorName] = useState("");
+  const [ErrorNameAr, setErrorNameAr] = useState("");
+  const [ErrorshortName, setErrorshortName] = useState("");
+  const [ErrorshortNameAr, setErrorshortNameAr] = useState("");
+
+
   //for Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -99,7 +108,9 @@ const HorseKind = () => {
                     marginRight: "100px",
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
-                ></h6>
+                >
+                  
+                </h6>
 
                 <Link to="/horsekindform">
                   <button>Add Horse Kind</button>

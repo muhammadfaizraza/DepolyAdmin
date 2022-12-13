@@ -6,6 +6,10 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
 const Breeder = () => {
+   //for error
+   const [Error, setError] = useState("")
+   const [ErrorAr, setErrorAr] = useState("")
+
   const [KeyWord, setKeyWord] = useState("");
   const [KeyWordAr, setKeyWordAr] = useState("");
   const [TitleEn, setTitleEn] = useState("");

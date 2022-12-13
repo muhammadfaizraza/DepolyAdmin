@@ -28,7 +28,7 @@ const Color = () => {
     TextInputValidation(
       "en",
       registeration.NameEn,
-      " English Name"
+      "Color Name"
     )
   ));
 
@@ -40,7 +40,7 @@ const Color = () => {
     TextInputValidation(
       "ar",
       registeration.NameAr,
-      "Name Arabic"
+      "Color Name Arabic"
     )
   ));
   console.log(data2,'asdasd')

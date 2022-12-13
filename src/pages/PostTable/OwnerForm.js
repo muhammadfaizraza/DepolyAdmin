@@ -13,10 +13,23 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { AiOutlineReload } from "react-icons/ai";
 import { Modal } from "react-bootstrap";
+import TextInputValidation from "../../utils/TextInputValidation";
 
 import NationalityPopup from "./Nationality"
 
 const OwnerForm = () => {
+
+     //for error
+     const [Error, setError] = useState("");
+     const [ErrorAr, setErrorAr] = useState("");
+     const [ErrorTitle, setErrorTitle] = useState("");
+     const [ErrorTitleAr, setErrorTitleAr] = useState("");
+     const [ErrorShortName, setErrorShortName] = useState("");
+     const [ErrorShortNameAr, setErrorShortNameAr] = useState("");
+
+     const [ErrorRegistration, setErrorRegistration] = useState("");
+    
+
   const dispatch = useDispatch();
   const history = useNavigate();
   const { pathname } = useLocation();
@@ -165,7 +178,6 @@ const OwnerForm = () => {
     }
   };
 
-  const isSubmitData = NameEn === "" || image === null || image === undefined;
   useEffect(() => {
     if (!Ownerimage) {
       setPreview(undefined);
@@ -201,6 +213,35 @@ const OwnerForm = () => {
       reader.readAsDataURL(file);
     });
   };
+  
+  const data1 = JSON.stringify(
+    TextInputValidation("en", TitleEn, "Owner Title English")
+  );
+
+  const Title = JSON.parse(data1);
+  const data2 = JSON.stringify(
+    TextInputValidation("ar", TitleAr, "Owner Title Arabic")
+  );
+  const Titlear = JSON.parse(data2);
+  const data3 = JSON.stringify(
+    TextInputValidation("en", NameEn, "Owner Name English")
+  );
+
+  const Name = JSON.parse(data3);
+  const data4 = JSON.stringify(
+    TextInputValidation("ar", NameAr, "Owner Name Arabic")
+  );
+  const Namear = JSON.parse(data4);
+
+  const data5 = JSON.stringify(
+    TextInputValidation("en", ShortEn, "Owner Short Name English")
+  );
+
+  const shotName = JSON.parse(data5);
+  const data6 = JSON.stringify(
+    TextInputValidation("ar", ShortAr, "Owner Short Name Arabic")
+  );
+  const shotNameAr = JSON.parse(data6);
 
   return (
     <>
@@ -223,11 +264,13 @@ const OwnerForm = () => {
                       onChange={(e) => setNameEn(e.target.value)}
                       name="Name"
                       value={NameEn}
+                      onBlur={() => setError(Name)}
                     >
                       <Form.Control type="text" placeholder="Name" required/>
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className="error">{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -239,10 +282,13 @@ const OwnerForm = () => {
                       name="Name"
                       value={NameAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() => setErrorAr(Namear)}
                     >
                       <Form.Control type="text" placeholder="اسم" required />
                     </FloatingLabel>
+                    <span className="errorAr">{ErrorAr.message}</span>
                   </div>
+
                 </div>
                 <div className="row  mainrow">
                   <div className="col-sm">
@@ -252,10 +298,12 @@ const OwnerForm = () => {
                       className="mb-3"
                       onChange={(e) => setTitleEn(e.target.value)}
                       value={TitleEn}
+                      onBlur={() => setErrorTitle(Title)}
                     >
                       <Form.Control type="text" placeholder="Title" required/>
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
+                    <span className="error">{ErrorTitle.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -267,9 +315,11 @@ const OwnerForm = () => {
                       name="Name"
                       value={TitleAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() => setErrorTitleAr(Titlear)}
                     >
                       <Form.Control type="text" placeholder="عنوان" required/>
                     </FloatingLabel>
+                    <span className="errorAr">{ErrorTitleAr.message}</span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -280,11 +330,13 @@ const OwnerForm = () => {
                       className="mb-3"
                       onChange={(e) => setShortEn(e.target.value)}
                       value={ShortEn}
+                      onBlur={() => setErrorShortName(shotName)}
                     >
                       <Form.Control type="text" placeholder="Short Name" required />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+<span className="error">{ErrorShortName.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -296,9 +348,11 @@ const OwnerForm = () => {
                       name="Name"
                       value={ShortAr}
                       style={{ direction: "rtl" }}
+                    onBlur={() => setErrorShortNameAr(shotNameAr)}
                     >
                       <Form.Control type="text" placeholder="اسم قصير" required/>
                     </FloatingLabel>
+                    <span className="errorAr">{ErrorShortNameAr.message}</span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -310,8 +364,10 @@ const OwnerForm = () => {
                       minDate={today}
                       monthPlaceholder="Registration Date"
                       yearPlaceholder=""
+                      onBlur={() => RegistrationDate === "" ?  setErrorRegistration("Owner Registration Date is required"):setErrorRegistration(" ")}
                     />
                     <span className="spanForm"> |</span>
+                    <span className="error">{ErrorRegistration}</span>
                   </div>
 
                   <div className="col-sm" style={{ direction: "rtl" }}>

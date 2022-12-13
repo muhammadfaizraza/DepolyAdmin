@@ -101,7 +101,9 @@ const SeoTable = () => {
                     alignItems: "center",
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
-                ></h6>
+                >
+
+                </h6>
 
                 <Link to="/seoform">
                   <button>Add SEO</button>
@@ -114,8 +116,8 @@ const SeoTable = () => {
                   <table>
                     <thead>
                       <tr>
-                        <th>KeyWord</th>
-                        <th>KeyWord Arabic </th>
+                        <th>Key Word</th>
+                        <th>Key Word Arabic </th>
                         <th>Title</th>
                         <th>Title Arabic</th>
                        

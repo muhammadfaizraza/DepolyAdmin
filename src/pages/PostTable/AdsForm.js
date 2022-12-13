@@ -3,37 +3,23 @@ import "../../Components/CSS/forms.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { add } from "../../redux/postReducer/PostAds";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import TextInputValidation from "../../utils/TextInputValidation";
 
 
 import swal from "sweetalert";
 
-const Validate = async (Language, GivenValue, FieldName) => {
-  const ArabicRegex = /[\u0600-\u06FF]/gm;
-  const EnglishRegex = /[a-z0-9.\-]/gim;
-
-  if (GivenValue === " ") {
-    return `${FieldName} Is Empty`;
-  } else if (Language === "en") {
-    if (EnglishRegex.test(GivenValue.trim()) === true) {
-      return true 
-    } else {
-      return `${FieldName} Should Have Only English Letter`;
-    }
-  } else if (Language === "ar") {
-    if (ArabicRegex.test(GivenValue.trim()) === true) {
-      return true
-    } else {
-      return `${FieldName} Should Have Only Arabic Letter`;
-    }
-  }
-};
 
 
 const AdsForm = () => {
-  const dispatch = useDispatch();
+
+//for error
+  const [Error, setError] = useState("");
+  const [ErrorAr, setErrorAr] = useState("");
+  const [ErrorDesc, setErrorDesc] = useState("");
+  const [ErrorDescAr, setErrorDescAr] = useState("");
+
   const history = useNavigate();
   const [TitleEn, setTitleEn] = useState("");
   const [TitleAr, setTitleAr] = useState("");
@@ -47,11 +33,11 @@ const AdsForm = () => {
      try {
     const formData = new FormData();
      formData.append("image", image);
-     formData.append("TitleEn", TitleEn);
+     formData.append("TitleEn", TitleEn+" ");
      formData.append("TitleAr", TitleAr);
+     formData.append("DescriptionEn", DescriptionEn+" ");
      formData.append("DescriptionAr", DescriptionAr);
-     formData.append("DescriptionEn", DescriptionEn);
-    const res = await axios.post(`${window.env.API_URL}/uploadAds`, formData);
+     const res = await axios.post(`${window.env.API_URL}/uploadAds`, formData);
      swal({
        title: "Success!",
        text: "Data has been added Successfully",
@@ -71,13 +57,6 @@ const AdsForm = () => {
      }
  };
 
-  const isSubmitData =
-    TitleAr === "" ||
-    TitleEn === "" ||
-    DescriptionAr === "" ||
-    DescriptionEn === "" ||
-    image === null ||
-    image === undefined;
 
   useEffect(() => {
     if (!image) {
@@ -95,6 +74,42 @@ const AdsForm = () => {
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
   };
+  
+  const data1 = (JSON.stringify(
+    TextInputValidation(
+      "en",
+      TitleEn,
+      "Ads Title English"
+    )
+  ));
+
+  const obj = JSON.parse(data1);
+  const data2 = (JSON.stringify(
+    TextInputValidation(
+      "ar",
+      TitleAr,
+      "Ads Title Arabic"
+    )
+  ));
+  const objAr = JSON.parse(data2);
+  const data3 = (JSON.stringify(
+    TextInputValidation(
+      "en",
+      DescriptionEn,
+      "Ads Description English"
+    )
+  ));
+
+  const description = JSON.parse(data3);
+  const data4 = (JSON.stringify(
+    TextInputValidation(
+      "ar",
+      DescriptionAr,
+      "Ads Description Arabic"
+    )
+  ));
+  const descriptionAr = JSON.parse(data4);
+
 
   return (
     <>
@@ -117,11 +132,13 @@ const AdsForm = () => {
                       onChange={(e) => setTitleEn(e.target.value)}
                       name="Name"
                       value={TitleEn}
+                      onBlur={() => setError(obj)}
                     >
                       <Form.Control type="text" placeholder="Title" />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className="error" >{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -133,9 +150,11 @@ const AdsForm = () => {
                       name="Name"
                       value={TitleAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() => setErrorAr(objAr)}
                     >
                       <Form.Control type="text" placeholder="عنوان" />
                     </FloatingLabel>
+                    <span className="errorAr">{ErrorAr.message}</span>
                   </div>
                 </div>
 
@@ -147,11 +166,13 @@ const AdsForm = () => {
                       className="mb-3"
                       onChange={(e) => setDescriptionEn(e.target.value)}
                       value={DescriptionEn}
+                      onBlur={() => setErrorDesc(description)}
                     >
                       <Form.Control type="text" placeholder="Description" />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className="error">{ErrorDesc.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -162,9 +183,11 @@ const AdsForm = () => {
                       onChange={(e) => setDescriptionAr(e.target.value)}
                       value={DescriptionAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() => setErrorDescAr(descriptionAr)}
                     >
                       <Form.Control type="text" placeholder="التفاصيل" />
                     </FloatingLabel>
+                    <span className="errorAr">{ErrorDescAr.message}</span>
                   </div>
                 </div>
 

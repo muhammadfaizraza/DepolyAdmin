@@ -3,7 +3,7 @@ import DatePicker from "react-date-picker";
 import "../../Components/CSS/forms.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { add } from "../../redux/postReducer/PostJockey";
 import { fetchnationality } from "../../redux/getReducer/getNationality";
 import swal from "sweetalert";
@@ -15,13 +15,29 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { AiOutlineReload } from "react-icons/ai";
 import { Modal } from "react-bootstrap";
-
+import TextInputValidation from "../../utils/TextInputValidation";
 import NationalityPopup from "./Nationality";
 
 const NewsForm = () => {
+  //for Errors
+  const [Error, setError] = useState("");
+  const [ErrorAr, setErrorAr] = useState("");
+
+  const [ErrorShortName, setErrorShortName] = useState("");
+  const [ErrorShortNameAr, setErrorShortNameAr] = useState("");
+
+  const [ErrorDateofBirth, setErrorDateofBirth] = useState("");
+  const [ErrorLicenseDate, setErrorLicenseDate] = useState("");
+  const [ErrorRemarks, setErrorRemarks] = useState("");
+  const [ErrorRemarksAr, setErrorRemarksAr] = useState("");
+  const [ErrorRating, setErrorRating] = useState("");
+  const [ErrorMinWeight, setErrorMinWeight] = useState("");
+  const [ErrorMaxWeight, setErrorMaxWeight] = useState("");
+  const [ErrorAllowance, setErrorAllowance] = useState("");
+
   const dispatch = useDispatch();
   const history = useNavigate();
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
 
   const { data: nationality } = useSelector((state) => state.nationality);
   var today = new Date();
@@ -44,7 +60,7 @@ const NewsForm = () => {
 
   const [showActivenationality, setShowActivenationality] = useState(false);
 
-  const handleCloseActivenationality= () => setShowActivenationality(false);
+  const handleCloseActivenationality = () => setShowActivenationality(false);
 
   const handleShowActivenationality = async () => {
     await setShowActivenationality(true);
@@ -76,7 +92,7 @@ const NewsForm = () => {
         icon: "success",
         button: "OK",
       });
-      if(pathname === '/jockeyform'){
+      if (pathname === "/jockeyform") {
         history("/jockey");
       }
     } catch (error) {
@@ -90,7 +106,7 @@ const NewsForm = () => {
     }
   };
 
-  const areAllFieldsFilled = image !== undefined && DOB !== "";
+ 
   useEffect(() => {
     dispatch(fetchnationality());
     if (!image) {
@@ -162,7 +178,7 @@ const NewsForm = () => {
       })
     );
 
-    let AllNationalityAr =
+  let AllNationalityAr =
     nationality === undefined ? (
       <></>
     ) : (
@@ -174,6 +190,37 @@ const NewsForm = () => {
         };
       })
     );
+  //Checking Validation
+
+  const data3 = JSON.stringify(
+    TextInputValidation("en", NameEn, "Jockey Name English")
+  );
+
+  const Name = JSON.parse(data3);
+  const data4 = JSON.stringify(
+    TextInputValidation("ar", NameAr, "Jockey Name Arabic")
+  );
+  const Namear = JSON.parse(data4);
+
+  const data5 = JSON.stringify(
+    TextInputValidation("en", ShortNameEn, "Jockey Short Name English")
+  );
+
+  const shotName = JSON.parse(data5);
+  const data6 = JSON.stringify(
+    TextInputValidation("ar", ShortNameAr, "Jockey Short Name Arabic")
+  );
+  const shotNameAr = JSON.parse(data6);
+
+  const data8 = JSON.stringify(
+    TextInputValidation("en", RemarksEn, "Jockey Remarks English")
+  );
+  const Remark = JSON.parse(data8);
+  const data9 = JSON.stringify(
+    TextInputValidation("en", RemarksAr, "Jockey Remarks Arabic")
+  );
+  const Remarkar = JSON.parse(data9);
+
   return (
     <>
       <div className="page">
@@ -195,12 +242,13 @@ const NewsForm = () => {
                       onChange={(e) => setNameEn(e.target.value)}
                       name="Name"
                       value={NameEn}
-                     
+                      onBlur={() => setError(Name)}
                     >
-                      <Form.Control type="text" placeholder="Name"  required/>
+                      <Form.Control type="text" placeholder="Name" required />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className="error">{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -212,10 +260,11 @@ const NewsForm = () => {
                       name="Name"
                       value={NameAr}
                       style={{ direction: "rtl" }}
-                     
+                      onBlur={() => setErrorAr(Namear)}
                     >
-                      <Form.Control type="text" placeholder="اسم"  required/>
+                      <Form.Control type="text" placeholder="اسم" required />
                     </FloatingLabel>
+                    <span className="errorAr">{ErrorAr.message}</span>
                   </div>
                 </div>
 
@@ -227,12 +276,17 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setShortNameEn(e.target.value)}
                       value={ShortNameEn}
-                     
+                      onBlur={() => setErrorShortName(shotName)}
                     >
-                      <Form.Control type="text" placeholder="Short Name"  required/>
+                      <Form.Control
+                        type="text"
+                        placeholder="Short Name"
+                        required
+                      />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className="error">{ErrorShortName.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -244,9 +298,15 @@ const NewsForm = () => {
                       name="Name"
                       value={ShortNameAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() => setErrorShortNameAr(shotNameAr)}
                     >
-                      <Form.Control type="text" placeholder="اسم قصير"  required/>
+                      <Form.Control
+                        type="text"
+                        placeholder="اسم قصير"
+                        required
+                      />
                     </FloatingLabel>
+                    <span className="errorAr">{ErrorShortNameAr.message}</span>
                   </div>
                 </div>
 
@@ -258,12 +318,17 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setRemarksEn(e.target.value)}
                       value={RemarksEn}
-                    
+                      onBlur={() => setErrorRemarks(Remark)}
                     >
-                      <Form.Control type="text" placeholder="Remarks"   required/>
+                      <Form.Control 
+                        type="text"
+                        placeholder="Remarks"
+                        required
+                      />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className="error">{ErrorRemarks.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -275,12 +340,17 @@ const NewsForm = () => {
                       name="Name"
                       value={RemarksAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() => setErrorRemarksAr(Remarkar)}
                     >
-                      <Form.Control type="text" placeholder="ملاحظات"   required/>
+                      <Form.Control
+                        type="text"
+                        placeholder="ملاحظات"
+                        required
+                      />
                     </FloatingLabel>
+                    <span className="errorAr">{ErrorRemarksAr.message}</span>
                   </div>
                 </div>
-
 
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -291,15 +361,23 @@ const NewsForm = () => {
                       maxDate={today}
                       monthPlaceholder="Date of Birth "
                       yearPlaceholder=""
+                      onBlur={() =>
+                        DOB === ""
+                          ? setErrorDateofBirth(
+                              "Jockey Date Of Birth is required"
+                            )
+                          : setErrorDateofBirth(" ")
+                      }
                     />
                     <span className="spanForm"> |</span>
+                    <span className="error">{ErrorDateofBirth}</span>
                   </div>
 
                   <div className="col-sm" style={{ direction: "rtl" }}>
-                  <DatePicker
-                       onChange={setDOB}
-                       value={DOB}
-                       maxDate={today}
+                    <DatePicker
+                      onChange={setDOB}
+                      value={DOB}
+                      maxDate={today}
                       dayPlaceholder="  "
                       monthPlaceholder="تاريخ الولادة"
                       yearPlaceholder=""
@@ -316,14 +394,21 @@ const NewsForm = () => {
                       maxDate={today}
                       monthPlaceholder="License Date"
                       yearPlaceholder=""
+                      onBlur={() =>
+                        DOB === ""
+                          ? setErrorLicenseDate(
+                              "Jockey License Date is required"
+                            )
+                          : setErrorLicenseDate(" ")
+                      }
                     />
 
                     <span className="spanForm"> |</span>
+                    <span className="error">{ErrorLicenseDate}</span>
                   </div>
 
                   <div className="col-sm" style={{ direction: "rtl" }}>
-
-                  <DatePicker
+                    <DatePicker
                       onChange={setJockeyLicenseDate}
                       value={JockeyLicenseDate}
                       dayPlaceholder="  "
@@ -332,11 +417,8 @@ const NewsForm = () => {
                       yearPlaceholder=""
                       style={{ direction: "rtl" }}
                     />
-                   
                   </div>
                 </div>
-
-                
 
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -352,19 +434,22 @@ const NewsForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <span className="addmore" onClick={handleShowActivenationality}>
-                            +
-                          </span>
+                        <span
+                          className="addmore"
+                          onClick={handleShowActivenationality}
+                        >
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
-                      </OverlayTrigger>{" "}
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>
                       |
                     </span>
                   </div>
@@ -389,13 +474,19 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setRating(e.target.value)}
                       value={Rating}
+                      onBlur={(e) => Rating === "" ?  setErrorRating("Jockey Rating is required "):setErrorRating(" ")}
+                   
                     >
-                      <Form.Control type="number" placeholder="Rating" required/>
+                      <Form.Control
+                        type="number"
+                        placeholder="Rating"
+                        required
+                      />
                     </FloatingLabel>
-
+<span className="error">{ErrorRating}</span>
                     {/* <span className="spanForm"> |</span> */}
                   </div>
-{/* 
+                  {/* 
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
@@ -417,15 +508,16 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setMiniumumJockeyWeight(e.target.value)}
                       value={MiniumumJockeyWeight}
+                      onBlur={(e) => MiniumumJockeyWeight === "" ?  setErrorMinWeight("Jockey Rating is required "):setErrorMinWeight(" ")}
                     >
                       <Form.Control
                         type="number"
                         placeholder="Jockey Minimum Weight"
-                        min='0'
+                        min="0"
                         required
                       />
                     </FloatingLabel>
-
+<span className="error">{ErrorMinWeight}</span>
                     {/* <span className="spanForm"> |</span> */}
                   </div>
 
@@ -444,7 +536,7 @@ const NewsForm = () => {
                     </FloatingLabel>
                   </div> */}
                 </div>
-                
+
                 <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
@@ -453,14 +545,16 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setMaximumJockeyWeight(e.target.value)}
                       value={MaximumJockeyWeight}
+                      onBlur={(e) => MaximumJockeyWeight === "" ?  setErrorMaxWeight("Jockey Rating is required "):setErrorMaxWeight(" ")}
                     >
                       <Form.Control
                         type="number"
                         placeholder="Jockey Maximum Weight"
-                        min='0'
+                        min="0"
                         required
                       />
                     </FloatingLabel>
+                    <span className="error">{ErrorMaxWeight}</span>
 
                     {/* <span className="spanForm"> |</span> */}
                   </div>
@@ -481,7 +575,6 @@ const NewsForm = () => {
                     </FloatingLabel>
                   </div> */}
                 </div>
-                
 
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -491,15 +584,16 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setJockeyAllowance(e.target.value)}
                       value={JockeyAllowance}
+                      onBlur={(e) => JockeyAllowance === "" ?  setErrorAllowance("Jockey Rating is required "):setErrorAllowance(" ")}
                     >
                       <Form.Control
                         type="number"
                         placeholder="Jockey Allowance"
-                        min='0'
+                        min="0"
                         required
                       />
                     </FloatingLabel>
-
+<span className="error">{ErrorAllowance}</span>
                     {/* <span className="spanForm"> |</span> */}
                   </div>
 
@@ -522,7 +616,7 @@ const NewsForm = () => {
 
                 <div className="ButtonSection">
                   <div>
-                  <label className="Multipleownerlabel">
+                    <label className="Multipleownerlabel">
                       Select Jockey image
                     </label>
                     <input

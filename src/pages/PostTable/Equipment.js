@@ -4,11 +4,16 @@ import axios from "axios";
 import { useNavigate , useLocation} from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import TextInputValidation from "../../utils/TextInputValidation";
 
 const Equipment = () => {
+  //for error
+  const [Error, setError] = useState("")
+  const [ErrorAr, setErrorAr] = useState("")
+
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
-  const [shortCode, setshortCode] = useState("");
+
 
   const history = useNavigate();
   const { pathname } = useLocation();
@@ -42,6 +47,23 @@ const Equipment = () => {
       });
     }
   };
+  const data1 = (JSON.stringify(
+    TextInputValidation(
+      "en",
+      NameEn,
+      "Equipment Name English"
+    )
+  ));
+
+  const obj = JSON.parse(data1);
+  const data2 = (JSON.stringify(
+    TextInputValidation(
+      "ar",
+      NameAr,
+      "Equipment Name Arabic"
+    )
+  ));
+  const objAr = JSON.parse(data2);
 
   return (
     <div className="page">
@@ -53,7 +75,7 @@ const Equipment = () => {
         >
           <div className="Headers">Create Equipment</div>
           <div className="form">
-            <form onSubmit={submit}>
+            <Form onSubmit={submit}>
               <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
@@ -63,11 +85,17 @@ const Equipment = () => {
                     onChange={(e) => setNameEn(e.target.value)}
                     name="Name"
                     value={NameEn}
+                    onBlur={() =>
+                      setError(obj)
+
+                    }
                   >
                     <Form.Control type="text" placeholder="Name" required/>
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
+                  <span className="error" 
+                  >{Error.message}</span>
                 </div>
 
                 <div className="col-sm">
@@ -79,9 +107,14 @@ const Equipment = () => {
                     name="Name"
                     value={NameAr}
                     style={{ direction: "rtl" }}
+                    onBlur={() =>
+                      setErrorAr(objAr)
+                           
+                     }
                   >
                     <Form.Control type="text" placeholder="اسم" required/>
                   </FloatingLabel>
+                  <span className="errorAr" >{ErrorAr.message}</span>
                 </div>
               </div>
 
@@ -91,7 +124,7 @@ const Equipment = () => {
                   Add Equipment
                 </button>
               </div>
-            </form>
+            </Form>
           </div>
         </div>
       </div>

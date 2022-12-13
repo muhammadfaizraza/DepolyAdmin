@@ -7,19 +7,14 @@ import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
 
 const Breeder = () => {
-  //for error 
+  //for error
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
   const [ErrorDesc, setErrorDesc] = useState("");
   const [ErrorDescAr, setErrorDescAr] = useState("");
 
-
-
-
-
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
-  const [shortCode, setshortCode] = useState("");
   const [DescriptionAr, setDescriptionAr] = useState("");
   const [DescriptionEn, setDescriptionEn] = useState("");
   const [image, setImage] = useState();
@@ -32,15 +27,15 @@ const Breeder = () => {
     try {
       const formData = new FormData();
 
-      formData.append("NameAr", NameAr + ' ');
+      formData.append("NameAr", NameAr + " ");
       formData.append("NameEn", NameEn);
       // formData.append("shortCode", shortCode);
-      formData.append("DescriptionAr", DescriptionAr + ' ');
+      formData.append("DescriptionAr", DescriptionAr + " ");
       formData.append("DescriptionEn", DescriptionEn);
       formData.append("image", image);
 
       await axios.post(`${window.env.API_URL}/uploadBreeder`, formData);
-      if (pathname === '/breeder') {
+      if (pathname === "/breeder") {
         history("/breederlist");
       }
       swal({
@@ -74,58 +69,39 @@ const Breeder = () => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [image]);
 
-  const Name = (JSON.stringify(
-    TextInputValidation(
-      "en",
-      NameEn,
-      " English Name"
-    )
-  ));
+  const Name = JSON.stringify(
+    TextInputValidation("en", NameEn, "Breeder English Name")
+  );
   const obj = JSON.parse(Name);
-  console.log(obj.status, 'aszxZ2dasd')
-  const arName = (JSON.stringify(
-    TextInputValidation(
-      "ar",
-      NameAr,
-      "Name Arabic"
-    )
-  ));
-  
+  console.log(obj.status, "aszxZ2dasd");
+  const arName = JSON.stringify(
+    TextInputValidation("ar", NameAr, " Breeder Name Arabic")
+  );
+
   const objAr = JSON.parse(arName);
 
-
-  const Description = (JSON.stringify(
-    TextInputValidation(
-      "en",
-      DescriptionEn,
-      " English Description"
-    )
-  ));
+  const Description = JSON.stringify(
+    TextInputValidation("en", DescriptionEn, "Breeder English Description")
+  );
   const Desc = JSON.parse(Description);
 
-  const arDescription = (JSON.stringify(
-    TextInputValidation(
-      "ar",
-      DescriptionAr,
-      " Arabic Description"
-    )
-  ));
-  
+  const arDescription = JSON.stringify(
+    TextInputValidation("ar", DescriptionAr, "Breeder Arabic Description")
+  );
+
   const DescAr = JSON.parse(arDescription);
 
   const styles = {
     popup: {
       color: Error.status === true ? "green" : "red",
-
-    }
+    },
   };
   const stylesAr = {
     popupAr: {
       color: ErrorAr.status === true ? "green" : "red",
-
-    }
+    },
   };
-  console.log(Error.status)
+  console.log(Error.status);
 
   return (
     <div className="page">
@@ -147,17 +123,15 @@ const Breeder = () => {
                     onChange={(e) => setNameEn(e.target.value)}
                     name="Name"
                     value={NameEn}
-                    onBlur={() =>
-                      setError(obj)
-
-                    } >
+                    onBlur={() => setError(obj)}
+                  >
                     <Form.Control type="text" placeholder="Name" />
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
-                  <span className="error" style={styles.popup}
-                  >{Error.message}</span>
-
+                  <span className="error" style={styles.popup}>
+                    {Error.message}
+                  </span>
                 </div>
 
                 <div className="col-sm">
@@ -169,13 +143,16 @@ const Breeder = () => {
                     name="Name"
                     value={NameAr}
                     style={{ direction: "rtl" }}
-
-
                   >
-                    <Form.Control type="text" placeholder="اسم" onBlur={() =>
-                      setErrorAr(objAr)} />
+                    <Form.Control
+                      type="text"
+                      placeholder="اسم"
+                      onBlur={() => setErrorAr(objAr)}
+                    />
                   </FloatingLabel>
-                  <span className="errorAr" style={stylesAr.popupAr} >{ErrorAr.message}</span>
+                  <span className="errorAr" style={stylesAr.popupAr}>
+                    {ErrorAr.message}
+                  </span>
                 </div>
               </div>
 
@@ -218,19 +195,14 @@ const Breeder = () => {
                     className="mb-3"
                     onChange={(e) => setDescriptionEn(e.target.value)}
                     value={DescriptionEn}
-                    onBlur={() =>
-                      setErrorDesc(Desc)
-
-                    }
+                    onBlur={() => setErrorDesc(Desc)}
                   >
-
                     <Form.Control type="text" placeholder="Description" />
                   </FloatingLabel>
                   <span className="spanForm"> |</span>
-                  <span className="error" style={styles.popup}
-                  >{ErrorDesc.message}</span>
-
-
+                  <span className="error" style={styles.popup}>
+                    {ErrorDesc.message}
+                  </span>
                 </div>
 
                 <div className="col-sm">
@@ -241,15 +213,13 @@ const Breeder = () => {
                     onChange={(e) => setDescriptionAr(e.target.value)}
                     value={DescriptionAr}
                     style={{ direction: "rtl" }}
-                    onBlur={() =>
-                      setErrorDescAr(DescAr)
-
-                    }
+                    onBlur={() => setErrorDescAr(DescAr)}
                   >
                     <Form.Control type="text" placeholder="وصف" />
                   </FloatingLabel>
-                  <span className="errorAr" style={styles.popup}
-                  >{ErrorDescAr.message}</span>
+                  <span className="errorAr" style={styles.popup}>
+                    {ErrorDescAr.message}
+                  </span>
                 </div>
               </div>
               <div className="ButtonSection">

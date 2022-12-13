@@ -304,6 +304,8 @@ const RaceForm = () => {
     dispatch(fetchRaceName());
     dispatch(fetchTrackLength());
     dispatch(fetchRaceKind());
+    dispatch(fetchgroundtype());
+
     if (!image) {
       setPreview(undefined);
       return;

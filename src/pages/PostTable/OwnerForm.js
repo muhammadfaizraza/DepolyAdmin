@@ -340,6 +340,7 @@ const OwnerForm = () => {
 
                     <span className="spanForm"> |</span>
                     <span className="error">{ErrorShortName.message}</span>
+                 <span className="error">{ErrorShortName.message}</span>
                   </div>
 
                   <div className="col-sm">

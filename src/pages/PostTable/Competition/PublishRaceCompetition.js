@@ -149,7 +149,7 @@ const Nationality = () => {
         { CastRaces: items, PickRaces: itemsTri },
       );
       const msgdata = response.data.msg;
-      // history('/competitionlisting')
+      history('/competitionlisting')
       swal({
         title: "Success!",
         text: msgdata,

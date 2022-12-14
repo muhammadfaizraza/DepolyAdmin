@@ -25,6 +25,9 @@ const navigate = useNavigate();
         <div className='OngoingRaces'  onClick={() => navigate('/AddRole')}>
           <p>Add Role </p>
         </div>
+        <div className='OngoingRaces' onClick={() => navigate('/AdminListing')}>
+          <p>Admin Listing</p>
+        </div>
         <div className='ResultAwaited'  onClick={() => navigate('/subscriberlist')}>
         <p>Subscriber</p>
         </div>

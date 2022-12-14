@@ -89,6 +89,8 @@ import GetMeetingType from "./pages/GetTable/GetMeetingType";
 import Verdict from "./pages/PostTable/Verdict";
 import Setting from "./pages/GetTable/Setting";
 import AdminProfile from "./pages/Setting/AdminProfile";
+import AdminListing from "./pages/Setting/AdminList";
+
 import SubscriberList from "./pages/Setting/SubscriberList";
 import AdminRole from "./pages/Setting/AdminRole";
 import RaceKind from "./pages/GetTable/RaceKind";
@@ -147,6 +149,7 @@ function App() {
              <Route path="/dashboard" element={<Dashboard />} />
              <Route path='/setting' element={<Setting/>} />
              <Route path='/AdminProfile' element={<AdminProfile />} />
+             <Route path='/AdminListing' element={<AdminListing />} />
              <Route path='/subscriberlist' element={<SubscriberList />} />
              <Route path='/AddRole' element={<AdminRole />} />
              <Route path="/racecourse" element={<RaceCourse />} />

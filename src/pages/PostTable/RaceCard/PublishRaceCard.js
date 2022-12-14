@@ -40,7 +40,7 @@ const Nationality = () => {
       FetchData.map(function (item) {
         return {
           id: item._id,
-          value: item.MeetingCode,
+          value: item._id,
           label: item.MeetingCode,
         };
       })

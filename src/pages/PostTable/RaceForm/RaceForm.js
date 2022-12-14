@@ -623,11 +623,11 @@ const RaceForm = () => {
                         placeholder="Weather Degree"
                       />
                     </FloatingLabel>
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                     <span className="error">{ErrorWeatherDegree}</span>
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <input
                       style={{ direction: "rtl" }}
                       placeholder="درجة الطقس "
@@ -635,7 +635,7 @@ const RaceForm = () => {
                       value={WeatherDegree}
                       type="number"
                     ></input>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -1014,7 +1014,7 @@ const RaceForm = () => {
                       placeholder={<div>نوع السباق</div>}
                       defaultValue={Sponsor}
                       onChange={setSponsor}
-                      options={SponsorForTheRaceAr}
+                      options={SponsorForTheRace}
                       className="selectdir"
                       isClearable={true}
                       isSearchable={true}
@@ -1046,7 +1046,7 @@ const RaceForm = () => {
                 </div> */}
                 <div className="row mainrow">
                   <div className="col-sm">
-                    <DateTimePicker
+                     <DateTimePicker
                       onChange={setDayNTime}
                       value={DayNTime}
                       monthPlaceholder="Date "
@@ -1054,11 +1054,11 @@ const RaceForm = () => {
                       minDate={today}
                       maxDate={new Date("02-29-2023")}
                       yearPlaceholder="Time"
-                      onBlur={() => DayNTime === "" ? setErrorDayNTime("Day and Time is required ") : setErrorDayNTime("")}
+                      // onBlur={() => DayNTime === "" ? setErrorDayNTime("Day and Time is required ") : setErrorDayNTime("")}
 
                     />
                     {/* <span className="spanForm"> |</span> */}
-                    <span className="error">{DayNTime}</span>
+                    {/* <span className="error">{DayNTime}</span> */}
                   </div>
                   {/* <div className="col-sm"  style={{ direction: "rtl" }}>
                     <DateTimePicker

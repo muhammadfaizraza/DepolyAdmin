@@ -81,7 +81,7 @@ const RaceForm = () => {
     setitems([...items, ResultEntry]);
     setRank(Rank + 1);
     }
-    
+    //   
   };
  
   const Remove = () => {
@@ -171,7 +171,7 @@ const RaceForm = () => {
                     <span onChange={setRank} value={i+1}>{i + 2}</span>
                     <span>
                       <Select
-                        defaultValue={HorseID}
+                        defaultValue={data[0]}
                         onChange={SetHorseID}
                         options={horseoptions}
                         isClearable={false}
@@ -179,13 +179,13 @@ const RaceForm = () => {
                       />
                     </span>
                     <span>
-                      <input type='number' value={i[1]} placeholder="Prize" className="resultforminput"/>
+                      <input type='number' value={data[1]} placeholder="Prize" className="resultforminput"/>
                     </span>
                     <span>
-                    <input type='number'  value={i[2]}  placeholder="Points"  className="resultforminput"/>
+                    <input type='number'  value={data[2]}  placeholder="Points"  className="resultforminput"/>
                     </span>
                     <span>
-                    <input type='number'  value={i[3]} placeholder="BonusPoints"  className="resultforminput"/>
+                    <input type='number'  value={data[3]} placeholder="BonusPoints"  className="resultforminput"/>
                     </span>
     
                     

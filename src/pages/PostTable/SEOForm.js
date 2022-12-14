@@ -26,10 +26,10 @@ const Breeder = () => {
     try {
       const formData = new FormData();
 
-      formData.append("KeywordAr", KeyWordAr + ' ');
+      formData.append("KeywordAr", KeyWordAr);
       formData.append("KeywordEn", KeyWord);
       formData.append("TitleEn", TitleEn );
-      formData.append("TitleAr", TitleAr + ' ');
+      formData.append("TitleAr", TitleAr);
 
       await axios.post(`${window.env.API_URL}/uploadSeoKeyword`, formData);
       if(pathname === '/seoform'){

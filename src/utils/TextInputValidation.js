@@ -3,7 +3,7 @@ const TextInputValidation = (Language, GivenValue, FieldName) => {
   const EnglishRegex = /^[A-Za-z\s]*$/;
   let Answer = {
     status: false,
-    message: "",
+    message: " ",
   };
   if (GivenValue === " ") {
     return (Answer = {

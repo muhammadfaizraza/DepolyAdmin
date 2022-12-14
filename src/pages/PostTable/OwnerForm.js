@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate , useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 import DatePicker from "react-date-picker";
@@ -15,20 +15,20 @@ import { AiOutlineReload } from "react-icons/ai";
 import { Modal } from "react-bootstrap";
 import TextInputValidation from "../../utils/TextInputValidation";
 
-import NationalityPopup from "./Nationality"
+import NationalityPopup from "./Nationality";
 
 const OwnerForm = () => {
+  //for error
+  const [Error, setError] = useState("");
+  const [ErrorAr, setErrorAr] = useState("");
+  const [ErrorTitle, setErrorTitle] = useState("");
+  const [ErrorTitleAr, setErrorTitleAr] = useState("");
+  const [ErrorShortName, setErrorShortName] = useState("");
+  const [ErrorShortNameAr, setErrorShortNameAr] = useState("");
 
-     //for error
-     const [Error, setError] = useState("");
-     const [ErrorAr, setErrorAr] = useState("");
-     const [ErrorTitle, setErrorTitle] = useState("");
-     const [ErrorTitleAr, setErrorTitleAr] = useState("");
-     const [ErrorShortName, setErrorShortName] = useState("");
-     const [ErrorShortNameAr, setErrorShortNameAr] = useState("");
+  const [ErrorRegistration, setErrorRegistration] = useState("");
 
-     const [ErrorRegistration, setErrorRegistration] = useState("");
-    
+  const [ErrorNatinalty, setErrorNatinalty] = useState("");
 
   const dispatch = useDispatch();
   const history = useNavigate();
@@ -62,7 +62,7 @@ const OwnerForm = () => {
       })
     );
 
-    let AllNationalityAr =
+  let AllNationalityAr =
     nationality === undefined ? (
       <></>
     ) : (
@@ -89,12 +89,12 @@ const OwnerForm = () => {
   const [preview, setPreview] = useState();
   const [showActivenationality, setShowActivenationality] = useState(false);
 
-  const handleCloseActivenationality= () => setShowActivenationality(false);
+  const handleCloseActivenationality = () => setShowActivenationality(false);
 
   const handleShowActivenationality = async () => {
     await setShowActivenationality(true);
   };
-  
+
   const convert = (num) => {
     if (num) {
       var date = new Date(num);
@@ -164,7 +164,7 @@ const OwnerForm = () => {
         icon: "success",
         button: "OK",
       });
-      if(pathname === '/ownerform'){
+      if (pathname === "/ownerform") {
         history("/owner");
       }
     } catch (error) {
@@ -213,7 +213,7 @@ const OwnerForm = () => {
       reader.readAsDataURL(file);
     });
   };
-  
+
   const data1 = JSON.stringify(
     TextInputValidation("en", TitleEn, "Owner Title English")
   );
@@ -266,7 +266,7 @@ const OwnerForm = () => {
                       value={NameEn}
                       onBlur={() => setError(Name)}
                     >
-                      <Form.Control type="text" placeholder="Name" required/>
+                      <Form.Control type="text" placeholder="Name" required />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
@@ -288,7 +288,6 @@ const OwnerForm = () => {
                     </FloatingLabel>
                     <span className="errorAr">{ErrorAr.message}</span>
                   </div>
-
                 </div>
                 <div className="row  mainrow">
                   <div className="col-sm">
@@ -300,7 +299,7 @@ const OwnerForm = () => {
                       value={TitleEn}
                       onBlur={() => setErrorTitle(Title)}
                     >
-                      <Form.Control type="text" placeholder="Title" required/>
+                      <Form.Control type="text" placeholder="Title" required />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
                     <span className="error">{ErrorTitle.message}</span>
@@ -317,7 +316,7 @@ const OwnerForm = () => {
                       style={{ direction: "rtl" }}
                       onBlur={() => setErrorTitleAr(Titlear)}
                     >
-                      <Form.Control type="text" placeholder="عنوان" required/>
+                      <Form.Control type="text" placeholder="عنوان" required />
                     </FloatingLabel>
                     <span className="errorAr">{ErrorTitleAr.message}</span>
                   </div>
@@ -332,11 +331,15 @@ const OwnerForm = () => {
                       value={ShortEn}
                       onBlur={() => setErrorShortName(shotName)}
                     >
-                      <Form.Control type="text" placeholder="Short Name" required />
+                      <Form.Control
+                        type="text"
+                        placeholder="Short Name"
+                        required
+                      />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-<span className="error">{ErrorShortName.message}</span>
+                    <span className="error">{ErrorShortName.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -348,9 +351,13 @@ const OwnerForm = () => {
                       name="Name"
                       value={ShortAr}
                       style={{ direction: "rtl" }}
-                    onBlur={() => setErrorShortNameAr(shotNameAr)}
+                      onBlur={() => setErrorShortNameAr(shotNameAr)}
                     >
-                      <Form.Control type="text" placeholder="اسم قصير" required/>
+                      <Form.Control
+                        type="text"
+                        placeholder="اسم قصير"
+                        required
+                      />
                     </FloatingLabel>
                     <span className="errorAr">{ErrorShortNameAr.message}</span>
                   </div>
@@ -364,14 +371,20 @@ const OwnerForm = () => {
                       minDate={today}
                       monthPlaceholder="Registration Date"
                       yearPlaceholder=""
-                      onBlur={() => RegistrationDate === "" ?  setErrorRegistration("Owner Registration Date is required"):setErrorRegistration(" ")}
+                      onBlur={() =>
+                        RegistrationDate === ""
+                          ? setErrorRegistration(
+                              "Owner Registration Date is required"
+                            )
+                          : setErrorRegistration(" ")
+                      }
                     />
                     <span className="spanForm"> |</span>
                     <span className="error">{ErrorRegistration}</span>
                   </div>
 
                   <div className="col-sm" style={{ direction: "rtl" }}>
-                  <DatePicker
+                    <DatePicker
                       onChange={setRegistrationDate}
                       value={RegistrationDate}
                       dayPlaceholder=""
@@ -396,26 +409,35 @@ const OwnerForm = () => {
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() =>
+                        NationalityID === ""
+                          ? setErrorNatinalty("Nationalty is required")
+                          : setErrorNatinalty(" ")
+                      }
                     />
                     <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <span className="addmore" onClick={handleShowActivenationality}>
-                            +
-                          </span>
+                        <span
+                          className="addmore"
+                          onClick={handleShowActivenationality}
+                        >
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
                       </OverlayTrigger>{" "}
                       |
                     </span>
+                    <span className="error">{ErrorNatinalty}</span>
                   </div>
 
                   <div className="col-sm">
@@ -434,40 +456,42 @@ const OwnerForm = () => {
                     />
                   </div>
                 </div>
-               
+
                 <div className="SelectOwnerimage">
-                <label className="Multiplecaplabel">Select Multiple Caps</label>
-                <input
-                  type="file"
-                  name="image"
-                  accept="image/*"
-                  onChange={onSelectFile1}
-                  multiple
-                />
-                <div className="ButtonSection">
-                  <div >
-                    <label className="Multipleownerlabel">
-                      Select Owner image
-                    </label>
+                  <label className="Multiplecaplabel">
+                    Select Multiple Caps
+                  </label>
+                  <input
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    onChange={onSelectFile1}
+                    multiple
+                  />
+                  <div className="ButtonSection">
+                    <div>
+                      <label className="Multipleownerlabel">
+                        Select Owner image
+                      </label>
 
-                    <input
-                      type="file"
-                      onChange={onSelectFile}
-                      className="formInput"
-                    />
-                    {Ownerimage && (
-                      <img src={preview} alt="" className="PreviewImage" />
-                    )}
+                      <input
+                        type="file"
+                        onChange={onSelectFile}
+                        className="formInput"
+                      />
+                      {Ownerimage && (
+                        <img src={preview} alt="" className="PreviewImage" />
+                      )}
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="SubmitButton"
+                      // disabled={isSubmitData}
+                    >
+                      Add Owner
+                    </button>
                   </div>
-
-                  <button
-                    type="submit"
-                    className="SubmitButton"
-                    // disabled={isSubmitData}
-                  >
-                    Add Owner
-                  </button>
-                </div>
                 </div>
               </form>
             </div>

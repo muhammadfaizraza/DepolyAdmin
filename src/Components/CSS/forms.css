@@ -720,3 +720,19 @@ font-size: 15.59px;
 .addbtn.competitionaddbtn {
   margin-top: 35px;
 }
+.newsError{
+color: red;
+font-size: 9px;
+position: relative;
+top: 36px;
+left: 18px;
+}
+span.newsErrorAr {
+  color: red;
+  font-size: 9px;
+  position: relative;
+  direction: rtl;
+  top: 41px;
+  size: 19%;
+  left: 71%;
+}

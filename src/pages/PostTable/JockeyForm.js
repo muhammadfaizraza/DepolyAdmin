@@ -34,6 +34,7 @@ const NewsForm = () => {
   const [ErrorMinWeight, setErrorMinWeight] = useState("");
   const [ErrorMaxWeight, setErrorMaxWeight] = useState("");
   const [ErrorAllowance, setErrorAllowance] = useState("");
+  const [ErrorNationality, setErrorNationality] = useState("");
 
   const dispatch = useDispatch();
   const history = useNavigate();
@@ -429,6 +430,8 @@ const NewsForm = () => {
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => NationalityID === "" ? setErrorNationality("Nationality is required"):setErrorNationality("")} 
+
                     />
                     <span className="spanForm">
                       <OverlayTrigger
@@ -452,6 +455,7 @@ const NewsForm = () => {
                       </OverlayTrigger>
                       |
                     </span>
+                    <span className="error">{ErrorNationality}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -508,7 +512,7 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setMiniumumJockeyWeight(e.target.value)}
                       value={MiniumumJockeyWeight}
-                      onBlur={(e) => MiniumumJockeyWeight === "" ? setErrorMinWeight("Jockey Rating is required ") : setErrorMinWeight(" ")}
+                      onBlur={(e) => MiniumumJockeyWeight === "" ? setErrorMinWeight("Minimum Jockey Weight is required") : setErrorMinWeight(" ")}
                     >
                       <Form.Control
                         type="number"
@@ -545,7 +549,7 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setMaximumJockeyWeight(e.target.value)}
                       value={MaximumJockeyWeight}
-                      onBlur={(e) => MaximumJockeyWeight === "" ? setErrorMaxWeight("Jockey Rating is required ") : setErrorMaxWeight(" ")}
+                      onBlur={(e) => MaximumJockeyWeight === "" ? setErrorMaxWeight("Maximum Jockey Weight is required") : setErrorMaxWeight(" ")}
                     >
                       <Form.Control
                         type="number"
@@ -584,7 +588,7 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setJockeyAllowance(e.target.value)}
                       value={JockeyAllowance}
-                      onBlur={(e) => JockeyAllowance === "" ? setErrorAllowance("Jockey Rating is required ") : setErrorAllowance(" ")}
+                      onBlur={(e) => JockeyAllowance === "" ? setErrorAllowance("Jockey Allowance is required ") : setErrorAllowance(" ")}
                     >
                       <Form.Control
                         type="number"

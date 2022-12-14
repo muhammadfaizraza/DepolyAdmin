@@ -6,7 +6,6 @@ import { MdDelete } from "react-icons/md";
 import { Modal } from "react-bootstrap";
 import SliderPopup from "../../Components/Popup/SliderPopup";
 import swal from "sweetalert";
-import remove from "../../redux/postReducer/PostSlider";
 import { fetchSlider, STATUSES } from "../../redux/getReducer/getSliderSlice";
 import "../../Components/CSS/Table.css";
 import { BsEyeFill, BsFillEyeFill } from "react-icons/bs";

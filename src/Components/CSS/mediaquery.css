@@ -45,6 +45,13 @@
       
        
     }
+    .react-date-picker__inputGroup {
+        width: 433px;
+        min-width: calc((4px * 3) + 0.54em * 8 + 0.217em * 2);
+        flex-grow: 1;
+        padding: 0 2px;
+        box-sizing: content-box;
+    }
     .AccordionBody > div > .mylink {
      
         font-size: 13.5px;
@@ -120,6 +127,13 @@
         font-size: 12.5px;
       
        
+    }
+    .react-date-picker__inputGroup {
+        width: 275px;
+        min-width: calc((4px * 3) + 0.54em * 8 + 0.217em * 2);
+        flex-grow: 1;
+        padding: 0 2px;
+        box-sizing: content-box;
     }
     .DashboardCard {
         gap: 35px !important;

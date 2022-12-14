@@ -9,8 +9,9 @@ import TextInputValidation from "../../utils/TextInputValidation";
 
 const SliderForm = () => {
    //for error
- const [Error, setError] = useState("")
- const [ErrorAr, setErrorAr] = useState("")
+ const [Error, setError] = useState("");
+ const [ErrorAr, setErrorAr] = useState("");
+ const [ErrorURL, setErrorURL] = useState("");
 
   const history = useNavigate();
   const [TitleEn, setTitleEn] = useState("");
@@ -147,10 +148,11 @@ const SliderForm = () => {
                       onChange={(e) => setUrl(e.target.value)}
                       name="Name"
                       value={Url}
+                      onBlur={() => Url === " " ? setErrorURL("URL is required"):setErrorURL("")}
                     >
                       <Form.Control type="text" placeholder="Title" required />
                     </FloatingLabel>
-
+<span className="error">{ErrorURL}</span>
                   </div>
 
 
@@ -170,7 +172,7 @@ const SliderForm = () => {
                       <img src={preview} className="PreviewImage" alt="" />
                     )}
                   </div>
-
+<div>
                   <button
                     type="submit"
                     onClick={submit}
@@ -178,7 +180,9 @@ const SliderForm = () => {
                   >
                     Add Slider
                   </button>
+                  </div>
                 </div>
+     
               </form>
             </div>
           </div>

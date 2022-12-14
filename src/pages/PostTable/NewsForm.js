@@ -229,7 +229,7 @@ const NewsForm = () => {
                       onBlur={() => setdescError(description)}
              
              />
-             <span>{descError.message}</span>
+             <span className="newsError">{descError.message}</span>
                   </div>
                   <div className="col-sm">
                     <ReactQuill
@@ -239,7 +239,9 @@ const NewsForm = () => {
                       formats={formats}
                       value={DescriptionAr}
                       onChange={setDescriptionAr}
+                      onBlur={() => setdescErrorAr(descriptionAr)}
                     />
+             <span className="newsErrorAr">{descErrorAr.message}</span>
                   </div>
                 </div>
 

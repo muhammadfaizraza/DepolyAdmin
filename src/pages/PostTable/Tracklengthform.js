@@ -172,7 +172,7 @@ const Tracklengthform = () => {
                     className="mb-3"
                     onChange={(e) => setTrackLength(e.target.value)}
                     value={TrackLength}
-                    onBlur={(e) => TrackLength === "" ?  setErrorTrackLength("Track Length is required "):setErrorTrackLength(" ")}
+                    onBlur={() => TrackLength === "" ?  setErrorTrackLength("Track Length is required "):setErrorTrackLength(" ")}
 
                   >
                     <Form.Control type="number" placeholder="Track Length" required/>
@@ -281,8 +281,7 @@ const Tracklengthform = () => {
                     options={groundtypeopt}
                     isClearable={true}
                     isSearchable={true}
-                    onBlur={() => GroundType === "" ?  setErrorGroundType(" Ground Type is required "):setErrorGroundType(" ")}
-
+                    onBlur={() => GroundType === "" ?  setErrorGroundType("Ground Type is required "):setErrorGroundType("")}
                   />
                 <span className="spanForm">
                       <OverlayTrigger
@@ -300,7 +299,7 @@ const Tracklengthform = () => {
                          <span className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
                           </span>
-                      </OverlayTrigger>{" "}
+                      </OverlayTrigger>
                       |
                     </span>
                     <span className="error">{ErrorGroundType}</span>

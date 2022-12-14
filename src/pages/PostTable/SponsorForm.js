@@ -15,6 +15,7 @@ const SponsorForm = () => {
  const [ErrorAr, setErrorAr] = useState("");
  const [descError, setdescError] = useState("");
  const [descErrorAr, setdescErrorAr] = useState("");
+ const [ErrorURL ,setErrorURL] = useState("");
 
   
   const history = useNavigate();
@@ -91,7 +92,7 @@ const SponsorForm = () => {
       TextInputValidation(
         "en",
         TitleEn,
-        "Slider Title English"
+        "Sponsor Title English"
       )
     ));
   
@@ -100,7 +101,7 @@ const SponsorForm = () => {
       TextInputValidation(
         "ar",
         TitleAr,
-        "Slider Title Arabic"
+        "Sponsor Title Arabic"
       )
     ));
     const objAr = JSON.parse(data2);
@@ -108,7 +109,7 @@ const SponsorForm = () => {
       TextInputValidation(
         "en",
         DescriptionEn,
-        "Slider Description English"
+        "Sponsor Description English"
       )
     ));
   
@@ -117,7 +118,7 @@ const SponsorForm = () => {
       TextInputValidation(
         "ar",
         DescriptionAr,
-        "Slider Description Arabic"
+        "Sponsor Description Arabic"
       )
     ));
     const descriptionAr = JSON.parse(data4);
@@ -221,9 +222,11 @@ const SponsorForm = () => {
                       onChange={(e) => setUrl(e.target.value)}
                       name="Name"
                       value={Url}
+                      onBlur={() => Url === " " ? setErrorURL("URL is required"):setErrorURL("")}
                     >
                       <Form.Control type="text" placeholder="Title" required/>
                     </FloatingLabel>
+                    <span className="error">{ErrorURL}</span>
 
                   </div>
 

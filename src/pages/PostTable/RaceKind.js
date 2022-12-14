@@ -107,7 +107,7 @@ const Racetypeform = () => {
                   >
                     <Form.Control type="text" placeholder="اسم" required/>
                   </FloatingLabel>
-                  <span className="error">{ErrorAr.message}</span>
+                  <span className="errorAr">{ErrorAr.message}</span>
                 </div>
               </div>
 

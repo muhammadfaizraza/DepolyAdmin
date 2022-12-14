@@ -8,8 +8,10 @@ import TextInputValidation from "../../utils/TextInputValidation";
 
 const Currency = () => {
   //for error
-  const [Error, setError] = useState("")
-  const [ErrorAr, setErrorAr] = useState("")
+  const [Error, setError] = useState("");
+  const [ErrorAr, setErrorAr] = useState("");
+
+  const [ErrorRate, setErrorRate] = useState("");
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
@@ -19,24 +21,15 @@ const Currency = () => {
   const history = useNavigate();
   const { pathname } = useLocation();
 
-
   //for Errors
-  const data1 = (JSON.stringify(
-    TextInputValidation(
-      "en",
-      NameEn,
-      "Name English"
-    )
-  ));
+  const data1 = JSON.stringify(
+    TextInputValidation("en", NameEn, "Currency Name English")
+  );
 
   const obj = JSON.parse(data1);
-  const data2 = (JSON.stringify(
-    TextInputValidation(
-      "ar",
-      NameAr,
-      "Currency Name Arabic"
-    )
-  ));
+  const data2 = JSON.stringify(
+    TextInputValidation("ar", NameAr, "Currency Name Arabic")
+  );
   const objAr = JSON.parse(data2);
 
   const submit = async (event) => {
@@ -45,11 +38,11 @@ const Currency = () => {
       const formData = new FormData();
 
       formData.append("NameEn", NameEn);
-      formData.append("NameAr", NameAr + ' ');
+      formData.append("NameAr", NameAr + " ");
       // formData.append("shortCode", shortCode);
       formData.append("Rate", Rate);
       await axios.post(`${window.env.API_URL}uploadCurrency`, formData);
-      if (pathname === '/currency') {
+      if (pathname === "/currency") {
         history("/currencylist");
       }
       swal({
@@ -68,18 +61,7 @@ const Currency = () => {
       });
     }
   };
-  const styles = {
-    popup: {
-      color: Error.status === true ? "green" : "red",
 
-    }
-  };
-  const stylesAr = {
-    popupAr: {
-      color: ErrorAr.status === true ? "green" : "red",
-
-    }
-  };
   return (
     <div className="page">
       <div className="rightsidedata">
@@ -100,18 +82,13 @@ const Currency = () => {
                     onChange={(e) => setNameEn(e.target.value)}
                     name="Name"
                     value={NameEn}
-                    onBlur={() =>
-                      setError(obj)
-
-                    }
+                    onBlur={() => setError(obj)}
                   >
                     <Form.Control type="text" placeholder="Name" required />
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
-                  <span className="error" style={styles.popup}
-                  >{Error.message}</span>
-
+                  <span className="error">{Error.message}</span>
                 </div>
 
                 <div className="col-sm">
@@ -123,18 +100,13 @@ const Currency = () => {
                     name="Name"
                     value={NameAr}
                     style={{ direction: "rtl" }}
-                    onBlur={() =>
-                      setErrorAr(objAr)
-
-                    }
+                    onBlur={() => setErrorAr(objAr)}
                   >
                     <Form.Control type="text" placeholder="اسم" required />
                   </FloatingLabel>
-                  <span className="errorAr" style={stylesAr.popupAr} >{ErrorAr.message}</span>
+                  <span className="errorAr">{ErrorAr.message}</span>
                 </div>
               </div>
-
-
 
               <div className="row mainrow">
                 <div className="col-sm">
@@ -144,11 +116,21 @@ const Currency = () => {
                     className="mb-3"
                     onChange={(e) => setRate(e.target.value)}
                     value={Rate}
+                    onBlur={() =>
+                      Rate === ""
+                        ? setErrorRate("Rate is required")
+                        : setErrorRate("")
+                    }
                   >
-                    <Form.Control type="number" placeholder="Rate" required />
-
+                    <Form.Control
+                      type="number"
+                      min="0"
+                      max="9"
+                      placeholder="Rate"
+                      required
+                    />
                   </FloatingLabel>
-
+                  <span className="error">{ErrorRate}</span>
                   {/* <span className="spanForm"> |</span> */}
                 </div>
 

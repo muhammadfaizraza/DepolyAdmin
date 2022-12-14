@@ -5,6 +5,7 @@ import { useNavigate , useLocation} from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import Select from "react-select";
+import TextInputValidation from "../../utils/TextInputValidation";
 
 const Offsets = [
   { id: "0", value: "false", label: "false" },
@@ -18,7 +19,14 @@ const OffsetsAr = [
 
 const Nationality = () => {
 
+  const [ErrorNameEn, setErrorNameEn] = useState("");
+  const [ErrorNameAr, setErrorNameAr] = useState("");
 
+  const [ErrorAbbrev, setErrorAbbrev] = useState("");
+  const [ErrorAltName, setErrorAltName] = useState("");
+  const [ErrorLabel, setErrorLabel] = useState("");
+  const [ErrorOffset, setErrorOffset] = useState("");
+  const [ErrorValue, setErrorValue] = useState("");
 
 
 
@@ -111,6 +119,40 @@ const Nationality = () => {
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
   };
+  //Checking Validation
+
+  const data3 = JSON.stringify(
+    TextInputValidation("en", NameEn, "Nationality Name English")
+  );
+
+  const Name = JSON.parse(data3);
+  const data4 = JSON.stringify(
+    TextInputValidation("ar", NameAr, "Nationality Name Arabic")
+  );
+  const Namear = JSON.parse(data4);
+
+  const data5 = JSON.stringify(
+    TextInputValidation("en", Abbrev, "Nationality Abbreviation ")
+  );
+
+  const abbrev = JSON.parse(data5);
+  const data6 = JSON.stringify(
+    TextInputValidation("en", AltName, "Nationality Alternative Name ")
+  );
+  const altName = JSON.parse(data6);
+
+  const data8 = JSON.stringify(
+    TextInputValidation("en", Label, "Nationality Label ")
+  );
+  const label = JSON.parse(data8);
+
+  const data9 = JSON.stringify(
+    TextInputValidation("en", Value, "Nationality Value English")
+  );
+  const value = JSON.parse(data9);
+  
+  
+
   return (
     <div className="page">
       <div className="rightsidedata">
@@ -131,11 +173,13 @@ const Nationality = () => {
                     onChange={(e) => setNameEn(e.target.value)}
                     name="Name"
                     value={NameEn}
+                    onBlur={() => setErrorNameEn(Name)}
                   >
                     <Form.Control type="text" placeholder="Name" required   />
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span >
+                  <span className="error">{ErrorNameEn.message}</span>
                 </div>
 
                 <div className="col-sm">
@@ -147,10 +191,11 @@ const Nationality = () => {
                     name="Name"
                     value={NameAr}
                     style={{ direction: "rtl" }}
+                    onBlur={() => setErrorNameAr(Namear)}
                   >
                     <Form.Control type="text" placeholder="اسم" required />
                   </FloatingLabel>
-            
+            <span className="errorAr">{ErrorNameAr.message}</span>
                 </div>
               </div>
 
@@ -193,13 +238,14 @@ const Nationality = () => {
                     className="mb-3"
                     onChange={(e) => setAbbrev(e.target.value)}
                     value={Abbrev}
+                  onBlur={() => setErrorAbbrev(abbrev)}
                   >
                     <Form.Control
                       type="text"
                       placeholder=" Abbreviation"
                       required/>
                   </FloatingLabel>
-                
+           <span className="error">{ErrorAbbrev.message}</span>
                   {/* <span className="spanForm"> |</span> */}
                 </div>
 
@@ -227,13 +273,15 @@ const Nationality = () => {
                     className="mb-3"
                     onChange={(e) => setAltName(e.target.value)}
                     value={AltName}
+                    onBlur={() => setErrorAltName(altName)}
+                 
                   >
                     <Form.Control
                       type="text"
                       placeholder="Write Alternative Name"
                       required/>
                   </FloatingLabel>
-
+                  <span className="error">{ErrorAltName.message}</span>
                   {/* <span className="spanForm"> |</span> */}
 
                 </div>
@@ -262,10 +310,12 @@ const Nationality = () => {
                     className="mb-3"
                     onChange={(e) => setLabel(e.target.value)}
                     value={Label}
+                  onBlur={() => setErrorLabel(label)}
                   >
                     <Form.Control type="text" placeholder="Label" required/>
                   </FloatingLabel>{" "}
                   {/* <span className="spanForm"> |</span> */}
+                  <span className="error">{ErrorLabel.message}</span>
                 </div>
 
                 {/* <div className="col-sm">
@@ -293,8 +343,10 @@ const Nationality = () => {
                       options={Offsets}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => Offset === "" ?  setErrorOffset("Offset is required"):setErrorOffset("") }
                     />
                     <span className="spanForm"> |</span>
+                    <span className="error">{ErrorOffset}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -318,10 +370,12 @@ const Nationality = () => {
                     className="mb-3"
                     onChange={(e) => setValue(e.target.value)}
                     value={Value}
+                    onBlur={() => setErrorValue(value) }
                   >
                     <Form.Control type="text" placeholder="Value" required/>
                   </FloatingLabel>
                   {/* <span className="spanForm"> |</span> */}
+                  <span className="error">{ErrorValue.message}</span>
                 </div>
 
                 {/* <div className="col-sm">

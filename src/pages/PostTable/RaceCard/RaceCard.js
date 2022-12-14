@@ -11,8 +11,17 @@ import dateFormat from "dateformat";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../../utils/TextInputValidation";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import { AiOutlineAim } from "react-icons/ai";
+import {AiOutlineReload} from "react-icons/ai"
+import { Fragment } from "react";
+import { Modal } from "react-bootstrap";
+import NationalityPopup from "../Nationality";
+
 
 const Nationality = () => {
+
   //for errors
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
@@ -23,8 +32,14 @@ const Nationality = () => {
   const [FetchData, setFetchData] = useState([]);
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
+  const [showActivenationality, setShowActivenationality] = useState(false);
 
-  const [RaceData, setRaceData] = useState("");
+  const handleCloseActivenationality = () => setShowActivenationality(false);
+
+  const handleShowActivenationality = async () => {
+    await setShowActivenationality(true);
+  };
+
   const { data: racecourse } = useSelector((state) => state.racecourse);
 
   let AllFetchData =
@@ -61,6 +76,12 @@ const Nationality = () => {
   useEffect(() => {
     dispatch(fetchracecourse());
   }, [dispatch]);
+  const FetchNew =() =>{
+
+dispatch(fetchracecourse())
+
+  }
+
 
   const Submit = async (event) => {
     event.preventDefault();
@@ -108,6 +129,7 @@ const Nationality = () => {
   );
   const objAr = JSON.parse(data2);
   return (
+    <Fragment>
     <div className="page">
       <div className="rightsidedata">
         <div
@@ -169,7 +191,25 @@ const Nationality = () => {
                       : setErrorRaceCourse("")
                   }
                 />
-                <span className="spanForm"> |</span>
+                 <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span className="addmore" onClick={handleShowActivenationality}>
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>
+                      |
+                    </span>
                 <span className="error">{ErrorRaceCourse}</span>
               </div>
 
@@ -193,6 +233,21 @@ const Nationality = () => {
         </div>
       </div>
     </div>
+       <Modal
+       show={showActivenationality}
+       onHide={handleCloseActivenationality}
+       size="lg"
+       aria-labelledby="contained-modal-title-vcenter"
+       centered
+     >
+       <Modal.Header closeButton>
+         <h2>Nationality</h2>
+       </Modal.Header>
+       <Modal.Body>
+         < NationalityPopup/>
+       </Modal.Body>
+     </Modal>
+     </Fragment>
   );
 };
 

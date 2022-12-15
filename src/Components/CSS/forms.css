@@ -82,7 +82,7 @@ form {
   color: white;
   border: none;
   font-size: 16px;
-}
+} 
 
 
 
@@ -367,7 +367,7 @@ border: none !important;
 }
 .react-date-picker__calendar .react-calendar {
   border-width: 3px !important;
-  border-radius: 20px;
+
   font-size: 12px;
   border-color:#19469D;
 }

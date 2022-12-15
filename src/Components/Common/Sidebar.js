@@ -639,8 +639,8 @@ const Sidebar = () => {
                       });
                     }}
                   >
-                    Equipment{" "}
-                  </Link>{" "}
+                    Equipment
+                  </Link>
                 </div>
               </Accordion.Body>
             </Accordion.Item>
@@ -653,7 +653,7 @@ const Sidebar = () => {
                   </Link>
                 </div>
                 <div>
-                  {" "}
+                  
                   <Link to="/seoform" className="mylink">
                     Add New
                   </Link>
@@ -661,7 +661,23 @@ const Sidebar = () => {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
+          {/* <div className="SettingSec">
+            <Link
+              to="/newsletter"
+              className="mylink"
+              onClick={() => {
+                window.scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: "smooth",
+                });
+              }}
+            >
+              NewsLetter
+            </Link>
+          </div> */}
           <hr />
+          
           <div className="SettingSec">
             <Link
               to="/setting"

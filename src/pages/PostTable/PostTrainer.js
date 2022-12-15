@@ -29,6 +29,7 @@ const TrainerForm = () => {
   const [ErrorLicenseDate, setErrorLicenseDate] = useState("");
   const [ErrorRemarks, setErrorRemarks] = useState("");
   const [ErrorDetail, setErrorDetail] = useState("");
+  const [ErrorNationality, setErrorNationality] = useState("");
 
   // const dispatch = useDispatch();
   const history = useNavigate();
@@ -451,6 +452,7 @@ const TrainerForm = () => {
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => NationalityId === ""? setErrorNationality("Nationality is required"):setErrorNationality("")}
                     />
                     <span className="spanForm">
                       <OverlayTrigger
@@ -474,6 +476,8 @@ const TrainerForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
+
+                    <span className="error">{ErrorNationality}</span>
                   </div>
                   <div className="col-sm">
                     <Select

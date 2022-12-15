@@ -119,12 +119,23 @@ const HorseForm = () => {
       horse.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
         };
       })
     );
-
+    let horseoptionsAr =
+    horse === undefined ? (
+      <></>
+    ) : (
+      horse.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
+        };
+      })
+    );
   let horsekindoptions =
     HorseKind === undefined ? (
       <></>
@@ -132,8 +143,20 @@ const HorseForm = () => {
       HorseKind.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
+        };
+      })
+    );
+    let horsekindoptionsAr =
+    HorseKind === undefined ? (
+      <></>
+    ) : (
+      HorseKind.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
         };
       })
     );
@@ -145,8 +168,20 @@ const HorseForm = () => {
       trainer.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
+        };
+      })
+    );
+    let traineroptionAr =
+    trainer === undefined ? (
+      <></>
+    ) : (
+      trainer.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
         };
       })
     );
@@ -158,12 +193,24 @@ const HorseForm = () => {
       owner.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
         };
       })
     );
 
+    let owneroptionAr =
+    owner === undefined ? (
+      <></>
+    ) : (
+      owner.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
+        };
+      })
+    );
   let AllColor =
     color === undefined ? (
       <></>
@@ -171,8 +218,20 @@ const HorseForm = () => {
       color.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
+        };
+      })
+    );
+    let AllColorAr =
+    color === undefined ? (
+      <></>
+    ) : (
+      color.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
         };
       })
     );
@@ -184,8 +243,20 @@ const HorseForm = () => {
       breeder.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
+        };
+      })
+    );
+    let AllBreederAr =
+    breeder === undefined ? (
+      <></>
+    ) : (
+      breeder.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
         };
       })
     );
@@ -197,21 +268,45 @@ const HorseForm = () => {
       nationality.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
         };
       })
     );
+    let AllNationalityAr =
+    nationality === undefined ? (
+      <></>
+    ) : (
+      nationality.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
+        };
+      })
+    );
 
-  let AllGender =
+    let AllGender =
     gender === undefined ? (
       <></>
     ) : (
       gender.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
+        };
+      })
+    );
+    let AllGenderAr =
+    gender === undefined ? (
+      <></>
+    ) : (
+      gender.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
         };
       })
     );
@@ -460,13 +555,13 @@ const HorseForm = () => {
                       onChange={setDOB}
                       value={DOB}
                       dayPlaceholder=""
-                      minDate={today}
-                      monthPlaceholder="Registration Date"
+                      maxDate={today}
+                      monthPlaceholder="Date of Birth"
                       yearPlaceholder=""
                       onBlur={() =>
                         DOB === ""
                           ? setErrorRegistration(
-                              "Horse Registration Date is required"
+                              "Horse Date of Birthe is required"
                             )
                           : setErrorRegistration(" ")
                       }
@@ -480,8 +575,8 @@ const HorseForm = () => {
                       onChange={setDOB}
                       value={DOB}
                       dayPlaceholder=""
-                      minDate={today}
-                      monthPlaceholder="تاريخ التسجيل"
+                      maxDate={today}
+                      monthPlaceholder="تاريخ الولادة"
                       yearPlaceholder=""
                       style={{ direction: "rtl" }}
                     />
@@ -617,7 +712,7 @@ const HorseForm = () => {
                       className="selectdir"
                       defaultValue={KindHorse}
                       onChange={setKindHorse}
-                      options={horsekindoptions}
+                      options={horsekindoptionsAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -779,7 +874,7 @@ const HorseForm = () => {
                       className="selectdir"
                       defaultValue={Breeder}
                       onChange={setBreeder}
-                      options={AllBreeder}
+                      options={AllBreederAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -825,7 +920,7 @@ const HorseForm = () => {
                       className="selectdir"
                       defaultValue={ColorID}
                       onChange={setColor}
-                      options={AllColor}
+                      options={AllColorAr}
                       isClearable={true}
                       isSearchable={true}
                
@@ -874,7 +969,7 @@ const HorseForm = () => {
                       className="selectdir"
                       defaultValue={Sex}
                       onChange={setSex}
-                      options={AllGender}
+                      options={AllGenderAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -899,7 +994,7 @@ const HorseForm = () => {
                       defaultValue={Sire}
                       onChange={setSire}
                       className="selectdir"
-                      options={horseoptions}
+                      options={horseoptionsAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -923,7 +1018,7 @@ const HorseForm = () => {
                       placeholder={<div>اكتب للبحث عن السد</div>}
                       defaultValue={Dam}
                       onChange={setDam}
-                      options={horseoptions}
+                      options={horseoptionsAr}
                       className="selectdir"
                       isClearable={true}
                       isSearchable={true}
@@ -948,7 +1043,7 @@ const HorseForm = () => {
                       placeholder={<div>اكتب للبحث عن مواليد</div>}
                       defaultValue={GSire}
                       onChange={setGSire}
-                      options={horseoptions}
+                      options={horseoptionsAr}
                       className="selectdir"
                       isClearable={true}
                       isSearchable={true}
@@ -1035,7 +1130,7 @@ const HorseForm = () => {
                       }
                       defaultValue={ActiveOwner}
                       onChange={setActiveOwner}
-                      options={owneroption}
+                      options={owneroptionAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -1063,7 +1158,7 @@ const HorseForm = () => {
                       className="selectdir"
                       defaultValue={isGelted}
                       onChange={setisGelted}
-                      options={Gelted}
+                      options={HorseStatusAllAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -1113,7 +1208,7 @@ const HorseForm = () => {
                       }
                       defaultValue={NationalityId}
                       onChange={setNationalityId}
-                      options={AllNationality}
+                      options={AllNationalityAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -1129,7 +1224,7 @@ const HorseForm = () => {
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => CreationId === "" ?  setErrorCreationid("Horse Creation is required "):setErrorCreationid(" ")}
+                      onBlur={() => CreationId === "" ?  setErrorCreationid("Horse Creation id is required "):setErrorCreationid(" ")}
                     />
                     <span className="spanForm"> |</span>
                     <span className="error">{ErrorCreationid}</span>
@@ -1147,7 +1242,7 @@ const HorseForm = () => {
                       }
                       efaultValue={CreationId}
                       onChange={setCreationId}
-                      options={AllNationality}
+                      options={AllNationalityAr}
                       isClearable={true}
                       isSearchable={true}
 
@@ -1198,7 +1293,7 @@ const HorseForm = () => {
                       }
                       defaultValue={ActiveTrainer}
                       onChange={setActiveTrainer}
-                      options={traineroption}
+                      options={traineroptionAr}
                       isClearable={true}
                       isSearchable={true}
                     />

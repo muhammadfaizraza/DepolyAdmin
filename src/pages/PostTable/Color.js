@@ -48,12 +48,7 @@ const Color = () => {
   const objAr = JSON.parse(data2);
 
   const submit = async (event) => {
-
     event.preventDefault();
-    
-    // alert(
-    //   JSON.stringify(TextInputValidation("en", registeration.NameEn, "Title English"))
-    // );
     try {
       const formData = new FormData();
       formData.append("NameEn", registeration.NameEn);

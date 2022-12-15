@@ -6,9 +6,8 @@ import { useNavigate } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
-
-
 import swal from "sweetalert";
+import { ImCross } from 'react-icons/im';
 
 
 
@@ -70,6 +69,10 @@ const AdsForm = () => {
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl);
   }, [image]);
+
+  const handlePreview = () => {
+    setImage('')
+  };
 
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
@@ -202,7 +205,10 @@ const AdsForm = () => {
                       className="formInput"
                     />
                     {image && (
-                      <img src={preview} className="PreviewImage" alt="" />
+                      <>
+                       <ImCross onClick={handlePreview}/>
+                       <img src={preview} className="PreviewImage" alt="" />
+                      </>
                     )}
                   </div>
 

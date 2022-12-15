@@ -108,7 +108,7 @@ line-height: 25px;
 color: #FFFFFF;
   }
   .myselectiondata > span:nth-child(3){
-    margin-left: 50px;
+    margin-left: 0px;
     padding: 10px;
     margin-right: 10px;
   }

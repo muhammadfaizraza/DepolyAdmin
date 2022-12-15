@@ -34,7 +34,10 @@
         width: 88.5%;
      
     }
-    
+    .react-date-picker__inputGroup {
+        width: 542px !important;
+      
+    }
     
     
 }
@@ -46,11 +49,8 @@
        
     }
     .react-date-picker__inputGroup {
-        width: 433px;
-        min-width: calc((4px * 3) + 0.54em * 8 + 0.217em * 2);
-        flex-grow: 1;
-        padding: 0 2px;
-        box-sizing: content-box;
+        width: 413px !important;
+      
     }
     .AccordionBody > div > .mylink {
      
@@ -118,6 +118,7 @@
         font-size: 13px;
        
     }
+
     
 }
 @media (max-width:1320px) and (min-width:1024px) {
@@ -129,12 +130,9 @@
        
     }
     .react-date-picker__inputGroup {
-        width: 275px;
-        min-width: calc((4px * 3) + 0.54em * 8 + 0.217em * 2);
-        flex-grow: 1;
-        padding: 0 2px;
-        box-sizing: content-box;
-    }
+        width: 275px !important;
+     
+    }   
     .DashboardCard {
         gap: 35px !important;
         margin: 1rem !important;
@@ -142,23 +140,25 @@
 
     .AccordionBody > div > .mylink {
      
-        font-size: 12.5px;
+        font-size: 14px !important;
       
     }
     .accordion-button {
      
-        font-size: 12.5px;
-       
+        font-size: 14px !important;
     }
     .SettingSec {
        
-        font-size: 12.5px;
-    
+        font-size: 14px !important;
         
     }
     .mylink {
-        font-size: 12.5px;
+        font-size: 14px !important;
+        
    
+    }
+    .mylink {
+        padding-left: 37px;
     }
     .mylink:hover{
 
@@ -226,7 +226,19 @@
     }
     
     .rightsidedata {
-   
-        margin-left: 0px;
+        margin-left: -11px;
     }
+    .Multipleownerlabel {
+        font-size: 16px !important;
+    }
+    .RaceButtonDiv {
+        margin-right: -23px;
+         }
+         .myselectiondata > span:nth-child(3) {
+             margin-left: 0px !important; 
+            
+        }
+        .myselecthorsedata > span:nth-child(3) {
+            width: fit-content;
+        }
 }

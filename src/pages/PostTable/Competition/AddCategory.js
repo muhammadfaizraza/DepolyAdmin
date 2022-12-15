@@ -1,22 +1,19 @@
 import React, { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../../utils/TextInputValidation";
 
-
 const Competition = () => {
-
-   //for error
- const [Error, setError] = useState("")
- const [ErrorAr, setErrorAr] = useState("")
+  //for error
+  const [Error, setError] = useState("");
+  const [ErrorAr, setErrorAr] = useState("");
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
-  const [shortCode, setshortCode] = useState("");
   const history = useNavigate();
   const { pathname } = useLocation();
 
@@ -28,8 +25,11 @@ const Competition = () => {
       formData.append("NameAr", NameAr);
       // formData.append("shortCode", shortCode);
 
-      await axios.post(`${window.env.API_URL}/uploadCompetitionCategory`, formData);
-      if(pathname === '/addCategory'){
+      await axios.post(
+        `${window.env.API_URL}/uploadCompetitionCategory`,
+        formData
+      );
+      if (pathname === "/addCategory") {
         history("/CategoryListing");
       }
       swal({
@@ -48,22 +48,14 @@ const Competition = () => {
       });
     }
   };
-  const data1 = (JSON.stringify(
-    TextInputValidation(
-      "en",
-      NameEn,
-      "Category Name English"
-    )
-  ));
+  const data1 = JSON.stringify(
+    TextInputValidation("en", NameEn, "Category Name English")
+  );
 
   const obj = JSON.parse(data1);
-  const data2 = (JSON.stringify(
-    TextInputValidation(
-      "ar",
-      NameAr,
-      "Category Name Arabic"
-    )
-  ));
+  const data2 = JSON.stringify(
+    TextInputValidation("ar", NameAr, "Category Name Arabic")
+  );
   const objAr = JSON.parse(data2);
   return (
     <div className="page">
@@ -73,8 +65,7 @@ const Competition = () => {
             marginTop: "30px",
           }}
         >
-          <div className="Headers">
-            Create Category</div>
+          <div className="Headers">Create Category</div>
           <div className="form">
             <form onSubmit={submit}>
               <div className="row mainrow">
@@ -86,16 +77,13 @@ const Competition = () => {
                     onChange={(e) => setNameEn(e.target.value)}
                     name="Name"
                     value={NameEn}
-                    onBlur={() =>
-                      setError(obj)
-
-                    }
+                    onBlur={() => setError(obj)}
                   >
                     <Form.Control type="text" placeholder="Name" />
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
-               <span className="error">{Error.message}</span>
+                  <span className="error">{Error.message}</span>
                 </div>
 
                 <div className="col-sm">

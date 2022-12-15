@@ -116,7 +116,6 @@ const NewsForm = () => {
                       controlId="floatingInput"
                       label="عنوان"
                       style={{ direction: "rtl" }}
-
                       className="mb-3 floatingInputAr"
                       onChange={(e) =>
                         setState({ ...state1, TitleAr: e.target.value })

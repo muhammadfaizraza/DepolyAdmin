@@ -148,6 +148,9 @@ const Nationality = () => {
         `${window.env.API_URL}/addraceincompetition/${id}`,
         { CastRaces: items, PickRaces: itemsTri },
       );
+      localStorage.removeItem('competition')
+      localStorage.removeItem('competitiontri')
+
       const msgdata = response.data.msg;
       history('/competitionlisting')
       swal({

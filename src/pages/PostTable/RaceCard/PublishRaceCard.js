@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate ,useLocation} from "react-router-dom";
+import { useNavigate ,useLocation ,Navigate } from "react-router-dom";
 import Select from "react-select";
 import DateTimePicker from "react-datetime-picker";
 import { fetchracecourse } from "../../../redux/getReducer/getRaceCourseSlice";
@@ -24,14 +24,12 @@ const Nationality = () => {
   const [Race, setRace] = useState("");
   const [DayNTime, setDayNTime] = useState("");
   const [FetchData, setFetchData] = useState([]);
+  const dispatch = useDispatch();
 
   const [RaceData, setRaceData] = useState([]);
   const { data: racecourse } = useSelector((state) => state.racecourse);
-  const {state} = useLocation();
-  const {CardId ,RaceCourseId} = state;
-  console.log(CardId,'id is this')
-  console.log(RaceCourseId,'RaceCourseId is this')
 
+ 
   console.log(FetchData)
   let AllFetchData =
     FetchData === undefined ? (
@@ -47,19 +45,22 @@ const Nationality = () => {
     );
     
   // const history = useNavigate();
-  const dispatch = useDispatch();
   const animatedComponents = makeAnimated();
   const FormaredDate = dateFormat(DayNTime, "isoDateTime");
   const history = useNavigate();
   const [selectedValue, setSelectedValue] = useState([]);
- 
-  const handleChange = (e) => {
-    setSelectedValue(Array.isArray(e) ? e.map(x => x.id) : []);
-  }
+  const {state} = useLocation();
+  const {CardId ,RaceCourseId} = state;
   
   useEffect(() => {
     dispatch(fetchracecourse());
   }, [dispatch]);
+
+  const handleChange = (e) => {
+    setSelectedValue(Array.isArray(e) ? e.map(x => x.id) : []);
+  }
+
+ 
 
 
   const FatchRace = async (event) => {
@@ -110,6 +111,7 @@ const Nationality = () => {
       });
     }
   };
+  // if(state.CardId === null) return <Navigate replace to="/"/>
 
   return (
     <div className="page">

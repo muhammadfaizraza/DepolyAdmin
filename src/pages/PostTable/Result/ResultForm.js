@@ -97,6 +97,8 @@ const RaceForm = () => {
     event.preventDefault();
     try { 
       const response = await axios.post(`${window.env.API_URL}createraceresult/${RaceId}`,{ResultEntry:items});
+      localStorage.removeItem('results')
+
       history("/races");
       swal({
         title: "Success",

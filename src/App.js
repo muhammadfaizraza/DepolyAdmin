@@ -116,6 +116,14 @@ import SEOForm from "./pages/PostTable/SEOForm";
 import PublishRaceCompetition from "./pages/PostTable/Competition/PublishRaceCompetition";
 import NewsLetter from "./pages/GetTable/NewsLetter";
 import Forgetpage from "./pages/GetTable/Forgetpage";
+import DeletedHorse from "./Components/DeletedData/DeletedHorse";
+import DeletedJockey from "./Components/DeletedData/DeletedJockey";
+import DeletedOwner from "./Components/DeletedData/DeletedOwner";
+import DeletedAds from "./Components/DeletedData/DeletedAds";
+import DeletedBreeder from "./Components/DeletedData/DeletedBreeder";
+import DeletedColor from "./Components/DeletedData/DeletedColor";
+import DeletedCurrency from "./Components/DeletedData/DeletedCurrency";
+import DeletedEquipment from "./Components/DeletedData/DeletedEquipment";
 
 
 function App() {
@@ -223,7 +231,21 @@ function App() {
              <Route path="/seoform" element={<SEOForm />} />
              <Route path="/competitionrace" element={<PublishRaceCompetition />} />
              <Route path="/newsletter" element={<NewsLetter />} />
+         
              <Route path="/password/reset/:token" element={<Forgetpage />} />
+
+ {/* Deleted Data */}
+             <Route path="/deletedhorse" element={<DeletedHorse />} />
+             <Route path="/deletedjockey" element={<DeletedJockey />} />
+             <Route path="/deletedowner" element={<DeletedOwner />} />
+             <Route path="/deletedads" element={<DeletedAds />} /> 
+             <Route path="/deletedbreeder" element={<DeletedBreeder />} />
+             <Route path="/deletedcolor" element={< DeletedColor/>} />
+             <Route path="/deletedcurrency" element={< DeletedCurrency/>} />
+             <Route path="/deletedequipment" element={< DeletedEquipment/>} />
+           
+           
+
 
              <Route path="*" element={<NotFound />} />
 

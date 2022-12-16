@@ -246,9 +246,14 @@ const TrainerForm = () => {
                   </div>
 
                   <div className="col-sm" style={{ direction: "rtl" }}>
-                    <input
-                      value={convert(StartDate)}
-                      placeholder="تاريخ الولادة"
+                  <DatePicker
+                      onChange={setStartDate}
+                      value={StartDate}
+                      dayPlaceholder=""
+                      minDate={today}
+                      monthPlaceholder="تاريخ البدء"
+                      yearPlaceholder=""
+                      style={{ direction: "rtl" }}
                     />
                   </div>
                 </div>

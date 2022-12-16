@@ -560,7 +560,7 @@ const Sidebar = () => {
                       });
                     }}
                   >
-                    Color{" "}
+                    Color
                   </Link>
                 </div>
                 <div>
@@ -720,6 +720,62 @@ const Sidebar = () => {
                     Owner
                   </Link>
                 </div>
+                <div>
+                  <Link to="/deletedads" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    Advertisement
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedbreeder" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    Breeder
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedcolor" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    Color
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedcurrency" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    Currency
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedequipment" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    Equipment
+                  </Link>
+                </div>
+
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>

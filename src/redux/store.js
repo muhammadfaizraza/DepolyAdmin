@@ -47,6 +47,7 @@ import getCategory from './getReducer/getCategory';
 import getCompetition from './getReducer/getCompetition';
 import getRaceCard from './getReducer/getRaceCard';
 import getSeo from './getReducer/getSeo';
+import getDeletedEquipment from './getReducer/DeletedSlice';
 import getAdminList from './getReducer/getAdminList';
 
 const store = configureStore({
@@ -99,7 +100,8 @@ const store = configureStore({
         competition:getCompetition,
         raceCard:getRaceCard,
         Seo: getSeo,
-        AdminList:getAdminList
+        AdminList:getAdminList,
+        deletedequipment:getDeletedEquipment,
     },
 });
 

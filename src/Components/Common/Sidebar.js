@@ -648,19 +648,82 @@ const Sidebar = () => {
               <Accordion.Header>SEO</Accordion.Header>
               <Accordion.Body className="AccordionBody">
                 <div>
-                  <Link to="/seolisting" className="mylink">
+                  <Link to="/seolisting" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
                     View Listing
                   </Link>
                 </div>
                 <div>
                   
-                  <Link to="/seoform" className="mylink">
+                  <Link to="/seoform" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
                     Add New
                   </Link>
                 </div>
               </Accordion.Body>
             </Accordion.Item>
+            <Accordion.Item eventKey="15">
+              <Accordion.Header>Deleted Table</Accordion.Header>
+              <Accordion.Body className="AccordionBody">
+                <div>
+                  <Link to="/deletedhorse" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    Horse
+                  </Link>
+                </div>
+                <div>
+                  
+                  <Link to="/deletedjockey" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    Jockey
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedtrainer" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    Trainer
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedowner" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    Owner
+                  </Link>
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
           </Accordion>
+          
           {/* <div className="SettingSec">
             <Link
               to="/newsletter"

@@ -34,7 +34,7 @@ const AdminRole = () => {
         icon: "success",
         button: "OK",
       });
-      history("/AddRole");
+      history("/AdminListing");
     } catch (error) {
       const err = error.response.data.message;
       swal({

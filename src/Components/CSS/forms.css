@@ -287,7 +287,26 @@ input::file-selector-button {
   margin-left: -54px;
 }
 
-
+.form-switch {
+  padding: -0.5em;
+  border: none;
+  margin: 0px 0px 0p;
+  font-size: 25px;
+  margin-left: 60px;
+}
+.EmailForget{
+  width: 100% !important;
+}
+.EmailForgetBtn{
+  margin: 25px;
+}
+.ForgetPassword p {
+  text-align: center;
+  padding: 15px;
+  color: #ef3f3f;
+  font-weight: 500;
+  cursor: pointer;
+}
 .css-6j8wv5-Input {
   margin: -3px;
   padding-bottom: 2px;

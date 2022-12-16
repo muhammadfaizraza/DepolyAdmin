@@ -20,7 +20,7 @@ const SubscriberList = () => {
 
   const handleRole = async (Id) => {
     try {
-      const res = await axios.put(`${window.env.API_URL}/ChangeStatus/${Id}`);
+      const res = await axios.put(`${window.env.API_URL}/adminChangeStatus/${Id}`);
       swal({
         title: "Success!",
         text: "Data has been Updated successfully ",

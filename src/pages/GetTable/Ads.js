@@ -16,6 +16,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import { BsEyeFill } from "react-icons/bs";
 import Pagination from "./Pagination";
+import Form from 'react-bootstrap/Form';
 
 const Ads = () => {
   //for Modal
@@ -121,6 +122,7 @@ const Ads = () => {
                         <th>Description </th>
                         <th>Description Arabic</th>
                         <th>Image</th>
+                        <th>Active</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -136,7 +138,13 @@ const Ads = () => {
                               <td>
                                 <img src={item.image} alt="" />
                               </td>
-
+                           <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  // label="Check this switch"
+                                />
+                                </td>
                               <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>

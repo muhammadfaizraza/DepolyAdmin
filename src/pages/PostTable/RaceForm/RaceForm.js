@@ -38,11 +38,21 @@ const WeatherTypes = [
   { id: "1", value: "Sunny", label: "Sunny" },
   { id: "2", value: "Cloudy", label: "Cloudy" },
 ];
+const WeatherTypesAr = [
+  { id: "1", value: "مشمس", label: "مشمس" },
+  { id: "2", value: "غائم", label: "غائم" },
+];
 const RaceStatuss = [
   { id: "1", value: "Cancel", label: "Cancel" },
   { id: "2", value: "Due", label: "Due" },
   { id: "2", value: "Live", label: "Live" },
   { id: "2", value: "End", label: "End" },
+];
+const RaceStatussAr = [
+  { id: "1", value: "يلغي", label: "يلغي" },
+  { id: "2", value: "بسبب", label: "بسبب" },
+  { id: "2", value: "يعيش", label: "يعيش" },
+  { id: "2", value: "نهاية", label: "نهاية" },
 ];
 
 const RaceForm = () => {
@@ -99,6 +109,18 @@ const RaceForm = () => {
         };
       })
     );
+    let racecoursesAr =
+    racecourse === undefined ? (
+      <></>
+    ) : (
+      racecourse.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.TrackNameAr,
+        };
+      })
+    );
 
   let JockeyForTheRace =
     jockey === undefined ? (
@@ -107,7 +129,7 @@ const RaceForm = () => {
       jockey.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
         };
       })
@@ -120,8 +142,20 @@ const RaceForm = () => {
       RaceName.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
+        };
+      })
+    );
+    let RacenameoptionsAr =
+    RaceName === undefined ? (
+      <></>
+    ) : (
+      RaceName.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
         };
       })
     );
@@ -163,12 +197,25 @@ const RaceForm = () => {
       meeting.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
         };
       })
     );
-  console.log(MeetingTypes, "MeetingTypes");
+    let MeetingTypesAr =
+    meeting === undefined ? (
+      <></>
+    ) : (
+      meeting.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
+        };
+      })
+    );
+
+
 
   let RaceTypes =
     RaceType === undefined ? (
@@ -177,8 +224,20 @@ const RaceForm = () => {
       RaceType.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
+        };
+      })
+    );
+    let RaceTypesAr =
+    RaceType === undefined ? (
+      <></>
+    ) : (
+      RaceType.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
         };
       })
     );
@@ -203,8 +262,20 @@ const RaceForm = () => {
       raceKinds.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
+        };
+      })
+    );
+    let OprtionRaceKindAr =
+    raceKinds === undefined ? (
+      <></>
+    ) : (
+      raceKinds.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
         };
       })
     );
@@ -216,8 +287,20 @@ const RaceForm = () => {
       groundtype.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
+        };
+      })
+    );
+    let GroundrTypeAllAr =
+    groundtype === undefined ? (
+      <></>
+    ) : (
+      groundtype.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
         };
       })
     );
@@ -463,7 +546,7 @@ const RaceForm = () => {
                       placeholder={<div>نوع الاجتماع</div>}
                       defaultValue={MeetingType}
                       className="selectdir"
-                      options={MeetingTypes}
+                      options={MeetingTypesAr}
                       onChange={setMeetingType}
                       isClearable={true}
                       isSearchable={true}
@@ -512,7 +595,7 @@ const RaceForm = () => {
                       className="selectdir"
                       defaultValue={RaceNameEn}
                       onChange={setRaceNameEn}
-                      options={Racenameoptions}
+                      options={RacenameoptionsAr}
                       isClearable={true}
                       isSearchable={true}
                     
@@ -681,7 +764,7 @@ const RaceForm = () => {
                       }
                       defaultValue={RaceTyp}
                       onChange={setRaceType}
-                      options={RaceTypes}
+                      options={RaceTypesAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -781,7 +864,9 @@ const RaceForm = () => {
                     <Select
                       placeholder={<div>طقس</div>}
                       className="selectdir"
-                      options={GroundrTypeAll}
+                      options={GroundrTypeAllAr}
+                      defaultValue={Ground}
+                      onChange={setGround}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -827,7 +912,7 @@ const RaceForm = () => {
                       defaultValue={RaceKind}
                       className="selectdir"
                       onChange={setRaceKind}
-                      options={OprtionRaceKind}
+                      options={OprtionRaceKindAr}
                       isClearable={true}
                       isSearchable={true}
                     
@@ -854,7 +939,7 @@ const RaceForm = () => {
                     <Select
                       placeholder={<div>طقس</div>}
                       className="selectdir"
-                      options={WeatherTypes}
+                      options={WeatherTypesAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -901,7 +986,9 @@ const RaceForm = () => {
                     <Select
                       placeholder={<div>دورة السباق</div>}
                       className="selectdir"
-                      options={racecourses}
+                      options={racecoursesAr}
+                      defaultValue={RaceCourse}
+                      onChange={setRaceCourse}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -970,7 +1057,9 @@ const RaceForm = () => {
                     <Select
                       placeholder={<div>حالة السباق</div>}
                       className="selectdir"
-                      options={RaceStatuss}
+                      options={RaceStatussAr}
+                      defaultValue={RaceStatus}
+                      onChange={setRaceStatus}
                       isClearable={true}
                       isSearchable={true}
                     />

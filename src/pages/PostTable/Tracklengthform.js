@@ -172,10 +172,14 @@ const Tracklengthform = () => {
                     className="mb-3"
                     onChange={(e) => setTrackLength(e.target.value)}
                     value={TrackLength}
-                    onBlur={() => TrackLength === "" ?  setErrorTrackLength("Track Length is required "):setErrorTrackLength(" ")}
-
+                    onBlur={(e) =>
+                      TrackLength === ""
+                        ? setErrorTrackLength("TriCount  Number is required ")
+                        : setErrorTrackLength(" ")
+                    }
+                    required
                   >
-                    <Form.Control type="number" placeholder="Track Length" required/>
+                    <Form.Control type="number" placeholder="Track Length"   />
                   </FloatingLabel>
                   <span className="error">{ErrorTrackLength}</span>
                   {/* <span className="spanForm"> |</span> */}
@@ -281,7 +285,7 @@ const Tracklengthform = () => {
                     options={groundtypeopt}
                     isClearable={true}
                     isSearchable={true}
-                    onBlur={() => GroundType === "" ?  setErrorGroundType("Ground Type is required "):setErrorGroundType("")}
+                    onBlur={() => GroundType === "" ? setErrorGroundType("Ground Type is required") : setErrorGroundType(" ")}
                   />
                 <span className="spanForm">
                       <OverlayTrigger
@@ -302,7 +306,7 @@ const Tracklengthform = () => {
                       </OverlayTrigger>
                       |
                     </span>
-                    <span className="error">{ErrorGroundType}</span>
+                    <span className="error">{console.log(ErrorGroundType)}</span>
                 </div>
                 <div className="col-sm">
                   <Select

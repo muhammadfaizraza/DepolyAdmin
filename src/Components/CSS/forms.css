@@ -292,7 +292,7 @@ input::file-selector-button {
   border: none;
   margin: 0px 0px 0p;
   font-size: 25px;
-  margin-left: 60px;
+  /* margin-left: 60px; */
 }
 .EmailForget{
   width: 100% !important;

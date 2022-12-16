@@ -83,6 +83,7 @@ const HorseForm = () => {
      const [ErrorGelded, setErrorGelded] = useState("");
      const [ErrorNationality, setErrorNationality] = useState("");
      const [ErrorCreationid, setErrorCreationid] = useState("");
+     const [ErrorRemarksAr, setErrorRemarksAr] = useState("");
      
   const [ErrorRegistration, setErrorRegistration] = useState("");
 
@@ -380,7 +381,8 @@ const HorseForm = () => {
   const [Owner, setOwner] = useState("");
   const [ActiveTrainer, setActiveTrainer] = useState("");
   const [Breeder, setBreeder] = useState("");
-  const [Remarks, setRemarks] = useState("");
+  const [RemarksEn, setRemarksEn] = useState("");
+  const [RemarksAr, setRemarksAr] = useState("");
   const [HorseStatus, setHorseStatus] = useState("");
   const [Sex, setSex] = useState("");
   const [ColorID, setColor] = useState("");
@@ -415,7 +417,8 @@ const HorseForm = () => {
       formData.append("Height",Height)
 
       formData.append("NameAr", NameAr + ' ');
-      formData.append("Remarks", Remarks);
+      formData.append("RemarksEn", RemarksEn);
+      formData.append("RemarksAr", RemarksAr);
       formData.append("ActiveOwner", ActiveOwner.id);
       // formData.append("ActiveJockey", ActiveJockey.id);
       // formData.append("Owner", Owner.id);
@@ -492,13 +495,21 @@ const HorseForm = () => {
 
  
     const data3 = JSON.stringify(
-      TextInputValidation("en", Remarks, "Horse Remarks  ")
+      TextInputValidation("en", RemarksEn, "Horse Remarks English ")
     );
     const remark = JSON.parse(data3);
     
+    const data4 = JSON.stringify(
+      TextInputValidation("ar", RemarksAr, "Horse Remarks Arabic  ")
+    );
+    const remarkar = JSON.parse(data4);
+    
 
  
+ 
 
+
+  
 
 
     const DateMax =   new Date();
@@ -628,8 +639,8 @@ const HorseForm = () => {
                       controlId="floatingInput"
                       label="Remarks"
                       className="mb-3"
-                      onChange={(e) => setRemarks(e.target.value)}
-                      value={Remarks}
+                      onChange={(e) => setRemarksEn(e.target.value)}
+                      value={RemarksEn}
                       required
                       onBlur={() => setErrorRemarks(remark)}
 
@@ -643,12 +654,16 @@ const HorseForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="ملاحظات"
+                      onChange={(e) => setRemarksAr(e.target.value)}
+                      value={RemarksAr}
+                      label="ملاحظة"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
+                      onBlur={() => setErrorRemarksAr(remarkar)}
                     >
                       <Form.Control type="text" placeholder="ملاحظات" />
                     </FloatingLabel>
+              <span className="errorAr">{ErrorRemarksAr.message}</span>
                   </div>
                 </div>
                 <div className="row mainrow">

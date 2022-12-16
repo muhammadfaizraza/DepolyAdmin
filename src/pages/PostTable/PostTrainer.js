@@ -28,6 +28,7 @@ const TrainerForm = () => {
   const [ErrorDateofBirth, setErrorDateofBirth] = useState("");
   const [ErrorLicenseDate, setErrorLicenseDate] = useState("");
   const [ErrorRemarks, setErrorRemarks] = useState("");
+  const [ErrorRemarksAr, setErrorRemarksAr] = useState("");
   const [ErrorDetail, setErrorDetail] = useState("");
   const [ErrorNationality, setErrorNationality] = useState("");
 
@@ -38,8 +39,10 @@ const TrainerForm = () => {
 
   const { data: nationality } = useSelector((state) => state.nationality);
   const [NameEn, setNameEn] = useState("");
-  const [Detail, setDetail] = useState("");
-  const [Remarks, setRemarks] = useState("");
+  const [DetailEn, setDetailEn] = useState("");
+  const [DetailAr, setDetailAr] = useState("");
+  const [RemarksEn, setRemarksEn] = useState("");
+  const [RemarksAr, setRemarksAr] = useState("");
   const [NameAr, setNameAr] = useState("");
   const [DOB, setDOB] = useState("");
   const [TitleAr, setTitleAr] = useState("");
@@ -66,16 +69,18 @@ const TrainerForm = () => {
       const formData = new FormData();
       formData.append("image", image);
       formData.append("NameEn", NameEn);
-      formData.append("Detail", Detail);
-      formData.append("Remarks", Remarks);
-      formData.append("NameAr", NameAr + " ");
+      formData.append("DetailEn", DetailEn);
+      formData.append("DetailAr", DetailAr);
+      formData.append("RemarksEn", RemarksEn);
+      formData.append("RemarksAr", RemarksAr);
+      formData.append("NameAr", NameAr );
       formData.append("DOB", DOB);
       formData.append("TitleAr", TitleAr);
       formData.append("NationalityID", NationalityId.id);
       formData.append("TitleEn", TitleEn);
       formData.append("TrainerLicenseDate", TrainerLicenseDate);
       formData.append("ShortNameEn", ShortNameEn);
-      formData.append("ShortNameAr", ShortNameAr + " ");
+      formData.append("ShortNameAr", ShortNameAr );
       await axios.post(
         `${window.env.API_URL}/uploadtrainer?keyword=&page=`,
         formData
@@ -154,7 +159,7 @@ const TrainerForm = () => {
   }, [image]);
   const FetchNew = () => {
     dispatch(fetchnationality());
-  };
+}
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
   };
@@ -215,14 +220,19 @@ const TrainerForm = () => {
   const shotNameAr = JSON.parse(data6);
 
   const data7 = JSON.stringify(
-    TextInputValidation("en", Detail, "Trainer Description English")
+    TextInputValidation("en", DetailEn, "Trainer Description English")
   );
   const detail = JSON.parse(data7);
 
   const data8 = JSON.stringify(
-    TextInputValidation("en", Remarks, "Trainer Remarks English")
+    TextInputValidation("en", RemarksEn, "Trainer Remarks English")
   );
   const Remark = JSON.parse(data8);
+  const data9 = JSON.stringify(
+    TextInputValidation("ar", RemarksAr, "Trainer Remarks Arabic")
+  );
+  const Remarkar = JSON.parse(data9);
+
 
   return (
     <Fragment>
@@ -416,8 +426,8 @@ const TrainerForm = () => {
                       controlId="floatingInput"
                       label="Details"
                       className="mb-3"
-                      onChange={(e) => setDetail(e.target.value)}
-                      value={Detail}
+                      onChange={(e) => setDetailEn(e.target.value)}
+                      value={DetailEn}
                       onBlur={() => setErrorDetail(detail)}
                     >
                       <Form.Control
@@ -435,6 +445,8 @@ const TrainerForm = () => {
                     <FloatingLabel
                       controlId="floatingInput"
                       label="تفاصيل"
+                      onChange={(e) => setDetailAr(e.target.value)}
+                      value={DetailAr}
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                     >
@@ -498,8 +510,8 @@ const TrainerForm = () => {
                       controlId="floatingInput"
                       label="Remarks"
                       className="mb-3"
-                      onChange={(e) => setRemarks(e.target.value)}
-                      value={Remarks}
+                      onChange={(e) => setRemarksEn(e.target.value)}
+                      value={RemarksEn}
                     onBlur={() => setErrorRemarks(Remark)}
                     >
                       <Form.Control
@@ -508,19 +520,24 @@ const TrainerForm = () => {
                         required
                       />
                     </FloatingLabel>
+                    <span className="spanForm"> |</span>
                     <span className="error">{ErrorRemarks.message}</span>
                   </div>
 
-                  {/* <div className="col-sm">
+                  <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
                       label="ملاحظات"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
+                      onChange={(e) => setRemarksAr(e.target.value)}
+                      onBlur={() => setErrorRemarksAr(Remarkar)}
+                      value={RemarksAr}
                     >
                       <Form.Control type="text" placeholder="ملاحظات" />
                     </FloatingLabel>
-                  </div> */}
+                    <span className="errorAr">{ErrorRemarksAr.message}</span>
+                  </div>
                 </div>
                 <div className="ButtonSection">
                   <div>

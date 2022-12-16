@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { fetchSponsor, STATUSES } from "../../redux/getReducer/getSponsorSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostSponsor";
 import swal from "sweetalert";
 import { Link ,useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
@@ -14,8 +13,12 @@ import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BsEyeFill } from "react-icons/bs";
 import Pagination from "./Pagination";
+import {Form} from "react-bootstrap"
 
 const News = () => {
+  const [Value, setValue] = useState(false);
+
+  //For Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -114,6 +117,8 @@ const News = () => {
                       <th>Description Arabic</th>
                       <th>Url</th>
                       <th>Image</th>
+                      <th>Active</th>
+                      
                       <th style={{ textAlign: "center" }}>Action</th>
                     </tr>
                   </thead>
@@ -137,6 +142,15 @@ const News = () => {
                                 }}
                               />
                             </td>
+                            <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
+                                />
+                                </td>
                             <td
                               className="table_delete_btn1"
                               style={{ textAlign: "center" }}

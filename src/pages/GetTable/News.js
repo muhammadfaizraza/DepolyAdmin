@@ -13,9 +13,12 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import Pagination from "./Pagination";
-
+import {Form} from "react-bootstrap"
 
 const News = () => {
+
+  const [Value , setValue] = useState(false)
+  //For Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -119,7 +122,7 @@ const News = () => {
                         <th>Description </th>
                         <th>Description Arabic</th>
                         <th>Image</th>
-
+<th>Active</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -139,6 +142,15 @@ const News = () => {
                             <td>
                               <img src={item.image} alt="" />
                             </td>
+                            <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
+                                />
+                                </td>
                             <td className="table_delete_btn1"
                               style={{ textAlign: "center" }}>
                             <BiEdit

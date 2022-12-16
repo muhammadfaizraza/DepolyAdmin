@@ -15,10 +15,12 @@ import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Pagination from "./Pagination";
-
+import {Form} from "react-bootstrap"
 
 
 const Slider = () => {
+const [Value , setValue] = useState(false)
+  //For Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -130,6 +132,7 @@ const Slider = () => {
                       <th>Title Arabic </th>
                       <th>Url</th>
                       <th>Image</th>
+                      <th>Active</th>
                       <th style={{ textAlign: "center" }}>Action</th>
                     </tr>
                   </thead>
@@ -151,7 +154,17 @@ const Slider = () => {
                                   height: "30px",
                                 }}
                               />
-                            </td>
+                                  </td>
+                                  <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                      
+                                  value={Value}
+                                />
+                                </td>
+                        
 
                             <td className="table_delete_btn1"
                               style={{ textAlign: "center" }}>

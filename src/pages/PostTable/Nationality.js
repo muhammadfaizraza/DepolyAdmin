@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate , useLocation} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import Select from "react-select";
@@ -18,69 +18,59 @@ const OffsetsAr = [
 ];
 
 const Nationality = () => {
-
   const [ErrorNameEn, setErrorNameEn] = useState("");
   const [ErrorNameAr, setErrorNameAr] = useState("");
 
-  const [ErrorAbbrev, setErrorAbbrev] = useState("");
-  const [ErrorAltName, setErrorAltName] = useState("");
+  const [ErrorAbbrevEn, setErrorAbbrevEn] = useState("");
+  const [ErrorAbbrevAr, setErrorAbbrevAr] = useState("");
+  const [ErrorAltNameEn, setErrorAltNameEn] = useState("");
+  const [ErrorAltNameAr, setErrorAltNameAr] = useState("");
   const [ErrorLabel, setErrorLabel] = useState("");
+  const [ErrorLabelAr, setErrorLabelAr] = useState("");
   const [ErrorOffset, setErrorOffset] = useState("");
-  const [ErrorValue, setErrorValue] = useState("");
-
-
+  const [ErrorValueEn, setErrorValueEn] = useState("");
+  const [ErrorValueAr, setErrorValueAr] = useState("");
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
 
-  const [Abbrev, setAbbrev] = useState("");
-  const [AltName, setAltName] = useState("");
-  const [Label, setLabel] = useState("");
+  const [AbbrevEn, setAbbrevEn] = useState("");
+  const [AbbrevAr, setAbbrevAr] = useState("");
+  const [AltNameEn, setAltNameEn] = useState("");
+  const [AltNameAr, setAltNameAr] = useState("");
+  const [LabelEn, setLabelEn] = useState("");
+  const [LabelAr, setLabelAr] = useState("");
   const [Offset, setOffset] = useState("");
-  const [Value, setValue] = useState("");
+  const [ValueEn, setValueEn] = useState("");
+  const [ValueAr, setValueAr] = useState("");
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
-
-
-
-
-
-
-
-
 
   const history = useNavigate();
   const { pathname } = useLocation();
 
-
   const submit = async (event) => {
-
-  
     event.preventDefault();
 
     try {
-
       const formData = new FormData();
       formData.append("NameEn", NameEn);
-      formData.append("NameAr", NameAr + ' ');
+      formData.append("NameAr", NameAr + " ");
       // formData.append("shortCode", shortCode);
-      formData.append("Abbrev", Abbrev);
-      formData.append("AltName", AltName);
-      formData.append("Label", Label);
+      formData.append("AbbrevEn", AbbrevEn);
+      formData.append("AbbrevAr", AbbrevAr);
+      formData.append("AltNameEn", AltNameEn);
+      formData.append("AltNameAr", AltNameAr);
+      formData.append("LabelEn", LabelEn);
+      formData.append("LabelAr", LabelAr);
       formData.append("Offset", Offset.id);
-      formData.append("Value", Value);
+      formData.append("ValueEn", ValueEn);
+      formData.append("ValueAr", ValueAr);
       formData.append("image", image);
-    
-        
-      
-   await axios.post(`${window.env.API_URL}/uploadNationality`, formData);
-          
-            
-     
-   
 
-  
-      if(pathname === '/nationality'){
+      await axios.post(`${window.env.API_URL}/uploadNationality`, formData);
+
+      if (pathname === "/nationality") {
         history("/nationalitylist");
       }
       swal({
@@ -90,22 +80,16 @@ const Nationality = () => {
         button: "OK",
       });
     } catch (error) {
-  
       const err = error.response.data.message;
-        swal({
+      swal({
         title: "Error!",
         text: err,
         icon: "error",
         button: "OK",
-
       });
-
     }
-  
-  
+  };
 
-}
- 
   useEffect(() => {
     if (!image) {
       setPreview(undefined);
@@ -132,26 +116,41 @@ const Nationality = () => {
   const Namear = JSON.parse(data4);
 
   const data5 = JSON.stringify(
-    TextInputValidation("en", Abbrev, "Nationality Abbreviation ")
+    TextInputValidation("en", AbbrevEn, "Nationality Abbreviation ")
   );
 
   const abbrev = JSON.parse(data5);
   const data6 = JSON.stringify(
-    TextInputValidation("en", AltName, "Nationality Alternative Name ")
+    TextInputValidation("en", AltNameEn, "Nationality Alternative Name ")
   );
   const altName = JSON.parse(data6);
 
   const data8 = JSON.stringify(
-    TextInputValidation("en", Label, "Nationality Label ")
+    TextInputValidation("en", LabelEn, "Nationality Label ")
   );
   const label = JSON.parse(data8);
 
   const data9 = JSON.stringify(
-    TextInputValidation("en", Value, "Nationality Value English")
+    TextInputValidation("en", ValueEn, "Nationality Value English")
   );
   const value = JSON.parse(data9);
-  
-  
+  const data10 = JSON.stringify(
+    TextInputValidation("ar", ValueAr, "Nationality Value Arabic")
+  );
+  const valuear = JSON.parse(data10);
+  const data11 = JSON.stringify(
+    TextInputValidation("ar", LabelAr, "Nationality Label Arabic")
+  );
+  const Labelar = JSON.parse(data10);
+  const data12 = JSON.stringify(
+    TextInputValidation("ar", AltNameAr, "Nationality Alternative Name Arabic")
+  );
+  const Altnamear = JSON.parse(data10);
+  const data13 = JSON.stringify(
+    TextInputValidation("ar", AbbrevAr, "Nationality Abbreviation Arabic")
+  );
+  const abbrevar = JSON.parse(data13);
+
 
   return (
     <div className="page">
@@ -175,10 +174,10 @@ const Nationality = () => {
                     value={NameEn}
                     onBlur={() => setErrorNameEn(Name)}
                   >
-                    <Form.Control type="text" placeholder="Name" required   />
+                    <Form.Control type="text" placeholder="Name" required />
                   </FloatingLabel>
 
-                  <span className="spanForm"> |</span >
+                  <span className="spanForm"> |</span>
                   <span className="error">{ErrorNameEn.message}</span>
                 </div>
 
@@ -195,7 +194,7 @@ const Nationality = () => {
                   >
                     <Form.Control type="text" placeholder="اسم" required />
                   </FloatingLabel>
-            <span className="errorAr">{ErrorNameAr.message}</span>
+                  <span className="errorAr">{ErrorNameAr.message}</span>
                 </div>
               </div>
 
@@ -236,25 +235,30 @@ const Nationality = () => {
                     controlId="floatingInput"
                     label=" Abbreviation"
                     className="mb-3"
-                    onChange={(e) => setAbbrev(e.target.value)}
-                    value={Abbrev}
-                  onBlur={() => setErrorAbbrev(abbrev)}
+                    onChange={(e) => setAbbrevEn(e.target.value)}
+                    value={AbbrevEn}
+                    onBlur={() => setErrorAbbrevEn(abbrev)}
                   >
                     <Form.Control
                       type="text"
                       placeholder=" Abbreviation"
-                      required/>
+                      required
+                    />
                   </FloatingLabel>
-           <span className="error">{ErrorAbbrev.message}</span>
-                  {/* <span className="spanForm"> |</span> */}
+                <span className="spanForm"> |</span> 
+                  <span className="error">{ErrorAbbrevEn.message}</span>
+                
                 </div>
 
-                {/* <div className="col-sm">
+              <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="اكتب الاختصار"
+                    onChange={(e) => setAbbrevAr(e.target.value)}
+                    value={AbbrevAr}
                     className="mb-3 floatingInputAr "
                     style={{ direction: "rtl", left: "initial", right: 0 }}
+                    onBlur={() => setErrorAbbrevAr(abbrevar)}
                   >
                     <Form.Control
                       type="text"
@@ -262,7 +266,8 @@ const Nationality = () => {
                       style={{ left: "%" }}
                     />
                   </FloatingLabel>
-                </div> */}
+                  <span className="errorAr">{ErrorAbbrevAr.message}</span>
+                </div> 
               </div>
 
               <div className="row mainrow">
@@ -271,27 +276,31 @@ const Nationality = () => {
                     controlId="floatingInput"
                     label=" Alternative Name"
                     className="mb-3"
-                    onChange={(e) => setAltName(e.target.value)}
-                    value={AltName}
-                    onBlur={() => setErrorAltName(altName)}
-                 
+                    onChange={(e) => setAltNameEn(e.target.value)}
+                    value={AltNameEn}
+                    onBlur={() => setErrorAltNameEn(altName)}
                   >
                     <Form.Control
                       type="text"
                       placeholder="Write Alternative Name"
-                      required/>
+                      required
+                    />
                   </FloatingLabel>
-                  <span className="error">{ErrorAltName.message}</span>
-                  {/* <span className="spanForm"> |</span> */}
-
+                  <span className="spanForm"> |</span> 
+                  <span className="error">{ErrorAltNameEn.message}</span>
+          
                 </div>
 
-                {/* <div className="col-sm">
+                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="اكتب الاسم البديل"
+                    onChange={(e) => setAltNameAr(e.target.value)}
+                    value={AltNameAr}
                     className="mb-3 floatingInputAr "
                     style={{ direction: "rtl", left: "initial", right: 0 }}
+                    onBlur={() => setErrorAltNameAr(Altnamear)}
+                  
                   >
                     <Form.Control
                       type="text"
@@ -299,7 +308,8 @@ const Nationality = () => {
                       style={{ left: "%" }}
                     />
                   </FloatingLabel>
-                </div> */}
+                  <span className="errorAr">{ErrorAltNameAr.message}</span>
+                </div> 
               </div>
 
               <div className="row mainrow">
@@ -308,22 +318,27 @@ const Nationality = () => {
                     controlId="floatingInput"
                     label="Label"
                     className="mb-3"
-                    onChange={(e) => setLabel(e.target.value)}
-                    value={Label}
-                  onBlur={() => setErrorLabel(label)}
+                    onChange={(e) => setLabelEn(e.target.value)}
+                    value={LabelEn}
+                    onBlur={() => setErrorLabel(label)}
                   >
-                    <Form.Control type="text" placeholder="Label" required/>
+                    <Form.Control type="text" placeholder="Label" required />
                   </FloatingLabel>{" "}
-                  {/* <span className="spanForm"> |</span> */}
+                  <span className="spanForm"> |</span>
                   <span className="error">{ErrorLabel.message}</span>
                 </div>
 
-                {/* <div className="col-sm">
+                <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="مُلصَق"
+                    onChange={(e) => setLabelAr(e.target.value)}
+                    value={LabelAr}
                     className="mb-3 floatingInputAr "
                     style={{ direction: "rtl", left: "initial", right: 0 }}
+                    onBlur={() => setErrorLabelAr(Labelar)}
+
+          
                   >
                     <Form.Control
                       type="text"
@@ -331,36 +346,41 @@ const Nationality = () => {
                       style={{ left: "%" }}
                     />
                   </FloatingLabel>
-                </div> */}
+            <span className="errorAr">{ErrorLabelAr.message}</span>
+                </div>
               </div>
 
               <div className="row mainrow">
-                  <div className="col-sm">
-                    <Select
-                      placeholder={<div>Offset</div>}
-                      defaultValue={Offset}
-                      onChange={setOffset}
-                      options={Offsets}
-                      isClearable={true}
-                      isSearchable={true}
-                      onBlur={() => Offset === "" ?  setErrorOffset("Offset is required"):setErrorOffset("") }
-                    />
-                    <span className="spanForm"> |</span>
-                    <span className="error">{ErrorOffset}</span>
-                  </div>
-                  <div className="col-sm">
-                    <Select
-                      required
-                      placeholder={<div>حدد جيلتي</div>}
-                      className="selectdir"
-                      defaultValue={Offset}
-                      onChange={setOffset}
-                      options={OffsetsAr}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                  </div>
+                <div className="col-sm">
+                  <Select
+                    placeholder={<div>Offset</div>}
+                    defaultValue={Offset}
+                    onChange={setOffset}
+                    options={Offsets}
+                    isClearable={true}
+                    isSearchable={true}
+                    onBlur={() =>
+                      Offset === ""
+                        ? setErrorOffset("Offset is required")
+                        : setErrorOffset("")
+                    }
+                  />
+                  <span className="spanForm"> |</span>
+                  <span className="error">{ErrorOffset}</span>
                 </div>
+                <div className="col-sm">
+                  <Select
+                    required
+                    placeholder={<div>حدد جيلتي</div>}
+                    className="selectdir"
+                    defaultValue={Offset}
+                    onChange={setOffset}
+                    options={OffsetsAr}
+                    isClearable={true}
+                    isSearchable={true}
+                  />
+                </div>
+              </div>
 
               <div className="row mainrow">
                 <div className="col-sm">
@@ -368,22 +388,25 @@ const Nationality = () => {
                     controlId="floatingInput"
                     label="Value"
                     className="mb-3"
-                    onChange={(e) => setValue(e.target.value)}
-                    value={Value}
-                    onBlur={() => setErrorValue(value) }
+                    onChange={(e) => setValueEn(e.target.value)}
+                    value={ValueEn}
+                    onBlur={() => setErrorValueEn(value)}
                   >
-                    <Form.Control type="text" placeholder="Value" required/>
+                    <Form.Control type="text" placeholder="Value" required />
                   </FloatingLabel>
-                  {/* <span className="spanForm"> |</span> */}
-                  <span className="error">{ErrorValue.message}</span>
+                  <span className="spanForm"> |</span>
+                  <span className="error">{ErrorValueEn.message}</span>
                 </div>
-
-                {/* <div className="col-sm">
+          
+                <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="القيمة"
+                    onChange={(e) => setValueAr(e.target.value)}
+                    value={ValueAr}
                     className="mb-3 floatingInputAr "
                     style={{ direction: "rtl", left: "initial", right: 0 }}
+                    onBlur={() => setErrorValueAr(valuear)}
                   >
                     <Form.Control
                       type="text"
@@ -391,14 +414,15 @@ const Nationality = () => {
                       style={{ left: "%" }}
                     />
                   </FloatingLabel>
-                </div> */}
+                  <span className="errorAr">{ErrorValueAr.message}</span>
+                </div> 
               </div>
 
               <div className="ButtonSection">
                 <div>
-                <label className="Multipleownerlabel">
-                      Select Nationality Flag image
-                    </label>
+                  <label className="Multipleownerlabel">
+                    Select Nationality Flag image
+                  </label>
                   <input
                     type="file"
                     onChange={onSelectFile}

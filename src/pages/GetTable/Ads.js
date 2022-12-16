@@ -19,6 +19,8 @@ import Pagination from "./Pagination";
 import Form from 'react-bootstrap/Form';
 
 const Ads = () => {
+
+  const [Value, setValue] = useState(false);
   //for Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -82,6 +84,7 @@ const Ads = () => {
       </h2>
     );
   }
+  console.log(Value,"hai bhai hai")
 
   return (
     <>
@@ -142,7 +145,9 @@ const Ads = () => {
                                 <Form.Check 
                                   type="switch"
                                   id="custom-switch"
+                                  onChange={() => setValue(true)}
                                   // label="Check this switch"
+                                  value={Value}
                                 />
                                 </td>
                               <td className="table_delete_btn1">

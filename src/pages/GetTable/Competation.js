@@ -114,7 +114,7 @@ const Statistic = () => {
                 </h6>
 
                 <Link to="/addcompetition">
-                  <button>Add Category</button>
+                  <button>Add Competition</button>
                 </Link>
               </div>
             </div>

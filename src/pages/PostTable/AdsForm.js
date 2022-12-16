@@ -32,9 +32,9 @@ const AdsForm = () => {
      try {
     const formData = new FormData();
      formData.append("image", image);
-     formData.append("TitleEn", TitleEn+" ");
+     formData.append("TitleEn", TitleEn);
      formData.append("TitleAr", TitleAr);
-     formData.append("DescriptionEn", DescriptionEn+" ");
+     formData.append("DescriptionEn", DescriptionEn);
      formData.append("DescriptionAr", DescriptionAr);
      const res = await axios.post(`${window.env.API_URL}/uploadAds`, formData);
      swal({
@@ -71,7 +71,7 @@ const AdsForm = () => {
   }, [image]);
 
   const handlePreview = () => {
-    setImage('')
+    setImage()
   };
 
   const onSelectFile = (e) => {

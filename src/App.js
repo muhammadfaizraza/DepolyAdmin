@@ -115,6 +115,7 @@ import Seolisting from "./pages/GetTable/Seolisting";
 import SEOForm from "./pages/PostTable/SEOForm";
 import PublishRaceCompetition from "./pages/PostTable/Competition/PublishRaceCompetition";
 import NewsLetter from "./pages/GetTable/NewsLetter";
+import Forgetpage from "./pages/GetTable/Forgetpage";
 
 
 function App() {
@@ -222,6 +223,7 @@ function App() {
              <Route path="/seoform" element={<SEOForm />} />
              <Route path="/competitionrace" element={<PublishRaceCompetition />} />
              <Route path="/newsletter" element={<NewsLetter />} />
+             <Route path="/password/reset/:token" element={<Forgetpage />} />
 
              <Route path="*" element={<NotFound />} />
 

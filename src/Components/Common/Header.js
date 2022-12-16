@@ -12,12 +12,12 @@ const Header = () => {
   let {pathname} = useLocation();
   const dispatch = useDispatch();
   const { userToken,userInfo } = useSelector((state) => state.user)
-  useEffect(() => {
-    if (userToken) {
-      dispatch(getUserDetails());
-    }
+  // useEffect(() => {
+  //   if (userToken) {
+  //     dispatch(getUserDetails());
+  //   }
    
-  }, [userToken, dispatch]);
+  // }, [userToken, dispatch]);
 
   // if (!userInfo && !userToken) {
     

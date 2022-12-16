@@ -38,7 +38,6 @@ const Login = () => {
     dispatch(userLogin(data))  
     toast(error || customError)
   }
-
   useEffect(() => {
     if (userInfo) {
       window.location.reload(); 

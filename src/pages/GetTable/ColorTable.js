@@ -2,7 +2,7 @@ import React, { useEffect, Fragment,useState } from "react";
 import { fetchcolor, STATUSES } from "../../redux/getReducer/getColor";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
+
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -45,7 +45,7 @@ const ColorTable = () => {
   }, [dispatch]);
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteColor/${Id}`);
+    await axios.delete(`${window.env.API_URL}/softdeleteColor/${Id}`);
       swal({
         title: "Success!",
         text: "Data has been Deleted successfully ",

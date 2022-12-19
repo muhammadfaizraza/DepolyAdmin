@@ -7,8 +7,8 @@ export const STATUSES = Object.freeze({
     LOADING: 'loading',
 });
 
-const getDeletedEquipmentSlice = createSlice({
-    name: 'deletedequipment',
+const getDeletedCurrencySlice = createSlice({
+    name: 'deletedcurrency',
     initialState: {
         data:[],
         status : STATUSES.IDLE,
@@ -16,24 +16,26 @@ const getDeletedEquipmentSlice = createSlice({
 
     extraReducers: (builder) => {
         builder
-        .addCase(fetchdeletedequipment.pending, (state, action) => {
+        .addCase(fetchdeletedcurrency.pending, (state, action) => {
             state.status = STATUSES.LOADING;
         })
-        .addCase(fetchdeletedequipment.fulfilled, (state, action) => {
+        .addCase(fetchdeletedcurrency.fulfilled, (state, action) => {
             state.data = action.payload;
             state.status = STATUSES.IDLE
         }) 
-        .addCase(fetchdeletedequipment.rejected , (state,action) => {
+        .addCase(fetchdeletedcurrency.rejected , (state,action) => {
             state.status = STATUSES.ERROR;
         })
     }
 });
 
-export const {setequipment , setStatus} = getDeletedEquipmentSlice.actions;
-export default getDeletedEquipmentSlice.reducer;
+export const {setcurrency , setStatus} = getDeletedCurrencySlice.actions;
+export default getDeletedCurrencySlice.reducer;
 
-export const fetchdeletedequipment = createAsyncThunk('/equipmentgetdeleted/fetch', async() => {
-    const res = await axios.get(`${window.env.API_URL}/equipmentgetdeleted?keyword=&page=`);
+export const fetchdeletedcurrency = createAsyncThunk('/currencygetdeleted/fetch', async() => {
+    const res = await axios.get(`${window.env.API_URL}/currencygetdeleted?keyword=&page=`);
     const breederData = res.data;
     return breederData.data;
 })
+
+

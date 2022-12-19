@@ -775,7 +775,28 @@ const Sidebar = () => {
                     Equipment
                   </Link>
                 </div>
-
+                <div>
+                  <Link to="/deletedgender" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    Gender
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletednationality" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    Nationality
+                  </Link>
+                </div>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>

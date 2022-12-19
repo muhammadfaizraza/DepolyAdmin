@@ -102,7 +102,9 @@ const BreederTable = () => {
                     alignItems: "center",
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
-                ></h6>
+                >
+                  ""
+                </h6>
 
                 <Link to="/breeder">
                   <button>Add Breeder</button>

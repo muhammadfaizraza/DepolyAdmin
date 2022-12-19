@@ -124,6 +124,8 @@ import DeletedBreeder from "./Components/DeletedData/DeletedBreeder";
 import DeletedColor from "./Components/DeletedData/DeletedColor";
 import DeletedCurrency from "./Components/DeletedData/DeletedCurrency";
 import DeletedEquipment from "./Components/DeletedData/DeletedEquipment";
+import DeletedGender from "./Components/DeletedData/DeletedGender";
+import DeletedNationality from "./Components/DeletedData/DeletedNationality";
 
 
 function App() {
@@ -243,9 +245,11 @@ function App() {
              <Route path="/deletedcolor" element={< DeletedColor/>} />
              <Route path="/deletedcurrency" element={< DeletedCurrency/>} />
              <Route path="/deletedequipment" element={< DeletedEquipment/>} />
+             <Route path="/deletedgender" element={< DeletedGender/>} />
+             <Route path="/deletednationality" element={< DeletedNationality/>} />
            
            
-
+               
 
              <Route path="*" element={<NotFound />} />
 

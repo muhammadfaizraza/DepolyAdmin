@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment, useState } from "react";
-import { fetchdeletedequipment, STATUSES } from "../../redux/getDeletedreducer/DeletedEquipmentSlice";
+import { fetchdeletedgender, STATUSES } from "../../redux/getDeletedreducer/DeletedGenderSlice";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -10,91 +10,89 @@ import HorseAnimation from "../../assets/horselottie.json";
 import Pagination from "../../pages/GetTable/Pagination";
 import {FaTrashRestoreAlt} from "react-icons/fa"
 import { Modal } from "react-bootstrap";
-import EquipmentPopup from "../../Components/Popup/EquipmentPopup";
 import { BsEyeFill } from "react-icons/bs";
+import GenderPopup from "../Popup/GenderPopup";
 
 
-
-const DeletedEquipment = () => {
-
-  const [Disable , setDisable] = useState(true);
-  //for Modal
-  const [show, setShow] = useState(false);
-  const [modaldata, setmodaldata] = useState();
-  const handleClose = () => setShow(false);
-  const handleShow = async (data) => {
-    setmodaldata(data);
-    await setShow(true);
-  };
-  const Restorefunction = async ( id) => {
-    try{
+const DeletedGender = () => {
+    const [Disable , setDisable] = useState(true);
+    //for Modal
+    const [show, setShow] = useState(false);
+    const [modaldata, setmodaldata] = useState();
+    const handleClose = () => setShow(false);
+    const handleShow = async (data) => {
+      setmodaldata(data);
+      await setShow(true);
+    };
+    const Restorefunction = async ( id) => {
+      try{
+    
+      //buttons disable
+      setDisable(false)
+    
+     await axios.post(`${window.env.API_URL}/restoresoftdeleteAds/${id}`, );
+      // api 
+      // button enable
+      dispatch(fetchdeletedgender());
+      setDisable(true)
+      swal({
+        title: "Success!",
+        text: "Data has been added successfully ",
+        icon: "success",
+        button: "OK",
+      });
+    }catch (error) {
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
+    }
   
-    //buttons disable
-    setDisable(false)
   
-   await axios.post(`${window.env.API_URL}/restoresoftdeleteequipment/${id}`, );
-    // api 
-    // button enable
-    dispatch(fetchdeletedequipment());
-    setDisable(true)
-    swal({
-      title: "Success!",
-      text: "Data has been added successfully ",
-      icon: "success",
-      button: "OK",
-    });
-  }catch (error) {
-    const err = error.response.data.message;
-    swal({
-      title: "Error!",
-      text: err,
-      icon: "error",
-      button: "OK",
-    });
-  }
-
-
+    
+    }
+    const dispatch = useDispatch();
   
-  }
-  const dispatch = useDispatch();
-
-  const { data: deletedequipment, status } = useSelector((state) => state.deletedequipment);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(8)
-
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = deletedequipment.slice(indexOfFirstPost, indexOfLastPost);
-  const paginate = pageNumber => setCurrentPage(pageNumber);
-
-
-  useEffect(() => {
-    dispatch(fetchdeletedequipment());
-  }, [dispatch]);
-
-
-  if (status === STATUSES.LOADING) {
-    return (
-      <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
-    );
-  }
-
-  if (status === STATUSES.ERROR) {
-    return (
-      <h2
-        style={{
-          margin: "100px",
-        }}
-      >
-        Something went wrong!
-      </h2>
-    );
-  }
-
-
-
+    const { data: deletedgender, status } = useSelector((state) => state.deletedgender);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(8)
+  
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = deletedgender.slice(indexOfFirstPost, indexOfLastPost);
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+  
+  
+    useEffect(() => {
+      dispatch(fetchdeletedgender());
+    }, [dispatch]);
+  
+  
+    if (status === STATUSES.LOADING) {
+      return (
+        <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
+      );
+    }
+  
+    if (status === STATUSES.ERROR) {
+      return (
+        <h2
+          style={{
+            margin: "100px",
+          }}
+        >
+          Something went wrong!
+        </h2>
+      );
+    }
+  
+  
+  
   return (
-    <Fragment>
+     <Fragment>
       <div className="page">
         <div className="rightsidedata">
           <div
@@ -103,7 +101,7 @@ const DeletedEquipment = () => {
             }}
           >
             <div className="Header ">
-              <h4>Equipment Listings</h4>
+              <h4>Gender Listings</h4>
 
               <div>
                 <h6
@@ -116,8 +114,8 @@ const DeletedEquipment = () => {
 
                 </h6>
 
-                <Link to="/equipment">
-                  <button>Add Equipment</button>
+                <Link to="/gender">
+                  <button>Add Gender</button>
                 </Link>
               </div>
             </div>
@@ -144,12 +142,11 @@ const DeletedEquipment = () => {
                               <td>{item.NameAr}</td>
 
                               <td>{item.shortCode} </td>
-
                               <td className="table_delete_btn1">
                                 <FaTrashRestoreAlt onClick={() => Restorefunction(item._id)} disabled={!Disable}/>
                                 <BsEyeFill onClick={() => handleShow(item)}/>
                               </td>
-
+                          
                             </tr>
                           </>
                         );
@@ -157,20 +154,17 @@ const DeletedEquipment = () => {
                     </tbody>
                   </table>
                 </ScrollContainer>
-              
               </div>
-              <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={deletedequipment.length}
-          paginate={paginate}
-        />
             </>
           </div>
-      
-
+          <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={deletedgender.length}
+          paginate={paginate}
+        />
         </div>
       </div>
-
       <Modal
         show={show}
         onHide={handleClose}
@@ -179,13 +173,14 @@ const DeletedEquipment = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2 style={{ fontFamily: "inter" }}>Equipment</h2>
+          <h2 style={{fontFamily: "inter"}}>Gender</h2>
         </Modal.Header>
         <Modal.Body>
-          <EquipmentPopup data={modaldata} />
+        <GenderPopup data={modaldata} />
         </Modal.Body>
-
-        <Modal.Footer>
+   
+        
+    <Modal.Footer>
           <button onClick={handleClose} className="modalClosebtn">
             Close
           </button>
@@ -195,4 +190,4 @@ const DeletedEquipment = () => {
   )
 }
 
-export default DeletedEquipment
+export default DeletedGender

@@ -1,60 +1,49 @@
-import React, { useEffect, useState } from "react";
-import {
-  fetchraceCard,
-  STATUSES,
-} from "../../redux/getReducer/getRaceCard";
+import React, { useEffect, Fragment, useState } from "react";
+import { fetchdeletedracecard, STATUSES } from "../../redux/getDeletedreducer/DeletedRaceCardSlice";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostRaceCourse";
+import { Link } from "react-router-dom";
 import swal from "sweetalert";
-import { Link, useNavigate } from "react-router-dom";
-import { BiEdit } from "react-icons/bi";
-import { Modal } from "react-bootstrap";
-import RacecoursePopup from "../../Components/Popup/RacecoursePopup";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
-import axios from "axios";
+import Pagination from "../../pages/GetTable/Pagination";
+import {FaTrashRestoreAlt} from "react-icons/fa"
+import { Modal } from "react-bootstrap";
 import { BsEyeFill } from "react-icons/bs";
-import Pagination from "./Pagination";
+
+import RacecoursePopup from "../Popup/RacecoursePopup";
 
 
-const Racecourse = () => {
-  const [show, setShow] = useState(false);
-  const [modaldata, setmodaldata] = useState();
-  const handleClose = () => setShow(false);
-  const handleShow = async (data) => {
-    setmodaldata(data);
-    await setShow(true);
-  };
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const { data: raceCard, status } = useSelector((state) => state.raceCard);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(8)
-  
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = raceCard.slice(indexOfFirstPost, indexOfLastPost);
-  const paginate = pageNumber => setCurrentPage(pageNumber);
-  console.log(raceCard,'raceCard')
-  useEffect(() => {
-    dispatch(fetchraceCard());
-  }, [dispatch]);
-
-  const handleRemove = async (Id) => {
-    try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteRaceCard/${Id}`)
+const DeletedRaceCard = () => {
+    const [Disable , setDisable] = useState(true);
+    //for Modal
+    const [show, setShow] = useState(false);
+    const [modaldata, setmodaldata] = useState();
+    const handleClose = () => setShow(false);
+    const handleShow = async (data) => {
+      setmodaldata(data);
+      await setShow(true);
+    };
+    const Restorefunction = async ( id) => {
+      try{
+    
+      //buttons disable
+      setDisable(false)
+    
+     await axios.post(`${window.env.API_URL}/restoresoftdeleteracecard/${id}`, );
+      // api 
+      // button enable
+      dispatch(fetchdeletedracecard());
+      setDisable(true)
       swal({
         title: "Success!",
-        text: "Data has been Deleted successfully ",
+        text: "Data has been added successfully ",
         icon: "success",
         button: "OK",
       });
-      dispatch(fetchraceCard());
-    } catch (error) {
+    }catch (error) {
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -63,25 +52,47 @@ const Racecourse = () => {
         button: "OK",
       });
     }
-  };
-
-  if (status === STATUSES.LOADING) {
-    <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
-  }
-
-  if (status === STATUSES.ERROR) {
-    return (
-      <h2
-        style={{
-          margin: "100px",
-        }}
-      >
-        Something went wrong!
-      </h2>
-    );
-  }
   
-  return (
+  
+    
+    }
+    const dispatch = useDispatch();
+  
+    const { data: deletedracecard, status } = useSelector((state) => state.deletedracecard);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(8)
+  
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = deletedracecard.slice(indexOfFirstPost, indexOfLastPost);
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+  
+  
+    useEffect(() => {
+      dispatch(fetchdeletedracecard());
+    }, [dispatch]);
+  
+  
+    if (status === STATUSES.LOADING) {
+      return (
+        <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
+      );
+    }
+  
+    if (status === STATUSES.ERROR) {
+      return (
+        <h2
+          style={{
+            margin: "100px",
+          }}
+        >
+          Something went wrong!
+        </h2>
+      );
+    }
+
+
+    return (
     <>
       <div className="page">
         <div className="rightsidedata">
@@ -130,20 +141,9 @@ const Racecourse = () => {
                             <td>{item.RaceCardNameAr === null ? <>N/A</> : item.RaceCardNameAr}</td>
                             <td>{item.RaceCardCourseData&& item.RaceCardCourseData.TrackNameEn }</td>                   
                             <td className="table_delete_btn1">
-                            <BiEdit   onClick={() => navigate('/editraceCard',{
-                                state:{
-                                  RaceId:item
-                                }
-                              })}/>
-                              
-                              <MdDelete
-                                style={{
-                                  fontSize: "22px",
-                                }}
-                                onClick={() => handleRemove(item._id)}
-                              />
-                              <BsEyeFill onClick={() => handleShow(item)}/>
-                            </td>
+                                <FaTrashRestoreAlt onClick={() => Restorefunction(item._id)} disabled={!Disable}/>
+                                <BsEyeFill onClick={() => handleShow(item)}/>
+                              </td> 
                           </tr>
                         </>
                       );
@@ -155,7 +155,7 @@ const Racecourse = () => {
           </div>
           <Pagination
           postsPerPage={postsPerPage}
-          totalPosts={raceCard.length}
+          totalPosts={deletedracecard.length}
           paginate={paginate}
         />
         </div>
@@ -180,6 +180,7 @@ const Racecourse = () => {
         </Modal.Footer>
       </Modal>
     </>
-  );
-};
-export default Racecourse;
+  )
+}
+
+export default DeletedRaceCard

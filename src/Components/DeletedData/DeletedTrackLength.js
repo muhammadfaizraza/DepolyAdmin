@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment, useState } from "react";
-import { fetchdeletedcurrency, STATUSES } from "../../redux/getDeletedreducer/DeletedCurrencySlice";
+import { fetchdeletedtracklength, STATUSES } from "../../redux/getDeletedreducer/DeletedTrackLengthSlice";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -11,11 +11,8 @@ import Pagination from "../../pages/GetTable/Pagination";
 import {FaTrashRestoreAlt} from "react-icons/fa"
 import { Modal } from "react-bootstrap";
 import { BsEyeFill } from "react-icons/bs";
-import CurrencyPopup from "../Popup/CurrencyPopup";
-
-
-
-const DeletedCurrency = () => {
+import TrackLengthPopup from "../Popup/TrackLengthPopup";
+const DletedTrackLength = () => {
   const [Disable , setDisable] = useState(true);
   //for Modal
   const [show, setShow] = useState(false);
@@ -31,10 +28,10 @@ const DeletedCurrency = () => {
     //buttons disable
     setDisable(false)
   
-   await axios.post(`${window.env.API_URL}/restoresoftdeletecurrency/${id}`, );
+   await axios.post(`${window.env.API_URL}/restoresoftdeletetracklength/${id}`, );
     // api 
     // button enable
-    dispatch(fetchdeletedcurrency());
+    dispatch(fetchdeletedtracklength());
     setDisable(true)
     swal({
       title: "Success!",
@@ -57,18 +54,18 @@ const DeletedCurrency = () => {
   }
   const dispatch = useDispatch();
 
-  const { data: deletedcurrency, status } = useSelector((state) => state.deletedcurrency);
+  const { data: deletedtracklength, status } = useSelector((state) => state.deletedtracklength);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8)
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = deletedcurrency.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = deletedtracklength.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
 
   useEffect(() => {
-    dispatch(fetchdeletedcurrency());
+    dispatch(fetchdeletedtracklength());
   }, [dispatch]);
 
 
@@ -90,7 +87,6 @@ const DeletedCurrency = () => {
     );
   }
 
-
   return (
     <Fragment>
 
@@ -102,7 +98,7 @@ const DeletedCurrency = () => {
                 }}
               >
                 <div className="Header ">
-                  <h4>Currency Listings</h4>
+                  <h4>Track Length Listings</h4>
     
                   <div>
                     <h6
@@ -115,8 +111,8 @@ const DeletedCurrency = () => {
                       
                     </h6>
     
-                    <Link to="/currency">
-                      <button>Add Currency</button>
+                    <Link to="/tracklengthform">
+                      <button>Add Track Length</button>
                     </Link>
                   </div>
                 </div>
@@ -126,11 +122,9 @@ const DeletedCurrency = () => {
                     <table>
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Name Arabic </th>
-                        
-                          <th>Short Code</th>
-                        <th>Rate</th>
+                          <th>Track Length</th>
+                          <th>Race Course </th>
+                          <th>RaceCourse Image</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -139,15 +133,10 @@ const DeletedCurrency = () => {
                           return (
                             <>
                               <tr className="tr_table_class">
-                                <td>{item.NameEn}</td>
-                                <td>{item.NameAr}</td>
-    
-                                <td>{item.shortCode} </td>
-                                <td>{item.Rate} </td>
-                              
-                            
-                 
-                              <td className="table_delete_btn1">
+                                <td>{item.TrackLength}</td>
+                                <td>{item.TrackLengthRaceCourseData&& item.TrackLengthRaceCourseData.TrackNameEn  }</td>
+                                <td><img src={item.RaceCourseImage} alt=""/></td>
+                                <td className="table_delete_btn1">
                                 <FaTrashRestoreAlt onClick={() => Restorefunction(item._id)} disabled={!Disable}/>
                                 <BsEyeFill onClick={() => handleShow(item)}/>
                               </td>
@@ -164,43 +153,43 @@ const DeletedCurrency = () => {
               </div>
               <span className="plusIconStyle"></span>
               <Pagination
-              postsPerPage={postsPerPage}
-              totalPosts={deletedcurrency.length}
-              paginate={paginate}
-            />
+          postsPerPage={postsPerPage}
+          totalPosts={deletedtracklength.length}
+          paginate={paginate}
+        />
             </div>
           </div>
     
     
     
     
+    
+    
+    
           <Modal
-            show={show}
-            onHide={handleClose}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-          >
-            <Modal.Header closeButton>
-              <h2 style={{fontFamily: "inter"}}>Currency</h2>
-            </Modal.Header>
-            <Modal.Body>
-              <CurrencyPopup data={modaldata} />
-            </Modal.Body>
-            
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2 style={{fontFamily:"inter"}}>TrackLength </h2>
+        </Modal.Header>
+        <Modal.Body>
+          <TrackLengthPopup data={modaldata} />
+        </Modal.Body>
         <Modal.Footer>
-              <button onClick={handleClose} className="modalClosebtn">
-                Close
-              </button>
-            </Modal.Footer>
-          
-          </Modal>
-    
-    
-    
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
+        </Modal.Footer>
+      
+      </Modal>
     
      </Fragment>
+ 
   )
 }
 
-export default DeletedCurrency
+export default DletedTrackLength;

@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment, useState } from "react";
+import React, { useEffect,  useState } from "react";
 import { fetchdeletedads, STATUSES } from "../../redux/getDeletedreducer/DeletedAdsSlice";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,6 @@ import HorseAnimation from "../../assets/horselottie.json";
 import Pagination from "../../pages/GetTable/Pagination";
 import {FaTrashRestoreAlt} from "react-icons/fa"
 import { Modal } from "react-bootstrap";
-import EquipmentPopup from "../../Components/Popup/EquipmentPopup";
 import { BsEyeFill } from "react-icons/bs";
 
 import AdsPopup from "../Popup/AdsPopup";
@@ -133,7 +132,7 @@ const DeletedAds = () => {
                       <th>Description </th>
                       <th>Description Arabic</th>
                       <th>Image</th>
-                      <th>Active</th>
+                     
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -149,7 +148,11 @@ const DeletedAds = () => {
                             <td>
                               <img src={item.image} alt="" />
                             </td>
-                     
+                    
+                            <td className="table_delete_btn1">
+                                <FaTrashRestoreAlt onClick={() => Restorefunction(item._id)} disabled={!Disable}/>
+                                <BsEyeFill onClick={() => handleShow(item)}/>
+                              </td>
                          </tr>
                         </>
                       );

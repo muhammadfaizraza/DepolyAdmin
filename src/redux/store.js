@@ -55,67 +55,107 @@ import getDeletedNationality from "./getDeletedreducer/DeletedNationalitSlice";
 import getDeletedBreeder from "./getDeletedreducer/DeletedBreederSlice";
 import getDeletedCurrency from "./getDeletedreducer/DeletedCurrencySlice";
 import getDeletedAds from "./getDeletedreducer/DeletedAdsSlice";
+import getDeletedSeo from "./getDeletedreducer/DeletedSeoSlice";
+import getDeletedSlider from "./getDeletedreducer/DeletedSliderSlice";
+import getDeletedSponsor from "./getDeletedreducer/DeletedSponsorSlice";
+import getDeletedNews from "./getDeletedreducer/DeletedNewsSlice";
+import getDeletedOwner from "./getDeletedreducer/DeletedOwnerSlice";
+import getDeletedTrainer from "./getDeletedreducer/DeletedTrainerSlice";
+import getDeletedJockey from "./getDeletedreducer/DeletedJockeySlice";
+import getDeletedHorseKind from "./getDeletedreducer/DeltedHorseKindSlice";
+import getDeletedHorse from "./getDeletedreducer/DeletedHorseSlice";
+import getDeleteGroundType from "./getDeletedreducer/DeletedGroundTypeSlice";
+import getDeletedTrackLength from "./getDeletedreducer/DeletedTrackLengthSlice";
+import getDeletedRaceCourse from "./getDeletedreducer/DeletedRaceCourseSlice";
+import getDeletedRace from "./getDeletedreducer/DeletedRaceSlice";
+import getDeletedRaceCard from "./getDeletedreducer/DeletedRaceCardSlice";
+import getDeletedRaceName from "./getDeletedreducer/DeletedRaceNameSlice";
+import getDeletedRaceType from "./getDeletedreducer/DeletedRaceTypeSlice";
+import getDeletedRaceKind from "./getDeletedreducer/DeletedRaceKindSlice";
+import getDeletedMeeting from "./getDeletedreducer/DeletedMeetingSlice";
+import getDeletedVerdict from "./getDeletedreducer/DeletedVerdictSlice";
+
 
 
 const store = configureStore({
-  reducer: {
-    news: getNewsSlice,
-    ads: getAdsSlice,
-    sponsor: getSponsorSlice,
-    PostNews: PostNewsSlice,
-    PostSponsor: PostSponsor,
-    PostAds: PostAds,
-    horse: getHorseSlice,
-    trainer: getTrainerSlice,
-    race: getRaceSlice,
-    postTrainer: PostTrainer,
-    racecourse: getRaceCourseSlice,
-    postracecourse: PostRaceCourse,
-    jockey: getJockeySlice,
-    postjockey: PostJockey,
-    postHorse: PostHorse,
-    postrace: postRace,
-    user: userReducer,
-    owner: getOwnerSlice,
-    postowner: PostOwner,
-    slider: getSliderSlice,
-    postslider: PostSlider,
-    singleSlider: getSingleSlider,
-    userProfile: getUserDetails,
-    singlejockey: getSingleJockey,
-    singleowner: getSingleOwner,
-    singleracecourse: getSingleRacecourse,
-    color: getColor,
-    nationality: getNationality,
-    breeder: getBreeder,
-    currency: getCurrency,
-    gender: getGenderSlice,
-    trackLength: getTracklength,
-    meeting: getMeeting,
-    RaceType: getRacetype,
-    RaceName: getRaceName,
-    subscriber: getSubscriber,
-    raceKinds: getRaceKind,
-    HorseKind: getHorseKind,
-    tobePublishRace: getToBePublishRace,
-    tobeRaceResult: fetchtobeRaceResult,
-    groundtype: getGroundType,
-    equipment: getEquipment,
-    Result: getResultSlice,
-    verdict: getVerdict,
-    category: getCategory,
-    competition: getCompetition,
-    raceCard: getRaceCard,
-    Seo: getSeo,
-    AdminList: getAdminList,
-    deletedequipment: getDeletedEquipment,
-    deletedcolor: getDeletedColor,
-    deletedgender: getDeletedGender,
-    deletednationality: getDeletedNationality,
-    deletedbreeder:getDeletedBreeder,
-    deletedcurrency:getDeletedCurrency,
-    deletedads:getDeletedAds
-  },
+    reducer: {
+        news: getNewsSlice,
+        ads: getAdsSlice,
+        sponsor: getSponsorSlice,
+        PostNews: PostNewsSlice,
+        PostSponsor: PostSponsor,
+        PostAds: PostAds,
+        horse: getHorseSlice,
+        trainer: getTrainerSlice,
+        race: getRaceSlice,
+        postTrainer: PostTrainer,
+        racecourse: getRaceCourseSlice,
+        postracecourse: PostRaceCourse,
+        jockey: getJockeySlice,
+        postjockey: PostJockey,
+        postHorse: PostHorse,
+        postrace: postRace,
+        user: userReducer,
+        owner: getOwnerSlice,
+        postowner: PostOwner,
+        slider: getSliderSlice,
+        postslider: PostSlider,
+        singleSlider: getSingleSlider,
+        userProfile: getUserDetails,
+        singlejockey: getSingleJockey,
+        singleowner: getSingleOwner,
+        singleracecourse: getSingleRacecourse,
+        color: getColor,
+        nationality: getNationality,
+        breeder: getBreeder,
+        currency: getCurrency,
+        gender: getGenderSlice,
+        trackLength: getTracklength,
+        meeting: getMeeting,
+        RaceType: getRacetype,
+        RaceName: getRaceName,
+        subscriber: getSubscriber,
+        raceKinds: getRaceKind,
+        HorseKind: getHorseKind,
+        tobePublishRace: getToBePublishRace,
+        tobeRaceResult: fetchtobeRaceResult,
+        groundtype: getGroundType,
+        equipment: getEquipment,
+        Result: getResultSlice,
+        verdict: getVerdict,
+        category: getCategory,
+        competition: getCompetition,
+        raceCard: getRaceCard,
+        Seo: getSeo,
+        AdminList: getAdminList,
+        deletedequipment: getDeletedEquipment,
+        deletedcolor: getDeletedColor,
+        deletedgender: getDeletedGender,
+        deletednationality: getDeletedNationality,
+        deletedbreeder: getDeletedBreeder,
+        deletedcurrency: getDeletedCurrency,
+        deletedads: getDeletedAds,
+        deletedseo: getDeletedSeo,
+        deletedslider: getDeletedSlider,
+        deletedsponsor: getDeletedSponsor,
+        deletednews: getDeletedNews,
+        deletedowner: getDeletedOwner,
+        deletedtrainer: getDeletedTrainer,
+        deletedjockey: getDeletedJockey,
+        deletedhorsekind: getDeletedHorseKind,
+        deletedhorse: getDeletedHorse,
+        deletedgroundtype: getDeleteGroundType,
+        deletedtracklength: getDeletedTrackLength,
+        deletedracecourse: getDeletedRaceCourse,
+        deletedrace: getDeletedRace,
+        deletedracecard: getDeletedRaceCard,
+        deletedracename: getDeletedRaceName,
+        deletedracetype: getDeletedRaceType,
+        deletedracekind: getDeletedRaceKind,
+        deletedmeeting:getDeletedMeeting,
+        deletedverdict:getDeletedVerdict,
+
+    },
 });
 
 export default store;

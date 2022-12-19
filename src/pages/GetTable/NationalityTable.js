@@ -141,7 +141,7 @@ const NationalityTable = () => {
                               <td>{item.Abbrev}</td>
                               <td>{item.shortCode} </td>
                               <td>{item.Label} </td>
-                              <td>{item.Offset === 'true' ? <>True</> : <>Talse</>} </td>
+                              <td>{item.Offset === 'true' ? <>True</> : <>False</>} </td>
                               <td>{item.Value}</td>
 
                               <td>

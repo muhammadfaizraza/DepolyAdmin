@@ -126,6 +126,22 @@ import DeletedCurrency from "./Components/DeletedData/DeletedCurrency";
 import DeletedEquipment from "./Components/DeletedData/DeletedEquipment";
 import DeletedGender from "./Components/DeletedData/DeletedGender";
 import DeletedNationality from "./Components/DeletedData/DeletedNationality";
+import DeletedSeo from "./Components/DeletedData/DeletedSeo";
+import DeletedSlider from "./Components/DeletedData/DeletedSlider";
+import DeletedSponor from "./Components/DeletedData/DeletedSponor";
+import DeletedNews from "./Components/DeletedData/DeletedNews";
+import DeletedTrainer from "./Components/DeletedData/DeletedTrainer";
+import DeletedHorseKind from "./Components/DeletedData/DeletedHorseKind";
+import DeletedGroundType from "./Components/DeletedData/DeletedGroundType";
+import DeletedTrackLength from "./Components/DeletedData/DeletedTrackLength";
+import DeletedRaceCourse from "./Components/DeletedData/DeletedRaceCourse";
+import DeletedRace from "./Components/DeletedData/DeletedRace";
+import DeletedRaceCard from "./Components/DeletedData/DeletedRaceCard";
+import DeletedRaceName from "./Components/DeletedData/DeletedRaceName";
+import DeletedRaceType from "./Components/DeletedData/DeletedRaceType";
+import DeletedRaceKind from "./Components/DeletedData/DeletedRaceKind";
+import DeletedMeeting from "./Components/DeletedData/DeletedMeeting";
+import DeletedVerdict from "./Components/DeletedData/DeletedVerdict";
 
 
 function App() {
@@ -247,9 +263,29 @@ function App() {
              <Route path="/deletedequipment" element={< DeletedEquipment/>} />
              <Route path="/deletedgender" element={< DeletedGender/>} />
              <Route path="/deletednationality" element={< DeletedNationality/>} />
+             <Route path="/deletedseo" element={< DeletedSeo/>} />
+             <Route path="/deletedslider" element={< DeletedSlider/>} />
+             <Route path="/deletedsponsor" element={< DeletedSponor/>} />
+             <Route path="/deletednews" element={< DeletedNews/>} />
+             <Route path="/deletedtrainer" element={< DeletedTrainer/>} />
+             <Route path="/deletedhorsekind" element={< DeletedHorseKind/>} />
+             <Route path="/deletedgroundtype" element={< DeletedGroundType/>} />
+             <Route path="/deletedtracklength" element={<DeletedTrackLength/>} />
+             <Route path="/deletedracecourse" element={<DeletedRaceCourse/>} />
+             <Route path="/deletedrace" element={<DeletedRace/>} />
+             <Route path="/deletedracecard" element={<DeletedRaceCard/>} />
+             <Route path="/deletedracename" element={<DeletedRaceName/>} />
+             <Route path="/deletedracetype" element={<DeletedRaceType/>} />
+             <Route path="/deletedracekind" element={<DeletedRaceKind/>} />
+             <Route path="/deletedmeeting" element={<DeletedMeeting/>} />
+             <Route path="/deletedverdict" element={<DeletedVerdict/>} />
            
-           
-               
+             
+             
+             
+             
+             
+             
 
              <Route path="*" element={<NotFound />} />
 

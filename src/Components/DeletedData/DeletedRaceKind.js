@@ -1,21 +1,22 @@
-import React, { useEffect, Fragment,useState } from "react";
+import React, { useEffect, Fragment, useState } from "react";
+import { fetchdeletedracekind, STATUSES } from "../../redux/getDeletedreducer/DeletedRaceKindSlice";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { MdDelete } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
-import { fetchverdict, STATUSES } from "../../redux/getReducer/getVerdict";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
-import { BiEdit } from "react-icons/bi";
-import axios from "axios";
+import Pagination from "../../pages/GetTable/Pagination";
+import {FaTrashRestoreAlt} from "react-icons/fa"
 import { Modal } from "react-bootstrap";
-import VerdictPopup from "../../Components/Popup/VerdictPopup";
 import { BsEyeFill } from "react-icons/bs";
-import Pagination from "./Pagination";
 
+import RaceKindpopup from "../Popup/RaceKindpopup";
 
-const VerdictTable = () => {
+const DeletedRacKind = () => {
+  const [Disable , setDisable] = useState(true);
+  //for Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -23,43 +24,52 @@ const VerdictTable = () => {
     setmodaldata(data);
     await setShow(true);
   };
+  const Restorefunction = async ( id) => {
+    try{
+  
+    //buttons disable
+    setDisable(false)
+  
+   await axios.post(`${window.env.API_URL}/restoresoftdeleteracekind/${id}`, );
+    // api 
+    // button enable
+    dispatch(fetchdeletedracekind());
+    setDisable(true)
+    swal({
+      title: "Success!",
+      text: "Data has been added successfully ",
+      icon: "success",
+      button: "OK",
+    });
+  }catch (error) {
+    const err = error.response.data.message;
+    swal({
+      title: "Error!",
+      text: err,
+      icon: "error",
+      button: "OK",
+    });
+  }
+
 
   
+  }
   const dispatch = useDispatch();
-  const history = useNavigate();
-  const { data: verdict, status } = useSelector((state) => state.verdict);
 
+  const { data: deletedracekind, status } = useSelector((state) => state.deletedracekind);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8)
-  
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = verdict.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = deletedracekind.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
+
   useEffect(() => {
-    dispatch(fetchverdict());
+    dispatch(fetchdeletedracekind());
   }, [dispatch]);
-  const handleRemove = async (Id) => {
-    try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteVerdict/${Id}`)
-      swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
-      });
-      dispatch(fetchverdict());
-    } catch (error) {
-      const err = error.response.data.message;
-      swal({
-        title: "Error!",
-        text: err,
-        icon: "error",
-        button: "OK",
-      });
-    }
-  };
+
 
   if (status === STATUSES.LOADING) {
     return (
@@ -89,13 +99,21 @@ const VerdictTable = () => {
             }}
           >
             <div className="Header ">
-              <h4>Verdict Listing</h4>
+              <h4>Race Kind Listings</h4>
 
               <div>
-            
+                <h6
+                  style={{
+                    marginRight: "100px",
+                    alignItems: "center",
+                    color: "rgba(0, 0, 0, 0.6)",
+                  }}
+                >
 
-                <Link to="/verdict">
-                  <button>Add Verdict</button>
+                </h6>
+
+                <Link to="/RaceKindform">
+                  <button>Add Race Kind</button>
                 </Link>
               </div>
             </div>
@@ -122,25 +140,10 @@ const VerdictTable = () => {
                               <td>{item.NameAr}</td>
 
                               <td>{item.shortCode} </td>
-
                               <td className="table_delete_btn1">
-                                <BiEdit
-                                  onClick={() =>
-                                    history("/editverdict", {
-                                      state: {
-                                        verdictid: item,
-                                      },
-                                    })
-                                  }
-                                />
-                                <MdDelete
-                                  style={{
-                                    fontSize: "22px",
-                                  }}
-                                  onClick={() => handleRemove(item._id)}
-                                />
-                                <BsEyeFill  onClick={() => handleShow(item)}/>
-                              </td>
+                                <FaTrashRestoreAlt onClick={() => Restorefunction(item._id)} disabled={!Disable}/>
+                                <BsEyeFill onClick={() => handleShow(item)}/>
+                              </td> 
                             </tr>
                           </>
                         );
@@ -154,7 +157,7 @@ const VerdictTable = () => {
           <span className="plusIconStyle"></span>
           <Pagination
           postsPerPage={postsPerPage}
-          totalPosts={verdict.length}
+          totalPosts={deletedracekind.length}
           paginate={paginate}
         />
         </div>
@@ -167,17 +170,20 @@ const VerdictTable = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2 style={{fontFamily:"inter"}}>Verdict </h2>
+          <h2 style={{fontFamily: "inter"}}>Race Kind</h2>
         </Modal.Header>
         <Modal.Body>
-          <VerdictPopup data={modaldata} />
+          <RaceKindpopup data={modaldata} />
         </Modal.Body>
-     
+         <Modal.Footer>
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
+        </Modal.Footer>
      
       </Modal>
-    
     </Fragment>
-  );
-};
+  )
+}
 
-export default VerdictTable;
+export default DeletedRacKind

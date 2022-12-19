@@ -797,6 +797,172 @@ const Sidebar = () => {
                     Nationality
                   </Link>
                 </div>
+                <div>
+                  <Link to="/deletedseo" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    SEO
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedslider" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    Slider
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedsponsor" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    Sponsor
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletednews" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    News
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedhorsekind" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    Horse Kind
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedgroundtype" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+           Ground Type
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedtracklength" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+        Track Length
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedracecourse" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+       Race Course
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedrace" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+      Race
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedracecard" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+      Race Card
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedracename" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+      Race Name
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedracetype" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+      Race Type
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedracekind" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+      Race Kind
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedmeeting" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+     Meeting Type
+                  </Link>
+                </div>
+                
+                <div>
+                  <Link to="/deletedverdict" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+    Verdict
+                  </Link>
+                </div>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>

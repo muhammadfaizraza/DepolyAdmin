@@ -96,13 +96,7 @@ const Horse = () => {
               <h4>Horse Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
+       
 
                 <Link to="/horseform">
                   <button>Add Horse</button>
@@ -151,7 +145,7 @@ const Horse = () => {
                                 </Moment>
                               </td>
 
-                              <td>{item.SexModelData.NameEn}</td>
+                              <td>{item.SexModelData === null ? <>N/A</>: <>{item.SexModelData.NameEn}</>}</td>
 
                               <td>{item.ColorIDData === null ? <>N/A</> : item.ColorIDData.NameEn} </td>
                               {/* <td>{item.KindOfHorse === '' ? <>N/A</>: item.KindOfHorse}</td> */}

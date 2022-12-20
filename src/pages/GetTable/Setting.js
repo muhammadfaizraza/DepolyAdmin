@@ -28,9 +28,9 @@ const navigate = useNavigate();
         <div className='OngoingRaces' onClick={() => navigate('/AdminListing')}>
           <p>Admin Listing</p>
         </div>
-        <div className='ResultAwaited'  onClick={() => navigate('/subscriberlist')}>
+        {/* <div className='ResultAwaited'  onClick={() => navigate('/subscriberlist')}>
         <p>Subscriber</p>
-        </div>
+        </div> */}
         
        </div>
       </div>

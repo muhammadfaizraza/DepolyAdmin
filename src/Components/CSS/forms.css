@@ -737,3 +737,15 @@ span.newsErrorAr {
   size: 19%;
   left: 71%;
 }
+
+.userfilter{
+display: flex;
+}
+.calenderuser{
+}
+.calendericon {
+  margin: 0px 20px 0 25px;
+  font-size: 36px;
+  color: #19469D;
+  cursor: pointer;
+}

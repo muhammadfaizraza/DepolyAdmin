@@ -73,7 +73,7 @@ export const getUserDetails = createAsyncThunk(
         },
       }
 
-      const { data } = await axios.get(`${window.env.API_URL}/singlesubscriber/${Cookies.get('id')}`, config)
+      const { data } = await axios.get(`${window.env.API_URL}/singleAdmin/${Cookies.get('id')}`, config)
       return data
     } catch (error) {
       if (error.response && error.response.data.message) {

@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchAds, STATUSES } from "../../redux/getReducer/getAdsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostAds";
 import { Link } from "react-router-dom";
-import { edit } from "../../redux/postReducer/PostAds";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import AdsPopup from "../../Components/Popup/AdsPopup";
@@ -37,7 +35,6 @@ const Ads = () => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = allads.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const aaa = ''
   const history = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {

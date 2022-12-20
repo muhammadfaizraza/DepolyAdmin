@@ -951,7 +951,28 @@ const Sidebar = () => {
      Meeting Type
                   </Link>
                 </div>
-                
+                <div>
+                  <Link to="/deletedcategory" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+   Competition Category
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/deletedcompetition" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+   Competition 
+                  </Link>
+                </div>
                 <div>
                   <Link to="/deletedverdict" className="mylink"   onClick={() => {
                       window.scrollTo({

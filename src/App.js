@@ -142,6 +142,8 @@ import DeletedRaceType from "./Components/DeletedData/DeletedRaceType";
 import DeletedRaceKind from "./Components/DeletedData/DeletedRaceKind";
 import DeletedMeeting from "./Components/DeletedData/DeletedMeeting";
 import DeletedVerdict from "./Components/DeletedData/DeletedVerdict";
+import DeletedCategory from "./Components/DeletedData/DeletedCategory";
+import DeletedCompetition from "./Components/DeletedData/DeletedCompetition";
 
 
 function App() {
@@ -279,8 +281,9 @@ function App() {
              <Route path="/deletedracekind" element={<DeletedRaceKind/>} />
              <Route path="/deletedmeeting" element={<DeletedMeeting/>} />
              <Route path="/deletedverdict" element={<DeletedVerdict/>} />
-           
-             
+             <Route path="/deletedcategory" element={<DeletedCategory/>} />
+           <Route path="/deletedcompetition" element={<DeletedCompetition/>} />
+               
              
              
              

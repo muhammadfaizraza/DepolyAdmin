@@ -99,3 +99,11 @@ button:focus, input:focus, a:focus {
 .page-link {
   cursor: pointer;
 }
+.searchLottie{
+  height: 100px !important;
+}
+.homeLottie{
+
+  height: 100px !important;
+
+}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import { fetchsubscriber ,STATUSES} from "../../redux/getReducer/getSubscriber";
 import { useNavigate } from "react-router-dom";
@@ -8,11 +8,33 @@ import swal from 'sweetalert';
 import axios from "axios";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
+import Pagination from "../GetTable/Pagination";
+import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css';
+import { BiFilter } from 'react-icons/bi';
+
 
 const SubscriberList = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const { data: subscriber, status } = useSelector((state) => state.subscriber);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(6);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = subscriber.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
+
+  const [ShowCalender, setShowCalender] = useState(false)
 
   useEffect(() => {
     dispatch(fetchsubscriber());
@@ -77,6 +99,8 @@ const SubscriberList = () => {
   //       }
   //     });
   // };
+ 
+
   return (
     <>
       <div className="page">
@@ -86,8 +110,9 @@ const SubscriberList = () => {
               marginTop: "30px",
             }}
           >
+              
             <div className="Header ">
-              <h4>Subscriber List</h4>
+              <h4>User Management</h4>
               <div>
                 <h6
                   style={{
@@ -96,10 +121,33 @@ const SubscriberList = () => {
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
                 >
-                  
+                  <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+                  <button>Export CSV</button>
                 </h6>
 
                 
+              </div>
+            </div>
+            <div className="userfilter">
+              <div>
+              
+              {
+                ShowCalender ? <div className="calenderuser">
+                <DateRangePicker
+                 onChange={item => setState([item.selection])}
+                 showSelectionPreview={true}
+                 moveRangeOnFirstSelection={false}
+                 months={2}
+                 ranges={state}
+                 direction="horizontal"
+               />
+                </div>:<></>
+              }
+              </div>
+              <div>
+                <select>
+                  <option></option>
+                </select>
               </div>
             </div>
             <>
@@ -119,7 +167,7 @@ const SubscriberList = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {subscriber.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         const { role } = item;
                         return (
                             <tr className="tr_table_class">
@@ -152,15 +200,21 @@ const SubscriberList = () => {
                   </table>
                 </ScrollContainer>
               </div>
-              <div className="ButtonSection">
+              {/* <div className="ButtonSection">
                    
                   <button type="submit" className="SubmitButton" onClick={() => history(-1)}>
                     Back
                   </button>
-              </div>
+              </div> */}
             </>
           </div>
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={subscriber.length}
+            paginate={paginate}
+          />
         </div>
+        
       </div>
     </>
   );

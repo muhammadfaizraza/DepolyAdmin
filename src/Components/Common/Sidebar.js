@@ -673,6 +673,34 @@ const Sidebar = () => {
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="15">
+              <Accordion.Header>User Management</Accordion.Header>
+              <Accordion.Body className="AccordionBody">
+                <div>
+                  <Link to="/subscriberlist" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    View User
+                  </Link>
+                </div>
+                <div>
+                  
+                  <Link to="/subscriberlist" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    View Subscriber
+                  </Link>
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="16">
               <Accordion.Header>Deleted Table</Accordion.Header>
               <Accordion.Body className="AccordionBody">
                 <div>
@@ -871,7 +899,7 @@ const Sidebar = () => {
                         behavior: "smooth",
                       });
                     }}>
-        Track Length
+                     Track Length
                   </Link>
                 </div>
                 <div>
@@ -882,7 +910,7 @@ const Sidebar = () => {
                         behavior: "smooth",
                       });
                     }}>
-       Race Course
+                   Race Course
                   </Link>
                 </div>
                 <div>
@@ -947,8 +975,8 @@ const Sidebar = () => {
                         left: 0,
                         behavior: "smooth",
                       });
-                    }}>
-     Meeting Type
+                     }}>
+                    Meeting Type
                   </Link>
                 </div>
                 <div>
@@ -981,7 +1009,7 @@ const Sidebar = () => {
                         behavior: "smooth",
                       });
                     }}>
-    Verdict
+                     Verdict
                   </Link>
                 </div>
               </Accordion.Body>

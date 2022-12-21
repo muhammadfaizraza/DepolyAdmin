@@ -227,10 +227,10 @@ const Races = () => {
                                   }`,
                                 }}
                               >
-                                {item.RaceNameModelData.NameEn}
+                                {item.RaceNameModelData === null ? <>N/A</> : item.RaceNameModelData.NameEn}
                               </td>
-                              <td>{item.RaceNameModelData.NameAr} </td>
-                              <td>{item.RaceTypeModelData.NameEn} </td>
+                              <td>{item.RaceNameModelData === null ? <>N/A</> : item.RaceNameModelData.NameAr} </td>
+                              <td>{item.RaceTypeModelData === null ? <>N/A</> : item.RaceTypeModelData.NameEn} </td>
                               <td>
                                 {item.RaceCourseData === null ? (
                                   <>N/A</>

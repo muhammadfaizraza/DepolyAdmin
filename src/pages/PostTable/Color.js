@@ -90,6 +90,7 @@ const Color = () => {
     }
   };
 
+  console.log(colorshortcode)
   const history = useNavigate();
   const { pathname } = useLocation();
 
@@ -168,7 +169,7 @@ const Color = () => {
                       // }
                     
                     >
-                      <Form.Control type="number" placeholder="Description" value={colorshortcode[0].maxshortCode}/>
+                      <Form.Control type="text" disabled placeholder="Description" value={colorshortcode.length === 0 ? <>N/A</> : colorshortcode[0].maxshortCode}/>
                   </FloatingLabel>
                  
 									

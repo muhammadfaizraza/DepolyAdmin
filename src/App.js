@@ -90,6 +90,8 @@ import Verdict from "./pages/PostTable/Verdict";
 import Setting from "./pages/GetTable/Setting";
 import AdminProfile from "./pages/Setting/AdminProfile";
 import AdminListing from "./pages/Setting/AdminList";
+import AddPoint from "./pages/PostTable/PointForm";
+import ViewPoint from "./pages/GetTable/PointTable";
 
 import SubscriberList from "./pages/Setting/SubscriberList";
 import AdminRole from "./pages/Setting/AdminRole";
@@ -251,7 +253,11 @@ function App() {
              <Route path="/seoform" element={<SEOForm />} />
              <Route path="/competitionrace" element={<PublishRaceCompetition />} />
              <Route path="/newsletter" element={<NewsLetter />} />
-         
+             <Route path="/viewcompetitionPoint" element={<ViewPoint />} />
+             <Route path="/addcompetitionPoint" element={<AddPoint />} />
+
+
+
              <Route path="/password/reset/:token" element={<Forgetpage />} />
 
  {/* Deleted Data */}
@@ -282,7 +288,7 @@ function App() {
              <Route path="/deletedmeeting" element={<DeletedMeeting/>} />
              <Route path="/deletedverdict" element={<DeletedVerdict/>} />
              <Route path="/deletedcategory" element={<DeletedCategory/>} />
-           <Route path="/deletedcompetition" element={<DeletedCompetition/>} />
+             <Route path="/deletedcompetition" element={<DeletedCompetition/>} />
                
              
              

@@ -1,23 +1,21 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
-import { fetchcolorshortcode } from "../../redux/getReducer/getcolorshortcode";
-import { useSelector ,useDispatch } from "react-redux";
 
-const Color = () => {
+const PointForm = () => {
   //for errors
   const [Error , setError] =useState("")
   const [ErrorAr , setErrorAr] =useState("")
-  const dispatch = useDispatch();
-  const {data:colorshortcode} = useSelector((state) => state.colorshortcode)
+  
   const [registeration, setregisteration] = useState({
     NameEn: "",
     NameAr: "",
   });
+  const [records, setrecords] = useState("");
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -25,9 +23,6 @@ const Color = () => {
     setregisteration({ ...registeration, [name]: value });
   };
 
-  useEffect(() => {
-    dispatch(fetchcolorshortcode());
-  },[dispatch])
 
   const data1 =  (JSON.stringify(
     TextInputValidation(
@@ -37,8 +32,10 @@ const Color = () => {
     )
   ));
 
+  console.log(data1,'asdasd')
 
   const obj = JSON.parse(data1);
+  console.log(obj.status,'aszxZ2dasd')
  const data2 =  (JSON.stringify(
     TextInputValidation(
       "ar",
@@ -102,14 +99,14 @@ const Color = () => {
               marginTop: "30px",
             }}
           >
-            <div className="Headers">Create Color</div>
+            <div className="Headers">Create Point Table</div>
             <div className="form">
               <form onSubmit={submit}>
                 <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="Name"
+                      label="Points"
                       className="mb-3"
                       name="Name"
                     >
@@ -118,6 +115,52 @@ const Color = () => {
                         onChange={handleChange}
                         value={registeration.NameEn}
                         name="NameEn"
+                        type="number"
+                        placeholder="Name"
+                        onBlur={() =>
+                         setError(obj)
+                              
+                        }
+                      />
+                    </FloatingLabel>
+                 
+                    <span className="spanForm"> |</span>
+                   
+                  </div>
+
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="BonusPoints"
+                      className="mb-3"
+                      name="Name"
+                    >
+                      <Form.Control
+                        name="BonusPoints"
+                        onChange={handleChange}
+                        value={registeration.NameAr}
+                        type="number"
+                        placeholder="BonusPoints"
+                        required
+                        
+                     
+                      />
+                    </FloatingLabel>
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Type"
+                      className="mb-3"
+                      name="Name"
+                    >
+                      <Form.Control
+                        required
+                        onChange={handleChange}
+                        value={registeration.NameEn}
+                        name="Type"
                         type="text"
                         placeholder="Name"
                         onBlur={() =>
@@ -128,59 +171,37 @@ const Color = () => {
                     </FloatingLabel>
                  
                     <span className="spanForm"> |</span>
-                    <span className="error" style={styles.popup}
-                    >{Error.message}</span>
+                   
                   </div>
 
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
-                      className="mb-3 floatingInputAr"
+                      label="Length"
+                      className="mb-3"
                       name="Name"
-                      style={{ direction: "rtl" }}
                     >
                       <Form.Control
                         name="NameAr"
                         onChange={handleChange}
                         value={registeration.NameAr}
-                        type="text"
-                        placeholder="اسم"
+                        type="number"
+                        placeholder="Length"
                         required
-                        onBlur={() =>
-                          setErrorAr(objAr)
-                               
-                         }
+                        
                      
                       />
                     </FloatingLabel>
-                    <span className="errorAr" style={stylesAr.popupAr} >{ErrorAr.message}</span>
                   </div>
                 </div>
-                <div className="row mainrow">
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="Short Code"
-                      className="mb-3"
-                      // onChange={(e) =>
-                      //   setState({ ...state1, shortCode: e.target.value })
-                      // }
-                    
-                    >
-                      <Form.Control type="number" placeholder="Description" value={colorshortcode[0].maxshortCode}/>
-                  </FloatingLabel>
-                 
-									
-                  </div>
-                </div>
+                
 
                 <div
                   className="ButtonSection "
                   style={{ justifyContent: "end" }}
                 >
                   <button Name="submit" className="SubmitButton">
-                    Add Color
+                    Add Point Table
                   </button>
                 </div>
               </form>
@@ -192,4 +213,4 @@ const Color = () => {
   );
 };
 
-export default Color;
+export default PointForm;

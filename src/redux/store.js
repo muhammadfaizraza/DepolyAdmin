@@ -76,6 +76,7 @@ import getDeletedMeeting from "./getDeletedreducer/DeletedMeetingSlice";
 import getDeletedVerdict from "./getDeletedreducer/DeletedVerdictSlice";
 import getDeletedCategory from "./getDeletedreducer/DeletedCategorySlice";
 import getDeletedCompetition from "./getDeletedreducer/DeletedCompetitionSlice";
+import getcolorshortcode from "./getReducer/getcolorshortcode";
 
 const store = configureStore({
   reducer: {
@@ -156,6 +157,7 @@ const store = configureStore({
     deletedverdict: getDeletedVerdict,
     deletedcategory: getDeletedCategory,
     deletedCompetition:getDeletedCompetition,
+    colorshortcode:getcolorshortcode
   },
 });
 

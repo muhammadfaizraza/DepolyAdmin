@@ -56,7 +56,7 @@ const DeletedCurrency = () => {
   
   }
   const dispatch = useDispatch();
-
+  
   const { data: deletedcurrency, status } = useSelector((state) => state.deletedcurrency);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8)
@@ -74,7 +74,10 @@ const DeletedCurrency = () => {
 
   if (status === STATUSES.LOADING) {
     return (
-      <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
+      <Lottie animationData={HorseAnimation} loop={true} className="Lottie searchLottie" style={{
+        height: '100px',
+        width: "100px"
+      }} />
     );
   }
 

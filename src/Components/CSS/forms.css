@@ -746,6 +746,43 @@ display: flex;
 .calendericon {
   margin: 0px 20px 0 25px;
   font-size: 36px;
-  color: #19469D;
+  color: #000;
   cursor: pointer;
+}
+
+.filtertextform {
+  padding: 20px;
+}
+.filtertextform > input  {
+  margin: 24px;
+}
+.filtertextform > select {
+  margin: 24px;
+}
+
+button.filterbtn {
+    float: right;
+    margin: -100px 55px 0 0;
+    background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
+    border-radius: 40px;
+    width: 186px;
+    height: 51px;
+    color: white;
+    border: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15.5949px;
+    line-height: 19px;
+}
+a.csvclass {
+  text-decoration: none;
+  font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15.5949px;
+    line-height: 19px;
+    padding-top: 7px;
+    color: #000000;
+    padding-left: 6px;
 }

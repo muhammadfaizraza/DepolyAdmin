@@ -13,7 +13,20 @@ import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css';
 import { BiFilter } from 'react-icons/bi';
+import { Country_Name, Country_NameAr } from "../../Components/Common/Country";
+import { CSVLink } from "react-csv";
 
+
+const statusData = [
+  {
+    id:1,
+    value:'Approved'
+  },
+  {
+    id:1,
+    value:'Not Approved'
+  }
+]
 
 const SubscriberList = () => {
   const dispatch = useDispatch();
@@ -122,17 +135,22 @@ const SubscriberList = () => {
                   }}
                 >
                   <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                  <button>Export CSV</button>
+                  <CSVLink data={subscriber} separator={";"} filename={"MKS User.csv"} className='csvclass'>
+                        Export CSV
+                    </CSVLink>
                 </h6>
 
                 
               </div>
             </div>
-            <div className="userfilter">
+            
               <div>
               
               {
-                ShowCalender ? <div className="calenderuser">
+                ShowCalender ?
+                <>
+                <div className="userfilter">
+                <div className="calenderuser">
                 <DateRangePicker
                  onChange={item => setState([item.selection])}
                  showSelectionPreview={true}
@@ -141,15 +159,53 @@ const SubscriberList = () => {
                  ranges={state}
                  direction="horizontal"
                />
-                </div>:<></>
+                </div>
+                <div className="filtertextform">
+                <select
+                                class="form-control"
+                                id="exampleFormControlSelect1"
+                                name="country"
+                                required
+                              >
+                                {Country_Name.map((item) => {
+                                  return (
+                                    <option
+                                      key={item.country_id}
+                                      name="country"
+                                    >
+                                      {item.country_name}
+                                    </option>
+                                  );
+                                })}
+            </select>
+            <input type='text' class="form-control" placeholder="Enter Passport Number"/>
+            <input type='text' class="form-control" placeholder="Enter Email"/>
+            <input type='text' class="form-control" placeholder="Enter Phone Number"/>
+            <select
+                                class="form-control"
+                                id="exampleFormControlSelect1"
+                                name="country"
+                                required
+                              >
+                                {statusData.map((item) => {
+                                  return (
+                                    <option
+                                      key={item.id}
+                                      name="country"
+                                    >
+                                      {item.value}
+                                    </option>
+                                  );
+                                })}
+               </select>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </>:<></>
               }
               </div>
-              <div>
-                <select>
-                  <option></option>
-                </select>
-              </div>
-            </div>
+              
             <>
               <div className="div_maintb">
                 <ScrollContainer className="scroll-container">

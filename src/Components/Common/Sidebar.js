@@ -1040,7 +1040,7 @@ const Sidebar = () => {
               NewsLetter
             </Link>
           </div> */}
-          <hr />
+          {/* <hr /> */}
           
           <div className="SettingSec">
             <Link

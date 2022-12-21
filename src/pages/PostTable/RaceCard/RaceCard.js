@@ -17,7 +17,7 @@ import { AiOutlineAim } from "react-icons/ai";
 import {AiOutlineReload} from "react-icons/ai"
 import { Fragment } from "react";
 import { Modal } from "react-bootstrap";
-import NationalityPopup from "../Nationality";
+import NationalityPopup from "../RaceCourseForm";
 
 
 const Nationality = () => {
@@ -241,7 +241,7 @@ dispatch(fetchracecourse())
        centered
      >
        <Modal.Header closeButton>
-         <h2>Nationality</h2>
+         <h2>Race Course</h2>
        </Modal.Header>
        <Modal.Body>
          < NationalityPopup/>

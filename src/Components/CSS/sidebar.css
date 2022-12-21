@@ -49,8 +49,15 @@
     font-family: 'Inter';
     font-weight: 300;
     font-size: 15.5949px;
-    margin-bottom: 15px;
-    margin-top: 50px;
+    /* margin-bottom: 15px; */
+    /* margin-top: 10px; */
+    /* top: 0; */
+    bottom: 0;
+    position: sticky;
+    background: #E8E8E8;
+    height: 60px;
+    padding: 20px 0 0px 0px;
+    border-top: 1.5px solid rgb(103, 102, 102);
 }
 .accordion-button::after {
     display: none;
@@ -94,7 +101,8 @@ cursor: pointer;
 }
 
 .adminsidebar {
- 
+    height: 87vh;
     overflow: auto;
     margin-top: 20px;
+    border-radius: 1px 39px 50px 0px;
 }

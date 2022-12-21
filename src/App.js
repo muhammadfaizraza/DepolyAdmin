@@ -93,7 +93,8 @@ import AdminListing from "./pages/Setting/AdminList";
 import AddPoint from "./pages/PostTable/PointForm";
 import ViewPoint from "./pages/GetTable/PointTable";
 
-import SubscriberList from "./pages/Setting/SubscriberList";
+import Userlist from "./pages/Setting/UserList";
+import Subscriberlist from "./pages/Setting/SubscriberList";
 import AdminRole from "./pages/Setting/AdminRole";
 import RaceKind from "./pages/GetTable/RaceKind";
 import RaceKindForm from "./pages/PostTable/RaceKind";
@@ -110,6 +111,8 @@ import RaceCard from './pages/PostTable/RaceCard/RaceCard'
 import { ToastContainer } from 'react-toastify';
 import NotFound from "./Components/Common/NotFound";
 import AddCompetition from "./pages/PostTable/Competition/AddCompetition";
+import NewCompetition from "./pages/PostTable/Competition/NewCompetition";
+
 import AddCategory from "./pages/PostTable/Competition/AddCategory";
 import CompetitionCategory from "./pages/GetTable/CompetitionCategory";
 import PublishRaceCard from "./pages/PostTable/RaceCard/PublishRaceCard";
@@ -182,7 +185,8 @@ function App() {
              <Route path='/setting' element={<Setting/>} />
              <Route path='/AdminProfile' element={<AdminProfile />} />
              <Route path='/AdminListing' element={<AdminListing />} />
-             <Route path='/subscriberlist' element={<SubscriberList />} />
+             <Route path='/userlist' element={<Userlist />} />
+             <Route path='/subscriberlist' element={<Subscriberlist />} />
              <Route path='/AddRole' element={<AdminRole />} />
              <Route path="/racecourse" element={<RaceCourse />} />
              <Route path="/races" element={<Races />} />
@@ -244,6 +248,8 @@ function App() {
              <Route path="/testTable" element={<TestTable />} />
              <Route path="/racecard" element={<RaceCard />} />
              <Route path="/addcompetition" element={<AddCompetition />} />
+             <Route path="/newcompetition" element={<NewCompetition />} />
+
              <Route path="/addCategory" element={<AddCategory />} />
              <Route path="/CategoryListing" element={<CompetitionCategory />} />
              <Route path="/publishracecard" element={<PublishRaceCard />} />

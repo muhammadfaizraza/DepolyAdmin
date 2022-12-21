@@ -1,21 +1,29 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
+import { fetchequipmentshortcode } from "../../redux/getShortCode/getequipmentshortcode";
+import { useSelector ,useDispatch } from "react-redux";
+
 
 const Equipment = () => {
   //for error
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
+  const dispatch = useDispatch();
+  const {data:equipmentshortcode} = useSelector((state) => state.equipmentshortcode)
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
 
   const history = useNavigate();
   const { pathname } = useLocation();
+ useEffect(() => {
+    dispatch(fetchequipmentshortcode());
+  },[dispatch])
 
   const submit = async (event) => {
     event.preventDefault();
@@ -101,6 +109,23 @@ const Equipment = () => {
                   <span className="errorAr">{ErrorAr.message}</span>
                 </div>
               </div>
+              <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Short Code"
+                      className="mb-3"
+                      // onChange={(e) =>
+                      //   setregisteration({ ...registeration, shortCode: e.target.value })
+                      // }
+                    
+                    >
+                      <Form.Control type="text"  placeholder="Description" value={equipmentshortcode.length === 0 ? <>N/A</> : equipmentshortcode[0].maxshortCode}/>
+                  </FloatingLabel>
+                 
+									
+                  </div>
+                </div>
 
               <div className="ButtonSection" style={{ justifyContent: "end" }}>
                 <button type="submit" className="SubmitButton">

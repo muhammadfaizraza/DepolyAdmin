@@ -685,7 +685,7 @@ const Sidebar = () => {
               <Accordion.Header>User Management</Accordion.Header>
               <Accordion.Body className="AccordionBody">
                 <div>
-                  <Link to="/subscriberlist" className="mylink"   onClick={() => {
+                  <Link to="/userlist" className="mylink"   onClick={() => {
                       window.scrollTo({
                         top: 0,
                         left: 0,

@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
-import { fetchcolorshortcode } from "../../redux/getReducer/getcolorshortcode";
+import { fetchcolorshortcode } from "../../redux/getShortCode/getcolorshortcode";
 import { useSelector ,useDispatch } from "react-redux";
 
 const Color = () => {
@@ -17,6 +17,7 @@ const Color = () => {
   const [registeration, setregisteration] = useState({
     NameEn: "",
     NameAr: "",
+    shortCode: ""
   });
 
   const handleChange = (e) => {
@@ -56,6 +57,8 @@ const Color = () => {
       const formData = new FormData();
       formData.append("NameEn", registeration.NameEn);
       formData.append("NameAr", registeration.NameAr + " ");
+      formData.append("shortCode", registeration.shortCode + " ");
+
       await axios.post(`${window.env.API_URL}/uploadColor`, formData);
       swal({
         title: "Success!",
@@ -164,12 +167,12 @@ const Color = () => {
                       controlId="floatingInput"
                       label="Short Code"
                       className="mb-3"
-                      // onChange={(e) =>
-                      //   setState({ ...state1, shortCode: e.target.value })
-                      // }
+                      onChange={(e) =>
+                        setregisteration({ ...registeration, shortCode: e.target.value })
+                      }
                     
                     >
-                      <Form.Control type="text" disabled placeholder="Description" value={colorshortcode.length === 0 ? <>N/A</> : colorshortcode[0].maxshortCode}/>
+                      <Form.Control type="text"  placeholder="Description" value={colorshortcode.length === 0 ? <>N/A</> : colorshortcode[0].maxshortCode}/>
                   </FloatingLabel>
                  
 									

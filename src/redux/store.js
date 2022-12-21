@@ -76,7 +76,20 @@ import getDeletedMeeting from "./getDeletedreducer/DeletedMeetingSlice";
 import getDeletedVerdict from "./getDeletedreducer/DeletedVerdictSlice";
 import getDeletedCategory from "./getDeletedreducer/DeletedCategorySlice";
 import getDeletedCompetition from "./getDeletedreducer/DeletedCompetitionSlice";
-import getcolorshortcode from "./getReducer/getcolorshortcode";
+
+import getcolorshortcode from "./getShortCode/getcolorshortcode";
+import getbreedershortcode from "./getShortCode/getbreedershortcode";
+import getcurrencyshortcode from "./getShortCode/getcurrencyshortcode";
+import getsexshortcode from "./getShortCode/getsexshortcode";
+import getgroundshortcode from "./getShortCode/getgroundtypeshortcode";
+import getmeetingshortcode from "./getShortCode/getmeetingtypeshortcode";
+import getracekindshortcode from "./getShortCode/getracekindshortcode";
+import getverdictshortcode from "./getShortCode/getverdictshortcode";
+import getnationalityshortcode from "./getShortCode/getnationalityshortcode";
+import getequipmentshortcode from "./getShortCode/getequipmentshortcode";
+import getracenameshortcode from "./getShortCode/getracenameshortcode";
+import getracetypeshortcode from "./getShortCode/getracetypeshortcode";
+import getNewLetter from "./getReducer/getNewLetter";
 
 const store = configureStore({
   reducer: {
@@ -157,7 +170,20 @@ const store = configureStore({
     deletedverdict: getDeletedVerdict,
     deletedcategory: getDeletedCategory,
     deletedCompetition:getDeletedCompetition,
-    colorshortcode:getcolorshortcode
+    colorshortcode:getcolorshortcode,
+    breedershortcode:getbreedershortcode,
+    currencyshortcode:getcurrencyshortcode,
+    equipmentshortcode:getequipmentshortcode,
+    groundshortcode:getgroundshortcode,
+    meetingshortcode:getmeetingshortcode,
+    nationalityshortcode:getnationalityshortcode,
+    racekindshortcode:getracekindshortcode,
+    racenameshortcode:getracenameshortcode,
+    racetypeshortcode:getracetypeshortcode,
+    sexshortcode:getsexshortcode,
+    verdictshortcode:getverdictshortcode,
+    newsletter:getNewLetter
+
   },
 });
 

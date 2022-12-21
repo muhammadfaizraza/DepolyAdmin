@@ -741,7 +741,8 @@ span.newsErrorAr {
 .userfilter{
 display: flex;
 }
-.calenderuser{
+.calenderuser {
+  margin-left: 15px;
 }
 .calendericon {
   margin: 0px 20px 0 25px;
@@ -785,4 +786,44 @@ a.csvclass {
     padding-top: 7px;
     color: #000000;
     padding-left: 6px;
+}
+
+.myselectioncompetition{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-right: 10rem;
+  padding-left: 1rem;
+}
+.myselectioncompetition > span {
+  color: #fff;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  padding: 18px;
+}
+
+.myselectioncompetition > span:nth-child(2) {
+  color: #fff;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  margin-left: 30px;
+}
+
+p.competitionrace1 {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 17px;
+}
+input[type='checkbox']{
+    width: 20px;
+    height: 100%;
 }

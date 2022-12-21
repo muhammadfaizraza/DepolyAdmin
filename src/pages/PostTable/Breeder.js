@@ -5,9 +5,13 @@ import { useNavigate, useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
+import { fetchbreedershortcode } from "../../redux/getShortCode/getbreedershortcode";
+import { useSelector ,useDispatch } from "react-redux";
 
 const Breeder = () => {
   //for error
+  const {data:breedershortcode} = useSelector((state) => state.breedershortcode)
+  const dispatch = useDispatch();
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
   const [ErrorDesc, setErrorDesc] = useState("");
@@ -58,6 +62,7 @@ const Breeder = () => {
     setImage(e.target.files[0]);
   };
   useEffect(() => {
+    dispatch(fetchbreedershortcode());
     if (!image) {
       setPreview(undefined);
       return;
@@ -67,7 +72,7 @@ const Breeder = () => {
 
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl);
-  }, [image]);
+  }, [image,dispatch]);
 
   const Name = JSON.stringify(
     TextInputValidation("en", NameEn, "Breeder English Name")
@@ -101,7 +106,6 @@ const Breeder = () => {
       color: ErrorAr.status === true ? "green" : "red",
     },
   };
-  console.log(Error.status);
 
   return (
     <div className="page">
@@ -155,7 +159,7 @@ const Breeder = () => {
                   </span>
                 </div>
               </div>
-
+              
               {/* <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
@@ -222,6 +226,22 @@ const Breeder = () => {
                   </span>
                 </div>
               </div>
+              <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Short Code"
+                      className="mb-3"
+                      // onChange={(e) =>
+                      //   setregisteration({ ...registeration, shortCode: e.target.value })
+                      // }
+                    
+                    >
+                      <Form.Control type="text"  placeholder="Description" value={breedershortcode.length === 0 ? <>N/A</> : breedershortcode[0].maxshortCode}/>
+                  </FloatingLabel>
+									
+                  </div>
+                </div>
               <div className="ButtonSection">
                 <div>
                   <label className="Multipleownerlabel">

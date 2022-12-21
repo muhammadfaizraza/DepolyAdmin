@@ -114,7 +114,23 @@ const GroundType = () => {
                   <span className="errorAr">{ErrorNameAr.message}</span>
                 </div>
               </div>
-
+              <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Short Code"
+                      className="mb-3"
+                      // onChange={(e) =>
+                      //   setregisteration({ ...registeration, shortCode: e.target.value })
+                      // }
+                    
+                    >
+                      <Form.Control type="text"  placeholder="Description" />
+                  </FloatingLabel>
+                 
+									
+                  </div>
+                </div>
               {/* <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel

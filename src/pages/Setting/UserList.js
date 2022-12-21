@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
-import { fetchnewsletter ,STATUSES} from "../../redux/getReducer/getNewLetter";
+import { fetchsubscriber ,STATUSES} from "../../redux/getReducer/getSubscriber";
 import { useNavigate } from "react-router-dom";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Moment from "react-moment";
@@ -13,20 +13,31 @@ import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css';
 import { BiFilter } from 'react-icons/bi';
+import { Country_Name, Country_NameAr } from "../../Components/Common/Country";
 import { CSVLink } from "react-csv";
-import { BiBlock } from "react-icons/bi";
 
+
+const statusData = [
+  {
+    id:1,
+    value:'Approved'
+  },
+  {
+    id:1,
+    value:'Not Approved'
+  }
+]
 
 const SubscriberList = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
-  const { data: newsletter, status } = useSelector((state) => state.newsletter);
+  const { data: subscriber, status } = useSelector((state) => state.subscriber);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(6);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = newsletter.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = subscriber.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const [state, setState] = useState([
     {
@@ -39,7 +50,7 @@ const SubscriberList = () => {
   const [ShowCalender, setShowCalender] = useState(false)
 
   useEffect(() => {
-    dispatch(fetchnewsletter());
+    dispatch(fetchsubscriber());
   }, [dispatch]);
 
   const handleRole = async (Id) => {
@@ -51,8 +62,8 @@ const SubscriberList = () => {
         icon: "success",
         button: "OK",
       });
-      history("/subscriberlist");
-      dispatch(fetchnewsletter());
+      history("/userlist");
+      dispatch(fetchsubscriber());
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -62,7 +73,7 @@ const SubscriberList = () => {
         button: "OK",
       });
     }
-    history("/subscriberlist");
+    history("/userlist");
   };
 
   if (status === STATUSES.LOADING) {
@@ -114,7 +125,7 @@ const SubscriberList = () => {
           >
               
             <div className="Header ">
-              <h4>Subscriber Management</h4>
+              <h4>User Management</h4>
               <div>
                 <h6
                   style={{
@@ -124,7 +135,7 @@ const SubscriberList = () => {
                   }}
                 >
                   <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                  <CSVLink data={newsletter} separator={";"} filename={"MKS User.csv"} className='csvclass'>
+                  <CSVLink data={subscriber} separator={";"} filename={"MKS User.csv"} className='csvclass'>
                         Export CSV
                     </CSVLink>
                 </h6>
@@ -150,8 +161,43 @@ const SubscriberList = () => {
                />
                 </div>
                 <div className="filtertextform">
-                
+                <select
+                                class="form-control"
+                                id="exampleFormControlSelect1"
+                                name="country"
+                                required
+                              >
+                                {Country_Name.map((item) => {
+                                  return (
+                                    <option
+                                      key={item.country_id}
+                                      name="country"
+                                    >
+                                      {item.country_name}
+                                    </option>
+                                  );
+                                })}
+            </select>
+            <input type='text' class="form-control" placeholder="Enter Passport Number"/>
             <input type='text' class="form-control" placeholder="Enter Email"/>
+            <input type='text' class="form-control" placeholder="Enter Phone Number"/>
+            <select
+                                class="form-control"
+                                id="exampleFormControlSelect1"
+                                name="country"
+                                required
+                              >
+                                {statusData.map((item) => {
+                                  return (
+                                    <option
+                                      key={item.id}
+                                      name="country"
+                                    >
+                                      {item.value}
+                                    </option>
+                                  );
+                                })}
+               </select>
                  </div>
                 
                 </div>
@@ -166,28 +212,42 @@ const SubscriberList = () => {
                   <table>
                     <thead>
                       <tr>
-                        <th>No #</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Passport No</th>
                         <th>Email</th>
-                        <th>createdAt</th>   
-                       <th style={{ textAlign: "center" }}>Action</th>
+                        <th>Phone Number</th>
+                        <th>createdAt</th>
+                        <th>Passport Picture</th>
+                        <th style={{ textAlign: "center" }}>Status</th>
                       </tr>
                     </thead>
                     <tbody>
                       {currentPosts.map((item, index) => {
+                        const { role } = item;
                         return (
                             <tr className="tr_table_class">
-                            <td>{index + 1}</td>
+                            <td>{item.FirstName}</td>
+                            <td>{item.LastName}</td>
+                            <td>{item.PassportNo}</td>
                             <td>{item.Email}</td>
+                            <td>{item.PhoneNumber}</td>
                             <td>
                               {" "}
                               <Moment format="YYYY/MM/DD">
                                 {item.createdAt}
                               </Moment>
                             </td>
-                            
+                            <td>
+                              <img src={item.PassportPicture} alt="" />
+                            </td>
                             <td style={{ textAlign: "center" }}>
-                               
-                                <BiBlock />
+                              <button className="Approvedbtn"  style={{
+                                  backgroundColor: `${
+                                    role === "approveduser"
+                                      ? "#4547EE"
+                                      : "#DE3E28"
+                                  }`}} onClick={() => handleRole(item._id)}>{item.role === 'approveduser' ? <>Approved</> : <>Not Approved</>}</button>
                             </td>
                           </tr>
                         );
@@ -206,7 +266,7 @@ const SubscriberList = () => {
           </div>
           <Pagination
             postsPerPage={postsPerPage}
-            totalPosts={newsletter.length}
+            totalPosts={subscriber.length}
             paginate={paginate}
           />
         </div>

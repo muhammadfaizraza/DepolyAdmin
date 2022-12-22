@@ -20,7 +20,7 @@ import { toast } from "react-toastify";
 
 
   const [checked, setChecked] = useState([]);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isChecked, setisChecked] = useState(true);
 
   console.log(state,'state')
  
@@ -80,17 +80,17 @@ import { toast } from "react-toastify";
   };
 
 
-  // useEffect(() => {
-  //   if(checked.length === saved1){
-  //     setIsDisabled(true)
-  //   }
-  // })
 
  
   const handleCheck = (event) => {
     var updatedList = [...checked];
     if (event.target.checked) {
+      if(checked.length == CompetitionId.CategoryCount){
+         alert('limit exceed');
+         return
+      }
       updatedList = [...checked, event.target.value];
+      
     } else {
       updatedList.splice(checked.indexOf(event.target.value), 1);
     }
@@ -118,11 +118,13 @@ import { toast } from "react-toastify";
             {
               race.map((item,index) => {
                 return(
-                  <div className="myselectiondata">
+                  <div className="myselectiondata" id={index}>
               <span>
               <label class="checkbox-label">
-                  <input type="checkbox" id={item._id} onChange={handleCheck}
-                   name="selectrace" disabled={isDisabled}  value={item._id}/>
+                  <input type="checkbox" id={index} onChange={handleCheck}
+                   name="selectrace" 
+                  
+                  value={item._id}/>
                   <span class="checkbox-custom rectangular"></span>
               </label>
               {/* <input type="checkbox" id="selectrace" onChange={(e) => setSelectedValue(e.target.value)} name="selectrace" value={item._id}/> */}

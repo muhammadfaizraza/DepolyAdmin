@@ -38,6 +38,14 @@ const WeatherTypes = [
   { id: "1", value: "Sunny", label: "Sunny" },
   { id: "2", value: "Cloudy", label: "Cloudy" },
 ];
+
+// const ResultStatus = [
+//   { id: "1", value: "Announced", label: "Announced" },
+//   { id: "2", value: "Awaited", label: "Awaited" },
+//   { id: "3", value: "Cancelled", label: "Cancelled" },
+
+// ];
+
 const WeatherTypesAr = [
   { id: "1", value: "مشمس", label: "مشمس" },
   { id: "2", value: "غائم", label: "غائم" },
@@ -382,7 +390,6 @@ const RaceForm = () => {
   const [RaceKind, setRaceKind] = useState("");
   const [DescriptionEn, setDescriptionEn] = useState("");
   const [DescriptionAr, setDescriptionAr] = useState("");
-  const [DayNTime, setDayNTime] = useState("");
   const [WeatherType, setWeatherType] = useState("");
   const [RaceStatus, setRaceStatus] = useState("");
   const [RaceCourse, setRaceCourse] = useState("");
@@ -393,12 +400,15 @@ const RaceForm = () => {
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
   const [RaceTyp, setRaceType] = useState("");
-  const [FirstPrice, setFirstPrice] = useState("");
-  const [SecondPrice, setSecondPrice] = useState("");
-  const [ThirdPrice, setThirdPrice] = useState("");
-  const [FourthPrice, setFourthPrice] = useState("");
-  const [FifthPrice, setFifthPrice] = useState("");
-  const [SixthPrice, setSixthPrice] = useState("");
+  const [DayNTime, setDayNTime] = useState("");
+
+
+  // const [FirstPrice, setFirstPrice] = useState("");
+  // const [SecondPrice, setSecondPrice] = useState("");
+  // const [ThirdPrice, setThirdPrice] = useState("");
+  // const [FourthPrice, setFourthPrice] = useState("");
+  // const [FifthPrice, setFifthPrice] = useState("");
+  // const [SixthPrice, setSixthPrice] = useState("");
 
   var today = new Date();
 
@@ -440,12 +450,12 @@ const RaceForm = () => {
       formData.append("RaceStatus", RaceStatus.value);
       formData.append("RaceCourse", RaceCourse.id);
       formData.append("WeatherIcon", WeatherIcon);
-      formData.append("FirstPrice", FirstPrice);
-      formData.append("SecondPrice", SecondPrice);
-      formData.append("ThirdPrice", ThirdPrice);
-      formData.append("FourthPrice", FourthPrice);
-      formData.append("FifthPrice", FifthPrice);
-      formData.append("SixthPrice", SixthPrice);
+      // formData.append("FirstPrice", FirstPrice);
+      // formData.append("SecondPrice", SecondPrice);
+      // formData.append("ThirdPrice", ThirdPrice);
+      // formData.append("FourthPrice", FourthPrice);
+      // formData.append("FifthPrice", FifthPrice);
+      // formData.append("SixthPrice", SixthPrice);
       formData.append("Sponsor", Sponsor.id);
       formData.append("WeatherDegree", WeatherDegree);
       formData.append("TrackLength", TrackLength.id);
@@ -994,49 +1004,7 @@ const RaceForm = () => {
                     />
                   </div>
                 </div>
-                {/* <div className="row mainrow">
-                  <div className="col-sm">
-                    <Select
-                      placeholder={<div>Active Jockey For The Race</div>}
-                      defaultValue={ActiveJockeyForTheRace}
-                      onChange={setActiveJockeyForTheRace}
-                      options={JockeyForTheRace}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                    <span className="spanForm">
-                      <OverlayTrigger
-                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
-                      >
-                        <span className="addmore" onClick={handleShowJockey}>
-                            +
-                          </span>
-                      </OverlayTrigger>
-                      <OverlayTrigger
-                        overlay={
-                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
-                        }
-                      >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
-                      </OverlayTrigger>{" "}
-                      |
-                    </span>
-                  </div>
-
-                  <div className="col-sm">
-                    <Select
-                      placeholder={<div>دورة السباق</div>}
-                      className="selectdir"
-                      defaultValue={ActiveJockeyForTheRace}
-                      onChange={ActiveJockeyForTheRace}
-                      options={JockeyForTheRace}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                  </div>
-                </div> */}
+                
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
@@ -1133,6 +1101,7 @@ const RaceForm = () => {
                     </FloatingLabel>
                   </div>
                 </div> */}
+                
                 <div className="row mainrow">
                   <div className="col-sm">
                      <DateTimePicker
@@ -1143,212 +1112,13 @@ const RaceForm = () => {
                       minDate={today}
                       maxDate={new Date("02-29-2023")}
                       yearPlaceholder="Time"
-                      // onBlur={() => DayNTime === "" ? setErrorDayNTime("Day and Time is required ") : setErrorDayNTime("")}
-
-                    />
-                    {/* <span className="spanForm"> |</span> */}
-                    {/* <span className="error">{DayNTime}</span> */}
-                  </div>
-                  {/* <div className="col-sm"  style={{ direction: "rtl" }}>
-                    <DateTimePicker
-                      onChange={setDayNTime}
-                      value={DayNTime}
-                      monthPlaceholder="Date "
-                      dayPlaceholder="&"
-                      minDate={today}
-                      maxDate={new Date("02-29-2023")}
-                      yearPlaceholder="Time"
                      
                     />
-                  </div> */}
-                </div>
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Enter 1st Prize"
-                      className="mb-3"
-                      onChange={(e) => setFirstPrice(e.target.value)}
-                      value={FirstPrice}
-                      min="0"
-                      onBlur={() => FirstPrice === "" ? setErrorFirstPrice("First Prize is required ") : setErrorFirstPrice("")}
-
-                    >
-                      <Form.Control
-                        type="number"
-                        min="0"
-                        placeholder="Enter 1st Prize"
-                      />
-                    </FloatingLabel>
-                    <span className="error">{ErrorFirstPrice}</span>
-                    {/* <span className="spanForm"> |</span> */}
+                   
                   </div>
-                  {/* <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="الجائزة الأولى "
-                      value={FirstPrice}
-                      onChange={(e) => setFirstPrice(e.target.value)}
-                      type='number'
-                      min='0'
-                    ></input>
-                  </div> */}
+                  
                 </div>
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Enter 2nd Prize"
-                      className="mb-3"
-                      onChange={(e) => setSecondPrice(e.target.value)}
-                      value={SecondPrice}
-                      onBlur={() => SecondPrice === "" ? setErrorSecondPrice("Second Prize is required ") : setErrorSecondPrice("")}
-
-                    >
-                      <Form.Control
-                        type="number"
-                        min="0"
-                        placeholder="Enter 2nd Prize"
-                      />
-                    </FloatingLabel>
-                    {/* <span className="spanForm"> |</span> */}
-                    <span className="error">{ErrorSecondPrice}</span>
-                  </div>
-                  {/* <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="الجائزة الثانية "
-                      value={SecondPrice}
-                      onChange={(e) => setSecondPrice(e.target.value)}
-                      type='number'
-                      min='0'
-                    ></input>
-                  </div> */}
-                </div>
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Enter 3rd Prize"
-                      className="mb-3"
-                      onChange={(e) => setThirdPrice(e.target.value)}
-                      value={ThirdPrice}
-                      onBlur={() => ThirdPrice === "" ? setErrorThirdPrice("Third Prize is required ") : setErrorThirdPrice("")}
-
-                   >
-                      <Form.Control
-                        type="number"
-                        min="0"
-                        placeholder="Enter 3rd Prize"
-                      />
-                    </FloatingLabel>
-<span className="error">{ErrorThirdPrice}</span>
-                    {/* <span className="spanForm"> |</span> */}
-                  </div>
-                  {/* <div className="col-sm">
-                    <input
-                      placeholder="الجائزة الثالثة"
-                      style={{ direction: "rtl" }}
-                      onChange={(e) => setThirdPrice(e.target.value)}
-                      value={ThirdPrice}
-                      type='number'
-                      min='0'
-                    ></input>
-                  </div> */}
-                </div>
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Enter 4th Prize"
-                      className="mb-3"
-                      onChange={(e) => setFourthPrice(e.target.value)}
-                      value={FourthPrice}
-                      onBlur={() => FourthPrice === "" ? setErrorFourthPrice("Fourth Prize is required") : setErrorFourthPrice("")}
-
-                    >
-                      <Form.Control
-                        type="number"
-                        min="0"
-                        placeholder="Enter 4th Prize"
-                      />
-                    </FloatingLabel>
-                    <span className="error">{ErrorFourthPrice}</span>
-                    {/* <span className="spanForm"> |</span> */}
-                  </div>
-                  {/* <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="الجائزة الرابعة "
-                      onChange={(e) => setFourthPrice(e.target.value)}
-                      value={FourthPrice}
-                      type='number'
-                      min='0'
-                    ></input>
-                  </div> */}
-                </div>
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Enter 5th Prize"
-                      className="mb-3"
-                      onChange={(e) => setFifthPrice(e.target.value)}
-                      value={FifthPrice}
-                      onBlur={() => FifthPrice === "" ? setErrorFifthPrice("Fifth Prize is required") : setErrorFifthPrice("")}
-
-                    >
-                      <Form.Control
-                        type="number"
-                        min="0"
-                        placeholder="Enter 5th Prize"
-                      />
-                    </FloatingLabel>
-                    <span className="error">{ErrorFifthPrice}</span>
-                    {/* <span className="spanForm"> |</span> */}
-                  </div>
-                  {/* <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="الجائزة الخامسة "
-                      onChange={(e) => setFifthPrice(e.target.value)}
-                      value={FifthPrice}
-                      type='number'
-                      min='0'
-                    ></input>
-                  </div> */}
-                </div>
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Enter 6th Prize"
-                      className="mb-3"
-                      onChange={(e) => setSixthPrice(e.target.value)}
-                      value={SixthPrice}
-                      onBlur={() => SixthPrice === "" ? setErrorSixthPrice("Sixth Prize is required") : setErrorSixthPrice("")}
-
-                    >
-                      <Form.Control
-                        type="number"
-                        min="0"
-                        placeholder="Enter 6th Prize"
-                      />
-                    </FloatingLabel>
-                    {/* <span className="spanForm"> |</span> */}
-                    <span className="error">{ErrorSixthPrice} </span>
-                  </div>
-                  {/* <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="الجائزة السادسة"
-                      onChange={(e) => setSixthPrice(e.target.value)}
-                      value={SixthPrice}
-                      type='number'
-                      min='0'
-                    ></input>
-                  </div> */}
-                </div>
+                
                 <div className="ButtonSection">
                   <div>
                     <label className="Multipleownerlabel">

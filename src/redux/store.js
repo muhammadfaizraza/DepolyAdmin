@@ -90,6 +90,7 @@ import getequipmentshortcode from "./getShortCode/getequipmentshortcode";
 import getracenameshortcode from "./getShortCode/getracenameshortcode";
 import getracetypeshortcode from "./getShortCode/getracetypeshortcode";
 import getNewLetter from "./getReducer/getNewLetter";
+import getPointTable from "./getReducer/getPointTable";
 
 const store = configureStore({
   reducer: {
@@ -182,7 +183,8 @@ const store = configureStore({
     racetypeshortcode:getracetypeshortcode,
     sexshortcode:getsexshortcode,
     verdictshortcode:getverdictshortcode,
-    newsletter:getNewLetter
+    newsletter:getNewLetter,
+    pointTable:getPointTable
 
   },
 });

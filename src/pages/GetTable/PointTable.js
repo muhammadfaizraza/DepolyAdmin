@@ -1,8 +1,7 @@
 import React, { useEffect, Fragment,useState } from "react";
-import { fetchcolor, STATUSES } from "../../redux/getReducer/getColor";
+import { fetchpointTable, STATUSES } from "../../redux/getReducer/getPointTable";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -30,30 +29,30 @@ const ColorTable = () => {
 
   const dispatch = useDispatch();
   const history = useNavigate();
-  const { data: Color, status } = useSelector((state) => state.color);
+  const { data: pointTable, status } = useSelector((state) => state.pointTable);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8)
   
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = Color.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = pointTable.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    dispatch(fetchcolor());
+    dispatch(fetchpointTable());
   }, [dispatch]);
   const handleRemove = async (Id) => {
     try {
-    await axios.delete(`${window.env.API_URL}/softdeleteColor/${Id}`);
+    await axios.delete(`${window.env.API_URL}/softdeletePointTableSystem/${Id}`);
       swal({
         title: "Success!",
         text: "Data has been Deleted successfully ",
         icon: "success",
         button: "OK",
       });
-      history("/colorlist");
-      dispatch(fetchcolor());
+      history("/viewcompetitionPoint");
+      dispatch(fetchpointTable());
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -63,7 +62,7 @@ const ColorTable = () => {
         button: "OK",
       });
     }
-    history("/colorlist");
+    history("/viewcompetitionPoint");
   };
 
   if (status === STATUSES.LOADING) {
@@ -118,31 +117,46 @@ const ColorTable = () => {
                   <table>
                     <thead>
                       <tr>
-                        <th>Points</th>
-                        <th>Bonus Points </th>
-                        <th>Type</th>
-                        <th>Length</th>
+                        <th>Group Name</th>
+                        <th>First Place Point </th>
+                        <th>Second Place Point</th>
+                        <th>Third Place Point</th>
+                        <th>First Place Bonus Point</th>
+                        <th>Second Place Bonus Point </th>
+                        <th>Third Place Bonus Point </th>
+                        <th>Fourth Price</th>
+                        <th>Fifth Price</th>
+                        <th>Sixth Price</th>
+                        <th>Short Code</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {/* {currentPosts.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.NameEn}</td>
-                              <td>{item.NameAr}</td>
-
+                              <td>{item.Group_Name}</td>
+                              <td>{item.First_Place_Point}</td>
+                              <td>{item.Second_Place_Point}</td>
+                              <td>{item.Third_Place_Point}</td>
+                              <td>{item.First_Place_Bonus_Point}</td>
+                              <td>{item.Second_Place_Bonus_Point}</td>
+                              <td>{item.Third_Place_Bonus_Point}</td>
+                              <td>{item.FourthPrice}</td>
+                              <td>{item.FifthPrice}</td>
+                              <td>{item.SixthPrice}</td>
                               <td>{item.shortCode} </td>
 
                               <td className="table_delete_btn1">
                                 <BiEdit
-                                  onClick={() =>
-                                    history("/editcolor", {
-                                      state: {
-                                        colorid: item,
-                                      },
-                                    })
-                                  }
+                                  // onClick={() =>
+                                  //   history("/editcolor", {
+                                  //     state: {
+                                  //       colorid: item,
+                                  //     },
+                                  //   })
+                                  // }
                                 />
                                 <MdDelete
                                   style={{
@@ -150,12 +164,14 @@ const ColorTable = () => {
                                   }}
                                   onClick={() => handleRemove(item._id)}
                                 />
-                                <BsEyeFill onClick={() => handleShow(item)}/>
+                                <BsEyeFill
+                                //  onClick={() => handleShow(item)}
+                                 />
                               </td>
                             </tr>
                           </>
                         );
-                      })} */}
+                      })}
                     </tbody>
                   </table>
                 </ScrollContainer>
@@ -165,7 +181,7 @@ const ColorTable = () => {
           <span className="plusIconStyle"></span>
           <Pagination
           postsPerPage={postsPerPage}
-          totalPosts={Color.length}
+          totalPosts={pointTable.length}
           paginate={paginate}
         />
         </div>

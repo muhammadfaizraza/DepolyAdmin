@@ -137,6 +137,7 @@ const HorseForm = () => {
         };
       })
     );
+    
   let horsekindoptions =
     HorseKind === undefined ? (
       <></>

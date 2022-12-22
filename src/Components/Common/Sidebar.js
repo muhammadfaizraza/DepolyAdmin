@@ -250,7 +250,7 @@ const Sidebar = () => {
                     Add Competition
                   </Link>
                 </div>
-                <div>
+                {/* <div>
                   <Link to="/CategoryListing" className="mylink">
                      Category Listing
                   </Link>
@@ -260,7 +260,7 @@ const Sidebar = () => {
                   <Link to="/addCategory" className="mylink">
                     Add Category
                   </Link>
-                </div>
+                </div> */}
                 <div>
                   <Link to="/addcompetitionPoint" className="mylink">
                    Add Point Table

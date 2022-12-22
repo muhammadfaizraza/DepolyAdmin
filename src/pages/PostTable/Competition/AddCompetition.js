@@ -2,124 +2,95 @@ import React, { useState, Fragment, useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import Select from "react-select";
-import { fetchcategory } from "../../../redux/getReducer/getCategory";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-date-picker";
 import swal from "sweetalert";
 import { AiOutlineReload } from "react-icons/ai";
-import { Modal } from "react-bootstrap";
-import CategoryPopup from "./AddCategory";
 import TextInputValidation from "../../../utils/TextInputValidation";
+
+
+const CategoryType = [
+    {
+        id: 1,
+        value: 'Pick',
+        label: 'Pick',
+    },
+    {
+        id: 1,
+        value: 'Cast',
+        label: 'Cast',
+    }
+    
+]
 
 const TrainerForm = () => {
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
 
-  const [ErrorDesc, setErrorDesc] = useState("");
-  const [ErrorDescAr, setErrorDescAr] = useState("");
-  const [ErrorCode, setErrorCode] = useState("");
+  // const [ErrorDesc, setErrorDesc] = useState("");
+  // const [ErrorDescAr, setErrorDescAr] = useState("");
+  // const [ErrorCode, setErrorCode] = useState("");
+  // const [ErrorPickCount, setErrorPickCount] = useState("");
+  // const [ErrorCategory, setErrorCategory] = useState("");
+
   const [ErrorDate, setErrorDate] = useState("");
   const [ErrorTriCount, setErrorTriCount] = useState("");
-  const [ErrorPickCount, setErrorPickCount] = useState("");
-  const [ErrorCategory, setErrorCategory] = useState("");
 
   const history = useNavigate();
   const dispatch = useDispatch();
 
-  const { data: category } = useSelector((state) => state.category);
-  useEffect(() => {
-    dispatch(fetchcategory());
-  }, []);
-  const FetchNew = () => {
-    dispatch(fetchcategory());
-  };
 
-  let AllCategory =
-    category === undefined ? (
-      <></>
-    ) : (
-      category.map(function (item) {
-        return {
-          id: item._id,
-          value: item.NameEn,
-          label: item.NameEn,
-        };
-      })
-    );
 
-  let AllCategoryAr =
-    category === undefined ? (
-      <></>
-    ) : (
-      category.map(function (item) {
-        return {
-          id: item._id,
-          value: item.NameAr,
-          label: item.NameAr,
-        };
-      })
-    );
-
-  const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
-  const [DescEn, setDescEn] = useState("");
-  const [DescAr, setDescAr] = useState("");
-  const [shortCode, setshortCode] = useState("");
-  const [pickCount, setpickCount] = useState("");
-  const [TriCount, setTriCount] = useState("");
+  const [NameEn, setNameEn] = useState("");
+  const [CodeEn, setCodeEn] = useState("");
+  const [CodeAr, setCodeAr] = useState("");
   const [StartDate, setStartDate] = useState("");
-  const [CompetitionCategory, setCompetitionCategory] = useState("");
-  const [CompetitionCode, setCompetitionCode] = useState("");
-  const [preview, setPreview] = useState();
-  const [image, setImage] = useState();
+  const [EndDate, setEndDate] = useState("");
+  const [Type, setType] = useState("");
+  const [NumberOfRace, setNumberOfRace] = useState("");
+  const [NumberOfPosition, setNumberOfPosition] = useState("");
 
-  const [showCategory, setShowCategory] = useState(false);
 
-  const handleCloseCategory = () => setShowCategory(false);
-
-  const handleShowCategory = async () => {
-    await setShowCategory(true);
-  };
 
   const submit = async (event) => {
     event.preventDefault();
-    try {
-      const formData = new FormData();
-      formData.append("NameEn", NameEn);
-      formData.append("NameAr", NameAr);
-      formData.append("DescEn", DescEn);
-      formData.append("DescAr", DescAr);
-      // formData.append("shortCode", shortCode);
-      formData.append("pickCount", pickCount);
-      formData.append("TriCount", TriCount);
-      formData.append("StartDate", StartDate);
-      formData.append("CompetitionCategory", CompetitionCategory.id);
-      formData.append("CompetitionCode", CompetitionCode);
-      await axios.post(
-        `${window.env.API_URL}/uploadCompetiton?keyword=&page=`,
-        formData
-      );
+    history('/competitionrace')
+    // try {
+    //   const formData = new FormData();
+    //   formData.append("NameEn", NameEn);
+    //   formData.append("NameAr", NameAr);
+    //   formData.append("DescEn", DescEn);
+    //   formData.append("DescAr", DescAr);
+    //   // formData.append("shortCode", shortCode);
+    //   formData.append("pickCount", pickCount);
+    //   formData.append("TriCount", TriCount);
+    //   formData.append("StartDate", StartDate);
+    //   formData.append("CompetitionCategory", CompetitionCategory.id);
+    //   formData.append("CompetitionCode", CompetitionCode);
+    //   await axios.post(
+    //     `${window.env.API_URL}/uploadCompetiton?keyword=&page=`,
+    //     formData
+    //   );
 
-      swal({
-        title: "Success!",
-        text: "Data has been added Successfully",
-        icon: "success",
-        button: "OK",
-      });
-      history("/competitionlisting");
-    } catch (error) {
-      const err = error.response.data.message;
-      swal({
-        title: "Error!",
-        text: err,
-        icon: "error",
-        button: "OK",
-      });
-    }
+    //   swal({
+    //     title: "Success!",
+    //     text: "Data has been added Successfully",
+    //     icon: "success",
+    //     button: "OK",
+    //   });
+    //   history("/competitionlisting");
+    // } catch (error) {
+    //   const err = error.response.data.message;
+    //   swal({
+    //     title: "Error!",
+    //     text: err,
+    //     icon: "error",
+    //     button: "OK",
+    //   });
+    // }
   };
 
   const convert = (num) => {
@@ -172,15 +143,8 @@ const TrainerForm = () => {
   );
   const objAr = JSON.parse(data2);
 
-  const data3 = JSON.stringify(
-    TextInputValidation("en", DescEn, "Competition Description English")
-  );
+  
 
-  const description = JSON.parse(data3);
-  const data4 = JSON.stringify(
-    TextInputValidation("ar", DescAr, "Competition Description Arabic")
-  );
-  const descriptionAr = JSON.parse(data4);
 
   return (
     <Fragment>
@@ -191,10 +155,12 @@ const TrainerForm = () => {
               marginTop: "30px",
             }}
           >
-            <div className="Headers">Add Competition</div>
+            <div className="Headers"> 
+             <h4>Competition</h4>
+            </div>
             <div className="form">
               <form onSubmit={submit}>
-                <div className="row mainrow">
+              <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
@@ -218,6 +184,38 @@ const TrainerForm = () => {
                       onChange={(e) => setNameAr(e.target.value)}
                       name="Name"
                       value={NameAr}
+                      style={{ direction: "rtl" }}
+                      onBlur={() => setErrorAr(objAr)}
+                    >
+                      <Form.Control type="text" placeholder="اسم" />
+                    </FloatingLabel>
+                    <span className="errorAr">{ErrorAr.message}</span>
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Code"
+                      className="mb-3"
+                      onChange={(e) => setCodeEn(e.target.value)}
+                      name="Name"
+                      value={CodeEn}
+                      onBlur={() => setError(obj)}
+                    >
+                      <Form.Control type="text" placeholder="Name" />
+                    </FloatingLabel>
+                    <span className="spanForm"> |</span>
+                    <span className="error">{Error.message}</span>
+                  </div>
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="الشفرة                      "
+                      className="mb-3 floatingInputAr"
+                      onChange={(e) => setCodeAr(e.target.value)}
+                      name="Name"
+                      value={CodeAr}
                       style={{ direction: "rtl" }}
                       onBlur={() => setErrorAr(objAr)}
                     >
@@ -257,221 +255,95 @@ const TrainerForm = () => {
                     />
                   </div>
                 </div>
-                <div className="row  mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Description"
-                      className="mb-3"
-                      onChange={(e) => setDescEn(e.target.value)}
-                      value={DescEn}
-                      onBlur={() => setErrorDesc(description)}
-                    >
-                      <Form.Control type="text" placeholder="Description" />
-                    </FloatingLabel>
-                    <span className="spanForm"> |</span>
-                    <span className="error">{ErrorDesc.message}</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="وصف"
-                      className="mb-3 floatingInputAr"
-                      onChange={(e) => setDescAr(e.target.value)}
-                      name="Name"
-                      value={DescAr}
-                      style={{ direction: "rtl" }}
-                      onBlur={() => setErrorDescAr(descriptionAr)}
-                    >
-                      <Form.Control type="text" placeholder="عنوان" />
-                    </FloatingLabel>
-                    <span className="errorAr">{ErrorDescAr.message}</span>
-                  </div>
-                </div>
-                {/* <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Short Name"
-                      className="mb-3"
-                      onChange={(e) => setshortCode(e.target.value)}
-                      value={shortCode}
-                    >
-                      <Form.Control type="text" placeholder="Short Code" />
-                    </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="اسم قصير"
-                      className="mb-3 floatingInputAr"
-                      onChange={(e) => setshortCode(e.target.value)}
-                      name="Name"
-                      value={shortCode}
-                      style={{ direction: "rtl" }}
-                    >
-                      <Form.Control type="text" placeholder="اسم قصير" />
-                    </FloatingLabel>
-                  </div>
-                </div> */}
                 <div className="row mainrow">
                   <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Competition Code"
-                      className="mb-3"
-                      onChange={(e) => setCompetitionCode(e.target.value)}
-                      name="Name"
-                      value={CompetitionCode}
-                      onBlur={() =>
-                        CompetitionCode.trim() === ""
-                          ? setErrorCode("Competition Code is required")
-                          : setErrorCode(" ")
+                    <DatePicker
+                      onChange={setEndDate}
+                      value={EndDate}
+                      minDate={today}
+                      dayPlaceholder=" "
+                      monthPlaceholder="End Date "
+                      yearPlaceholder=""
+                      onBlur={(e) =>
+                        StartDate === ""
+                          ? setErrorDate("Competition Start Date is required")
+                          : setErrorDate(" ")
                       }
-                    >
-                      <Form.Control
-                        type="text"
-                        placeholder="Competition Code"
-                      />
-                    </FloatingLabel>
-                    <span className="spanForm"> |</span>
-                    <span className="error">{ErrorCode}</span>
+                    />
+                    <span className="spanForm">|</span>
+                    <span className="error">{ErrorDate}</span>
                   </div>
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="اسم"
-                      className="mb-3 floatingInputAr"
-                      onChange={(e) => setCompetitionCode(e.target.value)}
-                      name="Name"
-                      value={CompetitionCode}
+
+                  <div className="col-sm" style={{ direction: "rtl" }}>
+                  <DatePicker
+                      onChange={setEndDate}
+                      value={EndDate}
+                      dayPlaceholder=""
+                      minDate={today}
+                      monthPlaceholder="تاريخ الانتهاء "
+                      yearPlaceholder=""
                       style={{ direction: "rtl" }}
-                    >
-                      <Form.Control type="text" placeholder="اسم" />
-                    </FloatingLabel>
+                    />
                   </div>
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
-                      placeholder={<div>Select Competition Category</div>}
-                      defaultValue={CompetitionCategory}
-                      onChange={setCompetitionCategory}
-                      options={AllCategory}
+                      placeholder={<div>Type/Category</div>}
+                      defaultValue={Type}
+                      onChange={setType}
+                      options={CategoryType}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() =>
-                        CompetitionCategory === ""
-                          ? setErrorCategory("Competition is required")
-                          : setErrorCategory("")
-                      }
                     />
                     <span className="spanForm">
-                      <OverlayTrigger
-                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
-                      >
-                        <span className="addmore" onClick={handleShowCategory}>
-                          +
-                        </span>
-                      </OverlayTrigger>
-                      <OverlayTrigger
-                        overlay={
-                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
-                        }
-                      >
-                        <span className="addmore" onClick={FetchNew}>
-                          <AiOutlineReload />
-                        </span>
-                      </OverlayTrigger>
                       |
                     </span>
-                    <span className="error">{ErrorCategory}</span>
                   </div>
                   <div className="col-sm">
                     <Select
                       required
                       placeholder={<div>حدد جيلتي</div>}
                       className="selectdir"
-                      defaultValue={CompetitionCategory}
-                      onChange={setCompetitionCategory}
-                      options={AllCategoryAr}
+                      defaultValue={Type}
+                      onChange={setType}
+                      options={CategoryType}
                       isClearable={true}
                       isSearchable={true}
                     />
                   </div>
                 </div>
-                <div className="row mainrow">
+              
+                {
+                  Type === null ? <></> :  (Type.value === 'Cast' ? <>
+                  
+                  <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="Pick Count"
+                      label="No of Postion"
                       className="mb-3"
-                      onChange={(e) => setpickCount(e.target.value)}
-                      value={pickCount}
-                      min="0"
-                      max="9"
+                      onChange={(e) => setNumberOfPosition(e.target.value)}
+                      value={NumberOfPosition}
+                      min="1"
+                      max="12"
                       onBlur={(e) =>
-                        pickCount === ""
-                          ? setErrorPickCount("Pick Count Number is required ")
-                          : setErrorPickCount(" ")
-                      }
-                    >
-                      <Form.Control
-                        type="number"
-                        min="0"
-                        max="9"
-                        placeholder="Pick Count"
-                      />
-                    </FloatingLabel>
-
-                    {/* <span className="spanForm"> |</span> */}
-                    <span className="error">{ErrorPickCount}</span>
-                  </div>
-                  {/* 
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="تفاصيل"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                    >
-                      <Form.Control type="number" placeholder="تفاصيل" />
-                    </FloatingLabel>
-                  </div> */}
-                </div>
-
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Tri Count"
-                      className="mb-3"
-                      onChange={(e) => setTriCount(e.target.value)}
-                      value={TriCount}
-                      min="0"
-                      max="9"
-                      onBlur={(e) =>
-                        TriCount === ""
+                        NumberOfPosition === ""
                           ? setErrorTriCount("TriCount  Number is required ")
                           : setErrorTriCount(" ")
                       }
                     >
                       <Form.Control
                         type="number"
-                        min="0"
-                        max="9"
+                        min="1"
+                      max="12"
                         placeholder="Pick Count"
                       />
                     </FloatingLabel>
-                    <span className="error">{ErrorTriCount}</span>
 
-                    {/* <span className="spanForm"> |</span> */}
+                    <span className="spanForm"> |</span>
                   </div>
-                  {/* 
+                  
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
@@ -481,36 +353,81 @@ const TrainerForm = () => {
                     >
                       <Form.Control type="number" placeholder="تفاصيل" />
                     </FloatingLabel>
-                  </div> */}
+                  </div>
                 </div>
+                  </> : <>
+                  
+                  
+                  
+                  <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="# of Races"
+                      className="mb-3"
+                      onChange={(e) => setNumberOfRace(e.target.value)}
+                      value={NumberOfRace}
+                      onBlur={(e) =>
+                        NumberOfRace === ""
+                          ? setErrorTriCount("TriCount  Number is required ")
+                          : setErrorTriCount(" ")
+                      }
+                    >
+                      <Form.Control
+                        type="number"
+                        min="2" max="5"
+                        placeholder="Pick Count"
+                      />
+                    </FloatingLabel>
+
+                    <span className="spanForm"> |</span>
+                  </div>
+                  
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="تفاصيل"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control type="number"min="2"
+                        max="12" placeholder="تفاصيل" />
+                    </FloatingLabel>
+                  </div>
+                </div>
+                  </>)
+                }
+         
+
+                
 
                 <div
                   className="ButtonSection "
                   style={{ justifyContent: "end" }}
                 >
-                  <button Name="submit" className="SubmitButton">
-                    Add Competition
+                  <div className="sbmtbtndiv">
+                <div className="RaceButtonDiv">
+                  <button className="updateButton">
+                    Update
                   </button>
+
+                  <button
+                    className="SubmitButton"
+                    type="submit"
+                    onClick={submit}
+                   
+                  >
+                   Add Races
+                  </button>
+                </div>
+              </div>
                 </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-      <Modal
-        show={showCategory}
-        onHide={handleCloseCategory}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <h2>Category</h2>
-        </Modal.Header>
-        <Modal.Body>
-          <CategoryPopup />
-        </Modal.Body>
-      </Modal>
+  
     </Fragment>
   );
 };

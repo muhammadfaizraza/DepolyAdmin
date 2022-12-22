@@ -72,6 +72,7 @@ const AdsForm = () => {
 
   const handlePreview = () => {
     setImage()
+  document.getElementById("file").value=""
   };
 
   const onSelectFile = (e) => {
@@ -203,10 +204,11 @@ const AdsForm = () => {
                       type="file"
                       onChange={onSelectFile}
                       className="formInput"
+                      id="file"
                     />
                     {image && (
                       <>
-                       <ImCross onClick={handlePreview}/>
+                       <ImCross onClick={handlePreview} className="crossIcon"/>
                        <img src={preview} className="PreviewImage" alt="" />
                       </>
                     )}

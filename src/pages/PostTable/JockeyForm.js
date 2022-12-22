@@ -17,6 +17,7 @@ import { AiOutlineReload } from "react-icons/ai";
 import { Modal } from "react-bootstrap";
 import TextInputValidation from "../../utils/TextInputValidation";
 import NationalityPopup from "./Nationality";
+import { ImCross } from 'react-icons/im';
 
 const NewsForm = () => {
   //for Errors
@@ -191,6 +192,10 @@ const NewsForm = () => {
         };
       })
     );
+    const handlePreview = () => {
+      setImage()
+    document.getElementById("file").value=""
+    };
   //Checking Validation
 
   const data3 = JSON.stringify(
@@ -627,9 +632,13 @@ const NewsForm = () => {
                       type="file"
                       onChange={onSelectFile}
                       className="formInput"
+                      id="file"
                     />
-                    {image && (
-                      <img src={preview} alt="" className="PreviewImage" />
+                     {image && (
+                      <>
+                       <ImCross onClick={handlePreview} className="crossIcon"/>
+                       <img src={preview} className="PreviewImage" alt="" />
+                      </>
                     )}
                   </div>
 

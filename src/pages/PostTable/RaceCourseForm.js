@@ -16,6 +16,7 @@ import NationalityPopUp from "../PostTable/Nationality";
 import { AiOutlineReload } from 'react-icons/ai'
 import { Modal } from "react-bootstrap";
 import TextInputValidation from "../../utils/TextInputValidation";
+import { ImCross } from 'react-icons/im';
 
 const RaceCourseForm = () => {
   const [Error , setError] =useState("");
@@ -162,7 +163,10 @@ const RaceCourseForm = () => {
     setImage(e.target.files[0]);
     
   };
-
+  const handlePreview = () => {
+    setImage()
+  document.getElementById("file").value=""
+  };
   
   const FetchNew = () => {
     dispatch(fetchnationality());
@@ -394,9 +398,13 @@ const RaceCourseForm = () => {
                       type="file"
                       onChange={onSelectFile}
                       className="formInput"
+                      id="file"
                     />
-                    {image && (
-                      <img src={preview} className="PreviewImage" alt="" />
+                     {image && (
+                      <>
+                       <ImCross onClick={handlePreview} className="crossIcon"/>
+                       <img src={preview} className="PreviewImage" alt="" />
+                      </>
                     )}
                   </div>
 

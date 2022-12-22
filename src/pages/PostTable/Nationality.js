@@ -6,6 +6,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import Select from "react-select";
 import TextInputValidation from "../../utils/TextInputValidation";
+import { ImCross } from 'react-icons/im';
 
 const Offsets = [
   { id: "0", value: "false", label: "false" },
@@ -102,6 +103,11 @@ const Nationality = () => {
 
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
+  };
+
+  const handlePreview = () => {
+    setImage()
+  document.getElementById("file").value=""
   };
   //Checking Validation
 
@@ -427,10 +433,14 @@ const Nationality = () => {
                     type="file"
                     onChange={onSelectFile}
                     className="formInput fileinputdata"
+                    id="file"
                   />
-                  {image && (
-                    <img src={preview} className="PreviewImage" alt="" />
-                  )}
+                   {image && (
+                      <>
+                       <ImCross onClick={handlePreview} className="crossIcon"/>
+                       <img src={preview} className="PreviewImage" alt="" />
+                      </>
+                    )}
                 </div>
                 <button type="submit" className="SubmitButton">
                   Add Nationality

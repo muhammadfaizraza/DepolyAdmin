@@ -6,6 +6,7 @@ import swal from "sweetalert";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
+import { ImCross } from 'react-icons/im';
 
 const SliderForm = () => {
    //for error
@@ -83,6 +84,10 @@ const SliderForm = () => {
 
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
+  };
+  const handlePreview = () => {
+    setImage()
+  document.getElementById("file").value=""
   };
   const isSubmitData = TitleAr === "" || TitleEn === "";
   return (
@@ -167,9 +172,13 @@ const SliderForm = () => {
                       type="file"
                       onChange={onSelectFile}
                       className="formInput"
+                      id="file"
                     />
                     {image && (
-                      <img src={preview} className="PreviewImage" alt="" />
+                      <>
+                       <ImCross onClick={handlePreview} className="crossIcon"/>
+                       <img src={preview} className="PreviewImage" alt="" />
+                      </>
                     )}
                   </div>
 <div>

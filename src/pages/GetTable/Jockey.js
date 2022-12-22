@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { fetchjockey, STATUSES } from "../../redux/getReducer/getJockeySlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
+
 import { Link, useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import swal from "sweetalert";
 import JockeyPopup from "../../Components/Popup/JockeyPopup";
 import { Modal } from "react-bootstrap";
-import { BsEyeFill, BsFillEyeFill } from "react-icons/bs";
+import { BsEyeFill } from "react-icons/bs";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Moment from "react-moment";
 import axios from "axios";
@@ -53,10 +53,11 @@ const Statistic = () => {
       })
 
       .then( async(willDelete) => {
-        const res = await axios.delete(`${window.env.API_URL}/softdeleteJockey/${Id}`)
+   
    
         if (willDelete) {
-          swal("Poof! Your data has been deleted!", {
+           await axios.delete(`${window.env.API_URL}/softdeleteJockey/${Id}`)
+          swal(" Your data has been deleted Successfully!", {
             icon: "success",
          
           }

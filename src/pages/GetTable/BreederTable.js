@@ -2,7 +2,6 @@ import React, { useEffect, Fragment,useState } from "react";
 import { fetchbreeder, STATUSES } from "../../redux/getReducer/getBreeder";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
 import { Link, useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import swal from "sweetalert";
@@ -53,10 +52,11 @@ const BreederTable = () => {
       })
 
       .then( async(willDelete) => {
-        const res = await axios.delete(`${window.env.API_URL}/softdeleteBreeder/${Id}`);
+  
    
         if (willDelete) {
-          swal("Poof! Your data has been deleted!", {
+       await axios.delete(`${window.env.API_URL}/softdeleteBreeder/${Id}`);
+          swal("Your data has been deleted Successfully!", {
             icon: "success",
          
           }

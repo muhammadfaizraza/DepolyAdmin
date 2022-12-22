@@ -50,11 +50,12 @@ const EquiptmentTable = () => {
 
       .then( async(willDelete) => {
 
-        const res = await axios.delete(`${window.env.API_URL}/softdeleteEquipment/${Id}`)
   
    
         if (willDelete) {
-          swal("Poof! Your data has been deleted!", {
+          
+       await axios.delete(`${window.env.API_URL}/softdeleteEquipment/${Id}`)
+          swal("Your data has been deleted Successfully!", {
             icon: "success",
          
           }

@@ -21,6 +21,7 @@ import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker';
 import 'react-calendar/dist/Calendar.css'
 import 'react-clock/dist/Clock.css'
+import { ImCross } from 'react-icons/im';
 
 import axios from "axios";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
@@ -459,7 +460,10 @@ const RaceForm = () => {
     setPreview(objectUrl);
     return () => URL.revokeObjectURL(objectUrl);
   }, [image, dispatch]);
-
+  const handlePreview = () => {
+    setImage()
+  document.getElementById("file").value=""
+  };
   const submit = async (event) => {
     event.preventDefault();
     try {
@@ -1157,35 +1161,39 @@ const RaceForm = () => {
                   <div className="col-sm">
                      <TimePicker
                       onChange={setStartTime}
-                      // value={StartTime}
-                      // monthPlaceholder="Start "
-                      // dayPlaceholder="Time"
-                      // minDate={today}
-                      // maxDate={new Date("02-29-2023")}
-                      // yearPlaceholder="Time"
+                      value={StartTime}
+             
+                      minutePlaceholder={"Start Date"}
+                      secondPlaceholder={""}
+                  
                      
                     />
+      <span className="spanForm">
                    
+                   |
+                 </span>
+                        
                   </div>
                   
-                </div>
-                <div className="row mainrow">
+               
                   <div className="col-sm">
                   <TimePicker
                       onChange={setEndTime}
                       value={EndTime}
-                      monthPlaceholder="End "
-                      dayPlaceholder="Time"
+                
+                      minutePlaceholder={"End Date"}
+                      secondPlaceholder={""}
+                     
                       // minDate={today}
                       // maxDate={new Date("02-29-2023")}
                       // yearPlaceholder="Time"
                      
                     />
                    
-                  </div>
+            
                   
                 </div>
-                
+                </div>
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
@@ -1247,9 +1255,13 @@ const RaceForm = () => {
                       type="file"
                       onChange={onSelectFile}
                       className="formInput"
+                      id="file"
                     />
-                    {image && (
-                      <img src={preview} alt="" className="PreviewImage" />
+                     {image && (
+                      <>
+                       <ImCross onClick={handlePreview} className="crossIcon"/>
+                       <img src={preview} className="PreviewImage" alt="" />
+                      </>
                     )}
                   </div>
 

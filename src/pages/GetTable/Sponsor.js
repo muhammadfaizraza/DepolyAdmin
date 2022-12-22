@@ -54,11 +54,12 @@ const News = () => {
       })
 
       .then( async(willDelete) => {
-        await axios.delete(`${window.env.API_URL}/softdeletesponsor/${Id}`)
+     
   
    
         if (willDelete) {
-          swal("Poof! Your data has been deleted!", {
+          await axios.delete(`${window.env.API_URL}/softdeletesponsor/${Id}`)
+          swal("Your data has been deleted Successfully!", {
             icon: "success",
          
           }

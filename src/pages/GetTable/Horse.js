@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { remove } from "../../redux/postReducer/PostHorse";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { fetchHorse, STATUSES } from "../../redux/getReducer/getHorseSlice";
@@ -58,10 +57,11 @@ const Horse = () => {
       })
 
       .then( async(willDelete) => {
-        const res = await axios.delete(`${window.env.API_URL}/softdeletehorse/${Id}`)
+
    
         if (willDelete) {
-          swal("Poof! Your data has been deleted!", {
+          await axios.delete(`${window.env.API_URL}/softdeletehorse/${Id}`)
+          swal("Your data has been deleted Successfully!", {
             icon: "success",
          
           }

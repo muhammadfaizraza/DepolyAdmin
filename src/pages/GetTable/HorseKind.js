@@ -13,15 +13,10 @@ import { BsEyeFill } from "react-icons/bs";
 import HorseKindPopup from "../../Components/Popup/HorseKindPopup";
 import { Modal } from "react-bootstrap";
 import Pagination from "./Pagination";
-import TextInputValidation from "../../utils/TextInputValidation";
 
 
 const HorseKind = () => {
 
-  const [ErrorName, setErrorName] = useState("");
-  const [ErrorNameAr, setErrorNameAr] = useState("");
-  const [ErrorshortName, setErrorshortName] = useState("");
-  const [ErrorshortNameAr, setErrorshortNameAr] = useState("");
 
 
   //for Modal
@@ -48,19 +43,38 @@ const HorseKind = () => {
   useEffect(() => {
     dispatch(fetchHorseKind());
   }, [dispatch]);
+
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(
-        `${window.env.API_URL}/softdeleteHorseKind/${Id}`
-      );
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+
+      .then( async(willDelete) => {
+
+   
+        if (willDelete) {
+          await axios.delete(
+            `${window.env.API_URL}/softdeleteHorseKind/${Id}`
+          ); 
+           swal("Data has been Deleted successfully ", {
+            icon: "success",
+         
+          }
+          )
+          dispatch(fetchHorseKind())
+          
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      dispatch(fetchHorseKind());
-    } catch (error) {
+   
+    }catch(error) {
+
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -69,7 +83,10 @@ const HorseKind = () => {
         button: "OK",
       });
     }
-  };
+
+
+
+  }
 
   if (status === STATUSES.LOADING) {
     return (

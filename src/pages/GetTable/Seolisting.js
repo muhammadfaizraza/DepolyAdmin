@@ -52,10 +52,11 @@ const SeoTable = () => {
 
       .then( async(willDelete) => {
 
-        const res = await axios.delete(`${window.env.API_URL}/softdeleteSeoKeyword/${Id}`)
-  
+   
    
         if (willDelete) {
+          const res = await axios.delete(`${window.env.API_URL}/softdeleteSeoKeyword/${Id}`)
+  
           swal("Poof! Your data has been deleted!", {
             icon: "success",
          

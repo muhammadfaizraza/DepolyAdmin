@@ -55,11 +55,12 @@ const ColorTable = () => {
       })
 
       .then( async(willDelete) => {
-        await axios.delete(`${window.env.API_URL}/softdeleteColor/${Id}`);
+     
   
    
         if (willDelete) {
-          swal("Poof! Your data has been deleted!", {
+          await axios.delete(`${window.env.API_URL}/softdeleteColor/${Id}`);
+          swal("Your data has been deleted Successfully!", {
             icon: "success",
          
           }

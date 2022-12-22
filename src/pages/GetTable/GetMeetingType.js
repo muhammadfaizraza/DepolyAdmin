@@ -2,7 +2,6 @@ import React, { useEffect, Fragment ,useState} from "react";
 import { fetchMeeting, STATUSES } from "../../redux/getReducer/getMeeting";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -55,9 +54,10 @@ const handleShow = async (data) => {
       })
   
       .then( async(willDelete) => {
-        const res = await axios.delete(`${window.env.API_URL}/softdeleteMeetingType/${Id}`)
+    
         if (willDelete) {
-          swal("Poof! Your data has been deleted!", {
+          await axios.delete(`${window.env.API_URL}/softdeleteMeetingType/${Id}`)
+          swal(" Your data has been deleted Successfully!", {
             icon: "success",
          
           }
@@ -112,15 +112,7 @@ const handleShow = async (data) => {
               <h4>Meeting Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    meeting: "rgba(0, 0, 0, 0.6)",
-                  }}
-                >
-                  
-                </h6>
+       
 
                 <Link to="/meeting">
                   <button>Add meeting</button>

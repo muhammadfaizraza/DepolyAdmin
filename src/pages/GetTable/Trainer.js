@@ -54,10 +54,11 @@ const Trainer = () => {
       })
 
       .then( async(willDelete) => {
-        const res = await axios.delete(`${window.env.API_URL}/softdeletetrainer/${Id}`)
+    
    
         if (willDelete) {
-          swal("Poof! Your data has been deleted!", {
+          const res = await axios.delete(`${window.env.API_URL}/softdeletetrainer/${Id}`)
+          swal("Your data has been deleted Successfully!", {
             icon: "success",
          
           }

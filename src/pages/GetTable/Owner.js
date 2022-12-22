@@ -65,10 +65,11 @@ const Owner = () => {
       })
 
       .then( async(willDelete) => {
-        const res = await axios.delete(`${window.env.API_URL}/softdeleteowner/${Id}`)
+  
    
         if (willDelete) {
-          swal("Poof! Your data has been deleted!", {
+          const res = await axios.delete(`${window.env.API_URL}/softdeleteowner/${Id}`)
+          swal("Your data has been deleted Successfully!", {
             icon: "success",
          
           }

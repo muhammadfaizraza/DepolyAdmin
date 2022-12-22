@@ -100,7 +100,7 @@ const Races = () => {
         const res = await axios.delete(`${window.env.API_URL}/softdeleterace/${Id}`)
    
         if (willDelete) {
-          swal("Poof! Your data has been deleted!", {
+          swal("Your data has been deleted Successfully!", {
             icon: "success",
          
           }

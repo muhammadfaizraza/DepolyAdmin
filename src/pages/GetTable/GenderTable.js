@@ -3,7 +3,6 @@ import { fetchgender, STATUSES } from "../../redux/getReducer/getGenderSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
-import { remove } from "../../redux/postReducer/PostJockey";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -53,11 +52,12 @@ const GenderTable = () => {
 
       .then( async(willDelete) => {
 
-        const res = await axios.delete(`${window.env.API_URL}/softdeleteSex/${Id}`)
+     
   
    
         if (willDelete) {
-          swal("Poof! Your data has been deleted!", {
+       await axios.delete(`${window.env.API_URL}/softdeleteSex/${Id}`)
+          swal("Your data has been deleted Successfully!", {
             icon: "success",
          
           }
@@ -115,15 +115,7 @@ const GenderTable = () => {
               <h4>Gender Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                >
-                  
-                </h6>
+             
 
                 <Link to="/gender">
                   <button>Add Gender</button>

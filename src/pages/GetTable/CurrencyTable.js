@@ -3,7 +3,6 @@ import { fetchcurrency ,STATUSES } from "../../redux/getReducer/getCurrency";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
-import { remove } from "../../redux/postReducer/PostJockey";
 import { Link, useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -54,11 +53,12 @@ const CurrencyTable = () => {
         })
   
         .then( async(willDelete) => {
-          const res = await axios.delete(`${window.env.API_URL}/softdeleteCurrency/${Id}`)
+         
     
      
           if (willDelete) {
-            swal("Poof! Your data has been deleted!", {
+           await axios.delete(`${window.env.API_URL}/softdeleteCurrency/${Id}`)
+            swal(" Your data has been deleted Successfully!", {
               icon: "success",
            
             }
@@ -116,16 +116,7 @@ const CurrencyTable = () => {
               <h4>Currency Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                >
-                  
-                </h6>
-
+              
                 <Link to="/currency">
                   <button>Add Currency</button>
                 </Link>

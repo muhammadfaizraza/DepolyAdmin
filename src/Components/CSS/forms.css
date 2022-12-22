@@ -852,4 +852,14 @@ input[type='checkbox']{
   margin-top: 10px;
   height: 14px;
 } */
-
+.react-time-picker__wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  border: none !important;
+}
+.react-time-picker {
+  display: inline-flex;
+  position: relative;
+  width: 48%;
+}

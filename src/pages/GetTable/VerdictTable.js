@@ -52,9 +52,9 @@ const VerdictTable = () => {
       })
   
       .then( async(willDelete) => {
-        const res = await axios.delete(`${window.env.API_URL}/softdeleteVerdict/${Id}`)
-        if (willDelete) {
-          swal("Poof! Your data has been deleted!", {
+       if (willDelete) {
+           await axios.delete(`${window.env.API_URL}/softdeleteVerdict/${Id}`)
+          swal("Your data has been deleted Successfully!", {
             icon: "success",
          
           }

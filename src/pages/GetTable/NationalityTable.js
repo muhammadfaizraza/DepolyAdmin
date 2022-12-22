@@ -5,7 +5,6 @@ import {
 } from "../../redux/getReducer/getNationality";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
 import { Link, useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import swal from "sweetalert";
@@ -60,11 +59,12 @@ const NationalityTable = () => {
 
       .then( async(willDelete) => {
 
-        const res = await axios.delete(`${window.env.API_URL}/softdeleteNationality/${Id}`)
   
    
         if (willDelete) {
-          swal("Poof! Your data has been deleted!", {
+          
+        await axios.delete(`${window.env.API_URL}/softdeleteNationality/${Id}`)
+          swal("Your data has been deleted Successfully!", {
             icon: "success",
          
           }
@@ -121,13 +121,8 @@ const NationalityTable = () => {
               <h4>Nationality Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
+             
+             
 
                 <Link to="/nationality">
                   <button>Add Nationality</button>

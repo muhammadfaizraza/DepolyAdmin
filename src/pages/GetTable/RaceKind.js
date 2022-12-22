@@ -55,7 +55,7 @@ const handleShow = async (data) => {
       .then( async(willDelete) => {
         const res = await axios.delete(`${window.env.API_URL}/softdeleteRaceKind/${Id}`)
         if (willDelete) {
-          swal("Poof! Your data has been deleted!", {
+          swal("Your data has been deleted Successfully!", {
             icon: "success",
          
           }

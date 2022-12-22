@@ -13,9 +13,15 @@ import { fetchRaceName } from "../../../redux/getReducer/getRaceName";
 import { fetchTrackLength } from "../../../redux/getReducer/getTracklength";
 import { fetchRaceKind } from "../../../redux/getReducer/getRaceKind";
 import { fetchgroundtype } from "../../../redux/getReducer/getGroundType";
+import { fetchpointTable } from "../../../redux/getReducer/getPointTable";
+
 import Select from "react-select";
 import swal from "sweetalert";
-import DateTimePicker from "react-datetime-picker";
+import DatePicker from 'react-date-picker';
+import TimePicker from 'react-time-picker';
+import 'react-calendar/dist/Calendar.css'
+import 'react-clock/dist/Clock.css'
+
 import axios from "axios";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -73,7 +79,7 @@ const RaceForm = () => {
   const [ErrorRaceKind, setErrorRaceKind] = useState("");
   const [ErrorDescriptionEn, setErrorDescriptionEn] = useState("");
   const [ErrorDescriptionAr, setErrorDescriptionAr] = useState("");
-  const [ErrorDayNTime, setErrorDayNTime] = useState("");
+  const [ErrorDay, setErrorDay] = useState("");
   const [ErrorWeatherType, setErrorWeatherType] = useState("");
   const [ErrorRaceStatus, setErrorRaceStatus] = useState("");
   const [ErrorRaceCourse, setErrorRaceCourse] = useState("");
@@ -84,12 +90,12 @@ const RaceForm = () => {
   const [ErrorActiveJockeyForTheRace, setErrorActiveJockeyForTheRace] =
     useState("");
   const [ErrorRaceTyp, setErrorRaceType] = useState("");
-  const [ErrorFirstPrice, setErrorFirstPrice] = useState("");
-  const [ErrorSecondPrice, setErrorSecondPrice] = useState("");
-  const [ErrorThirdPrice, setErrorThirdPrice] = useState("");
-  const [ErrorFourthPrice, setErrorFourthPrice] = useState("");
-  const [ErrorFifthPrice, setErrorFifthPrice] = useState("");
-  const [ErrorSixthPrice, setErrorSixthPrice] = useState("");
+  // const [ErrorFirstPrice, setErrorFirstPrice] = useState("");
+  // const [ErrorSecondPrice, setErrorSecondPrice] = useState("");
+  // const [ErrorThirdPrice, setErrorThirdPrice] = useState("");
+  // const [ErrorFourthPrice, setErrorFourthPrice] = useState("");
+  // const [ErrorFifthPrice, setErrorFifthPrice] = useState("");
+  // const [ErrorSixthPrice, setErrorSixthPrice] = useState("");
 
   //end
   const { data: racecourse } = useSelector((state) => state.racecourse);
@@ -101,9 +107,24 @@ const RaceForm = () => {
   const { data: trackLength } = useSelector((state) => state.trackLength);
   const { data: raceKinds, status } = useSelector((state) => state.raceKinds);
   const { data: groundtype } = useSelector((state) => state.groundtype);
+  const { data: pointTable } = useSelector((state) => state.pointTable);
 
   const history = useNavigate();
   const dispatch = useDispatch();
+
+  let racepointTable =
+     pointTable === undefined ? (
+      <></>
+    ) : (
+      pointTable.map(function (item) {
+        return {
+          id: item._id,
+          value: item.Group_Name,
+          label: item.Group_Name,
+        };
+      })
+    );
+
 
   let racecourses =
     racecourse === undefined ? (
@@ -380,6 +401,7 @@ const RaceForm = () => {
     dispatch(fetchTrackLength());
     dispatch(fetchRaceKind());
     dispatch(fetchgroundtype());
+    dispatch(fetchpointTable());
   };
 
   const [MeetingType, setMeetingType] = useState("");
@@ -400,8 +422,14 @@ const RaceForm = () => {
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
   const [RaceTyp, setRaceType] = useState("");
-  const [DayNTime, setDayNTime] = useState("");
+  const [Day, setDay] = useState("");
+  const [StartTime, setStartTime] = useState("");
+  const [EndTime, setEndTime] = useState("");
+  const [PointTableSystem, setPointTableSystem] = useState("");
 
+  console.log(StartTime,'StartTime')
+  console.log(PointTableSystem,'PointTableSystem')
+  console.log(EndTime,'EndTime')
 
   // const [FirstPrice, setFirstPrice] = useState("");
   // const [SecondPrice, setSecondPrice] = useState("");
@@ -445,11 +473,17 @@ const RaceForm = () => {
       formData.append("RaceKind", RaceKind.id);
       formData.append("DescriptionEn", DescriptionEn);
       formData.append("DescriptionAr", DescriptionAr);
-      formData.append("DayNTime", DayNTime);
+      formData.append("Day", Day);
       formData.append("WeatherType", WeatherType.value);
       formData.append("RaceStatus", RaceStatus.value);
       formData.append("RaceCourse", RaceCourse.id);
       formData.append("WeatherIcon", WeatherIcon);
+
+      formData.append("StartTime", StartTime);
+      formData.append("EndTime", EndTime);
+      formData.append("PointTableSystem", PointTableSystem.id);
+
+
       // formData.append("FirstPrice", FirstPrice);
       // formData.append("SecondPrice", SecondPrice);
       // formData.append("ThirdPrice", ThirdPrice);
@@ -1104,14 +1138,47 @@ const RaceForm = () => {
                 
                 <div className="row mainrow">
                   <div className="col-sm">
-                     <DateTimePicker
-                      onChange={setDayNTime}
-                      value={DayNTime}
+                     <DatePicker
+                      onChange={setDay}
+                      value={Day}
                       monthPlaceholder="Date "
-                      dayPlaceholder="&"
+                      // dayPlaceholder="&"
                       minDate={today}
                       maxDate={new Date("02-29-2023")}
-                      yearPlaceholder="Time"
+                      // yearPlaceholder="Time"
+                     
+                    />
+                   
+                  </div>
+                  
+                </div>
+
+                <div className="row mainrow">
+                  <div className="col-sm">
+                     <TimePicker
+                      onChange={setStartTime}
+                      // value={StartTime}
+                      // monthPlaceholder="Start "
+                      // dayPlaceholder="Time"
+                      // minDate={today}
+                      // maxDate={new Date("02-29-2023")}
+                      // yearPlaceholder="Time"
+                     
+                    />
+                   
+                  </div>
+                  
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                  <TimePicker
+                      onChange={setEndTime}
+                      value={EndTime}
+                      monthPlaceholder="End "
+                      dayPlaceholder="Time"
+                      // minDate={today}
+                      // maxDate={new Date("02-29-2023")}
+                      // yearPlaceholder="Time"
                      
                     />
                    
@@ -1119,6 +1186,58 @@ const RaceForm = () => {
                   
                 </div>
                 
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Select Point Table</div>}
+                      defaultValue={PointTableSystem}
+                      onChange={setPointTableSystem}
+                      options={racepointTable}
+                      isClearable={true}
+                      isSearchable={true}
+                      onBlur={() => RaceTyp === "" ? setErrorRaceType("Race Type is required ") : setErrorRaceType("")}
+
+                    />
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span className="addmore" onClick={handleShowRaceType}>
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
+                    <span className="error">{ErrorRaceTyp}</span>
+                  </div>
+
+                  <div className="col-sm">
+                    <Select
+                      className="selectdir"
+                      placeholder={
+                        <div style={{ direction: "rtl" }}>
+                          اكتب للبحث عن الجنسية
+                        </div>
+                      }
+                      defaultValue={RaceTyp}
+                      onChange={setRaceType}
+                      options={RaceTypesAr}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
+
+
                 <div className="ButtonSection">
                   <div>
                     <label className="Multipleownerlabel">

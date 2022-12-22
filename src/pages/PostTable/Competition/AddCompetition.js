@@ -57,40 +57,41 @@ const TrainerForm = () => {
 
   const submit = async (event) => {
     event.preventDefault();
-    history('/competitionrace')
-    // try {
-    //   const formData = new FormData();
-    //   formData.append("NameEn", NameEn);
-    //   formData.append("NameAr", NameAr);
-    //   formData.append("DescEn", DescEn);
-    //   formData.append("DescAr", DescAr);
-    //   // formData.append("shortCode", shortCode);
-    //   formData.append("pickCount", pickCount);
-    //   formData.append("TriCount", TriCount);
-    //   formData.append("StartDate", StartDate);
-    //   formData.append("CompetitionCategory", CompetitionCategory.id);
-    //   formData.append("CompetitionCode", CompetitionCode);
-    //   await axios.post(
-    //     `${window.env.API_URL}/uploadCompetiton?keyword=&page=`,
-    //     formData
-    //   );
+    // history('/competitionrace')
+    try {
+      const formData = new FormData();
+      formData.append("NameEn", NameEn);
+      formData.append("NameAr", NameAr);
+      formData.append("CodeEn", CodeEn);
+      formData.append("CodeAr", CodeAr);
+      formData.append("StartDate", StartDate);
+      formData.append("EndDate", EndDate);
+      formData.append("StartDate", StartDate);
+      formData.append("Type", Type.value);
+      formData.append("NumberOfRace", NumberOfRace);
+      formData.append("NumberOfPosition", NumberOfPosition);
 
-    //   swal({
-    //     title: "Success!",
-    //     text: "Data has been added Successfully",
-    //     icon: "success",
-    //     button: "OK",
-    //   });
-    //   history("/competitionlisting");
-    // } catch (error) {
-    //   const err = error.response.data.message;
-    //   swal({
-    //     title: "Error!",
-    //     text: err,
-    //     icon: "error",
-    //     button: "OK",
-    //   });
-    // }
+    const res = await axios.post(
+        `${window.env.API_URL}/uploadCompetiton`,
+        formData
+      );
+
+      swal({
+        title: "Success!",
+        text: "Data has been added Successfully",
+        icon: "success",
+        button: "OK",
+      });
+      history("/competitionrace");
+    } catch (error) {
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
+    }
   };
 
   const convert = (num) => {

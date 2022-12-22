@@ -132,7 +132,6 @@ const Statistic = () => {
                         <th>End Date </th>
                         <th>Start Date </th>
                         <th>Start Date </th>
-                        <th>Category Count</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -157,14 +156,7 @@ const Statistic = () => {
                                   {item.EndDate}
                                 </Moment>{" "}
                               </td>
-                              <td>
-                                <button
-                                  className="Approvedbtn resultbtn"
-                                  onClick={() => GoToPublish(item)}
-                                >
-                                  Click
-                                </button>
-                              </td>
+                            
 
                               <td className="table_delete_btn1">
                                   <BiEdit onClick={() => navigate('/editcompetition',{

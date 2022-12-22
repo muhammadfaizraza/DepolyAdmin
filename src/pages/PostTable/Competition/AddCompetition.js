@@ -14,12 +14,12 @@ import TextInputValidation from "../../../utils/TextInputValidation";
 const CategoryType = [
     {
         id: 1,
-        value: 'Pick',
+        value: 'pick',
         label: 'Pick',
     },
     {
         id: 1,
-        value: 'Cast',
+        value: 'cast',
         label: 'Cast',
     }
     
@@ -51,7 +51,7 @@ const TrainerForm = () => {
   const [EndDate, setEndDate] = useState("");
   const [Type, setType] = useState("");
   const [NumberOfRace, setNumberOfRace] = useState("");
-  const [NumberOfPosition, setNumberOfPosition] = useState("");
+  // const [NumberOfPosition, setNumberOfPosition] = useState("");
 
 
 
@@ -62,32 +62,38 @@ const TrainerForm = () => {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
-      formData.append("CodeEn", CodeEn);
-      formData.append("CodeAr", CodeAr);
+      formData.append("CompetitionCode", CodeEn);
       formData.append("StartDate", StartDate);
       formData.append("EndDate", EndDate);
-      formData.append("StartDate", StartDate);
-      formData.append("Type", Type.value);
-      formData.append("NumberOfRace", NumberOfRace);
-      formData.append("NumberOfPosition", NumberOfPosition);
+      formData.append("CompetitionCategory", Type.value);
+      formData.append("CategoryCount", NumberOfRace);
 
-    const res = await axios.post(
+      const res = await axios.post(
         `${window.env.API_URL}/uploadCompetiton`,
         formData
       );
-
       swal({
         title: "Success!",
         text: "Data has been added Successfully",
         icon: "success",
         button: "OK",
       });
-      history("/competitionrace");
+      const CompetitionId = res.data.data;
+      history("/competitionrace", {
+        state: {
+          CompetitionId: CompetitionId
+        },
+      });
+
+      console.log(CompetitionId,'CompetitionId');
+      console.log(Type.value,'CompetitionType')
+
     } catch (error) {
       const err = error.response.data.message;
+      console.log(err,'err 22')
       swal({
         title: "Error!",
-        text: err,
+        text: err[0],
         icon: "error",
         button: "OK",
       });
@@ -316,7 +322,7 @@ const TrainerForm = () => {
                 </div>
               
                 {
-                  Type === null ? <></> :  (Type.value === 'Cast' ? <>
+                  Type === null ? <></> :  (Type.value === 'cast' ? <>
                   
                   <div className="row mainrow">
                   <div className="col-sm">
@@ -324,12 +330,12 @@ const TrainerForm = () => {
                       controlId="floatingInput"
                       label="No of Postion"
                       className="mb-3"
-                      onChange={(e) => setNumberOfPosition(e.target.value)}
-                      value={NumberOfPosition}
+                      onChange={(e) => setNumberOfRace(e.target.value)}
+                      value={NumberOfRace}
                       min="1"
                       max="12"
                       onBlur={(e) =>
-                        NumberOfPosition === ""
+                        NumberOfRace === ""
                           ? setErrorTriCount("TriCount  Number is required ")
                           : setErrorTriCount(" ")
                       }

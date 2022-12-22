@@ -10,98 +10,75 @@ import dateFormat from "dateformat";
 import { fetchcompetition } from "../../../redux/getReducer/getCompetition";
 import { toast } from "react-toastify";
 
-const LocalItem = () => {
-  const list = localStorage.getItem("competition");
-  if (list) {
-    return JSON.parse(localStorage.getItem("competition"));
-  } else {
-    return [];
-  }
-};
 
-const LocalItemTri = () => {
-  const listtri = localStorage.getItem("competitiontri");
-  if (listtri) {
-    return JSON.parse(localStorage.getItem("competitiontri"));
-  } else {
-    return [];
-  }
-};
 
-const Nationality = () => {
+  const Nationality = () => {
   const { data: race } = useSelector((state) => state.race);
 
   const { state } = useLocation();
-  // const { competitionId } = state;
+  const { CompetitionId  } = state;
 
 
+  const [checked, setChecked] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  console.log(state,'state')
  
-  
-  // const history = useNavigate();
   const dispatch = useDispatch();
   const history = useNavigate();
-  const [selectedValue, setSelectedValue] = useState([]);
+  console.log(CompetitionId,'CompetitionId')
 
-  console.log(selectedValue,'sadasdsadsadsad')
-
-  const [Rank, setRank] = useState(1);
-  const [items, setitems] = useState(LocalItem());
-  const [itemsTri, setitemsTri] = useState(LocalItemTri());
-
-  const handleChange = (e) => {
-    setSelectedValue(Array.isArray(e) ? e.map((x) => x.id) : []);
-  };
+ 
 
   useEffect(() => {
     dispatch(fetchrace());
     dispatch(fetchcompetition());
   }, [dispatch]);
+ 
+
+  const [TriCountValue, setTriCountValue] = useState([])
+  const [CastCountValue, setCastCountValue] = useState([])
+
   useEffect(() => {
-    localStorage.setItem("competition", JSON.stringify(items));
-    localStorage.setItem("competitiontri", JSON.stringify(itemsTri));
-  }, [items, itemsTri]);
+    if(CompetitionId.CompetitionCategory === 'pick'){
+      setTriCountValue(checked)
+    }
+    else{
+      setCastCountValue(checked)
+    }
+  });
 
-  
-  // const id = competitionId._id;
+  console.log(TriCountValue,'TriCountValue');
 
-  
-  // const Publish = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     console.log(
-  //       { CastRaces: items },
-  //       { PickRaces: itemsTri },
-  //       "selectedValue"
-  //     );
-  //     const response = await axios.post(
-  //       `${window.env.API_URL}/addraceincompetition/${id}`,
-  //       { CastRaces: items, PickRaces: itemsTri }
-  //     );
-  //     localStorage.removeItem("competition");
-  //     localStorage.removeItem("competitiontri");
+  const Publish = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(
+        `${window.env.API_URL}/addraceincompetition/${CompetitionId._id}`,
+        { CastRaces: CastCountValue, PickRaces: TriCountValue }
+      );
 
-  //     const msgdata = response.data.msg;
-  //     history("/competitionlisting");
-  //     swal({
-  //       title: "Success!",
-  //       text: msgdata,
-  //       icon: "success",
-  //       button: "OK",
-  //     });
-  //   } catch (error) {
-  //     const err = error.response.data.message;
-  //     swal({
-  //       title: "Error!",
-  //       text: err,
-  //       icon: "error",
-  //       button: "OK",
-  //     });
-  //   }
-  // };
+      const msgdata = response.data.msg;
+      console.log(response,'response')
+      history("/competitionlisting");
+      swal({
+        title: "Success!",
+        text: msgdata,
+        icon: "success",
+        button: "OK",
+      });
+    } catch (error) {
+      console.log(error,'response')
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
+    }
+  };
 
-  const saved1 = 1;
-  const [checked, setChecked] = useState([]);
-  const [isDisabled, setIsDisabled] = useState(false);
 
   // useEffect(() => {
   //   if(checked.length === saved1){
@@ -142,7 +119,7 @@ const Nationality = () => {
               race.map((item,index) => {
                 return(
                   <div className="myselectiondata">
-              <span onChange={setRank} value={1}>
+              <span>
               <label class="checkbox-label">
                   <input type="checkbox" id={item._id} onChange={handleCheck}
                    name="selectrace" disabled={isDisabled}  value={item._id}/>
@@ -164,7 +141,7 @@ const Nationality = () => {
             
 
             <div className="ButtonSection " style={{ justifyContent: "end" }}>
-              <button Name="submit" className="SubmitButton" >
+              <button Name="submit" className="SubmitButton" onClick={Publish}>
                 Publish
               </button>
             </div>

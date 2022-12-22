@@ -47,7 +47,7 @@ const Statistic = () => {
   const GoToPublish = (competitionId) => {
     history("/competitionrace", {
       state: {
-        competitionId: competitionId,
+        CompetitionId: competitionId,
       },
     });
   }
@@ -124,17 +124,15 @@ const Statistic = () => {
                   <table>
                     <thead>
                       <tr>
-                        <th>Competition Name</th>
+                        <th>Name</th>
                         <th>Name Arabic </th>
-                        <th>Competition Category </th>
-                        <th>Competition Code</th>
-                        <th>Description </th>
-                        <th>Description Arabic</th>
+                        <th>Competition Code </th>
                         <th>Short Code</th>
-                        <th>Pick Count</th>
-                        <th>Tri Count</th>
+                        <th>Type/Category</th>
+                        <th>End Date </th>
                         <th>Start Date </th>
-                        <th>Add Races</th>
+                        <th>Start Date </th>
+                        <th>Category Count</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -145,17 +143,18 @@ const Statistic = () => {
                             <tr className="tr_table_class">
                               <td>{item.NameEn === null ? <>N/A</>: item.NameEn}</td>
                               <td>{item.NameAr === null ? <>N/A</>:item.NameAr}</td>
-                              <td>{item.CompetitionCategory.NameEn === null ? <>N/A</> : item.CompetitionCategoryData.NameEn}</td>
-                              <td>{item.CompetitionCode === '' ? <>N/A</> : item.CompetitionCode}</td>
-                              
-                              <td>{item.DescEn}</td>
-                              <td>{item.DescAr} </td>
+                              <td>{item.CompetitionCode === null ? <>N/A</> : item.CompetitionCode}</td>
                               <td>{item.shortCode}</td>
-                              <td>{item.pickCount}</td>
-                              <td>{item.TriCount}</td>
+                              <td>{item.CompetitionCategory}</td>
+                              <td>{item.CategoryCount}</td>
                               <td>
                                 <Moment format="YYYY/MM/DD">
                                   {item.StartDate}
+                                </Moment>{" "}
+                              </td>
+                              <td>
+                                <Moment format="YYYY/MM/DD">
+                                  {item.EndDate}
                                 </Moment>{" "}
                               </td>
                               <td>

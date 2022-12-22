@@ -33,7 +33,7 @@ export const {setcompetition , setStatus} = getcompetitionSlice.actions;
 export default getcompetitionSlice.reducer;
 
 export const fetchcompetition = createAsyncThunk('/competitionget/fetch', async() => {
-    const res = await axios.get(`${window.env.API_URL}/Competitonget?keyword=&page=`);
+    const res = await axios.get(`${window.env.API_URL}/Competitonget`);
     const competitionData = res.data;
     return competitionData.data;
 })

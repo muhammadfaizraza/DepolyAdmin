@@ -19,6 +19,8 @@ const Equipment = () => {
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
 
+
+
   const history = useNavigate();
   const { pathname } = useLocation();
  useEffect(() => {

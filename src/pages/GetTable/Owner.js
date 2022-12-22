@@ -53,17 +53,35 @@ const Owner = () => {
   useEffect(() => {
     dispatch(fetchOwner({pagenumber}));
   },[dispatch]);
+
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteowner/${Id}`)
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+
+      .then( async(willDelete) => {
+        const res = await axios.delete(`${window.env.API_URL}/softdeleteowner/${Id}`)
+   
+        if (willDelete) {
+          swal("Poof! Your data has been deleted!", {
+            icon: "success",
+         
+          }
+          )
+          dispatch(fetchOwner())
+          
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      dispatch(fetchOwner());
-    } catch (error) {
+   
+    }catch(error) {
+
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -72,7 +90,10 @@ const Owner = () => {
         button: "OK",
       });
     }
-  };
+
+
+
+  }
   if (status === STATUSES.LOADING) {
         return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
 

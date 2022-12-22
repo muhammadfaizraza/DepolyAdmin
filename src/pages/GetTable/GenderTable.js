@@ -40,17 +40,37 @@ const GenderTable = () => {
   useEffect(() => {
     dispatch(fetchgender());
   }, [dispatch]);
+
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteSex/${Id}`)
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+
+      .then( async(willDelete) => {
+
+        const res = await axios.delete(`${window.env.API_URL}/softdeleteSex/${Id}`)
+  
+   
+        if (willDelete) {
+          swal("Poof! Your data has been deleted!", {
+            icon: "success",
+         
+          }
+          )
+          dispatch(fetchgender())
+          
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      dispatch(fetchgender());
-    } catch (error) {
+   
+    }catch(error) {
+
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -59,7 +79,10 @@ const GenderTable = () => {
         button: "OK",
       });
     }
-  };
+
+
+
+  }
 
   if (status === STATUSES.LOADING) {
     return (

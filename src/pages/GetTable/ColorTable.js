@@ -43,18 +43,36 @@ const ColorTable = () => {
   useEffect(() => {
     dispatch(fetchcolor());
   }, [dispatch]);
+
   const handleRemove = async (Id) => {
     try {
-    await axios.delete(`${window.env.API_URL}/softdeleteColor/${Id}`);
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+
+      .then( async(willDelete) => {
+        await axios.delete(`${window.env.API_URL}/softdeleteColor/${Id}`);
+  
+   
+        if (willDelete) {
+          swal("Poof! Your data has been deleted!", {
+            icon: "success",
+         
+          }
+          )
+          dispatch(fetchcolor())
+          
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      history("/colorlist");
-      dispatch(fetchcolor());
-    } catch (error) {
+   
+    }catch(error) {
+
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -63,9 +81,10 @@ const ColorTable = () => {
         button: "OK",
       });
     }
-    history("/colorlist");
-  };
 
+
+
+  }
   if (status === STATUSES.LOADING) {
     return (
       <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />

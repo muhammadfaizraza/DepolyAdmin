@@ -218,7 +218,7 @@ const NewsForm = () => {
                     <span className="errorAr">{ErrorTitleAr.message}</span>
                   </div>
                 </div>
-                <div className="row ">
+                <div className="row quillRow">
                   <div className="col-sm">
                     <ReactQuill
                       theme="snow"

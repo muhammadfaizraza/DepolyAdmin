@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
@@ -6,14 +6,16 @@ import Form from "react-bootstrap/Form";
 import { useNavigate, useLocation } from "react-router-dom";
 import TextInputValidation from "../../utils/TextInputValidation";
 import { fetchcurrencyshortcode } from "../../redux/getShortCode/getcurrencyshortcode";
-import { useSelector ,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const Currency = () => {
   //for error
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
   const dispatch = useDispatch();
-  const {data:currencyshortcode} = useSelector((state) => state.currencyshortcode)
+  const { data: currencyshortcode } = useSelector(
+    (state) => state.currencyshortcode
+  );
   const [ErrorRate, setErrorRate] = useState("");
 
   const [NameEn, setNameEn] = useState("");
@@ -25,7 +27,7 @@ const Currency = () => {
   const { pathname } = useLocation();
   useEffect(() => {
     dispatch(fetchcurrencyshortcode());
-  },[dispatch])
+  }, [dispatch]);
 
   //for Errors
   const data1 = JSON.stringify(
@@ -139,7 +141,7 @@ const Currency = () => {
                   <span className="error">{ErrorRate}</span>
                   {/* <span className="spanForm"> |</span> */}
                 </div>
-               
+
                 {/* <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
@@ -158,22 +160,29 @@ const Currency = () => {
                 </div> */}
               </div>
               <div className="row mainrow">
-                  <div className="col-sm">
+                <div className="col-sm">
                   <FloatingLabel
-                      controlId="floatingInput"
-                      label="Short Code"
-                      className="mb-3"
-                      // onChange={(e) =>
-                      //   setregisteration({ ...registeration, shortCode: e.target.value })
-                      // }
-                    
-                    >
-                      <Form.Control type="text"  placeholder="Description" value={currencyshortcode.length === 0 ? <>N/A</> : currencyshortcode[0].maxshortCode}/>
+                    controlId="floatingInput"
+                    label="Short Code"
+                    className="mb-3"
+                    // onChange={(e) =>
+                    //   setregisteration({ ...registeration, shortCode: e.target.value })
+                    // }
+                  >
+                    <Form.Control
+                      type="text"
+                      placeholder="Description"
+                      value={
+                        currencyshortcode.length === 0 ? (
+                          <>N/A</>
+                        ) : (
+                          currencyshortcode[0].maxshortCode
+                        )
+                      }
+                    />
                   </FloatingLabel>
-                 
-									
-                  </div>
                 </div>
+              </div>
               <div className="ButtonSection" style={{ justifyContent: "end" }}>
                 <button type="submit" className="SubmitButton">
                   Add Currency

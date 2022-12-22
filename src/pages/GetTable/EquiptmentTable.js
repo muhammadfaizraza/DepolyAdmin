@@ -40,15 +40,34 @@ const EquiptmentTable = () => {
   }, [dispatch]);
   const handleRemove = async (Id) => {
     try {
-   await axios.delete(`${window.env.API_URL}/softdeleteEquipment/${Id}`)
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+
+      .then( async(willDelete) => {
+
+        const res = await axios.delete(`${window.env.API_URL}/softdeleteEquipment/${Id}`)
+  
+   
+        if (willDelete) {
+          swal("Poof! Your data has been deleted!", {
+            icon: "success",
+         
+          }
+          )
+          dispatch(fetchequipment())
+          
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      dispatch(fetchequipment());
-    } catch (error) {
+   
+    }catch(error) {
+
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -57,8 +76,10 @@ const EquiptmentTable = () => {
         button: "OK",
       });
     }
-  };
 
+
+
+  }
   if (status === STATUSES.LOADING) {
     return (
       <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />

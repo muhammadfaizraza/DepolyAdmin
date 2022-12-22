@@ -42,17 +42,36 @@ const News = () => {
   useEffect(() => {
     dispatch(fetchSponsor());
   }, []);
+
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeletesponsor/${Id}`)
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+
+      .then( async(willDelete) => {
+        await axios.delete(`${window.env.API_URL}/softdeletesponsor/${Id}`)
+  
+   
+        if (willDelete) {
+          swal("Poof! Your data has been deleted!", {
+            icon: "success",
+         
+          }
+          )
+          dispatch(fetchSponsor())
+          
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      dispatch(fetchSponsor());
-    } catch (error) {
+   
+    }catch(error) {
+
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -61,7 +80,11 @@ const News = () => {
         button: "OK",
       });
     }
-  };
+
+
+
+  }
+  
   if (status === STATUSES.LOADING) {
     return (
       <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />

@@ -40,17 +40,35 @@ const { data: trackLength, status } = useSelector((state) => state.trackLength);
 useEffect(() => {
   dispatch(fetchTrackLength());
 }, [dispatch]);
+
 const handleRemove = async (Id) => {
   try {
-    const res = await axios.delete(`${window.env.API_URL}/softdeleteTrackLength/${Id}`)
     swal({
-      title: "Success!",
-      text: "Data has been Deleted successfully ",
-      icon: "success",
-      button: "OK",
+      title: "Are you sure?",
+      text: "do you want to delete this data ?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+
+    .then( async(willDelete) => {
+      const res = await axios.delete(`${window.env.API_URL}/softdeleteTrackLength/${Id}`)
+ 
+      if (willDelete) {
+        swal("Poof! Your data has been deleted!", {
+          icon: "success",
+       
+        }
+        )
+        dispatch(fetchTrackLength())
+        
+      } else {
+        swal("Your data is safe!");
+      }
     });
-    dispatch(fetchTrackLength());
-  } catch (error) {
+ 
+  }catch(error) {
+
     const err = error.response.data.message;
     swal({
       title: "Error!",
@@ -59,7 +77,10 @@ const handleRemove = async (Id) => {
       button: "OK",
     });
   }
-};
+
+
+
+}
 
 
 if (status === STATUSES.LOADING) {

@@ -728,14 +728,12 @@ position: relative;
 top: 36px;
 left: 18px;
 }
-span.newsErrorAr {
+.newsErrorAr {
   color: red;
-  font-size: 9px;
-  position: relative;
-  direction: rtl;
-  top: 41px;
-  size: 19%;
-  left: 71%;
+  font-size: 11px;
+  float: right;
+  margin-top: 47px;
+  margin-right: 18px;
 }
 
 .userfilter{
@@ -827,3 +825,26 @@ input[type='checkbox']{
     width: 20px;
     height: 100%;
 }
+.form-switch .form-check-input {
+  width: 2em;
+  margin-left: -2.5em;
+  height: 27px;
+}
+.quillRow {
+  margin-top: 22px;
+} 
+
+.newsError{
+  color: red;
+  font-size: 11px !important;
+  position: relative;
+}
+
+.newsErrorAr{
+  color: red;
+  font-size: 11px !important;
+  position: relative;
+}
+
+
+

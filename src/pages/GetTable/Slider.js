@@ -54,17 +54,37 @@ const [Value , setValue] = useState(false)
   useEffect(() => {
     dispatch(fetchSlider());
   }, []);
+
+
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteSlider/${Id}`)
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+
+      .then( async(willDelete) => {
+        const res = await axios.delete(`${window.env.API_URL}/softdeleteSlider/${Id}`)
+  
+   
+        if (willDelete) {
+          swal("Poof! Your data has been deleted!", {
+            icon: "success",
+         
+          }
+          )
+          dispatch(fetchSlider())
+          
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      dispatch(fetchSlider());
-    } catch (error) {
+   
+    }catch(error) {
+
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -73,7 +93,11 @@ const [Value , setValue] = useState(false)
         button: "OK",
       });
     }
-  };
+
+
+
+  }
+
   if (status === STATUSES.LOADING) {
         return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
 

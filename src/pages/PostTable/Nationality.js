@@ -141,11 +141,11 @@ const Nationality = () => {
   const data11 = JSON.stringify(
     TextInputValidation("ar", LabelAr, "Nationality Label Arabic")
   );
-  const Labelar = JSON.parse(data10);
+  const Labelar = JSON.parse(data11);
   const data12 = JSON.stringify(
     TextInputValidation("ar", AltNameAr, "Nationality Alternative Name Arabic")
   );
-  const Altnamear = JSON.parse(data10);
+  const Altnamear = JSON.parse(data12);
   const data13 = JSON.stringify(
     TextInputValidation("ar", AbbrevAr, "Nationality Abbreviation Arabic")
   );

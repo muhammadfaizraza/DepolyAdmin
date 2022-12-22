@@ -218,7 +218,7 @@ const NewsForm = () => {
   );
   const Remark = JSON.parse(data8);
   const data9 = JSON.stringify(
-    TextInputValidation("en", RemarksAr, "Jockey Remarks Arabic")
+    TextInputValidation("ar", RemarksAr, "Jockey Remarks Arabic")
   );
   const Remarkar = JSON.parse(data9);
 

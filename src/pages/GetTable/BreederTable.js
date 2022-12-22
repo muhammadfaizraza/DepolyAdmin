@@ -41,18 +41,35 @@ const BreederTable = () => {
     dispatch(fetchbreeder());
   }, [dispatch]);
 
+  
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteBreeder/${Id}`);
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+
+      .then( async(willDelete) => {
+        const res = await axios.delete(`${window.env.API_URL}/softdeleteBreeder/${Id}`);
+   
+        if (willDelete) {
+          swal("Poof! Your data has been deleted!", {
+            icon: "success",
+         
+          }
+          )
+          dispatch(fetchbreeder())
+          
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      history("/breederlist");
-      dispatch(fetchbreeder());
-    } catch (error) {
+   
+    }catch(error) {
+
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -61,8 +78,10 @@ const BreederTable = () => {
         button: "OK",
       });
     }
-    dispatch(fetchbreeder());
-  };
+
+
+
+  }
   
 
   if (status === STATUSES.LOADING) {

@@ -1,6 +1,4 @@
 const TextInputValidation = (Language, GivenValue, FieldName) => {
-  const ArabicRegex = /^[\u0621-\u064A\u0660-\u0669 ]+$/;
-  const EnglishRegex = /^[A-Za-z\s]*$/;
   let Answer = {
     status: false,
     message: " ",
@@ -11,23 +9,22 @@ const TextInputValidation = (Language, GivenValue, FieldName) => {
       message: ` ${FieldName} is required `,
     });
   } else if (Language === "en") {
-    if (EnglishRegex.test(GivenValue) === true) {
+    if (EnglishFieldValidation(GivenValue) === true) {
       return (Answer = {
         status: true,
-        message: '',
+        message: `${FieldName} is validated`,
       });
     } else {
       return (Answer = {
         status: false,
         message: `${FieldName} Should Have Only English Letter`,
       });
-
     }
   } else if (Language === "ar") {
-    if (ArabicRegex.test(GivenValue) === true) {
+    if (ArabicLanguageVerification(GivenValue) === true) {
       return (Answer = {
         status: true,
-        message: '',
+        message: `${FieldName} is validated`,
       });
     } else {
       return (Answer = {
@@ -38,3 +35,24 @@ const TextInputValidation = (Language, GivenValue, FieldName) => {
   }
 };
 export default TextInputValidation;
+const EnglishFieldValidation = (Value) => {
+  if (
+    /^[a-zA-Z0-9$-@!%*?&#^_.+]+$/.test(Value) ||
+    /^[a-zA-Z0-9$-@!%*?&#^_. +]+$/.test(Value)
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
+const ArabicLanguageVerification = (Value) => {
+  if (
+    /^[\u0621-\u064A\u0660-\u0669\da-zA-Z$-@$!%*?&#^-_.+ ]+$/.test(Value) ||
+    /^[\u0621-\u064A\u0660-\u0669\da-zA-Z$-@$!%*?&#^-_.+]+$/.test(Value) ||
+    /^[a-zA-Z\d$-@$!%*?&#^-_.+\u0621-\u064A\u0660-\u0669]+$/.test(Value)
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};

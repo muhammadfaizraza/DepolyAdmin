@@ -845,6 +845,11 @@ input[type='checkbox']{
   font-size: 11px !important;
   position: relative;
 }
-
-
+/* .crossIcon {
+  display: block;
+  margin-left: 157px;
+  margin-bottom: -18px;
+  margin-top: 10px;
+  height: 14px;
+} */
 

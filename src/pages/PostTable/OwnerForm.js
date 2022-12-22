@@ -14,6 +14,7 @@ import Form from "react-bootstrap/Form";
 import { AiOutlineReload } from "react-icons/ai";
 import { Modal } from "react-bootstrap";
 import TextInputValidation from "../../utils/TextInputValidation";
+import { ImCross } from 'react-icons/im';
 
 import NationalityPopup from "./Nationality";
 
@@ -213,7 +214,10 @@ const OwnerForm = () => {
       reader.readAsDataURL(file);
     });
   };
-
+  const handlePreview = () => {
+    setOwnerimage()
+  document.getElementById("file").value=""
+  };
   const data1 = JSON.stringify(
     TextInputValidation("en", TitleEn, "Owner Title English")
   );
@@ -479,10 +483,14 @@ const OwnerForm = () => {
                         type="file"
                         onChange={onSelectFile}
                         className="formInput"
+                        id="file"
                       />
                       {Ownerimage && (
-                        <img src={preview} alt="" className="PreviewImage" />
-                      )}
+                      <>
+                       <ImCross onClick={handlePreview} className="crossIcon"/>
+                       <img src={preview} className="PreviewImage" alt="" />
+                      </>
+                    )}
                     </div>
 
                     <button

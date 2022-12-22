@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
 import { fetchbreedershortcode } from "../../redux/getShortCode/getbreedershortcode";
 import { useSelector ,useDispatch } from "react-redux";
+import { ImCross } from 'react-icons/im';
 
 const Breeder = () => {
   //for error
@@ -61,6 +62,7 @@ const Breeder = () => {
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
   };
+ 
   useEffect(() => {
     dispatch(fetchbreedershortcode());
     if (!image) {
@@ -73,6 +75,12 @@ const Breeder = () => {
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl);
   }, [image,dispatch]);
+
+
+  const handlePreview = () => {
+    setImage()
+  document.getElementById("file").value=" "
+  };
 
   const Name = JSON.stringify(
     TextInputValidation("en", NameEn, "Breeder English Name")
@@ -251,10 +259,14 @@ const Breeder = () => {
                     type="file"
                     onChange={onSelectFile}
                     className="formInput"
+                    id="file"
                   />
                   {image && (
-                    <img src={preview} alt="" className="PreviewImage" />
-                  )}
+                      <>
+                       <ImCross onClick={handlePreview} className="crossIcon"/>
+                       <img src={preview} className="PreviewImage" alt="" />
+                      </>
+                    )}
                 </div>
 
                 <button type="submit" className="SubmitButton">

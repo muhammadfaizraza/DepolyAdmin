@@ -15,6 +15,7 @@ import { AiOutlineReload } from "react-icons/ai";
 import { Modal } from "react-bootstrap";
 import TextInputValidation from "../../utils/TextInputValidation";
 import NationalityPopup from "./Nationality";
+import { ImCross } from 'react-icons/im';
 
 const TrainerForm = () => {
   //for Errors
@@ -189,6 +190,10 @@ const TrainerForm = () => {
         };
       })
     );
+    const handlePreview = () => {
+      setImage()
+    document.getElementById("file").value=""
+    };
 //Checking Validation
   const data1 = JSON.stringify(
     TextInputValidation("en", TitleEn, "Trainer Title English")
@@ -548,9 +553,13 @@ const TrainerForm = () => {
                       type="file"
                       onChange={onSelectFile}
                       className="formInput"
+                      id="file"
                     />
-                    {image && (
-                      <img src={preview} className="PreviewImage" alt="" />
+                      {image && (
+                      <>
+                       <ImCross onClick={handlePreview} className="crossIcon"/>
+                       <img src={preview} className="PreviewImage" alt="" />
+                      </>
                     )}
                   </div>
 

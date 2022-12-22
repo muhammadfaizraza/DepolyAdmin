@@ -13,6 +13,7 @@ import { fetchgroundtype } from "../../redux/getReducer/getGroundType";
 import { Modal } from "react-bootstrap";
 import { AiOutlineReload } from "react-icons/ai";
 import TextInputValidation from "../../utils/TextInputValidation";
+import { ImCross } from 'react-icons/im';
 
 import RaceCoursePopup from "./RaceCourseForm";
 import GroundTypePopup from "./GroundType";
@@ -110,14 +111,17 @@ const Tracklengthform = () => {
     
       });
       
-      return false
+      
     }
   
     const objectUrl = URL.createObjectURL(RaceCourseImage);
     setPreview(objectUrl);
     return () => URL.revokeObjectURL(objectUrl);
   }, [RaceCourseImage ,dispatch]);
-
+  const handlePreview = () => {
+    setRaceCourseImage()
+  document.getElementById("file").value=""
+  };
   const FetchNew = () => {
     dispatch(fetchgroundtype());
     dispatch(fetchracecourse());
@@ -331,10 +335,14 @@ const Tracklengthform = () => {
                     type="file"
                     onChange={onSelectFile}
                     className="formInput"
+                    id="file"
                   />
-                  {RaceCourseImage && (
-                    <img src={preview} alt="" className="PreviewImage" />
-                  )}
+                    {RaceCourseImage && (
+                      <>
+                       <ImCross onClick={handlePreview} className="crossIcon"/>
+                       <img src={preview} className="PreviewImage" alt="" />
+                      </>
+                    )}
                 </div>
 
                 <button type="submit" className="SubmitButton">

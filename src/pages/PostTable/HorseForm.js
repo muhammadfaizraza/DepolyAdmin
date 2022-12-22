@@ -29,7 +29,7 @@ import OwnerPopup from "./OwnerForm";
 import TrainerPopup from "./PostTrainer";
 import NationalityPopup from "./Nationality";
 import HorseKindPopup from "./Horsekindform";
-
+import { ImCross } from 'react-icons/im';
 
 const Gelted = [
   { id: "0", value: "false", label: "false" },
@@ -137,7 +137,6 @@ const HorseForm = () => {
         };
       })
     );
-    
   let horsekindoptions =
     HorseKind === undefined ? (
       <></>
@@ -479,6 +478,10 @@ const HorseForm = () => {
   const onSelectFile = (e) => {
     setimage(e.target.files[0]);
   
+  };
+  const handlePreview = () => {
+    setimage()
+  document.getElementById("file").value=""
   };
 
     var today = new Date();
@@ -1325,9 +1328,13 @@ const HorseForm = () => {
                       type="file"
                       onChange={onSelectFile}
                       className="formInput"
+                      id="file"
                     />
-                    {image && (
-                      <img src={preview} alt="" className="PreviewImage" />
+                   {image && (
+                      <>
+                       <ImCross onClick={handlePreview} className="crossIcon"/>
+                       <img src={preview} className="PreviewImage" alt="" />
+                      </>
                     )}
                   </div>
                   <button

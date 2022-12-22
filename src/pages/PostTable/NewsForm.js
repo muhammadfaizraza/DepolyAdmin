@@ -10,6 +10,7 @@ import swal from "sweetalert";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import TextInputValidation from "../../utils/TextInputValidation";
+import { ImCross } from 'react-icons/im';
 
 const modules = {
   toolbar: [
@@ -105,6 +106,10 @@ const NewsForm = () => {
 
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
+  };
+  const handlePreview = () => {
+    setImage()
+  document.getElementById("file").value=""
   };
 
   const data1 = JSON.stringify(
@@ -252,9 +257,13 @@ const NewsForm = () => {
                       type="file"
                       onChange={onSelectFile}
                       className="formInput"
+                      id="file"
                     />
-                    {image && (
-                      <img src={preview} alt="" className="PreviewImage" />
+                      {image && (
+                      <>
+                       <ImCross onClick={handlePreview} className="crossIcon"/>
+                       <img src={preview} className="PreviewImage" alt="" />
+                      </>
                     )}
                   </div>
 

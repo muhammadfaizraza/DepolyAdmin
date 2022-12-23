@@ -58,7 +58,7 @@ const Racename = () => {
       .then( async(willDelete) => {
    
         if (willDelete) {
-          const res = await axios.delete(`${window.env.API_URL}/softdeleteRaceName/${Id}`)
+          await axios.delete(`${window.env.API_URL}/softdeleteRaceName/${Id}`)
           swal("Your data has been deleted Successfully!", {
             icon: "success",
          

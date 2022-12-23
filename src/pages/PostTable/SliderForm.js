@@ -124,7 +124,7 @@ const SliderForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className="error" 
+                    <span className={Error.status ? 'success' : 'error'} 
                   >{Error.message}</span>
                   </div>
 
@@ -144,7 +144,7 @@ const SliderForm = () => {
                     >
                       <Form.Control type="text" placeholder="عنوان" required />
                     </FloatingLabel>
-                    <span className="errorAr" >{ErrorAr.message}</span>
+                    <span className={ErrorAr.status ? 'success' : 'error'} >{ErrorAr.message}</span>
                   </div>
                 </div>
 

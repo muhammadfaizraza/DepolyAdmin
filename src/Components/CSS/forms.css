@@ -695,8 +695,7 @@ background-color: #00A3FF;
   direction: rtl;
 }
 
-.Competitiontripick{
-}
+
 
 .pickCountstyle{
 margin: 34px;
@@ -717,6 +716,16 @@ font-size: 15.59px;
   top: 45px;
   right: 0;
 }
+.successAr {
+  font-size: 11px;
+  direction: rtl;
+  display: flex;
+ color: #228B22;
+  position: absolute;
+  top: 45px;
+  right: 0;
+}
+
 
 .addbtn.competitionaddbtn {
   margin-top: 35px;
@@ -734,6 +743,13 @@ left: 18px;
   float: right;
   margin-top: 47px;
   margin-right: 18px;
+}
+.success{
+
+  color:  #228B22;
+  font-size: 11px;
+  position: absolute;
+  top: 45px;
 }
 
 .userfilter{

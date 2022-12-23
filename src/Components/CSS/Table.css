@@ -454,11 +454,11 @@ img.PreviewHorseImage {
     background-color: transparent;
     border-radius: 0;
 }
-/* .dropdown {
+.deletedDropdown {
     position: absolute;
     right: 214px;
     top: 120px;
-} */
+}
 .btn-primary {
     --bs-btn-color:  black !important;
     --bs-btn-bg: transparent !important;

@@ -76,7 +76,7 @@ const Breeder = () => {
   );
 
   const titlear =JSON.parse(data4);
-
+console.log(Error , "done")
   return (
     <div className="page">
       <div className="rightsidedata">
@@ -103,7 +103,7 @@ const Breeder = () => {
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
-                <span className="error">{Error.message}</span>
+                <span  className={Error.status ? 'success' : 'error'}>{Error.message}</span>
                 </div>
 
                 <div className="col-sm">
@@ -119,7 +119,7 @@ const Breeder = () => {
                   >
                     <Form.Control type="text" placeholder="اسم" />
                   </FloatingLabel>
-               <span className="errorAr">{ErrorAr.message}</span>
+               <span  className={ErrorAr.status ? 'successAr' : 'errorAr'}>{ErrorAr.message}</span>
                 </div>
               </div>
            
@@ -167,7 +167,7 @@ const Breeder = () => {
                     <Form.Control type="text" placeholder="Description" />
                   </FloatingLabel>
                   <span className="spanForm"> |</span>
-              <span className="error">{ErrorTitle.message}</span>
+              <span className={ErrorTitle.status ? 'success' : 'error'}>{ErrorTitle.message}</span>
                 </div>
 
                 <div className="col-sm">
@@ -182,7 +182,7 @@ const Breeder = () => {
                   >
                     <Form.Control type="text" placeholder="عنوان" />
                   </FloatingLabel>
-                  <span className="errorAr">{ErrorTitleAr.message}</span>
+                  <span className={ErrorTitleAr.status ? 'successAr' : 'errorAr'}>{ErrorTitleAr.message}</span>
                 </div>
               </div>
               <div className="ButtonSection " style={{ justifyContent: "end" }}>

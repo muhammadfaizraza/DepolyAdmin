@@ -284,7 +284,7 @@ const Races = () => {
                               <td>
                                 {" "}
                                 <Moment parse="YYYY-MM-DD HH:mm">
-                                  {item.DayNTime}
+                                  {item.Day}
                                 </Moment>
                               </td>
                               {/* <td>{item.HorseModel}</td> */}

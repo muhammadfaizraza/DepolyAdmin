@@ -187,7 +187,7 @@ const Nationality = () => {
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
-                  <span className="error">{ErrorNameEn.message}</span>
+                  <span className={ErrorNameEn.status ? 'success' : 'error'}>{ErrorNameEn.message}</span>
                 </div>
 
                 <div className="col-sm">
@@ -203,7 +203,7 @@ const Nationality = () => {
                   >
                     <Form.Control type="text" placeholder="اسم" required />
                   </FloatingLabel>
-                  <span className="errorAr">{ErrorNameAr.message}</span>
+                  <span className={ErrorNameAr.status ? 'successAr' : 'errorAr'}>{ErrorNameAr.message}</span>
                 </div>
               </div>
 
@@ -255,7 +255,7 @@ const Nationality = () => {
                     />
                   </FloatingLabel>
                 <span className="spanForm"> |</span> 
-                  <span className="error">{ErrorAbbrevEn.message}</span>
+                  <span className={ErrorAbbrevEn.status ? 'success' : 'error'}>{ErrorAbbrevEn.message}</span>
                 
                 </div>
 
@@ -275,7 +275,7 @@ const Nationality = () => {
                       style={{ left: "%" }}
                     />
                   </FloatingLabel>
-                  <span className="errorAr">{ErrorAbbrevAr.message}</span>
+                  <span className={ErrorAbbrevAr.status ? 'successAr' : 'errorAr'}>{ErrorAbbrevAr.message}</span>
                 </div> 
               </div>
 
@@ -296,7 +296,7 @@ const Nationality = () => {
                     />
                   </FloatingLabel>
                   <span className="spanForm"> |</span> 
-                  <span className="error">{ErrorAltNameEn.message}</span>
+                  <span className={ErrorAltNameEn.status ? 'success' : 'error'}>{ErrorAltNameEn.message}</span>
           
                 </div>
 
@@ -317,7 +317,7 @@ const Nationality = () => {
                       style={{ left: "%" }}
                     />
                   </FloatingLabel>
-                  <span className="errorAr">{ErrorAltNameAr.message}</span>
+                  <span className={ErrorAltNameAr.status ? 'successAr' : 'errorAr'}>{ErrorAltNameAr.message}</span>
                 </div> 
               </div>
 
@@ -334,7 +334,7 @@ const Nationality = () => {
                     <Form.Control type="text" placeholder="Label" required />
                   </FloatingLabel>{" "}
                   <span className="spanForm"> |</span>
-                  <span className="error">{ErrorLabel.message}</span>
+                  <span className={ErrorLabel.status ? 'success' : 'error'}>{ErrorLabel.message}</span>
                 </div>
 
                 <div className="col-sm">
@@ -355,7 +355,7 @@ const Nationality = () => {
                       style={{ left: "%" }}
                     />
                   </FloatingLabel>
-            <span className="errorAr">{ErrorLabelAr.message}</span>
+            <span className={ErrorLabelAr.status ? 'successAr' : 'errorAr'}>{ErrorLabelAr.message}</span>
                 </div>
               </div>
 
@@ -404,7 +404,7 @@ const Nationality = () => {
                     <Form.Control type="text" placeholder="Value" required />
                   </FloatingLabel>
                   <span className="spanForm"> |</span>
-                  <span className="error">{ErrorValueEn.message}</span>
+                  <span className={ErrorValueEn.status ? 'success' : 'error'}>{ErrorValueEn.message}</span>
                 </div>
           
                 <div className="col-sm">
@@ -423,7 +423,7 @@ const Nationality = () => {
                       style={{ left: "%" }}
                     />
                   </FloatingLabel>
-                  <span className="errorAr">{ErrorValueAr.message}</span>
+                  <span  className={ErrorValueAr.status ? 'successAr' : 'errorAr'}>{ErrorValueAr.message}</span>
                 </div> 
               </div>
 

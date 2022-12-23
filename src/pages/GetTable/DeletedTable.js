@@ -88,7 +88,7 @@ function App() {
 
   return (
     <>
-      <Dropdown onSelect={handleSelect}>
+      <Dropdown onSelect={handleSelect} className="deletedDropdown">
         <Dropdown.Toggle>Tables</Dropdown.Toggle>
 
         <Dropdown.Menu>

@@ -147,7 +147,7 @@ const AdsForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className="error" >{Error.message}</span>
+                    <span className={Error.status ? 'success' : 'error'} >{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -163,7 +163,7 @@ const AdsForm = () => {
                     >
                       <Form.Control type="text" placeholder="عنوان" />
                     </FloatingLabel>
-                    <span className="errorAr">{ErrorAr.message}</span>
+                    <span className={ErrorAr.status ? 'successAr' : 'errorAr'}>{ErrorAr.message}</span>
                   </div>
                 </div>
 
@@ -181,7 +181,7 @@ const AdsForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className="error">{ErrorDesc.message}</span>
+                    <span className={ErrorDesc.status ? 'success' : 'error'}>{ErrorDesc.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -196,7 +196,7 @@ const AdsForm = () => {
                     >
                       <Form.Control type="text" placeholder="التفاصيل" />
                     </FloatingLabel>
-                    <span className="errorAr">{ErrorDescAr.message}</span>
+                    <span className={ErrorDescAr.status ? 'successAr' : 'errorAr'}>{ErrorDescAr.message}</span>
                   </div>
                 </div>
 

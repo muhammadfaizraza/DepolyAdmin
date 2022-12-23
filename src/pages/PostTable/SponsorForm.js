@@ -162,7 +162,7 @@ const SponsorForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className="error" 
+                    <span className={Error.status ? 'success' : 'error'}
                   >{Error.message}</span>
                   </div>
 
@@ -182,7 +182,7 @@ const SponsorForm = () => {
                     >
                       <Form.Control type="text" placeholder="عنوان" required/>
                     </FloatingLabel>
-                    <span className="errorAr" >{ErrorAr.message}</span>
+                    <span className={ErrorAr.status ? 'successAr' : 'errorAr'}>{ErrorAr.message}</span>
                   </div>
                 </div>
 
@@ -200,7 +200,7 @@ const SponsorForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className="error">{descError.message}</span>
+                    <span className={descError.status ? 'success' : 'error'}>{descError.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -216,7 +216,7 @@ const SponsorForm = () => {
                     >
                       <Form.Control type="text" placeholder="التفاصيل" required />
                     </FloatingLabel>
-                    <span className="errorAr">{descErrorAr.message}</span>
+                    <span className={descErrorAr.status ? 'successAr' : 'errorAr'}>{descErrorAr.message}</span>
                   </div>
                 </div>
 

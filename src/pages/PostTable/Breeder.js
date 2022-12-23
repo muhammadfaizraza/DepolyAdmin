@@ -145,7 +145,7 @@ const Breeder = () => {
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
-                  <span className="error" style={styles.popup}>
+                  <span className={Error.status ? 'success' : 'error'} >
                     {Error.message}
                   </span>
                 </div>
@@ -166,7 +166,7 @@ const Breeder = () => {
                       onBlur={() => setErrorAr(objAr)}
                     />
                   </FloatingLabel>
-                  <span className="errorAr" style={stylesAr.popupAr}>
+                  <span className={ErrorAr.status ? 'successAr' : 'errorAr'}>
                     {ErrorAr.message}
                   </span>
                 </div>
@@ -216,7 +216,7 @@ const Breeder = () => {
                     <Form.Control type="text" placeholder="Description" />
                   </FloatingLabel>
                   <span className="spanForm"> |</span>
-                  <span className="error" style={styles.popup}>
+                  <span className={ErrorDesc.status ? 'success' : 'error'} >
                     {ErrorDesc.message}
                   </span>
                 </div>
@@ -233,7 +233,7 @@ const Breeder = () => {
                   >
                     <Form.Control type="text" placeholder="وصف" />
                   </FloatingLabel>
-                  <span className="errorAr" style={styles.popup}>
+                  <span className={ErrorDescAr.status ? 'successAr' : 'errorAr'} >
                     {ErrorDescAr.message}
                   </span>
                 </div>

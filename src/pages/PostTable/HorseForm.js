@@ -322,6 +322,7 @@ const HorseForm = () => {
     const [showActiveTrainer, setShowActiveTrainer] = useState(false);
     const [showActivenationality, setShowActivenationality] = useState(false);
     const [showHorseKind, setShowHorseKind] = useState(false);
+    const [isLoading, setisLoading] = useState(false);
 
     
  
@@ -409,6 +410,7 @@ const HorseForm = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -452,6 +454,7 @@ const HorseForm = () => {
         button: "OK",
       });
       history("/horse");
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -460,6 +463,7 @@ const HorseForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
   useEffect(() => {
@@ -1339,7 +1343,7 @@ const HorseForm = () => {
                   </div>
                   <button
                     type="submit"
-                  
+                     disabled={isLoading}
                     className="SubmitButton"
                   >
                     Add Horse

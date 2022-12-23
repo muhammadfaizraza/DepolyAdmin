@@ -13,6 +13,7 @@ const SliderForm = () => {
  const [Error, setError] = useState("");
  const [ErrorAr, setErrorAr] = useState("");
  const [ErrorURL, setErrorURL] = useState("");
+ const [isLoading, setisLoading] = useState(false);
 
   const history = useNavigate();
   const [TitleEn, setTitleEn] = useState("");
@@ -42,6 +43,7 @@ const SliderForm = () => {
   const objAr = JSON.parse(data2);
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -59,6 +61,7 @@ const SliderForm = () => {
         icon: "success",
         button: "OK",
       });
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -67,6 +70,7 @@ const SliderForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
   useEffect(() => {
@@ -186,6 +190,7 @@ const SliderForm = () => {
                     type="submit"
                     onClick={submit}
                     className="SubmitButton"
+                    disabled={isLoading}
                   >
                     Add Slider
                   </button>

@@ -25,6 +25,7 @@ const TrainerForm = () => {
   const [ErrorTitleAr, setErrorTitleAr] = useState("");
   const [ErrorShortName, setErrorShortName] = useState("");
   const [ErrorShortNameAr, setErrorShortNameAr] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
   const [ErrorDateofBirth, setErrorDateofBirth] = useState("");
   const [ErrorLicenseDate, setErrorLicenseDate] = useState("");
@@ -66,6 +67,7 @@ const TrainerForm = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -96,6 +98,7 @@ const TrainerForm = () => {
       if (pathname === "/trainerform") {
         history("/trainer");
       }
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -104,6 +107,7 @@ const TrainerForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
 
@@ -563,7 +567,7 @@ const TrainerForm = () => {
                     )}
                   </div>
 
-                  <button type="submit" className="SubmitButton">
+                  <button type="submit" className="SubmitButton" disabled={isLoading}>
                     Add Trainer
                   </button>
                 </div>

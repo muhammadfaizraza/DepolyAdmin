@@ -47,6 +47,7 @@ const Verdicts = () => {
             icon: "error",
             button: "OK",
           });
+          setisLoading(false)
         }
       };
       

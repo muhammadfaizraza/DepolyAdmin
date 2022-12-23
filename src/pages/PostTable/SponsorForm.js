@@ -71,6 +71,7 @@ const SponsorForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
   useEffect(() => {

@@ -23,7 +23,8 @@ const RaceCourseForm = () => {
   const [ErrorAr , setErrorAr] =useState("");
   const [ErrorColor , setErrorColor] =useState("")
   const [ErrorNationality , setErrorNationality] =useState("")
- 
+  const [isLoading, setisLoading] = useState(false);
+
 
   
 
@@ -112,6 +113,7 @@ const RaceCourseForm = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -133,6 +135,7 @@ const RaceCourseForm = () => {
       if(pathname === '/racecourseform'){
         history("/racecourse");
       }
+      setisLoading(false)
     } catch (error) {
       
       const err = error.response.data.message;
@@ -142,6 +145,7 @@ const RaceCourseForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
 
@@ -408,7 +412,7 @@ const RaceCourseForm = () => {
                     )}
                   </div>
 
-                  <button type="submit" className="SubmitButton">
+                  <button type="submit" className="SubmitButton" disabled={isLoading}>
                     Add Race Course
                   </button>
                 </div>

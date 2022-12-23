@@ -15,12 +15,14 @@ const Horsekindform = () => {
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
   const [shortName, setshortName] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
   const history = useNavigate();
   const { pathname } = useLocation();
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
@@ -37,6 +39,7 @@ const Horsekindform = () => {
       if (pathname === "/horsekindform") {
         history("/horsekind");
       }
+      setisLoading(false)
     } catch (error) {
       const err = error.message;
       swal({
@@ -45,6 +48,7 @@ const Horsekindform = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
 
@@ -137,7 +141,7 @@ const Horsekindform = () => {
               </div>
 
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
-                <button type="submit" className="SubmitButton">
+                <button type="submit" className="SubmitButton" disabled={isLoading}>
                   Add Horse Kind
                 </button>
               </div>

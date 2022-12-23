@@ -48,6 +48,7 @@ const MeetingType = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
 

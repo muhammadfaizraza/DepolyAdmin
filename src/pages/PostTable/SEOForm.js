@@ -12,6 +12,7 @@ const Breeder = () => {
    const [ErrorAr, setErrorAr] = useState("")
    const [ErrorTitle, setErrorTitle] = useState("")
    const [ErrorTitleAr, setErrorTitleAr] = useState("")
+   const [isLoading, setisLoading] = useState(false);
 
   const [KeyWord, setKeyWord] = useState("");
   const [KeyWordAr, setKeyWordAr] = useState("");
@@ -23,6 +24,7 @@ const Breeder = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
 
@@ -41,6 +43,7 @@ const Breeder = () => {
         icon: "success",
         button: "OK",
       });
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -49,6 +52,7 @@ const Breeder = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
 //function for errors
@@ -198,7 +202,7 @@ const Breeder = () => {
                 </div>
               </div>
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
-                <button Name="submit" className="SubmitButton">
+                <button Name="submit" className="SubmitButton" disabled={isLoading}>
                   Add SEO
                 </button>
               </div>

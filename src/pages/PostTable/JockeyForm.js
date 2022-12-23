@@ -36,6 +36,7 @@ const NewsForm = () => {
   const [ErrorMaxWeight, setErrorMaxWeight] = useState("");
   const [ErrorAllowance, setErrorAllowance] = useState("");
   const [ErrorNationality, setErrorNationality] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
   const dispatch = useDispatch();
   const history = useNavigate();
@@ -70,6 +71,7 @@ const NewsForm = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -97,6 +99,7 @@ const NewsForm = () => {
       if (pathname === "/jockeyform") {
         history("/jockey");
       }
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -105,6 +108,7 @@ const NewsForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
 
@@ -642,7 +646,7 @@ const NewsForm = () => {
                     )}
                   </div>
 
-                  <button type="submit" className="SubmitButton">
+                  <button type="submit" className="SubmitButton" disabled={isLoading}>
                     Add Jockey
                   </button>
                 </div>

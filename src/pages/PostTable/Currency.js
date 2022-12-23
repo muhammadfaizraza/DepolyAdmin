@@ -22,6 +22,7 @@ const Currency = () => {
   const [NameAr, setNameAr] = useState("");
   const [shortCode, setshortCode] = useState("");
   const [Rate, setRate] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
   const history = useNavigate();
   const { pathname } = useLocation();
@@ -42,6 +43,7 @@ const Currency = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
 
@@ -59,6 +61,7 @@ const Currency = () => {
         icon: "success",
         button: "OK",
       });
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -67,6 +70,7 @@ const Currency = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
 
@@ -159,15 +163,15 @@ const Currency = () => {
                   </FloatingLabel>
                 </div> */}
               </div>
-              <div className="row mainrow">
+              {/* <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="Short Code"
                     className="mb-3"
-                    // onChange={(e) =>
-                    //   setregisteration({ ...registeration, shortCode: e.target.value })
-                    // }
+                    onChange={(e) =>
+                      setregisteration({ ...registeration, shortCode: e.target.value })
+                    }
                   >
                     <Form.Control
                       type="text"
@@ -182,9 +186,9 @@ const Currency = () => {
                     />
                   </FloatingLabel>
                 </div>
-              </div>
+              </div> */}
               <div className="ButtonSection" style={{ justifyContent: "end" }}>
-                <button type="submit" className="SubmitButton">
+                <button type="submit" className="SubmitButton" disabled={isLoading}>
                   Add Currency
                 </button>
               </div>

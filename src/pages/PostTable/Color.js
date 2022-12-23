@@ -20,6 +20,8 @@ const Color = () => {
     shortCode: ""
   });
 
+  const [isLoading, setisLoading] = useState(false);
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -53,6 +55,7 @@ const Color = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("NameEn", registeration.NameEn);
@@ -69,6 +72,7 @@ const Color = () => {
       if (pathname === "/color") {
         history("/colorlist");
       }
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -77,6 +81,7 @@ const Color = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
   //conditional styling for errors
@@ -183,7 +188,7 @@ const Color = () => {
                   className="ButtonSection "
                   style={{ justifyContent: "end" }}
                 >
-                  <button Name="submit" className="SubmitButton">
+                  <button Name="submit" className="SubmitButton" disabled={isLoading}>
                     Add Color
                   </button>
                 </div>

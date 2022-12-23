@@ -17,6 +17,7 @@ const Breeder = () => {
   const [ErrorAr, setErrorAr] = useState("");
   const [ErrorDesc, setErrorDesc] = useState("");
   const [ErrorDescAr, setErrorDescAr] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
@@ -29,6 +30,7 @@ const Breeder = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
 
@@ -49,6 +51,7 @@ const Breeder = () => {
         icon: "success",
         button: "OK",
       });
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -57,6 +60,7 @@ const Breeder = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
   const onSelectFile = (e) => {
@@ -269,7 +273,7 @@ const Breeder = () => {
                     )}
                 </div>
 
-                <button type="submit" className="SubmitButton">
+                <button type="submit" className="SubmitButton" disabled={isLoading}>
                   Add Breeder
                 </button>
               </div>

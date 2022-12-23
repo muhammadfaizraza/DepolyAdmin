@@ -26,6 +26,7 @@ const Tracklengthform = () => {
   const [ErrorGroundType, setErrorGroundType] = useState("");
  
   const [ErrorRailPosition, setErrorRailPosition] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
 
 
@@ -59,6 +60,7 @@ const Tracklengthform = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("TrackLength", TrackLength);
@@ -77,7 +79,7 @@ const Tracklengthform = () => {
       if(pathname === '/tracklengthform'){
         history("/tracklength");
       }
-     
+     setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -86,6 +88,7 @@ const Tracklengthform = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
   const onSelectFile = (e) => {
@@ -345,7 +348,7 @@ const Tracklengthform = () => {
                     )}
                 </div>
 
-                <button type="submit" className="SubmitButton">
+                <button type="submit" className="SubmitButton" disabled={isLoading}>
                   Add Track Length
                 </button>
               </div>

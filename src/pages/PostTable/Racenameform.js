@@ -51,6 +51,7 @@ const Racenameform = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
 

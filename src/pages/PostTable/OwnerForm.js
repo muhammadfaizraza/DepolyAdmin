@@ -26,6 +26,7 @@ const OwnerForm = () => {
   const [ErrorTitleAr, setErrorTitleAr] = useState("");
   const [ErrorShortName, setErrorShortName] = useState("");
   const [ErrorShortNameAr, setErrorShortNameAr] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
   const [ErrorRegistration, setErrorRegistration] = useState("");
 
@@ -141,23 +142,19 @@ const OwnerForm = () => {
 
   const submit = async (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append("Ownerimage", Ownerimage);
-    formData.append("NameEn", NameEn);
-    formData.append("NameAr", NameAr);
-    formData.append("TitleEn", TitleEn);
-    formData.append("TitleAr", TitleAr);
-    formData.append("ShortEn", ShortEn);
-    formData.append("ShortAr", ShortAr);
-    formData.append("NationalityID", NationalityID.id);
-    formData.append("RegistrationDate", RegistrationDate);
-    formData.append("image", image);
-    // image.forEach((image) => {
-    // formData.append("image", image);
-    //
-
-    // });
+    setisLoading(true)
     try {
+      const formData = new FormData();
+      formData.append("Ownerimage", Ownerimage);
+      formData.append("NameEn", NameEn);
+      formData.append("NameAr", NameAr);
+      formData.append("TitleEn", TitleEn);
+      formData.append("TitleAr", TitleAr);
+      formData.append("ShortEn", ShortEn);
+      formData.append("ShortAr", ShortAr);
+      formData.append("NationalityID", NationalityID.id);
+      formData.append("RegistrationDate", RegistrationDate);
+      formData.append("image", image);
       await axios.post(`${window.env.API_URL}/createowner`, formData);
       swal({
         title: "Success!",
@@ -168,6 +165,7 @@ const OwnerForm = () => {
       if (pathname === "/ownerform") {
         history("/owner");
       }
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -176,6 +174,7 @@ const OwnerForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
 
@@ -496,7 +495,7 @@ const OwnerForm = () => {
                     <button
                       type="submit"
                       className="SubmitButton"
-                      // disabled={isSubmitData}
+                      disabled={isLoading}
                     >
                       Add Owner
                     </button>

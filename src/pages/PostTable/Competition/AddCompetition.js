@@ -133,8 +133,8 @@ const TrainerForm = () => {
 
   const submit = async (event) => {
     event.preventDefault();
-    // history('/competitionrace')
-    try {
+    setisLoading(true)
+        try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
@@ -161,7 +161,7 @@ const TrainerForm = () => {
           CompetitionId: CompetitionId
         },
       });
-      
+      isLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       console.log(err,'err 22')
@@ -171,6 +171,7 @@ const TrainerForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
 
@@ -590,7 +591,7 @@ const TrainerForm = () => {
                     className="SubmitButton"
                     type="submit"
                     onClick={submit}
-                   
+                   disabled = {isLoading}
                   >
                    Add Races
                   </button>

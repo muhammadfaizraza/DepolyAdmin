@@ -48,6 +48,7 @@ const NewsForm = () => {
   const [ErrorTitleAr, setErrorTitleAr] = useState("");
   const [descError, setdescError] = useState("");
   const [descErrorAr, setdescErrorAr] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
   const history = useNavigate();
 
@@ -62,6 +63,7 @@ const NewsForm = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -82,6 +84,7 @@ const NewsForm = () => {
         button: "OK",
       });
       history("/news");
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -90,6 +93,7 @@ const NewsForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
   useEffect(() => {
@@ -267,7 +271,7 @@ const NewsForm = () => {
                     )}
                   </div>
 
-                  <button type="submit" className="SubmitButton">
+                  <button type="submit" className="SubmitButton" disabled={isLoading}>
                     Add News
                   </button>
                 </div>

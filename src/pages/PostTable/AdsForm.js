@@ -18,6 +18,7 @@ const AdsForm = () => {
   const [ErrorAr, setErrorAr] = useState("");
   const [ErrorDesc, setErrorDesc] = useState("");
   const [ErrorDescAr, setErrorDescAr] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
   const history = useNavigate();
   const [TitleEn, setTitleEn] = useState("");
@@ -29,6 +30,7 @@ const AdsForm = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
      try {
     const formData = new FormData();
      formData.append("image", image);
@@ -45,6 +47,7 @@ const AdsForm = () => {
      });
 
      history("/ads");
+     setisLoading(false)
      } catch (error) {
       const err = error.response.data.message;
        swal({
@@ -53,6 +56,8 @@ const AdsForm = () => {
          icon: "error",
          button: "OK",
        });
+       setisLoading(false)
+
      }
  };
 
@@ -214,7 +219,7 @@ const AdsForm = () => {
                     )}
                   </div>
 
-                  <button type="submit" className="SubmitButton">
+                  <button type="submit" className="SubmitButton" disabled={isLoading}>
                     Create Ads
                   </button>
                 </div>

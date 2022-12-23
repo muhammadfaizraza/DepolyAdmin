@@ -527,6 +527,7 @@ const RaceForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
 

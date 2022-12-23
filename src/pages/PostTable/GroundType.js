@@ -46,6 +46,7 @@ const GroundType = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
   const data1 =  (JSON.stringify(

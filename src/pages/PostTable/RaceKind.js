@@ -46,6 +46,7 @@ const Racetypeform = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
 

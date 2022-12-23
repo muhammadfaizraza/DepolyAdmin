@@ -21,6 +21,7 @@ import { toast } from "react-toastify";
 
   const [checked, setChecked] = useState([]);
   const [isChecked, setisChecked] = useState(true);
+  const [isLoading, setisLoading] = useState(false);
 
   console.log(state,'state')
  
@@ -52,6 +53,7 @@ import { toast } from "react-toastify";
 
   const Publish = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const response = await axios.post(
         `${window.env.API_URL}/addraceincompetition/${CompetitionId._id}`,
@@ -67,6 +69,7 @@ import { toast } from "react-toastify";
         icon: "success",
         button: "OK",
       });
+      setisLoading(false)
     } catch (error) {
       console.log(error,'response')
       const err = error.response.data.message;
@@ -143,7 +146,7 @@ import { toast } from "react-toastify";
             
 
             <div className="ButtonSection " style={{ justifyContent: "end" }}>
-              <button Name="submit" className="SubmitButton" onClick={Publish}>
+              <button Name="submit" className="SubmitButton" onClick={Publish} disabled={isLoading}>
                 Publish
               </button>
             </div>

@@ -31,6 +31,7 @@ const Nationality = () => {
   const [ErrorOffset, setErrorOffset] = useState("");
   const [ErrorValueEn, setErrorValueEn] = useState("");
   const [ErrorValueAr, setErrorValueAr] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
@@ -52,7 +53,7 @@ const Nationality = () => {
 
   const submit = async (event) => {
     event.preventDefault();
-
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
@@ -80,6 +81,7 @@ const Nationality = () => {
         icon: "success",
         button: "OK",
       });
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -88,6 +90,7 @@ const Nationality = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
 
@@ -442,7 +445,7 @@ const Nationality = () => {
                       </>
                     )}
                 </div>
-                <button type="submit" className="SubmitButton">
+                <button type="submit" className="SubmitButton" disabled={isLoading}>
                   Add Nationality
                 </button>
               </div>

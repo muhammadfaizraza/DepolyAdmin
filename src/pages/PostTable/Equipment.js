@@ -18,6 +18,7 @@ const Equipment = () => {
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
 
 
@@ -29,6 +30,7 @@ const Equipment = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
 
@@ -46,6 +48,7 @@ const Equipment = () => {
         icon: "success",
         button: "OK",
       });
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -54,6 +57,7 @@ const Equipment = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
   const data1 = JSON.stringify(
@@ -111,15 +115,15 @@ const Equipment = () => {
                   <span className="errorAr">{ErrorAr.message}</span>
                 </div>
               </div>
-              <div className="row mainrow">
+              {/* <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
                       label="Short Code"
                       className="mb-3"
-                      // onChange={(e) =>
-                      //   setregisteration({ ...registeration, shortCode: e.target.value })
-                      // }
+                      onChange={(e) =>
+                        setregisteration({ ...registeration, shortCode: e.target.value })
+                      }
                     
                     >
                       <Form.Control type="text"  placeholder="Description" value={equipmentshortcode.length === 0 ? <>N/A</> : equipmentshortcode[0].maxshortCode}/>
@@ -127,10 +131,10 @@ const Equipment = () => {
                  
 									
                   </div>
-                </div>
+                </div> */}
 
               <div className="ButtonSection" style={{ justifyContent: "end" }}>
-                <button type="submit" className="SubmitButton">
+                <button type="submit" className="SubmitButton" disabled={isLoading}>
                   Add Equipment
                 </button>
               </div>

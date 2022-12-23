@@ -15,13 +15,15 @@ const Racetypeform = () => {
     const [NameEn, setNameEn] = useState("");
     const [NameAr, setNameAr] = useState("");
     const [shortCode,setshortCode]= useState("") 
-  
+    const [isLoading, setisLoading] = useState(false);
+
   const history =useNavigate()
   const {pathname} = useLocation();
   
   
     const submit = async (event) => {
       event.preventDefault();
+      setisLoading(true);
       try {
         const formData = new FormData();
         formData.append("NameEn", NameEn);
@@ -38,7 +40,7 @@ const Racetypeform = () => {
         if(pathname === '/racetypeform'){
           history('/racetype')
         }
-       
+       setisLoading(false)
       }catch (error) {
         const err = error.response.data.message;
         swal({
@@ -47,6 +49,7 @@ const Racetypeform = () => {
           icon: "error",
           button: "OK",
         });
+        setisLoading(false)
       }
     };
 
@@ -183,7 +186,7 @@ onChange={(e) => setNameAr(e.target.value)}
             <div className='ButtonSection ' style={{justifyContent:"end"}}>
      
 
-              <button Name='submit' className='SubmitButton'>Add Race Type</button>
+              <button Name='submit' className='SubmitButton' disabled={isLoading}>Add Race Type</button>
 
             </div>
           </form>

@@ -10,7 +10,8 @@ const PointForm = () => {
   //for errors
   const [Error , setError] =useState("")
   const [ErrorAr , setErrorAr] =useState("")
-  
+  const [isLoading, setisLoading] = useState(false);
+
   
   const [registeration, setregisteration] = useState({
     Group_Name: "",
@@ -56,6 +57,7 @@ const PointForm = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("Group_Name", registeration.Group_Name);
@@ -78,6 +80,7 @@ const PointForm = () => {
         button: "OK",
       });
       history("/viewcompetitionPoint");
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message[0];
       console.log(err ,'data is err')
@@ -87,6 +90,7 @@ const PointForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
   //conditional styling for errors
@@ -376,7 +380,7 @@ const PointForm = () => {
                   className="ButtonSection "
                   style={{ justifyContent: "end" }}
                 >
-                  <button Name="submit" className="SubmitButton">
+                  <button Name="submit" className="SubmitButton" disabled={isLoading}>
                     Add Point Table
                   </button>
                 </div>

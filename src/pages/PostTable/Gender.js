@@ -16,13 +16,15 @@ const Gender = () => {
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
- 
+  const [isLoading, setisLoading] = useState(false);
+
 
   const history = useNavigate();
   const { pathname } = useLocation();
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
@@ -39,6 +41,7 @@ const Gender = () => {
       if(pathname === '/gender'){
         history("/genderlist");
       }
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -47,6 +50,7 @@ const Gender = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
   
@@ -120,15 +124,15 @@ const Gender = () => {
                   <span className="errorAr" >{ErrorAr.message}</span>
                 </div>
               </div>
-              <div className="row mainrow">
+              {/* <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
                       label="Short Code"
                       className="mb-3"
-                      // onChange={(e) =>
-                      //   setregisteration({ ...registeration, shortCode: e.target.value })
-                      // }
+                      onChange={(e) =>
+                        setregisteration({ ...registeration, shortCode: e.target.value })
+                      }
                     
                     >
                       <Form.Control type="text"  placeholder="Description" />
@@ -136,7 +140,7 @@ const Gender = () => {
                  
 									
                   </div>
-                </div>
+                </div> */}
               {/* <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
@@ -169,7 +173,7 @@ const Gender = () => {
               </div> */}
 
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
-                <button Name="submit" className="SubmitButton">
+                <button Name="submit" className="SubmitButton" disabled={isLoading}>
                   Add Gender
                 </button>
               </div>

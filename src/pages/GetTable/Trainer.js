@@ -201,7 +201,7 @@ const Trainer = () => {
                                   whiteSpace: "nowrap",
                                 }}
                               >
-                                {item.Remarks}
+                                {item.RemarksEn}
                               </td>
                               <td
                                 style={{
@@ -211,7 +211,7 @@ const Trainer = () => {
                                   whiteSpace: "nowrap",
                                 }}
                               >
-                                {item.Detail}
+                                {item.DetailEn}
                               </td>
                               <td>
                                 <img src={item.image} alt="" />

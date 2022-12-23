@@ -126,7 +126,7 @@ const Racenameform = () => {
                   <span className='errorAr'>{ErrorAr.message}</span>
                 </div>
               </div>
-              <div className="row mainrow">
+              {/* <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
@@ -142,7 +142,7 @@ const Racenameform = () => {
                  
 									
                   </div>
-                </div>
+                </div> */}
               {/* <div className="row mainrow">
               <div className="col-sm">
           

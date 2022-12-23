@@ -114,7 +114,7 @@ const ItemLength = items.length;
         const response = await axios.post(`${window.env.API_URL}addracehorses/${RaceId}`, {HorseEntry:items});
         localStorage.removeItem('lists')
         setGate(1)
-        history("/fullpublishrace", {
+        history("/addracePoint", {
           state: {
             RaceId: RaceId
           },

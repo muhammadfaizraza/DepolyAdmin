@@ -137,7 +137,7 @@ const Currency = () => {
                     <Form.Control
                       type="number"
                       min="0"
-                      max="9"
+                      
                       placeholder="Rate"
                       required
                     />

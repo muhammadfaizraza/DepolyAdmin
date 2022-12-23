@@ -238,22 +238,7 @@ const Breeder = () => {
                   </span>
                 </div>
               </div>
-              <div className="row mainrow">
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="Short Code"
-                      className="mb-3"
-                      // onChange={(e) =>
-                      //   setregisteration({ ...registeration, shortCode: e.target.value })
-                      // }
-                    
-                    >
-                      <Form.Control type="text"  placeholder="Description" value={breedershortcode.length === 0 ? <>N/A</> : breedershortcode[0].maxshortCode}/>
-                  </FloatingLabel>
-									
-                  </div>
-                </div>
+              
               <div className="ButtonSection">
                 <div>
                   <label className="Multipleownerlabel">

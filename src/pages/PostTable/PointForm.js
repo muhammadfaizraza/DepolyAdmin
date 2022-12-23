@@ -15,15 +15,15 @@ const PointForm = () => {
   
   const [registeration, setregisteration] = useState({
     Group_Name: "",
-    First_Place_Point: "",
-    Second_Place_Point: "",
-    Third_Place_Point: "",
-    First_Place_Bonus_Point: "",
-    Second_Place_Bonus_Point: "",
-    Third_Place_Bonus_Point: "",
-    FourthPrice: "",
-    FifthPrice: "",
-    SixthPrice: "",
+    Rank: "",
+    Point: "",
+    Bonus_Point: "",
+    // First_Place_Bonus_Point: "",
+    // Second_Place_Bonus_Point: "",
+    // Third_Place_Bonus_Point: "",
+    // FourthPrice: "",
+    // FifthPrice: "",
+    // SixthPrice: "",
   });
 
   const [records, setrecords] = useState("");
@@ -61,15 +61,15 @@ const PointForm = () => {
     try {
       const formData = new FormData();
       formData.append("Group_Name", registeration.Group_Name);
-      formData.append("First_Place_Point", registeration.First_Place_Point);
-      formData.append("Second_Place_Point", registeration.Second_Place_Point);
-      formData.append("Third_Place_Point", registeration.Third_Place_Point);
-      formData.append("First_Place_Bonus_Point", registeration.First_Place_Bonus_Point);
-      formData.append("Second_Place_Bonus_Point", registeration.Second_Place_Bonus_Point);
-      formData.append("Third_Place_Bonus_Point", registeration.Third_Place_Bonus_Point);
-      formData.append("FourthPrice", registeration.FourthPrice);
-      formData.append("FifthPrice", registeration.FifthPrice);
-      formData.append("SixthPrice", registeration.SixthPrice);
+      formData.append("Rank", registeration.Rank);
+      formData.append("Point", registeration.Point);
+      formData.append("Bonus_Point", registeration.Bonus_Point);
+      // formData.append("First_Place_Bonus_Point", registeration.First_Place_Bonus_Point);
+      // formData.append("Second_Place_Bonus_Point", registeration.Second_Place_Bonus_Point);
+      // formData.append("Third_Place_Bonus_Point", registeration.Third_Place_Bonus_Point);
+      // formData.append("FourthPrice", registeration.FourthPrice);
+      // formData.append("FifthPrice", registeration.FifthPrice);
+      // formData.append("SixthPrice", registeration.SixthPrice);
     const res =  await axios.post(`${window.env.API_URL}/uploadPointTableSystem`, formData);
     const msg = res;
     console.log(msg, 'data is 1');
@@ -153,16 +153,16 @@ const PointForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="First Place Point"
+                      label="Rank"
                       className="mb-3"
                       name="BonusPoints"
                     >
                       <Form.Control
                         name="BonusPoints"
                         onChange={(e) =>
-                          setregisteration({ ...registeration, First_Place_Point: e.target.value })
+                          setregisteration({ ...registeration, Rank: e.target.value })
                         }
-                        value={registeration.First_Place_Point}
+                        value={registeration.Rank}
                         type="number"
                         placeholder="BonusPoints"
                         required
@@ -176,16 +176,16 @@ const PointForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="Second Place Point"
+                      label=" Point"
                       className="mb-3"
                       name="Name"
                     >
                       <Form.Control
                         required
                         onChange={(e) =>
-                          setregisteration({ ...registeration, Second_Place_Point: e.target.value })
+                          setregisteration({ ...registeration, Point: e.target.value })
                         }
-                        value={registeration.Second_Place_Point}
+                        value={registeration.Point}
                         name="Type"
                         type="text"
                         placeholder="Name"
@@ -203,15 +203,15 @@ const PointForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="Third Place Point"
+                      label="Bonus Point"
                       className="mb-3"
                       name="Name"
                     >
                       <Form.Control
                       onChange={(e) =>
-                        setregisteration({ ...registeration, Third_Place_Point: e.target.value })
+                        setregisteration({ ...registeration, Bonus_Point: e.target.value })
                       } 
-                      value={registeration.Third_Place_Point}
+                      value={registeration.Bonus_Point}
                         type="number"
                         placeholder="Length"
                         required
@@ -221,7 +221,7 @@ const PointForm = () => {
                     </FloatingLabel>
                   </div>
                 </div>
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
@@ -372,7 +372,7 @@ const PointForm = () => {
                       />
                     </FloatingLabel>
                   </div>
-                </div>
+                </div> */}
 
                 
 

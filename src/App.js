@@ -112,6 +112,7 @@ import { ToastContainer } from 'react-toastify';
 import NotFound from "./Components/Common/NotFound";
 import AddCompetition from "./pages/PostTable/Competition/AddCompetition";
 import NewCompetition from "./pages/PostTable/Competition/NewCompetition";
+import AddPointInRace from "./pages/PostTable/RaceForm/AddPoints";
 
 import AddCategory from "./pages/PostTable/Competition/AddCategory";
 import CompetitionCategory from "./pages/GetTable/CompetitionCategory";
@@ -262,6 +263,7 @@ function App() {
              <Route path="/newsletter" element={<NewsLetter />} />
              <Route path="/viewcompetitionPoint" element={<ViewPoint />} />
              <Route path="/addcompetitionPoint" element={<AddPoint />} />
+             <Route path="/addracePoint" element={<AddPointInRace />} />
 
 
 

@@ -105,6 +105,16 @@ const Sidebar = () => {
                   </Link>{" "}
                 </div>
                 <div>
+                  <Link to="/addcompetitionPoint" className="mylink">
+                   Add Point Table
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/viewcompetitionPoint" className="mylink">
+                   View Point Table
+                  </Link>
+                </div>
+                <div>
                   <Link to="/verdict" className="mylink">
                     Add Verdict
                   </Link>{" "}
@@ -261,16 +271,7 @@ const Sidebar = () => {
                     Add Category
                   </Link>
                 </div>
-                <div>
-                  <Link to="/addcompetitionPoint" className="mylink">
-                   Add Point Table
-                  </Link>
-                </div>
-                <div>
-                  <Link to="/viewcompetitionPoint" className="mylink">
-                   View Point Table
-                  </Link>
-                </div>
+                
               </Accordion.Body>
             </Accordion.Item>
             {/* <Accordion.Item eventKey="7">
@@ -712,7 +713,7 @@ const Sidebar = () => {
            
           </Accordion>
          
-          <div className="deleted ">
+          <div className="SettingSec">
             <Link
               to="/deletedtable"
               className="mylink"

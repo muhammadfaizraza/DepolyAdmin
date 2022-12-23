@@ -713,7 +713,7 @@ const Sidebar = () => {
            
           </Accordion>
          
-          <div className="SettingSec">
+          <div className="SettingSec1">
             <Link
               to="/deletedtable"
               className="mylink"

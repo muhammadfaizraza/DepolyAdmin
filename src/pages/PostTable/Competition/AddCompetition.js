@@ -143,7 +143,8 @@ const TrainerForm = () => {
       formData.append("EndDate", EndDate);
       formData.append("CompetitionCategory", Type.value);
       formData.append("CategoryCount", NumberOfRace);
-      formData.append("CompetitionCategory", CompetitionCategory.id);
+      formData.append("CompetitionType", CompetitionCategory.id);
+      formData.append("CompetitionSponsor", Sponsor.id);
 
       const res = await axios.post(
         `${window.env.API_URL}/uploadCompetiton`,

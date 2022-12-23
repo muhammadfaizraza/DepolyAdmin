@@ -16,6 +16,7 @@ const SponsorForm = () => {
  const [descError, setdescError] = useState("");
  const [descErrorAr, setdescErrorAr] = useState("");
  const [ErrorURL ,setErrorURL] = useState("");
+ const [isLoading, setisLoading] = useState(false);
 
   
   const history = useNavigate();
@@ -36,6 +37,7 @@ const SponsorForm = () => {
   };
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -50,12 +52,14 @@ const SponsorForm = () => {
         `${window.env.API_URL}uploadSponsor?keyword=&page=`,
         formData
       );
+
       swal({
         title: "Success!",
         text: "Data has been added successfully",
         icon: "success",
         button: "OK",
       });
+      setisLoading(false)
       if(pathname === '/sponsorform'){
         history("/sponsor");      }
     
@@ -255,7 +259,7 @@ const SponsorForm = () => {
                     )}
                   </div>
 
-                  <button type="submit" className="SubmitButton">
+                  <button type="submit" className="SubmitButton" disabled={isLoading}>
                     Add Sponsor
                   </button>
                 </div>

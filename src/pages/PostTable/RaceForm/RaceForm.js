@@ -91,12 +91,14 @@ const RaceForm = () => {
   const [ErrorActiveJockeyForTheRace, setErrorActiveJockeyForTheRace] =
     useState("");
   const [ErrorRaceTyp, setErrorRaceType] = useState("");
-  // const [ErrorFirstPrice, setErrorFirstPrice] = useState("");
-  // const [ErrorSecondPrice, setErrorSecondPrice] = useState("");
-  // const [ErrorThirdPrice, setErrorThirdPrice] = useState("");
-  // const [ErrorFourthPrice, setErrorFourthPrice] = useState("");
-  // const [ErrorFifthPrice, setErrorFifthPrice] = useState("");
-  // const [ErrorSixthPrice, setErrorSixthPrice] = useState("");
+
+  const [ErrorFirstPrice, setErrorFirstPrice] = useState("");
+  const [ErrorSecondPrice, setErrorSecondPrice] = useState("");
+  const [ErrorThirdPrice, setErrorThirdPrice] = useState("");
+  const [ErrorFourthPrice, setErrorFourthPrice] = useState("");
+  const [ErrorFifthPrice, setErrorFifthPrice] = useState("");
+  const [ErrorSixthPrice, setErrorSixthPrice] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
   //end
   const { data: racecourse } = useSelector((state) => state.racecourse);
@@ -432,12 +434,12 @@ const RaceForm = () => {
   console.log(PointTableSystem,'PointTableSystem')
   console.log(EndTime,'EndTime')
 
-  // const [FirstPrice, setFirstPrice] = useState("");
-  // const [SecondPrice, setSecondPrice] = useState("");
-  // const [ThirdPrice, setThirdPrice] = useState("");
-  // const [FourthPrice, setFourthPrice] = useState("");
-  // const [FifthPrice, setFifthPrice] = useState("");
-  // const [SixthPrice, setSixthPrice] = useState("");
+  const [FirstPrice, setFirstPrice] = useState("");
+  const [SecondPrice, setSecondPrice] = useState("");
+  const [ThirdPrice, setThirdPrice] = useState("");
+  const [FourthPrice, setFourthPrice] = useState("");
+  const [FifthPrice, setFifthPrice] = useState("");
+  const [SixthPrice, setSixthPrice] = useState("");
 
   var today = new Date();
 
@@ -466,6 +468,7 @@ const RaceForm = () => {
   };
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("RaceName", RaceNameEn.id);
@@ -488,12 +491,12 @@ const RaceForm = () => {
       formData.append("PointTableSystem", PointTableSystem.id);
 
 
-      // formData.append("FirstPrice", FirstPrice);
-      // formData.append("SecondPrice", SecondPrice);
-      // formData.append("ThirdPrice", ThirdPrice);
-      // formData.append("FourthPrice", FourthPrice);
-      // formData.append("FifthPrice", FifthPrice);
-      // formData.append("SixthPrice", SixthPrice);
+      formData.append("FirstPrice", FirstPrice);
+      formData.append("SecondPrice", SecondPrice);
+      formData.append("ThirdPrice", ThirdPrice);
+      formData.append("FourthPrice", FourthPrice);
+      formData.append("FifthPrice", FifthPrice);
+      formData.append("SixthPrice", SixthPrice);
       formData.append("Sponsor", Sponsor.id);
       formData.append("WeatherDegree", WeatherDegree);
       formData.append("TrackLength", TrackLength.id);
@@ -515,6 +518,7 @@ const RaceForm = () => {
           RaceId: RaceId,
         },
       });
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -1161,14 +1165,13 @@ const RaceForm = () => {
                   <div className="col-sm">
                      <TimePicker
                       onChange={setStartTime}
-                      value={StartTime}
              
                       minutePlaceholder={"Start Date"}
                       secondPlaceholder={""}
                   
                      
                     />
-      <span className="spanForm">
+              <span className="spanForm">
                    
                    |
                  </span>
@@ -1179,7 +1182,7 @@ const RaceForm = () => {
                   <div className="col-sm">
                   <TimePicker
                       onChange={setEndTime}
-                      value={EndTime}
+                      // value={EndTime}
                 
                       minutePlaceholder={"End Date"}
                       secondPlaceholder={""}
@@ -1194,7 +1197,7 @@ const RaceForm = () => {
                   
                 </div>
                 </div>
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
                     <Select
                       placeholder={<div>Select Point Table</div>}
@@ -1243,8 +1246,100 @@ const RaceForm = () => {
                       isSearchable={true}
                     />
                   </div>
-                </div>
+                </div> */}
 
+<div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Enter 1st Prize"
+                      className="mb-3"
+                      onChange={(e) => setFirstPrice(e.target.value)}
+                      value={FirstPrice}
+                      min='0'
+                    >
+                      <Form.Control  type="number" min='0' placeholder="Enter 1st Prize" />
+                    </FloatingLabel>
+                  </div>
+                  
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Enter 2nd Prize"
+                      className="mb-3"
+                      onChange={(e) => setSecondPrice(e.target.value)}
+                      value={SecondPrice}
+                     
+                    >
+                      <Form.Control  type="number" min='0' placeholder="Enter 2nd Prize" />
+                    </FloatingLabel>
+                  </div>
+                  
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Enter 3rd Prize"
+                      className="mb-3"
+                      onChange={(e) => setThirdPrice(e.target.value)}
+                      value={ThirdPrice}
+                     
+                    >
+                      <Form.Control  type="number" min='0' placeholder="Enter 3rd Prize" />
+                    </FloatingLabel>
+
+                  </div>
+                  
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Enter 4th Prize"
+                      className="mb-3"
+                      onChange={(e) => setFourthPrice(e.target.value)}
+                      value={FourthPrice}
+                     
+                    >
+                      <Form.Control  type="number" min='0' placeholder="Enter 4th Prize" />
+                    </FloatingLabel>
+
+                  </div>
+                  
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Enter 5th Prize"
+                      className="mb-3"
+                      onChange={(e) => setFifthPrice(e.target.value)}
+                      value={FifthPrice}
+                     
+                    >
+                      <Form.Control  type="number" min='0' placeholder="Enter 5th Prize" />
+                    </FloatingLabel>
+                  </div>
+                  
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Enter 6th Prize"
+                      className="mb-3"
+                      onChange={(e) => setSixthPrice(e.target.value)}
+                      value={SixthPrice}
+                     
+                    >
+                      <Form.Control  type="number" min='0' placeholder="Enter 6th Prize" />
+                    </FloatingLabel>
+                  </div>
+                 
+                </div>
 
                 <div className="ButtonSection">
                   <div>
@@ -1265,7 +1360,7 @@ const RaceForm = () => {
                     )}
                   </div>
 
-                  <button type="submit" className="SubmitButton">
+                  <button type="submit" className="SubmitButton" disabled={isLoading}>
                     Save & Add Horses
                   </button>
                 </div>

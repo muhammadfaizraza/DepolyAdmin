@@ -16,11 +16,13 @@ const Verdicts = () => {
     
     const [NameEn, setNameEn] = useState("");
     const [NameAr, setNameAr] = useState("");
+    const [isLoading, setisLoading] = useState(false);
 
     const history = useNavigate()
 
     const submit = async (event) => {
         event.preventDefault();
+        setisLoading(true)
         try {
           const formData = new FormData();
           formData.append("NameEn", NameEn);
@@ -35,6 +37,7 @@ const Verdicts = () => {
             icon: "success",
             button: "OK",
           });
+          setisLoading(false)
           
         } catch (error) {
           const err = error.message;
@@ -177,7 +180,7 @@ onChange={(e) => setNameAr(e.target.value)}
             <div className='ButtonSection ' style={{justifyContent:"end"}}>
      
 
-              <button Name='submit' className='SubmitButton'>Add Verdict</button>
+              <button Name='submit' className='SubmitButton' disabled={isLoading}>Add Verdict</button>
 
             </div>
           </form>

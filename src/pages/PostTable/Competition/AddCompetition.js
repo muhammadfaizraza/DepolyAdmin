@@ -9,7 +9,10 @@ import DatePicker from "react-date-picker";
 import swal from "sweetalert";
 import { AiOutlineReload } from "react-icons/ai";
 import TextInputValidation from "../../../utils/TextInputValidation";
-
+import { fetchcategory } from "../../../redux/getReducer/getCategory";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import { fetchSponsor } from "../../../redux/getReducer/getSponsorSlice";
 
 const CategoryType = [
     {
@@ -28,6 +31,7 @@ const CategoryType = [
 const TrainerForm = () => {
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
+  const [ErrorSponsor, setErrorSponsor] = useState("");
 
   // const [ErrorDesc, setErrorDesc] = useState("");
   // const [ErrorDescAr, setErrorDescAr] = useState("");
@@ -37,10 +41,79 @@ const TrainerForm = () => {
 
   const [ErrorDate, setErrorDate] = useState("");
   const [ErrorTriCount, setErrorTriCount] = useState("");
+  const [ErrorCategory, setErrorCategory] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
   const history = useNavigate();
   const dispatch = useDispatch();
 
+  const { data: category } = useSelector((state) => state.category);
+  const { data: sponsor } = useSelector((state) => state.sponsor);
+
+  useEffect(() => {
+    dispatch(fetchcategory());
+    dispatch(fetchSponsor());
+  }, []);
+
+  const FetchNew = () => {
+    dispatch(fetchcategory());
+  };
+
+  let AllCategory =
+    category === undefined ? (
+      <></>
+    ) : (
+      category.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameEn,
+          label: item.NameEn,
+        };
+      })
+    );
+
+  let AllCategoryAr =
+    category === undefined ? (
+      <></>
+    ) : (
+      category.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameAr,
+          label: item.NameAr,
+        };
+      })
+    );
+
+    let SponsorForTheRace =
+    sponsor === undefined ? (
+      <></>
+    ) : (
+      sponsor.map(function (item) {
+        return {
+          id: item._id,
+          value: item.image,
+          label: (
+            <div>
+              <img src={item.image} height="30px" width="30px" />{" "}
+            </div>
+          ),
+        };
+      })
+    );
+
+  let SponsorForTheRaceAr =
+    sponsor === undefined ? (
+      <></>
+    ) : (
+      sponsor.map(function (item) {
+        return {
+          id: item._id,
+          value: item.TitleAr,
+          label: item.TitleAr,
+        };
+      })
+    );
 
 
   const [NameAr, setNameAr] = useState("");
@@ -51,6 +124,9 @@ const TrainerForm = () => {
   const [EndDate, setEndDate] = useState("");
   const [Type, setType] = useState("");
   const [NumberOfRace, setNumberOfRace] = useState("");
+  const [CompetitionCategory, setCompetitionCategory] = useState("");
+  const [Sponsor, setSponsor] = useState("");
+
   // const [NumberOfPosition, setNumberOfPosition] = useState("");
 
 
@@ -67,6 +143,7 @@ const TrainerForm = () => {
       formData.append("EndDate", EndDate);
       formData.append("CompetitionCategory", Type.value);
       formData.append("CategoryCount", NumberOfRace);
+      formData.append("CompetitionCategory", CompetitionCategory.id);
 
       const res = await axios.post(
         `${window.env.API_URL}/uploadCompetiton`,
@@ -84,10 +161,7 @@ const TrainerForm = () => {
           CompetitionId: CompetitionId
         },
       });
-
-      console.log(CompetitionId,'CompetitionId');
-      console.log(Type.value,'CompetitionType')
-
+      
     } catch (error) {
       const err = error.response.data.message;
       console.log(err,'err 22')
@@ -290,6 +364,100 @@ const TrainerForm = () => {
                       monthPlaceholder="تاريخ الانتهاء "
                       yearPlaceholder=""
                       style={{ direction: "rtl" }}
+                    />
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Select Competition Category</div>}
+                      defaultValue={CompetitionCategory}
+                      onChange={setCompetitionCategory}
+                      options={AllCategory}
+                      isClearable={true}
+                      isSearchable={true}
+                      onBlur={() =>
+                        CompetitionCategory === ""
+                          ? setErrorCategory("Competition is required")
+                          : setErrorCategory("")
+                      }
+                    />
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span className="addmore">
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>
+                      |
+                    </span>
+                    <span className="error">{ErrorCategory}</span>
+                  </div>
+                  <div className="col-sm">
+                    <Select
+                      required
+                      placeholder={<div>حدد جيلتي</div>}
+                      className="selectdir"
+                      defaultValue={CompetitionCategory}
+                      onChange={setCompetitionCategory}
+                      options={AllCategoryAr}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Sponsor Image</div>}
+                      defaultValue={Sponsor}
+                      onChange={setSponsor}
+                      options={SponsorForTheRace}
+                      isClearable={true}
+                      isSearchable={true}
+                      onBlur={() => Sponsor === "" ? setErrorSponsor("Sponsor is required ") : setErrorSponsor("")}
+
+                    />
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span className="addmore">
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
+                  </div>
+
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>نوع السباق</div>}
+                      defaultValue={Sponsor}
+                      onChange={setSponsor}
+                      options={SponsorForTheRace}
+                      className="selectdir"
+                      isClearable={true}
+                      isSearchable={true}
                     />
                   </div>
                 </div>

@@ -11,6 +11,7 @@ const Competition = () => {
   //for error
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
@@ -19,6 +20,7 @@ const Competition = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
@@ -29,6 +31,7 @@ const Competition = () => {
         `${window.env.API_URL}/uploadCompetitionCategory`,
         formData
       );
+      setisLoading(false);
       if (pathname === "/addCategory") {
         history("/CategoryListing");
       }
@@ -135,7 +138,7 @@ const Competition = () => {
               </div> */}
 
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
-                <button Name="submit" className="SubmitButton">
+                <button Name="submit" className="SubmitButton" disabled={isLoading}>
                   Add Category
                 </button>
               </div>

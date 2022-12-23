@@ -57,7 +57,7 @@ const Color = () => {
       const formData = new FormData();
       formData.append("NameEn", registeration.NameEn);
       formData.append("NameAr", registeration.NameAr + " ");
-      formData.append("shortCode", registeration.shortCode + " ");
+      // formData.append("shortCode", registeration.shortCode + " ");
 
       await axios.post(`${window.env.API_URL}/uploadColor`, formData);
       swal({
@@ -161,7 +161,7 @@ const Color = () => {
                     <span className="errorAr" style={stylesAr.popupAr} >{ErrorAr.message}</span>
                   </div>
                 </div>
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
@@ -177,7 +177,7 @@ const Color = () => {
                  
 									
                   </div>
-                </div>
+                </div> */}
 
                 <div
                   className="ButtonSection "

@@ -10,6 +10,7 @@ const GroundType = () => {
 
   const [ErrorNameEn, setErrorNameEn] = useState("");
   const [ErrorNameAr, setErrorNameAr] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
@@ -19,6 +20,7 @@ const GroundType = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
@@ -35,6 +37,7 @@ const GroundType = () => {
         icon: "success",
         button: "OK",
       });
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -163,7 +166,7 @@ const GroundType = () => {
               </div> */}
 
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
-                <button Name="submit" className="SubmitButton">
+                <button Name="submit" className="SubmitButton" disabled={isLoading}>
                   Add Ground
                 </button>
               </div>

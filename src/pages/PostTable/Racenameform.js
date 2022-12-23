@@ -11,6 +11,7 @@ const Racenameform = () => {
   //for errors
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
 
 
@@ -25,6 +26,7 @@ const Racenameform = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
@@ -40,7 +42,7 @@ const Racenameform = () => {
       if (pathname === '/racenameform') {
         history('/racename')
       }
-
+      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -179,7 +181,7 @@ const Racenameform = () => {
               <div className='ButtonSection ' style={{ justifyContent: "end" }}>
 
 
-                <button Name='submit' className='SubmitButton'>Add Race Name</button>
+                <button Name='submit' className='SubmitButton' disabled={isLoading}>Add Race Name</button>
 
               </div>
             </form>

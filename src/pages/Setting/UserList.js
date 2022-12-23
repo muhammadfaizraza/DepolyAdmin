@@ -49,6 +49,12 @@ const SubscriberList = () => {
 
   const [ShowCalender, setShowCalender] = useState(false)
 
+  const  [SearchData , setSearchData] = useState();
+
+  const GetSearch = () => {
+    const response = axios.get((`${window.env.API_URL}/SearchUser?FirstName=${'Hassam'}&LastName=${''}&PassportNo=${''}&ApprovedStatus=${''}`))
+    console.log(response,'response 1a')
+  }
   useEffect(() => {
     dispatch(fetchsubscriber());
   }, [dispatch]);
@@ -161,23 +167,7 @@ const SubscriberList = () => {
                />
                 </div>
                 <div className="filtertextform">
-                <select
-                                class="form-control"
-                                id="exampleFormControlSelect1"
-                                name="country"
-                                required
-                              >
-                                {Country_Name.map((item) => {
-                                  return (
-                                    <option
-                                      key={item.country_id}
-                                      name="country"
-                                    >
-                                      {item.country_name}
-                                    </option>
-                                  );
-                                })}
-            </select>
+                
             <input type='text' class="form-control" placeholder="Enter Passport Number"/>
             <input type='text' class="form-control" placeholder="Enter Email"/>
             <input type='text' class="form-control" placeholder="Enter Phone Number"/>
@@ -201,7 +191,7 @@ const SubscriberList = () => {
                  </div>
                 
                 </div>
-                <button className="filterbtn">Apply Filter</button>
+                <button className="filterbtn" onClick={GetSearch}>Apply Filter</button>
                 </>:<></>
               }
               </div>

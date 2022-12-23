@@ -106,3 +106,13 @@ cursor: pointer;
     margin-top: 20px;
     border-radius: 1px 39px 50px 0px;
 }
+.deleted a{
+
+font-weight: 300;
+margin-top: 100px;
+
+}
+.deleted{
+margin-top: 9px;
+margin-left: -3px;
+}

@@ -214,7 +214,7 @@ const SubscriberList = () => {
                     </thead>
                     <tbody>
                       {currentPosts.map((item, index) => {
-                        const { role } = item;
+                      
                         return (
                             <tr className="tr_table_class">
                             <td>{item.FirstName}</td>
@@ -234,10 +234,10 @@ const SubscriberList = () => {
                             <td style={{ textAlign: "center" }}>
                               <button className="Approvedbtn"  style={{
                                   backgroundColor: `${
-                                    role === "approveduser"
+                                    item.ApprovedStatus === true
                                       ? "#4547EE"
                                       : "#DE3E28"
-                                  }`}} onClick={() => handleRole(item._id)}>{item.role === 'approveduser' ? <>Approved</> : <>Not Approved</>}</button>
+                                  }`}} onClick={() => handleRole(item._id)}>{item.ApprovedStatus === true ? <>Approved</> : <>Not Approved</>}</button>
                             </td>
                           </tr>
                         );

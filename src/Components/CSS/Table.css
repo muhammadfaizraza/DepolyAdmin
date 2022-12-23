@@ -460,10 +460,10 @@ img.PreviewHorseImage {
     top: 120px;
 }
 .btn-primary {
-    --bs-btn-color:  #fff !important;
+    --bs-btn-color:  black !important;
     --bs-btn-bg: transparent !important;
     --bs-btn-border-color:transparent !important;
-    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-color: black;
     --bs-btn-hover-bg: transparent !important;
     --bs-btn-hover-border-color:transparent !important;
     --bs-btn-focus-shadow-rgb: 49,132,253;

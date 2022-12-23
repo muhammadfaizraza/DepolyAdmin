@@ -432,7 +432,6 @@ const RaceForm = () => {
 
   console.log(StartTime,'StartTime')
   console.log(PointTableSystem,'PointTableSystem')
-  console.log(EndTime,'EndTime')
 
   const [FirstPrice, setFirstPrice] = useState("");
   const [SecondPrice, setSecondPrice] = useState("");
@@ -486,9 +485,9 @@ const RaceForm = () => {
       formData.append("RaceCourse", RaceCourse.id);
       formData.append("WeatherIcon", WeatherIcon);
 
-      formData.append("StartTime", StartTime);
-      formData.append("EndTime", EndTime);
-      formData.append("PointTableSystem", PointTableSystem.id);
+      formData.append("StartTime",StartTime);
+      formData.append("EndTime",EndTime);
+      // formData.append("PointTableSystem", PointTableSystem.id);
 
 
       formData.append("FirstPrice", FirstPrice);
@@ -1183,17 +1182,13 @@ const RaceForm = () => {
                   <div className="col-sm">
                   <TimePicker
                       onChange={setEndTime}
-                      // value={EndTime}
-                
+             
                       minutePlaceholder={"End Date"}
                       secondPlaceholder={""}
-                     
-                      // minDate={today}
-                      // maxDate={new Date("02-29-2023")}
-                      // yearPlaceholder="Time"
+                  
                      
                     />
-                   
+                 
             
                   
                 </div>

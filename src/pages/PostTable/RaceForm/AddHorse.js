@@ -262,7 +262,7 @@ const ItemLength = items.length;
                     onClick={submit}
                    
                   >
-                    Next & Add Verdict
+                    Next & Add Point
                   </button>
                 </div>
               </div>

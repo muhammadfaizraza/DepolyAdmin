@@ -35,6 +35,18 @@ const SubscriberList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(6);
 
+
+  const  [SearchData , setSearchData] = useState();
+
+  const GetSearch = async () => {
+    const response = await axios.get((`${window.env.API_URL}/SearchUser?PassportNo=${''}&Email=${''}&Address=${''}&PhoneNumber=${''}`))
+    setSearchData(response.data.data)
+  }
+  useEffect(() => {
+    dispatch(fetchsubscriber());
+    GetSearch();
+  }, [dispatch]);
+  
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = subscriber.slice(indexOfFirstPost, indexOfLastPost);
@@ -49,16 +61,9 @@ const SubscriberList = () => {
 
   const [ShowCalender, setShowCalender] = useState(false)
 
-  const  [SearchData , setSearchData] = useState();
+ 
 
-  const GetSearch = () => {
-    const response = axios.get((`${window.env.API_URL}/SearchUser?FirstName=${'Hassam'}&LastName=${''}&PassportNo=${''}&ApprovedStatus=${''}`))
-    console.log(response,'response 1a')
-  }
-  useEffect(() => {
-    dispatch(fetchsubscriber());
-  }, [dispatch]);
-
+  console.log(SearchData,'SearchData data1')
   const handleRole = async (Id) => {
     try {
       const res = await axios.put(`${window.env.API_URL}/ChangeStatus/${Id}`);

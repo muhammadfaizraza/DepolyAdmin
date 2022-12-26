@@ -115,7 +115,7 @@ const Color = () => {
       }
       setisLoading(false)
     } catch (error) {
-      const err = error.response.data.map((d) => d.message );
+      const err = error.response.data.message;;
       console.log(err,'dadasd')
       swal({
         title: "Error!",

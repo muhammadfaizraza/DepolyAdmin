@@ -158,7 +158,7 @@ const HorseKind = () => {
                               <td>{item.NameAr}</td>
                               <td>{item.AbbrevEn}</td>
                               <td>{item.AbbrevAr}</td>
-                              {/* <td>{item.shortName} </td> */}
+                              {/* <td>{item.short} </td> */}
 
                               <td className="table_delete_btn1">
                                 <BiEdit

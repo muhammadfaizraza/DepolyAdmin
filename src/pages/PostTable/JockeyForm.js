@@ -258,7 +258,7 @@ const NewsForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className="error">{Error.message}</span>
+                    <span className={Error.status ? 'success' : 'error'}>{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -274,7 +274,7 @@ const NewsForm = () => {
                     >
                       <Form.Control type="text" placeholder="اسم" required />
                     </FloatingLabel>
-                    <span className="errorAr">{ErrorAr.message}</span>
+                    <span className={ErrorAr.status ? 'successAr' : 'errorAr'}>{ErrorAr.message}</span>
                   </div>
                 </div>
 
@@ -296,7 +296,7 @@ const NewsForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className="error">{ErrorShortName.message}</span>
+                    <span className={ErrorShortName.status ? 'success' : 'error'}>{ErrorShortName.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -316,7 +316,7 @@ const NewsForm = () => {
                         required
                       />
                     </FloatingLabel>
-                    <span className="errorAr">{ErrorShortNameAr.message}</span>
+                    <span className={ErrorShortNameAr.status ? 'successAr' : 'errorAr'}>{ErrorShortNameAr.message}</span>
                   </div>
                 </div>
 
@@ -338,7 +338,7 @@ const NewsForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className="error">{ErrorRemarks.message}</span>
+                    <span className={ErrorRemarks.status ? 'success' : 'error'}>{ErrorRemarks.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -358,7 +358,7 @@ const NewsForm = () => {
                         required
                       />
                     </FloatingLabel>
-                    <span className="errorAr">{ErrorRemarksAr.message}</span>
+                    <span className={ErrorRemarksAr.status ? 'successAr' : 'errorAr'}>{ErrorRemarksAr.message}</span>
                   </div>
                 </div>
 
@@ -487,7 +487,7 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setRating(e.target.value)}
                       value={Rating}
-                      onBlur={(e) => Rating === "" ? setErrorRating("Jockey Rating is required ") : setErrorRating(" ")}
+                      onBlur={(e) => Rating === "" ? setErrorRating("Jockey Rating is required ") : setErrorRating("Jockey Rating is validated")}
 
                     >
                       <Form.Control
@@ -496,7 +496,7 @@ const NewsForm = () => {
                         required
                       />
                     </FloatingLabel>
-                    <span className="error">{ErrorRating}</span>
+                    <span className={Rating === "" ? "error":"success"}>{ErrorRating}</span>
                     {/* <span className="spanForm"> |</span> */}
                   </div>
                   {/* 
@@ -521,7 +521,7 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setMiniumumJockeyWeight(e.target.value)}
                       value={MiniumumJockeyWeight}
-                      onBlur={(e) => MiniumumJockeyWeight === "" ? setErrorMinWeight("Minimum Jockey Weight is required") : setErrorMinWeight(" ")}
+                      onBlur={(e) => MiniumumJockeyWeight === "" ? setErrorMinWeight("Minimum Jockey Weight is required") : setErrorMinWeight("Minimum Jockey Weight is Validated ")}
                     >
                       <Form.Control
                         type="number"
@@ -530,7 +530,7 @@ const NewsForm = () => {
                         required
                       />
                     </FloatingLabel>
-                    <span className="error">{ErrorMinWeight}</span>
+                    <span className={MiniumumJockeyWeight === "" ? "error":"success"}>{ErrorMinWeight}</span>
                     {/* <span className="spanForm"> |</span> */}
                   </div>
 
@@ -558,7 +558,7 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setMaximumJockeyWeight(e.target.value)}
                       value={MaximumJockeyWeight}
-                      onBlur={(e) => MaximumJockeyWeight === "" ? setErrorMaxWeight("Maximum Jockey Weight is required") : setErrorMaxWeight(" ")}
+                      onBlur={(e) => MaximumJockeyWeight === "" ? setErrorMaxWeight("Maximum Jockey Weight is required") : setErrorMaxWeight(" Maximum Jockey Weight is Validated")}
                     >
                       <Form.Control
                         type="number"
@@ -567,7 +567,7 @@ const NewsForm = () => {
                         required
                       />
                     </FloatingLabel>
-                    <span className="error">{ErrorMaxWeight}</span>
+                    <span className={MaximumJockeyWeight === "" ? "error":"success"}>{ErrorMaxWeight}</span>
 
                     {/* <span className="spanForm"> |</span> */}
                   </div>
@@ -597,7 +597,7 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setJockeyAllowance(e.target.value)}
                       value={JockeyAllowance}
-                      onBlur={(e) => JockeyAllowance === "" ? setErrorAllowance("Jockey Allowance is required ") : setErrorAllowance(" ")}
+                      onBlur={(e) => JockeyAllowance === "" ? setErrorAllowance("Jockey Allowance is required ") : setErrorAllowance("Jockey Allowance is Validated ")}
                     >
                       <Form.Control
                         type="number"
@@ -606,7 +606,7 @@ const NewsForm = () => {
                         required
                       />
                     </FloatingLabel>
-                    <span className="error">{ErrorAllowance}</span>
+                    <span className={JockeyAllowance === "" ? "error":"success"}>{ErrorAllowance}</span>
                     {/* <span className="spanForm"> |</span> */}
                   </div>
 

@@ -163,6 +163,8 @@ const Horsekindform = () => {
                     controlId="floatingInput"
                     label="اسم قصير"
                     className="mb-3 floatingInputAr"
+                    onChange={(e) => setshortNameAr(e.target.value)}
+                    value={shortNameAr}
                     style={{ direction: "rtl" }}
                   >
                     <Form.Control type="text" placeholder="التفاصيل" />

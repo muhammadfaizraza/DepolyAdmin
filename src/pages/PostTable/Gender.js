@@ -56,7 +56,7 @@ const Gender = () => {
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
       // formData.append("shortCode", shortCode);
-      formData.append("shortCode",shortCode);
+      formData.append("shortCode",state1.shortCode + 1);
       formData.append("AbbrevEn", AbbrevEn);
       formData.append("AbbrevAr", AbbrevAr);
 

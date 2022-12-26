@@ -22,7 +22,7 @@ const GroundType = () => {
   const [shortCode, setshortCode] = useState("");
   const [AbbrevEn, setAbbrevEn] = useState("");
   const [AbbrevAr, setAbbrevAr] = useState("");
-  
+
   const dispatch = useDispatch();
 
   const history = useNavigate();
@@ -51,7 +51,7 @@ const GroundType = () => {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
-      formData.append("shortCode",shortCode);
+      formData.append("shortCode",state1.shortCode + 1);
       formData.append("AbbrevEn", AbbrevEn);
       formData.append("AbbrevAr", AbbrevAr);
 

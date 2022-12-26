@@ -53,7 +53,7 @@ const Equipment = () => {
 
       formData.append("NameAr", NameAr);
       formData.append("NameEn", NameEn);
-      formData.append("shortCode",shortCode);
+      formData.append("shortCode",state1.shortCode + 1);
 
       await axios.post(`${window.env.API_URL}/uploadEquipment`, formData);
       if (pathname === "/equipment") {

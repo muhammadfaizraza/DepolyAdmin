@@ -66,7 +66,7 @@ const Nationality = () => {
   useEffect(() => {
 		if (nationalityshortcode) {
 			setState({
-        shortCode: nationalityshortcode[0].maxshortCode === null ? 10 : nationalityshortcode[0].maxshortCode + 1,
+        shortCode: nationalityshortcode.length === 0 ? 10 : nationalityshortcode[0].maxshortCode + 1,
 			});
 		} else {
       setState.shortCode('9')
@@ -80,7 +80,7 @@ const Nationality = () => {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
-      formData.append("shortCode", state1.shortCode);
+      formData.append("shortCode", state.shortCode);
       formData.append("AbbrevEn", AbbrevEn);
       formData.append("AbbrevAr", AbbrevAr);
       formData.append("AltNameEn", AltNameEn);

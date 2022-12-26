@@ -88,7 +88,7 @@ const Nationality = () => {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
-      // formData.append("shortCode", state1.shortCode);
+      formData.append("shortCode", state1.shortCode);
       formData.append("AbbrevEn", AbbrevEn);
       formData.append("AbbrevAr", AbbrevAr);
       formData.append("AltNameEn", AltNameEn);
@@ -113,7 +113,7 @@ const Nationality = () => {
       });
       setisLoading(false)
     } catch (error) {
-      const err = error.response.data.message[0];
+      const err = error.response.data.message;
       swal({
         title: "Error!",
         text: err,
@@ -413,6 +413,23 @@ const Nationality = () => {
 									
                   </div>
                 </div> */}
+                 <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Short Code"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, shortCode: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="number" placeholder="Description" value={state1.shortCode}/>
+                    </FloatingLabel>
+                 
+									
+                  </div>
+                </div> 
 
               <div className="ButtonSection">
                 <div>

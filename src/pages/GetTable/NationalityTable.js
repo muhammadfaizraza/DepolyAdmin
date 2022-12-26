@@ -139,7 +139,7 @@ const NationalityTable = () => {
                         <th>Name Arabic </th>
                         <th>Alternative Name </th>
                         <th>Alternative Arabic</th>
-                        {/* <th>Short Code</th> */}
+                        <th>Short Code</th>
                         {/* <th>Label</th> */}
                         {/* <th>Off Set </th>
 
@@ -158,7 +158,7 @@ const NationalityTable = () => {
                               <td>{item.NameAr}</td>
                               <td>{item.AltNameEn}</td>
                               <td>{item.AltNameAr}</td>
-                              {/* <td>{item.shortCode} </td> */}
+                              <td>{item.shortCode} </td>
                               {/* <td>{item.Label} </td> */}
                               {/* <td>{item.Offset === 'true' ? <>True</> : <>False</>} </td> */}
                               {/* <td>{item.ValueEn}</td> */}

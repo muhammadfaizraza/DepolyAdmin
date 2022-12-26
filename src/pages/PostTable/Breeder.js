@@ -70,7 +70,7 @@ const Breeder = () => {
       
       setisLoading(false)
     } catch (error) {
-      const err = error.response.data.message[0];
+      const err = error.response.data.message;
       console.log(err)
       swal({
         title: "Error!",

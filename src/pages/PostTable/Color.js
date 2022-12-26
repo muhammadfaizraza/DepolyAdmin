@@ -27,7 +27,6 @@ const Color = () => {
 		shortCode: '',
 	});
 
-  console.log(colorshortcode.length ,'colorshortcode')
   useEffect(() => {
 		if (colorshortcode) {
 			setState({
@@ -39,16 +38,17 @@ const Color = () => {
 	}, [colorshortcode]);
 
 
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setregisteration({ ...registeration, [name]: value });
-  };
+
 
   useEffect(() => {
     dispatch(fetchcolorshortcode());
   },[dispatch])
 
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setregisteration({ ...registeration, [name]: value });
+  };
   const data1 =  (JSON.stringify(
     TextInputValidation(
       "en",

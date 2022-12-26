@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
+import { fetchhorsekindshortcode } from "../../redux/getShortCode/gethorsekindshortcode";
+import { useSelector ,useDispatch } from "react-redux";
 
 const Horsekindform = () => {
   //FOR ERRORS
@@ -18,10 +20,33 @@ const Horsekindform = () => {
   const [shortNameAr, setshortNameAr] = useState("");
   const [isLoading, setisLoading] = useState(false);
   const [shortCode, setshortCode] = useState("");
-
+  const dispatch = useDispatch();
+  const {data:horsekindshortcode} = useSelector((state) => state.horsekindshortcode)
   const history = useNavigate();
   const { pathname } = useLocation();
 
+  const [state1, setState] = useState({
+		shortCode: '',
+	});
+
+  useEffect(() => {
+		if (horsekindshortcode) {
+			setState({
+        shortCode: horsekindshortcode.length === 0 ? 9 : horsekindshortcode[0].maxshortCode,
+			});
+		} else {
+      setState.shortCode('9')
+		}
+	}, [horsekindshortcode]);
+
+
+
+
+  useEffect(() => {
+    dispatch(fetchhorsekindshortcode());
+  },[dispatch])
+
+  
   const submit = async (event) => {
     event.preventDefault();
     setisLoading(true)
@@ -145,20 +170,22 @@ const Horsekindform = () => {
                 </div>
               </div>
               <div className="row mainrow">
-                <div className="col-sm">
+                  <div className="col-sm">
                   <FloatingLabel
-                    controlId="floatingInput"
-                    label="Short Code"
-                    className="mb-3"
-                    onChange={(e) => setshortCode(e.target.value)}
-                    value={shortCode}
-                  >
-                    <Form.Control type="text" placeholder="Short Code" />
-                  </FloatingLabel>
-
-                  {/* <span className="spanForm"> |</span> */}
+                      controlId="floatingInput"
+                      label="Short Code"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, shortCode: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="number" placeholder="Description" value={state1.shortCode}/>
+                    </FloatingLabel>
+                 
+									
+                  </div>
                 </div>
-              </div>
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
                 <button type="submit" className="SubmitButton" disabled={isLoading}>
                   Add Horse Kind

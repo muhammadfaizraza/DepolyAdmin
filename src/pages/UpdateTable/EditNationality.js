@@ -19,11 +19,13 @@ const NewsForm = () => {
 		NameEn: '',
     NameAr:'',
     shortCode: '',
-		AltName: '',
-    Abbrev: '',
-    Label:'',
+		AltNameEn: '',
+    AltNameAr: '',
+    AbbrevAr: '',
+    AbbrevEn: '',
     Offset:'',
-    Value:'',
+    ValueEn:'',
+    ValueAr:'',
     image:image
     
 	});
@@ -40,11 +42,13 @@ const NewsForm = () => {
 				NameEn: nationalityid.NameEn,
         NameAr: nationalityid.NameAr,
         shortCode: nationalityid.shortCode,
-        AltName: nationalityid.AltName,
-        Abbrev: nationalityid.Abbrev,
-        Label:nationalityid.Label,
+        AltNameEn: nationalityid.AltNameEn,
+        AltNameAr: nationalityid.AltNameAr,
+        AbbrevAr: nationalityid.AbbrevAr,
+        AbbrevEn: nationalityid.AbbrevEn,
         Offset:nationalityid.Offset,
-        Value:nationalityid.Value,
+        ValueEn:nationalityid.ValueEn,
+        ValueAr:nationalityid.ValueAr,
 				image:nationalityid.image
 			});
 		} else {
@@ -69,11 +73,16 @@ const NewsForm = () => {
       formData.append("NameEn", state1.NameEn);
       formData.append("NameAr", state1.NameAr + ' ');
       formData.append("shortCode", state1.shortCode);
-      formData.append("AltName", state1.AltName);
-      formData.append("Abbrev", state1.Abbrev);
-      formData.append("Label", state1.Label);
+      formData.append("AltNameEn", state1.AltNameEn);
+      formData.append("AltNameAr", state1.AltNameAr);
+
+      formData.append("AbbrevAr", state1.AbbrevAr);
+      formData.append("AbbrevEn", state1.AbbrevEn);
+      // formData.append("Label", state1.Label);
       formData.append("Offset", state1.Offset);
-      formData.append("Value", state1.Value);
+      formData.append("ValueEn", state1.ValueEn);
+      formData.append("ValueAr", state1.ValueAr);
+
       const response = await axios.put(`${window.env.API_URL}/updateNationality/${nationalityid._id}`, formData);
       history("/nationalitylist");
       swal({
@@ -164,11 +173,11 @@ const NewsForm = () => {
                       label="Alternate Name"
                       className="mb-3"
                       onChange={(e) =>
-                        setState({ ...state1, AltName: e.target.value })
+                        setState({ ...state1, AltNameEn: e.target.value })
                       }
                     
                     >
-                      <Form.Control type="text"  placeholder="Description" value={state1.AltName}/>
+                      <Form.Control type="text"  placeholder="Description" value={state1.AltNameEn}/>
                     </FloatingLabel>
                   
                   </div>
@@ -182,18 +191,18 @@ const NewsForm = () => {
                       label="Abbrevation"
                       className="mb-3"
                       onChange={(e) =>
-                        setState({ ...state1, Abbrev: e.target.value })
+                        setState({ ...state1, AbbrevEn: e.target.value })
                       }
                     
                     >
-                      <Form.Control type="text"  placeholder="Description" value={state1.Abbrev}/>
+                      <Form.Control type="text"  placeholder="Description" value={state1.AbbrevEn}/>
                     </FloatingLabel>
                   
                   </div>
 
                 </div>
 
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
@@ -210,9 +219,9 @@ const NewsForm = () => {
                   </div>
 
                
-                </div>
+                </div> */}
 
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
@@ -228,20 +237,20 @@ const NewsForm = () => {
                   
                   </div>
 
-                </div>
+                </div> */}
 
                 <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="Value"
+                      label="ValueEn"
                       className="mb-3"
                       onChange={(e) =>
-                        setState({ ...state1, Value: e.target.value })
+                        setState({ ...state1, ValueEn: e.target.value })
                       }
                     
                     >
-                      <Form.Control type="text"  placeholder="Description" value={state1.Value}/>
+                      <Form.Control type="text"  placeholder="Description" value={state1.ValueEn}/>
                     </FloatingLabel>
                 
                   </div>

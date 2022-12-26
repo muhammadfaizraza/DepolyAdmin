@@ -7,6 +7,9 @@ import Form from "react-bootstrap/Form";
 import Select from "react-select";
 import TextInputValidation from "../../utils/TextInputValidation";
 import { ImCross } from 'react-icons/im';
+import { fetchnationalityshortcode } from "../../redux/getShortCode/getnationalityshortcode";
+import { useSelector ,useDispatch } from "react-redux";
+
 
 const Offsets = [
   { id: "0", value: "false", label: "false" },
@@ -19,6 +22,9 @@ const OffsetsAr = [
 ];
 
 const Nationality = () => {
+
+  const {data:nationalityshortcode} = useSelector((state) => state.nationalityshortcode)
+
   const [ErrorNameEn, setErrorNameEn] = useState("");
   const [ErrorNameAr, setErrorNameAr] = useState("");
 
@@ -52,6 +58,20 @@ const Nationality = () => {
 
   const history = useNavigate();
   const { pathname } = useLocation();
+
+  const [state1, setState] = useState({
+		shortCode: '',
+	});
+
+  useEffect(() => {
+		if (nationalityshortcode) {
+			setState({
+        shortCode: nationalityshortcode.length === 0 ? 9 : nationalityshortcode[0].maxshortCode,
+			});
+		} else {
+      setState.shortCode('9')
+		}
+	}, [nationalityshortcode]);
 
   const submit = async (event) => {
     event.preventDefault();
@@ -399,35 +419,22 @@ const Nationality = () => {
                 </div> 
               </div>
               <div className="row mainrow">
-                <div className="col-sm">
+                  <div className="col-sm">
                   <FloatingLabel
-                    controlId="floatingInput"
-                    label="Short Code"
-                    className="mb-3"
-                    onChange={(e) => setshortCode(e.target.value)}
-                    value={shortCode}
-                  >
-                    <Form.Control type="text" placeholder="Short Code" />
-                  </FloatingLabel>
-
-                  {/* <span className="spanForm"> |</span> */}
+                      controlId="floatingInput"
+                      label="Short Code"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, shortCode: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="number" placeholder="Description" value={state1.shortCode}/>
+                    </FloatingLabel>
+                 
+									
+                  </div>
                 </div>
-{/* 
-                <div className="col-sm">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="رمز قصير"
-                    className="mb-3 floatingInputAr "
-                    style={{ direction: "rtl", left: "initial", right: 0 }}
-                  >
-                    <Form.Control
-                      type="text"
-                      placeholder="رمز قصير"
-                      style={{ left: "%" }}
-                    />
-                  </FloatingLabel>
-                </div> */}
-              </div>
 
               <div className="ButtonSection">
                 <div>

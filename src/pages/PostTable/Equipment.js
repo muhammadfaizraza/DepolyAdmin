@@ -30,6 +30,21 @@ const Equipment = () => {
     dispatch(fetchequipmentshortcode());
   },[dispatch])
 
+  const [state1, setState] = useState({
+		shortCode: '',
+	});
+
+  useEffect(() => {
+		if (equipmentshortcode) {
+			setState({
+        shortCode: equipmentshortcode.length === 0 ? 9 : equipmentshortcode[0].maxshortCode,
+			});
+		} else {
+      setState.shortCode('9')
+		}
+	}, [equipmentshortcode]);
+
+
   const submit = async (event) => {
     event.preventDefault();
     setisLoading(true)
@@ -123,13 +138,13 @@ const Equipment = () => {
                       controlId="floatingInput"
                       label="Short Code"
                       className="mb-3"
-                      onChange={(e) => setshortCode(e.target.value)}
-                      name="Name"
-                      value={shortCode}
-                      // value={equipmentshortcode.length === 0 ? <>N/A</> : equipmentshortcode[0].maxshortCode}
+                      onChange={(e) =>
+                        setState({ ...state1, shortCode: e.target.value })
+                      }
+                    
                     >
-                      <Form.Control type="text"  placeholder="Description" />
-                  </FloatingLabel>
+                      <Form.Control type="number" placeholder="Description" value={state1.shortCode}/>
+                    </FloatingLabel>
                  
 									
                   </div>

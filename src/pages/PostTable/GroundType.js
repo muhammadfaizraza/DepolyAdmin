@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import TextInputValidation from "../../utils/TextInputValidation";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-
+import { fetchgroundshortcode } from "../../redux/getShortCode/getgroundtypeshortcode";
+import { useSelector ,useDispatch } from "react-redux";
 const GroundType = () => {
+  const {data:groundshortcode} = useSelector((state) => state.groundshortcode)
 
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
@@ -20,10 +22,28 @@ const GroundType = () => {
   const [shortCode, setshortCode] = useState("");
   const [AbbrevEn, setAbbrevEn] = useState("");
   const [AbbrevAr, setAbbrevAr] = useState("");
+  
+  const dispatch = useDispatch();
 
   const history = useNavigate();
   const { pathname } = useLocation();
 
+  const [state1, setState] = useState({
+		shortCode: '',
+	});
+
+  useEffect(() => {
+		if (groundshortcode) {
+			setState({
+        shortCode: groundshortcode.length === 0 ? 9 : groundshortcode[0].maxshortCode,
+			});
+		} else {
+      setState.shortCode('9')
+		}
+	}, [groundshortcode]);
+  useEffect(() => {
+    dispatch(fetchgroundshortcode());
+  },[dispatch])
   const submit = async (event) => {
     event.preventDefault();
     setisLoading(true)
@@ -192,23 +212,23 @@ const GroundType = () => {
                     <span className="errorAr" style={stylesAr.popupAr} >{ErrorAr.message}</span>
                   </div>
                 </div>
-                  <div className="row mainrow">
-                <div className="col-sm">
+                <div className="row mainrow">
+                  <div className="col-sm">
                   <FloatingLabel
-                    controlId="floatingInput"
-                    label="Short Code"
-                    name="shortCode"
-                    className="mb-3"
-                    onChange={(e) => setshortCode(e.target.value)}
-                      value={setshortCode}
-                  >
-                    <Form.Control type="text"  name="shortCode"
-                   
-                    placeholder="Short Code" />
-                  </FloatingLabel>
-
+                      controlId="floatingInput"
+                      label="Short Code"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, shortCode: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="number" placeholder="Description" value={state1.shortCode}/>
+                    </FloatingLabel>
+                 
+									
+                  </div>
                 </div>
-              </div> 
 
                
               {/* <div className="row mainrow">

@@ -80,7 +80,7 @@ const Nationality = () => {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
-      formData.append("shortCode", shortCode);
+      formData.append("shortCode", state1.shortCode);
       formData.append("AbbrevEn", AbbrevEn);
       formData.append("AbbrevAr", AbbrevAr);
       formData.append("AltNameEn", AltNameEn);
@@ -366,10 +366,10 @@ const Nationality = () => {
                         : setErrorOffset("")
                     }
                   />
-                  <span className="spanForm"> |</span>
+                  {/* <span className="spanForm"> |</span> */}
                   <span className="error">{ErrorOffset}</span>
                 </div>
-                <div className="col-sm">
+                {/* <div className="col-sm">
                   <Select
                     required
                     placeholder={<div>حدد جيلتي</div>}
@@ -380,7 +380,7 @@ const Nationality = () => {
                     isClearable={true}
                     isSearchable={true}
                   />
-                </div>
+                </div> */}
               </div>
 
               <div className="row mainrow">

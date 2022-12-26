@@ -35,7 +35,7 @@ const Horsekindform = () => {
         shortCode: horsekindshortcode.length === 0 ? 10 : horsekindshortcode[0].maxshortCode + 1,
 			});
 		} else {
-      setState.shortCode('9')
+      setState.shortCode('10')
 		}
 	}, [horsekindshortcode]);
 
@@ -55,8 +55,8 @@ const Horsekindform = () => {
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
       formData.append("shortCode",shortCode);
-      formData.append("shortName", shortName);
-      formData.append("shortNameAr", shortNameAr);
+      formData.append("AbbrevEn", shortName);
+      formData.append("AbbrevAr", shortNameAr);
 
 
       await axios.post(`${window.env.API_URL}/uploadHorseKind`, formData);

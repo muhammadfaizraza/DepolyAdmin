@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import { useNavigate , useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
+import { fetchsexshortcode } from "../../redux/getShortCode/getsexshortcode";
+import { useSelector ,useDispatch } from "react-redux";
 
 
 const Gender = () => {
  //for error
+ const dispatch = useDispatch();
+
  const [Error, setError] = useState("")
  const [ErrorAr, setErrorAr] = useState("")
+ const {data:sexshortcode} = useSelector((state) => state.sexshortcode)
 
 
 
@@ -24,6 +29,24 @@ const Gender = () => {
 
   const history = useNavigate();
   const { pathname } = useLocation();
+  const [state1, setState] = useState({
+		shortCode: '',
+	});
+
+  console.log(sexshortcode,'sexshortcode')
+  useEffect(() => {
+		if (sexshortcode) {
+			setState({
+        shortCode: sexshortcode.length === 0 ? 9 : sexshortcode[0].maxshortCode,
+			});
+		} else {
+		}
+	}, [sexshortcode]);
+
+  useEffect(() => {
+    dispatch(fetchsexshortcode());
+  }, [dispatch]);
+
 
   const submit = async (event) => {
     event.preventDefault();
@@ -196,23 +219,23 @@ const Gender = () => {
                     <span className="errorAr" style={stylesAr.popupAr} >{ErrorAr.message}</span>
                   </div>
                 </div>
-              <div className="row mainrow">
-                <div className="col-sm">
+                <div className="row mainrow">
+                  <div className="col-sm">
                   <FloatingLabel
-                    controlId="floatingInput"
-                    label="Short Code"
-                    name="shortCode"
-                    className="mb-3"
-                    onChange={(e) => setshortCode(e.target.value)}
-                      value={setshortCode}
-                  >
-                    <Form.Control type="text"  name="shortCode"
-                   
-                    placeholder="Short Code" />
-                  </FloatingLabel>
-
+                      controlId="floatingInput"
+                      label="Short Code"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, shortCode: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="number" placeholder="Description" value={state1.shortCode}/>
+                    </FloatingLabel>
+                 
+									
+                  </div>
                 </div>
-              </div> 
               {/* <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel

@@ -23,6 +23,21 @@ const Color = () => {
   });
 
   const [isLoading, setisLoading] = useState(false);
+  const [state1, setState] = useState({
+		shortCode: '',
+	});
+
+  console.log(colorshortcode.length ,'colorshortcode')
+  useEffect(() => {
+		if (colorshortcode) {
+			setState({
+        shortCode: colorshortcode.length === 0 ? 9 : colorshortcode[0].maxshortCode,
+			});
+		} else {
+      setState.shortCode('9')
+		}
+	}, [colorshortcode]);
+
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -64,7 +79,7 @@ const Color = () => {
       formData.append("NameAr", registeration.NameAr);
       formData.append("AbbrevEn", registeration.AbbrevEn);
       formData.append("AbbrevAr", registeration.AbbrevAr );
-      formData.append("shortCode", registeration.shortCode);
+      formData.append("shortCode", state1.shortCode + 1);
 
       await axios.post(`${window.env.API_URL}/uploadColor`, formData);
       swal({
@@ -78,7 +93,8 @@ const Color = () => {
       }
       setisLoading(false)
     } catch (error) {
-      const err = error.response.data.message;
+      const err = error.response.data.map((d) => d.message );
+      console.log(err,'dadasd')
       swal({
         title: "Error!",
         text: err,
@@ -239,23 +255,23 @@ const Color = () => {
                     <span className="errorAr" style={stylesAr.popupAr} >{ErrorAr.message}</span>
                   </div>
                 </div>
-                  <div className="row mainrow">
-                <div className="col-sm">
+                <div className="row mainrow">
+                  <div className="col-sm">
                   <FloatingLabel
-                    controlId="floatingInput"
-                    label="Short Code"
-                    name="shortCode"
-                    className="mb-3"
-                  
-                  >
-                    <Form.Control type="text"  name="shortCode"
-                    onChange={handleChange}
-                    value={registeration.shortCode}
-                    placeholder="Short Code" />
-                  </FloatingLabel>
-
+                      controlId="floatingInput"
+                      label="Short Code"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, shortCode: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="number" placeholder="Description" value={state1.shortCode}/>
+                    </FloatingLabel>
+                 
+									
+                  </div>
                 </div>
-              </div> 
                 <div
                   className="ButtonSection "
                   style={{ justifyContent: "end" }}

@@ -12,6 +12,8 @@ import { ImCross } from 'react-icons/im';
 const Breeder = () => {
   //for error
   const {data:breedershortcode} = useSelector((state) => state.breedershortcode)
+
+
   const dispatch = useDispatch();
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
@@ -26,6 +28,17 @@ const Breeder = () => {
   const [image, setImage] = useState();
   const [shortCode, setshortCode] = useState("");
 
+  const [state1, setState] = useState({
+		shortCode: '',
+	});
+  useEffect(() => {
+		if (breedershortcode) {
+			setState({
+        shortCode: breedershortcode.length === 0 ? 9 : breedershortcode[0].maxshortCode,
+			});
+		} else {
+		}
+	}, [breedershortcode]);
   const [preview, setPreview] = useState();
   const history = useNavigate();
   const { pathname } = useLocation();
@@ -36,9 +49,9 @@ const Breeder = () => {
     try {
       const formData = new FormData();
 
-      formData.append("NameAr", NavigationPreloadManager);
+      formData.append("NameAr", NameAr);
       formData.append("NameEn", NameEn);
-      formData.append("shortCode", shortCode);
+      formData.append("shortCode", state1.shortCode + 1);
       formData.append("DescriptionAr", DescriptionAr);
       formData.append("DescriptionEn", DescriptionEn);
       formData.append("image", image);
@@ -70,7 +83,8 @@ const Breeder = () => {
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
   };
- 
+  // console.log(breedershortcode[0].maxshortCode,'breedershortcode')
+
   useEffect(() => {
     dispatch(fetchbreedershortcode());
     if (!image) {
@@ -210,36 +224,23 @@ const Breeder = () => {
                   </span>
                 </div>
               </div>
-               <div className="row mainrow">
-                <div className="col-sm">
+              <div className="row mainrow">
+                  <div className="col-sm">
                   <FloatingLabel
-                    controlId="floatingInput"
-                    label="Short Code"
-                    className="mb-3"
-                    onChange={(e) => setshortCode(e.target.value)}
-                    value={shortCode}
-                  >
-                    <Form.Control type="text" placeholder="Short Code" />
-                  </FloatingLabel>
-
-                  {/* <span className="spanForm"> |</span> */}
+                      controlId="floatingInput"
+                      label="Short Code"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, shortCode: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="number" placeholder="Description" value={state1.shortCode}/>
+                    </FloatingLabel>
+                 
+									
+                  </div>
                 </div>
-{/* 
-                <div className="col-sm">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="رمز قصير"
-                    className="mb-3 floatingInputAr "
-                    style={{ direction: "rtl", left: "initial", right: 0 }}
-                  >
-                    <Form.Control
-                      type="text"
-                      placeholder="رمز قصير"
-                      style={{ left: "%" }}
-                    />
-                  </FloatingLabel>
-                </div> */}
-              </div> 
 
              
               

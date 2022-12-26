@@ -65,8 +65,8 @@ const Nationality = () => {
       formData.append("AbbrevAr", AbbrevAr);
       formData.append("AltNameEn", AltNameEn);
       formData.append("AltNameAr", AltNameAr);
-      formData.append("LabelEn", LabelEn);
-      formData.append("LabelAr", LabelAr);
+      // formData.append("LabelEn", LabelEn);
+      // formData.append("LabelAr", LabelAr);
       formData.append("Offset", Offset.id);
       formData.append("ValueEn", ValueEn);
       formData.append("ValueAr", ValueAr);
@@ -293,7 +293,7 @@ const Nationality = () => {
                 </div> 
               </div>
 
-              <div className="row mainrow">
+              {/* <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
@@ -329,7 +329,7 @@ const Nationality = () => {
                   </FloatingLabel>
             <span className={ErrorLabelAr.status ? 'successAr' : 'errorAr'}>{ErrorLabelAr.message}</span>
                 </div>
-              </div>
+              </div> */}
 
               <div className="row mainrow">
                 <div className="col-sm">

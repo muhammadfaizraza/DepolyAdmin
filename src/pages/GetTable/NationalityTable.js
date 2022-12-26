@@ -140,7 +140,7 @@ const NationalityTable = () => {
                         <th>Alternative Name </th>
                         <th>Abbreviation</th>
                         <th>Short Code</th>
-                        <th>Label</th>
+                        {/* <th>Label</th> */}
                         <th>Off Set </th>
 
                         <th>Value</th>
@@ -156,12 +156,12 @@ const NationalityTable = () => {
                             <tr className="tr_table_class">
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
-                              <td>{item.AltName}</td>
-                              <td>{item.Abbrev}</td>
+                              <td>{item.AltNameEn}</td>
+                              <td>{item.AbbrevEn}</td>
                               <td>{item.shortCode} </td>
-                              <td>{item.Label} </td>
+                              {/* <td>{item.Label} </td> */}
                               <td>{item.Offset === 'true' ? <>True</> : <>False</>} </td>
-                              <td>{item.Value}</td>
+                              <td>{item.ValueEn}</td>
 
                               <td>
                                 <img src={item.image} alt="" />

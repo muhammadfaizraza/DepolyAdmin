@@ -54,7 +54,7 @@ const Horsekindform = () => {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
-      formData.append("shortCode",shortCode);
+      // formData.append("shortCode",shortCode);
       formData.append("AbbrevEn", shortName);
       formData.append("AbbrevAr", shortNameAr);
       await axios.post(`${window.env.API_URL}/uploadHorseKind`, formData);
@@ -169,7 +169,7 @@ const Horsekindform = () => {
                   </FloatingLabel>
                 </div>
               </div>
-              <div className="row mainrow">
+              {/* <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
@@ -185,7 +185,7 @@ const Horsekindform = () => {
                  
 									
                   </div>
-                </div>
+                </div> */}
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
                 <button type="submit" className="SubmitButton" disabled={isLoading}>
                   Add Horse Kind

@@ -37,7 +37,7 @@ const Gender = () => {
   useEffect(() => {
 		if (sexshortcode) {
 			setState({
-        shortCode: sexshortcode.length === 0 ? 9 : sexshortcode[0].maxshortCode,
+        shortCode: sexshortcode.length === 0 ? 9 : sexshortcode[0].maxshortCode + 1,
 			});
 		} else {
 		}
@@ -56,7 +56,7 @@ const Gender = () => {
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
       // formData.append("shortCode", shortCode);
-      formData.append("shortCode",state1.shortCode + 1);
+      formData.append("shortCode",state1.shortCode);
       formData.append("AbbrevEn", AbbrevEn);
       formData.append("AbbrevAr", AbbrevAr);
 

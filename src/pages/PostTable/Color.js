@@ -30,7 +30,7 @@ const Color = () => {
   useEffect(() => {
 		if (colorshortcode) {
 			setState({
-        shortCode: colorshortcode.length === 0 ? 9 : colorshortcode[0].maxshortCode,
+        shortCode: colorshortcode.length === 0 ? 9 : colorshortcode[0].maxshortCode + 1,
 			});
 		} else {
       setState.shortCode('9')
@@ -79,7 +79,7 @@ const Color = () => {
       formData.append("NameAr", registeration.NameAr);
       formData.append("AbbrevEn", registeration.AbbrevEn);
       formData.append("AbbrevAr", registeration.AbbrevAr );
-      formData.append("shortCode", state1.shortCode + 1);
+      formData.append("shortCode", state1.shortCode);
 
       await axios.post(`${window.env.API_URL}/uploadColor`, formData);
       swal({

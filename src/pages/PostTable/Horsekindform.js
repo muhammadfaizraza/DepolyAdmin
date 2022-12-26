@@ -32,7 +32,7 @@ const Horsekindform = () => {
   useEffect(() => {
 		if (horsekindshortcode) {
 			setState({
-        shortCode: horsekindshortcode.length === 0 ? 9 : horsekindshortcode[0].maxshortCode,
+        shortCode: horsekindshortcode.length === 0 ? 9 : horsekindshortcode[0].maxshortCode + 1,
 			});
 		} else {
       setState.shortCode('9')

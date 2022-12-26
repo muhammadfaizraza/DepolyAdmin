@@ -37,7 +37,7 @@ const Equipment = () => {
   useEffect(() => {
 		if (equipmentshortcode) {
 			setState({
-        shortCode: equipmentshortcode.length === 0 ? 9 : equipmentshortcode[0].maxshortCode,
+        shortCode: equipmentshortcode.length === 0 ? 9 : equipmentshortcode[0].maxshortCode + 1,
 			});
 		} else {
       setState.shortCode('9')
@@ -53,7 +53,7 @@ const Equipment = () => {
 
       formData.append("NameAr", NameAr);
       formData.append("NameEn", NameEn);
-      formData.append("shortCode",state1.shortCode + 1);
+      formData.append("shortCode",state1.shortCode);
 
       await axios.post(`${window.env.API_URL}/uploadEquipment`, formData);
       if (pathname === "/equipment") {

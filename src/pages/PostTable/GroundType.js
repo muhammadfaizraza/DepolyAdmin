@@ -35,7 +35,7 @@ const GroundType = () => {
   useEffect(() => {
 		if (groundshortcode) {
 			setState({
-        shortCode: groundshortcode.length === 0 ? 9 : groundshortcode[0].maxshortCode,
+        shortCode: groundshortcode.length === 0 ? 9 : groundshortcode[0].maxshortCode + 1,
 			});
 		} else {
       setState.shortCode('9')
@@ -51,7 +51,7 @@ const GroundType = () => {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
-      formData.append("shortCode",state1.shortCode + 1);
+      formData.append("shortCode",state1.shortCode);
       formData.append("AbbrevEn", AbbrevEn);
       formData.append("AbbrevAr", AbbrevAr);
 

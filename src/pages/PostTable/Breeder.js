@@ -34,7 +34,7 @@ const Breeder = () => {
   useEffect(() => {
 		if (breedershortcode) {
 			setState({
-        shortCode: breedershortcode.length === 0 ? 9 : breedershortcode[0].maxshortCode,
+        shortCode: breedershortcode.length === 0 ? 9 : breedershortcode[0].maxshortCode + 1,
 			});
 		} else {
 		}
@@ -51,7 +51,7 @@ const Breeder = () => {
 
       formData.append("NameAr", NameAr);
       formData.append("NameEn", NameEn);
-      formData.append("shortCode", state1.shortCode + 1);
+      formData.append("shortCode", state1.shortCode);
       formData.append("DescriptionAr", DescriptionAr);
       formData.append("DescriptionEn", DescriptionEn);
       formData.append("image", image);

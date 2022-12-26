@@ -47,9 +47,9 @@ const EnglishFieldValidation = (Value) => {
 };
 const ArabicLanguageVerification = (Value) => {
   if (
-    /^[\u0621-\u064A\u0660-\u0669\da-zA-Z$-@$!%*?&#^-_.+ ]+$/.test(Value) ||
-    /^[\u0621-\u064A\u0660-\u0669\da-zA-Z$-@$!%*?&#^-_.+]+$/.test(Value) ||
-    /^[a-zA-Z\d$-@$!%*?&#^-_.+\u0621-\u064A\u0660-\u0669]+$/.test(Value)
+    /^[a-zA-Z0-9$-@$!%*?&#^-_,،.+\u0621-\u064A\u0660-\u0669 ]+$/.test(Value) ||
+    /^[a-zA-Z0-9$-@$!%*?&#^-_,،.+\u0621-\u064A\u0660-\u0669]+$/.test(Value) ||
+    /^[a-zA-Z\d$-@$!%*?&#^-،_.+\u0621-\u064A\u0660-\u0669]+$/.test(Value)
   ) {
     return true;
   } else {

@@ -45,6 +45,8 @@ const Nationality = () => {
   const [Offset, setOffset] = useState("");
   const [ValueEn, setValueEn] = useState("");
   const [ValueAr, setValueAr] = useState("");
+  const [shortCode, setshortCode] = useState("");
+
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
 
@@ -58,7 +60,7 @@ const Nationality = () => {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr + " ");
-      // formData.append("shortCode", shortCode);
+      formData.append("shortCode", shortCode);
       formData.append("AbbrevEn", AbbrevEn);
       formData.append("AbbrevAr", AbbrevAr);
       formData.append("AltNameEn", AltNameEn);
@@ -207,37 +209,7 @@ const Nationality = () => {
                 </div>
               </div>
 
-              {/* <div className="row mainrow">
-                <div className="col-sm">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="Short Code"
-                    className="mb-3"
-                    onChange={(e) => setshortCode(e.target.value)}
-                    value={shortCode}
-                  >
-                    <Form.Control type="text" placeholder="Short Code" />
-                  </FloatingLabel>
-
-                  <span className="spanForm"> |</span>
-                </div>
-
-                <div className="col-sm">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="رمز قصير"
-                    className="mb-3 floatingInputAr "
-                    style={{ direction: "rtl", left: "initial", right: 0 }}
-                  >
-                    <Form.Control
-                      type="text"
-                      placeholder="رمز قصير"
-                      style={{ left: "%" }}
-                    />
-                  </FloatingLabel>
-                </div>
-              </div> */}
-
+              
               <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
@@ -425,6 +397,36 @@ const Nationality = () => {
                   </FloatingLabel>
                   <span  className={ErrorValueAr.status ? 'successAr' : 'errorAr'}>{ErrorValueAr.message}</span>
                 </div> 
+              </div>
+              <div className="row mainrow">
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Short Code"
+                    className="mb-3"
+                    onChange={(e) => setshortCode(e.target.value)}
+                    value={shortCode}
+                  >
+                    <Form.Control type="text" placeholder="Short Code" />
+                  </FloatingLabel>
+
+                  {/* <span className="spanForm"> |</span> */}
+                </div>
+{/* 
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="رمز قصير"
+                    className="mb-3 floatingInputAr "
+                    style={{ direction: "rtl", left: "initial", right: 0 }}
+                  >
+                    <Form.Control
+                      type="text"
+                      placeholder="رمز قصير"
+                      style={{ left: "%" }}
+                    />
+                  </FloatingLabel>
+                </div> */}
               </div>
 
               <div className="ButtonSection">

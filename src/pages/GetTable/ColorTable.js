@@ -140,7 +140,8 @@ const ColorTable = () => {
                       <tr>
                         <th>Name</th>
                         <th>Name Arabic </th>
-
+                        <th>Abrevation</th>
+                        <th>Abrevation Arabic </th>
                         <th>Short Code</th>
 
                         <th>Action</th>
@@ -153,7 +154,8 @@ const ColorTable = () => {
                             <tr className="tr_table_class">
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
-
+                              <td>{item.AbbrevEn}</td>
+                              <td>{item.AbbrevAr}</td>
                               <td>{item.shortCode} </td>
 
                               <td className="table_delete_btn1">

@@ -122,7 +122,7 @@ const BreederTable = () => {
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
                 >
-                  ""
+                  
                 </h6>
 
                 <Link to="/breeder">
@@ -136,6 +136,7 @@ const BreederTable = () => {
                   <table>
                     <thead>
                       <tr>
+                      <th>Action</th>
                         <th>Name</th>
                         <th>Name Arabic </th>
 
@@ -144,7 +145,7 @@ const BreederTable = () => {
                         <th>Description Arabic</th>
                         <th>Image</th>
 
-                        <th>Action</th>
+                       
                       </tr>
                     </thead>
                     <tbody>
@@ -152,17 +153,7 @@ const BreederTable = () => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.NameEn}</td>
-                              <td>{item.NameAr}</td>
-
-                              <td>{item.shortCode} </td>
-                              <td>{item.DescriptionEn} </td>
-                              <td>{item.DescriptionAr} </td>
-                              <td>
-                                <img src={item.image} alt="" />
-                              </td>
-
-                              <td className="table_delete_btn1">
+                            <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
                                     history("/editbreeder", {
@@ -181,6 +172,17 @@ const BreederTable = () => {
                                 <BsEyeFill onClick={() => handleShow(item)
                                 }/>
                               </td>
+                              <td>{item.NameEn}</td>
+                              <td>{item.NameAr}</td>
+
+                              <td>{item.shortCode} </td>
+                              <td>{item.DescriptionEn} </td>
+                              <td>{item.DescriptionAr} </td>
+                              <td>
+                                <img src={item.image} alt="" />
+                              </td>
+
+                              
                             </tr>
                           </>
                         );

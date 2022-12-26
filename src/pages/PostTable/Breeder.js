@@ -24,6 +24,8 @@ const Breeder = () => {
   const [DescriptionAr, setDescriptionAr] = useState("");
   const [DescriptionEn, setDescriptionEn] = useState("");
   const [image, setImage] = useState();
+  const [shortCode, setshortCode] = useState("");
+
   const [preview, setPreview] = useState();
   const history = useNavigate();
   const { pathname } = useLocation();
@@ -34,10 +36,10 @@ const Breeder = () => {
     try {
       const formData = new FormData();
 
-      formData.append("NameAr", NameAr + " ");
+      formData.append("NameAr", NavigationPreloadManager);
       formData.append("NameEn", NameEn);
-      // formData.append("shortCode", shortCode);
-      formData.append("DescriptionAr", DescriptionAr + " ");
+      formData.append("shortCode", shortCode);
+      formData.append("DescriptionAr", DescriptionAr);
       formData.append("DescriptionEn", DescriptionEn);
       formData.append("image", image);
 
@@ -171,38 +173,6 @@ const Breeder = () => {
                   </span>
                 </div>
               </div>
-              
-              {/* <div className="row mainrow">
-                <div className="col-sm">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="Short Code"
-                    className="mb-3"
-                    onChange={(e) => setshortCode(e.target.value)}
-                    value={shortCode}
-                  >
-                    <Form.Control type="text" placeholder="Short Code" />
-                  </FloatingLabel>
-
-                  <span className="spanForm"> |</span>
-                </div>
-
-                <div className="col-sm">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="رمز قصير"
-                    className="mb-3 floatingInputAr "
-                    style={{ direction: "rtl", left: "initial", right: 0 }}
-                  >
-                    <Form.Control
-                      type="text"
-                      placeholder="رمز قصير"
-                      style={{ left: "%" }}
-                    />
-                  </FloatingLabel>
-                </div>
-              </div> */}
-
               <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
@@ -238,6 +208,38 @@ const Breeder = () => {
                   </span>
                 </div>
               </div>
+               <div className="row mainrow">
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Short Code"
+                    className="mb-3"
+                    onChange={(e) => setshortCode(e.target.value)}
+                    value={shortCode}
+                  >
+                    <Form.Control type="text" placeholder="Short Code" />
+                  </FloatingLabel>
+
+                  {/* <span className="spanForm"> |</span> */}
+                </div>
+{/* 
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="رمز قصير"
+                    className="mb-3 floatingInputAr "
+                    style={{ direction: "rtl", left: "initial", right: 0 }}
+                  >
+                    <Form.Control
+                      type="text"
+                      placeholder="رمز قصير"
+                      style={{ left: "%" }}
+                    />
+                  </FloatingLabel>
+                </div> */}
+              </div> 
+
+             
               
               <div className="ButtonSection">
                 <div>

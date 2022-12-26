@@ -80,7 +80,7 @@ import Seo from "../../Components/DeletedData/DeletedSeo";
 import Dropdown from "react-bootstrap/Dropdown";
 
 function App() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("Table");
   const handleSelect = (e) => {
     console.log(e);
     setValue(e);
@@ -89,8 +89,7 @@ function App() {
   return (
     <>
       <Dropdown onSelect={handleSelect} className="deletedDropdown">
-        <Dropdown.Toggle>Tables</Dropdown.Toggle>
-
+        <Dropdown.Toggle>{value}</Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item eventKey="Ads">Ads</Dropdown.Item>
           <Dropdown.Item eventKey="Breeder">Breeder</Dropdown.Item>

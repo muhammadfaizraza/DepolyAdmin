@@ -17,7 +17,9 @@ const Color = () => {
   const [registeration, setregisteration] = useState({
     NameEn: "",
     NameAr: "",
-    shortCode: ""
+    shortCode: "",
+    AbbrevEn:"",
+    AbbrevAr:""
   });
 
   const [isLoading, setisLoading] = useState(false);
@@ -59,8 +61,10 @@ const Color = () => {
     try {
       const formData = new FormData();
       formData.append("NameEn", registeration.NameEn);
-      formData.append("NameAr", registeration.NameAr + " ");
-      // formData.append("shortCode", registeration.shortCode + " ");
+      formData.append("NameAr", registeration.NameAr);
+      formData.append("AbbrevEn", registeration.AbbrevEn);
+      formData.append("AbbrevAr", registeration.AbbrevAr );
+      formData.append("shortCode", registeration.shortCode);
 
       await axios.post(`${window.env.API_URL}/uploadColor`, formData);
       swal({
@@ -183,7 +187,75 @@ const Color = () => {
 									
                   </div>
                 </div> */}
+               <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Abbrevation"
+                      className="mb-3"
+                      name="AbbrevEn"
+                    >
+                      <Form.Control
+                        required
+                        onChange={handleChange}
+                        value={registeration.AbbrevEn}
+                        name="AbbrevEn"
+                        type="text"
+                        placeholder="Abbrevation"
+                        onBlur={() =>
+                         setError(obj)
+                              
+                        }
+                      />
+                    </FloatingLabel>
+                 
+                    <span className="spanForm"> |</span>
+                    <span className="error" style={styles.popup}
+                    >{Error.message}</span>
+                  </div>
 
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="اختصار"
+                      className="mb-3 floatingInputAr"
+                      name="AbbrevAr"
+                      style={{ direction: "rtl" }}
+                    >
+                      <Form.Control
+                        name="AbbrevAr"
+                        onChange={handleChange}
+                        value={registeration.AbbrevAr}
+                        type="text"
+                        placeholder="اختصار"
+                        required
+                        onBlur={() =>
+                          setErrorAr(objAr)
+                               
+                         }
+                     
+                      />
+                    </FloatingLabel>
+                    <span className="errorAr" style={stylesAr.popupAr} >{ErrorAr.message}</span>
+                  </div>
+                </div>
+                  <div className="row mainrow">
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Short Code"
+                    name="shortCode"
+                    className="mb-3"
+                  
+                  >
+                    <Form.Control type="text"  name="shortCode"
+                    onChange={handleChange}
+                    value={registeration.shortCode}
+                    placeholder="Short Code" />
+                  </FloatingLabel>
+
+                </div>
+              </div> 
                 <div
                   className="ButtonSection "
                   style={{ justifyContent: "end" }}

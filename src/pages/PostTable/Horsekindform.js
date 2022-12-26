@@ -15,7 +15,9 @@ const Horsekindform = () => {
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
   const [shortName, setshortName] = useState("");
+  const [shortNameAr, setshortNameAr] = useState("");
   const [isLoading, setisLoading] = useState(false);
+  const [shortCode, setshortCode] = useState("");
 
   const history = useNavigate();
   const { pathname } = useLocation();
@@ -26,8 +28,11 @@ const Horsekindform = () => {
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
-      formData.append("NameAr", NameAr + " ");
+      formData.append("NameAr", NameAr);
+      formData.append("shortCode",shortCode);
       formData.append("shortName", shortName);
+      formData.append("shortNameAr", shortNameAr);
+
 
       await axios.post(`${window.env.API_URL}/uploadHorseKind`, formData);
       swal({
@@ -139,7 +144,21 @@ const Horsekindform = () => {
                   </FloatingLabel>
                 </div>
               </div>
+              <div className="row mainrow">
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Short Code"
+                    className="mb-3"
+                    onChange={(e) => setshortCode(e.target.value)}
+                    value={shortCode}
+                  >
+                    <Form.Control type="text" placeholder="Short Code" />
+                  </FloatingLabel>
 
+                  {/* <span className="spanForm"> |</span> */}
+                </div>
+              </div>
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
                 <button type="submit" className="SubmitButton" disabled={isLoading}>
                   Add Horse Kind

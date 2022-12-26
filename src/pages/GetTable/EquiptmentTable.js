@@ -133,12 +133,13 @@ const EquiptmentTable = () => {
                   <table>
                     <thead>
                       <tr>
+                      <th>Action</th>
                         <th>Name</th>
                         <th>Name Arabic </th>
 
                         <th>Short Code</th>
 
-                        <th>Action</th>
+                       
                       </tr>
                     </thead>
                     <tbody>
@@ -146,12 +147,7 @@ const EquiptmentTable = () => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.NameEn}</td>
-                              <td>{item.NameAr}</td>
-
-                              <td>{item.shortCode} </td>
-
-                              <td className="table_delete_btn1">
+                            <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
                                     history("/editequipment", {
@@ -169,6 +165,12 @@ const EquiptmentTable = () => {
                                 />
                                 <BsEyeFill onClick={() => handleShow(item)}/>
                               </td>
+                              <td>{item.NameEn}</td>
+                              <td>{item.NameAr}</td>
+
+                              <td>{item.shortCode} </td>
+
+                            
                               
                             </tr>
                           </>

@@ -18,6 +18,8 @@ const Equipment = () => {
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
+  const [shortCode, setshortCode] = useState("");
+
   const [isLoading, setisLoading] = useState(false);
 
 
@@ -34,9 +36,9 @@ const Equipment = () => {
     try {
       const formData = new FormData();
 
-      formData.append("NameAr", NameAr + " ");
+      formData.append("NameAr", NameAr);
       formData.append("NameEn", NameEn);
-      // formData.append("shortCode",shortCode);
+      formData.append("shortCode",shortCode);
 
       await axios.post(`${window.env.API_URL}/uploadEquipment`, formData);
       if (pathname === "/equipment") {
@@ -115,23 +117,23 @@ const Equipment = () => {
                   <span className={ErrorAr.status ? 'successAr' : 'errorAr'}>{ErrorAr.message}</span>
                 </div>
               </div>
-              {/* <div className="row mainrow">
+              <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
                       label="Short Code"
                       className="mb-3"
-                      onChange={(e) =>
-                        setregisteration({ ...registeration, shortCode: e.target.value })
-                      }
-                    
+                      onChange={(e) => setshortCode(e.target.value)}
+                      name="Name"
+                      value={shortCode}
+                      // value={equipmentshortcode.length === 0 ? <>N/A</> : equipmentshortcode[0].maxshortCode}
                     >
-                      <Form.Control type="text"  placeholder="Description" value={equipmentshortcode.length === 0 ? <>N/A</> : equipmentshortcode[0].maxshortCode}/>
+                      <Form.Control type="text"  placeholder="Description" />
                   </FloatingLabel>
                  
 									
                   </div>
-                </div> */}
+                </div>
 
               <div className="ButtonSection" style={{ justifyContent: "end" }}>
                 <button type="submit" className="SubmitButton" disabled={isLoading}>

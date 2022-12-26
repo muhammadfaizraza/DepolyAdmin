@@ -8,6 +8,9 @@ import Form from "react-bootstrap/Form";
 
 const GroundType = () => {
 
+  const [Error, setError] = useState("");
+  const [ErrorAr, setErrorAr] = useState("");
+
   const [ErrorNameEn, setErrorNameEn] = useState("");
   const [ErrorNameAr, setErrorNameAr] = useState("");
   const [isLoading, setisLoading] = useState(false);
@@ -15,6 +18,9 @@ const GroundType = () => {
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
   const [shortCode, setshortCode] = useState("");
+  const [AbbrevEn, setAbbrevEn] = useState("");
+  const [AbbrevAr, setAbbrevAr] = useState("");
+
   const history = useNavigate();
   const { pathname } = useLocation();
 
@@ -24,8 +30,10 @@ const GroundType = () => {
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
-      formData.append("NameAr", NameAr + ' ');
-      // formData.append("shortCode",shortCode);
+      formData.append("NameAr", NameAr);
+      formData.append("shortCode",shortCode);
+      formData.append("AbbrevEn", AbbrevEn);
+      formData.append("AbbrevAr", AbbrevAr);
 
       await axios.post(`${window.env.API_URL}uploadGroundType`, formData);
       if (pathname === "/ground") {
@@ -58,6 +66,18 @@ const GroundType = () => {
   ));
 
   console.log(data1,'asdasd')
+  const styles = {
+    popup:{
+      color: Error.status === true ? "green" : "red",
+ 
+    }
+  };
+  const stylesAr = {
+    popupAr:{
+      color: ErrorAr.status === true ? "green" : "red",
+ 
+    }
+  };
 
   const obj = JSON.parse(data1);
   console.log(obj.status,'aszxZ2dasd')
@@ -118,7 +138,79 @@ const GroundType = () => {
                   <span className="errorAr">{ErrorNameAr.message}</span>
                 </div>
               </div>
-              
+              <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Abbrevation"
+                      className="mb-3"
+                      name="AbbrevEn"
+                      onChange={(e) => setAbbrevEn(e.target.value)}
+                      value={AbbrevEn}
+                    >
+                      <Form.Control
+                        required
+                       
+                        name="AbbrevEn"
+                        type="text"
+                        placeholder="Abbrevation"
+                        onBlur={() =>
+                         setError(obj)
+                              
+                        }
+                      />
+                    </FloatingLabel>
+                 
+                    <span className="spanForm"> |</span>
+                    <span className="error" style={styles.popup}
+                    >{Error.message}</span>
+                  </div>
+
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="اختصار"
+                      className="mb-3 floatingInputAr"
+                      name="AbbrevAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) => setAbbrevAr(e.target.value)}
+                      value={AbbrevAr}
+                    >
+                      <Form.Control
+                        name="AbbrevAr"
+                        
+                        type="text"
+                        placeholder="اختصار"
+                        required
+                        onBlur={() =>
+                          setErrorAr(objAr)
+                               
+                         }
+                     
+                      />
+                    </FloatingLabel>
+                    <span className="errorAr" style={stylesAr.popupAr} >{ErrorAr.message}</span>
+                  </div>
+                </div>
+                  <div className="row mainrow">
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Short Code"
+                    name="shortCode"
+                    className="mb-3"
+                    onChange={(e) => setshortCode(e.target.value)}
+                      value={setshortCode}
+                  >
+                    <Form.Control type="text"  name="shortCode"
+                   
+                    placeholder="Short Code" />
+                  </FloatingLabel>
+
+                </div>
+              </div> 
+
+               
               {/* <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel

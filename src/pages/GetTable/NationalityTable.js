@@ -138,7 +138,6 @@ const NationalityTable = () => {
                         <th>Name</th>
                         <th>Name Arabic </th>
                         <th>Alternative Name </th>
-
                         <th>Abbreviation</th>
                         <th>Short Code</th>
                         <th>Label</th>

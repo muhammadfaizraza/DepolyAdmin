@@ -36,10 +36,16 @@ const SubscriberList = () => {
   const [postsPerPage] = useState(6);
 
 
-  const  [SearchData , setSearchData] = useState();
+  const  [SearchData , setSearchData] = useState([]);
+  const  [PassportNo , setPassportNo] = useState('');
+  const  [Address , setAddress] = useState('');
+  const  [PhoneNumber , setPhoneNumber] = useState('');
+
+
+
 
   const GetSearch = async () => {
-    const response = await axios.get((`${window.env.API_URL}/SearchUser?PassportNo=${''}&Email=${''}&Address=${''}&PhoneNumber=${''}`))
+    const response = await axios.get((`${window.env.API_URL}/SearchUser?PassportNo=${PassportNo}&Email=${''}&Address=${Address}&PhoneNumber=${PhoneNumber}`))
     setSearchData(response.data.data)
   }
   useEffect(() => {
@@ -49,7 +55,7 @@ const SubscriberList = () => {
   
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = subscriber.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = SearchData.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const [state, setState] = useState([
     {
@@ -173,9 +179,9 @@ const SubscriberList = () => {
                 </div>
                 <div className="filtertextform">
                 
-            <input type='text' class="form-control" placeholder="Enter Passport Number"/>
-            <input type='text' class="form-control" placeholder="Enter Email"/>
-            <input type='text' class="form-control" placeholder="Enter Phone Number"/>
+            <input type='text' class="form-control" onChange={(e) => setPassportNo(e.target.value)} placeholder="Enter Passport Number"/>
+            <input type='text' class="form-control"  onChange={(e) => setPhoneNumber(e.target.value)} placeholder="Enter Phone Number"/>
+            <input type='text' class="form-control"  onChange={(e) => setAddress(e.target.value)} placeholder="Enter Address"/>
             <select
                                 class="form-control"
                                 id="exampleFormControlSelect1"
@@ -261,7 +267,7 @@ const SubscriberList = () => {
           </div>
           <Pagination
             postsPerPage={postsPerPage}
-            totalPosts={subscriber.length}
+            totalPosts={SearchData.length}
             paginate={paginate}
           />
         </div>

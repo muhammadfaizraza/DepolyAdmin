@@ -756,7 +756,7 @@ const HorseForm = () => {
                       
                     />
                     <span className="spanForm"> |</span>
-                    <span className={ErrorHorseStatus === "" ? "error":"success"}>{ErrorHorseStatus}</span>
+                    <span className={HorseStatus === "" ? "error":"success"}>{ErrorHorseStatus}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -866,7 +866,7 @@ const HorseForm = () => {
                       options={AllBreeder}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => Rds === "" ?  setErrorBreeder("Horse Breeder is required "):setErrorBreeder(" Horse Breeder is Validated")}
+                      onBlur={() => Breeder === "" ?  setErrorBreeder("Horse Breeder is required "):setErrorBreeder(" Horse Breeder is Validated")}
 
                     />
                      <span className="spanForm">
@@ -888,7 +888,7 @@ const HorseForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
-                    <span className={ErrorBreeder === "" ? "error" : "success"}>{ErrorBreeder}</span>
+                    <span className={Breeder === "" ? "error" : "success"}>{ErrorBreeder}</span>
                   </div>
                   <div className="col-sm">
                     <Select

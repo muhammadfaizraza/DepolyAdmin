@@ -12,7 +12,11 @@ const Color = () => {
   //for errors
   const [Error , setError] =useState("")
   const [ErrorAr , setErrorAr] =useState("")
+  const [ErrorAbbrev , setErrorAbbrev] =useState("")
+  const [ErrorAbbrevAr , setErrorAbbrevAr] =useState("")
+  
   const dispatch = useDispatch();
+  
   const {data:colorshortcode} = useSelector((state) => state.colorshortcode)
   const [registeration, setregisteration] = useState({
     NameEn: "",
@@ -70,6 +74,24 @@ const Color = () => {
 
   const objAr = JSON.parse(data2);
 
+  const data3 =  (JSON.stringify(
+    TextInputValidation(
+      "ar",
+      registeration.AbbrevAr,
+      "Color Abbreviation Arabic"
+    )
+  ));
+
+
+  const abbrevar = JSON.parse(data3);
+  const data4 =  (JSON.stringify(
+    TextInputValidation(
+      "en",
+      registeration.AbbrevEn,
+      "Color Abbreviation"
+    )
+  ));
+  const AbbrevEn = JSON.parse(data4);
   const submit = async (event) => {
     event.preventDefault();
     setisLoading(true)
@@ -219,15 +241,15 @@ const Color = () => {
                         type="text"
                         placeholder="Abbrevation"
                         onBlur={() =>
-                         setError(obj)
+                         setErrorAbbrev(AbbrevEn)
                               
                         }
                       />
                     </FloatingLabel>
                  
                     <span className="spanForm"> |</span>
-                    <span className="error" style={styles.popup}
-                    >{Error.message}</span>
+                    <span className={ErrorAbbrev.status ? "success" :"error"}
+                    >{ErrorAbbrev.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -246,14 +268,14 @@ const Color = () => {
                         placeholder="اختصار"
                         required
                         onBlur={() =>
-                          setErrorAr(objAr)
+                          setErrorAbbrevAr(abbrevar)
                                
                          }
                      
                       />
                     </FloatingLabel>
-                    <span className="errorAr" style={stylesAr.popupAr} >{ErrorAr.message}</span>
-                  </div>
+                    <span className={ErrorAbbrevAr.status ? "successAr" :"errorAr"}
+                    >{ErrorAbbrevAr.message}</span>                </div>
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">

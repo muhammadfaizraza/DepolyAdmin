@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,8 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { useLocation } from "react-router-dom";
 import TextInputValidation from "../../utils/TextInputValidation";
+import { fetchmeetingshortcode } from "../../redux/getShortCode/getmeetingtypeshortcode";
+import { useSelector ,useDispatch } from "react-redux";
 
 const MeetingType = () => {
   //for errors
@@ -14,11 +16,31 @@ const MeetingType = () => {
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
-  const [shortCode, setshortCode] = useState("");
   const [isLoading, setisLoading] = useState(false);
+  const {data:meetingshortcode} = useSelector((state) => state.meetingshortcode)
+  const dispatch = useDispatch();
 
   const history = useNavigate();
   const { pathname } = useLocation();
+
+  const [state1, setState] = useState({
+		shortCode: '',
+	});
+
+  useEffect(() => {
+		if (meetingshortcode) {
+			setState({
+        shortCode: meetingshortcode.length === 0 ? 10 : meetingshortcode[0].maxshortCode + 1,
+			});
+		} else {
+      setState.shortCode('9')
+		}
+	}, [meetingshortcode]);
+
+  useEffect(() => {
+    dispatch(fetchmeetingshortcode());
+  },[dispatch])
+
 
   const submit = async (event) => {
     event.preventDefault();
@@ -26,8 +48,8 @@ const MeetingType = () => {
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
-      formData.append("NameAr", NameAr + " ");
-      // formData.append("shortCode",shortCode);
+      formData.append("NameAr", NameAr);
+      formData.append("shortCode",state1.shortCode);
 
       await axios.post(`${window.env.API_URL}/uploadMeetingType`, formData);
       swal({
@@ -111,7 +133,23 @@ const MeetingType = () => {
                   <span className={ErrorAr.status ? "successAr" :"errorAr"}>{ErrorAr.message}</span>
                 </div>
               </div>
-              
+              <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Short Code"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, shortCode: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="number" placeholder="Description" value={state1.shortCode}/>
+                    </FloatingLabel>
+                 
+									
+                  </div>
+                </div>
               {/* <div className="row mainrow">
               <div className="col-sm">
           

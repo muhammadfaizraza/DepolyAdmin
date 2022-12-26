@@ -88,16 +88,16 @@ const Nationality = () => {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
-      formData.append("shortCode", state1.shortCode);
+      // formData.append("shortCode", state1.shortCode);
       formData.append("AbbrevEn", AbbrevEn);
       formData.append("AbbrevAr", AbbrevAr);
       formData.append("AltNameEn", AltNameEn);
       formData.append("AltNameAr", AltNameAr);
       // formData.append("LabelEn", LabelEn);
       // formData.append("LabelAr", LabelAr);
-      formData.append("Offset", Offset.id);
-      formData.append("ValueEn", ValueEn);
-      formData.append("ValueAr", ValueAr);
+      // formData.append("Offset", Offset.id);
+      // formData.append("ValueEn", ValueEn);
+      // formData.append("ValueAr", ValueAr);
       formData.append("image", image);
 
       await axios.post(`${window.env.API_URL}/uploadNationality`, formData);
@@ -359,39 +359,9 @@ const Nationality = () => {
                 </div>
               </div> */}
 
-              <div className="row mainrow">
-                <div className="col-sm">
-                  <Select
-                    placeholder={<div>Offset</div>}
-                    defaultValue={Offset}
-                    onChange={setOffset}
-                    options={Offsets}
-                    isClearable={true}
-                    isSearchable={true}
-                    onBlur={() =>
-                      Offset === ""
-                        ? setErrorOffset("Offset is required")
-                        : setErrorOffset("")
-                    }
-                  />
-                  {/* <span className="spanForm"> |</span> */}
-                  <span className="error">{ErrorOffset}</span>
-                </div>
-                {/* <div className="col-sm">
-                  <Select
-                    required
-                    placeholder={<div>حدد جيلتي</div>}
-                    className="selectdir"
-                    defaultValue={Offset}
-                    onChange={setOffset}
-                    options={OffsetsAr}
-                    isClearable={true}
-                    isSearchable={true}
-                  />
-                </div> */}
-              </div>
+              
 
-              <div className="row mainrow">
+              {/* <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
@@ -442,7 +412,7 @@ const Nationality = () => {
                  
 									
                   </div>
-                </div>
+                </div> */}
 
               <div className="ButtonSection">
                 <div>

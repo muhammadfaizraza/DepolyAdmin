@@ -1,11 +1,12 @@
-
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import swal from 'sweetalert';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import TextInputValidation from '../../utils/TextInputValidation';
+import { fetchracenameshortcode } from "../../redux/getShortCode/getracenameshortcode";
+import { useSelector ,useDispatch } from "react-redux";
 
 const Racenameform = () => {
   //for errors
@@ -13,14 +14,33 @@ const Racenameform = () => {
   const [ErrorAr, setErrorAr] = useState("");
   const [isLoading, setisLoading] = useState(false);
 
-
-
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
   const [shortCode, setshortCode] = useState("")
 
-  const history = useNavigate()
+  const {data:racenameshortcode} = useSelector((state) => state.racenameshortcode)
+  const dispatch = useDispatch();
+
+  const history = useNavigate();
   const { pathname } = useLocation();
+
+  const [state1, setState] = useState({
+		shortCode: '',
+	});
+
+  useEffect(() => {
+		if (racenameshortcode) {
+			setState({
+        shortCode: racenameshortcode.length === 0 ? 10 : racenameshortcode[0].maxshortCode + 1,
+			});
+		} else {
+      setState.shortCode('9')
+		}
+	}, [racenameshortcode]);
+
+  useEffect(() => {
+    dispatch(fetchracenameshortcode());
+  },[dispatch])
 
 
 
@@ -126,58 +146,23 @@ const Racenameform = () => {
                   <span className={ErrorAr.status ? "successAr": "errorAr" }>{ErrorAr.message}</span>
                 </div>
               </div>
-              {/* <div className="row mainrow">
+              <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
                       label="Short Code"
                       className="mb-3"
-                      // onChange={(e) =>
-                      //   setregisteration({ ...registeration, shortCode: e.target.value })
-                      // }
+                      onChange={(e) =>
+                        setState({ ...state1, shortCode: e.target.value })
+                      }
                     
                     >
-                      <Form.Control type="text"  placeholder="Description" />
-                  </FloatingLabel>
+                      <Form.Control type="number" placeholder="Description" value={state1.shortCode}/>
+                    </FloatingLabel>
                  
 									
                   </div>
-                </div> */}
-              {/* <div className="row mainrow">
-              <div className="col-sm">
-          
-                
-                <FloatingLabel
-        controlId="floatingInput"
-        label="Short Code"
-        className="mb-3"
-        onChange={(e) => setshortCode(e.target.value)}
-        value={shortCode}
-                 
-               
-             
-> 
-        <Form.Control type="text" placeholder="Short Code"/>
-      </FloatingLabel>
-                
-                <span className="spanForm"> |</span>
-              </div>
-
-              <div className="col-sm">
-              <FloatingLabel
-        controlId="floatingInput"
-        label="رمز قصير"
-        className="mb-3 floatingInputAr "
-        style={{ direction: "rtl" , left:'initial' , right:0  }}
-
-        
-             
-> 
-        <Form.Control type="text" placeholder="اسم"  style={{left:'%'}}   />
-      </FloatingLabel>
-              </div>
-            </div> */}
-
+                </div>
 
               <div className='ButtonSection ' style={{ justifyContent: "end" }}>
 

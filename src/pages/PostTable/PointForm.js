@@ -9,8 +9,11 @@ import TextInputValidation from "../../utils/TextInputValidation";
 const PointForm = () => {
   //for errors
   const [Error , setError] =useState("")
-  const [ErrorAr , setErrorAr] =useState("")
-  const [isLoading, setisLoading] = useState(false);
+const [ErrorRank, setErrorRank] = useState("");
+const [ErrorPoints, setErrorPoints] = useState("");
+const [ErrorBpoints, setErrorBpoints] = useState("");
+  
+const [isLoading, setisLoading] = useState(false);
 
   
   const [registeration, setregisteration] = useState({
@@ -38,20 +41,13 @@ const PointForm = () => {
   const data1 =  (JSON.stringify(
     TextInputValidation(
       "en",
-      registeration.NameEn,
-      "Color Name"
+      registeration.Group_Name,
+      "Group Points Name"
     )
   ));
 
 
   const obj = JSON.parse(data1);
- const data2 =  (JSON.stringify(
-    TextInputValidation(
-      "ar",
-      registeration.NameAr,
-      "Color Name Arabic"
-    )
-  ));
 
 
 
@@ -129,11 +125,13 @@ const PointForm = () => {
                       label="Group Name"
                       className="mb-3"
                       name="Name"
+                      onBlur={() => setError(obj)}
                     >
                       <Form.Control
                         required
                         onChange={(e) =>
                           setregisteration({ ...registeration, Group_Name: e.target.value })
+                        
                         }
                         value={registeration.Group_Name}
                         name="Group_Name"
@@ -147,7 +145,7 @@ const PointForm = () => {
                     </FloatingLabel>
                  
                     <span className="spanForm"> |</span>
-                   
+                    <span className={Error.status ? 'success' : 'error'}>{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -166,10 +164,11 @@ const PointForm = () => {
                         type="number"
                         placeholder="BonusPoints"
                         required
-                        
+                        onBlur={(e) => registeration.Rank === "" ? setErrorRank("Rank is required") : setErrorRank("Rank is Validated ")}
                      
                       />
                     </FloatingLabel>
+                    <span className={registeration.Rank  === "" ? "error":"success"}>{ErrorRank}</span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -187,17 +186,14 @@ const PointForm = () => {
                         }
                         value={registeration.Point}
                         name="Type"
-                        type="text"
+                        type="number"
                         placeholder="Name"
-                        onBlur={() =>
-                         setError(obj)
-                              
-                        }
+                        onBlur={(e) => registeration.Point === "" ? setErrorPoints(" Bonus Points is required") : setErrorPoints("Bonus Points is Validated ")}
                       />
                     </FloatingLabel>
                  
                     <span className="spanForm"> |</span>
-                   
+                    <span className={registeration.Point  === "" ? "error":"success"}>{ErrorPoints}</span>
                   </div>
 
                   <div className="col-sm">
@@ -215,10 +211,11 @@ const PointForm = () => {
                         type="number"
                         placeholder="Length"
                         required
-                        
+                        onBlur={(e) => registeration.Bonus_Point === "" ? setErrorBpoints("Points is required") : setErrorBpoints("Points is Validated ")}
                      
                       />
                     </FloatingLabel>
+                    <span className={registeration.Bonus_Point  === "" ? "error":"success"}>{ErrorBpoints}</span>
                   </div>
                 </div>
                 {/* <div className="row mainrow">

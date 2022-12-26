@@ -227,7 +227,7 @@ const RaceCourseForm = () => {
                       <Form.Control type="text" placeholder="Track Name" required/>
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
-                    <span className="error">{Error.message}</span>
+                    <span className={Error.status ? "success" :"error"}>{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -247,7 +247,7 @@ const RaceCourseForm = () => {
                         required
                       />
                     </FloatingLabel>
-                    <span className="errorAr">{ErrorAr.message}</span>
+                    <span className={ErrorAr.status ? "successAr" :"errorAr"}>{ErrorAr.message}</span>
 
                   </div>
                 </div>
@@ -293,7 +293,7 @@ const RaceCourseForm = () => {
                       options={AllColor}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => ColorCode === "" ?  setErrorColor("Color is required "):setErrorColor(" ")}
+                      onBlur={() => ColorCode === "" ?  setErrorColor("Color is required "):setErrorColor("Color is Validated")}
                   
                     />
                     <span className="spanForm">
@@ -319,7 +319,7 @@ const RaceCourseForm = () => {
                         <span className="addmore" onClick={FetchNew}><AiOutlineReload /></span>
                         </>
                       </OverlayTrigger> |</span>
-                      <span className="error">{ErrorColor}</span>
+                      <span className={ColorCode === "" ? "error":"success"}>{ErrorColor}</span>
 
                   </div>
                   <div className="col-sm">
@@ -347,7 +347,7 @@ const RaceCourseForm = () => {
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => NationalityId === "" ?  setErrorNationality("Nationality is required "):setErrorNationality(" ")}
+                      onBlur={() => NationalityId === "" ?  setErrorNationality("Nationality is required "):setErrorNationality("Nationality is Validated ")}
                   
 
                     />
@@ -374,7 +374,7 @@ const RaceCourseForm = () => {
                         <span className="addmore" onClick={FetchNew}><AiOutlineReload /></span>
                         </>
                       </OverlayTrigger> |</span>
-                      <span className="error">{ErrorNationality}</span>
+                      <span  className={NationalityId === "" ? "error":"success"}>{ErrorNationality}</span>
                   </div>
 
                   <div className="col-sm">

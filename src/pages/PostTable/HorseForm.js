@@ -912,7 +912,7 @@ const HorseForm = () => {
                       options={AllColor}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => Rds === "" ?  setErrorColor("Horse Color is required "):setErrorColor(" ")}
+                      onBlur={() => ColorID === "" ?  setErrorColor("Horse Color is required "):setErrorColor("Horse Color is Validated")}
 
                     />
                      <span className="spanForm">
@@ -934,7 +934,7 @@ const HorseForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
-                    <span className="error">{ErrorColor}</span>
+                    <span className={ColorID === "" ? "error" : "success"}>{ErrorColor}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -960,7 +960,7 @@ const HorseForm = () => {
                       options={AllGender}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => Sex === "" ?  setErrorGender("Horse Gender is required "):setErrorGender(" ")}
+                      onBlur={() => Sex === "" ?  setErrorGender("Horse Gender is required "):setErrorGender("Horse Gender is Validated ")}
 
                     
                     />
@@ -983,7 +983,7 @@ const HorseForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
-                    <span className="error">{ErrorGender}</span>
+                    <span className={Sex === "" ? "error": "success"}>{ErrorGender}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -1119,7 +1119,7 @@ const HorseForm = () => {
                       options={owneroption}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => ActiveOwner === "" ?  setErrorOwner("Horse Owner is required "):setErrorOwner(" ")}
+                      onBlur={() => ActiveOwner === "" ?  setErrorOwner("Horse Owner is required "):setErrorOwner("Horse Owner is Validated ")}
 
                     /> 
                      <span className="spanForm">
@@ -1141,7 +1141,7 @@ const HorseForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
-                    <span className="error">{ErrorOwner}</span>
+                    <span className={ActiveOwner === "" ? "error" :"success"}>{ErrorOwner}</span>
                   </div>
 
                   <div className="col-sm">
@@ -1168,11 +1168,11 @@ const HorseForm = () => {
                       options={Gelted}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => isGelted === "" ?  setErrorGelded("Gelded is required "):setErrorGelded(" ")}
+                      onBlur={() => isGelted === "" ?  setErrorGelded("Gelded is required "):setErrorGelded("Gelded is Validated")}
 
                     />
                     <span className="spanForm"> |</span>
-                    <span className="error">{ErrorGelded}</span>
+                    <span className={isGelted === "" ? "error" :"success" }>{ErrorGelded}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -1196,7 +1196,7 @@ const HorseForm = () => {
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
-                       onBlur={() => NationalityId === "" ?  setErrorNationality("Horse Nationality is required "):setErrorNationality(" ")}
+                       onBlur={() => NationalityId === "" ?  setErrorNationality("Horse Nationality is required "):setErrorNationality("Horse Nationality is Validated")}
                     />
                     <span className="spanForm">
                       <OverlayTrigger
@@ -1217,7 +1217,7 @@ const HorseForm = () => {
                       </OverlayTrigger>
                       |
                     </span>
-                    <span className="error">{ErrorNationality}</span>
+                    <span className={NationalityId === "" ?  "error": "success"} >{ErrorNationality}</span>
 
                   </div>
 
@@ -1247,10 +1247,10 @@ const HorseForm = () => {
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => CreationId === "" ?  setErrorCreationid("Horse Creation id is required "):setErrorCreationid(" ")}
+                      onBlur={() => CreationId === "" ?  setErrorCreationid("Horse Creation id is required "):setErrorCreationid("Horse Creation id is Validated ")}
                     />
                     <span className="spanForm"> |</span>
-                    <span className="error">{ErrorCreationid}</span>
+                    <span className={CreationId === "" ?  "error": "success"} >{ErrorCreationid}</span>
 
   
                   </div>
@@ -1282,7 +1282,7 @@ const HorseForm = () => {
                       isClearable={true}
                       isSearchable={true}
                       
-        onBlur={() => ActiveTrainer === "" ?  setErrorTrainer("Horse Trainer is required "):setErrorTrainer(" ")}
+        onBlur={() => ActiveTrainer === "" ?  setErrorTrainer("Horse Trainer is required "):setErrorTrainer("Horse Trainer is Validated ")}
                     />
                     <span className="spanForm">
                       <OverlayTrigger
@@ -1303,7 +1303,7 @@ const HorseForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
-                    <span className="error">{ErrorTrainer}</span>
+                    <span className={ActiveTrainer === "" ?  "error": "success"}>{ErrorTrainer}</span>
                   </div>
 
                   <div className="col-sm">

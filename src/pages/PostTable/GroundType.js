@@ -13,6 +13,10 @@ const GroundType = () => {
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
 
+  
+  const [ErrorAbbrev, setErrorAbbrev] = useState("");
+  const [ErrorAbbrevAr, setErrorAbbrevAr] = useState("");
+
   const [ErrorNameEn, setErrorNameEn] = useState("");
   const [ErrorNameAr, setErrorNameAr] = useState("");
   const [isLoading, setisLoading] = useState(false);
@@ -100,7 +104,6 @@ const GroundType = () => {
   };
 
   const obj = JSON.parse(data1);
-  console.log(obj.status,'aszxZ2dasd')
  const data2 =  (JSON.stringify(
     TextInputValidation(
       "ar",
@@ -111,6 +114,31 @@ const GroundType = () => {
 
 
   const objAr = JSON.parse(data2);
+
+  const data3 =  (JSON.stringify(
+    TextInputValidation(
+      "en",
+      AbbrevEn,
+      "Ground Type Abbreviation"
+    )
+  ));
+
+
+  const abbrev = JSON.parse(data3);
+  const data4 =  (JSON.stringify(
+    TextInputValidation(
+      "ar",
+      AbbrevEn,
+      "Ground Type Abbreviation"
+    )
+  ));
+
+
+  const abbrevAr = JSON.parse(data4);
+
+
+
+
   return (
     <div className="page">
       <div className="rightsidedata">
@@ -138,7 +166,7 @@ const GroundType = () => {
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
-                  <span className="error">{ErrorNameEn.message}</span>
+                  <span className={ErrorNameEn.status ? "success": "error"}>{ErrorNameEn.message}</span>
                 </div>
 
                 <div className="col-sm">
@@ -155,7 +183,7 @@ const GroundType = () => {
                   >
                     <Form.Control type="text" placeholder="اسم" required/>
                   </FloatingLabel>
-                  <span className="errorAr">{ErrorNameAr.message}</span>
+                  <span className={ErrorNameAr.status ? "successAr": "errorAr"}>{ErrorNameAr.message}</span>
                 </div>
               </div>
               <div className="row mainrow">
@@ -175,15 +203,15 @@ const GroundType = () => {
                         type="text"
                         placeholder="Abbrevation"
                         onBlur={() =>
-                         setError(obj)
+                         setErrorAbbrev(abbrev)
                               
                         }
                       />
                     </FloatingLabel>
                  
                     <span className="spanForm"> |</span>
-                    <span className="error" style={styles.popup}
-                    >{Error.message}</span>
+                    <span className="error" 
+                    >{ErrorAbbrev.message}</span>
                   </div>
 
                   <div className="col-sm">

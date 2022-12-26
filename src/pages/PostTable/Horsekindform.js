@@ -13,6 +13,7 @@ const Horsekindform = () => {
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
   const [ErrorShortName, setErrorShortName] = useState("");
+  const [ErrorShortNameAr, setErrorShortNameAr] = useState("");
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
@@ -94,6 +95,11 @@ const Horsekindform = () => {
   );
   const shotName = JSON.parse(data3);
 
+  const data4 = JSON.stringify(
+    TextInputValidation("ar", shortNameAr, "Horse Kind Short Name Arabic")
+  );
+  const shotNameAr = JSON.parse(data4);
+
   return (
     <div className="page">
       <div className="rightsidedata">
@@ -120,7 +126,7 @@ const Horsekindform = () => {
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
-                  <span className="error">{Error.message}</span>
+                  <span className={Error.status ? "success" : "error"}>{Error.message}</span>
                 </div>
 
                 <div className="col-sm">
@@ -136,7 +142,7 @@ const Horsekindform = () => {
                   >
                     <Form.Control type="text" placeholder="اسم" required />
                   </FloatingLabel>
-                  <span className="errorAr">{ErrorAr.message}</span>
+                  <span className={ErrorAr.status ? "successAr" : "errorAr"}>{ErrorAr.message}</span>
                 </div>
               </div>
 
@@ -153,7 +159,7 @@ const Horsekindform = () => {
                     <Form.Control type="text" placeholder="ShortCode" />
                   </FloatingLabel>
                   <span className="spanForm"> |</span>
-                  <span className="error">{ErrorShortName.message}</span>
+                  <span className={ErrorShortName.status ? "success" : "error"}>{ErrorShortName.message}</span>
                 </div>
 
                 <div className="col-sm">
@@ -164,9 +170,11 @@ const Horsekindform = () => {
                     onChange={(e) => setshortNameAr(e.target.value)}
                     value={shortNameAr}
                     style={{ direction: "rtl" }}
+                    onBlur={() => setErrorShortNameAr(shotNameAr)}
                   >
                     <Form.Control type="text" placeholder="التفاصيل" />
                   </FloatingLabel>
+                  <span className={ErrorShortNameAr.status ? "successAr" : "errorAr"}>{ErrorShortNameAr.message}</span>
                 </div>
               </div>
               {/* <div className="row mainrow">

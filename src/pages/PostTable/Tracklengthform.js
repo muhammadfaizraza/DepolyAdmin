@@ -179,16 +179,16 @@ const Tracklengthform = () => {
                     className="mb-3"
                     onChange={(e) => setTrackLength(e.target.value)}
                     value={TrackLength}
-                    onBlur={(e) =>
+                    onBlur={() =>
                       TrackLength === ""
-                        ? setErrorTrackLength("TriCount  Number is required ")
-                        : setErrorTrackLength(" ")
+                        ? setErrorTrackLength("Tracklength is required ")
+                        : setErrorTrackLength("Tracklength is Validated ")
                     }
                     required
                   >
                     <Form.Control type="number" placeholder="Track Length"   />
                   </FloatingLabel>
-                  <span className="error">{ErrorTrackLength}</span>
+                  <span className={TrackLength === "" ? "error" :"success"}>{ErrorTrackLength}</span>
                   {/* <span className="spanForm"> |</span> */}
                 </div>
 
@@ -218,7 +218,7 @@ const Tracklengthform = () => {
                     <Form.Control type="text" placeholder="Rail Position" required/>
                   </FloatingLabel>
                   <span className="spanForm"> |</span>
-                  <span className="error">{ErrorRailPosition.message}</span>
+                  <span className={ErrorRailPosition.status ?"success" :"error" }>{ErrorRailPosition.message}</span>
 
                 </div>
 
@@ -245,7 +245,7 @@ const Tracklengthform = () => {
                     options={courseoptions}
                     isClearable={true}
                     isSearchable={true}
-                    onBlur={() => RaceCourse === "" ?  setErrorRaceCourse("Race Course is required "):setErrorRaceCourse(" ")}
+                    onBlur={() => RaceCourse === "" ?  setErrorRaceCourse("Race Course is required "):setErrorRaceCourse("Race Course is Validated ")}
                   />
                  <span className="spanForm">
                       <OverlayTrigger
@@ -266,7 +266,7 @@ const Tracklengthform = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
-                    <span className="error">{ErrorRaceCourse}</span>
+                    <span className={RaceCourse === "" ? "error" : "success"}>{ErrorRaceCourse}</span>
                 </div>
                 <div className="col-sm">
                   <Select
@@ -313,7 +313,7 @@ const Tracklengthform = () => {
                       </OverlayTrigger>
                       |
                     </span>
-                    <span className="error">{console.log(ErrorGroundType)}</span>
+                    <span className={GroundType === "" ? "error" : "success"}>{ErrorGroundType}</span>
                 </div>
                 <div className="col-sm">
                   <Select

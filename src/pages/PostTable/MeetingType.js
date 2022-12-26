@@ -92,7 +92,7 @@ const MeetingType = () => {
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
-                  <span className="error">{Error.message}</span>
+                  <span className={Error.status ? "success" :"error"}>{Error.message}</span>
                 </div>
 
                 <div className="col-sm">
@@ -108,7 +108,7 @@ const MeetingType = () => {
                   >
                     <Form.Control type="text" placeholder="اسم" required />
                   </FloatingLabel>
-                  <span className="errorAr">{ErrorAr.message}</span>
+                  <span className={ErrorAr.status ? "successAr" :"errorAr"}>{ErrorAr.message}</span>
                 </div>
               </div>
               

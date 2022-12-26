@@ -37,7 +37,7 @@ const Equipment = () => {
   useEffect(() => {
 		if (equipmentshortcode) {
 			setState({
-        shortCode: equipmentshortcode.length === 0 ? 9 : equipmentshortcode[0].maxshortCode + 1,
+        shortCode: equipmentshortcode.length === 0 ? 10 : equipmentshortcode[0].maxshortCode + 1,
 			});
 		} else {
       setState.shortCode('9')

@@ -30,7 +30,7 @@ const Color = () => {
   useEffect(() => {
 		if (colorshortcode) {
 			setState({
-        shortCode: colorshortcode.length === 0 ? 9 : colorshortcode[0].maxshortCode + 1,
+        shortCode: colorshortcode.length === 0 ? 10 : colorshortcode[0].maxshortCode + 1,
 			});
 		} else {
       setState.shortCode('9')

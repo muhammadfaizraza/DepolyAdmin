@@ -138,6 +138,8 @@ const NationalityTable = () => {
                         <th>Name</th>
                         <th>Name Arabic </th>
                         <th>Alternative Name </th>
+                        <th>Hemisphere English</th>
+                        <th>Hemisphere Arabic</th>
                         <th>Alternative Arabic</th>
                         <th>Short Code</th>
                         {/* <th>Label</th> */}
@@ -158,6 +160,8 @@ const NationalityTable = () => {
                               <td>{item.NameAr}</td>
                               <td>{item.AltNameEn}</td>
                               <td>{item.AltNameAr}</td>
+                              <td>{item.HemisphereEn}</td>
+                              <td>{item.HemisphereAr}</td>
                               <td>{item.shortCode} </td>
                               {/* <td>{item.Label} </td> */}
                               {/* <td>{item.Offset === 'true' ? <>True</> : <>False</>} </td> */}

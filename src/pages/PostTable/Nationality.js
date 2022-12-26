@@ -11,14 +11,14 @@ import { fetchnationalityshortcode } from "../../redux/getShortCode/getnationali
 import { useSelector ,useDispatch } from "react-redux";
 
 
-const Offsets = [
-  { id: "0", value: "false", label: "false" },
-  { id: "1", value: "true", label: "true" },
+const Hemisphere = [
+  { id: "0", value: "Southern Hemisphere", label: "Southern Hemisphere" },
+  { id: "1", value: "Northern Hemisphere", label: "Northern Hemisphere" },
 ];
 
-const OffsetsAr = [
-  { id: "0", value: "خاطئة", label: "خاطئة" },
-  { id: "1", value: "حقيقي", label: "حقيقي" },
+const HemisphereArS = [
+  { id: "0", value: "نصف الكرة الجنوبي", label: "نصف الكرة الجنوبي" },
+  { id: "1", value: "نصف الكرة الشمالي", label: "نصف الكرة الشمالي" },
 ];
 
 const Nationality = () => {
@@ -48,7 +48,9 @@ const Nationality = () => {
   const [AltNameAr, setAltNameAr] = useState("");
   const [LabelEn, setLabelEn] = useState("");
   const [LabelAr, setLabelAr] = useState("");
-  const [Offset, setOffset] = useState("");
+  const [HemisphereEn, setHemisphereEn] = useState("");
+  const [HemisphereAr, setHemisphereAr] = useState("");
+
   const [ValueEn, setValueEn] = useState("");
   const [ValueAr, setValueAr] = useState("");
   const [shortCode, setshortCode] = useState("");
@@ -93,8 +95,8 @@ const Nationality = () => {
       formData.append("AbbrevAr", AbbrevAr);
       formData.append("AltNameEn", AltNameEn);
       formData.append("AltNameAr", AltNameAr);
-      // formData.append("LabelEn", LabelEn);
-      // formData.append("LabelAr", LabelAr);
+      formData.append("HemisphereEn", HemisphereEn.value);
+      formData.append("HemisphereAr", HemisphereAr.value);
       // formData.append("Offset", Offset.id);
       // formData.append("ValueEn", ValueEn);
       // formData.append("ValueAr", ValueAr);
@@ -413,6 +415,35 @@ const Nationality = () => {
 									
                   </div>
                 </div> */}
+
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Select Hemisphere</div>}
+                      defaultValue={HemisphereEn}
+                      onChange={setHemisphereEn}
+                      options={Hemisphere}
+                      isClearable={true}
+                      isSearchable={true}
+                      // onBlur={() => WeatherType === "" ? setErrorWeatherType("Weather Type is required ") : setErrorWeatherType("")}
+
+                    />{" "}
+                    <span className="spanForm"> |</span>
+                    {/* <span className="error">{ErrorWeatherType}</span> */}
+                  </div>
+
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>طقس</div>}
+                      className="selectdir"
+                      defaultValue={HemisphereAr}
+                      onChange={setHemisphereAr}
+                      options={HemisphereArS}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
                  <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel

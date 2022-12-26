@@ -49,7 +49,7 @@ const Gender = () => {
       }
       setisLoading(false)
     } catch (error) {
-      const err = error.response.data.message;
+      const err = error.response.data.message[0];
       swal({
         title: "Error!",
         text: err,

@@ -53,9 +53,11 @@ const Breeder = () => {
         icon: "success",
         button: "OK",
       });
+      
       setisLoading(false)
     } catch (error) {
-      const err = error.response.data.message;
+      const err = error.response.data.message[0];
+      console.log(err)
       swal({
         title: "Error!",
         text: err,

@@ -84,9 +84,11 @@ const Breeder = () => {
     setImage(e.target.files[0]);
   };
   // console.log(breedershortcode[0].maxshortCode,'breedershortcode')
-
   useEffect(() => {
     dispatch(fetchbreedershortcode());
+
+  },[dispatch])
+  useEffect(() => {
     if (!image) {
       setPreview(undefined);
       return;

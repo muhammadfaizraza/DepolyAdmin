@@ -14,6 +14,7 @@ import { BsEyeFill } from "react-icons/bs";
 import RaceTypepopup from "../../Components/Popup/RaceTypepopup";
 import { Modal } from "react-bootstrap";
 import Pagination from "./Pagination";
+import { fetchracetypeshortcode } from "../../redux/getShortCode/getracetypeshortcode";
 
 const Racetype = () => {
   const [show, setShow] = useState(false);
@@ -39,6 +40,7 @@ const Racetype = () => {
 
   useEffect(() => {
     dispatch(fetchRaceType());
+    dispatch(fetchracetypeshortcode());
   }, [dispatch]);
 
   const handleRemove = async (Id) => {

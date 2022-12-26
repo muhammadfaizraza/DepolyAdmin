@@ -20,10 +20,12 @@ import { CSVLink } from "react-csv";
 const statusData = [
   {
     id:1,
+    data:'true',
     value:'Approved'
   },
   {
-    id:1,
+    id:0,
+    data:'false',
     value:'Not Approved'
   }
 ]
@@ -40,12 +42,13 @@ const SubscriberList = () => {
   const  [PassportNo , setPassportNo] = useState('');
   const  [Address , setAddress] = useState('');
   const  [PhoneNumber , setPhoneNumber] = useState('');
+  const  [Approved , setApproved] = useState('');
 
 
 
 
   const GetSearch = async () => {
-    const response = await axios.get((`${window.env.API_URL}/SearchUser?PassportNo=${PassportNo}&Email=${''}&Address=${Address}&PhoneNumber=${PhoneNumber}`))
+    const response = await axios.get((`${window.env.API_URL}/SearchUser?PassportNo=${PassportNo}&Address=${Address}&ApprovedStatus=${Approved}&PhoneNumber=${PhoneNumber}`))
     setSearchData(response.data.data)
   }
   useEffect(() => {
@@ -186,6 +189,7 @@ const SubscriberList = () => {
                                 class="form-control"
                                 id="exampleFormControlSelect1"
                                 name="country"
+                                onChange={(e) => setApproved(e.target.value)}
                                 required
                               >
                                 {statusData.map((item) => {
@@ -193,6 +197,7 @@ const SubscriberList = () => {
                                     <option
                                       key={item.id}
                                       name="country"
+                                      value={item.id}
                                     >
                                       {item.value}
                                     </option>

@@ -52,7 +52,7 @@ const NationalityPopup = (data) => {
            
           
           >
-            <Form.Control type="text"  placeholder="Alternative Name"  value={data.data.AltName} readOnly />
+            <Form.Control type="text"  placeholder="Alternative Name"  value={data.data.AltNameEn} readOnly />
           </FloatingLabel>
         
         </div>
@@ -68,14 +68,14 @@ const NationalityPopup = (data) => {
           
           
           >
-            <Form.Control type="text"  placeholder="Abbrevation"  value={data.data.Abbrev} readOnly />
+            <Form.Control type="text"  placeholder="Abbrevation"  value={data.data.AbbrevEn} readOnly />
           </FloatingLabel>
         
         </div>
 
       </div>
 
-      <div className="row mainrow">
+      {/* <div className="row mainrow">
         <div className="col-sm">
         <FloatingLabel
             controlId="floatingInput"
@@ -89,9 +89,9 @@ const NationalityPopup = (data) => {
         </div>
 
      
-      </div>
+      </div> */}
 
-      <div className="row mainrow">
+      {/* <div className="row mainrow">
         <div className="col-sm">
         <FloatingLabel
             controlId="floatingInput"
@@ -100,12 +100,12 @@ const NationalityPopup = (data) => {
           
           
           >
-            <Form.Control type="number"  placeholder="Offset"  value={data.data.Offset} readOnly />
+            <Form.Control type="number"  placeholder="Offset"  value={data.data.Offset === true ? <>'True'</>:'False'} readOnly />
           </FloatingLabel>
         
         </div>
 
-      </div>
+      </div> */}
 
       <div className="row mainrow">
         <div className="col-sm">
@@ -115,7 +115,7 @@ const NationalityPopup = (data) => {
             className="mb-3"
          
           >
-            <Form.Control type="text"  placeholder="Value" value={data.data.Value} readOnly/>
+            <Form.Control type="text"  placeholder="Value" value={data.data.ValueEn} readOnly/>
           </FloatingLabel>
       
         </div>

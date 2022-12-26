@@ -28,6 +28,7 @@ const Breeder = () => {
   const [image, setImage] = useState();
   const [shortCode, setshortCode] = useState("");
 
+  console.log(breedershortcode,'breedershortcode')
   const [state1, setState] = useState({
 		shortCode: '',
 	});

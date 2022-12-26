@@ -20,19 +20,19 @@
   
 }
 
-.accordion-button:not(.collapsed) {
+ .accordion-button:not(.collapsed) {
     background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
     border-radius: 0 20px 20px 0;
-}
+} 
 .accordion-button:focus {
     border-color: none;
     box-shadow: none;
 }
-.collapsing {
+/* .collapsing {
     -webkit-transition: none;
     transition: none;
     display: none;
-}
+} */
 .accordion {
     --bs-accordion-bg: #E8E8E8;
     --bs-accordion-border-color:none;
@@ -59,9 +59,9 @@
     padding: 20px 0 0px 0px;
     border-top: 1.5px solid rgb(103, 102, 102);
 }
-.accordion-button::after {
+/* .accordion-button::after {
     display: none;
-}
+} */
 
 .accordion-button {
     padding-left: 37px !important;
@@ -77,7 +77,7 @@
     border-radius: 40px;
    width: 186px;
     height: 51px;
-    color: white;
+    color: white;   
     border: none;
     padding: 8px;
     font-size: 1.3rem;

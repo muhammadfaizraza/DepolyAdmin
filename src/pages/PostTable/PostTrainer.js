@@ -111,43 +111,43 @@ const TrainerForm = () => {
     }
   };
 
-  const convert = (num) => {
-    if (num) {
-      var date = new Date(num);
-      var months = [
-        "يناير",
-        "فبراير",
-        "مارس",
-        "إبريل",
-        "مايو",
-        "يونيو",
-        "يوليو",
-        "أغسطس",
-        "سبتمبر",
-        "أكتوبر",
-        "نوفمبر",
-        "ديسمبر",
-      ];
-      var days = [
-        "اﻷحد",
-        "اﻷثنين",
-        "الثلاثاء",
-        "اﻷربعاء",
-        "الخميس",
-        "الجمعة",
-        "السبت",
-      ];
-      var delDateString =
-        days[date.getDay()] +
-        " " +
-        date.getDate() +
-        " " +
-        months[date.getMonth()] +
-        " " +
-        date.getFullYear();
-      return delDateString;
-    }
-  };
+  // const convert = (num) => {
+  //   if (num) {
+  //     var date = new Date(num);
+  //     var months = [
+  //       "يناير",
+  //       "فبراير",
+  //       "مارس",
+  //       "إبريل",
+  //       "مايو",
+  //       "يونيو",
+  //       "يوليو",
+  //       "أغسطس",
+  //       "سبتمبر",
+  //       "أكتوبر",
+  //       "نوفمبر",
+  //       "ديسمبر",
+  //     ];
+  //     var days = [
+  //       "اﻷحد",
+  //       "اﻷثنين",
+  //       "الثلاثاء",
+  //       "اﻷربعاء",
+  //       "الخميس",
+  //       "الجمعة",
+  //       "السبت",
+  //     ];
+  //     var delDateString =
+  //       days[date.getDay()] +
+  //       " " +
+  //       date.getDate() +
+  //       " " +
+  //       months[date.getMonth()] +
+  //       " " +
+  //       date.getFullYear();
+  //     return delDateString;
+  //   }
+  // };
 
   var today = new Date();
   useEffect(() => {
@@ -242,6 +242,10 @@ const TrainerForm = () => {
   );
   const Remarkar = JSON.parse(data9);
 
+  const data10 = JSON.stringify(
+    TextInputValidation("ar", DetailAr, "Trainer Remarks Arabic")
+  );
+  const detailar = JSON.parse(data10);
 
   return (
     <Fragment>
@@ -270,7 +274,7 @@ const TrainerForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className="error">{Error.message}</span>
+                    <span className={Error.status ? 'success' : 'error'}>{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -286,7 +290,7 @@ const TrainerForm = () => {
                     >
                       <Form.Control type="text" placeholder="اسم" required />
                     </FloatingLabel>
-                    <span className="errorAr">{ErrorAr.message}</span>
+                    <span className={ErrorAr.status ? 'successAr' : 'errorAr'}>{ErrorAr.message}</span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -369,7 +373,7 @@ const TrainerForm = () => {
                       <Form.Control type="text" placeholder="Title" required />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
-                    <span className="error">{ErrorTitle.message}</span>
+                    <span className={ErrorTitle.status ? 'success' : 'error'}>{ErrorTitle.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -385,7 +389,7 @@ const TrainerForm = () => {
                     >
                       <Form.Control type="text" placeholder="عنوان" required />
                     </FloatingLabel>
-                    <span className="errorAr">{ErrorTitleAr.message}</span>
+                    <span className={ErrorTitleAr.status ? 'successAr' : 'errorAr'}>{ErrorTitleAr.message}</span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -406,7 +410,7 @@ const TrainerForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className="error">{ErrorShortName.message}</span>
+                    <span className={ErrorShortName.status ? 'success' : 'error'}>{ErrorShortName.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -426,7 +430,7 @@ const TrainerForm = () => {
                         required
                       />
                     </FloatingLabel>
-                    <span className="errorAr">{ErrorShortNameAr.message}</span>
+                    <span className={ErrorShortNameAr.status ? 'successAr' : 'errorAr'}>{ErrorShortNameAr.message}</span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -447,7 +451,7 @@ const TrainerForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className="error">{ErrorDetail.message}</span>
+                    <span className={ErrorDetail.status ? 'success' : 'error'}>{ErrorDetail.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -461,6 +465,7 @@ const TrainerForm = () => {
                     >
                       <Form.Control type="text" placeholder="تفاصيل" />
                     </FloatingLabel>
+                    <span className={detailar.status ? 'successAr' : 'errorAr'}>{detailar.message}</span>
                   </div>
                 </div>
 
@@ -530,7 +535,7 @@ const TrainerForm = () => {
                       />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
-                    <span className="error">{ErrorRemarks.message}</span>
+                    <span className={ErrorRemarks.status ? 'success' : 'error'}>{ErrorRemarks.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -545,7 +550,7 @@ const TrainerForm = () => {
                     >
                       <Form.Control type="text" placeholder="ملاحظات" />
                     </FloatingLabel>
-                    <span className="errorAr">{ErrorRemarksAr.message}</span>
+                    <span className={ErrorRemarksAr.status ? 'successAr' : 'errorAr'}>{ErrorRemarksAr.message}</span>
                   </div>
                 </div>
                 <div className="ButtonSection">

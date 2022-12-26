@@ -93,7 +93,7 @@ const SliderForm = () => {
     setImage()
   document.getElementById("file").value=""
   };
-  const isSubmitData = TitleAr === "" || TitleEn === "";
+
   return (
     <>
       <div className="page">
@@ -144,7 +144,7 @@ const SliderForm = () => {
                     >
                       <Form.Control type="text" placeholder="عنوان" required />
                     </FloatingLabel>
-                    <span className={ErrorAr.status ? 'success' : 'error'} >{ErrorAr.message}</span>
+                    <span className={ErrorAr.status ? 'successAr' : 'errorAr'} >{ErrorAr.message}</span>
                   </div>
                 </div>
 

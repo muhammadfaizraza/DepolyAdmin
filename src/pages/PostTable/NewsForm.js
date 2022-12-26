@@ -171,7 +171,7 @@ const NewsForm = () => {
                       <Form.Control type="text" placeholder="Title" />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
-                    <span className="error">{Error.message}</span>
+                    <span className={Error.status ? 'success' : 'error'}>{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -187,7 +187,7 @@ const NewsForm = () => {
                     >
                       <Form.Control type="text" placeholder="عنوان" required />
                     </FloatingLabel>
-                    <span className="errorAr">{ErrorAr.message}</span>
+                    <span className={ErrorAr.status ? 'successAr' : 'errorAr'}>{ErrorAr.message}</span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -208,7 +208,7 @@ const NewsForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className="error">{ErrorTitle.message}</span>
+                    <span className={ErrorTitle.status ? 'success' : 'error'}>{ErrorTitle.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -224,7 +224,7 @@ const NewsForm = () => {
                     >
                       <Form.Control type="text" placeholder="عنوان" required />
                     </FloatingLabel>
-                    <span className="errorAr">{ErrorTitleAr.message}</span>
+                    <span className={ErrorTitleAr.status ? 'successAr' : 'errorAr'}>{ErrorTitleAr.message}</span>
                   </div>
                 </div>
                 <div className="row quillRow">

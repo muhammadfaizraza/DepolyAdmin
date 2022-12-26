@@ -37,7 +37,7 @@ const Gender = () => {
   useEffect(() => {
 		if (sexshortcode) {
 			setState({
-        shortCode: sexshortcode.length === 0 ? 10 : sexshortcode[0].maxshortCode + 1,
+        shortCode: sexshortcode[0].maxshortCode === null ? 10 : sexshortcode[0].maxshortCode + 1,
 			});
 		} else {
 		}

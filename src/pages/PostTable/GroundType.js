@@ -35,7 +35,7 @@ const GroundType = () => {
   useEffect(() => {
 		if (groundshortcode) {
 			setState({
-        shortCode: groundshortcode.length === 0 ? 10 : groundshortcode[0].maxshortCode + 1,
+        shortCode: groundshortcode[0].maxshortCode === null ? 10 : groundshortcode[0].maxshortCode + 1,
 			});
 		} else {
       setState.shortCode('9')

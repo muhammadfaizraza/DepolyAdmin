@@ -66,7 +66,7 @@ const Nationality = () => {
   useEffect(() => {
 		if (nationalityshortcode) {
 			setState({
-        shortCode: nationalityshortcode.length === 0 ? 10 : nationalityshortcode[0].maxshortCode + 1,
+        shortCode: nationalityshortcode[0].maxshortCode === null ? 10 : nationalityshortcode[0].maxshortCode + 1,
 			});
 		} else {
       setState.shortCode('9')

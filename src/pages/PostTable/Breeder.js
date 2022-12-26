@@ -34,7 +34,7 @@ const Breeder = () => {
   useEffect(() => {
 		if (breedershortcode) {
 			setState({
-        shortCode: breedershortcode.length === 0 ? 10 : breedershortcode[0].maxshortCode + 1,
+        shortCode: breedershortcode[0].maxshortCode === null ? 10 : breedershortcode[0].maxshortCode + 1,
 			});
 		} else {
 		}

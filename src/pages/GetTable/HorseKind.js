@@ -142,10 +142,10 @@ const HorseKind = () => {
                       <tr>
                         <th>Name</th>
                         <th>Name Arabic </th>
-                        <th>Abrevation</th>
-                        <th>Abrevation Arabic </th>
+                        {/* <th>Abrevation</th>
+                        <th>Abrevation Arabic </th> */}
                         <th>Short Name</th>
-
+                        <th>Short Name Arabic</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -158,7 +158,7 @@ const HorseKind = () => {
                               <td>{item.NameAr}</td>
                               <td>{item.AbbrevEn}</td>
                               <td>{item.AbbrevAr}</td>
-                              <td>{item.shortName} </td>
+                              {/* <td>{item.shortName} </td> */}
 
                               <td className="table_delete_btn1">
                                 <BiEdit

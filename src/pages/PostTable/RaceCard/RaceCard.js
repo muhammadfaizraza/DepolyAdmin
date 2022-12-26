@@ -153,7 +153,7 @@ dispatch(fetchracecourse())
                 </FloatingLabel>
 
                 <span className="spanForm"> |</span>
-                <span className="error">{Error.message}</span>
+                <span className={Error.status ? 'success' : 'error'} >{Error.message}</span>
               </div>
               <div className="col-sm">
                 <FloatingLabel
@@ -171,7 +171,7 @@ dispatch(fetchracecourse())
                     style={{ left: "%" }}
                   />
                 </FloatingLabel>
-                <span className="errorAr">{ErrorAr.message}</span>
+                <span className={ErrorAr.status ? 'successAr' : 'errorAr'}>{ErrorAr.message}</span>
               </div>
             </div>
 
@@ -188,7 +188,7 @@ dispatch(fetchracecourse())
                   onBlur={() =>
                     Race === ""
                       ? setErrorRaceCourse("Race Course is required")
-                      : setErrorRaceCourse("")
+                      : setErrorRaceCourse("Race Course is Validated")
                   }
                 />
                  <span className="spanForm">
@@ -210,7 +210,7 @@ dispatch(fetchracecourse())
                       </OverlayTrigger>
                       |
                     </span>
-                <span className="error">{ErrorRaceCourse}</span>
+                <span className={Race === '' ? "error" : "success"}>{ErrorRaceCourse}</span>
               </div>
 
               <div className="col-sm">

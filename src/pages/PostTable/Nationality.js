@@ -55,6 +55,7 @@ const Nationality = () => {
 
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
+  const dispatch = useDispatch();
 
   const history = useNavigate();
   const { pathname } = useLocation();

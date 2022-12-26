@@ -63,6 +63,9 @@ const Nationality = () => {
 		shortCode: '',
 	});
 
+  console.log(nationalityshortcode.length,'nationalityshortcode 1');
+  console.log(nationalityshortcode,'nationalityshortcode 2' )
+
   useEffect(() => {
 		if (nationalityshortcode) {
 			setState({
@@ -72,6 +75,10 @@ const Nationality = () => {
       setState.shortCode('9')
 		}
 	}, [nationalityshortcode]);
+  useEffect(() => {
+    dispatch(fetchnationalityshortcode());
+  },[dispatch])
+
 
   const submit = async (event) => {
     event.preventDefault();

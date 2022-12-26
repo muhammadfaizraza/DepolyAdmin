@@ -179,7 +179,23 @@ const NewsForm = () => {
                     >
                       <Form.Control type="text"  placeholder="Description" value={state1.AltNameEn}/>
                     </FloatingLabel>
-                  
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, AltNameAr: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text"  placeholder="Description" value={state1.AltNameAr}/>
+                    </FloatingLabel>
+                 
                   </div>
 
                 </div>
@@ -197,7 +213,23 @@ const NewsForm = () => {
                     >
                       <Form.Control type="text"  placeholder="Description" value={state1.AbbrevEn}/>
                     </FloatingLabel>
-                  
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, AbbrevAr: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text"  placeholder="Description" value={state1.AbbrevAr}/>
+                    </FloatingLabel>
+                 
                   </div>
 
                 </div>
@@ -252,7 +284,23 @@ const NewsForm = () => {
                     >
                       <Form.Control type="text"  placeholder="Description" value={state1.ValueEn}/>
                     </FloatingLabel>
-                
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, NameAr: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text"  placeholder="Description" value={state1.NameAr}/>
+                    </FloatingLabel>
+                 
                   </div>
 
                 </div>

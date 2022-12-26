@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { fetchSinglejockey } from "../../redux/getReducer/getSingleJockey";
 import swal from "sweetalert";
 import axios from "axios";
+import DatePicker from "react-date-picker";
 
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
@@ -19,10 +20,17 @@ const NewsForm = () => {
   const [state1, setState] = useState({
 		NameEn: '',
     NameAr:'',
+    ShortNameEn:"",
+    ShortNameAr:"",
+    DOB:"",
+    RemarksEn:"",
+    JockeyAllowance:"",
 		MaximumJockeyWeight: '',
     MiniumumJockeyWeight: '',
-    image:''
-    
+    image:'',
+    RemarksAr:"",
+    Rating:"",
+    JockeyLicenseDate:"",
 	});
   const [image,setImage] = useState();
   const [preview,setPreview] = useState();
@@ -42,9 +50,16 @@ const NewsForm = () => {
 			setState({
 				NameEn: jockeyid.NameEn,
         NameAr: jockeyid.NameAr,
+        ShortNameEn:jockeyid.ShortNameEn,
+        ShortNameAr:jockeyid.ShortNameAr,
+        RemarksEn:jockeyid.RemarksEn,
+        RemarksAr:jockeyid.RemarksAr,
 				MaximumJockeyWeight: jockeyid.MaximumJockeyWeight,
         MiniumumJockeyWeight: jockeyid.MiniumumJockeyWeight,
-        image:jockeyid.image
+        Rating:jockeyid.Rating,
+				JockeyLicenseDate: jockeyid.JockeyLicenseDate,
+        DOB:jockeyid.DOB
+  
 			});
 		} else {
 			dispatch(fetchSinglejockey({ jockeyid }));
@@ -70,8 +85,16 @@ console.log(preview,'preview')
       formData.append("image", image);
       formData.append("NameEn", state1.NameEn);
       formData.append("NameAr", state1.NameAr + ' ');
+      formData.append("ShortNameEn", state1.ShortNameEn);
+      formData.append("ShortNameAr", state1.ShortNameAr);
+      formData.append("RemarksEn", state1.RemarksEn);
+      formData.append("RemarksAr", state1.RemarksAr);
       formData.append("MaximumJockeyWeight", state1.MaximumJockeyWeight);
       formData.append("MiniumumJockeyWeight", state1.MiniumumJockeyWeight);
+      formData.append("Rating", state1.Rating);
+      formData.append("JockeyLicenseDate", state1.JockeyLicenseDate);
+      formData.append("DOB", state1.DOB);
+     
 
       const response = await axios.put(`${window.env.API_URL}/updateJockey/${jockeyid._id}`, formData);
       history("/jockey");
@@ -135,6 +158,128 @@ console.log(preview,'preview')
                     </FloatingLabel>
                   </div>
                 </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Short Name"
+                      className="mb-3 "
+                      onChange={(e) =>
+                        setState({ ...state1, ShortNameEn: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.ShortNameEn}/>
+                    </FloatingLabel>
+                  
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم قصير"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, ShortNameAr: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.ShortNameAr}/>
+                    </FloatingLabel>
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Remarks"
+                      className="mb-3 "
+                      onChange={(e) =>
+                        setState({ ...state1, RemarksEn: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.RemarksEn}/>
+                    </FloatingLabel>
+                  
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="ملاحظات"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, RemarksAr: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.RemarksAr}/>
+                    </FloatingLabel>
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Rating"
+                      className="mb-3 "
+                      onChange={(e) =>
+                        setState({ ...state1, Rating: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="number" placeholder="Description" value={state1.Rating}/>
+                    </FloatingLabel>
+                  
+                  
+                  </div>
+                  </div>
+                  <div className="row mainrow">
+                  <div className="col-sm">
+                    <DatePicker
+                       onChange={(e) =>
+                        setState({ ...state1, JockeyLicenseDate: e.target.value })
+                      }
+                      defaultValue={state1.JockeyLicenseDate}
+                      value={state1.JockeyLicenseDate}
+                      dayPlaceholder="  "
+                    
+                      monthPlaceholder="License Date"
+                      yearPlaceholder=""
+                      
+                    />
+
+                 
+                  
+                  </div>
+
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <DatePicker
+                       onChange={(e) =>
+                        setState({ ...state1, DOB: e.target.value })
+                      }
+                      defaultValue={state1.DOB}
+                      value={state1.DOB}
+                      dayPlaceholder="  "
+                    
+                      monthPlaceholder="License Date"
+                      yearPlaceholder=""
+                      
+                    />
+
+                 
+                  
+                  </div>
+
+                </div>
+                
                 <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel

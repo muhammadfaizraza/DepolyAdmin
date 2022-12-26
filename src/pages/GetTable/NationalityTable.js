@@ -138,9 +138,10 @@ const NationalityTable = () => {
                         <th>Name</th>
                         <th>Name Arabic </th>
                         <th>Alternative Name </th>
+                        <th>Alternative Arabic</th>
                         <th>Hemisphere English</th>
                         <th>Hemisphere Arabic</th>
-                        <th>Alternative Arabic</th>
+                      
                         <th>Short Code</th>
                         {/* <th>Label</th> */}
                         {/* <th>Off Set </th>

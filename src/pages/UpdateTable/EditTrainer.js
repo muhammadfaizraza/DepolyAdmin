@@ -24,10 +24,13 @@ const NewsForm = () => {
     TitleAr:'',
     ShortNameEn:'',
     ShortNameAr:'',
-    Remarks:'',
+    RemarksEn:'',
+    RemarksAr:'',
     TrainerLicenseDate:'',
-    Detail:''
-	});
+    DetailEn:'',
+    DetailAr:'',
+    TrainerLicenseDate:""
+  });
   const [preview,setPreview] = useState();
 
   const [image,setImage] = useState();
@@ -50,8 +53,12 @@ const NewsForm = () => {
         TitleAr: trainerid.TitleAr,
         ShortNameEn: trainerid.ShortNameEn,
         ShortNameAr: trainerid.ShortNameAr,
-        Remarks: trainerid.Remarks,
-        Detail: trainerid.Detail,
+        RemarksEn: trainerid.RemarksEn,
+        RemarksAr: trainerid.RemarksAr,
+        DetailEn: trainerid.DetailEn,
+        DetailAr: trainerid.DetailAr,
+        TrainerLicenseDate:trainerid.TrainerLicenseDate
+
         
 			});
 		} else {
@@ -80,10 +87,12 @@ const NewsForm = () => {
       formData.append("NameAr", state1.NameAr);
       formData.append("TitleEn", state1.TitleEn);
       formData.append("TitleAr", state1.TitleAr);
-      formData.append("Remarks", state1.Remarks);
+      formData.append("RemarksEn", state1.RemarksEn);
+      formData.append("RemarksAr", state1.RemarksAr);
       formData.append("ShortNameEn", state1.ShortNameEn);
       formData.append("ShortNameAr", state1.ShortNameAr);
-      formData.append("Detail", state1.Detail);
+      formData.append("DetailEn", state1.DetailEn);
+      formData.append("DetailAr", state1.DetailAr);
       formData.append("TrainerLicenseDate", TrainerLicenseDate);
 
 
@@ -170,7 +179,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="اسم قصير"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
@@ -203,7 +212,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="لقب"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
@@ -256,31 +265,31 @@ const NewsForm = () => {
                       label="Detail"
                       className="mb-3"
                       onChange={(e) =>
-                        setState({ ...state1, Detail: e.target.value })
+                        setState({ ...state1, DetailEn: e.target.value })
                       }
                     
                     >
-                      <Form.Control type="text" placeholder="Description" value={state1.Detail}/>
+                      <Form.Control type="text" placeholder="Description" value={state1.DetailEn}/>
                     </FloatingLabel>
                  
-                    {/* <span className="spanForm"> |</span> */}
+                    <span className="spanForm"> |</span>
                   </div>
 
-                  {/* <div className="col-sm">
+                  <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="التفاصيل"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
-                        setState({ ...state1, NameAr: e.target.value })
+                        setState({ ...state1, DetailAr: e.target.value })
                       }
                     
                     >
                       <Form.Control type="text" placeholder="Description" value={state1.NameAr}/>
                     </FloatingLabel>
                     
-                  </div> */}
+                  </div>
                 </div>
                 
                 
@@ -292,30 +301,30 @@ const NewsForm = () => {
                       label="Remarks"
                       className="mb-3"
                       onChange={(e) =>
-                        setState({ ...state1, Remarks: e.target.value })
+                        setState({ ...state1, RemarksEn: e.target.value })
                       }
                     
                     >
-                      <Form.Control type="text" placeholder="Description" value={state1.Remarks}/>
+                      <Form.Control type="text" placeholder="Description" value={state1.RemarksEn}/>
                     </FloatingLabel>
                   
-                    {/* <span className="spanForm"> |</span> */}
+                    <span className="spanForm"> |</span>
                   </div>
 
-                  {/* <div className="col-sm">
+                  <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="ملاحظات"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
-                        setState({ ...state1, Remarks: e.target.value })
+                        setState({ ...state1, RemarksAr: e.target.value })
                       }
                     
                     >
-                      <Form.Control type="text" placeholder="Description" value={state1.NameAr}/>
+                      <Form.Control type="text" placeholder="Description" value={state1.RemarksAr}/>
                     </FloatingLabel>
-                  </div> */}
+                  </div>
                 </div>
 
                 

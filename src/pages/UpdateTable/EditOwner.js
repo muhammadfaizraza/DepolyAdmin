@@ -54,6 +54,8 @@ const NewsForm = () => {
         TitleAr:ownerid.TitleAr,
         ShortEn: ownerid.ShortEn,
         ShortAr: ownerid.ShortAr,
+        RegistrationDate: ownerid.RegistrationDate,
+    
         image: ownerid.image
    
 			});
@@ -86,6 +88,8 @@ const NewsForm = () => {
       formData.append("TitleAr", state1.TitleAr);
       formData.append("ShortEn", state1.ShortEn);
       formData.append("ShortAr", state1.ShortAr);
+      formData.append("RegistrationDate", state1.RegistrationDate);
+
       formData.append("Ownerimage", state1.image);
       // formData.append("NationalityID", NationalityID.id);
       // formData.append("RegistrationDate", RegistrationDate);
@@ -220,6 +224,24 @@ const NewsForm = () => {
                   </div>
                 </div>
                 
+                <div className="row mainrow">
+                  
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Date of Birth"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, RegistrationDate: e.target.value })
+                      }
+                    >
+                      <Form.Control type="date" placeholder="Details"  	value={state1.RegistrationDate}/>
+                    </FloatingLabel>
+                
+                  
+                  </div>
+
+                </div>
 {/* 
                 <div className="row mainrow">
                   <div className="col-sm">

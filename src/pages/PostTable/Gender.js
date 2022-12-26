@@ -72,7 +72,7 @@ const Gender = () => {
       }
       setisLoading(false)
     } catch (error) {
-      const err = error.response.data.message[0];
+      const err = error.response.data.message;
       swal({
         title: "Error!",
         text: err,

@@ -2,7 +2,6 @@ import React, { useEffect, Fragment , useState } from "react";
 import { fetchRaceType, STATUSES } from "../../redux/getReducer/getRacetype";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -14,7 +13,6 @@ import { BsEyeFill } from "react-icons/bs";
 import RaceTypepopup from "../../Components/Popup/RaceTypepopup";
 import { Modal } from "react-bootstrap";
 import Pagination from "./Pagination";
-import { fetchracetypeshortcode } from "../../redux/getShortCode/getracetypeshortcode";
 
 const Racetype = () => {
   const [show, setShow] = useState(false);
@@ -40,7 +38,6 @@ const Racetype = () => {
 
   useEffect(() => {
     dispatch(fetchRaceType());
-    dispatch(fetchracetypeshortcode());
   }, [dispatch]);
 
   const handleRemove = async (Id) => {

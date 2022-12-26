@@ -1,14 +1,20 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import swal from 'sweetalert';
 import axios from 'axios';
 import { useNavigate ,useLocation } from 'react-router-dom';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';  
 import TextInputValidation from "../../utils/TextInputValidation";
+import { fetchracetypeshortcode } from "../../redux/getShortCode/getracetypeshortcode";
+import { useSelector ,useDispatch } from "react-redux";
+
+
 const Racetypeform = () => {
  //for error
  const [Error, setError] = useState("")
  const [ErrorAr, setErrorAr] = useState("")
+ const {data:racetypeshortcode} = useSelector((state) => state.racetypeshortcode)
+ const dispatch = useDispatch();
 
 
 
@@ -19,7 +25,26 @@ const Racetypeform = () => {
 
   const history =useNavigate()
   const {pathname} = useLocation();
-  
+
+
+  const [state1, setState] = useState({
+		shortCode: '',
+	});
+
+  useEffect(() => {
+		if (racetypeshortcode) {
+			setState({
+        shortCode: racetypeshortcode.length === 0 ? 10 : racetypeshortcode[0].maxshortCode + 1,
+			});
+		} else {
+      setState.shortCode('9')
+		}
+	}, [racetypeshortcode]);
+
+
+  useEffect(() => {
+    dispatch(fetchracetypeshortcode());
+  },[dispatch])
   
     const submit = async (event) => {
       event.preventDefault();
@@ -27,8 +52,8 @@ const Racetypeform = () => {
       try {
         const formData = new FormData();
         formData.append("NameEn", NameEn);
-        formData.append("NameAr" , NameAr + ' ')
-        // formData.append("shortCode",shortCode);
+        formData.append("NameAr" , NameAr)
+        formData.append("shortCode",state1.shortCode);
   
         await axios.post(`${window.env.API_URL}/uploadRaceType`, formData)
         swal({
@@ -136,13 +161,13 @@ onChange={(e) => setNameAr(e.target.value)}
                       controlId="floatingInput"
                       label="Short Code"
                       className="mb-3"
-                      // onChange={(e) =>
-                      //   setregisteration({ ...registeration, shortCode: e.target.value })
-                      // }
+                      onChange={(e) =>
+                        setState({ ...state1, shortCode: e.target.value })
+                      }
                     
                     >
-                      <Form.Control type="text"  placeholder="Description" />
-                  </FloatingLabel>
+                      <Form.Control type="number" placeholder="Description" value={state1.shortCode}/>
+                    </FloatingLabel>
                  
 									
                   </div>

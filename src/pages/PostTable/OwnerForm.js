@@ -372,7 +372,7 @@ const OwnerForm = () => {
                       onChange={setRegistrationDate}
                       value={RegistrationDate}
                       dayPlaceholder=""
-                      minDate={today}
+                      // minDate={today}
                       monthPlaceholder="Registration Date"
                       yearPlaceholder=""
                       onBlur={() =>

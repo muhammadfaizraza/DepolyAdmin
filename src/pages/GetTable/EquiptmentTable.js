@@ -13,6 +13,9 @@ import { BsEyeFill } from "react-icons/bs";
 import { Modal } from "react-bootstrap";
 import EquipmentPopup from "../../Components/Popup/EquipmentPopup";
 import Pagination from "./Pagination";
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
+
 
 const EquiptmentTable = () => {
 //for Modal

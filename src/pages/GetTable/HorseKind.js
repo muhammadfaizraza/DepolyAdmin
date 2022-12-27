@@ -13,6 +13,9 @@ import { BsEyeFill } from "react-icons/bs";
 import HorseKindPopup from "../../Components/Popup/HorseKindPopup";
 import { Modal } from "react-bootstrap";
 import Pagination from "./Pagination";
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
+
 
 
 const HorseKind = () => {

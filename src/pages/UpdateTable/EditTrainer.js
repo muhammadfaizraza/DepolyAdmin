@@ -9,10 +9,13 @@ import Form from "react-bootstrap/Form";
 import { fetchnationality } from "../../redux/getReducer/getNationality";
 import { useDispatch } from "react-redux";
 
+
 const NewsForm = () => {
   const history = useNavigate();
   const dispatch = useDispatch();
   const { state } = useLocation();
+const [TrainerLicenseDate,setTrainerLicenseDate] = useState('')
+const [DOB,setDOB] = useState('')
   var today = new Date();
 
   const { trainerid } = state;
@@ -26,24 +29,28 @@ const NewsForm = () => {
     ShortNameAr:'',
     RemarksEn:'',
     RemarksAr:'',
-    TrainerLicenseDate:'',
     DetailEn:'',
     DetailAr:'',
-    TrainerLicenseDate:""
+    TrainerLicenseDate:"",
+    DOB:"",
   });
+ 
   const [preview,setPreview] = useState();
 
   const [image,setImage] = useState();
-  const [TrainerLicenseDate,setTrainerLicenseDate] = useState();
 
 
   const fileSelected = (event) => {
     const image = event.target.files[0];
     setImage(image);
   };
+
+
+
+  let dateall =  Date.parse(trainerid.TrainerLicenseDate)
   
 
-
+console.log(dateall,'dateall 1')
   useEffect(() => {
 		if (trainerid) {
 			setState({
@@ -64,6 +71,12 @@ const NewsForm = () => {
 		} else {
 		}
 	}, [trainerid]);
+  function convert(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
 
   useEffect(() => {
     dispatch(fetchnationality());
@@ -77,7 +90,16 @@ const NewsForm = () => {
     setPreview(objectUrl)
     return () => URL.revokeObjectURL(objectUrl)
 }, [image])
-  const submit = async (event) => {
+
+
+const handleChange =(e)=>{
+
+setState({...state1 , TrainerLicenseDate: e.target.value})
+console.log(state.TrainerLicenseDate, "")
+} 
+
+console.log("aaya", state1.TrainerLicenseDate)
+const submit = async (event) => {
     event.preventDefault();
     try {
       
@@ -93,7 +115,9 @@ const NewsForm = () => {
       formData.append("ShortNameAr", state1.ShortNameAr);
       formData.append("DetailEn", state1.DetailEn);
       formData.append("DetailAr", state1.DetailAr);
-      formData.append("TrainerLicenseDate", TrainerLicenseDate);
+      formData.append("TrainerLicenseDate", TrainerLicenseDate );
+      formData.append("DOB", DOB);
+
 
 
       const response = await axios.put(`${window.env.API_URL}/updatetrainer/${trainerid._id}`, formData);
@@ -330,18 +354,18 @@ const NewsForm = () => {
                 
 
                 <div className="row mainrow">
-                  <div className="col-sm">
+              
                     <DatePicker
                       onChange={setTrainerLicenseDate}
                       value={TrainerLicenseDate}
-                      dayPlaceholder="  "
+                      dayPlaceholder=""
                       maxDate={today}
-                      monthPlaceholder="License Date"
+                      monthPlaceholder={state1.TrainerLicenseDate}
                       yearPlaceholder=""
+                  className="editDate"
                     />
 
-                    {/* <span className="spanForm"> |</span> */}
-                  </div>
+          
 
                   {/* <div className="col-sm" style={{ direction: "rtl" }}>
                     <input
@@ -350,6 +374,28 @@ const NewsForm = () => {
                     />
                   </div> */}
                 </div>
+                <div className="row mainrow">
+                <DatePicker
+                      onChange={setDOB}
+                       
+                      value={DOB}
+                      dayPlaceholder=""
+                      maxDate={today}
+                      monthPlaceholder={state1.DOB}
+                      yearPlaceholder=""
+                  className="editDate"
+                    />  
+          
+
+    
+
+            {/* <div className="col-sm" style={{ direction: "rtl" }}>
+              <input
+                
+                placeholder="تاريخ الولادة"
+              />
+            </div> */}
+          </div>
                 <div className="ButtonSection">
                 <div>
                 <input type='file' onChange={fileSelected} className="formInput"/>

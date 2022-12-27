@@ -884,3 +884,7 @@ svg.crossIcon {
   left: -77%;
   top: 15%;
 }
+.editDate::placeholder {
+  width: 79px !important;
+}
+

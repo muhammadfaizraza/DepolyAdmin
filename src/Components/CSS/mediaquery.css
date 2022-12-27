@@ -182,6 +182,7 @@
   }
   .myselecthorsedata > span:nth-child(3) {
     width: fit-content;
-  }
+  max-width: 100% !important;
+min-width: 210px !important;  
 }
- 
+}

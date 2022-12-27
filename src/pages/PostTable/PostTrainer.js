@@ -32,6 +32,7 @@ const TrainerForm = () => {
   const [ErrorRemarks, setErrorRemarks] = useState("");
   const [ErrorRemarksAr, setErrorRemarksAr] = useState("");
   const [ErrorDetail, setErrorDetail] = useState("");
+  const [ErrorDetailAr, setErrorDetailAr] = useState("");
   const [ErrorNationality, setErrorNationality] = useState("");
 
   // const dispatch = useDispatch();
@@ -243,7 +244,7 @@ const TrainerForm = () => {
   const Remarkar = JSON.parse(data9);
 
   const data10 = JSON.stringify(
-    TextInputValidation("ar", DetailAr, "Trainer Remarks Arabic")
+    TextInputValidation("ar", DetailAr, "Trainer Detail Arabic")
   );
   const detailar = JSON.parse(data10);
 
@@ -462,10 +463,11 @@ const TrainerForm = () => {
                       value={DetailAr}
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
+                      onBlur={() => setErrorDetailAr(detailar)}
                     >
-                      <Form.Control type="text" placeholder="تفاصيل" />
+                      <Form.Control type="text" />
                     </FloatingLabel>
-                    <span className={detailar.status ? 'successAr' : 'errorAr'}>{detailar.message}</span>
+                    <span className={ErrorDetailAr.status ? 'successAr' : 'errorAr'}>{ErrorDetailAr.message}</span>
                   </div>
                 </div>
 
@@ -571,10 +573,12 @@ const TrainerForm = () => {
                       </>
                     )}
                   </div>
+                  <div>
 
                   <button type="submit" className="SubmitButton" disabled={isLoading}>
                     Add Trainer
                   </button>
+                  </div>
                 </div>
               </form>
             </div>

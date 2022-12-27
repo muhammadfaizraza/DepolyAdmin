@@ -11,6 +11,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { useSelector } from "react-redux";
 
+
 const NewsForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
@@ -88,7 +89,7 @@ const NewsForm = () => {
       formData.append("TitleAr", state1.TitleAr);
       formData.append("ShortEn", state1.ShortEn);
       formData.append("ShortAr", state1.ShortAr);
-      formData.append("RegistrationDate", state1.RegistrationDate);
+      formData.append("RegistrationDate", RegistrationDate);
 
       formData.append("Ownerimage", state1.image);
       // formData.append("NationalityID", NationalityID.id);
@@ -226,20 +227,27 @@ const NewsForm = () => {
                 
                 <div className="row mainrow">
                   
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="Date of Birth"
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, RegistrationDate: e.target.value })
-                      }
-                    >
-                      <Form.Control type="date" placeholder="Details"  	value={state1.RegistrationDate}/>
-                    </FloatingLabel>
+    
+             
+            
+            <DatePicker
+              onChange={setRegistrationDate}
+              value={RegistrationDate}
+              // value={JockeyLicenseDate}
+              dayPlaceholder="  "
+            
+              monthPlaceholder={state1.RegistrationDate}
+              yearPlaceholder=""
+              
+            />
+
+         
+          
+       
+
+                      
                 
-                  
-                  </div>
+              
 
                 </div>
 {/* 
@@ -288,6 +296,7 @@ const NewsForm = () => {
                 <div className="ButtonSection">
                 <div>
                 <input type='file' onChange={fileSelected} className="formInput"/>
+           
                 <img src={preview}  className="PreviewImage" alt=""/>
 
                 </div>

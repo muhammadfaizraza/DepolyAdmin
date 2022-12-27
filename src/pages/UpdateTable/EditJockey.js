@@ -244,21 +244,21 @@ console.log(preview,'preview')
                   </div>
                   </div>
                   <div className="row mainrow">
-                  <div className="col-sm">
+            
                     <DatePicker
                       onChange={setJockeyLicenseDate}
                       value={JockeyLicenseDate}
                       // value={JockeyLicenseDate}
                       dayPlaceholder="  "
                     
-                      monthPlaceholder="License Date"
+                      monthPlaceholder={state1.JockeyLicenseDate}
                       yearPlaceholder=""
                       
                     />
 
                  
                   
-                  </div>
+               
 
                 </div>
                 <div className="row mainrow">
@@ -272,8 +272,8 @@ console.log(preview,'preview')
                       onChange={setDOB}
                       value={DOB}
                       dayPlaceholder="  "
-                    // maxDate={today}
-                      monthPlaceholder=" Date of Birth"
+                 
+                      monthPlaceholder={state1.DOB}
                       yearPlaceholder=""
                       
                     />

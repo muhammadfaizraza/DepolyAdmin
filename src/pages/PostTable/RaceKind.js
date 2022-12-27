@@ -191,6 +191,7 @@ const Racetypeform = () => {
               </div> */}
 
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
+                
                 <button Name="submit" className="SubmitButton" disabled={isLoading}>
                   Add RaceKind
                 </button>

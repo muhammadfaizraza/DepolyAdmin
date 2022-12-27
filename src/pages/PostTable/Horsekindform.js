@@ -70,10 +70,14 @@ const Horsekindform = () => {
       }
       setisLoading(false)
     } catch (error) {
-      const err = error.response.data.message;
+      const err = error.response.data.message[0];
+      const err1 = error.response.data.message[1];
+      const err2 = error.response.data.message[2];
+
+      console.log(err,'dadasd')
       swal({
         title: "Error!",
-        text: err,
+        text: err,err1,err2,
         icon: "error",
         button: "OK",
       });

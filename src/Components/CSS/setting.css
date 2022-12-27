@@ -26,3 +26,6 @@ a.page-item1 {
     background-color: #19469d ;
     color: #fff;
 }
+.forflex{
+    display: flex;
+}

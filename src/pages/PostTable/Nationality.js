@@ -79,9 +79,11 @@ const Nationality = () => {
   },[dispatch])
 
 
+
   const submit = async (event) => {
     event.preventDefault();
     setisLoading(true)
+    
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);

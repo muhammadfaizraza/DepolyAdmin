@@ -168,7 +168,7 @@ const Owner = () => {
                       {item.RegistrationDate}
                              </Moment></td>
                     
-                      <td>{item.OwnerDataNationalityData.NameEn}</td> 
+                      <td>{item.OwnerDataNationalityData === null ? <>N/A</> : item.OwnerDataNationalityData.NameEn}</td> 
                          {/* <td>
                           <img src={item.OwnerIDData === undefined ? <></> : item.OwnerIDData.OwnerSilkColor} alt='' />
                          </td> */}

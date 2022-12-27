@@ -272,7 +272,7 @@ console.log(preview,'preview')
                       onChange={setDOB}
                       value={DOB}
                       dayPlaceholder="  "
-                    
+                    // maxDate={today}
                       monthPlaceholder=" Date of Birth"
                       yearPlaceholder=""
                       

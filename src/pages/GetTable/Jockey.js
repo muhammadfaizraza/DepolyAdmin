@@ -15,6 +15,9 @@ import axios from "axios";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import Pagination from "./Pagination";
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
+
 
 
 const Statistic = () => {

@@ -14,7 +14,8 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import CompetitionPopup from "../../Components/Popup/CompetitionPopup";
 import Pagination from "./Pagination";
-
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
 
 const Statistic = () => {
   const [show, setShow] = useState(false);

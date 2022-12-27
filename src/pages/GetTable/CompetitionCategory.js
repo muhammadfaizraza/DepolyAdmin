@@ -13,6 +13,9 @@ import { Modal } from "react-bootstrap";
 import CategoryPopup from "../../Components/Popup/CategoryPopup";
 import { BsEyeFill } from "react-icons/bs";
 import Pagination from "./Pagination";
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
+
 
 const CategoryTable = () => {
   const [show, setShow] = useState(false);

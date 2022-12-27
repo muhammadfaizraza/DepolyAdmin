@@ -72,7 +72,6 @@ const SubscriberList = () => {
 
  
 
-  console.log(SearchData,'SearchData data1')
   const handleRole = async (Id) => {
     try {
       const res = await axios.put(`${window.env.API_URL}/ChangeStatus/${Id}`);
@@ -223,6 +222,7 @@ const SubscriberList = () => {
                         <th>Passport No</th>
                         <th>Email</th>
                         <th>Phone Number</th>
+                        <th>Country</th>
                         <th>createdAt</th>
                         <th>Passport Picture</th>
                         <th style={{ textAlign: "center" }}>Status</th>
@@ -238,6 +238,7 @@ const SubscriberList = () => {
                             <td>{item.PassportNo}</td>
                             <td>{item.Email}</td>
                             <td>{item.PhoneNumber}</td>
+                            <td>{item.NationalityID}</td>
                             <td>
                               {" "}
                               <Moment format="YYYY/MM/DD">

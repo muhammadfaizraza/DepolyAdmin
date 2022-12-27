@@ -37,11 +37,18 @@ const TrainerForm = () => {
   // const [ErrorDescAr, setErrorDescAr] = useState("");
   // const [ErrorCode, setErrorCode] = useState("");
   // const [ErrorPickCount, setErrorPickCount] = useState("");
-  // const [ErrorCategory, setErrorCategory] = useState("");
 
   const [ErrorDate, setErrorDate] = useState("");
+  const [ErrorEndDate, setErrorEndDate] = useState("");
   const [ErrorTriCount, setErrorTriCount] = useState("");
+  const [ErrorNoofRaces, setErrorNoofRaces] = useState("");
   const [ErrorCategory, setErrorCategory] = useState("");
+  const [ErrorCategorys, setErrorCategorys] = useState("");
+  
+  const [ErrorCode, setErrorCode] = useState("");
+  const [ErrorCodeAr, setErrorCodeAr] = useState("");
+
+
   const [isLoading, setisLoading] = useState(false);
 
   const history = useNavigate();
@@ -97,7 +104,7 @@ const TrainerForm = () => {
             <div style={{
               display:'flex'
             }}>
-              <img src={item.image} height="30px" width="30px" />{" "}
+              <img src={item.image} height="30px" width="30px" alt="" />
               <p style={{
                 padding:'5px'
               }}>{item.TitleEn}</p>
@@ -119,7 +126,7 @@ const TrainerForm = () => {
             <div style={{
               display:'flex'
             }}>
-              <img src={item.image} height="30px" width="30px" />{" "}
+              <img src={item.image} height="30px" width="30px"  alt=""/>
               <p style={{
                 padding:'5px'
               }}>{item.TitleAr}</p>
@@ -253,7 +260,7 @@ const TrainerForm = () => {
             }}
           >
             <div className="Headers"> 
-             <h4>Competition</h4>
+           Competition
             </div>
             <div className="form">
               <form onSubmit={submit}>
@@ -271,7 +278,7 @@ const TrainerForm = () => {
                       <Form.Control type="text" placeholder="Name" />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
-                    <span className="error">{Error.message}</span>
+                    <span className={Error.status ? "success" :"error"}>{Error.message}</span>
                   </div>
                   <div className="col-sm">
                     <FloatingLabel
@@ -286,7 +293,7 @@ const TrainerForm = () => {
                     >
                       <Form.Control type="text" placeholder="اسم" />
                     </FloatingLabel>
-                    <span className="errorAr">{ErrorAr.message}</span>
+                    <span className={ErrorAr.status ? "successAr" :"errorAr"}>{ErrorAr.message}</span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -298,12 +305,15 @@ const TrainerForm = () => {
                       onChange={(e) => setCodeEn(e.target.value)}
                       name="Name"
                       value={CodeEn}
-                      onBlur={() => setError(obj)}
-                    >
+                      onBlur={(e) =>
+                        CodeEn === ""
+                          ? setErrorCode("Competition Code is required")
+                          : setErrorCode("Competition Code is Validated ")
+                      }   >
                       <Form.Control type="text" placeholder="Name" />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
-                    <span className="error">{Error.message}</span>
+                    <span className={CodeEn === "" ? "error" : "success"}>{ErrorCode}</span>
                   </div>
                   <div className="col-sm">
                     <FloatingLabel
@@ -314,11 +324,14 @@ const TrainerForm = () => {
                       name="Name"
                       value={CodeAr}
                       style={{ direction: "rtl" }}
-                      onBlur={() => setErrorAr(objAr)}
-                    >
+                      onBlur={(e) =>
+                        CodeAr === ""
+                          ? setErrorCodeAr("Competition Code is required")
+                          : setErrorCodeAr("Competition Code is Validated ")
+                      }   > 
                       <Form.Control type="text" placeholder="اسم" />
                     </FloatingLabel>
-                    <span className="errorAr">{ErrorAr.message}</span>
+                    <span className={CodeAr === "" ? "errorAr" : "successAr"}>{ErrorCodeAr}</span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -333,11 +346,11 @@ const TrainerForm = () => {
                       onBlur={(e) =>
                         StartDate === ""
                           ? setErrorDate("Competition Start Date is required")
-                          : setErrorDate(" ")
+                          : setErrorDate("Competition Start Date is Validated ")
                       }
                     />
                     <span className="spanForm">|</span>
-                    <span className="error">{ErrorDate}</span>
+                    <span className={StartDate === "" ? "error" : "success"}>{ErrorDate}</span>
                   </div>
 
                   <div className="col-sm" style={{ direction: "rtl" }}>
@@ -362,13 +375,13 @@ const TrainerForm = () => {
                       monthPlaceholder="End Date "
                       yearPlaceholder=""
                       onBlur={(e) =>
-                        StartDate === ""
-                          ? setErrorDate("Competition Start Date is required")
-                          : setErrorDate(" ")
+                        EndDate === ""
+                          ? setErrorEndDate("Competition End Date is required")
+                          : setErrorEndDate("Competition End Date is Validated ")
                       }
                     />
                     <span className="spanForm">|</span>
-                    <span className="error">{ErrorDate}</span>
+                    <span className={EndDate === "" ? "error" : "success"}>{ErrorEndDate}</span>
                   </div>
 
                   <div className="col-sm" style={{ direction: "rtl" }}>
@@ -395,7 +408,7 @@ const TrainerForm = () => {
                       onBlur={() =>
                         CompetitionCategory === ""
                           ? setErrorCategory("Competition is required")
-                          : setErrorCategory("")
+                          : setErrorCategory("Competition is Validated")
                       }
                     />
                     <span className="spanForm">
@@ -417,7 +430,7 @@ const TrainerForm = () => {
                       </OverlayTrigger>
                       |
                     </span>
-                    <span className="error">{ErrorCategory}</span>
+                    <span className={CompetitionCategory === "" ? "error" :"success"}>{ErrorCategory}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -441,7 +454,7 @@ const TrainerForm = () => {
                       options={SponsorForTheRace}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => Sponsor === "" ? setErrorSponsor("Sponsor is required ") : setErrorSponsor("")}
+                      onBlur={() => Sponsor === "" ? setErrorSponsor("Sponsor is required ") : setErrorSponsor("Sponsor is Validated")}
 
                     />
                     <span className="spanForm">
@@ -463,6 +476,7 @@ const TrainerForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
+                    <span className={Sponsor === "" ? "error" :"success"}>{ErrorSponsor}</span>
                   </div>
 
                   <div className="col-sm">
@@ -486,10 +500,14 @@ const TrainerForm = () => {
                       options={CategoryType}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => Type === "" ? setErrorCategorys("Category is required ") : setErrorCategorys("Category is Validated")}
+
                     />
                     <span className="spanForm">
                       |
                     </span>
+                    <span className={Type === "" ? "error" :"success"}>{ErrorCategorys}</span>
+
                   </div>
                   <div className="col-sm">
                     <Select
@@ -520,8 +538,8 @@ const TrainerForm = () => {
                       max="12"
                       onBlur={(e) =>
                         NumberOfRace === ""
-                          ? setErrorTriCount("TriCount  Number is required ")
-                          : setErrorTriCount(" ")
+                          ? setErrorTriCount("Number Of Position is required ")
+                          : setErrorTriCount("Number Of Position is Validated ")
                       }
                     >
                       <Form.Control
@@ -533,6 +551,7 @@ const TrainerForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className={NumberOfRace === "" ? "error" :"success"}>{ErrorTriCount}</span>
                   </div>
                   
                   <div className="col-sm">
@@ -560,8 +579,8 @@ const TrainerForm = () => {
                       value={NumberOfRace}
                       onBlur={(e) =>
                         NumberOfRace === ""
-                          ? setErrorTriCount("TriCount  Number is required ")
-                          : setErrorTriCount(" ")
+                          ? setErrorNoofRaces("Number Of Races is required ")
+                          : setErrorNoofRaces("Number Of Races is Validated ")
                       }
                     >
                       <Form.Control
@@ -572,6 +591,8 @@ const TrainerForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className={NumberOfRace === "" ? "error" :"success"}>{ErrorNoofRaces}</span>
+
                   </div>
                   
                   <div className="col-sm">

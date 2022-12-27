@@ -83,7 +83,17 @@ const Nationality = () => {
   const submit = async (event) => {
     event.preventDefault();
     setisLoading(true)
-    
+    if(image === undefined){
+      swal({
+        title: "Error!",
+        text: "Please Upload image",
+        icon: "error",
+        button: "OK",
+      });
+      setisLoading(false)
+
+    }
+   else{
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
@@ -125,6 +135,7 @@ const Nationality = () => {
       });
       setisLoading(false)
     }
+   }
   };
 
   useEffect(() => {

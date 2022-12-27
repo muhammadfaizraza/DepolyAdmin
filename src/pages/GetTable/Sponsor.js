@@ -13,12 +13,12 @@ import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BsEyeFill } from "react-icons/bs";
 import Pagination from "./Pagination";
-import {Form} from "react-bootstrap"
+
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
 
 const News = () => {
-  const [Value, setValue] = useState(false);
+
   const [ShowCalender, setShowCalender] = useState(false)
 
   //For Modal

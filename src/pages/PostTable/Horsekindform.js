@@ -91,12 +91,12 @@ const Horsekindform = () => {
   );
   const objAr = JSON.parse(data2);
   const data3 = JSON.stringify(
-    TextInputValidation("en", shortName, "Horse Kind Short Name English")
+    TextInputValidation("en", shortName, "Horse Kind Abbreviation English")
   );
   const shotName = JSON.parse(data3);
 
   const data4 = JSON.stringify(
-    TextInputValidation("ar", shortNameAr, "Horse Kind Short Name Arabic")
+    TextInputValidation("ar", shortNameAr, "Horse Kind Abbreviation Arabic")
   );
   const shotNameAr = JSON.parse(data4);
 

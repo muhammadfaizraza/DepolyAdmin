@@ -10,7 +10,7 @@ import { fetchcolor } from "../../redux/getReducer/getColor";
 import { fetchbreeder } from "../../redux/getReducer/getBreeder";
 import { fetchnationality } from "../../redux/getReducer/getNationality";
 import { fetchgender } from "../../redux/getReducer/getGenderSlice";
-import { fetchHorseKind, setHorseKind } from "../../redux/getReducer/getHorseKind";
+import { fetchHorseKind } from "../../redux/getReducer/getHorseKind";
 import DatePicker from "react-date-picker";
 import swal from "sweetalert";
 import axios from "axios";
@@ -376,7 +376,7 @@ const HorseForm = () => {
     // Modal functionalities End Here
 
   const [ActiveOwner, setActiveOwner] = useState("");
-  const [Age, setAge] = useState("");
+ 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
   const [Owner, setOwner] = useState("");

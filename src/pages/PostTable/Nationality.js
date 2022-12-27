@@ -32,11 +32,7 @@ const Nationality = () => {
   const [ErrorAbbrevAr, setErrorAbbrevAr] = useState("");
   const [ErrorAltNameEn, setErrorAltNameEn] = useState("");
   const [ErrorAltNameAr, setErrorAltNameAr] = useState("");
-  const [ErrorLabel, setErrorLabel] = useState("");
-  const [ErrorLabelAr, setErrorLabelAr] = useState("");
-  const [ErrorOffset, setErrorOffset] = useState("");
-  const [ErrorValueEn, setErrorValueEn] = useState("");
-  const [ErrorValueAr, setErrorValueAr] = useState("");
+ 
   const [isLoading, setisLoading] = useState(false);
 
   const [NameEn, setNameEn] = useState("");
@@ -171,23 +167,8 @@ const Nationality = () => {
   );
   const altName = JSON.parse(data6);
 
-  const data8 = JSON.stringify(
-    TextInputValidation("en", LabelEn, "Nationality Label ")
-  );
-  const label = JSON.parse(data8);
-
-  const data9 = JSON.stringify(
-    TextInputValidation("en", ValueEn, "Nationality Value English")
-  );
-  const value = JSON.parse(data9);
-  const data10 = JSON.stringify(
-    TextInputValidation("ar", ValueAr, "Nationality Value Arabic")
-  );
-  const valuear = JSON.parse(data10);
-  const data11 = JSON.stringify(
-    TextInputValidation("ar", LabelAr, "Nationality Label Arabic")
-  );
-  const Labelar = JSON.parse(data11);
+ 
+ 
   const data12 = JSON.stringify(
     TextInputValidation("ar", AltNameAr, "Nationality Alternative Name Arabic")
   );

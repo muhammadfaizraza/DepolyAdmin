@@ -879,3 +879,8 @@ input[type='checkbox']{
   position: relative;
   width: 48%;
 }
+svg.crossIcon {
+  position: relative;
+  left: -77%;
+  top: 15%;
+}

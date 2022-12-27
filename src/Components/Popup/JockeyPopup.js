@@ -153,7 +153,9 @@ console.log(data)
              className="mb-3"
            
            >
-             <Form.Control type="text" placeholder="Description" value={data.data.JockeyNationalityData.NameEn} readOnly/>
+             <Form.Control type="text" placeholder="Description" 
+             value={data.data.JockeyNationalityData&& data.data.JockeyNationalityData.NameEn} 
+             readOnly/>
            </FloatingLabel>
         
   

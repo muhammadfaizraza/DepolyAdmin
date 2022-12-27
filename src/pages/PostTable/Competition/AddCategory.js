@@ -87,7 +87,7 @@ const Competition = () => {
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
-                  <span className="error">{Error.message}</span>
+                  <span className={Error.status ?  "success" :  "error"}>{Error.message}</span>
                 </div>
 
                 <div className="col-sm">
@@ -103,7 +103,7 @@ const Competition = () => {
                   >
                     <Form.Control type="text" placeholder="اسم" />
                   </FloatingLabel>
-                  <span className="errorAr">{ErrorAr.message}</span>
+                  <span className={ErrorAr.status ?  "successAr" :  "errorAr"}>{ErrorAr.message}</span>
                 </div>
               </div>
 

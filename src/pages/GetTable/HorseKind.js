@@ -142,10 +142,11 @@ const HorseKind = () => {
                       <tr>
                         <th>Name</th>
                         <th>Name Arabic </th>
-                        {/* <th>Abrevation</th>
-                        <th>Abrevation Arabic </th> */}
-                        <th>Short Name</th>
-                        <th>Short Name Arabic</th>
+                        <th>Abrevation</th>
+                        <th>Abrevation Arabic </th>
+                        
+                        {/* <th>Short Name</th>
+                        <th>Short Name Arabic</th> */}
                         <th>Action</th>
                       </tr>
                     </thead>

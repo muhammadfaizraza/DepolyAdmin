@@ -197,6 +197,7 @@ const BreederTable = () => {
           <Pagination
           postsPerPage={postsPerPage}
           totalPosts={breeder.length}
+          currentPage={currentPage}
           paginate={paginate}
         />
         </div>

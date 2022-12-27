@@ -7,3 +7,22 @@
     width: 120px;
     margin-left: -10px;
 }
+
+a.page-item {
+    text-decoration: none;
+    list-style: none;
+    border: 1px solid rgb(156, 152, 152);
+    cursor: pointer;
+    padding: 8px;
+    color: rgb(69, 67, 67);
+}
+
+a.page-item1 {
+    text-decoration: none;
+    list-style: none;
+    border: 1px solid rgb(156, 152, 152);
+    cursor: pointer;
+    padding: 8px;
+    background-color: #19469d ;
+    color: #fff;
+}

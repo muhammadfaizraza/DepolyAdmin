@@ -447,6 +447,8 @@ const HorseForm = () => {
         `${window.env.API_URL}createhorse?keyword=&page=`,
         formData
       );
+      setisLoading(false)
+
       swal({
         title: "Success!",
         text: "Data has been added Successfully",
@@ -454,7 +456,6 @@ const HorseForm = () => {
         button: "OK",
       });
       history("/horse");
-      setisLoading(false)
     } catch (error) {
       const err = error.response.data.message;
       swal({

@@ -19,6 +19,7 @@ import { CSVLink } from "react-csv";
 
 
 const News = () => {
+  const [ShowCalender, setShowCalender] = useState(false)
 
   const [Value , setValue] = useState(false)
   //For Modal
@@ -133,6 +134,11 @@ const News = () => {
                 <Link to="/newsform">
                   <button>Add News</button>
                 </Link>
+                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+
+                <CSVLink  data={allnews}  separator={";"} filename={"MKS News.csv"} className='csvclass'>
+                        Export CSV
+                </CSVLink>
               </div>
             </div>
             <>

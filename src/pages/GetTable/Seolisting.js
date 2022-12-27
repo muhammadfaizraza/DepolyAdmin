@@ -13,8 +13,10 @@ import { Modal } from "react-bootstrap";
 import { BsEyeFill } from "react-icons/bs";
 import SeoPopup from "../../Components/Popup/SeoPopup";
 import Pagination from "./Pagination";
-
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
 const SeoTable = () => {
+  const [ShowCalender, setShowCalender] = useState(false)
 
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();

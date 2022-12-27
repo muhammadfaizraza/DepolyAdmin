@@ -20,6 +20,7 @@ import { CSVLink } from "react-csv";
 
 const HorseKind = () => {
 
+  const [ShowCalender, setShowCalender] = useState(false)
 
 
   //for Modal
@@ -135,6 +136,11 @@ const HorseKind = () => {
                 <Link to="/horsekindform">
                   <button>Add Horse Kind</button>
                 </Link>
+                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+
+                <CSVLink  data={HorseKind}  separator={";"} filename={"MKS Horse Kind.csv"} className='csvclass'>
+                        Export CSV
+                </CSVLink>
               </div>
             </div>
             <>

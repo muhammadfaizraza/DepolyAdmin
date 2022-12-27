@@ -17,6 +17,8 @@ import { BiEdit } from "react-icons/bi";
 import RaceDetailPopup from "../../Components/Popup/RaceDetailPopup";
 import { BsEyeFill } from "react-icons/bs";
 import Pagination from './Pagination'
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
 
 const Prize = (data) => {
   return (
@@ -48,6 +50,8 @@ const Prize = (data) => {
 };
 
 const Races = () => {
+  const [ShowCalender, setShowCalender] = useState(false)
+
   const history = useNavigate();
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();

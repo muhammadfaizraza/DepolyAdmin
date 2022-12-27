@@ -16,8 +16,12 @@ import axios from "axios";
 import { BiEdit } from "react-icons/bi";
 import { BsEyeFill } from "react-icons/bs";
 import Pagination from "./Pagination";
-
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
 const Trainer = () => {
+
+  const [ShowCalender, setShowCalender] = useState(false)
+
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);

@@ -21,6 +21,7 @@ import { CSVLink } from "react-csv";
 
 
 const GroundTypeTable = () => {
+  const [ShowCalender, setShowCalender] = useState(false)
 
   //for Modal 
   const [show, setShow] = useState(false);
@@ -131,6 +132,11 @@ const GroundTypeTable = () => {
                 <Link to="/ground">
                   <button>Add Ground Type</button>
                 </Link>
+                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+
+                <CSVLink  data={groundtype}  separator={";"} filename={"MKS Ground Type.csv"} className='csvclass'>
+                        Export CSV
+                </CSVLink>
               </div>
             </div>
             <>

@@ -20,6 +20,8 @@ import { CSVLink } from "react-csv";
 
 
 const CurrencyTable = () => {
+  const [ShowCalender, setShowCalender] = useState(false)
+
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -123,6 +125,10 @@ const CurrencyTable = () => {
                 <Link to="/currency">
                   <button>Add Currency</button>
                 </Link>
+                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+                  <CSVLink  data={currency}  separator={";"} filename={"MKS Currency.csv"} className='csvclass'>
+                        Export CSV
+                    </CSVLink>
               </div>
             </div>
             <>

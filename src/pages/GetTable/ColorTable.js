@@ -19,7 +19,8 @@ import { CSVLink } from "react-csv";
 
 
 const ColorTable = () => {
-  
+  const [ShowCalender, setShowCalender] = useState(false)
+
   const [modaldata, setmodaldata] = useState();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -133,6 +134,11 @@ const ColorTable = () => {
                 <Link to="/color">
                   <button>Add Color</button>
                 </Link>
+                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+
+                <CSVLink  data={Color}  separator={";"} filename={"MKS Color.csv"} className='csvclass'>
+                        Export CSV
+                </CSVLink>
               </div>
             </div>
             <>

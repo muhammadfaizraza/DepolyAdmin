@@ -18,6 +18,7 @@ import { CSVLink } from "react-csv";
 
 
 const GetMeetingType = () => {
+  const [ShowCalender, setShowCalender] = useState(false)
 
 //for Modal
 const [show, setShow] = useState(false);
@@ -120,6 +121,11 @@ const handleShow = async (data) => {
                 <Link to="/meeting">
                   <button>Add meeting</button>
                 </Link>
+                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+
+                <CSVLink  data={meeting}  separator={";"} filename={"MKS Meeting.csv"} className='csvclass'>
+                        Export CSV
+                </CSVLink>
               </div>
             </div>
             <>

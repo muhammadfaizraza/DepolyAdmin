@@ -14,9 +14,12 @@ import VerdictPopup from "../../Components/Popup/VerdictPopup";
 import { BsEyeFill } from "react-icons/bs";
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
-import {   } from "react-csv";
+import { CSVLink } from "react-csv";
 
 const VerdictTable = () => {
+
+  const [ShowCalender, setShowCalender] = useState(false)
+
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);

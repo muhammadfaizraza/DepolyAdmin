@@ -22,6 +22,7 @@ import { CSVLink } from "react-csv";
 const Horse = () => {
 //for errors
 
+const [ShowCalender, setShowCalender] = useState(false)
 
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -126,6 +127,11 @@ const Horse = () => {
                 <Link to="/horseform">
                   <button>Add Horse</button>
                 </Link>
+                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+
+                <CSVLink  data={horse}  separator={";"} filename={"MKS Horses.csv"} className='csvclass'>
+                        Export CSV
+                </CSVLink>
               </div>
             </div>
             <>

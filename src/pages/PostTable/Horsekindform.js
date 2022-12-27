@@ -150,7 +150,7 @@ const Horsekindform = () => {
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
-                    label="Short Name"
+                    label="Abbreviation"
                     className="mb-3"
                     onChange={(e) => setshortName(e.target.value)}
                     value={shortName}
@@ -165,7 +165,7 @@ const Horsekindform = () => {
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
-                    label="اسم قصير"
+                    label=" اختصار                    "
                     className="mb-3 floatingInputAr"
                     onChange={(e) => setshortNameAr(e.target.value)}
                     value={shortNameAr}

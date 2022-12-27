@@ -15,10 +15,13 @@ import swal from "sweetalert";
 import { BsEyeFill } from "react-icons/bs";
 import Pagination from "./Pagination";
 import Form from 'react-bootstrap/Form';
-
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
 const Ads = () => {
 
   const [Value, setValue] = useState(false);
+  const [ShowCalender, setShowCalender] = useState(false)
+
   //for Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -132,7 +135,28 @@ const Ads = () => {
                   <Link to="/adsform">
                     <button>Create Ad</button>
                   </Link>
+                  <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+                  <CSVLink  data={allads}  separator={";"} filename={"MKS Ads.csv"} className='csvclass'>
+                        Export CSV
+                    </CSVLink>
                 </div>
+              </div>
+              <div>
+              
+              {
+                ShowCalender ?
+                <>
+                <div className="userfilter">
+                
+                <div className="filtertextform">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </>:<></>
+              }
               </div>
               <div className="div_maintb">
                 <ScrollContainer className="scroll-container">

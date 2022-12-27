@@ -124,7 +124,7 @@ const SubscriberList = () => {
                   }}
                 >
                   <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                  <CSVLink data={newsletter} separator={";"} filename={"MKS User.csv"} className='csvclass'>
+                  <CSVLink data={newsletter} separator={";"} filename={"MKS Subscriber.csv"} className='csvclass'>
                         Export CSV
                     </CSVLink>
                 </h6>

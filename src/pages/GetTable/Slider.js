@@ -16,10 +16,13 @@ import axios from "axios";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Pagination from "./Pagination";
 import {Form} from "react-bootstrap"
-
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
 
 const Slider = () => {
 const [Value , setValue] = useState(false)
+const [ShowCalender, setShowCalender] = useState(false)
+
   //For Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -146,8 +149,29 @@ const [Value , setValue] = useState(false)
                 <Link to="/sliderform">
                   <button>Add Slider</button>
                 </Link>
+                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+                  <CSVLink  data={slider}  separator={";"} filename={"MKS Slider.csv"} className='csvclass'>
+                        Export CSV
+                    </CSVLink>
               </div>
             </div>
+            <div>
+              
+              {
+                ShowCalender ?
+                <>
+                <div className="userfilter">
+                
+                <div className="filtertextform">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </>:<></>
+              }
+              </div>
             <div className="div_maintb">
               <ScrollContainer className="scroll-container">
                 <table striped bordered hover>

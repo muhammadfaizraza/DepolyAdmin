@@ -128,6 +128,10 @@ const [ShowCalender, setShowCalender] = useState(false)
                 <Link to="/RaceKindform">
                   <button>Add Race Kind</button>
                 </Link>
+                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+                  <CSVLink  data={raceKinds}  separator={";"} filename={"MKS Race Kind.csv"} className='csvclass'>
+                        Export CSV
+                    </CSVLink>
               </div>
             </div>
             <>

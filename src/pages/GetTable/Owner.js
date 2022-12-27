@@ -136,6 +136,10 @@ const Owner = () => {
                  <Link to="/ownerform">
                    <button>Add Owner</button>
                  </Link>
+                 <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+                  <CSVLink  data={owner}  separator={";"} filename={"MKS Owner.csv"} className='csvclass'>
+                        Export CSV
+                    </CSVLink>
                </div>
              </div>
            <>

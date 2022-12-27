@@ -158,6 +158,10 @@ const Races = () => {
                 <Link to="/raceform">
                   <button>Add Race</button>
                 </Link>
+                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+                  <CSVLink  data={tobePublishRace}  separator={";"} filename={"MKS Race.csv"} className='csvclass'>
+                        Export CSV
+                    </CSVLink>
               </div>
             </div>
 

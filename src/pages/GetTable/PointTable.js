@@ -113,6 +113,10 @@ const ColorTable = () => {
                 <Link to="/addcompetitionPoint">
                   <button>Add Point Table</button>
                 </Link>
+                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+                <CSVLink  data={pointTable}  separator={";"} filename={"MKS Point Table.csv"} className='csvclass'>
+                        Export CSV
+                </CSVLink>
               </div>
             </div>
             <>

@@ -422,7 +422,7 @@ const NewsForm = () => {
                       onChange={setJockeyLicenseDate}
                       value={JockeyLicenseDate}
                       dayPlaceholder="  "
-                      maxDate={today}
+                      // maxDate={today}
                       monthPlaceholder="تاريخ التسجيل"
                       yearPlaceholder=""
                       style={{ direction: "rtl" }}

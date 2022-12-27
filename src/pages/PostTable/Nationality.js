@@ -115,10 +115,15 @@ const Nationality = () => {
       });
       setisLoading(false)
     } catch (error) {
-      const err = error.response.data.message;
+      const err0 = error.response.data.message;
+      console.log(err0,)
+      const err = error.response.data.message[0];
+      const err1 = error.response.data.message[1];
+      const err2 = error.response.data.message[2];
+      console.log(err)
       swal({
         title: "Error!",
-        text: err,
+        text: err,err1,err2, err0,
         icon: "error",
         button: "OK",
       });

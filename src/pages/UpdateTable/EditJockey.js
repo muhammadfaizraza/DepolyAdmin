@@ -16,7 +16,11 @@ const NewsForm = () => {
 
   const { jockeyid } = state;
 
-  console.log(jockeyid)
+  console.log(jockeyid);
+
+  const [JockeyLicenseDate,setJockeyLicenseDate] = useState('');
+  const [DOB,setDOB] = useState('')
+
   const [state1, setState] = useState({
 		NameEn: '',
     NameAr:'',
@@ -92,8 +96,8 @@ console.log(preview,'preview')
       formData.append("MaximumJockeyWeight", state1.MaximumJockeyWeight);
       formData.append("MiniumumJockeyWeight", state1.MiniumumJockeyWeight);
       formData.append("Rating", state1.Rating);
-      formData.append("JockeyLicenseDate", state1.JockeyLicenseDate);
-      formData.append("DOB", state1.DOB);
+      formData.append("JockeyLicenseDate", JockeyLicenseDate);
+      formData.append("DOB", DOB);
      
 
       const response = await axios.put(`${window.env.API_URL}/updateJockey/${jockeyid._id}`, formData);
@@ -242,11 +246,9 @@ console.log(preview,'preview')
                   <div className="row mainrow">
                   <div className="col-sm">
                     <DatePicker
-                       onChange={(e) =>
-                        setState({ ...state1, JockeyLicenseDate: e.target.value })
-                      }
-                      defaultValue={state1.JockeyLicenseDate}
-                      value={state1.JockeyLicenseDate}
+                      onChange={setJockeyLicenseDate}
+                      value={JockeyLicenseDate}
+                      // value={JockeyLicenseDate}
                       dayPlaceholder="  "
                     
                       monthPlaceholder="License Date"
@@ -262,14 +264,16 @@ console.log(preview,'preview')
                 <div className="row mainrow">
                   <div className="col-sm">
                     <DatePicker
-                       onChange={(e) =>
-                        setState({ ...state1, DOB: e.target.value })
-                      }
-                      defaultValue={state1.DOB}
-                      value={state1.DOB}
+                      //  onChange={(e) =>
+                      //   setState({ ...state1, DOB: e.target.value })
+                      // }
+                      // defaultValue={state1.DOB}
+                      // value={state1.DOB}
+                      onChange={setDOB}
+                      value={DOB}
                       dayPlaceholder="  "
                     
-                      monthPlaceholder="License Date"
+                      monthPlaceholder=" Date of Birth"
                       yearPlaceholder=""
                       
                     />

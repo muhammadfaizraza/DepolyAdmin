@@ -332,7 +332,7 @@ const TrainerForm = () => {
                       onChange={setTrainerLicenseDate}
                       value={TrainerLicenseDate}
                       dayPlaceholder="  "
-                      maxDate={today}
+                      // maxDate={today}
                       monthPlaceholder="License Date"
                       yearPlaceholder=""
                       onBlur={() =>
@@ -353,7 +353,7 @@ const TrainerForm = () => {
                       onChange={setTrainerLicenseDate}
                       value={TrainerLicenseDate}
                       dayPlaceholder="  "
-                      maxDate={today}
+                      // maxDate={today}
                       monthPlaceholder="تاريخ التسجيل"
                       yearPlaceholder=""
                       style={{ direction: "rtl" }}

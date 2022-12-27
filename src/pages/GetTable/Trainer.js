@@ -153,6 +153,8 @@ const Trainer = () => {
 
                         <th>Remarks</th>
                         <th>Detail</th>
+                        <th>Nationality</th>
+
                         <th>Image</th>
 
                         <th>Action</th>
@@ -213,6 +215,8 @@ const Trainer = () => {
                               >
                                 {item.DetailEn}
                               </td>
+                              <td>{item.TrainerNationalityData === null ? <>N/A</> : item.TrainerNationalityData.NameEn}</td>
+
                               <td>
                                 <img src={item.image} alt="" />
                               </td>

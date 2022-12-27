@@ -126,10 +126,28 @@ const News = () => {
                   <button>Add Sponsor</button>
                 </Link>
                 <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                  {/* <CSVLink separator={";"} filename={"MKS User.csv"} className='csvclass'>
+                <CSVLink  data={sponsor}  separator={";"} filename={"MKS sponsor.csv"} className='csvclass'>
                         Export CSV
-                    </CSVLink> */}
+                </CSVLink>
               </div>
+            </div>
+            <div>
+              
+              {
+                ShowCalender ?
+                <span className="transitionclass">
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </span>:<></>
+              }
             </div>
             <div className="div_maintb">
               <ScrollContainer className="scroll-container">

@@ -13,8 +13,10 @@ import { Modal } from "react-bootstrap";
 import { BsEyeFill } from "react-icons/bs";
 import BreederPopup from "../../Components/Popup/BreederPopup";
 import Pagination from "./Pagination";
-
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
 const BreederTable = () => {
+  const [ShowCalender, setShowCalender] = useState(false)
 
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -128,8 +130,31 @@ const BreederTable = () => {
                 <Link to="/breeder">
                   <button>Add Breeder</button>
                 </Link>
+                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+                <CSVLink  data={breeder}  separator={";"} filename={"MKS Breeder.csv"} className='csvclass'>
+                        Export CSV
+                </CSVLink>
               </div>
             </div>
+            {/* <div>
+              
+              {
+                ShowCalender ?
+                <span className="transitionclass">
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                 <input type='text' class="form-control" placeholder="Enter Name"/>
+                 <input type='text' class="form-control" placeholder="Enter Short Code"/>
+
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </span>:<></>
+              }
+            </div> */}
             <>
               <div className="div_maintb">
                 <ScrollContainer>

@@ -203,6 +203,8 @@ const News = () => {
           postsPerPage={postsPerPage}
           totalPosts={allnews.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

@@ -205,6 +205,8 @@ const NationalityTable = () => {
           postsPerPage={postsPerPage}
           totalPosts={nationality.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

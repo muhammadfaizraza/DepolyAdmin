@@ -176,6 +176,8 @@ const handleShow = async (data) => {
           postsPerPage={postsPerPage}
           totalPosts={meeting.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

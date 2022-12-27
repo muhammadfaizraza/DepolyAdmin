@@ -195,6 +195,8 @@ const HorseKind = () => {
             postsPerPage={postsPerPage}
             totalPosts={HorseKind.length}
             paginate={paginate}
+            currentPage={currentPage}
+
           />
         </div>
       </div>

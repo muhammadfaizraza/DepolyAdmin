@@ -144,7 +144,7 @@ const Ads = () => {
                         <th>Description </th>
                         <th>Description Arabic</th>
                         <th>Image</th>
-                        <th>Active</th>
+                        {/* <th>Active</th> */}
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -160,7 +160,7 @@ const Ads = () => {
                               <td>
                                 <img src={item.image} alt="" />
                               </td>
-                           <td>
+                                {/* <td>
                                 <Form.Check 
                                   type="switch"
                                   id="custom-switch"
@@ -168,7 +168,7 @@ const Ads = () => {
                                   // label="Check this switch"
                                   value={Value}
                                 />
-                                </td>
+                                </td> */}
                               <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
@@ -202,6 +202,7 @@ const Ads = () => {
             postsPerPage={postsPerPage}
             totalPosts={allads.length}
             paginate={paginate}
+            currentPosts={currentPosts}
           />
         </div>
       </div>

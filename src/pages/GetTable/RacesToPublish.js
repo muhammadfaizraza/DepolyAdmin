@@ -330,6 +330,8 @@ const Races = () => {
           postsPerPage={postsPerPage}
           totalPosts={tobePublishRace.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

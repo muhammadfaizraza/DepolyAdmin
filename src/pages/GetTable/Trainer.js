@@ -250,6 +250,8 @@ const Trainer = () => {
           postsPerPage={postsPerPage}
           totalPosts={trainer.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

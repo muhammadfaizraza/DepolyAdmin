@@ -188,6 +188,8 @@ const SeoTable = () => {
           postsPerPage={postsPerPage}
           totalPosts={Seo.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

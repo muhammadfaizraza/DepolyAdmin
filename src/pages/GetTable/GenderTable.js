@@ -181,6 +181,8 @@ const GenderTable = () => {
           postsPerPage={postsPerPage}
           totalPosts={gender.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

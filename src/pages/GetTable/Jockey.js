@@ -205,6 +205,8 @@ const Statistic = () => {
           postsPerPage={postsPerPage}
           totalPosts={jockey.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

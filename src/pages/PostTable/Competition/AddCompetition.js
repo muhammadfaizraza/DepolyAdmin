@@ -94,8 +94,13 @@ const TrainerForm = () => {
           id: item._id,
           value: item.image,
           label: (
-            <div>
+            <div style={{
+              display:'flex'
+            }}>
               <img src={item.image} height="30px" width="30px" />{" "}
+              <p style={{
+                padding:'5px'
+              }}>{item.TitleEn}</p>
             </div>
           ),
         };
@@ -109,8 +114,17 @@ const TrainerForm = () => {
       sponsor.map(function (item) {
         return {
           id: item._id,
-          value: item.TitleAr,
-          label: item.TitleAr,
+          value: item.image,
+          label: (
+            <div style={{
+              display:'flex'
+            }}>
+              <img src={item.image} height="30px" width="30px" />{" "}
+              <p style={{
+                padding:'5px'
+              }}>{item.TitleAr}</p>
+            </div>
+          ),
         };
       })
     );
@@ -456,7 +470,7 @@ const TrainerForm = () => {
                       placeholder={<div>نوع السباق</div>}
                       defaultValue={Sponsor}
                       onChange={setSponsor}
-                      options={SponsorForTheRace}
+                      options={SponsorForTheRaceAr}
                       className="selectdir"
                       isClearable={true}
                       isSearchable={true}

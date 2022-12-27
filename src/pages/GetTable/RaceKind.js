@@ -181,6 +181,8 @@ const handleShow = async (data) => {
           postsPerPage={postsPerPage}
           totalPosts={raceKinds.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

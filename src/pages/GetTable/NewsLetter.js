@@ -157,6 +157,8 @@ const NewsLetter = () => {
         postsPerPage={postsPerPage}
         totalPosts={Color.length}
         paginate={paginate}
+        currentPage={currentPage}
+
       />
       </div>
     </div>

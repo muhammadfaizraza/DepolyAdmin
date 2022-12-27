@@ -14,9 +14,12 @@ import axios from "axios";
 import { BsEyeFill } from "react-icons/bs";
 import Pagination from "./Pagination";
 import {Form} from "react-bootstrap"
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
 
 const News = () => {
   const [Value, setValue] = useState(false);
+  const [ShowCalender, setShowCalender] = useState(false)
 
   //For Modal
   const [show, setShow] = useState(false);
@@ -122,6 +125,10 @@ const News = () => {
                 <Link to="/sponsorform">
                   <button>Add Sponsor</button>
                 </Link>
+                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+                  {/* <CSVLink separator={";"} filename={"MKS User.csv"} className='csvclass'>
+                        Export CSV
+                    </CSVLink> */}
               </div>
             </div>
             <div className="div_maintb">
@@ -135,7 +142,7 @@ const News = () => {
                       <th>Description Arabic</th>
                       <th>Url</th>
                       <th>Image</th>
-                      <th>Active</th>
+                      {/* <th>Active</th> */}
                       
                       <th style={{ textAlign: "center" }}>Action</th>
                     </tr>
@@ -160,7 +167,7 @@ const News = () => {
                                 }}
                               />
                             </td>
-                            <td>
+                            {/* <td>
                                 <Form.Check 
                                   type="switch"
                                   id="custom-switch"
@@ -168,7 +175,7 @@ const News = () => {
                                   // label="Check this switch"
                                   value={Value}
                                 />
-                                </td>
+                                </td> */}
                             <td
                               className="table_delete_btn1"
                               style={{ textAlign: "center" }}
@@ -196,6 +203,8 @@ const News = () => {
           postsPerPage={postsPerPage}
           totalPosts={sponsor.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

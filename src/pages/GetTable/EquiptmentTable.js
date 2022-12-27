@@ -183,6 +183,8 @@ const EquiptmentTable = () => {
           postsPerPage={postsPerPage}
           totalPosts={equipment.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

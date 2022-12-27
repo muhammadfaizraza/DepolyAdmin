@@ -186,6 +186,8 @@ if (status === STATUSES.ERROR) {
           postsPerPage={postsPerPage}
           totalPosts={trackLength.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
             </div>
           </div>

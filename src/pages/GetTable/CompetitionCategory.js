@@ -162,6 +162,8 @@ const CategoryTable = () => {
           postsPerPage={postsPerPage}
           totalPosts={category.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

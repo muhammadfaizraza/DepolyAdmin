@@ -185,6 +185,8 @@ const Racename = () => {
           postsPerPage={postsPerPage}
           totalPosts={RaceName.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

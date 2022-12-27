@@ -176,6 +176,8 @@ const Racecourse = () => {
           postsPerPage={postsPerPage}
           totalPosts={raceCard.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

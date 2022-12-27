@@ -189,6 +189,8 @@ const GroundTypeTable = () => {
           postsPerPage={postsPerPage}
           totalPosts={groundtype.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

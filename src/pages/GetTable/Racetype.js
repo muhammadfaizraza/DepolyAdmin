@@ -181,6 +181,8 @@ const Racetype = () => {
           postsPerPage={postsPerPage}
           totalPosts={RaceType.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

@@ -184,6 +184,8 @@ const Statistic = () => {
           postsPerPage={postsPerPage}
           totalPosts={competition.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

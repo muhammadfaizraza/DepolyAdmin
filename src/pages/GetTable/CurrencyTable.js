@@ -177,6 +177,8 @@ const CurrencyTable = () => {
           postsPerPage={postsPerPage}
           totalPosts={currency.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

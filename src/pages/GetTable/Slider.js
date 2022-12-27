@@ -222,6 +222,8 @@ const [Value , setValue] = useState(false)
           postsPerPage={postsPerPage}
           totalPosts={slider.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

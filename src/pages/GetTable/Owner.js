@@ -206,6 +206,8 @@ const Owner = () => {
           postsPerPage={postsPerPage}
           totalPosts={owner.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
        </div>
      </div>

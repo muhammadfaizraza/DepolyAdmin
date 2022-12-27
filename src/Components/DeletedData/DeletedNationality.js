@@ -124,12 +124,9 @@ const DeletedNationality = () => {
                         <th>Abbreviation</th>
                         <th>Abbreviation Arabic</th>
                         <th>Short Code</th>
-                        <th>Label</th>
-                        <th>Label Arabic</th>
-                        <th>Off Set </th>
+                      
 
-                        <th>Value</th>
-                        <th>Value Arabic</th>
+                        
 
                         <th>Image</th>
                         <th>Action</th>
@@ -147,11 +144,8 @@ const DeletedNationality = () => {
                               <td>{item.AbbrevEn}</td>
                               <td>{item.AbbrevAr}</td>
                               <td>{item.shortCode} </td>
-                              <td>{item.LabelEn} </td>
-                              <td>{item.LabelAr} </td>
-                              <td>{item.Offset === 'true' ? <>True</> : <>False</>} </td>
-                              <td>{item.ValueEn}</td>
-                              <td>{item.ValueAr}</td>
+                             
+                             
 
                               <td>
                                 <img src={item.image} alt="" />
@@ -177,6 +171,8 @@ const DeletedNationality = () => {
           postsPerPage={postsPerPage}
           totalPosts={deletednationality.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

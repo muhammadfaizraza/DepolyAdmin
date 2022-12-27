@@ -183,6 +183,8 @@ const ColorTable = () => {
           postsPerPage={postsPerPage}
           totalPosts={pointTable.length}
           paginate={paginate}
+          currentPage={currentPage}
+
         />
         </div>
       </div>

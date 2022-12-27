@@ -20,7 +20,6 @@ const Horsekindform = () => {
   const [shortName, setshortName] = useState("");
   const [shortNameAr, setshortNameAr] = useState("");
   const [isLoading, setisLoading] = useState(false);
-  const [shortCode, setshortCode] = useState("");
   const dispatch = useDispatch();
   const {data:horsekindshortcode} = useSelector((state) => state.horsekindshortcode)
   const history = useNavigate();

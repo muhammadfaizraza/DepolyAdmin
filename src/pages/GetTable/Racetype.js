@@ -15,6 +15,9 @@ import { Modal } from "react-bootstrap";
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+
 const Racetype = () => {
   const [ShowCalender, setShowCalender] = useState(false)
 
@@ -125,6 +128,21 @@ const Racetype = () => {
                 <Link to="/racetypeform">
                   <button>Add Race Type</button>
                 </Link>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>             
+                              <CSVLink  data={RaceType}  separator={";"} filename={"MKS Race Type.csv"} className='csvclass'>
+                        Export CSV
+                    </CSVLink>
               </div>
             </div>
             <div>

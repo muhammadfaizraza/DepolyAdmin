@@ -16,6 +16,8 @@ import { Modal } from "react-bootstrap";
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const Tracklength = () => {
   const [ShowCalender, setShowCalender] = useState(false)
@@ -134,6 +136,21 @@ if (status === STATUSES.ERROR) {
                     <Link to="/tracklengthform">
                       <button>Add Track Length</button>
                     </Link>
+                    <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>                 
+                          <CSVLink  data={trackLength}  separator={";"} filename={"MKS Track Length.csv"} className='csvclass'>
+                        Export CSV
+                    </CSVLink>
                   </div>
                 </div>
                 <div>

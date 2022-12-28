@@ -18,7 +18,8 @@ import { BsEyeFill } from "react-icons/bs";
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const NationalityTable = () => {
 //for Modal
@@ -132,8 +133,18 @@ const [ShowCalender, setShowCalender] = useState(false)
                 <Link to="/nationality">
                   <button>Add Nationality</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>
                 <CSVLink  data={nationality}  separator={";"} filename={"MKS Nationality.csv"} className='csvclass'>
                         Export CSV
                 </CSVLink>

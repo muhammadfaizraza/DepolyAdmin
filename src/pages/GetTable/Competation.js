@@ -16,6 +16,8 @@ import CompetitionPopup from "../../Components/Popup/CompetitionPopup";
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const Statistic = () => {
   const [ShowCalender, setShowCalender] = useState(false)
@@ -118,8 +120,18 @@ const Statistic = () => {
                 <Link to="/addcompetition">
                   <button>Add Competition</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                  <CSVLink  data={competition}  separator={";"} filename={"MKS Competition.csv"} className='csvclass'>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>                  <CSVLink  data={competition}  separator={";"} filename={"MKS Competition.csv"} className='csvclass'>
                         Export CSV
                     </CSVLink>
               </div>

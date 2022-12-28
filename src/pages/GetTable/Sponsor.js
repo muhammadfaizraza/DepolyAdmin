@@ -3,7 +3,7 @@ import { fetchSponsor, STATUSES } from "../../redux/getReducer/getSponsorSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import swal from "sweetalert";
-import { Link ,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import ScrollContainer from "react-indiana-drag-scroll";
 import SponserPopup from "../../Components/Popup/SponserPopup";
@@ -13,13 +13,13 @@ import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BsEyeFill } from "react-icons/bs";
 import Pagination from "./Pagination";
-
-import { BiFilter } from 'react-icons/bi';
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
 
 const News = () => {
-
-  const [ShowCalender, setShowCalender] = useState(false)
+  const [ShowCalender, setShowCalender] = useState(false);
 
   //For Modal
   const [show, setShow] = useState(false);
@@ -35,12 +35,12 @@ const News = () => {
   const { data: sponsor, status } = useSelector((state) => state.sponsor);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(8)
-  
+  const [postsPerPage] = useState(8);
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = sponsor.slice(indexOfFirstPost, indexOfLastPost);
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
     dispatch(fetchSponsor());
@@ -54,28 +54,18 @@ const News = () => {
         icon: "warning",
         buttons: true,
         dangerMode: true,
-      })
-
-      .then( async(willDelete) => {
-     
-  
-   
+      }).then(async (willDelete) => {
         if (willDelete) {
-          await axios.delete(`${window.env.API_URL}/softdeletesponsor/${Id}`)
+          await axios.delete(`${window.env.API_URL}/softdeletesponsor/${Id}`);
           swal("Your data has been deleted Successfully!", {
             icon: "success",
-         
-          }
-          )
-          dispatch(fetchSponsor())
-          
+          });
+          dispatch(fetchSponsor());
         } else {
           swal("Your data is safe!");
         }
       });
-   
-    }catch(error) {
-
+    } catch (error) {
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -84,11 +74,8 @@ const News = () => {
         button: "OK",
       });
     }
+  };
 
-
-
-  }
-  
   if (status === STATUSES.LOADING) {
     return (
       <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
@@ -120,34 +107,51 @@ const News = () => {
               <h4>Sponsor Listings</h4>
 
               <div>
-            
-
                 <Link to="/sponsorform">
                   <button>Add Sponsor</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                <CSVLink  data={sponsor}  separator={";"} filename={"MKS sponsor.csv"} className='csvclass'>
-                        Export CSV
+                <OverlayTrigger
+                  overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                >
+                  <span className="addmore">
+                    <BiFilter
+                      className="calendericon"
+                      onClick={() => setShowCalender(!ShowCalender)}
+                    />
+                  </span>
+                </OverlayTrigger>
+                <CSVLink
+                  data={sponsor}
+                  separator={";"}
+                  filename={"MKS sponsor.csv"}
+                  className="csvclass"
+                >
+                  Export CSV
                 </CSVLink>
               </div>
             </div>
             <div>
-              
-              {
-                ShowCalender ?
+              {ShowCalender ? (
                 <span className="transitionclass">
-                <div className="userfilter">
-                
-                <div className="filtertextform forflex">
-                
-                 <input type='text' class="form-control" placeholder="Enter Title"/>
-                 <input type='text' class="form-control" placeholder="Enter Description"/>
-                 </div>
-                
-                </div>
-                <button className="filterbtn">Apply Filter</button>
-                </span>:<></>
-              }
+                  <div className="userfilter">
+                    <div className="filtertextform forflex">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Title"
+                      />
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Description"
+                      />
+                    </div>
+                  </div>
+                  <button className="filterbtn">Apply Filter</button>
+                </span>
+              ) : (
+                <></>
+              )}
             </div>
             <div className="div_maintb">
               <ScrollContainer className="scroll-container">
@@ -161,7 +165,7 @@ const News = () => {
                       <th>Url</th>
                       <th>Image</th>
                       {/* <th>Active</th> */}
-                      
+
                       <th style={{ textAlign: "center" }}>Action</th>
                     </tr>
                   </thead>
@@ -198,15 +202,19 @@ const News = () => {
                               className="table_delete_btn1"
                               style={{ textAlign: "center" }}
                             >
-                              <BiEdit onClick={() => navigate('/editsponsor',{
-                                state:{
-                                  sponsorid:item
+                              <BiEdit
+                                onClick={() =>
+                                  navigate("/editsponsor", {
+                                    state: {
+                                      sponsorid: item,
+                                    },
+                                  })
                                 }
-                              })} />
+                              />
                               <MdDelete
                                 onClick={() => handleRemove(item._id)}
                               />
-                              <BsEyeFill onClick={()=> handleShow(item)}/>
+                              <BsEyeFill onClick={() => handleShow(item)} />
                             </td>
                           </tr>
                         </>
@@ -218,12 +226,11 @@ const News = () => {
             </div>
           </div>
           <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={sponsor.length}
-          paginate={paginate}
-          currentPage={currentPage}
-
-        />
+            postsPerPage={postsPerPage}
+            totalPosts={sponsor.length}
+            paginate={paginate}
+            currentPage={currentPage}
+          />
         </div>
       </div>
       <Modal
@@ -245,7 +252,6 @@ const News = () => {
             Close
           </button>
         </Modal.Footer>
-
       </Modal>
     </>
   );

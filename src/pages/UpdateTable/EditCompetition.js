@@ -30,8 +30,8 @@ const NewsForm = () => {
     NameEn:'',
     DescEn: '',
     DescAr:'',
-    TriCount: '',
-    pickCount:'',
+    CategoryCount: '',
+    CompetitionCategory:'',
     StartDate:'',
     CompetitionCode:'',
     shortCode:'',
@@ -46,8 +46,7 @@ const NewsForm = () => {
         NameAr: competitionid.NameAr,
 				DescEn:competitionid.DescEn,
         DescAr:competitionid.DescAr,
-        TriCount: competitionid.TriCount,
-        pickCount: competitionid.pickCount,
+        CategoryCount: competitionid.CategoryCount,
         StartDate: competitionid.StartDate,
         CompetitionCode: competitionid.CompetitionCode,
         shortCode: competitionid.shortCode,
@@ -80,8 +79,8 @@ const NewsForm = () => {
       formData.append("NameAr", state1.NameAr);
       formData.append("DescEn", state1.DescEn);
       formData.append("DescAr", state1.DescAr);
-      formData.append("TriCount", state1.TriCount);
-      formData.append("pickCount", state1.pickCount);
+      formData.append("CategoryCount", state1.CategoryCount);
+      formData.append("CompetitionCategory", state1.CompetitionCategory);
       formData.append("StartDate", StartDate);
       formData.append("CompetitionCode", state1.CompetitionCode);
       // formData.append("CompetitionCategory", (CompetitionCategory ===  undefined ? state1.CompetitionCategory : CompetitionCategory.id) );
@@ -211,7 +210,7 @@ const NewsForm = () => {
                       value={StartDate}
                       minDate={today}
                       dayPlaceholder=" "
-                      monthPlaceholder="Start Date "
+                      monthPlaceholder={state1.StartDate}
                       yearPlaceholder=""
                     />
                     <span className="spanForm"> |</span>
@@ -224,7 +223,7 @@ const NewsForm = () => {
                     />
                   </div>
                 </div>
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   
                   <div className="col-sm">
                   <FloatingLabel
@@ -256,8 +255,42 @@ const NewsForm = () => {
                     </FloatingLabel>
                   
                   </div>
-                </div>
+                </div> */}
                 
+              
+                
+
+                <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Tri Count"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, CategoryCount: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="number" placeholder="Description"value={state1.CategoryCount}/>
+                    </FloatingLabel>
+               
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="تريكونت"className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, CategoryCount: e.target.value })
+                      }
+                    >
+                      <Form.Control type="number" placeholder="Description"value={state1.CategoryCount}/>
+                    </FloatingLabel>
+                    
+                  </div>
+                </div>
                 <div className="row mainrow">
                   
                   <div className="col-sm">
@@ -272,24 +305,10 @@ const NewsForm = () => {
                       <Form.Control type="text" placeholder="Details"  	value={state1.CompetitionCode}/>
                     </FloatingLabel>
                 
-                    <span className="spanForm"> |</span>
                   </div>
                   
 
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="المنافسة"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                      onChange={(e) =>
-                        setState({ ...state1, CompetitionCode: e.target.value })
-                      }
-                    >
-                      <Form.Control type="text" placeholder="Details"value={state1.CompetitionCode} />
-                    </FloatingLabel>
                   
-                  </div>
                 </div>
                 <div className="row mainrow">
                   
@@ -299,64 +318,16 @@ const NewsForm = () => {
                       label="Pick Count"
                       className="mb-3"
                       onChange={(e) =>
-                        setState({ ...state1, pickCount: e.target.value })
+                        setState({ ...state1, CompetitionCategory: e.target.value })
                       }
                     >
-                      <Form.Control type="number" placeholder="Details"  	value={state1.pickCount}/>
+                      <Form.Control type="text" placeholder="Details"  	value={state1.CompetitionCategory}/>
                     </FloatingLabel>
                 
-                    <span className="spanForm"> |</span>
                   </div>
                   
 
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="انتقاء"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                      onChange={(e) =>
-                        setState({ ...state1, pickCount: e.target.value })
-                      }
-                    >
-                      <Form.Control type="number" placeholder="Details"value={state1.pickCount} />
-                    </FloatingLabel>
-                  
-                  </div>
                 </div>
-
-                <div className="row mainrow">
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="Tri Count"
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, TriCount: e.target.value })
-                      }
-                    
-                    >
-                      <Form.Control type="number" placeholder="Description"value={state1.TriCount}/>
-                    </FloatingLabel>
-               
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="تريكونت"className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                      onChange={(e) =>
-                        setState({ ...state1, TriCount: e.target.value })
-                      }
-                    >
-                      <Form.Control type="number" placeholder="Description"value={state1.TriCount}/>
-                    </FloatingLabel>
-                    
-                  </div>
-                </div>
-                
 
                 {/* <div className="row mainrow">
                   <div className="col-sm">

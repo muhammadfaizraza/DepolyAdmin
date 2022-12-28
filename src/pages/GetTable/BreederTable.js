@@ -15,6 +15,10 @@ import BreederPopup from "../../Components/Popup/BreederPopup";
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+
+
 const BreederTable = () => {
   const [ShowCalender, setShowCalender] = useState(false)
 
@@ -130,8 +134,18 @@ const BreederTable = () => {
                 <Link to="/breeder">
                   <button>Add Breeder</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                <CSVLink  data={breeder}  separator={";"} filename={"MKS Breeder.csv"} className='csvclass'>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>                <CSVLink  data={breeder}  separator={";"} filename={"MKS Breeder.csv"} className='csvclass'>
                         Export CSV
                 </CSVLink>
               </div>

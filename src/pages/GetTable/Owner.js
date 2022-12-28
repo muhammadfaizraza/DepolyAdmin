@@ -19,7 +19,8 @@ import { BsEyeFill } from 'react-icons/bs';
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 
 const Owner = () => {
@@ -136,8 +137,19 @@ const Owner = () => {
                  <Link to="/ownerform">
                    <button>Add Owner</button>
                  </Link>
-                 <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                  <CSVLink  data={owner}  separator={";"} filename={"MKS Owner.csv"} className='csvclass'>
+                 <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>       
+                                    <CSVLink  data={owner}  separator={";"} filename={"MKS Owner.csv"} className='csvclass'>
                         Export CSV
                     </CSVLink>
                </div>

@@ -62,7 +62,10 @@ const NewsForm = () => {
         MiniumumJockeyWeight: jockeyid.MiniumumJockeyWeight,
         Rating:jockeyid.Rating,
 				JockeyLicenseDate: jockeyid.JockeyLicenseDate,
-        DOB:jockeyid.DOB
+        DOB:jockeyid.DOB,
+        JockeyAllowance:jockeyid.JockeyAllowance,
+
+
   
 			});
 		} else {
@@ -95,6 +98,8 @@ console.log(preview,'preview')
       formData.append("RemarksAr", state1.RemarksAr);
       formData.append("MaximumJockeyWeight", state1.MaximumJockeyWeight);
       formData.append("MiniumumJockeyWeight", state1.MiniumumJockeyWeight);
+      formData.append("JockeyAllowance", state1.JockeyAllowance);
+
       formData.append("Rating", state1.Rating);
       formData.append("JockeyLicenseDate", JockeyLicenseDate);
       formData.append("DOB", DOB);
@@ -262,8 +267,7 @@ console.log(preview,'preview')
 
                 </div>
                 <div className="row mainrow">
-                  <div className="col-sm">
-                    <DatePicker
+                <DatePicker
                       //  onChange={(e) =>
                       //   setState({ ...state1, DOB: e.target.value })
                       // }
@@ -277,10 +281,6 @@ console.log(preview,'preview')
                       yearPlaceholder=""
                       
                     />
-
-                 
-                  
-                  </div>
 
                 </div>
                 
@@ -330,25 +330,28 @@ console.log(preview,'preview')
                       <Form.Control type="number" placeholder="Description" value={state1.MaximumJockeyWeight}/>
                     </FloatingLabel>
                   
-                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  {/* <div className="col-sm">
+                 
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="أقصى وزن للجوكي"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
+                      label=" Allowance Weight"
+                      className="mb-3"
                       onChange={(e) =>
-                        setState({ ...state1, MaximumJockeyWeight: e.target.value })
+                        setState({ ...state1, JockeyAllowance: e.target.value })
                       }
+                     
                     >
-                      <Form.Control type="text" placeholder="Description" value={state1.MaximumJockeyWeight}/>
+                      <Form.Control type="number" placeholder="Description" value={state1.JockeyAllowance}/>
                     </FloatingLabel>
-                    
-                  </div> */}
-                </div>
+                  
+                  </div>
 
+                 
+                </div>
                 <div className="ButtonSection">
                 <div>
                 <input type='file' onChange={fileSelected} className="formInput"/>

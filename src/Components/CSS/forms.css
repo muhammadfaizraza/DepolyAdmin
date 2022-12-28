@@ -888,3 +888,6 @@ svg.crossIcon {
   width: 79px !important;
 }
 
+.react-date-picker__inputGroup__input {
+  min-width: 5rem !important;
+}

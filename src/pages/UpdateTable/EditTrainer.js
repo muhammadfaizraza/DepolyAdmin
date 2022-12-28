@@ -362,7 +362,7 @@ const submit = async (event) => {
                       maxDate={today}
                       monthPlaceholder={state1.TrainerLicenseDate}
                       yearPlaceholder=""
-                  className="editDate"
+                      className="editDate"
                     />
 
           
@@ -381,9 +381,9 @@ const submit = async (event) => {
                       value={DOB}
                       dayPlaceholder=""
                       maxDate={today}
-                      monthPlaceholder={state1.DOB}
+                      monthPlaceholder={state1.TrainerLicenseDate}
                       yearPlaceholder=""
-                  className="editDate"
+                     className="editDate"
                     />  
           
 

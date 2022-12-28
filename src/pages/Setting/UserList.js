@@ -1,34 +1,38 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
-import { fetchsubscriber ,STATUSES} from "../../redux/getReducer/getSubscriber";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchsubscriber,
+  STATUSES,
+} from "../../redux/getReducer/getSubscriber";
 import { useNavigate } from "react-router-dom";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Moment from "react-moment";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 import axios from "axios";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import Pagination from "../GetTable/Pagination";
-import { DateRangePicker } from 'react-date-range';
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css';
-import { BiFilter } from 'react-icons/bi';
+import { DateRangePicker } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css";
+import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
 // import { Country_Name, Country_NameAr } from "../../Components/Common/Country";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const statusData = [
   {
-    id:1,
-    data:'true',
-    value:'Approved'
+    id: 1,
+    data: "true",
+    value: "Approved",
   },
   {
-    id:0,
-    data:'false',
-    value:'Not Approved'
-  }
-]
+    id: 0,
+    data: "false",
+    value: "Not Approved",
+  },
+];
 
 const SubscriberList = () => {
   const dispatch = useDispatch();
@@ -37,25 +41,25 @@ const SubscriberList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(6);
 
-
-  const  [SearchData , setSearchData] = useState([]);
-  const  [PassportNo , setPassportNo] = useState('');
-  const  [Address , setAddress] = useState('');
-  const  [PhoneNumber , setPhoneNumber] = useState('');
-  const  [Approved , setApproved] = useState('');
-
-
-
+  const [SearchData, setSearchData] = useState([]);
+  const [PassportNo, setPassportNo] = useState("");
+  const [Address, setAddress] = useState("");
+  const [PhoneNumber, setPhoneNumber] = useState("");
+  const [Approved, setApproved] = useState("");
+  const [StartDate, setStartDate] = useState('2022-12-28');
+  const [EndDate, setEndDate] = useState("");
 
   const GetSearch = async () => {
-    const response = await axios.get((`${window.env.API_URL}/SearchUser?PassportNo=${PassportNo}&Address=${Address}&ApprovedStatus=${Approved}&PhoneNumber=${PhoneNumber}`))
-    setSearchData(response.data.data)
-  }
+    const response = await axios.get(
+      `${window.env.API_URL}/SearchUser?PassportNo=${PassportNo}&Address=${Address}&ApprovedStatus=${Approved}&startdate=${StartDate}&endDate=${EndDate}`
+    );
+    setSearchData(response.data.data);
+  };
   useEffect(() => {
     dispatch(fetchsubscriber());
     GetSearch();
   }, [dispatch]);
-  
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = SearchData.slice(indexOfFirstPost, indexOfLastPost);
@@ -64,13 +68,14 @@ const SubscriberList = () => {
     {
       startDate: new Date(),
       endDate: new Date(),
-      key: 'selection'
-    }
+      key: "selection",
+    },
   ]);
 
-  const [ShowCalender, setShowCalender] = useState(false)
+  // console.log(state[0].endDate,'date range')
+  // console.log(state[0].startDate,'date range 1')
 
- 
+  const [ShowCalender, setShowCalender] = useState(false);
 
   const handleRole = async (Id) => {
     try {
@@ -96,10 +101,9 @@ const SubscriberList = () => {
   };
 
   if (status === STATUSES.LOADING) {
-        return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
-
-
-
+    return (
+      <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
+    );
   }
   if (status === STATUSES.ERROR) {
     return (
@@ -131,7 +135,6 @@ const SubscriberList = () => {
   //       }
   //     });
   // };
- 
 
   return (
     <>
@@ -142,7 +145,6 @@ const SubscriberList = () => {
               marginTop: "30px",
             }}
           >
-              
             <div className="Header ">
               <h4>User Management</h4>
               <div>
@@ -153,64 +155,94 @@ const SubscriberList = () => {
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
                 >
-                  <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                  <CSVLink data={subscriber} separator={";"} filename={"MKS User.csv"} className='csvclass'>
-                        Export CSV
-                    </CSVLink>
+                  <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>
+                  
+                  <CSVLink
+                    data={subscriber}
+                    separator={";"}
+                    filename={"MKS User.csv"}
+                    className="csvclass"
+                  >
+                    Export CSV
+                  </CSVLink>
                 </h6>
-
-                
               </div>
             </div>
-            
-              <div>
-              
-              {
-                ShowCalender ?
+
+            <div>
+              {ShowCalender ? (
                 <>
-                <div className="userfilter">
-                <div className="calenderuser">
-                <DateRangePicker
-                 onChange={item => setState([item.selection])}
-                 showSelectionPreview={true}
-                 moveRangeOnFirstSelection={false}
-                 months={2}
-                 ranges={state}
-                 direction="horizontal"
-               />
-                </div>
-                <div className="filtertextform">
-                
-            <input type='text' class="form-control" onChange={(e) => setPassportNo(e.target.value)} placeholder="Enter Passport Number"/>
-            <input type='text' class="form-control"  onChange={(e) => setPhoneNumber(e.target.value)} placeholder="Enter Phone Number"/>
-            <input type='text' class="form-control"  onChange={(e) => setAddress(e.target.value)} placeholder="Enter Address"/>
-            <select
-                                class="form-control"
-                                id="exampleFormControlSelect1"
-                                name="country"
-                                onChange={(e) => setApproved(e.target.value)}
-                                required
-                              >
-                                {statusData.map((item) => {
-                                  return (
-                                    <option
-                                      key={item.id}
-                                      name="country"
-                                      value={item.id}
-                                    >
-                                      {item.value}
-                                    </option>
-                                  );
-                                })}
-               </select>
-                 </div>
-                
-                </div>
-                <button className="filterbtn" onClick={GetSearch}>Apply Filter</button>
-                </>:<></>
-              }
-              </div>
-              
+                  <div className="userfilter">
+                    <div className="calenderuser">
+                      <DateRangePicker
+                        onChange={(item) => setState([item.selection])}
+                        showSelectionPreview={true}
+                        moveRangeOnFirstSelection={false}
+                        months={2}
+                        ranges={state}
+                        direction="horizontal"
+                      />
+                    </div>
+                    <div className="filtertextform">
+                      <input
+                        type="text"
+                        class="form-control"
+                        onChange={(e) => setPassportNo(e.target.value)}
+                        placeholder="Enter Passport Number"
+                      />
+                      <input
+                        type="text"
+                        class="form-control"
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        placeholder="Enter Phone Number"
+                      />
+                      <input
+                        type="text"
+                        class="form-control"
+                        onChange={(e) => setAddress(e.target.value)}
+                        placeholder="Enter Address"
+                      />
+                      <select
+                        class="form-control"
+                        id="exampleFormControlSelect1"
+                        name="country"
+                        onChange={(e) => setApproved(e.target.value)}
+                        required
+                      >
+                        {statusData.map((item) => {
+                          return (
+                            <option
+                              key={item.id}
+                              name="country"
+                              value={item.id}
+                            >
+                              {item.value}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                  </div>
+                  <button className="filterbtn" onClick={GetSearch}>
+                    Apply Filter
+                  </button>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+
             <>
               <div className="div_maintb">
                 <ScrollContainer className="scroll-container">
@@ -230,9 +262,8 @@ const SubscriberList = () => {
                     </thead>
                     <tbody>
                       {currentPosts.map((item, index) => {
-                      
                         return (
-                            <tr className="tr_table_class">
+                          <tr className="tr_table_class">
                             <td>{item.FirstName}</td>
                             <td>{item.LastName}</td>
                             <td>{item.PassportNo}</td>
@@ -249,12 +280,23 @@ const SubscriberList = () => {
                               <img src={item.PassportPicture} alt="" />
                             </td>
                             <td style={{ textAlign: "center" }}>
-                              <button className="Approvedbtn"  style={{
+                              <button
+                                className="Approvedbtn"
+                                style={{
                                   backgroundColor: `${
                                     item.ApprovedStatus === true
                                       ? "#4547EE"
                                       : "#DE3E28"
-                                  }`}} onClick={() => handleRole(item._id)}>{item.ApprovedStatus === true ? <>Approved</> : <>Not Approved</>}</button>
+                                  }`,
+                                }}
+                                onClick={() => handleRole(item._id)}
+                              >
+                                {item.ApprovedStatus === true ? (
+                                  <>Approved</>
+                                ) : (
+                                  <>Not Approved</>
+                                )}
+                              </button>
                             </td>
                           </tr>
                         );
@@ -277,7 +319,6 @@ const SubscriberList = () => {
             paginate={paginate}
           />
         </div>
-        
       </div>
     </>
   );

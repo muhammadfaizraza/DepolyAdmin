@@ -15,7 +15,8 @@ import CurrencyPopup from "../../Components/Popup/CurrencyPopup";
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 
 
@@ -125,8 +126,19 @@ const CurrencyTable = () => {
                 <Link to="/currency">
                   <button>Add Currency</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                  <CSVLink  data={currency}  separator={";"} filename={"MKS Currency.csv"} className='csvclass'>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>
+                                    <CSVLink  data={currency}  separator={";"} filename={"MKS Currency.csv"} className='csvclass'>
                         Export CSV
                     </CSVLink>
               </div>

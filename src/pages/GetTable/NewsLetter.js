@@ -16,7 +16,8 @@ import {BsEyeFill} from "react-icons/bs"
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const NewsLetter = () => {
   const [ShowCalender, setShowCalender] = useState(false)

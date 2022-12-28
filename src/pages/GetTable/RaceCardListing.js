@@ -19,7 +19,8 @@ import { BsEyeFill } from "react-icons/bs";
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 
 const Racecourse = () => {
@@ -131,8 +132,18 @@ const Racecourse = () => {
                 <Link to="/racecard">
                   <button>Add Race Card</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                  <CSVLink  data={raceCard}  separator={";"} filename={"MKS Race Card.csv"} className='csvclass'>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>                         <CSVLink  data={raceCard}  separator={";"} filename={"MKS Race Card.csv"} className='csvclass'>
                         Export CSV
                     </CSVLink>
               </div>

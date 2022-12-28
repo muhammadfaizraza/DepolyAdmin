@@ -18,6 +18,8 @@ import Pagination from "./Pagination";
 import {Form} from "react-bootstrap"
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const Slider = () => {
 const [Value , setValue] = useState(false)
@@ -149,8 +151,19 @@ const [ShowCalender, setShowCalender] = useState(false)
                 <Link to="/sliderform">
                   <button>Add Slider</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                  <CSVLink  data={slider}  separator={";"} filename={"MKS Slider.csv"} className='csvclass'>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>       
+                                    <CSVLink  data={slider}  separator={";"} filename={"MKS Slider.csv"} className='csvclass'>
                         Export CSV
                     </CSVLink>
               </div>
@@ -175,20 +188,7 @@ const [ShowCalender, setShowCalender] = useState(false)
               }
               </div>
               
-              {
-                ShowCalender ?
-                <>
-                <div className="userfilter">
-                
-                <div className="filtertextform">
-                
-                 <input type='text' class="form-control" placeholder="Enter Title"/>
-                 </div>
-                
-                </div>
-                <button className="filterbtn">Apply Filter</button>
-                </>:<></>
-              }
+             
               </div>
             <div className="div_maintb">
               <ScrollContainer className="scroll-container">
@@ -199,7 +199,7 @@ const [ShowCalender, setShowCalender] = useState(false)
                       <th>Title Arabic </th>
                       <th>Url</th>
                       <th>Image</th>
-                      <th>Active</th>
+                      {/* <th>Active</th> */}
                       <th style={{ textAlign: "center" }}>Action</th>
                     </tr>
                   </thead>
@@ -222,7 +222,7 @@ const [ShowCalender, setShowCalender] = useState(false)
                                 }}
                               />
                                   </td>
-                                  <td>
+                                  {/* <td>
                                 <Form.Check 
                                   type="switch"
                                   id="custom-switch"
@@ -230,7 +230,7 @@ const [ShowCalender, setShowCalender] = useState(false)
                       
                                   value={Value}
                                 />
-                                </td>
+                                </td> */}
                         
 
                             <td className="table_delete_btn1"

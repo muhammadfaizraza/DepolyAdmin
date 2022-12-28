@@ -2,7 +2,8 @@ import React, { useEffect, Fragment ,useState} from "react";
 import { fetchRaceName, STATUSES } from "../../redux/getReducer/getRaceName";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import { Link, useNavigate  } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -132,8 +133,18 @@ const Racename = () => {
                 <Link to="/racenameform">
                   <button>Add Race Name</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                  <CSVLink  data={RaceName}  separator={";"} filename={"MKS Race Name.csv"} className='csvclass'>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>                         <CSVLink  data={RaceName}  separator={";"} filename={"MKS Race Name.csv"} className='csvclass'>
                         Export CSV
                     </CSVLink>
               </div>

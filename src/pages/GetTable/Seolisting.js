@@ -15,6 +15,9 @@ import SeoPopup from "../../Components/Popup/SeoPopup";
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+
 const SeoTable = () => {
   const [ShowCalender, setShowCalender] = useState(false)
 
@@ -129,6 +132,21 @@ const SeoTable = () => {
                 <Link to="/seoform">
                   <button>Add SEO</button>
                 </Link>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>           
+                                <CSVLink  data={Seo}  separator={";"} filename={"MKS Seo.csv"} className='csvclass'>
+                        Export CSV
+                    </CSVLink>
               </div>
             </div>
             <div>

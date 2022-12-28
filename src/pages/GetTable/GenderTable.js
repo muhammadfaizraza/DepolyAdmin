@@ -15,7 +15,8 @@ import GenderPopup from "../../Components/Popup/GenderPopup";
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const GenderTable = () => {
 
@@ -125,8 +126,18 @@ const GenderTable = () => {
                 <Link to="/gender">
                   <button>Add Gender</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>
                 <CSVLink  data={gender}  separator={";"} filename={"MKS Gender.csv"} className='csvclass'>
                         Export CSV
                 </CSVLink>

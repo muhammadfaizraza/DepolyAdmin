@@ -17,7 +17,8 @@ import HorseAnimation from "../../assets/horselottie.json";
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 
 const Statistic = () => {
@@ -129,8 +130,18 @@ const Statistic = () => {
                 <Link to="/jockeyform">
                   <button>Add Jockey</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>
                 <CSVLink  data={jockey}  separator={";"} filename={"MKS Jockey.csv"} className='csvclass'>
                         Export CSV
                 </CSVLink>

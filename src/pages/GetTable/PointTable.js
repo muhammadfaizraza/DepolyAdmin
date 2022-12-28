@@ -10,12 +10,13 @@ import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BiEdit } from "react-icons/bi";
 import { Modal } from "react-bootstrap";
-import ColorPopup from "../../Components/Popup/ColorPopup";
+import PointTablePopup from "../../Components/Popup/PointTablePopup";
 import {BsEyeFill} from "react-icons/bs"
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const ColorTable = () => {
   const [ShowCalender, setShowCalender] = useState(false)
@@ -113,8 +114,19 @@ const ColorTable = () => {
                 <Link to="/addcompetitionPoint">
                   <button>Add Point Table</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                <CSVLink  data={pointTable}  separator={";"} filename={"MKS Point Table.csv"} className='csvclass'>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>       
+                                  <CSVLink  data={pointTable}  separator={";"} filename={"MKS Point Table.csv"} className='csvclass'>
                         Export CSV
                 </CSVLink>
               </div>
@@ -191,7 +203,7 @@ const ColorTable = () => {
                                   onClick={() => handleRemove(item._id)}
                                 />
                                 <BsEyeFill
-                                //  onClick={() => handleShow(item)}
+                                 onClick={() => handleShow(item)}
                                  />
                               </td>
                             </tr>
@@ -222,10 +234,10 @@ const ColorTable = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2>Color  </h2>
+          <h2>Point Table  </h2>
         </Modal.Header>
         <Modal.Body>
-          <ColorPopup data={modaldata} />
+          <PointTablePopup data={modaldata} />
         </Modal.Body>
         <Modal.Footer>
           <button onClick={handleClose} className="modalClosebtn">

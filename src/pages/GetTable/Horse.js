@@ -17,7 +17,8 @@ import {BsEyeFill} from "react-icons/bs"
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const Horse = () => {
 //for errors
@@ -127,8 +128,18 @@ const [ShowCalender, setShowCalender] = useState(false)
                 <Link to="/horseform">
                   <button>Add Horse</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>
                 <CSVLink  data={horse}  separator={";"} filename={"MKS Horses.csv"} className='csvclass'>
                         Export CSV
                 </CSVLink>
@@ -165,14 +176,17 @@ const [ShowCalender, setShowCalender] = useState(false)
                         <th>Color</th>
                         <th>Purchase Price</th>
                         <th>Breeder</th>
+                        
+                        <th>Remarks</th>
+
+                        <th>Rds</th>
                         {/* <th>Active Owner</th>
                         <th>Over All Rating</th> */}
                         {/* <th>Dam</th>
                         <th>Sire</th>
                         <th>GSire</th> */}
-                        <th>Remarks</th>
 
-                        <th>Rds</th>
+                        
                         {/* <th>Cap</th> */}
 
                         <th>Image</th>

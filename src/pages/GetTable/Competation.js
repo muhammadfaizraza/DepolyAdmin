@@ -124,6 +124,24 @@ const Statistic = () => {
                     </CSVLink>
               </div>
             </div>
+            <div>
+              
+              {
+                ShowCalender ?
+                <span className="transitionclass">
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </span>:<></>
+              }
+              </div>
             <>
               <div className="div_maintb">
                 <ScrollContainer>
@@ -135,9 +153,9 @@ const Statistic = () => {
                         <th>Competition Code </th>
                         <th>Short Code</th>
                         <th>Type/Category</th>
+                        <th>Count </th>
+                        <th>Start Date </th>
                         <th>End Date </th>
-                        <th>Start Date </th>
-                        <th>Start Date </th>
                         <th>Action</th>
                       </tr>
                     </thead>

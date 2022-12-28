@@ -136,7 +136,7 @@ const BreederTable = () => {
                 </CSVLink>
               </div>
             </div>
-            {/* <div>
+            <div>
               
               {
                 ShowCalender ?
@@ -145,16 +145,15 @@ const BreederTable = () => {
                 
                 <div className="filtertextform forflex">
                 
-                 <input type='text' class="form-control" placeholder="Enter Name"/>
-                 <input type='text' class="form-control" placeholder="Enter Short Code"/>
-
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 <input type='text' class="form-control" placeholder="Enter Description"/>
                  </div>
                 
                 </div>
                 <button className="filterbtn">Apply Filter</button>
                 </span>:<></>
               }
-            </div> */}
+              </div>
             <>
               <div className="div_maintb">
                 <ScrollContainer>

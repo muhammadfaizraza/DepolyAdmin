@@ -11,7 +11,6 @@ const NewsForm = () => {
   const { state } = useLocation();
 
   const { groundtypeid } = state;
-  console.log(groundtypeid ,'data');
 
   const [state1, setState] = useState({
     NameEn: "",
@@ -39,7 +38,7 @@ const NewsForm = () => {
       formData.append("NameAr", state1.NameAr + ' ');
       formData.append("shortCode", state1.shortCode);
 
-      const response = await axios.put(
+       await axios.put(
         `${window.env.API_URL}/updateGroundType/${groundtypeid._id}`,
         formData
       );

@@ -3,26 +3,20 @@ import "../../Components/CSS/forms.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
-import Select from "react-select";
 import DatePicker from "react-date-picker";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { useSelector } from "react-redux";
-import { fetchcategory } from '../../redux/getReducer/getCategory'
 
 const NewsForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
   
   const { competitionid } = state;
-  console.log(competitionid);
   const { data: category } = useSelector((state) => state.category);
 
   const [image,setImage] = useState();
   const [preview,setPreview] = useState();
-  const [CompetitionCategory, setCompetitionCategory] = useState("");
   const [StartDate, setStartDate] = useState("");
 
   const [state1, setState] = useState({
@@ -53,7 +47,7 @@ const NewsForm = () => {
         CompetitionCategory:competitionid.CompetitionCategory
 			});
 		} else {
-			alert('No Data')
+			
 		}
 	}, [competitionid]);
 
@@ -66,10 +60,10 @@ const NewsForm = () => {
     setPreview(objectUrl)
     return () => URL.revokeObjectURL(objectUrl)
 }, [image])
-  const fileSelected = (event) => {
-    const image = event.target.files[0];
-    setImage(image);
-  };
+  // const fileSelected = (event) => {
+  //   const image = event.target.files[0];
+  //   setImage(image);
+  // };
   const submit = async (event) => {
     event.preventDefault();
     try {
@@ -88,7 +82,7 @@ const NewsForm = () => {
 
       // formData.append("RegistrationDate", RegistrationDate);
 
-      const response = await axios.put(`${window.env.API_URL}/updateCompetiton/${competitionid._id}`, formData);
+      await axios.put(`${window.env.API_URL}/updateCompetiton/${competitionid._id}`, formData);
       history("/competitionlisting");
       swal({
         title: "Success!",
@@ -118,7 +112,6 @@ const NewsForm = () => {
       };
     })
   );
-  console.log(AllCategory)
   var today = new Date();
 
   const convert = (num) => {
@@ -264,14 +257,15 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="Tri Count"
+                      label=" Count"
                       className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, CategoryCount: e.target.value })
                       }
                     
                     >
-                      <Form.Control type="number" placeholder="Description"value={state1.CategoryCount}/>
+                      <Form.Control type="number" min="1"
+                      max="12" placeholder="Description"value={state1.CategoryCount}/>
                     </FloatingLabel>
                
                     <span className="spanForm"> |</span>
@@ -310,7 +304,7 @@ const NewsForm = () => {
 
                   
                 </div>
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   
                   <div className="col-sm">
                   <FloatingLabel
@@ -321,13 +315,13 @@ const NewsForm = () => {
                         setState({ ...state1, CompetitionCategory: e.target.value })
                       }
                     >
-                      <Form.Control type="text" placeholder="Details"  	value={state1.CompetitionCategory}/>
+                      <Form.Control type="number" placeholder="Details"  	value={state1.CompetitionCategory}/>
                     </FloatingLabel>
                 
                   </div>
                   
 
-                </div>
+                </div> */}
 
                 {/* <div className="row mainrow">
                   <div className="col-sm">

@@ -11,7 +11,6 @@ const NewsForm = () => {
   const { state } = useLocation();
 
   const { nationalityid } = state;
-  console.log(nationalityid)
   const [image,setImage] = useState();
   const [preview,setPreview] = useState();
 

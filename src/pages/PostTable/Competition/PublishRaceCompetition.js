@@ -2,11 +2,8 @@ import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import Select from "react-select";
 import { fetchrace } from "../../../redux/getReducer/getRaceSlice";
 import { useSelector, useDispatch } from "react-redux";
-import makeAnimated from "react-select/animated";
-import dateFormat from "dateformat";
 import { fetchcompetition } from "../../../redux/getReducer/getCompetition";
 import { toast } from "react-toastify";
 
@@ -20,14 +17,10 @@ import { toast } from "react-toastify";
 
 
   const [checked, setChecked] = useState([]);
-  const [isChecked, setisChecked] = useState(true);
   const [isLoading, setisLoading] = useState(false);
-
-  console.log(state,'state')
  
   const dispatch = useDispatch();
   const history = useNavigate();
-  console.log(CompetitionId,'CompetitionId')
 
  
 
@@ -49,8 +42,6 @@ import { toast } from "react-toastify";
     }
   });
 
-  console.log(TriCountValue,'TriCountValue');
-
   const Publish = async (event) => {
     event.preventDefault();
     setisLoading(true)
@@ -61,7 +52,8 @@ import { toast } from "react-toastify";
       );
 
       const msgdata = response.data.msg;
-      console.log(response,'response')
+      setisLoading(false)
+
       history("/competitionlisting");
       swal({
         title: "Success!",
@@ -89,8 +81,8 @@ import { toast } from "react-toastify";
     var updatedList = [...checked];
     if (event.target.checked) {
       if(checked.length == CompetitionId.CategoryCount){
-         alert('limit exceed');
-         return
+        return toast('limit exceed');
+         
       }
       updatedList = [...checked, event.target.value];
       
@@ -100,7 +92,6 @@ import { toast } from "react-toastify";
     setChecked(updatedList);
   };
 
-  console.log(checked,'checked')
 
   return (
     <div className="page">

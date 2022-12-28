@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../../utils/TextInputValidation";
@@ -20,7 +19,7 @@ const Competition = () => {
 
   const submit = async (event) => {
     event.preventDefault();
-    setisLoading(true)
+    setisLoading(true);
     try {
       const formData = new FormData();
       formData.append("NameEn", NameEn);
@@ -49,7 +48,7 @@ const Competition = () => {
         icon: "error",
         button: "OK",
       });
-      setisLoading(false)
+      setisLoading(false);
     }
   };
   const data1 = JSON.stringify(
@@ -87,7 +86,9 @@ const Competition = () => {
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
-                  <span className={Error.status ?  "success" :  "error"}>{Error.message}</span>
+                  <span className={Error.status ? "success" : "error"}>
+                    {Error.message}
+                  </span>
                 </div>
 
                 <div className="col-sm">
@@ -103,7 +104,9 @@ const Competition = () => {
                   >
                     <Form.Control type="text" placeholder="اسم" />
                   </FloatingLabel>
-                  <span className={ErrorAr.status ?  "successAr" :  "errorAr"}>{ErrorAr.message}</span>
+                  <span className={ErrorAr.status ? "successAr" : "errorAr"}>
+                    {ErrorAr.message}
+                  </span>
                 </div>
               </div>
 
@@ -139,7 +142,11 @@ const Competition = () => {
               </div> */}
 
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
-                <button Name="submit" className="SubmitButton" disabled={isLoading}>
+                <button
+                  Name="submit"
+                  className="SubmitButton"
+                  disabled={isLoading}
+                >
                   Add Category
                 </button>
               </div>

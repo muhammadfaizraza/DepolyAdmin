@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-
 import {
   fetchracecourse,
   STATUSES,
 } from "../../redux/getReducer/getRaceCourseSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostRaceCourse";
 import swal from "sweetalert";
 import { Link, useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";

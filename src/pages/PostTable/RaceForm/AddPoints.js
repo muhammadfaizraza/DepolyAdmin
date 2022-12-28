@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import Select from "react-select";
 import { useSelector, useDispatch } from "react-redux";
-import makeAnimated from "react-select/animated";
-import dateFormat from "dateformat";
-import { fetchcompetition } from "../../../redux/getReducer/getCompetition";
-import { toast } from "react-toastify";
 import { fetchpointTable } from "../../../redux/getReducer/getPointTable";
 
 
@@ -21,7 +16,6 @@ import { fetchpointTable } from "../../../redux/getReducer/getPointTable";
   const [checked, setChecked] = useState([]);
   const [isLoading, setisLoading] = useState(false);
 
-  console.log(state,'state')
  
   const dispatch = useDispatch();
   const history = useNavigate();
@@ -31,10 +25,6 @@ import { fetchpointTable } from "../../../redux/getReducer/getPointTable";
   useEffect(() => {
     dispatch(fetchpointTable());
   }, [dispatch]);
- 
-
-  console.log(pointTable,'pointTable')
-
   
 
   const Publish = async (event) => {
@@ -45,7 +35,7 @@ import { fetchpointTable } from "../../../redux/getReducer/getPointTable";
         `${window.env.API_URL}/AddPointTable/${RaceId}`,
         { Points: checked }
       );
-
+      setisLoading(true)
       const msgdata = response.data.msg;
       history("/fullpublishrace", {
         state: {
@@ -60,7 +50,6 @@ import { fetchpointTable } from "../../../redux/getReducer/getPointTable";
       });
       setisLoading(false)
     } catch (error) {
-      console.log(error,'response')
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -85,8 +74,6 @@ import { fetchpointTable } from "../../../redux/getReducer/getPointTable";
     }
     setChecked(updatedList);
   };
-
-  console.log(checked,'checked')
 
   return (
     <div className="page">

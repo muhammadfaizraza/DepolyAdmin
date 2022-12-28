@@ -11,7 +11,6 @@ const NewsForm = () => {
   const { state } = useLocation();
 
   const { adsid } = state;  
-  console.log(adsid,'adsid');
 
   const [image,setImage] = useState();
   const [preview,setPreview] = useState();
@@ -25,7 +24,6 @@ const NewsForm = () => {
 	});
 
  
-  console.log(preview,'pre')
 
   useEffect(() => {
 		if (adsid) {

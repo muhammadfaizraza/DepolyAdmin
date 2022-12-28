@@ -14,7 +14,6 @@ import { fetchTrackLength } from "../../../redux/getReducer/getTracklength";
 import { fetchRaceKind } from "../../../redux/getReducer/getRaceKind";
 import { fetchgroundtype } from "../../../redux/getReducer/getGroundType";
 import { fetchpointTable } from "../../../redux/getReducer/getPointTable";
-
 import Select from "react-select";
 import swal from "sweetalert";
 import DatePicker from 'react-date-picker';
@@ -22,7 +21,6 @@ import TimePicker from 'react-time-picker';
 import 'react-calendar/dist/Calendar.css'
 import 'react-clock/dist/Clock.css'
 import { ImCross } from 'react-icons/im';
-
 import axios from "axios";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -121,18 +119,18 @@ const RaceForm = () => {
   const history = useNavigate();
   const dispatch = useDispatch();
 
-  let racepointTable =
-     pointTable === undefined ? (
-      <></>
-    ) : (
-      pointTable.map(function (item) {
-        return {
-          id: item._id,
-          value: item.Group_Name,
-          label: item.Group_Name,
-        };
-      })
-    );
+  // let racepointTable =
+  //    pointTable === undefined ? (
+  //     <></>
+  //   ) : (
+  //     pointTable.map(function (item) {
+  //       return {
+  //         id: item._id,
+  //         value: item.Group_Name,
+  //         label: item.Group_Name,
+  //       };
+  //     })
+  //   );
 
 
   let racecourses =
@@ -160,18 +158,6 @@ const RaceForm = () => {
       })
     );
 
-  let JockeyForTheRace =
-    jockey === undefined ? (
-      <></>
-    ) : (
-      jockey.map(function (item) {
-        return {
-          id: item._id,
-          value: item._id,
-          label: item.NameEn,
-        };
-      })
-    );
 
   let Racenameoptions =
     RaceName === undefined ? (
@@ -267,6 +253,8 @@ const RaceForm = () => {
         };
       })
     );
+
+
     let RaceTypesAr =
     RaceType === undefined ? (
       <></>
@@ -434,10 +422,7 @@ const RaceForm = () => {
   const [Day, setDay] = useState("");
   const [StartTime, setStartTime] = useState("");
   const [EndTime, setEndTime] = useState("");
-  const [PointTableSystem, setPointTableSystem] = useState("");
 
-  console.log(StartTime,'StartTime')
-  console.log(PointTableSystem,'PointTableSystem')
 
   const [FirstPrice, setFirstPrice] = useState("");
   const [SecondPrice, setSecondPrice] = useState("");
@@ -493,9 +478,6 @@ const RaceForm = () => {
 
       formData.append("StartTime",StartTime);
       formData.append("EndTime",EndTime);
-      // formData.append("PointTableSystem", PointTableSystem.id);
-
-
       formData.append("FirstPrice", FirstPrice);
       formData.append("SecondPrice", SecondPrice);
       formData.append("ThirdPrice", ThirdPrice);
@@ -505,12 +487,12 @@ const RaceForm = () => {
       formData.append("Sponsor", Sponsor.id);
       formData.append("WeatherDegree", WeatherDegree);
       formData.append("TrackLength", TrackLength.id);
-      // formData.append("ActiveJockeyForTheRace", ActiveJockeyForTheRace.id);
       formData.append("image", image);
       const response = await axios.post(
         `${window.env.API_URL}/createrace`,
         formData
       );
+      setisLoading(false)
       swal({
         title: "Success",
         text: "Data has been added successfully ",
@@ -540,8 +522,6 @@ const RaceForm = () => {
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
   };
-
-  //Function For Validation
 
   const data1 = JSON.stringify(
     TextInputValidation("en", DescriptionEn, "Race Description")
@@ -1120,7 +1100,7 @@ const RaceForm = () => {
                       placeholder={<div>نوع السباق</div>}
                       defaultValue={Sponsor}
                       onChange={setSponsor}
-                      options={SponsorForTheRace}
+                      options={SponsorForTheRaceAr}
                       className="selectdir"
                       isClearable={true}
                       isSearchable={true}

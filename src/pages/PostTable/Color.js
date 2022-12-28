@@ -144,8 +144,6 @@ const Color = () => {
  
     }
   };
-
-  console.log(colorshortcode)
   const history = useNavigate();
   const { pathname } = useLocation();
 

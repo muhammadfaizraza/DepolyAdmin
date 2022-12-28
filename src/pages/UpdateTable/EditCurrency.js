@@ -11,7 +11,6 @@ const NewsForm = () => {
   const { state } = useLocation();
 
   const { currencyid } = state;  
-  console.log(currencyid,'currencyid')
   const [state1, setState] = useState({
 		NameEn: '',
     NameAr:'',
@@ -45,7 +44,7 @@ const NewsForm = () => {
       formData.append("shortCode", state1.shortCode);
       formData.append("Rate", state1.Rate);
 
-      const response = await axios.put(`${window.env.API_URL}/updateCurrency/${currencyid._id}`, formData);
+       await axios.put(`${window.env.API_URL}/updateCurrency/${currencyid._id}`, formData);
       history("/currencylist");
       swal({
         title: "Success!",

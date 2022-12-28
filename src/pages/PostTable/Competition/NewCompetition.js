@@ -68,14 +68,11 @@ const TrainerForm = () => {
   const [NameAr, setNameAr] = useState("");
   const [DescEn, setDescEn] = useState("");
   const [DescAr, setDescAr] = useState("");
-  const [shortCode, setshortCode] = useState("");
   const [pickCount, setpickCount] = useState("");
   const [TriCount, setTriCount] = useState("");
   const [StartDate, setStartDate] = useState("");
   const [CompetitionCategory, setCompetitionCategory] = useState("");
   const [CompetitionCode, setCompetitionCode] = useState("");
-  const [preview, setPreview] = useState();
-  const [image, setImage] = useState();
 
   const [showCategory, setShowCategory] = useState(false);
 
@@ -122,43 +119,7 @@ const TrainerForm = () => {
     }
   };
 
-  const convert = (num) => {
-    if (num) {
-      var date = new Date(num);
-      var months = [
-        "يناير",
-        "فبراير",
-        "مارس",
-        "إبريل",
-        "مايو",
-        "يونيو",
-        "يوليو",
-        "أغسطس",
-        "سبتمبر",
-        "أكتوبر",
-        "نوفمبر",
-        "ديسمبر",
-      ];
-      var days = [
-        "اﻷحد",
-        "اﻷثنين",
-        "الثلاثاء",
-        "اﻷربعاء",
-        "الخميس",
-        "الجمعة",
-        "السبت",
-      ];
-      var delDateString =
-        days[date.getDay()] +
-        " " +
-        date.getDate() +
-        " " +
-        months[date.getMonth()] +
-        " " +
-        date.getFullYear();
-      return delDateString;
-    }
-  };
+  
 
   var today = new Date();
 

@@ -3,38 +3,34 @@ import "../../Components/CSS/forms.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
-import Select from "react-select";
 import DatePicker from "react-date-picker";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-import { useSelector } from "react-redux";
 
 
 const NewsForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
-  const { data: nationality } = useSelector((state) => state.nationality);
+  // const { data: nationality } = useSelector((state) => state.nationality);
 
   const { ownerid } = state;
   const [image,setImage] = useState();
   const [preview,setPreview] = useState();
-  const [NationalityID, setNationalityID] = useState("");
+  // const [NationalityID, setNationalityID] = useState("");
   const [RegistrationDate, setRegistrationDate] = useState("");
 
-  let AllNationality =
-    nationality === undefined ? (
-      <></>
-    ) : (
-      nationality.map(function (item) {
-        return {
-          id: item._id,
-          value: item.NameEn,
-          label: item.NameEn,
-        };
-      })
-    );
+  // let AllNationality =
+  //   nationality === undefined ? (
+  //     <></>
+  //   ) : (
+  //     nationality.map(function (item) {
+  //       return {
+  //         id: item._id,
+  //         value: item.NameEn,
+  //         label: item.NameEn,
+  //       };
+  //     })
+  //   );
   const [state1, setState] = useState({
 		NameAr: '',
     NameEn:'',
@@ -74,6 +70,7 @@ const NewsForm = () => {
     setPreview(objectUrl)
     return () => URL.revokeObjectURL(objectUrl)
 }, [image])
+
   const fileSelected = (event) => {
     const image = event.target.files[0];
     setImage(image);
@@ -92,10 +89,9 @@ const NewsForm = () => {
       formData.append("RegistrationDate", RegistrationDate);
 
       formData.append("Ownerimage", state1.image);
-      // formData.append("NationalityID", NationalityID.id);
-      // formData.append("RegistrationDate", RegistrationDate);
 
-      const response = await axios.put(`${window.env.API_URL}/updateOwner/${ownerid._id}`, formData);
+
+      await axios.put(`${window.env.API_URL}/updateOwner/${ownerid._id}`, formData);
       history("/owner");
       swal({
         title: "Success!",
@@ -233,66 +229,13 @@ const NewsForm = () => {
             <DatePicker
               onChange={setRegistrationDate}
               value={RegistrationDate}
-              // value={JockeyLicenseDate}
               dayPlaceholder="  "
             
               monthPlaceholder={state1.RegistrationDate}
               yearPlaceholder=""
               
             />
-
-         
-          
-       
-
-                      
-                
-              
-
                 </div>
-{/* 
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <Select
-                      placeholder={<div>Type to search Nationality</div>}
-                      defaultValue={NationalityID}
-                      onChange={setNationalityID}
-                      options={AllNationality}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                    <span className="spanForm">
-                      <OverlayTrigger
-                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
-                      >
-                        <button
-                          className="addmore"
-                          onClick={() => history("/nationality")}
-                        >
-                          +
-                        </button>
-                      </OverlayTrigger>
-                      |
-                    </span>
-                  </div>
-
-                  <div className="col-sm">
-                    <Select
-                      className="selectdir"
-                      placeholder={
-                        <div style={{ direction: "rtl" }}>
-                          اكتب للبحث عن الجنسية
-                        </div>
-                      }
-                      defaultValue={NationalityID}
-                      onChange={setNationalityID}
-                      options={AllNationality}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                  </div>
-                </div> */}
-
                 <div className="ButtonSection">
                 <div>
                 <input type='file' onChange={fileSelected} className="formInput"/>

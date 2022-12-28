@@ -11,7 +11,6 @@ const NewsForm = () => {
   const { state } = useLocation();
 
   const { colorid } = state;
-  console.log(colorid);
 
   const [state1, setState] = useState({
 		NameEn: '',

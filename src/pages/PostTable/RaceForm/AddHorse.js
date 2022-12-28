@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Moment from "moment";
 import "react-toastify/dist/ReactToastify.css";
 import { fetchjockey } from "../../../redux/getReducer/getJockeySlice";
 import { useState } from "react";
@@ -9,10 +8,8 @@ import { useSelector } from "react-redux";
 import { fetchHorse } from "../../../redux/getReducer/getHorseSlice";
 import { fetchequipment } from "../../../redux/getReducer/getEquipment";
 import { toast } from 'react-toastify';
-
 import Select from "react-select";
 import swal from "sweetalert";
-import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 
 const LocalItem = () => {
@@ -136,7 +133,6 @@ const ItemLength = items.length;
         });
       }
     }
-    
   };
 
   return (

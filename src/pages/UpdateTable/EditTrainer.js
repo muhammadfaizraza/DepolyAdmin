@@ -71,12 +71,7 @@ console.log(dateall,'dateall 1')
 		} else {
 		}
 	}, [trainerid]);
-  function convert(str) {
-    var date = new Date(str),
-      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-      day = ("0" + date.getDate()).slice(-2);
-    return [date.getFullYear(), mnth, day].join("-");
-  }
+  
 
   useEffect(() => {
     dispatch(fetchnationality());
@@ -89,17 +84,9 @@ console.log(dateall,'dateall 1')
     const objectUrl = URL.createObjectURL(image)
     setPreview(objectUrl)
     return () => URL.revokeObjectURL(objectUrl)
-}, [image])
+},[image,trainerid.image])
 
-
-const handleChange =(e)=>{
-
-setState({...state1 , TrainerLicenseDate: e.target.value})
-console.log(state.TrainerLicenseDate, "")
-} 
-
-console.log("aaya", state1.TrainerLicenseDate)
-const submit = async (event) => {
+    const submit = async (event) => {
     event.preventDefault();
     try {
       
@@ -120,7 +107,7 @@ const submit = async (event) => {
 
 
 
-      const response = await axios.put(`${window.env.API_URL}/updatetrainer/${trainerid._id}`, formData);
+      await axios.put(`${window.env.API_URL}/updatetrainer/${trainerid._id}`, formData);
       history("/trainer");
       swal({
         title: "Success!",
@@ -249,38 +236,6 @@ const submit = async (event) => {
                     
                   </div>
                 </div>
-                {/* <div className="row mainrow">
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="Remarks"
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, Remarks: e.target.value })
-                      }
-                    
-                    >
-                      <Form.Control type="text" placeholder="Description" value={state1.Remarks}/>
-                    </FloatingLabel>
-                
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="اسم"
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, NameAr: e.target.value })
-                      }
-                    
-                    >
-                      <Form.Control type="text" placeholder="Description" value={state1.NameAr}/>
-                    </FloatingLabel>
-                    
-                  </div>
-                </div> */}
 
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -365,14 +320,6 @@ const submit = async (event) => {
                       className="editDate"
                     />
 
-          
-
-                  {/* <div className="col-sm" style={{ direction: "rtl" }}>
-                    <input
-                      
-                      placeholder="تاريخ الولادة"
-                    />
-                  </div> */}
                 </div>
                 <div className="row mainrow">
                 <DatePicker
@@ -384,18 +331,8 @@ const submit = async (event) => {
                       monthPlaceholder={state1.TrainerLicenseDate}
                       yearPlaceholder=""
                      className="editDate"
-                    />  
-          
-
-    
-
-            {/* <div className="col-sm" style={{ direction: "rtl" }}>
-              <input
-                
-                placeholder="تاريخ الولادة"
-              />
-            </div> */}
-          </div>
+                    /> 
+                 </div>
                 <div className="ButtonSection">
                 <div>
                 <input type='file' onChange={fileSelected} className="formInput"/>

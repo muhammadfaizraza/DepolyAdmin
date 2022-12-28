@@ -46,13 +46,7 @@ const PublishRace = () => {
       label: item.NameEn,
     };
   });
-  let AllJockey = jockey.map(function (item) {
-    return {
-      id: item._id,
-      value: item.NameEn,
-      label: item.NameEn,
-    };
-  });
+
 
   let AllVerdict = verdict.map(function (item) {
     return {
@@ -147,16 +141,12 @@ const PublishRace = () => {
                     <span>Rank #</span>
                     <span>Verdict Name</span>
                     <span>Horse Name</span>
-                    {/* <span>Jockey Name</span> */}
                   </div>
                 </div>
                 {items.map((e, i) => {
                 return (
                   <div className="myselectiondata">
                     <span >{i + 1}</span>
-                    {/* <span>
-                      <input type='text' value={VerdictName} onChange={() => SetVerdictName(e.target.value)} placeholder='Verdict Name' className='textverdict' />
-                    </span> */}
                      <span>
                       <Select
                         defaultValue={VerdictName}
@@ -175,24 +165,7 @@ const PublishRace = () => {
                         isSearchable={true}
                       />
                     </span>
-                    {/* <span>
-                      <Select
-                        defaultValue={JockeyData}
-                        onChange={SetJockeyData}
-                        options={AllJockey}
-                        isClearable={false}
-                        isSearchable={true}
-                      />
-                    </span> */}
-                    {/* <span>
-                      <Select
-                        defaultValue={InputData}
-                        onChange={SetinputData}
-                        options={horseoptions}
-                        isClearable={false}
-                        isSearchable={true}
-                      />
-                    </span> */}
+                   
                   </div>
                 );
               })}

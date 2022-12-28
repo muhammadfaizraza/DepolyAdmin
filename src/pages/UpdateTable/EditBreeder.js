@@ -11,8 +11,6 @@ const NewsForm = () => {
   const { state } = useLocation();
 
   const { breederid } = state;
-  console.log(breederid);
-
   const [image,setImage] = useState();
   const [preview,setPreview] = useState();
 

@@ -11,7 +11,6 @@ const NewsForm = () => {
   const { state } = useLocation();
 
   const { equipmentid } = state;
-  console.log(equipmentid);
 
   const [state1, setState] = useState({
 		NameEn: '',
@@ -44,7 +43,7 @@ const NewsForm = () => {
       formData.append("NameAr", state1.NameAr + ' ');
       formData.append("shortCode", state1.shortCode);
 
-      const response = await axios.put(`${window.env.API_URL}/updateEquipment/${equipmentid._id}`, formData);
+      await axios.put(`${window.env.API_URL}/updateEquipment/${equipmentid._id}`, formData);
       history("/equipmentlist");
       swal({
         title: "Success!",

@@ -197,43 +197,43 @@ const TrainerForm = () => {
     }
   };
 
-  const convert = (num) => {
-    if (num) {
-      var date = new Date(num);
-      var months = [
-        "يناير",
-        "فبراير",
-        "مارس",
-        "إبريل",
-        "مايو",
-        "يونيو",
-        "يوليو",
-        "أغسطس",
-        "سبتمبر",
-        "أكتوبر",
-        "نوفمبر",
-        "ديسمبر",
-      ];
-      var days = [
-        "اﻷحد",
-        "اﻷثنين",
-        "الثلاثاء",
-        "اﻷربعاء",
-        "الخميس",
-        "الجمعة",
-        "السبت",
-      ];
-      var delDateString =
-        days[date.getDay()] +
-        " " +
-        date.getDate() +
-        " " +
-        months[date.getMonth()] +
-        " " +
-        date.getFullYear();
-      return delDateString;
-    }
-  };
+  // const convert = (num) => {
+  //   if (num) {
+  //     var date = new Date(num);
+  //     var months = [
+  //       "يناير",
+  //       "فبراير",
+  //       "مارس",
+  //       "إبريل",
+  //       "مايو",
+  //       "يونيو",
+  //       "يوليو",
+  //       "أغسطس",
+  //       "سبتمبر",
+  //       "أكتوبر",
+  //       "نوفمبر",
+  //       "ديسمبر",
+  //     ];
+  //     var days = [
+  //       "اﻷحد",
+  //       "اﻷثنين",
+  //       "الثلاثاء",
+  //       "اﻷربعاء",
+  //       "الخميس",
+  //       "الجمعة",
+  //       "السبت",
+  //     ];
+  //     var delDateString =
+  //       days[date.getDay()] +
+  //       " " +
+  //       date.getDate() +
+  //       " " +
+  //       months[date.getMonth()] +
+  //       " " +
+  //       date.getFullYear();
+  //     return delDateString;
+  //   }
+  // };
 
   var today = new Date();
 

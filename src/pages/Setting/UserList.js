@@ -317,6 +317,7 @@ const SubscriberList = () => {
             postsPerPage={postsPerPage}
             totalPosts={SearchData.length}
             paginate={paginate}
+            currentPosts={currentPosts}
           />
         </div>
       </div>

@@ -46,13 +46,7 @@ const PublishRace = () => {
       label: item.NameEn,
     };
   });
-  let AllJockey = jockey.map(function (item) {
-    return {
-      id: item._id,
-      value: item.NameEn,
-      label: item.NameEn,
-    };
-  });
+
 
   let AllVerdict = verdict.map(function (item) {
     return {

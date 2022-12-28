@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../Components/CSS/forms.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { fetchSinglejockey } from "../../redux/getReducer/getSingleJockey";
 import swal from "sweetalert";
@@ -15,9 +15,6 @@ const NewsForm = () => {
   const { state } = useLocation();
 
   const { jockeyid } = state;
-
-  console.log(jockeyid);
-
   const [JockeyLicenseDate,setJockeyLicenseDate] = useState('');
   const [DOB,setDOB] = useState('')
 
@@ -46,7 +43,7 @@ const NewsForm = () => {
   
   useEffect(() => {
     dispatch(fetchSinglejockey());
-  }, []);
+  }, [dispatch]);
 
 
   useEffect(() => {
@@ -64,14 +61,11 @@ const NewsForm = () => {
 				JockeyLicenseDate: jockeyid.JockeyLicenseDate,
         DOB:jockeyid.DOB,
         JockeyAllowance:jockeyid.JockeyAllowance,
-
-
-  
 			});
 		} else {
 			dispatch(fetchSinglejockey({ jockeyid }));
 		}
-	}, [jockeyid]);
+	}, [jockeyid,dispatch]);
 
   useEffect(() => {
     if (image === undefined) {
@@ -83,7 +77,6 @@ const NewsForm = () => {
     return () => URL.revokeObjectURL(objectUrl)
 }, [image])
 
-console.log(preview,'preview')
   const submit = async (event) => {
     event.preventDefault();
     try {
@@ -99,13 +92,12 @@ console.log(preview,'preview')
       formData.append("MaximumJockeyWeight", state1.MaximumJockeyWeight);
       formData.append("MiniumumJockeyWeight", state1.MiniumumJockeyWeight);
       formData.append("JockeyAllowance", state1.JockeyAllowance);
-
       formData.append("Rating", state1.Rating);
       formData.append("JockeyLicenseDate", JockeyLicenseDate);
       formData.append("DOB", DOB);
      
 
-      const response = await axios.put(`${window.env.API_URL}/updateJockey/${jockeyid._id}`, formData);
+       await axios.put(`${window.env.API_URL}/updateJockey/${jockeyid._id}`, formData);
       history("/jockey");
       swal({
         title: "Success!",
@@ -268,11 +260,6 @@ console.log(preview,'preview')
                 </div>
                 <div className="row mainrow">
                 <DatePicker
-                      //  onChange={(e) =>
-                      //   setState({ ...state1, DOB: e.target.value })
-                      // }
-                      // defaultValue={state1.DOB}
-                      // value={state1.DOB}
                       onChange={setDOB}
                       value={DOB}
                       dayPlaceholder="  "
@@ -298,23 +285,7 @@ console.log(preview,'preview')
                       <Form.Control type="number" placeholder="Description" value={state1.MiniumumJockeyWeight}/>
                     </FloatingLabel>
                  
-                    {/* <span className="spanForm"> |</span> */}
                   </div>
-
-                  {/* <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="الحد الأدنى من وزن الجوكي"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                      onChange={(e) =>
-                        setState({ ...state1, MiniumumJockeyWeight: e.target.value })
-                      }
-                     
-                    >
-                      <Form.Control type="text" placeholder="Description" value={state1.MiniumumJockeyWeight}/>
-                    </FloatingLabel>
-                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">

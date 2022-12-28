@@ -32,6 +32,7 @@ const AdminProfile = () => {
   useEffect(() => {
 		if (userInfo) {
 			setState({
+        id:userInfo.data._id,
 				FirstName: userInfo.data.FirstName,
         LastName: userInfo.data.LastName,
 				role: userInfo.data.role,
@@ -41,8 +42,34 @@ const AdminProfile = () => {
 		}
 	}, [userInfo]);
 
+  const submit = async (event) => {
+    event.preventDefault();
+    try {
+      
+      const formData = new FormData();
+      formData.append("FirstName", state1.FirstName);
+      formData.append("LastName", state1.LastName);
+      formData.append("role", state1.role);
+      formData.append("Email", state1.Email);
 
-  const submit = async (e) => {};
+      const response = await axios.put(`${window.env.API_URL}/updateadmin/${state1.id}`, formData);
+      // history("/colorlist");
+      swal({
+        title: "Success!",
+        text: "Data has been Updated successfully ",
+        icon: "success",
+        button: "OK",
+      });
+    } catch (error) {
+      const err = error.response.data.message;
+      swal({
+      title: "Error!",
+      text: err,
+      icon: "error",
+      button: "OK",
+    });
+    }
+  };
 
   return (
     <div className="page">

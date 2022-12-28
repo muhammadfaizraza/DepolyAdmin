@@ -208,6 +208,7 @@ const SubscriberList = () => {
             postsPerPage={postsPerPage}
             totalPosts={newsletter.length}
             paginate={paginate}
+            currentPosts={currentPosts}
           />
         </div>
         

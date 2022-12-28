@@ -11,15 +11,12 @@ const NewsForm = () => {
   const { state } = useLocation();
 
   const { genderid } = state;
-  console.log(genderid);
 
   const [state1, setState] = useState({
 		NameEn: '',
     NameAr:'',
 		shortCode: '',
-    AbbrevAr:'',
-		shortCode: '',
-    
+    AbbrevAr:'',    
 	});
  
 
@@ -48,7 +45,7 @@ const NewsForm = () => {
       formData.append("NameAr", state1.NameAr + ' ');
       formData.append("shortCode", state1.shortCode);
 
-      const response = await axios.put(`${window.env.API_URL}/updateSex/${genderid._id}`, formData);
+       await axios.put(`${window.env.API_URL}/updateSex/${genderid._id}`, formData);
       history("/genderlist");
       swal({
         title: "Success!",

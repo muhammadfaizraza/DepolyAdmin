@@ -891,3 +891,14 @@ svg.crossIcon {
 .react-date-picker__inputGroup__input {
   min-width: 5rem !important;
 }
+
+p.selectLabel {
+  position: relative;
+  top: 11px;
+  left: 30px;
+  font-size: 11px;
+  z-index: 15;
+  line-height: 0px;
+  margin: 2px;
+  color: #8d8d8a;
+}

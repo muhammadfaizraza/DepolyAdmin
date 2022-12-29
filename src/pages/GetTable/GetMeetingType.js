@@ -15,7 +15,8 @@ import MeetingPopup from "../../Components/Popup/MeetingPopup";
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const GetMeetingType = () => {
   const [ShowCalender, setShowCalender] = useState(false)
@@ -121,13 +122,41 @@ const handleShow = async (data) => {
                 <Link to="/meeting">
                   <button>Add meeting</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>
                 <CSVLink  data={meeting}  separator={";"} filename={"MKS Meeting.csv"} className='csvclass'>
                         Export CSV
                 </CSVLink>
               </div>
             </div>
+            <div>
+              
+              {
+                ShowCalender ?
+                <span className="transitionclass">
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </span>:<></>
+              }
+              </div>
             <>
               <div className="div_maintb">
                 <ScrollContainer>

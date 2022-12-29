@@ -16,7 +16,8 @@ import {BsEyeFill} from "react-icons/bs"
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const NewsLetter = () => {
   const [ShowCalender, setShowCalender] = useState(false)
@@ -104,6 +105,24 @@ const NewsLetter = () => {
               </Link>
             </div>
           </div>
+          <div>
+              
+              {
+                ShowCalender ?
+                <span className="transitionclass">
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </span>:<></>
+              }
+              </div>
           <>
             <div className="div_maintb">
               <ScrollContainer>

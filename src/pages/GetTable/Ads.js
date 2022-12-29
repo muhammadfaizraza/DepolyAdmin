@@ -14,13 +14,15 @@ import axios from "axios";
 import swal from "sweetalert";
 import { BsEyeFill } from "react-icons/bs";
 import Pagination from "./Pagination";
-import Form from 'react-bootstrap/Form';
-import { BiFilter } from 'react-icons/bi';
+import Form from "react-bootstrap/Form";
+import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
-const Ads = () => {
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
+const Ads = () => {
   const [Value, setValue] = useState(false);
-  const [ShowCalender, setShowCalender] = useState(false)
+  const [ShowCalender, setShowCalender] = useState(false);
 
   //for Modal
   const [show, setShow] = useState(false);
@@ -44,7 +46,6 @@ const Ads = () => {
     dispatch(fetchAds());
   }, []);
 
-
   const handleRemove = async (Id) => {
     try {
       swal({
@@ -53,30 +54,20 @@ const Ads = () => {
         icon: "warning",
         buttons: true,
         dangerMode: true,
-      })
-
-      .then( async(willDelete) => {
-       
-  
-   
+      }).then(async (willDelete) => {
         if (willDelete) {
           const res = await axios.delete(
             `${window.env.API_URL}/softdeleteAds/${Id}`
           );
           swal("Your data has been deleted Successfully!", {
             icon: "success",
-         
-          }
-          )
-          dispatch(fetchAds())
-          
+          });
+          dispatch(fetchAds());
         } else {
           swal("Your data is safe!");
         }
       });
-   
-    }catch(error) {
-
+    } catch (error) {
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -85,10 +76,7 @@ const Ads = () => {
         button: "OK",
       });
     }
-
-
-
-  }
+  };
   if (status === STATUSES.LOADING) {
     return (
       <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
@@ -106,7 +94,6 @@ const Ads = () => {
       </h2>
     );
   }
-  console.log(Value,"hai bhai hai")
 
   return (
     <>
@@ -128,36 +115,53 @@ const Ads = () => {
                       alignItems: "center",
                       color: "rgba(0, 0, 0, 0.6)",
                     }}
-                  >
-                    
-                  </h6>
+                  ></h6>
 
                   <Link to="/adsform">
                     <button>Create Ad</button>
                   </Link>
-                  <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                  <CSVLink  data={allads}  separator={";"} filename={"MKS Ads.csv"} className='csvclass'>
-                        Export CSV
-                    </CSVLink>
+                  <OverlayTrigger
+                    overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                  >
+                    <span className="addmore">
+                      <BiFilter
+                        className="calendericon"
+                        onClick={() => setShowCalender(!ShowCalender)}
+                      />
+                    </span>
+                  </OverlayTrigger>
+                  <CSVLink
+                    data={allads}
+                    separator={";"}
+                    filename={"MKS Ads.csv"}
+                    className="csvclass"
+                  >
+                    Export CSV
+                  </CSVLink>
                 </div>
               </div>
               <div>
-              
-              {
-                ShowCalender ?
-                <span className="transitionclass">
-                <div className="userfilter">
-                
-                <div className="filtertextform forflex">
-                
-                 <input type='text' class="form-control" placeholder="Enter Title"/>
-                 <input type='text' class="form-control" placeholder="Enter Description"/>
-                 </div>
-                
-                </div>
-                <button className="filterbtn">Apply Filter</button>
-                </span>:<></>
-              }
+                {ShowCalender ? (
+                  <span className="transitionclass">
+                    <div className="userfilter">
+                      <div className="filtertextform forflex">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Title"
+                        />
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Description"
+                        />
+                      </div>
+                    </div>
+                    <button className="filterbtn">Apply Filter</button>
+                  </span>
+                ) : (
+                  <></>
+                )}
               </div>
               <div className="div_maintb">
                 <ScrollContainer className="scroll-container">
@@ -185,7 +189,7 @@ const Ads = () => {
                               <td>
                                 <img src={item.image} alt="" />
                               </td>
-                                {/* <td>
+                              {/* <td>
                                 <Form.Check 
                                   type="switch"
                                   id="custom-switch"

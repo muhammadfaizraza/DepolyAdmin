@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchrace, STATUSES } from "../../redux/getReducer/getRaceSlice";
 import { fetchtobePublishRace } from "../../redux/getReducer/getToBePublishRace";
 import { useDispatch, useSelector } from "react-redux";
-import { Link ,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../Components/CSS/Table.css";
 import ScrollContainer from "react-indiana-drag-scroll";
 import "../../Components/CSS/race.css";
@@ -16,10 +16,11 @@ import axios from "axios";
 import { BiEdit } from "react-icons/bi";
 import RaceDetailPopup from "../../Components/Popup/RaceDetailPopup";
 import { BsEyeFill } from "react-icons/bs";
-import Pagination from './Pagination'
-import { BiFilter } from 'react-icons/bi';
+import Pagination from "./Pagination";
+import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 const Prize = (data) => {
   return (
     <>
@@ -50,15 +51,12 @@ const Prize = (data) => {
 };
 
 const Races = () => {
-  const [ShowCalender, setShowCalender] = useState(false)
+  const [ShowCalender, setShowCalender] = useState(false);
 
   const history = useNavigate();
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
-;
-
-
   const handleShow = async (data) => {
     setmodaldata(data);
     await setShow(true);
@@ -71,27 +69,31 @@ const Races = () => {
     setmodaldataPopup(data);
     await setShowRacePopup(true);
   };
-  
+
   const dispatch = useDispatch();
-  const { data: tobePublishRace ,status } = useSelector((state) => state.tobePublishRace);
+  const { data: tobePublishRace, status } = useSelector(
+    (state) => state.tobePublishRace
+  );
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(8)
- 
+  const [postsPerPage] = useState(8);
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = tobePublishRace.slice(indexOfFirstPost, indexOfLastPost);
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  console.log(tobePublishRace.length,'tobePublishRace');
-  
+  console.log(tobePublishRace.length, "tobePublishRace");
+
   useEffect(() => {
     dispatch(fetchrace());
     dispatch(fetchtobePublishRace());
   }, [dispatch]);
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleterace/${Id}`)
+      const res = await axios.delete(
+        `${window.env.API_URL}/softdeleterace/${Id}`
+      );
       swal({
         title: "Success!",
         text: "Data has been Deleted successfully ",
@@ -110,16 +112,17 @@ const Races = () => {
     }
   };
 
-
   const GoToPublish = (RaceId) => {
     history("/publishrace", {
       state: {
         RaceId: RaceId,
       },
     });
-  }
+  };
   if (status === STATUSES.LOADING) {
-    return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
+    return (
+      <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
+    );
   }
   if (status === STATUSES.ERROR) {
     return (
@@ -132,7 +135,7 @@ const Races = () => {
       </h2>
     );
   }
-  
+
   return (
     <>
       <div className="page">
@@ -143,28 +146,61 @@ const Races = () => {
             }}
           >
             <div className="Header ">
-            <h4> Race To Be Published</h4>
-            <div>
+              <h4> Race To Be Published</h4>
+              <div>
                 <h6
                   style={{
                     marginRight: "100px",
                     alignItems: "center",
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
-                >
-                 
-                </h6>
-
+                ></h6>
                 <Link to="/raceform">
                   <button>Add Race</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                  <CSVLink  data={tobePublishRace}  separator={";"} filename={"MKS Race.csv"} className='csvclass'>
-                        Export CSV
-                    </CSVLink>
+                <OverlayTrigger
+                  overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                >
+                  <span className="addmore">
+                    <BiFilter
+                      className="calendericon"
+                      onClick={() => setShowCalender(!ShowCalender)}
+                    />
+                  </span>
+                </OverlayTrigger>{" "}
+                <CSVLink
+                  data={tobePublishRace}
+                  separator={";"}
+                  filename={"MKS Race.csv"}
+                  className="csvclass"
+                >
+                  Export CSV
+                </CSVLink>
               </div>
             </div>
-
+            <div>
+              {ShowCalender ? (
+                <span className="transitionclass">
+                  <div className="userfilter">
+                    <div className="filtertextform forflex">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Title"
+                      />
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Description"
+                      />
+                    </div>
+                  </div>
+                  <button className="filterbtn">Apply Filter</button>
+                </span>
+              ) : (
+                <></>
+              )}
+            </div>
             <div class="div_maintb">
               <ScrollContainer className="scroll-container">
                 <table className="Sc">
@@ -193,12 +229,10 @@ const Races = () => {
                       <th>Action</th>
                     </tr>
                   </thead>
-                      {tobePublishRace === undefined || tobePublishRace.length === 0 ? (
+                  {tobePublishRace === undefined ||
+                  tobePublishRace.length === 0 ? (
                     <div>
-                      <h3 className="notdatadiv"
-                    >
-                      No Race
-                    </h3>
+                      <h3 className="notdatadiv">No Race</h3>
                     </div>
                   ) : (
                     <>
@@ -212,7 +246,7 @@ const Races = () => {
                             }}
                           >
                             <tr>
-                            <td
+                              <td
                                 style={{
                                   backgroundColor: `${
                                     RaceStatus === "Cancel"
@@ -234,10 +268,26 @@ const Races = () => {
                                   }`,
                                 }}
                               >
-                                {item.RaceNameModelData === null ? <>N/A</> : item.RaceNameModelData.NameEn}
+                                {item.RaceNameModelData === null ? (
+                                  <>N/A</>
+                                ) : (
+                                  item.RaceNameModelData.NameEn
+                                )}
                               </td>
-                              <td>{item.RaceNameModelData === null ? <>N/A</> : item.RaceNameModelData.NameAr} </td>
-                              <td>{item.RaceTypeModelData === null ? <>N/A</> : item.RaceTypeModelData.NameEn} </td>
+                              <td>
+                                {item.RaceNameModelData === null ? (
+                                  <>N/A</>
+                                ) : (
+                                  item.RaceNameModelData.NameAr
+                                )}{" "}
+                              </td>
+                              <td>
+                                {item.RaceTypeModelData === null ? (
+                                  <>N/A</>
+                                ) : (
+                                  item.RaceTypeModelData.NameEn
+                                )}{" "}
+                              </td>
                               <td>
                                 {item.RaceCourseData === null ? (
                                   <>N/A</>
@@ -286,7 +336,6 @@ const Races = () => {
                                   Click
                                 </button>
                               </td>
-                             
 
                               <td>
                                 {" "}
@@ -322,7 +371,9 @@ const Races = () => {
                                 <MdDelete
                                   onClick={() => handleRemove(item._id)}
                                 />
-                                <BsEyeFill onClick={() => handleShowRacePopup(item)} /> 
+                                <BsEyeFill
+                                  onClick={() => handleShowRacePopup(item)}
+                                />
                               </td>
                             </tr>
                           </tbody>
@@ -335,12 +386,11 @@ const Races = () => {
             </div>
           </div>
           <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={tobePublishRace.length}
-          paginate={paginate}
-          currentPage={currentPage}
-
-        />
+            postsPerPage={postsPerPage}
+            totalPosts={tobePublishRace.length}
+            paginate={paginate}
+            currentPage={currentPage}
+          />
         </div>
       </div>
       <Modal
@@ -370,21 +420,19 @@ const Races = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>  
-          <h2 style={{fontFamily: "inter"}}>Race</h2>
+        <Modal.Header closeButton>
+          <h2 style={{ fontFamily: "inter" }}>Race</h2>
         </Modal.Header>
         <Modal.Body>
           <RaceDetailPopup data={modaldataPopup} />
         </Modal.Body>
-         <Modal.Footer>
+        <Modal.Footer>
           <button onClick={handleCloseRacePopup} className="modalClosebtn">
             Close
           </button>
         </Modal.Footer>
-     
       </Modal>
     </>
-
   );
 };
 export default Races;

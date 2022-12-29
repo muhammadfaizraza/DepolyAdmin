@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-
 import {
   fetchracecourse,
   STATUSES,
 } from "../../redux/getReducer/getRaceCourseSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostRaceCourse";
 import swal from "sweetalert";
 import { Link, useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
@@ -20,7 +18,8 @@ import { BsEyeFill } from "react-icons/bs";
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 
 const Racecourse = () => {
@@ -135,13 +134,40 @@ const Racecourse = () => {
                 <Link to="/racecourseform">
                   <button>Add Race Cource</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-                  <CSVLink  data={racecourse}  separator={";"} filename={"MKS Race Course.csv"} className='csvclass'>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>                         <CSVLink  data={racecourse}  separator={";"} filename={"MKS Race Course.csv"} className='csvclass'>
                         Export CSV
                     </CSVLink>
               </div>
             </div>
-
+            <div>
+              
+              {
+                ShowCalender ?
+                <span className="transitionclass">
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </span>:<></>
+              }
+              </div>
             <div class="div_maintb">
               <ScrollContainer>
                 <table striped bordered hover>

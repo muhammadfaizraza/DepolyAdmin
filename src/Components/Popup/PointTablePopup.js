@@ -2,7 +2,8 @@ import React from 'react'
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
-const GroundTypePopup = (data) => {
+const PointTable = (data) => {
+  console.log(data,' dadat')
   return (
    
         
@@ -13,13 +14,13 @@ const GroundTypePopup = (data) => {
 
               <FloatingLabel
                   controlId="floatingInput"
-                  label="Ground Type "
+                  label="Bonus_Point                  "
                   className="mb-3"
                 
                 
                
                 >
-                  <Form.Control type="text" placeholder="Description" readOnly value={data.data.NameEn}/>
+                  <Form.Control type="text" placeholder="Description" readOnly value={data.data.Bonus_Point}/>
                 </FloatingLabel>
              
                 <span className="spanForm"> |</span>
@@ -28,12 +29,11 @@ const GroundTypePopup = (data) => {
               <div className="col-sm">
               <FloatingLabel
                   controlId="floatingInput"
-                  label="نوع الأرض"
-                  className="mb-3 floatingInputAr"
-                  style={{ direction: "rtl", left: "initial", right: 0 }}
+                  label=" Group_Name"
+                  className="mb-3"
                 
                 >
-                  <Form.Control type="text" placeholder="اسم" readOnly value={data.data.NameAr} style={{ left: "%" }}/>
+                  <Form.Control type="text" placeholder="اسم" readOnly value={data.data.Group_Name}/>
                 </FloatingLabel>
                 
               </div>
@@ -43,13 +43,13 @@ const GroundTypePopup = (data) => {
 
               <FloatingLabel
                   controlId="floatingInput"
-                  label="Abbreviation "
+                  label="Point "
                   className="mb-3"
                 
                 
                
                 >
-                  <Form.Control type="text" placeholder="Description" readOnly value={data.data.AbbrevEn}/>
+                  <Form.Control type="text" placeholder="Description" readOnly value={data.data.Point}/>
                 </FloatingLabel>
              
                 <span className="spanForm"> |</span>
@@ -58,12 +58,11 @@ const GroundTypePopup = (data) => {
               <div className="col-sm">
               <FloatingLabel
                   controlId="floatingInput"
-                  label=" اختصار"
-                  className="mb-3 floatingInputAr"
-                  style={{ direction: "rtl", left: "initial", right: 0 }}
+                  label=" Rank"
+                  className="mb-3 "
                 
                 >
-                  <Form.Control type="text" placeholder="اسم" readOnly value={data.data.AbbrevAr} style={{ left: "%" }}/>
+                  <Form.Control type="text" placeholder="اسم" readOnly value={data.data.Rank} />
                 </FloatingLabel>
                 
               </div>
@@ -97,4 +96,4 @@ const GroundTypePopup = (data) => {
   )
 }
 
-export default GroundTypePopup
+export default PointTable

@@ -114,7 +114,7 @@ const TrainerPopup = (data) => {
                 className="mb-3"
               
               >
-                <Form.Control type="text" placeholder="Description" value={data.data.Detail} readOnly/>
+                <Form.Control type="text" placeholder="Description" value={data.data.DetailEn} readOnly/>
               </FloatingLabel>
            
      
@@ -131,7 +131,7 @@ const TrainerPopup = (data) => {
               
               
               >
-                <Form.Control type="text" placeholder="Description" value={data.data.Remarks} readOnly/>
+                <Form.Control type="text" placeholder="Description" value={data.data.RemarksEn} readOnly/>
               </FloatingLabel>
             
             </div>

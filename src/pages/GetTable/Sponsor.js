@@ -1,26 +1,27 @@
-import React, { useEffect, Fragment, useState } from "react";
-import { fetchRaceName, STATUSES } from "../../redux/getReducer/getRaceName";
+import React, { useEffect, useState } from "react";
+import { fetchSponsor, STATUSES } from "../../redux/getReducer/getSponsorSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
-import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import { Link, useNavigate } from "react-router-dom";
+import { BiEdit } from "react-icons/bi";
 import ScrollContainer from "react-indiana-drag-scroll";
+import SponserPopup from "../../Components/Popup/SponserPopup";
+import { Modal } from "react-bootstrap";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
-import { BiEdit } from "react-icons/bi";
 import { BsEyeFill } from "react-icons/bs";
-import RaceNamePopup from "../../Components/Popup/RaceNamePopup";
-import { Modal } from "react-bootstrap";
 import Pagination from "./Pagination";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
-const Racename = () => {
+
+const News = () => {
   const [ShowCalender, setShowCalender] = useState(false);
 
-  //for Modal
+  //For Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -28,22 +29,22 @@ const Racename = () => {
     setmodaldata(data);
     await setShow(true);
   };
-  const dispatch = useDispatch();
-  const history = useNavigate();
 
-  const { data: RaceName, status } = useSelector((state) => state.RaceName);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { data: sponsor, status } = useSelector((state) => state.sponsor);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = RaceName.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = sponsor.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    dispatch(fetchRaceName());
-  }, [dispatch]);
+    dispatch(fetchSponsor());
+  }, []);
 
   const handleRemove = async (Id) => {
     try {
@@ -55,11 +56,11 @@ const Racename = () => {
         dangerMode: true,
       }).then(async (willDelete) => {
         if (willDelete) {
-          await axios.delete(`${window.env.API_URL}/softdeleteRaceName/${Id}`);
+          await axios.delete(`${window.env.API_URL}/softdeletesponsor/${Id}`);
           swal("Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchRaceName());
+          dispatch(fetchSponsor());
         } else {
           swal("Your data is safe!");
         }
@@ -94,7 +95,7 @@ const Racename = () => {
   }
 
   return (
-    <Fragment>
+    <>
       <div className="page">
         <div className="rightsidedata">
           <div
@@ -103,18 +104,11 @@ const Racename = () => {
             }}
           >
             <div className="Header ">
-              <h4>Race Name Listings</h4>
+              <h4>Sponsor Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
-                <Link to="/racenameform">
-                  <button>Add Race Name</button>
+                <Link to="/sponsorform">
+                  <button>Add Sponsor</button>
                 </Link>
                 <OverlayTrigger
                   overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
@@ -125,11 +119,11 @@ const Racename = () => {
                       onClick={() => setShowCalender(!ShowCalender)}
                     />
                   </span>
-                </OverlayTrigger>{" "}
+                </OverlayTrigger>
                 <CSVLink
-                  data={RaceName}
+                  data={sponsor}
                   separator={";"}
-                  filename={"MKS Race Name.csv"}
+                  filename={"MKS sponsor.csv"}
                   className="csvclass"
                 >
                   Export CSV
@@ -159,62 +153,81 @@ const Racename = () => {
                 <></>
               )}
             </div>
-            <>
-              <div className="div_maintb">
-                <ScrollContainer>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Name Arabic </th>
+            <div className="div_maintb">
+              <ScrollContainer className="scroll-container">
+                <table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Title </th>
+                      <th>Title Arabic</th>
+                      <th>Description </th>
+                      <th>Description Arabic</th>
+                      <th>Url</th>
+                      <th>Image</th>
+                      {/* <th>Active</th> */}
 
-                        <th>Short Code</th>
-
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {currentPosts.map((item, index) => {
-                        return (
-                          <>
-                            <tr className="tr_table_class">
-                              <td>{item.NameEn}</td>
-                              <td>{item.NameAr}</td>
-
-                              <td>{item.shortCode} </td>
-
-                              <td className="table_delete_btn1">
-                                <BiEdit
-                                  onClick={() =>
-                                    history("/editracename", {
-                                      state: {
-                                        racenameid: item,
-                                      },
-                                    })
-                                  }
+                      <th style={{ textAlign: "center" }}>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentPosts.map((item, index) => {
+                      return (
+                        <>
+                          <tr className="tr_table_class">
+                            <td>{item.TitleEn}</td>
+                            <td>{item.TitleAr}</td>
+                            <td>{item.DescriptionEn}</td>
+                            <td>{item.DescriptionAr}</td>
+                            <td>{item.Url}</td>
+                            <td>
+                              <img
+                                src={item.image}
+                                alt=""
+                                style={{
+                                  width: "30px",
+                                  height: "30px",
+                                }}
+                              />
+                            </td>
+                            {/* <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
                                 />
-                                <MdDelete
-                                  style={{
-                                    fontSize: "22px",
-                                  }}
-                                  onClick={() => handleRemove(item._id)}
-                                />
-                                <BsEyeFill onClick={() => handleShow(item)} />
-                              </td>
-                            </tr>
-                          </>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </ScrollContainer>
-              </div>
-            </>
+                                </td> */}
+                            <td
+                              className="table_delete_btn1"
+                              style={{ textAlign: "center" }}
+                            >
+                              <BiEdit
+                                onClick={() =>
+                                  navigate("/editsponsor", {
+                                    state: {
+                                      sponsorid: item,
+                                    },
+                                  })
+                                }
+                              />
+                              <MdDelete
+                                onClick={() => handleRemove(item._id)}
+                              />
+                              <BsEyeFill onClick={() => handleShow(item)} />
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </ScrollContainer>
+            </div>
           </div>
-          <span className="plusIconStyle"></span>
           <Pagination
             postsPerPage={postsPerPage}
-            totalPosts={RaceName.length}
+            totalPosts={sponsor.length}
             paginate={paginate}
             currentPage={currentPage}
           />
@@ -228,19 +241,19 @@ const Racename = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2 style={{ fontFamily: "inter" }}>Race Name</h2>
+          <h2>Sponsor </h2>
         </Modal.Header>
         <Modal.Body>
-          <RaceNamePopup data={modaldata} />
+          <SponserPopup data={modaldata} />
         </Modal.Body>
+
         <Modal.Footer>
           <button onClick={handleClose} className="modalClosebtn">
             Close
           </button>
         </Modal.Footer>
       </Modal>
-    </Fragment>
+    </>
   );
 };
-
-export default Racename;
+export default News;

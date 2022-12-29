@@ -16,7 +16,8 @@ import {BsEyeFill} from "react-icons/bs"
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const ColorTable = () => {
   const [ShowCalender, setShowCalender] = useState(false)
@@ -134,13 +135,41 @@ const ColorTable = () => {
                 <Link to="/color">
                   <button>Add Color</button>
                 </Link>
-                <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
-
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>
                 <CSVLink  data={Color}  separator={";"} filename={"MKS Color.csv"} className='csvclass'>
                         Export CSV
                 </CSVLink>
               </div>
             </div>
+            <div>
+              
+              {
+                ShowCalender ?
+                <span className="transitionclass">
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </span>:<></>
+              }
+              </div>
             <>
               <div className="div_maintb">
                 <ScrollContainer>

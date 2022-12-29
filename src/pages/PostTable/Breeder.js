@@ -26,9 +26,7 @@ const Breeder = () => {
   const [DescriptionAr, setDescriptionAr] = useState("");
   const [DescriptionEn, setDescriptionEn] = useState("");
   const [image, setImage] = useState();
-  const [shortCode, setshortCode] = useState("");
 
-  console.log(breedershortcode,'breedershortcode')
   const [state1, setState] = useState({
 		shortCode: '',
 	});
@@ -59,9 +57,11 @@ const Breeder = () => {
       formData.append("image", image);
 
       await axios.post(`${window.env.API_URL}/uploadBreeder`, formData);
+      
       if (pathname === "/breeder") {
         history("/breederlist");
       }
+
       swal({
         title: "Success!",
         text: "Data has been added successfully ",

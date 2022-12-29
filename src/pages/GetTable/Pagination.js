@@ -1,11 +1,6 @@
 import React from 'react';
 
 const Pagination = ({ postsPerPage, totalPosts, paginate ,currentPage}) => {
-  // const pageNumbers = [];
-
-  // for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
-  //   pageNumbers.push(i);
-  // }
   
   let pagination = [], i = 1;
   const totalall = Math.ceil(totalPosts / postsPerPage)
@@ -17,8 +12,6 @@ const Pagination = ({ postsPerPage, totalPosts, paginate ,currentPage}) => {
      i++;
    } else {
      pagination.push('...');
-
-     //jump to the next page to be linked in the navigation
      i = i < currentPage ? currentPage - 1 : totalall - 2;
    }
  }

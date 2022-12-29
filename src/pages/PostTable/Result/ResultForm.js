@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import Moment from "moment";
 import "react-toastify/dist/ReactToastify.css";
-import { fetchjockey } from "../../../redux/getReducer/getJockeySlice";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -9,11 +7,8 @@ import { useSelector } from "react-redux";
 import { fetchHorse } from "../../../redux/getReducer/getHorseSlice";
 import Select from "react-select";
 import swal from "sweetalert";
-import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 import { toast } from 'react-toastify';
-// import FloatingLabel from "react-bootstrap/FloatingLabel";
-// import Form from "react-bootstrap/Form";
 
 const LocalItem = () => {
   const list = localStorage.getItem("results");
@@ -38,8 +33,6 @@ const RaceForm = () => {
   const history = useNavigate();
   const { state } = useLocation();
   const { RaceId } = state;
-
-  console.log(RaceId,'RaceId');
 
   let horseoptions = horse.map(function (item) {
     return {

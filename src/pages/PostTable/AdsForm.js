@@ -7,13 +7,10 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
 import swal from "sweetalert";
-import { ImCross } from 'react-icons/im';
-
-
+import { ImCross } from "react-icons/im";
 
 const AdsForm = () => {
-
-//for error
+  //for error
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
   const [ErrorDesc, setErrorDesc] = useState("");
@@ -30,37 +27,36 @@ const AdsForm = () => {
 
   const submit = async (event) => {
     event.preventDefault();
-    setisLoading(true)
-     try {
-    const formData = new FormData();
-     formData.append("image", image);
-     formData.append("TitleEn", TitleEn);
-     formData.append("TitleAr", TitleAr);
-     formData.append("DescriptionEn", DescriptionEn);
-     formData.append("DescriptionAr", DescriptionAr);
-   await axios.post(`${window.env.API_URL}/uploadAds`, formData);
-     swal({
-       title: "Success!",
-       text: "Data has been added Successfully",
-       icon: "success",
-       button: "OK",
-     });
+    setisLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append("image", image);
+      formData.append("TitleEn", TitleEn);
+      formData.append("TitleAr", TitleAr);
+      formData.append("DescriptionEn", DescriptionEn);
+      formData.append("DescriptionAr", DescriptionAr);
+      await axios.post(`${window.env.API_URL}/uploadAds`, formData);
+      setisLoading(false);
+      swal({
+        title: "Success!",
+        text: "Data has been added Successfully",
+        icon: "success",
+        button: "OK",
+      });
 
-     history("/ads");
-     setisLoading(false)
-     } catch (error) {
+      history("/ads");
+      setisLoading(false);
+    } catch (error) {
       const err = error.response.data.message;
-       swal({
-         title: "Error!",
-         text: err,
-         icon: "error",
-         button: "OK",
-       });
-       setisLoading(false)
-
-     }
- };
-
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
+      setisLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (!image) {
@@ -76,49 +72,32 @@ const AdsForm = () => {
   }, [image]);
 
   const handlePreview = () => {
-    setImage()
-  document.getElementById("file").value=""
+    setImage();
+    document.getElementById("file").value = "";
   };
 
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
   };
-  
-  const data1 = (JSON.stringify(
-    TextInputValidation(
-      "en",
-      TitleEn,
-      "Ads Title English"
-    )
-  ));
+
+  const data1 = JSON.stringify(
+    TextInputValidation("en", TitleEn, "Ads Title English")
+  );
 
   const obj = JSON.parse(data1);
-  const data2 = (JSON.stringify(
-    TextInputValidation(
-      "ar",
-      TitleAr,
-      "Ads Title Arabic"
-    )
-  ));
+  const data2 = JSON.stringify(
+    TextInputValidation("ar", TitleAr, "Ads Title Arabic")
+  );
   const objAr = JSON.parse(data2);
-  const data3 = (JSON.stringify(
-    TextInputValidation(
-      "en",
-      DescriptionEn,
-      "Ads Description English"
-    )
-  ));
+  const data3 = JSON.stringify(
+    TextInputValidation("en", DescriptionEn, "Ads Description English")
+  );
 
   const description = JSON.parse(data3);
-  const data4 = (JSON.stringify(
-    TextInputValidation(
-      "ar",
-      DescriptionAr,
-      "Ads Description Arabic"
-    )
-  ));
+  const data4 = JSON.stringify(
+    TextInputValidation("ar", DescriptionAr, "Ads Description Arabic")
+  );
   const descriptionAr = JSON.parse(data4);
-
 
   return (
     <>
@@ -147,7 +126,9 @@ const AdsForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className={Error.status ? 'success' : 'error'} >{Error.message}</span>
+                    <span className={Error.status ? "success" : "error"}>
+                      {Error.message}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -163,7 +144,9 @@ const AdsForm = () => {
                     >
                       <Form.Control type="text" placeholder="عنوان" />
                     </FloatingLabel>
-                    <span className={ErrorAr.status ? 'successAr' : 'errorAr'}>{ErrorAr.message}</span>
+                    <span className={ErrorAr.status ? "successAr" : "errorAr"}>
+                      {ErrorAr.message}
+                    </span>
                   </div>
                 </div>
 
@@ -181,7 +164,9 @@ const AdsForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className={ErrorDesc.status ? 'success' : 'error'}>{ErrorDesc.message}</span>
+                    <span className={ErrorDesc.status ? "success" : "error"}>
+                      {ErrorDesc.message}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -196,7 +181,11 @@ const AdsForm = () => {
                     >
                       <Form.Control type="text" placeholder="التفاصيل" />
                     </FloatingLabel>
-                    <span className={ErrorDescAr.status ? 'successAr' : 'errorAr'}>{ErrorDescAr.message}</span>
+                    <span
+                      className={ErrorDescAr.status ? "successAr" : "errorAr"}
+                    >
+                      {ErrorDescAr.message}
+                    </span>
                   </div>
                 </div>
 
@@ -213,13 +202,20 @@ const AdsForm = () => {
                     />
                     {image && (
                       <>
-                       <ImCross onClick={handlePreview} className="crossIcon"/>
-                       <img src={preview} className="PreviewImage" alt="" />
+                        <ImCross
+                          onClick={handlePreview}
+                          className="crossIcon"
+                        />
+                        <img src={preview} className="PreviewImage" alt="" />
                       </>
                     )}
                   </div>
 
-                  <button type="submit" className="SubmitButton" disabled={isLoading}>
+                  <button
+                    type="submit"
+                    className="SubmitButton"
+                    disabled={isLoading}
+                  >
                     Create Ads
                   </button>
                 </div>

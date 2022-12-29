@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate ,useLocation ,Navigate } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import Select from "react-select";
 import DateTimePicker from "react-datetime-picker";
 import { fetchracecourse } from "../../../redux/getReducer/getRaceCourseSlice";
@@ -11,26 +11,11 @@ import dateFormat from "dateformat";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
-const LocalItem = () => {
-  const list = localStorage.getItem("cards");
-  if (list) {
-    return JSON.parse(localStorage.getItem("cards"));
-  } else {
-    return [];
-  }
-};
-
 const Nationality = () => {
-  const [Race, setRace] = useState("");
   const [DayNTime, setDayNTime] = useState("");
   const [FetchData, setFetchData] = useState([]);
   const dispatch = useDispatch();
 
-  const [RaceData, setRaceData] = useState([]);
-  const { data: racecourse } = useSelector((state) => state.racecourse);
-
- 
-  console.log(FetchData)
   let AllFetchData =
     FetchData === undefined ? (
       <></>
@@ -43,25 +28,21 @@ const Nationality = () => {
         };
       })
     );
-    
+
   // const history = useNavigate();
-  const animatedComponents = makeAnimated();
   const FormaredDate = dateFormat(DayNTime, "isoDateTime");
   const history = useNavigate();
   const [selectedValue, setSelectedValue] = useState([]);
-  const {state} = useLocation();
-  const {CardId ,RaceCourseId} = state;
-  
+  const { state } = useLocation();
+  const { CardId, RaceCourseId } = state;
+
   useEffect(() => {
     dispatch(fetchracecourse());
   }, [dispatch]);
 
   const handleChange = (e) => {
-    setSelectedValue(Array.isArray(e) ? e.map(x => x.id) : []);
-  }
-
- 
-
+    setSelectedValue(Array.isArray(e) ? e.map((x) => x.id) : []);
+  };
 
   const FatchRace = async (event) => {
     event.preventDefault();
@@ -92,9 +73,11 @@ const Nationality = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        `${window.env.API_URL}/addracesinracecard/${CardId}`,{RaceEntry:selectedValue});
-        const msgdata = response.data.msg
-        history('/racecardlisting')
+        `${window.env.API_URL}/addracesinracecard/${CardId}`,
+        { RaceEntry: selectedValue }
+      );
+      const msgdata = response.data.msg;
+      history("/racecardlisting");
       swal({
         title: "Success!",
         text: msgdata,
@@ -123,7 +106,6 @@ const Nationality = () => {
         >
           <div className="Headers">Create Race Card</div>
           <div className="form">
-          
             <div className="row mainrow">
               <div className="col-sm">
                 <DateTimePicker
@@ -139,7 +121,11 @@ const Nationality = () => {
               </div>
             </div>
             <div className="ButtonSection " style={{ justifyContent: "end" }}>
-              <button Name="submit" className="SubmitButton" onClick={FatchRace}>
+              <button
+                Name="submit"
+                className="SubmitButton"
+                onClick={FatchRace}
+              >
                 Fetch Races
               </button>
             </div>
@@ -154,14 +140,16 @@ const Nationality = () => {
                 value={RaceData.id}
                '
               /> */}
-               <Select
+              <Select
                 className="dropdown multidropdown"
                 placeholder="Select Option"
-                value={AllFetchData.filter(obj => selectedValue.includes(obj.id))} // set selected values
+                value={AllFetchData.filter((obj) =>
+                  selectedValue.includes(obj.id)
+                )} // set selected values
                 options={AllFetchData} // set list of the data
                 onChange={handleChange} // assign onChange function
                 isMulti
-                isClearable   
+                isClearable
               />
             </div>
 

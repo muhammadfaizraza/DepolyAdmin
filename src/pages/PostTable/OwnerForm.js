@@ -58,7 +58,7 @@ const OwnerForm = () => {
       nationality.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
         };
       })

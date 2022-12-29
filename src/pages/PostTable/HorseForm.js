@@ -521,7 +521,7 @@ const HorseForm = () => {
   
 
 
-    const DateMax =   new Date();
+
   return (
     <Fragment>
       <div className="page">
@@ -882,7 +882,7 @@ const HorseForm = () => {
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
-                      >
+                    >
                          <span className="addmore" onClick={FetchNew}>
                             <AiOutlineReload />
                           </span>

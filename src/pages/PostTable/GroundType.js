@@ -93,19 +93,7 @@ const GroundType = () => {
     )
   ));
 
-  console.log(data1,'asdasd')
-  const styles = {
-    popup:{
-      color: Error.status === true ? "green" : "red",
- 
-    }
-  };
-  const stylesAr = {
-    popupAr:{
-      color: ErrorAr.status === true ? "green" : "red",
- 
-    }
-  };
+
 
   const obj = JSON.parse(data1);
  const data2 =  (JSON.stringify(
@@ -214,7 +202,7 @@ const GroundType = () => {
                     </FloatingLabel>
                  
                     <span className="spanForm"> |</span>
-                    <span className="error" 
+                    <span className={ErrorAbbrev.status ? "success" : "error"}
                     >{ErrorAbbrev.message}</span>
                   </div>
 
@@ -235,13 +223,13 @@ const GroundType = () => {
                         placeholder="اختصار"
                         required
                         onBlur={() =>
-                          setErrorAr(objAr)
+                          setAbbrevAr(abbrevAr)
                                
                          }
                      
                       />
                     </FloatingLabel>
-                    <span className="errorAr" style={stylesAr.popupAr} >{ErrorAr.message}</span>
+                    <span  className={AbbrevAr.status ? "successAr" : "errorAr"} >{AbbrevAr.message}</span>
                   </div>
                 </div>
                 <div className="row mainrow">

@@ -116,7 +116,7 @@ const NewsForm = () => {
       formData.append("ShortEn", state1.ShortEn);
       formData.append("ShortAr", state1.ShortAr);
       formData.append("RegistrationDate", RegistrationDate);
-      formData.append("NationalityID", NationalityID.id);
+      formData.append("NationalityID", NationalityID.id === undefined ? state1.NationalityID : NationalityID.id);
 
       formData.append("Ownerimage", state1.image);
       // formData.append("NationalityID", NationalityID.id);

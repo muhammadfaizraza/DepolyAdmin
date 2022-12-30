@@ -8,12 +8,30 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { fetchnationality } from "../../redux/getReducer/getNationality";
 import { useDispatch } from "react-redux";
+import  Select  from "react-select";
+import { useSelector } from "react-redux";
+import { Tooltip ,OverlayTrigger} from "react-bootstrap";
+import {AiOutlineReload} from "react-icons/ai"
+import { Modal } from "react-bootstrap";
+import NationalityPopup from "../PostTable/Nationality";
 
 const NewsForm = () => {
   const history = useNavigate();
   const dispatch = useDispatch();
   const { state } = useLocation();
+  const { data: nationality } = useSelector((state) => state.nationality);
   const [TrainerLicenseDate, setTrainerLicenseDate] = useState("");
+  const [NationalityID, setNationalityID] = useState("");
+   const [showActivenationality, setShowActivenationality] = useState(false);
+  const handleCloseActivenationality = () => setShowActivenationality(false);
+
+  const handleShowActivenationality = async () => {
+    await setShowActivenationality(true);
+  };
+  const FetchNew = () => {
+    dispatch(fetchnationality());
+  };
+  
   const [DOB, setDOB] = useState("");
   var today = new Date();
 
@@ -32,6 +50,7 @@ const NewsForm = () => {
     DetailAr: "",
     TrainerLicenseDate: "",
     DOB: "",
+    NationalityID:""
   });
 
   const [preview, setPreview] = useState();
@@ -42,7 +61,31 @@ const NewsForm = () => {
     const image = event.target.files[0];
     setImage(image);
   };
+  let AllNationality =
+  nationality === undefined ? (
+    <></>
+  ) : (
+    nationality.map(function (item) {
+      return {
+        id: item._id,
+        value: item.NameEn,
+        label: item.NameEn,
+      };
+    })
+  );
 
+let AllNationalityAr =
+  nationality === undefined ? (
+    <></>
+  ) : (
+    nationality.map(function (item) {
+      return {
+        id: item._id,
+        value: item.NameAr,
+        label: item.NameAr,
+      };
+    })
+  );
   let dateall = Date.parse(trainerid.TrainerLicenseDate);
 
   console.log(dateall, "dateall 1");
@@ -60,6 +103,7 @@ const NewsForm = () => {
         DetailEn: trainerid.DetailEn,
         DetailAr: trainerid.DetailAr,
         TrainerLicenseDate: trainerid.TrainerLicenseDate,
+        NationalityID:trainerid.NationalityID
       });
     } else {
     }
@@ -94,6 +138,8 @@ const NewsForm = () => {
       formData.append("DetailEn", state1.DetailEn);
       formData.append("DetailAr", state1.DetailAr);
       formData.append("TrainerLicenseDate", TrainerLicenseDate);
+      formData.append("NationalityID", NationalityID.id === undefined ? state1.NationalityID : NationalityID.id);
+
       formData.append("DOB", DOB);
 
       const response = await axios.put(
@@ -373,6 +419,60 @@ const NewsForm = () => {
                   </div> */}
                 </div>
                 <div className="row mainrow">
+                <p className="selectLabel">Nationality</p>
+                    <div className="col-sm">
+              
+                      <Select
+                        placeholder={<div>{trainerid.TrainerNationalityData.NameEn}</div>}
+                        defaultValue={NationalityID}
+                        onChange={setNationalityID}
+                        options={AllNationality}
+                        isClearable={true}
+                        isSearchable={true}
+                      />
+                      <span className="spanForm">
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id={`tooltip-top`}>Add more</Tooltip>
+                          }
+                        >
+                          <span
+                            className="addmore"
+                            onClick={handleShowActivenationality}
+                          >
+                            +
+                          </span>
+                        </OverlayTrigger>
+                        <OverlayTrigger
+                          overlay={
+                            <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                          }
+                        >
+                          <span className="addmore" onClick={FetchNew}>
+                            <AiOutlineReload />
+                          </span>
+                        </OverlayTrigger>
+                        |
+                      </span>
+                    </div>
+
+                    <div className="col-sm">
+                      <Select
+                        className="selectdir"
+                        placeholder={
+                          <div style={{ direction: "rtl" }}>
+                            اكتب للبحث عن الجنسية
+                          </div>
+                        }
+                        defaultValue={NationalityID}
+                        onChange={setNationalityID}
+                        options={AllNationalityAr}
+                        isClearable={true}
+                        isSearchable={true}
+                      />
+                    </div>
+                  </div>
+                <div className="row mainrow">
                   <DatePicker
                     onChange={setDOB}
                     value={DOB}
@@ -390,6 +490,7 @@ const NewsForm = () => {
               />
             </div> */}
                 </div>
+         
                 <div className="ButtonSection">
                   <div>
                     <input
@@ -408,6 +509,20 @@ const NewsForm = () => {
           </div>
         </div>
       </div>
+      <Modal
+        show={showActivenationality}
+        onHide={handleCloseActivenationality}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Nationality</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <NationalityPopup />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

@@ -57,6 +57,7 @@ const NewsForm = () => {
     RemarksAr: "",
     Rating: "",
     JockeyLicenseDate: "",
+  NationalityID:""
   });
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
@@ -85,6 +86,7 @@ const NewsForm = () => {
         JockeyLicenseDate: jockeyid.JockeyLicenseDate,
         DOB: jockeyid.DOB,
         JockeyAllowance: jockeyid.JockeyAllowance,
+        NationalityID:jockeyid.NationalityID
       });
     } else {
       dispatch(fetchSinglejockey({ jockeyid }));
@@ -142,8 +144,8 @@ const NewsForm = () => {
       formData.append("MiniumumJockeyWeight", state1.MiniumumJockeyWeight);
       formData.append("Rating", state1.Rating);
       formData.append("JockeyLicenseDate", JockeyLicenseDate);
-      formData.append("NationalityID", NationalityID.id);
-      formData.append("DOB", DOB);
+      formData.append("NationalityID", NationalityID.id === undefined ? state1.NationalityID : NationalityID.id);
+        formData.append("DOB", DOB);
 
       const response = await axios.put(
         `${window.env.API_URL}/updateJockey/${jockeyid._id}`,
@@ -523,6 +525,20 @@ const NewsForm = () => {
           </div>
         </div>
       </div>
+      <Modal
+        show={showActivenationality}
+        onHide={handleCloseActivenationality}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Nationality</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <NationalityPopup />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

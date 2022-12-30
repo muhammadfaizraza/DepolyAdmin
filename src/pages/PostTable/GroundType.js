@@ -217,19 +217,18 @@ const GroundType = () => {
                       value={AbbrevAr}
                     >
                       <Form.Control
-                        name="AbbrevAr"
-                        
+                        name="AbbrevAr" 
                         type="text"
                         placeholder="اختصار"
                         required
                         onBlur={() =>
-                          setAbbrevAr(abbrevAr)
+                          setErrorAbbrevAr(abbrevAr)
                                
                          }
                      
                       />
                     </FloatingLabel>
-                    <span  className={AbbrevAr.status ? "successAr" : "errorAr"} >{AbbrevAr.message}</span>
+                    <span  className={ErrorAbbrevAr.status ? "successAr" : "errorAr"} >{ErrorAbbrevAr.message}</span>
                   </div>
                 </div>
                 <div className="row mainrow">

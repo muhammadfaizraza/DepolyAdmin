@@ -16,14 +16,13 @@ import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BsEyeFill } from "react-icons/bs";
 import Pagination from "./Pagination";
-import { BiFilter } from 'react-icons/bi';
+import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
-
 const Racecourse = () => {
-  const [ShowCalender, setShowCalender] = useState(false)
+  const [ShowCalender, setShowCalender] = useState(false);
 
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -34,21 +33,20 @@ const Racecourse = () => {
   };
 
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { data: racecourse, status } = useSelector((state) => state.racecourse);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(8)
-  
+  const [postsPerPage] = useState(8);
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = racecourse.slice(indexOfFirstPost, indexOfLastPost);
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
     dispatch(fetchracecourse());
   }, [dispatch]);
-
 
   const handleRemove = async (Id) => {
     try {
@@ -58,26 +56,21 @@ const Racecourse = () => {
         icon: "warning",
         buttons: true,
         dangerMode: true,
-      })
+      }).then(async (willDelete) => {
+        const res = await axios.delete(
+          `${window.env.API_URL}/softdeletecourse/${Id}`
+        );
 
-      .then( async(willDelete) => {
-        const res = await axios.delete(`${window.env.API_URL}/softdeletecourse/${Id}`)
-   
         if (willDelete) {
           swal("Your data has been deleted Successfully!", {
             icon: "success",
-         
-          }
-          )
-          dispatch(fetchracecourse())
-          
+          });
+          dispatch(fetchracecourse());
         } else {
           swal("Your data is safe!");
         }
       });
-   
-    }catch(error) {
-
+    } catch (error) {
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -86,14 +79,10 @@ const Racecourse = () => {
         button: "OK",
       });
     }
-
-
-
-  }
-  
+  };
 
   if (status === STATUSES.LOADING) {
-    <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
+    <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />;
   }
 
   if (status === STATUSES.ERROR) {
@@ -107,7 +96,7 @@ const Racecourse = () => {
       </h2>
     );
   }
-  
+
   return (
     <>
       <div className="page">
@@ -127,47 +116,53 @@ const Racecourse = () => {
                     alignItems: "center",
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
-                >
-                  
-                </h6>
-
+                ></h6>
                 <Link to="/racecourseform">
                   <button>Add Race Cource</button>
                 </Link>
                 <OverlayTrigger
-                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
-                      >
-                        <span
-                          className="addmore"
-                        >
-                          <BiFilter
-                    className="calendericon"
-                    onClick={() => setShowCalender(!ShowCalender)}
-                  />
-                        </span>
-                  </OverlayTrigger>                         <CSVLink  data={racecourse}  separator={";"} filename={"MKS Race Course.csv"} className='csvclass'>
-                        Export CSV
-                    </CSVLink>
+                  overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                >
+                  <span className="addmore">
+                    <BiFilter
+                      className="calendericon"
+                      onClick={() => setShowCalender(!ShowCalender)}
+                    />
+                  </span>
+                </OverlayTrigger>{" "}
+                <CSVLink
+                  data={racecourse}
+                  separator={";"}
+                  filename={"MKS Race Course.csv"}
+                  className="csvclass"
+                >
+                  Export CSV
+                </CSVLink>
               </div>
             </div>
             <div>
-              
-              {
-                ShowCalender ?
+              {ShowCalender ? (
                 <span className="transitionclass">
-                <div className="userfilter">
-                
-                <div className="filtertextform forflex">
-                
-                 <input type='text' class="form-control" placeholder="Enter Title"/>
-                 <input type='text' class="form-control" placeholder="Enter Description"/>
-                 </div>
-                
-                </div>
-                <button className="filterbtn">Apply Filter</button>
-                </span>:<></>
-              }
-              </div>
+                  <div className="userfilter">
+                    <div className="filtertextform forflex">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Title"
+                      />
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Description"
+                      />
+                    </div>
+                  </div>
+                  <button className="filterbtn">Apply Filter</button>
+                </span>
+              ) : (
+                <></>
+              )}
+            </div>
             <div class="div_maintb">
               <ScrollContainer>
                 <table striped bordered hover>
@@ -175,6 +170,9 @@ const Racecourse = () => {
                     <tr>
                       <th>Track Name</th>
                       <th>Track Name Arabic </th>
+                      <th>Abbreviation</th>
+                      <th>Abbreviation Arabic</th>
+                  
                       <th>Nationality</th>
                       <th>Color Code</th>
                       <th>Short Code</th>
@@ -189,28 +187,63 @@ const Racecourse = () => {
                       return (
                         <>
                           <tr className="tr_table_class">
-                            <td>{item.TrackNameEn === null ? <>N/A</> : item.TrackNameEn }</td>
-                            <td>{item.TrackNameAr === null ? <>N/A</> : item.TrackNameAr}</td>
-                            <td>{item.NationalityDataRaceCourse.NameEn === null ? <>N/A</> : item.NationalityDataRaceCourse.NameEn}</td>
-                            <td>{item.ColorCodeData === null ? <>N/A</> : item.ColorCodeData.NameEn}</td>
+                            <td>
+                              {item.TrackNameEn === null ? (
+                                <>N/A</>
+                              ) : (
+                                item.TrackNameEn
+                              )}
+                            </td>
+                            <td>
+                              {item.TrackNameAr === null ? (
+                                <>N/A</>
+                              ) : (
+                                item.TrackNameAr
+                              )}
+                            </td>
+                            <td>
+                              {item.AbbrevEn === null ? (
+                                <>N/A</>
+                              ) : (
+                                <>{item.AbbrevEn}</>
+                              )}
+                            </td>
+                            <td>
+                              {item.AbbrevAr === null ? (
+                                <>N/A</>
+                              ) : (
+                                <>{item.AbbrevAr}</>
+                              )}
+                            </td>
+                            <td>
+                              {item.ColorCodeData === null ? (
+                                <>N/A</>
+                              ) : (
+                                item.ColorCodeData.NameEn
+                              )}
+                            </td>
                             <td>{item.shortCode} </td>
                             <td>
                               <img src={item.image} alt="" />
                             </td>
                             <td className="table_delete_btn1">
-                            <BiEdit   onClick={() => navigate('/editracecourse',{
-                                state:{
-                                  courseid:item
+                              <BiEdit
+                                onClick={() =>
+                                  navigate("/editracecourse", {
+                                    state: {
+                                      courseid: item,
+                                    },
+                                  })
                                 }
-                              })}/>
-                              
+                              />
+
                               <MdDelete
                                 style={{
                                   fontSize: "22px",
                                 }}
                                 onClick={() => handleRemove(item._id)}
                               />
-                              <BsEyeFill onClick={() => handleShow(item)}/>
+                              <BsEyeFill onClick={() => handleShow(item)} />
                             </td>
                           </tr>
                         </>
@@ -222,12 +255,11 @@ const Racecourse = () => {
             </div>
           </div>
           <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={racecourse.length}
-          paginate={paginate}
-          currentPage={currentPage}
-
-        />
+            postsPerPage={postsPerPage}
+            totalPosts={racecourse.length}
+            paginate={paginate}
+            currentPage={currentPage}
+          />
         </div>
       </div>
       <Modal
@@ -238,7 +270,7 @@ const Racecourse = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2 style={{fontFamily:"inter"}}> Race Course </h2>
+          <h2 style={{ fontFamily: "inter" }}> Race Course </h2>
         </Modal.Header>
         <Modal.Body>
           <RacecoursePopup data={modaldata} />

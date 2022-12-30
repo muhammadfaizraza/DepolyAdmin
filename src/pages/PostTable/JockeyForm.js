@@ -17,7 +17,7 @@ import { AiOutlineReload } from "react-icons/ai";
 import { Modal } from "react-bootstrap";
 import TextInputValidation from "../../utils/TextInputValidation";
 import NationalityPopup from "./Nationality";
-import { ImCross } from 'react-icons/im';
+import { ImCross } from "react-icons/im";
 
 const NewsForm = () => {
   //for Errors
@@ -71,7 +71,7 @@ const NewsForm = () => {
 
   const submit = async (event) => {
     event.preventDefault();
-    setisLoading(true)
+    setisLoading(true);
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -99,7 +99,7 @@ const NewsForm = () => {
       if (pathname === "/jockeyform") {
         history("/jockey");
       }
-      setisLoading(false)
+      setisLoading(false);
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -108,10 +108,9 @@ const NewsForm = () => {
         icon: "error",
         button: "OK",
       });
-      setisLoading(false)
+      setisLoading(false);
     }
   };
-
 
   useEffect(() => {
     dispatch(fetchnationality());
@@ -196,10 +195,10 @@ const NewsForm = () => {
         };
       })
     );
-    const handlePreview = () => {
-      setImage()
-    document.getElementById("file").value=""
-    };
+  const handlePreview = () => {
+    setImage();
+    document.getElementById("file").value = "";
+  };
   //Checking Validation
 
   const data3 = JSON.stringify(
@@ -258,7 +257,9 @@ const NewsForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className={Error.status ? 'success' : 'error'}>{Error.message}</span>
+                    <span className={Error.status ? "success" : "error"}>
+                      {Error.message}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -274,7 +275,9 @@ const NewsForm = () => {
                     >
                       <Form.Control type="text" placeholder="اسم" required />
                     </FloatingLabel>
-                    <span className={ErrorAr.status ? 'successAr' : 'errorAr'}>{ErrorAr.message}</span>
+                    <span className={ErrorAr.status ? "successAr" : "errorAr"}>
+                      {ErrorAr.message}
+                    </span>
                   </div>
                 </div>
 
@@ -296,7 +299,11 @@ const NewsForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className={ErrorShortName.status ? 'success' : 'error'}>{ErrorShortName.message}</span>
+                    <span
+                      className={ErrorShortName.status ? "success" : "error"}
+                    >
+                      {ErrorShortName.message}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -316,7 +323,13 @@ const NewsForm = () => {
                         required
                       />
                     </FloatingLabel>
-                    <span className={ErrorShortNameAr.status ? 'successAr' : 'errorAr'}>{ErrorShortNameAr.message}</span>
+                    <span
+                      className={
+                        ErrorShortNameAr.status ? "successAr" : "errorAr"
+                      }
+                    >
+                      {ErrorShortNameAr.message}
+                    </span>
                   </div>
                 </div>
 
@@ -338,7 +351,9 @@ const NewsForm = () => {
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className={ErrorRemarks.status ? 'success' : 'error'}>{ErrorRemarks.message}</span>
+                    <span className={ErrorRemarks.status ? "success" : "error"}>
+                      {ErrorRemarks.message}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -358,7 +373,13 @@ const NewsForm = () => {
                         required
                       />
                     </FloatingLabel>
-                    <span className={ErrorRemarksAr.status ? 'successAr' : 'errorAr'}>{ErrorRemarksAr.message}</span>
+                    <span
+                      className={
+                        ErrorRemarksAr.status ? "successAr" : "errorAr"
+                      }
+                    >
+                      {ErrorRemarksAr.message}
+                    </span>
                   </div>
                 </div>
 
@@ -374,8 +395,8 @@ const NewsForm = () => {
                       onBlur={() =>
                         DOB === ""
                           ? setErrorDateofBirth(
-                            "Jockey Date Of Birth is required"
-                          )
+                              "Jockey Date Of Birth is required"
+                            )
                           : setErrorDateofBirth(" ")
                       }
                     />
@@ -407,8 +428,8 @@ const NewsForm = () => {
                       onBlur={() =>
                         DOB === ""
                           ? setErrorLicenseDate(
-                            "Jockey License Date is required"
-                          )
+                              "Jockey License Date is required"
+                            )
                           : setErrorLicenseDate(" ")
                       }
                     />
@@ -439,8 +460,11 @@ const NewsForm = () => {
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => NationalityID === "" ? setErrorNationality("Nationality is required"):setErrorNationality("")} 
-
+                      onBlur={() =>
+                        NationalityID === ""
+                          ? setErrorNationality("Nationality is required")
+                          : setErrorNationality("")
+                      }
                     />
                     <span className="spanForm">
                       <OverlayTrigger
@@ -487,16 +511,22 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setRating(e.target.value)}
                       value={Rating}
-                      onBlur={(e) => Rating === "" ? setErrorRating("Jockey Rating is required ") : setErrorRating("Jockey Rating is validated")}
-
+                      onBlur={(e) =>
+                        Rating === ""
+                          ? setErrorRating("Jockey Rating is required ")
+                          : setErrorRating("Jockey Rating is validated")
+                      }
                     >
                       <Form.Control
-                        type="number"
                         placeholder="Rating"
-                        required
+                        min="1"
+                        step={0.1}
+                        type="number"
                       />
                     </FloatingLabel>
-                    <span className={Rating === "" ? "error":"success"}>{ErrorRating}</span>
+                    <span className={Rating === "" ? "error" : "success"}>
+                      {ErrorRating}
+                    </span>
                     {/* <span className="spanForm"> |</span> */}
                   </div>
                   {/* 
@@ -521,7 +551,15 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setMiniumumJockeyWeight(e.target.value)}
                       value={MiniumumJockeyWeight}
-                      onBlur={(e) => MiniumumJockeyWeight === "" ? setErrorMinWeight("Minimum Jockey Weight is required") : setErrorMinWeight("Minimum Jockey Weight is Validated ")}
+                      onBlur={(e) =>
+                        MiniumumJockeyWeight === ""
+                          ? setErrorMinWeight(
+                              "Minimum Jockey Weight is required"
+                            )
+                          : setErrorMinWeight(
+                              "Minimum Jockey Weight is Validated "
+                            )
+                      }
                     >
                       <Form.Control
                         type="number"
@@ -530,7 +568,13 @@ const NewsForm = () => {
                         required
                       />
                     </FloatingLabel>
-                    <span className={MiniumumJockeyWeight === "" ? "error":"success"}>{ErrorMinWeight}</span>
+                    <span
+                      className={
+                        MiniumumJockeyWeight === "" ? "error" : "success"
+                      }
+                    >
+                      {ErrorMinWeight}
+                    </span>
                     {/* <span className="spanForm"> |</span> */}
                   </div>
 
@@ -558,7 +602,15 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setMaximumJockeyWeight(e.target.value)}
                       value={MaximumJockeyWeight}
-                      onBlur={(e) => MaximumJockeyWeight === "" ? setErrorMaxWeight("Maximum Jockey Weight is required") : setErrorMaxWeight(" Maximum Jockey Weight is Validated")}
+                      onBlur={(e) =>
+                        MaximumJockeyWeight === ""
+                          ? setErrorMaxWeight(
+                              "Maximum Jockey Weight is required"
+                            )
+                          : setErrorMaxWeight(
+                              " Maximum Jockey Weight is Validated"
+                            )
+                      }
                     >
                       <Form.Control
                         type="number"
@@ -567,7 +619,13 @@ const NewsForm = () => {
                         required
                       />
                     </FloatingLabel>
-                    <span className={MaximumJockeyWeight === "" ? "error":"success"}>{ErrorMaxWeight}</span>
+                    <span
+                      className={
+                        MaximumJockeyWeight === "" ? "error" : "success"
+                      }
+                    >
+                      {ErrorMaxWeight}
+                    </span>
 
                     {/* <span className="spanForm"> |</span> */}
                   </div>
@@ -597,7 +655,11 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setJockeyAllowance(e.target.value)}
                       value={JockeyAllowance}
-                      onBlur={(e) => JockeyAllowance === "" ? setErrorAllowance("Jockey Allowance is required ") : setErrorAllowance("Jockey Allowance is Validated ")}
+                      onBlur={(e) =>
+                        JockeyAllowance === ""
+                          ? setErrorAllowance("Jockey Allowance is required ")
+                          : setErrorAllowance("Jockey Allowance is Validated ")
+                      }
                     >
                       <Form.Control
                         type="number"
@@ -606,7 +668,11 @@ const NewsForm = () => {
                         required
                       />
                     </FloatingLabel>
-                    <span className={JockeyAllowance === "" ? "error":"success"}>{ErrorAllowance}</span>
+                    <span
+                      className={JockeyAllowance === "" ? "error" : "success"}
+                    >
+                      {ErrorAllowance}
+                    </span>
                     {/* <span className="spanForm"> |</span> */}
                   </div>
 
@@ -638,15 +704,22 @@ const NewsForm = () => {
                       className="formInput"
                       id="file"
                     />
-                     {image && (
+                    {image && (
                       <>
-                       <ImCross onClick={handlePreview} className="crossIcon"/>
-                       <img src={preview} className="PreviewImage" alt="" />
+                        <ImCross
+                          onClick={handlePreview}
+                          className="crossIcon"
+                        />
+                        <img src={preview} className="PreviewImage" alt="" />
                       </>
                     )}
                   </div>
 
-                  <button type="submit" className="SubmitButton" disabled={isLoading}>
+                  <button
+                    type="submit"
+                    className="SubmitButton"
+                    disabled={isLoading}
+                  >
                     Add Jockey
                   </button>
                 </div>

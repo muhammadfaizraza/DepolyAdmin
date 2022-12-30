@@ -21,8 +21,12 @@ import { ImCross } from 'react-icons/im';
 const RaceCourseForm = () => {
   const [Error , setError] =useState("");
   const [ErrorAr , setErrorAr] =useState("");
-  const [ErrorColor , setErrorColor] =useState("")
-  const [ErrorNationality , setErrorNationality] =useState("")
+  const [ErrorColor , setErrorColor] =useState("");
+  const [ErrorAbbrev , setErrorAbbrev  ] =useState("");
+  const [ErrorNationality , setErrorNationality] =useState("");
+  const [ErrorAbbrevAr ,setErrorAbbrevAr] = useState("")
+  
+
   const [isLoading, setisLoading] = useState(false);
 
 
@@ -90,6 +94,8 @@ const RaceCourseForm = () => {
   const [TrackNameEn, setTrackNameEn] = useState("");
   const [TrackNameAr, setTrackNameAr] = useState("");
   // const [shortCode, setshortCode] = useState("");
+  const [AbbrevEn, setAbbrevEn] = useState("");
+  const [AbbrevAr, setAbbrevAr] = useState("");
   const [NationalityId, setNationalityId] = useState("");
   const [ColorCode, setColorCode] = useState("");
   const [image, setImage] = useState();
@@ -121,6 +127,9 @@ const RaceCourseForm = () => {
       formData.append("TrackNameAr", TrackNameAr + ' ');
       formData.append("ColorCode", ColorCode.id);
       formData.append("NationalityID", NationalityId.id);
+      formData.append("AbbrevEn", AbbrevEn);
+      formData.append("AbbrevAr", AbbrevAr);
+      
       // formData.append("shortCode", shortCode);
       const response = await axios.post(
         `${window.env.API_URL}/createcourse?keyword=&page=`,
@@ -184,6 +193,15 @@ const RaceCourseForm = () => {
       "Track Name English"
     )
   ));
+  const data3 = JSON.stringify(
+    TextInputValidation("en", AbbrevEn, "Gender Abbreviation English")
+  );
+
+  const abbrev = JSON.parse(data3);
+  const data4 = JSON.stringify(
+    TextInputValidation("ar", AbbrevAr, "Gender Abbreviation Arabic")
+  );
+  const abbrevar = JSON.parse(data4);
 
 
   const obj = JSON.parse(data1);
@@ -251,6 +269,50 @@ const RaceCourseForm = () => {
 
                   </div>
                 </div>
+                <div className="row mainrow">
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Abbrevation"
+                    className="mb-3"
+                    name="AbbrevEn"
+                    onChange={(e) => setAbbrevEn(e.target.value)}
+                    value={AbbrevEn}
+                  >
+                    <Form.Control
+                      required
+                      name="AbbrevEn"
+                      type="text"
+                      placeholder="Abbrevation"
+                      onBlur={() => setErrorAbbrev(abbrev)}
+                    />
+                  </FloatingLabel>
+
+                  <span className="spanForm"> |</span>
+                  <span className={ErrorAbbrev.status ? "success" :"error"}>{ErrorAbbrev.message}</span>
+                </div>
+
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="اختصار"
+                    className="mb-3 floatingInputAr"
+                    name="AbbrevAr"
+                    style={{ direction: "rtl" }}
+                    onChange={(e) => setAbbrevAr(e.target.value)}
+                    value={AbbrevAr}
+                  >
+                    <Form.Control
+                      name="AbbrevAr"
+                      type="text"
+                      placeholder="اختصار"
+                      required
+                      onBlur={() => setErrorAbbrevAr(abbrevar)}
+                    />
+                  </FloatingLabel>
+                  <span className={ErrorAbbrev.status ? "successAr" :"errorAr"}>{ErrorAbbrevAr.message}</span>
+                </div>
+              </div>
                 
 
                 {/* <div className="row mainrow">
@@ -393,6 +455,7 @@ const RaceCourseForm = () => {
                     />
                   </div>
                 </div>
+          
                 <div className="ButtonSection">
                   <div>
                   <label className="Multipleownerlabel">

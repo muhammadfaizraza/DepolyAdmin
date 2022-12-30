@@ -61,6 +61,49 @@ const RacecoursePopup = (data) => {
                         </FloatingLabel>
                     </div>
                 </div>
+                <div className="row mainrow">
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Abbrevation"
+                    className="mb-3"
+                    name="AbbrevEn"
+                
+       
+                  >
+                    <Form.Control
+                      required
+                      name="AbbrevEn"
+                      type="text"
+                      placeholder="Abbrevation"
+                      value={data.data.AbbrevEn}    
+            
+                    />
+                  </FloatingLabel>
+
+                  <span className="spanForm"> |</span>
+                </div>
+
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="اختصار"
+                    className="mb-3 floatingInputAr"
+                    name="AbbrevAr"
+                    style={{ direction: "rtl" }}
+                  
+                  >
+                    <Form.Control
+                      name="AbbrevAr"
+                      type="text"
+                      placeholder="اختصار"
+                      value={data.data.AbbrevAr}
+                      required
+                
+                    />
+                  </FloatingLabel>
+                </div>
+              </div>
 
                 {/* <div className="row mainrow">
                   <div className="col-sm">

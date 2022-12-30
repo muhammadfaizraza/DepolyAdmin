@@ -110,13 +110,7 @@ const Racecourse = () => {
               <h4>Race Course Listing</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
+          
                 <Link to="/racecourseform">
                   <button>Add Race Cource</button>
                 </Link>
@@ -174,7 +168,7 @@ const Racecourse = () => {
                       <th>Abbreviation Arabic</th>
                   
                       <th>Nationality</th>
-                      <th>Color Code</th>
+                      <th>Color</th>
                       <th>Short Code</th>
 
                       <th>Image</th>
@@ -213,6 +207,13 @@ const Racecourse = () => {
                                 <>N/A</>
                               ) : (
                                 <>{item.AbbrevAr}</>
+                              )}
+                            </td>
+                            <td>
+                              {item.NationalityDataRaceCourse === null ? (
+                                <>N/A</>
+                              ) : (
+                                <>{item.NationalityDataRaceCourse.NameEn}</>
                               )}
                             </td>
                             <td>

@@ -395,7 +395,7 @@ const NewsForm = () => {
         CreationId.id === undefined ? state1.NationalityID : NationalityID.id
       );
 
-      const response = await axios.put(
+     await axios.put(
         `${window.env.API_URL}/updatehorse/${horseid._id}`,
         formData
       );

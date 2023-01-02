@@ -159,7 +159,12 @@ const Trainer = () => {
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Enter Description"
+                        placeholder="Enter Remarks"
+                      />
+                      <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Enter Age"
                       />
                     </div>
                   </div>

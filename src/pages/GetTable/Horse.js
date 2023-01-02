@@ -155,7 +155,10 @@ const [ShowCalender, setShowCalender] = useState(false)
                 <div className="filtertextform forflex">
                 
                  <input type='text' class="form-control" placeholder="Enter Title"/>
-                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                 <input type='text' class="form-control" placeholder="Enter Gender"/>
+                 <input type='text' class="form-control" placeholder="Enter Color"/>
+                 <input type='text' class="form-control" placeholder="Enter Age"/>
+
                  </div>
                 
                 </div>

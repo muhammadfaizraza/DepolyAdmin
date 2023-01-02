@@ -279,7 +279,7 @@ td:last-child {
     left: 0 !important;
     border-radius: 0 20px 20px 0 !important;
     position: sticky !IMPORTANT;
-    padding-right: 150px;
+    padding-right: 100px;
 }
 .div_maintb td {
     position: relative;

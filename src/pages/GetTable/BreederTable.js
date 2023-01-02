@@ -21,8 +21,8 @@ import Tooltip from "react-bootstrap/Tooltip";
 const BreederTable = () => {
   const [ShowCalender, setShowCalender] = useState(false);
 
-  const [SearchData, setSearchData] = useState('');
   const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
 
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -45,14 +45,13 @@ const BreederTable = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const GetSearch = async () => {
-    const response = await axios.get(
-      `${window.env.API_URL}/SearchUser?shortCode=${SearchCode}&NameEn=${SearchData}`
-    );
-    setSearchData(response.data.data);
+    dispatch(fetchbreeder({SearchTitle,SearchCode}));
+    setSearchTitle('')
+    setSearchCode('')
   };
 
   useEffect(() => {
-    dispatch(fetchbreeder());
+    dispatch(fetchbreeder({SearchTitle,SearchCode}));
   }, [dispatch]);
 
   const handleRemove = async (Id) => {
@@ -155,11 +154,13 @@ const BreederTable = () => {
                         type="text"
                         class="form-control"
                         placeholder="Enter Title"
+                        onChange={(e) => setSearchTitle(e.target.value)}
                       />
                       <input
                         type="text"
                         class="form-control"
                         placeholder="Enter Short Code"
+                        onChange={(e) => setSearchCode(e.target.value)}
                       />
                     </div>
                   </div>

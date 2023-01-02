@@ -163,6 +163,7 @@ const CurrencyTable = () => {
                         <th>Name Arabic </th>
 
                         <th>Short Code</th>
+                        <th>Symbol</th>
                         <th>Rate</th>
                       </tr>
                     </thead>
@@ -193,6 +194,7 @@ const CurrencyTable = () => {
                               <td>{item.NameAr}</td>
 
                               <td>{item.shortCode} </td>
+                              <td></td>
                               <td>{item.Rate} </td>
 
                             

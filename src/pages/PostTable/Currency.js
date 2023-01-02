@@ -17,11 +17,14 @@ const Currency = () => {
     (state) => state.currencyshortcode
   );
   const [ErrorRate, setErrorRate] = useState("");
+  const [ErrorSymbol, setErrorSymbol] = useState("");
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
   const [shortCode, setshortCode] = useState("");
   const [Rate, setRate] = useState("");
+  const [Symbol, setSymbol] = useState("");
+
   const [isLoading, setisLoading] = useState(false);
 
   const history = useNavigate();
@@ -121,7 +124,30 @@ const Currency = () => {
                   <span className={ErrorAr.status ? 'successAr' : 'errorAr'}>{ErrorAr.message}</span>
                 </div>
               </div>
-
+              <div className="row mainrow">
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Symbol"
+                    className="mb-3"
+                    onChange={(e) => setSymbol(e.target.value)}
+                    value={Symbol}
+                    onBlur={() =>
+                      Rate === ""
+                        ? setErrorSymbol("Symbol is required")
+                        : setErrorSymbol("")
+                    }
+                  >
+                    <Form.Control
+                      type="text"
+                      
+                      placeholder="Rate"
+                      required
+                    />
+                  </FloatingLabel>
+                  <span className="error">{ErrorSymbol}</span>
+                </div>
+              </div>
               <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
@@ -137,8 +163,8 @@ const Currency = () => {
                     }
                   >
                     <Form.Control
-                      type="number"
-                      min="0"
+                      type="decimal"
+                      // min="0"
                       
                       placeholder="Rate"
                       required

@@ -46,6 +46,8 @@ const NewsForm = () => {
       const formData = new FormData();
       formData.append("NameEn", state1.NameEn);
       formData.append("NameAr", state1.NameAr + ' ');
+      formData.append("AbbrevEn", state1.AbbrevEn);
+      formData.append("AbbrevAr", state1.AbbrevAr );
       formData.append("shortCode", state1.shortCode);
 
       const response = await axios.put(`${window.env.API_URL}/updateSex/${genderid._id}`, formData);
@@ -118,7 +120,7 @@ const NewsForm = () => {
 
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="Abrevation"
+                      label="Abreviation"
                       className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, AbbrevEn: e.target.value })

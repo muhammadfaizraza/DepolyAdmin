@@ -35,7 +35,33 @@ const GenderPopup = (data) => {
             
           </div>
         </div>
-  
+        <div className="row mainrow">
+          <div className="col-sm">
+
+          <FloatingLabel
+              controlId="floatingInput"
+              label="Abbreviation"
+              className="mb-3"
+           
+            >
+              <Form.Control type="text" placeholder="Name" value={data.data.AbbrevEn} readOnly/>
+            </FloatingLabel>
+         
+            <span className="spanForm"> |</span>
+          </div>
+
+          <div className="col-sm">
+          <FloatingLabel
+              controlId="floatingInput"
+              label="اختصار"
+              className="mb-3 floatingInputAr"
+            
+            >
+              <Form.Control type="text" placeholder="اسم"   value={data.data.AbbrevAr} readOnly style={{direction:"rtl"}}/>
+            </FloatingLabel>
+            
+          </div>
+        </div>
         
         <div className="row mainrow">
       <div className="col-sm">

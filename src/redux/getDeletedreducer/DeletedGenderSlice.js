@@ -32,8 +32,8 @@ const getDeletedGenderSlice = createSlice({
 export const {setgender , setStatus} = getDeletedGenderSlice.actions;
 export default getDeletedGenderSlice.reducer;
 
-export const fetchdeletedgender = createAsyncThunk('/Adsgetdeleted/fetch', async() => {
-    const res = await axios.get(`${window.env.API_URL}/Adsgetdeleted?keyword=&page=`);
+export const fetchdeletedgender = createAsyncThunk('/sexgetdeleted/fetch', async() => {
+    const res = await axios.get(`${window.env.API_URL}/sexgetdeleted?keyword=&page=`);
     const breederData = res.data;
     return breederData.data;
 })

@@ -32,6 +32,8 @@ const Nationality = () => {
   const [ErrorAbbrevAr, setErrorAbbrevAr] = useState("");
   const [ErrorAltNameEn, setErrorAltNameEn] = useState("");
   const [ErrorAltNameAr, setErrorAltNameAr] = useState("");
+  const [ErrorHemisphere, setErrorHemisphere] = useState("");
+  const [ErrorHemispherAr, setErrorHemispherAr] = useState("");
  
   const [isLoading, setisLoading] = useState(false);
 
@@ -422,9 +424,15 @@ const Nationality = () => {
                       options={Hemisphere}
                       isClearable={true}
                       isSearchable={true}
-                      // onBlur={() => WeatherType === "" ? setErrorWeatherType("Weather Type is required ") : setErrorWeatherType("")}
+                      onBlur={()=>{
+                        HemisphereEn === "" ? setErrorHemisphere("Hemisphere Arabic is required"): setErrorHemisphere("Hemisphere Arabic is Validated")
+                        
+                                              }}
 
                     />{" "}
+                         <span className={HemisphereEn === "" ? "error" :"success"}>{ErrorHemispheregit add .
+                         }</span>
+               
                     <span className="spanForm"> |</span>
                     {/* <span className="error">{ErrorWeatherType}</span> */}
                   </div>
@@ -438,7 +446,12 @@ const Nationality = () => {
                       options={HemisphereArS}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={()=>{
+HemisphereAr === "" ? setErrorHemispherAr("Hemisphere Arabic is required"): setErrorHemispherAr("Hemisphere Arabic is Validated")
+
+                      }}
                     />
+                    <span className={HemisphereAr === "" ? "errorAr" :"successAr"}>{ErrorHemispherAr}</span>
                   </div>
                 </div>
                  <div className="row mainrow">

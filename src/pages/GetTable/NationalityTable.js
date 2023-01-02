@@ -179,7 +179,9 @@ const [ShowCalender, setShowCalender] = useState(false)
                         <th>Name</th>
                         <th>Name Arabic </th>
                         <th>Alternative Name </th>
-                        <th>Alternative Arabic</th>
+                        <th>Alternative Name Arabic</th>
+                        <th>Abrreviation </th>
+                        <th>Abrreviation Arabic</th>
                         <th>Hemisphere English</th>
                         <th>Hemisphere Arabic</th>
                       
@@ -219,6 +221,8 @@ const [ShowCalender, setShowCalender] = useState(false)
                               <td>{item.NameAr}</td>
                               <td>{item.AltNameEn}</td>
                               <td>{item.AltNameAr}</td>
+                              <td>{item.AbbrevEn}</td>
+                              <td>{item.AbbrevAr}</td>
                               <td>{item.HemisphereEn}</td>
                               <td>{item.HemisphereAr}</td>
                               <td>{item.shortCode} </td>

@@ -171,8 +171,8 @@ const GenderTable = () => {
 
                         <th>Name</th>
                         <th>Name Arabic </th>
-                        <th>Abrevation</th>
-                        <th>Abrevation Arabic </th>
+                        <th>Abreviation</th>
+                        <th>Abreviation Arabic </th>
                         <th>Short Code</th>
 
                       </tr>

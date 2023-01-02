@@ -3,13 +3,26 @@ import "../../Components/CSS/forms.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
+import Select from "react-select";
 
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+
+const Hemisphere = [
+  { id: "0", value: "Southern Hemisphere", label: "Southern Hemisphere" },
+  { id: "1", value: "Northern Hemisphere", label: "Northern Hemisphere" },
+];
+
+const HemisphereArS = [
+  { id: "0", value: "نصف الكرة الجنوبي", label: "نصف الكرة الجنوبي" },
+  { id: "1", value: "نصف الكرة الشمالي", label: "نصف الكرة الشمالي" },
+];
 const NewsForm = () => {
+  
   const history = useNavigate();
   const { state } = useLocation();
-
+  const [HemisphereEn, setHemisphereEn] = useState("");
+  const [HemisphereAr, setHemisphereAr] = useState("");
   const { nationalityid } = state;
   console.log(nationalityid)
   const [image,setImage] = useState();
@@ -23,6 +36,7 @@ const NewsForm = () => {
     AltNameAr: '',
     AbbrevAr: '',
     AbbrevEn: '',
+   
     Offset:'',
     ValueEn:'',
     ValueAr:'',
@@ -304,6 +318,38 @@ const NewsForm = () => {
                   </div>
 
                 </div> */}
+                     <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Select Hemisphere</div>}
+                      defaultValue={HemisphereEn}
+                      onChange={setHemisphereEn}
+                      options={Hemisphere}
+                      isClearable={true}
+                      isSearchable={true}
+                 
+
+                    />
+              
+               
+                    <span className="spanForm"> |</span>
+                    {/* <span className="error">{ErrorWeatherType}</span> */}
+                  </div>
+
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>طقس</div>}
+                      className="selectdir"
+                      defaultValue={HemisphereAr}
+                      onChange={setHemisphereAr}
+                      options={HemisphereArS}
+                      isClearable={true}
+                      isSearchable={true}
+                    
+                    />
+       
+                  </div>
+                </div>
 
                 <div className="ButtonSection">
                 <div>

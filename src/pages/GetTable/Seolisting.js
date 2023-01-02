@@ -54,7 +54,7 @@ const SeoTable = () => {
         dangerMode: true,
       }).then(async (willDelete) => {
         if (willDelete) {
-          const res = await axios.delete(
+           await axios.delete(
             `${window.env.API_URL}/softdeleteSeoKeyword/${Id}`
           );
 
@@ -107,13 +107,7 @@ const SeoTable = () => {
               <h4>SEO Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
+          
 
                 <Link to="/seoform">
                   <button>Add SEO</button>
@@ -146,19 +140,21 @@ const SeoTable = () => {
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Enter Title"
+                        placeholder="Enter Keyword"
                       />
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Enter Description"
+                        placeholder="Enter Title"
                       />
                     </div>
                   </div>
                   <button className="filterbtn">Apply Filter</button>
                 </span>
               ) : (
-                <></>
+                <>
+
+                </>
               )}
             </div>
             <>
@@ -169,8 +165,8 @@ const SeoTable = () => {
                       <tr>
                       <th>Action</th>
 
-                        <th>Key Word</th>
-                        <th>Key Word Arabic </th>
+                        <th>KeyWord</th>
+                        <th>KeyWord Arabic </th>
                         <th>Title</th>
                         <th>Title Arabic</th>
 

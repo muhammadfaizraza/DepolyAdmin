@@ -75,7 +75,7 @@ const DeletedAds = () => {
 
   if (status === STATUSES.LOADING) {
     return (
-      <Lottie animationData={HorseAnimation} loop={true} className="Lottie homeLottie" />
+      <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
     );
   }
 

@@ -3,7 +3,7 @@ const TextInputValidation = (Language, GivenValue, FieldName) => {
     status: false,
     message: " ",
   };
-  if (GivenValue === " ") {
+  if (GivenValue === "") {
     return (Answer = {
       status: false,
       message: ` ${FieldName} is required `,

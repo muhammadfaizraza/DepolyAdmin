@@ -125,40 +125,43 @@ const DeletedCompetition= () => {
               <ScrollContainer>
                 <table>
                   <thead>
-                    <tr>
-                      <th>Competition Name</th>
-                      <th>Name Arabic </th>
-                      <th>Competition Category </th>
-                      <th>Competition Code</th>
-                      <th>Description </th>
-                      <th>Description Arabic</th>
-                      <th>Short Code</th>
-                      <th>Pick Count</th>
-                      <th>Tri Count</th>
-                      <th>Start Date </th>
-                      <th>Action</th>
-                    </tr>
+                  <tr>
+                     
+                        <th>Name</th>
+                        <th>Name Arabic </th>
+                        <th>Competition Code </th>
+                        <th>Short Code</th>
+                        <th>Type/Category</th>
+                        <th>Count </th>
+                        <th>Start Date </th>
+                        <th>End Date </th>
+                        <th>Action</th>
+                      </tr>
                   </thead>
                   <tbody>
                     {currentPosts.map((item, index) => {
                       return (
                         <>
                           <tr className="tr_table_class">
-                            <td>{item.NameEn === null ? <>N/A</>: item.NameEn}</td>
-                            <td>{item.NameAr === null ? <>N/A</>:item.NameAr}</td>
-                            <td>{item.CompetitionCategory.NameEn&&  item.CompetitionCategoryData.NameEn}</td>
-                            <td>{item.CompetitionCode === '' ? <>N/A</> : item.CompetitionCode}</td>
+                          <td>{item.NameEn === null ? <>N/A</>: item.NameEn}</td>
+                              <td>{item.NameAr === null ? <>N/A</>:item.NameAr}</td>
+                              <td>{item.CompetitionCode === null ? <>N/A</> : item.CompetitionCode}</td>
+                              <td>{item.shortCode}</td>
+                              <td>{item.CompetitionCategory}</td>
+                              <td>{item.CategoryCount}</td>
+                              <td>
+                                <Moment format="YYYY/MM/DD">
+                                  {item.StartDate}
+                                </Moment>{" "}
+                              </td>
+                              <td>
+                                <Moment format="YYYY/MM/DD">
+                                  {item.EndDate}
+                                </Moment>{" "}
+                              </td>
                             
-                            <td>{item.DescEn}</td>
-                            <td>{item.DescAr} </td>
-                            <td>{item.shortCode}</td>
-                            <td>{item.pickCount}</td>
-                            <td>{item.TriCount}</td>
-                            <td>
-                              <Moment format="YYYY/MM/DD">
-                                {item.StartDate}
-                              </Moment>{" "}
-                            </td>
+
+                             
                          
                             <td className="table_delete_btn1">
                                 <FaTrashRestoreAlt onClick={() => Restorefunction(item._id)} disabled={!Disable}/>

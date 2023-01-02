@@ -97,7 +97,7 @@ const Races = () => {
         buttons: true,
         dangerMode: true,
       }).then(async (willDelete) => {
-        const res = await axios.delete(
+    await axios.delete(
           `${window.env.API_URL}/softdeleterace/${Id}`
         );
 
@@ -156,13 +156,7 @@ const Races = () => {
             <div className="Header ">
               <h4> Race Listings</h4>
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
+          
                 <Link to="/raceform">
                   <button>Add Race</button>
                 </Link>

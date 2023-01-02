@@ -30,7 +30,7 @@ const DeletedGender = () => {
       //buttons disable
       setDisable(false)
     
-     await axios.post(`${window.env.API_URL}/restoresoftdeleteAds/${id}`, );
+     await axios.post(`${window.env.API_URL}/restoresoftdeletesex/${id}`, );
       // api 
       // button enable
       dispatch(fetchdeletedgender());

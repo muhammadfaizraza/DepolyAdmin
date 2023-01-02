@@ -109,13 +109,7 @@ const Ads = () => {
                 <h4>Advertisement Listings</h4>
 
                 <div>
-                  <h6
-                    style={{
-                      marginRight: "100px",
-                      alignItems: "center",
-                      color: "rgba(0, 0, 0, 0.6)",
-                    }}
-                  ></h6>
+           
 
                   <Link to="/adsform">
                     <button>Create Ad</button>

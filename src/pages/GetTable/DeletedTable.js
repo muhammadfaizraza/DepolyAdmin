@@ -101,9 +101,9 @@ function App() {
           <Dropdown.Item eventKey="Currency">Currency</Dropdown.Item>
           <Dropdown.Item eventKey="Equipment">Equipment</Dropdown.Item>
           <Dropdown.Item eventKey="Gender">Gender</Dropdown.Item>
-          <Dropdown.Item eventKey="GroundType"> GroundType</Dropdown.Item>
+          <Dropdown.Item eventKey="Ground Type"> GroundType</Dropdown.Item>
           <Dropdown.Item eventKey="Horse"> Horse</Dropdown.Item>
-          <Dropdown.Item eventKey="HorseKind"> HorseKind</Dropdown.Item>
+          <Dropdown.Item eventKey="Horse Kind"> HorseKind</Dropdown.Item>
           <Dropdown.Item eventKey="Jockey">Jockey</Dropdown.Item>
           <Dropdown.Item eventKey="Meeting">Meeting</Dropdown.Item>
           <Dropdown.Item eventKey="Nationality">Nationality</Dropdown.Item>
@@ -111,15 +111,15 @@ function App() {
 
           <Dropdown.Item eventKey="Owner">Owner</Dropdown.Item>
           <Dropdown.Item eventKey="Race">Race</Dropdown.Item>
-          <Dropdown.Item eventKey="Racetype">Race Type</Dropdown.Item>
-          <Dropdown.Item eventKey="Racename">Race Name</Dropdown.Item>
-          <Dropdown.Item eventKey="Racekind">Race kind</Dropdown.Item>
-          <Dropdown.Item eventKey="RaceCard">Race Card</Dropdown.Item>
-          <Dropdown.Item eventKey="RaceCourse">Race Course</Dropdown.Item>
+          <Dropdown.Item eventKey="Race Type">Race Type</Dropdown.Item>
+          <Dropdown.Item eventKey="Race Name">Race Name</Dropdown.Item>
+          <Dropdown.Item eventKey="Race Kind">Race kind</Dropdown.Item>
+          <Dropdown.Item eventKey="Race Card">Race Card</Dropdown.Item>
+          <Dropdown.Item eventKey="Race Course">Race Course</Dropdown.Item>
           <Dropdown.Item eventKey="Sponsor">Sponsor</Dropdown.Item>
           <Dropdown.Item eventKey="Slider">Slider</Dropdown.Item>
           <Dropdown.Item eventKey="Seo">Seo</Dropdown.Item>
-          <Dropdown.Item eventKey="Tracklength">Track Length</Dropdown.Item>
+          <Dropdown.Item eventKey="Track Length">Track Length</Dropdown.Item>
           <Dropdown.Item eventKey="Trainer">Trainer</Dropdown.Item>
           <Dropdown.Item eventKey="Verdict">Verdict</Dropdown.Item>
          
@@ -151,7 +151,7 @@ function Tab({ value }) {
     return <Gender />;
   } else if (value.toString() === "Horse") {
     return <Horse />;
-  } else if (value.toString() === "GroundType") {
+  } else if (value.toString() === "Ground Type") {
     return <GroundType />;
   } else if (value.toString() === "HorseKind") {
     return <HorseKind />;
@@ -167,17 +167,17 @@ function Tab({ value }) {
     return <Nationality />;
   } else if (value.toString() === "Race") {
     return <Race />;
-  } else if (value.toString() === "Racetype") {
+  } else if (value.toString() === "Race Type") {
     return <Racetype />;
-  } else if (value.toString() === "Racename") {
+  } else if (value.toString() === "Race Name") {
     return <Racename />;
-  }else if (value.toString() === "Racekind") {
+  }else if (value.toString() === "Race Kind") {
     return <Racekind />;
-  }else if (value.toString() === "RaceCard") {
+  }else if (value.toString() === "Race Card") {
     return <RaceCard />;
-  }else if (value.toString() === "RaceCourse") {
+  }else if (value.toString() === "Race Course") {
     return <RaceCourse />;
-  }else if (value.toString() === "Tracklength") {
+  }else if (value.toString() === "Track Length") {
     return <Tracklength />;
   }else if (value.toString() === "Trainer") {
     return <Trainer />;
@@ -187,7 +187,7 @@ function Tab({ value }) {
     return <Sponsor />;
   }else if (value.toString() === "Slider") {
     return <Slider />;
-  }else if (value.toString() === "Seo ") {
+  }else if (value.toString() === "Seo") {
     return <Seo  />;
   }
   else {

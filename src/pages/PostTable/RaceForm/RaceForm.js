@@ -16,11 +16,11 @@ import { fetchgroundtype } from "../../../redux/getReducer/getGroundType";
 import { fetchpointTable } from "../../../redux/getReducer/getPointTable";
 import Select from "react-select";
 import swal from "sweetalert";
-import DatePicker from 'react-date-picker';
-import TimePicker from 'react-time-picker';
-import 'react-calendar/dist/Calendar.css'
-import 'react-clock/dist/Clock.css'
-import { ImCross } from 'react-icons/im';
+import DatePicker from "react-date-picker";
+import TimePicker from "react-time-picker";
+import "react-calendar/dist/Calendar.css";
+import "react-clock/dist/Clock.css";
+import { ImCross } from "react-icons/im";
 import axios from "axios";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -88,13 +88,10 @@ const RaceForm = () => {
   const [ErrorTrackLength, setErrorTrackLength] = useState("");
   const [ErrorActiveJockeyForTheRace, setErrorActiveJockeyForTheRace] =
     useState("");
-    const [ErrorDate, setErrorDate] =
-    useState("");
-    const [ErrorStartTime, setErrorStartTime] =
-    useState("");
-    const [ErrorEndTime, setErrorEndTime] =
-    useState("");
-    const [ErrorRaceTyp, setErrorRaceType] = useState("");
+  const [ErrorDate, setErrorDate] = useState("");
+  const [ErrorStartTime, setErrorStartTime] = useState("");
+  const [ErrorEndTime, setErrorEndTime] = useState("");
+  const [ErrorRaceTyp, setErrorRaceType] = useState("");
 
   const [ErrorFirstPrice, setErrorFirstPrice] = useState("");
   const [ErrorSecondPrice, setErrorSecondPrice] = useState("");
@@ -132,7 +129,6 @@ const RaceForm = () => {
   //     })
   //   );
 
-
   let racecourses =
     racecourse === undefined ? (
       <></>
@@ -145,7 +141,7 @@ const RaceForm = () => {
         };
       })
     );
-    let racecoursesAr =
+  let racecoursesAr =
     racecourse === undefined ? (
       <></>
     ) : (
@@ -157,7 +153,6 @@ const RaceForm = () => {
         };
       })
     );
-
 
   let Racenameoptions =
     RaceName === undefined ? (
@@ -171,7 +166,7 @@ const RaceForm = () => {
         };
       })
     );
-    let RacenameoptionsAr =
+  let RacenameoptionsAr =
     RaceName === undefined ? (
       <></>
     ) : (
@@ -226,7 +221,7 @@ const RaceForm = () => {
         };
       })
     );
-    let MeetingTypesAr =
+  let MeetingTypesAr =
     meeting === undefined ? (
       <></>
     ) : (
@@ -238,8 +233,6 @@ const RaceForm = () => {
         };
       })
     );
-
-
 
   let RaceTypes =
     RaceType === undefined ? (
@@ -254,8 +247,7 @@ const RaceForm = () => {
       })
     );
 
-
-    let RaceTypesAr =
+  let RaceTypesAr =
     RaceType === undefined ? (
       <></>
     ) : (
@@ -293,7 +285,7 @@ const RaceForm = () => {
         };
       })
     );
-    let OprtionRaceKindAr =
+  let OprtionRaceKindAr =
     raceKinds === undefined ? (
       <></>
     ) : (
@@ -318,7 +310,7 @@ const RaceForm = () => {
         };
       })
     );
-    let GroundrTypeAllAr =
+  let GroundrTypeAllAr =
     groundtype === undefined ? (
       <></>
     ) : (
@@ -423,7 +415,6 @@ const RaceForm = () => {
   const [StartTime, setStartTime] = useState("");
   const [EndTime, setEndTime] = useState("");
 
-
   const [FirstPrice, setFirstPrice] = useState("");
   const [SecondPrice, setSecondPrice] = useState("");
   const [ThirdPrice, setThirdPrice] = useState("");
@@ -453,12 +444,12 @@ const RaceForm = () => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [image, dispatch]);
   const handlePreview = () => {
-    setImage()
-  document.getElementById("file").value=""
+    setImage();
+    document.getElementById("file").value = "";
   };
   const submit = async (event) => {
     event.preventDefault();
-    setisLoading(true)
+    setisLoading(true);
     try {
       const formData = new FormData();
       formData.append("RaceName", RaceNameEn.id);
@@ -475,9 +466,8 @@ const RaceForm = () => {
       formData.append("RaceStatus", RaceStatus.value);
       formData.append("RaceCourse", RaceCourse.id);
       formData.append("WeatherIcon", WeatherIcon);
-
-      formData.append("StartTime",StartTime);
-      formData.append("EndTime",EndTime);
+      formData.append("StartTime", StartTime);
+      formData.append("EndTime", EndTime);
       formData.append("FirstPrice", FirstPrice);
       formData.append("SecondPrice", SecondPrice);
       formData.append("ThirdPrice", ThirdPrice);
@@ -492,7 +482,7 @@ const RaceForm = () => {
         `${window.env.API_URL}/createrace`,
         formData
       );
-      setisLoading(false)
+      setisLoading(false);
       swal({
         title: "Success",
         text: "Data has been added successfully ",
@@ -505,7 +495,7 @@ const RaceForm = () => {
           RaceId: RaceId,
         },
       });
-      setisLoading(false)
+      setisLoading(false);
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -514,10 +504,9 @@ const RaceForm = () => {
         icon: "error",
         button: "OK",
       });
-      setisLoading(false)
+      setisLoading(false);
     }
   };
-
 
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
@@ -555,7 +544,11 @@ const RaceForm = () => {
                       options={MeetingTypes}
                       isClearable={true}
                       isSearchable={true}
-                    onBlur={() => MeetingType === "" ? setErrorMeetingType("Meeting Type is required ") : setErrorMeetingType("Meeting Type is Validated")}
+                      onBlur={() =>
+                        MeetingType === ""
+                          ? setErrorMeetingType("Meeting Type is required ")
+                          : setErrorMeetingType("Meeting Type is Validated")
+                      }
                     />
                     <span className="spanForm">
                       <OverlayTrigger
@@ -576,7 +569,9 @@ const RaceForm = () => {
                       </OverlayTrigger>
                       |
                     </span>
-                    <span className={MeetingType === "" ? "error" :"success"}>{ErrorMeetingType}</span>
+                    <span className={MeetingType === "" ? "error" : "success"}>
+                      {ErrorMeetingType}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -588,7 +583,6 @@ const RaceForm = () => {
                       onChange={setMeetingType}
                       isClearable={true}
                       isSearchable={true}
-                      
                     />
                   </div>
                 </div>
@@ -601,8 +595,11 @@ const RaceForm = () => {
                       options={Racenameoptions}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => RaceNameEn === "" ? setErrorRaceNameEn("Race Name is required ") : setErrorRaceNameEn("Race Name is Validated")}
-
+                      onBlur={() =>
+                        RaceNameEn === ""
+                          ? setErrorRaceNameEn("Race Name is required ")
+                          : setErrorRaceNameEn("Race Name is Validated")
+                      }
                     />{" "}
                     <span className="spanForm">
                       <OverlayTrigger
@@ -623,8 +620,9 @@ const RaceForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
-                    <span className={RaceNameEn === "" ? "error" :"success"}>{ErrorRaceNameEn}</span>
-
+                    <span className={RaceNameEn === "" ? "error" : "success"}>
+                      {ErrorRaceNameEn}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -636,7 +634,6 @@ const RaceForm = () => {
                       options={RacenameoptionsAr}
                       isClearable={true}
                       isSearchable={true}
-                    
                     />
                   </div>
                 </div>
@@ -648,13 +645,18 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setMeetingCode(e.target.value)}
                       value={MeetingCode}
-                      onBlur={() => MeetingCode === "" ? setErrorMeetingCode("Meeting Code is required ") : setErrorMeetingCode("Meeting Code is Validated")}
-
+                      onBlur={() =>
+                        MeetingCode === ""
+                          ? setErrorMeetingCode("Meeting Code is required ")
+                          : setErrorMeetingCode("Meeting Code is Validated")
+                      }
                     >
                       <Form.Control type="text" placeholder="Meeting Code" />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
-                    <span className={MeetingType === "" ? "error" :"success"}>{ErrorMeetingCode}</span>
+                    <span className={MeetingType === "" ? "error" : "success"}>
+                      {ErrorMeetingCode}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -682,7 +684,13 @@ const RaceForm = () => {
                       <Form.Control type="text" placeholder="Description" />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
-                    <span className={ErrorDescriptionEn.status ? "success": "error"}>{ErrorDescriptionEn.message}</span>
+                    <span
+                      className={
+                        ErrorDescriptionEn.status ? "success" : "error"
+                      }
+                    >
+                      {ErrorDescriptionEn.message}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -697,7 +705,13 @@ const RaceForm = () => {
                     >
                       <Form.Control type="text" placeholder=" وصف" />
                     </FloatingLabel>
-                    <span className={ErrorDescriptionAr.status ? "successAr": "errorAr"}>{ErrorDescriptionAr.message}</span>
+                    <span
+                      className={
+                        ErrorDescriptionAr.status ? "successAr" : "errorAr"
+                      }
+                    >
+                      {ErrorDescriptionAr.message}
+                    </span>
                   </div>
                 </div>
                 <div className="row  mainrow">
@@ -708,13 +722,18 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setWeatherIcon(e.target.value)}
                       value={WeatherIcon}
-                      onBlur={() => WeatherIcon === " " ? setErrorWeatherIcon("Weather Icon is required ") : setErrorWeatherIcon("Weather Icon is Required")}
-
+                      onBlur={() =>
+                        WeatherIcon === " "
+                          ? setErrorWeatherIcon("Weather Icon is required ")
+                          : setErrorWeatherIcon("Weather Icon is Required")
+                      }
                     >
                       <Form.Control type="text" placeholder="Weather Icon" />
                     </FloatingLabel>
                     <span className="spanForm">|</span>
-                    <span className={WeatherIcon === "" ? "error" :"success"}>{ErrorWeatherIcon}</span>
+                    <span className={WeatherIcon === "" ? "error" : "success"}>
+                      {ErrorWeatherIcon}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -736,8 +755,11 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setWeatherDegree(e.target.value)}
                       value={WeatherDegree}
-                      onBlur={() => WeatherDegree === "" ? setErrorWeatherDegree("Weather Degree is required ") : setErrorWeatherDegree("Weather Degree is Validated")}
-
+                      onBlur={() =>
+                        WeatherDegree === ""
+                          ? setErrorWeatherDegree("Weather Degree is required ")
+                          : setErrorWeatherDegree("Weather Degree is Validated")
+                      }
                     >
                       <Form.Control
                         type="number"
@@ -745,7 +767,11 @@ const RaceForm = () => {
                       />
                     </FloatingLabel>
                     {/* <span className="spanForm"> |</span> */}
-                    <span className={WeatherDegree === "" ? "error" :"success"}>{ErrorWeatherDegree}</span>
+                    <span
+                      className={WeatherDegree === "" ? "error" : "success"}
+                    >
+                      {ErrorWeatherDegree}
+                    </span>
                   </div>
 
                   {/* <div className="col-sm">
@@ -767,8 +793,11 @@ const RaceForm = () => {
                       options={RaceTypes}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => RaceTyp === "" ? setErrorRaceType("Race Type is required ") : setErrorRaceType("Race Type is Validated")}
-
+                      onBlur={() =>
+                        RaceTyp === ""
+                          ? setErrorRaceType("Race Type is required ")
+                          : setErrorRaceType("Race Type is Validated")
+                      }
                     />
                     <span className="spanForm">
                       <OverlayTrigger
@@ -789,7 +818,9 @@ const RaceForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
-                    <span className={RaceTyp === "" ? "error" :"success"}>{ErrorRaceTyp}</span>
+                    <span className={RaceTyp === "" ? "error" : "success"}>
+                      {ErrorRaceTyp}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -817,8 +848,11 @@ const RaceForm = () => {
                       options={TrackLenght}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => TrackLength === "" ? setErrorTrackLength("Track Length is required ") : setErrorTrackLength("")}
-
+                      onBlur={() =>
+                        TrackLength === ""
+                          ? setErrorTrackLength("Track Length is required ")
+                          : setErrorTrackLength("")
+                      }
                     />
                     <span className="spanForm">
                       <OverlayTrigger
@@ -842,7 +876,9 @@ const RaceForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
-                    <span className={TrackLength === "" ? "error" :"success"}>{ErrorTrackLength}</span>
+                    <span className={TrackLength === "" ? "error" : "success"}>
+                      {ErrorTrackLength}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -870,8 +906,11 @@ const RaceForm = () => {
                       options={GroundrTypeAll}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => Ground === "" ? setErrorGround("Ground Type is required ") : setErrorGround("")}
-
+                      onBlur={() =>
+                        Ground === ""
+                          ? setErrorGround("Ground Type is required ")
+                          : setErrorGround("")
+                      }
                     />{" "}
                     <span className="spanForm">
                       <OverlayTrigger
@@ -895,7 +934,9 @@ const RaceForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
-                    <span className={Ground === "" ? "error" :"success"}>{ErrorGround} </span>
+                    <span className={Ground === "" ? "error" : "success"}>
+                      {ErrorGround}{" "}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -919,8 +960,11 @@ const RaceForm = () => {
                       options={OprtionRaceKind}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => RaceKind === "" ? setErrorRaceKind("Race Kind is required ") : setErrorRaceKind("")}
-
+                      onBlur={() =>
+                        RaceKind === ""
+                          ? setErrorRaceKind("Race Kind is required ")
+                          : setErrorRaceKind("")
+                      }
                     />
                     <span className="spanForm">
                       <OverlayTrigger
@@ -941,7 +985,9 @@ const RaceForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
-                    <span className={RaceKind === "" ? "error" :"success"}>{ErrorRaceKind}</span>
+                    <span className={RaceKind === "" ? "error" : "success"}>
+                      {ErrorRaceKind}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -953,7 +999,6 @@ const RaceForm = () => {
                       options={OprtionRaceKindAr}
                       isClearable={true}
                       isSearchable={true}
-                    
                     />
                   </div>
                 </div>
@@ -966,11 +1011,16 @@ const RaceForm = () => {
                       options={WeatherTypes}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => WeatherType === "" ? setErrorWeatherType("Weather Type is required ") : setErrorWeatherType("Weather Type is Validated")}
-
+                      onBlur={() =>
+                        WeatherType === ""
+                          ? setErrorWeatherType("Weather Type is required ")
+                          : setErrorWeatherType("Weather Type is Validated")
+                      }
                     />{" "}
                     <span className="spanForm"> |</span>
-                    <span className={WeatherType === "" ? "error" :"success"}>{ErrorWeatherType}</span>
+                    <span className={WeatherType === "" ? "error" : "success"}>
+                      {ErrorWeatherType}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -992,8 +1042,11 @@ const RaceForm = () => {
                       options={racecourses}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => RaceCourse === "" ? setErrorRaceCourse("Race Course is required ") : setErrorRaceCourse("Race Course is Validated")}
-
+                      onBlur={() =>
+                        RaceCourse === ""
+                          ? setErrorRaceCourse("Race Course is required ")
+                          : setErrorRaceCourse("Race Course is Validated")
+                      }
                     />
                     <span className="spanForm">
                       <OverlayTrigger
@@ -1017,7 +1070,9 @@ const RaceForm = () => {
                       </OverlayTrigger>{" "}
                       |
                     </span>
-                    <span className={RaceCourse === "" ? "error" :"success"}>{ErrorRaceCourse}</span>
+                    <span className={RaceCourse === "" ? "error" : "success"}>
+                      {ErrorRaceCourse}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -1032,7 +1087,7 @@ const RaceForm = () => {
                     />
                   </div>
                 </div>
-                
+
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
@@ -1042,11 +1097,16 @@ const RaceForm = () => {
                       options={RaceStatuss}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => RaceStatus === "" ? setErrorRaceStatus("Race Status is required ") : setErrorRaceStatus("")}
-
+                      onBlur={() =>
+                        RaceStatus === ""
+                          ? setErrorRaceStatus("Race Status is required ")
+                          : setErrorRaceStatus("")
+                      }
                     />
                     <span className="spanForm"> |</span>
-                    <span className={RaceStatus === "" ? "error" :"success"}>{ErrorRaceStatus}</span>
+                    <span className={RaceStatus === "" ? "error" : "success"}>
+                      {ErrorRaceStatus}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -1070,8 +1130,11 @@ const RaceForm = () => {
                       options={SponsorForTheRace}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => Sponsor === "" ? setErrorSponsor("Sponsor is required ") : setErrorSponsor("Sponsor is Validated")}
-
+                      onBlur={() =>
+                        Sponsor === ""
+                          ? setErrorSponsor("Sponsor is required ")
+                          : setErrorSponsor("Sponsor is Validated")
+                      }
                     />
                     <span className="spanForm">
                       <OverlayTrigger
@@ -1092,7 +1155,9 @@ const RaceForm = () => {
                       </OverlayTrigger>
                       |
                     </span>
-                    <span className={Sponsor === "" ? "error" :"success"}>{ErrorSponsor}</span>
+                    <span className={Sponsor === "" ? "error" : "success"}>
+                      {ErrorSponsor}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -1104,7 +1169,7 @@ const RaceForm = () => {
                       className="selectdir"
                       isClearable={true}
                       isSearchable={true}
-                    />      
+                    />
                   </div>
                 </div>
                 {/* <div className="row mainrow">
@@ -1130,10 +1195,10 @@ const RaceForm = () => {
                     </FloatingLabel>
                   </div>
                 </div> */}
-                
+
                 <div className="row mainrow">
                   <div className="col-sm">
-                     <DatePicker
+                    <DatePicker
                       onChange={setDay}
                       value={Day}
                       monthPlaceholder="Date "
@@ -1141,46 +1206,53 @@ const RaceForm = () => {
                       minDate={today}
                       maxDate={new Date("02-29-2023")}
                       // yearPlaceholder="Time"
-                      onBlur={() => Day === "" ? setErrorDate("Date is required ") : setErrorDate("Date is Validated")}
-                     
+                      onBlur={() =>
+                        Day === ""
+                          ? setErrorDate("Date is required ")
+                          : setErrorDate("Date is Validated")
+                      }
                     />
-                  
-                  <span className={Day === "" ? "error" :"success"}>{ErrorDate}</span>
+
+                    <span className={Day === "" ? "error" : "success"}>
+                      {ErrorDate}
+                    </span>
                   </div>
-              
                 </div>
 
                 <div className="row mainrow">
                   <div className="col-sm">
-                     <TimePicker
+                    <TimePicker
                       onChange={setStartTime}
-             
-                      minutePlaceholder={"Start Date"}
+                      minutePlaceholder={"Start Time"}
                       secondPlaceholder={""}
-                      onBlur={() => StartTime === "" ? setErrorStartTime("Start Time is required ") : setErrorStartTime("Start Time is Validated")}
-                     
+                      onBlur={() =>
+                        StartTime === ""
+                          ? setErrorStartTime("Start Time is required ")
+                          : setErrorStartTime("Start Time is Validated")
+                      }
                     />
-              <span className="spanForm">
-                   
-                   |
-                 </span>
-                 <span className={StartTime === "" ? "error" :"success"}>{ErrorStartTime}</span>    
+                    <span className="spanForm">|</span>
+                    <span className={StartTime === "" ? "error" : "success"}>
+                      {ErrorStartTime}
+                    </span>
                   </div>
-                  
-               
+
                   <div className="col-sm">
-                  <TimePicker
+                    <TimePicker
                       onChange={setEndTime}
-             
-                      minutePlaceholder={"End Date"}
+                      minutePlaceholder={"End Time"}
                       secondPlaceholder={""}
-                  
-                      onBlur={() => EndTime === "" ? setErrorEndTime("End Time is required ") : setErrorEndTime("End Time is Validated")}
+                      onBlur={() =>
+                        EndTime === ""
+                          ? setErrorEndTime("End Time is required ")
+                          : setErrorEndTime("End Time is Validated")
+                      }
                     />
-                 
-            
-                 <span className={StartTime === "" ? "error" :"success"}>{ErrorStartTime}</span>  
-                </div>
+
+                    <span className={StartTime === "" ? "error" : "success"}>
+                      {ErrorStartTime}
+                    </span>
+                  </div>
                 </div>
                 {/* <div className="row mainrow">
                   <div className="col-sm">
@@ -1233,7 +1305,7 @@ const RaceForm = () => {
                   </div>
                 </div> */}
 
-<div className="row mainrow">
+                <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
@@ -1241,14 +1313,23 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setFirstPrice(e.target.value)}
                       value={FirstPrice}
-                      min='0'
-                      onBlur={() => FirstPrice === "" ? setErrorFirstPrice("First Prize is required ") : setErrorFirstPrice("First Prize is Validated")}
+                      min="0"
+                      onBlur={() =>
+                        FirstPrice === ""
+                          ? setErrorFirstPrice("First Prize is required ")
+                          : setErrorFirstPrice("First Prize is Validated")
+                      }
                     >
-                      <Form.Control  type="number" min='0' placeholder="Enter 1st Prize" />
+                      <Form.Control
+                        type="number"
+                        min="0"
+                        placeholder="Enter 1st Prize"
+                      />
                     </FloatingLabel>
-                    <span className={FirstPrice === "" ? "error" :"success"}>{ErrorFirstPrice}</span>
+                    <span className={FirstPrice === "" ? "error" : "success"}>
+                      {ErrorFirstPrice}
+                    </span>
                   </div>
-                  
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -1258,14 +1339,22 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setSecondPrice(e.target.value)}
                       value={SecondPrice}
-                              onBlur={() => SecondPrice === "" ? setErrorSecondPrice("Second Prize is required ") : setErrorSecondPrice("Second Prize is Validated")}
-             
+                      onBlur={() =>
+                        SecondPrice === ""
+                          ? setErrorSecondPrice("Second Prize is required ")
+                          : setErrorSecondPrice("Second Prize is Validated")
+                      }
                     >
-                      <Form.Control  type="number" min='0' placeholder="Enter 2nd Prize" />
+                      <Form.Control
+                        type="number"
+                        min="0"
+                        placeholder="Enter 2nd Prize"
+                      />
                     </FloatingLabel>
-                    <span className={SecondPrice === "" ? "error" :"success"}>{ErrorSecondPrice}</span>
+                    <span className={SecondPrice === "" ? "error" : "success"}>
+                      {ErrorSecondPrice}
+                    </span>
                   </div>
-                  
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -1275,16 +1364,22 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setThirdPrice(e.target.value)}
                       value={ThirdPrice}
-                      onBlur={() => ThirdPrice === "" ? setErrorThirdPrice("Third Prize is required ") : setErrorThirdPrice("Third Prize is Validated")}
-             
-                     
+                      onBlur={() =>
+                        ThirdPrice === ""
+                          ? setErrorThirdPrice("Third Prize is required ")
+                          : setErrorThirdPrice("Third Prize is Validated")
+                      }
                     >
-                      <Form.Control  type="number" min='0' placeholder="Enter 3rd Prize" />
+                      <Form.Control
+                        type="number"
+                        min="0"
+                        placeholder="Enter 3rd Prize"
+                      />
                     </FloatingLabel>
-                    <span className={ThirdPrice === "" ? "error" :"success"}>{ErrorThirdPrice}</span>
-
+                    <span className={ThirdPrice === "" ? "error" : "success"}>
+                      {ErrorThirdPrice}
+                    </span>
                   </div>
-                  
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -1294,15 +1389,22 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setFourthPrice(e.target.value)}
                       value={FourthPrice}
-                      onBlur={() => FourthPrice === "" ? setErrorFourthPrice("Fourth Prize is required ") : setErrorFourthPrice("Fourth Prize is Validated")}
-             
-                     
+                      onBlur={() =>
+                        FourthPrice === ""
+                          ? setErrorFourthPrice("Fourth Prize is required ")
+                          : setErrorFourthPrice("Fourth Prize is Validated")
+                      }
                     >
-                      <Form.Control  type="number" min='0' placeholder="Enter 4th Prize" />
+                      <Form.Control
+                        type="number"
+                        min="0"
+                        placeholder="Enter 4th Prize"
+                      />
                     </FloatingLabel>
-                    <span className={FourthPrice === "" ? "error" :"success"}>{ErrorFourthPrice}</span>
+                    <span className={FourthPrice === "" ? "error" : "success"}>
+                      {ErrorFourthPrice}
+                    </span>
                   </div>
-                  
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -1312,16 +1414,22 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setFifthPrice(e.target.value)}
                       value={FifthPrice}
-                      onBlur={() => FifthPrice === "" ? setErrorFifthPrice("Fifth Prize is required ") : setErrorFifthPrice("Fifth Prize is Validated")}
-             
-                     
+                      onBlur={() =>
+                        FifthPrice === ""
+                          ? setErrorFifthPrice("Fifth Prize is required ")
+                          : setErrorFifthPrice("Fifth Prize is Validated")
+                      }
                     >
-                      <Form.Control  type="number" min='0' placeholder="Enter 5th Prize" />
+                      <Form.Control
+                        type="number"
+                        min="0"
+                        placeholder="Enter 5th Prize"
+                      />
                     </FloatingLabel>
-                    <span className={FifthPrice === "" ? "error" :"success"}>{ErrorFifthPrice}</span>
-             
+                    <span className={FifthPrice === "" ? "error" : "success"}>
+                      {ErrorFifthPrice}
+                    </span>
                   </div>
-                  
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -1331,17 +1439,22 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setSixthPrice(e.target.value)}
                       value={SixthPrice}
-                      onBlur={() => SixthPrice === "" ? setErrorSixthPrice("Sixth Prize is required ") : setErrorSixthPrice("Sixth Prize is Validated")}
-             
-                     
-                     
+                      onBlur={() =>
+                        SixthPrice === ""
+                          ? setErrorSixthPrice("Sixth Prize is required ")
+                          : setErrorSixthPrice("Sixth Prize is Validated")
+                      }
                     >
-                      <Form.Control  type="number" min='0' placeholder="Enter 6th Prize" />
+                      <Form.Control
+                        type="number"
+                        min="0"
+                        placeholder="Enter 6th Prize"
+                      />
                     </FloatingLabel>
-                    <span className={SixthPrice === "" ? "error" :"success"}>{ErrorSixthPrice}</span>
-             
+                    <span className={SixthPrice === "" ? "error" : "success"}>
+                      {ErrorSixthPrice}
+                    </span>
                   </div>
-                 
                 </div>
 
                 <div className="ButtonSection">
@@ -1355,15 +1468,22 @@ const RaceForm = () => {
                       className="formInput"
                       id="file"
                     />
-                     {image && (
+                    {image && (
                       <>
-                       <ImCross onClick={handlePreview} className="crossIcon"/>
-                       <img src={preview} className="PreviewImage" alt="" />
+                        <ImCross
+                          onClick={handlePreview}
+                          className="crossIcon"
+                        />
+                        <img src={preview} className="PreviewImage" alt="" />
                       </>
                     )}
                   </div>
 
-                  <button type="submit" className="SubmitButton" disabled={isLoading}>
+                  <button
+                    type="submit"
+                    className="SubmitButton"
+                    disabled={isLoading}
+                  >
                     Save & Add Horses
                   </button>
                 </div>

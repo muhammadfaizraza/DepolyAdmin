@@ -158,6 +158,8 @@ const News = () => {
                 <table striped bordered hover>
                   <thead>
                     <tr>
+                    <th style={{ textAlign: "center" }}>Action</th>
+
                       <th>Title </th>
                       <th>Title Arabic</th>
                       <th>Description </th>
@@ -166,7 +168,6 @@ const News = () => {
                       <th>Image</th>
                       {/* <th>Active</th> */}
 
-                      <th style={{ textAlign: "center" }}>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -174,6 +175,24 @@ const News = () => {
                       return (
                         <>
                           <tr className="tr_table_class">
+                          <td
+                              className="table_delete_btn1"
+                              // style={{ textAlign: "center" }}
+                            >
+                              <BiEdit
+                                onClick={() =>
+                                  navigate("/editsponsor", {
+                                    state: {
+                                      sponsorid: item,
+                                    },
+                                  })
+                                }
+                              />
+                              <MdDelete
+                                onClick={() => handleRemove(item._id)}
+                              />
+                              <BsEyeFill onClick={() => handleShow(item)} />
+                            </td>
                             <td>{item.TitleEn}</td>
                             <td>{item.TitleAr}</td>
                             <td>{item.DescriptionEn}</td>
@@ -198,24 +217,7 @@ const News = () => {
                                   value={Value}
                                 />
                                 </td> */}
-                            <td
-                              className="table_delete_btn1"
-                              style={{ textAlign: "center" }}
-                            >
-                              <BiEdit
-                                onClick={() =>
-                                  navigate("/editsponsor", {
-                                    state: {
-                                      sponsorid: item,
-                                    },
-                                  })
-                                }
-                              />
-                              <MdDelete
-                                onClick={() => handleRemove(item._id)}
-                              />
-                              <BsEyeFill onClick={() => handleShow(item)} />
-                            </td>
+                            
                           </tr>
                         </>
                       );

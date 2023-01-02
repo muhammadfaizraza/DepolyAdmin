@@ -174,6 +174,8 @@ const [ShowCalender, setShowCalender] = useState(false)
                   <table>
                     <thead>
                       <tr>
+                      <th>Action</th>
+
                         <th>Name</th>
                         <th>Name Arabic </th>
                         <th>Alternative Name </th>
@@ -188,7 +190,6 @@ const [ShowCalender, setShowCalender] = useState(false)
                         <th>Value</th> */}
 
                         <th>Image</th>
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -196,22 +197,7 @@ const [ShowCalender, setShowCalender] = useState(false)
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.NameEn}</td>
-                              <td>{item.NameAr}</td>
-                              <td>{item.AltNameEn}</td>
-                              <td>{item.AltNameAr}</td>
-                              <td>{item.HemisphereEn}</td>
-                              <td>{item.HemisphereAr}</td>
-                              <td>{item.shortCode} </td>
-                              {/* <td>{item.Label} </td> */}
-                              {/* <td>{item.Offset === 'true' ? <>True</> : <>False</>} </td> */}
-                              {/* <td>{item.ValueEn}</td> */}
-
-                              <td>
-                                <img src={item.image} alt="" />
-                              </td>
-
-                              <td className="table_delete_btn1">
+                            <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
                                     history("/editnationality", {
@@ -229,6 +215,22 @@ const [ShowCalender, setShowCalender] = useState(false)
                                 />
                                 <BsEyeFill onClick={() => handleShow(item)} />
                               </td>
+                              <td>{item.NameEn}</td>
+                              <td>{item.NameAr}</td>
+                              <td>{item.AltNameEn}</td>
+                              <td>{item.AltNameAr}</td>
+                              <td>{item.HemisphereEn}</td>
+                              <td>{item.HemisphereAr}</td>
+                              <td>{item.shortCode} </td>
+                              {/* <td>{item.Label} </td> */}
+                              {/* <td>{item.Offset === 'true' ? <>True</> : <>False</>} </td> */}
+                              {/* <td>{item.ValueEn}</td> */}
+
+                              <td>
+                                <img src={item.image} alt="" />
+                              </td>
+
+                             
                             </tr>
                           </>
                         );

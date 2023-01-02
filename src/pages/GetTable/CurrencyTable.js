@@ -157,12 +157,13 @@ const CurrencyTable = () => {
                   <table>
                     <thead>
                       <tr>
+                      <th>Action</th>
+
                         <th>Name</th>
                         <th>Name Arabic </th>
 
                         <th>Short Code</th>
                         <th>Rate</th>
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -170,13 +171,7 @@ const CurrencyTable = () => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.NameEn}</td>
-                              <td>{item.NameAr}</td>
-
-                              <td>{item.shortCode} </td>
-                              <td>{item.Rate} </td>
-
-                              <td className="table_delete_btn1">
+                            <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
                                     history("/editcurrency", {
@@ -194,6 +189,13 @@ const CurrencyTable = () => {
                                 />
                                 <BsEyeFill onClick={() => handleShow(item)} />
                               </td>
+                              <td>{item.NameEn}</td>
+                              <td>{item.NameAr}</td>
+
+                              <td>{item.shortCode} </td>
+                              <td>{item.Rate} </td>
+
+                            
                             </tr>
                           </>
                         );

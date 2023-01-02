@@ -175,6 +175,8 @@ const Trainer = () => {
                   <table>
                     <thead>
                       <tr>
+                        
+                      <th>Action</th>
                         <th>Name</th>
                         <th>Name Arabic</th>
                         <th>Age</th>
@@ -192,7 +194,6 @@ const Trainer = () => {
 
                         <th>Image</th>
 
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -200,6 +201,24 @@ const Trainer = () => {
                         return (
                           <>
                             <tr className="tr_table_class">
+                            <td
+                                className="table_delete_btn1"
+                                // style={{ textAlign: "center" }}
+                              >
+                                <BiEdit
+                                  onClick={() =>
+                                    navigate("/edittrainer", {
+                                      state: {
+                                        trainerid: item,
+                                      },
+                                    })
+                                  }
+                                />
+                                <MdDelete
+                                  onClick={() => handleRemove(item._id)}
+                                />
+                                <BsEyeFill onClick={() => handleShow(item)} />
+                              </td>
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
                               <td>
@@ -261,24 +280,7 @@ const Trainer = () => {
                               <td>
                                 <img src={item.image} alt="" />
                               </td>
-                              <td
-                                className="table_delete_btn1"
-                                style={{ textAlign: "center" }}
-                              >
-                                <BiEdit
-                                  onClick={() =>
-                                    navigate("/edittrainer", {
-                                      state: {
-                                        trainerid: item,
-                                      },
-                                    })
-                                  }
-                                />
-                                <MdDelete
-                                  onClick={() => handleRemove(item._id)}
-                                />
-                                <BsEyeFill onClick={() => handleShow(item)} />
-                              </td>
+                              
                             </tr>
                           </>
                         );

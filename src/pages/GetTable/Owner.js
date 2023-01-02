@@ -172,6 +172,7 @@ const Owner = () => {
                   <table>
                     <thead>
                       <tr>
+                      <th style={{ textAlign: "center" }}>Action</th>
                         <th>Owner Name</th>
                         <th>Owner Name Arabic</th>
                         <th>Title</th>
@@ -182,7 +183,6 @@ const Owner = () => {
                         <th>Nationality</th>
                         {/* <th>Silk Color</th> */}
                         <th>Image</th>
-                        <th style={{ textAlign: "center" }}>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -190,6 +190,24 @@ const Owner = () => {
                         return (
                           <>
                             <tr className="tr_table_class">
+                            <td
+                                className="table_delete_btn1"
+                                // style={{ textAlign: "center" }}
+                              >
+                                <BiEdit
+                                  onClick={() =>
+                                    navigate("/editowner", {
+                                      state: {
+                                        ownerid: item,
+                                      },
+                                    })
+                                  }
+                                />
+                                <MdDelete
+                                  onClick={() => handleRemove(item._id)}
+                                />
+                                <BsEyeFill onClick={() => handleShow(item)} />
+                              </td>
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
                               <td>{item.TitleEn}</td>
@@ -220,24 +238,7 @@ const Owner = () => {
                               <td>
                                 <img src={item.image} alt="" />
                               </td>
-                              <td
-                                className="table_delete_btn1"
-                                style={{ textAlign: "center" }}
-                              >
-                                <BiEdit
-                                  onClick={() =>
-                                    navigate("/editowner", {
-                                      state: {
-                                        ownerid: item,
-                                      },
-                                    })
-                                  }
-                                />
-                                <MdDelete
-                                  onClick={() => handleRemove(item._id)}
-                                />
-                                <BsEyeFill onClick={() => handleShow(item)} />
-                              </td>
+                              
                             </tr>
                           </>
                         );

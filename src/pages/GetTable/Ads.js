@@ -168,13 +168,15 @@ const Ads = () => {
                   <table striped bordered hover>
                     <thead>
                       <tr>
+                         <th>Action</th>
                         <th>Title </th>
                         <th>Title Arabic</th>
                         <th>Description </th>
                         <th>Description Arabic</th>
                         <th>Image</th>
+                        
                         {/* <th>Active</th> */}
-                        <th>Action</th>
+                       
                       </tr>
                     </thead>
                     <tbody>
@@ -182,23 +184,7 @@ const Ads = () => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.TitleEn}</td>
-                              <td>{item.TitleAr}</td>
-                              <td>{item.DescriptionEn}</td>
-                              <td>{item.DescriptionAr}</td>
-                              <td>
-                                <img src={item.image} alt="" />
-                              </td>
-                              {/* <td>
-                                <Form.Check 
-                                  type="switch"
-                                  id="custom-switch"
-                                  onChange={() => setValue(true)}
-                                  // label="Check this switch"
-                                  value={Value}
-                                />
-                                </td> */}
-                              <td className="table_delete_btn1">
+                            <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
                                     history("/editads", {
@@ -217,6 +203,23 @@ const Ads = () => {
                                 />
                                 <BsEyeFill onClick={() => handleShow(item)} />
                               </td>
+                              <td>{item.TitleEn}</td>
+                              <td>{item.TitleAr}</td>
+                              <td>{item.DescriptionEn}</td>
+                              <td>{item.DescriptionAr}</td>
+                              <td>
+                                <img src={item.image} alt="" />
+                              </td>
+                              {/* <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
+                                />
+                                </td> */}
+                              
                             </tr>
                           </>
                         );

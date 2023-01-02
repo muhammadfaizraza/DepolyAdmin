@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment,useState } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import { fetchbreeder, STATUSES } from "../../redux/getReducer/getBreeder";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
@@ -13,14 +13,16 @@ import { Modal } from "react-bootstrap";
 import { BsEyeFill } from "react-icons/bs";
 import BreederPopup from "../../Components/Popup/BreederPopup";
 import Pagination from "./Pagination";
-import { BiFilter } from 'react-icons/bi';
+import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
-
 const BreederTable = () => {
-  const [ShowCalender, setShowCalender] = useState(false)
+  const [ShowCalender, setShowCalender] = useState(false);
+
+  const [SearchData, setSearchData] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
 
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -29,24 +31,30 @@ const BreederTable = () => {
     setmodaldata(data);
     await setShow(true);
   };
+  
   const dispatch = useDispatch();
   const history = useNavigate();
 
   const { data: breeder, status } = useSelector((state) => state.breeder);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(8)
-  
+  const [postsPerPage] = useState(8);
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = breeder.slice(indexOfFirstPost, indexOfLastPost);
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const GetSearch = async () => {
+    const response = await axios.get(
+      `${window.env.API_URL}/SearchUser?shortCode=${SearchCode}&NameEn=${SearchData}`
+    );
+    setSearchData(response.data.data);
+  };
 
   useEffect(() => {
     dispatch(fetchbreeder());
   }, [dispatch]);
 
-  
   const handleRemove = async (Id) => {
     try {
       swal({
@@ -55,27 +63,18 @@ const BreederTable = () => {
         icon: "warning",
         buttons: true,
         dangerMode: true,
-      })
-
-      .then( async(willDelete) => {
-  
-   
+      }).then(async (willDelete) => {
         if (willDelete) {
-       await axios.delete(`${window.env.API_URL}/softdeleteBreeder/${Id}`);
+          await axios.delete(`${window.env.API_URL}/softdeleteBreeder/${Id}`);
           swal("Your data has been deleted Successfully!", {
             icon: "success",
-         
-          }
-          )
-          dispatch(fetchbreeder())
-          
+          });
+          dispatch(fetchbreeder());
         } else {
           swal("Your data is safe!");
         }
       });
-   
-    }catch(error) {
-
+    } catch (error) {
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -84,11 +83,7 @@ const BreederTable = () => {
         button: "OK",
       });
     }
-
-
-
-  }
-  
+  };
 
   if (status === STATUSES.LOADING) {
     return (
@@ -127,63 +122,66 @@ const BreederTable = () => {
                     alignItems: "center",
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
-                >
-                  
-                </h6>
-
+                ></h6>
                 <Link to="/breeder">
                   <button>Add Breeder</button>
                 </Link>
                 <OverlayTrigger
-                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
-                      >
-                        <span
-                          className="addmore"
-                        >
-                          <BiFilter
-                    className="calendericon"
-                    onClick={() => setShowCalender(!ShowCalender)}
-                  />
-                        </span>
-                  </OverlayTrigger>                <CSVLink  data={breeder}  separator={";"} filename={"MKS Breeder.csv"} className='csvclass'>
-                        Export CSV
+                  overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                >
+                  <span className="addmore">
+                    <BiFilter
+                      className="calendericon"
+                      onClick={() => setShowCalender(!ShowCalender)}
+                    />
+                  </span>
+                </OverlayTrigger>{" "}
+                <CSVLink
+                  data={breeder}
+                  separator={";"}
+                  filename={"MKS Breeder.csv"}
+                  className="csvclass"
+                >
+                  Export CSV
                 </CSVLink>
               </div>
             </div>
             <div>
-              
-              {
-                ShowCalender ?
+              {ShowCalender ? (
                 <span className="transitionclass">
-                <div className="userfilter">
-                
-                <div className="filtertextform forflex">
-                
-                 <input type='text' class="form-control" placeholder="Enter Title"/>
-                 <input type='text' class="form-control" placeholder="Enter Description"/>
-                 </div>
-                
-                </div>
-                <button className="filterbtn">Apply Filter</button>
-                </span>:<></>
-              }
-              </div>
+                  <div className="userfilter">
+                    <div className="filtertextform forflex">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Title"
+                      />
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Short Code"
+                      />
+                    </div>
+                  </div>
+                  <button className="filterbtn"  onClick={GetSearch}>Apply Filter</button>
+                </span>
+              ) : (
+                <></>
+              )}
+            </div>
             <>
               <div className="div_maintb">
                 <ScrollContainer>
                   <table>
                     <thead>
                       <tr>
-                      <th>Action</th>
+                        <th>Action</th>
                         <th>Name</th>
                         <th>Name Arabic </th>
-
                         <th>Short Code</th>
                         <th>Description</th>
                         <th>Description Arabic</th>
                         <th>Image</th>
-
-                       
                       </tr>
                     </thead>
                     <tbody>
@@ -191,7 +189,7 @@ const BreederTable = () => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                            <td className="table_delete_btn1">
+                              <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
                                     history("/editbreeder", {
@@ -207,8 +205,7 @@ const BreederTable = () => {
                                   }}
                                   onClick={() => handleRemove(item._id)}
                                 />
-                                <BsEyeFill onClick={() => handleShow(item)
-                                }/>
+                                <BsEyeFill onClick={() => handleShow(item)} />
                               </td>
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
@@ -219,8 +216,6 @@ const BreederTable = () => {
                               <td>
                                 <img src={item.image} alt="" />
                               </td>
-
-                              
                             </tr>
                           </>
                         );
@@ -233,11 +228,11 @@ const BreederTable = () => {
           </div>
           <span className="plusIconStyle"></span>
           <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={breeder.length}
-          currentPage={currentPage}
-          paginate={paginate}
-        />
+            postsPerPage={postsPerPage}
+            totalPosts={breeder.length}
+            currentPage={currentPage}
+            paginate={paginate}
+          />
         </div>
       </div>
       <Modal
@@ -248,7 +243,7 @@ const BreederTable = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2 style={{fontFamily: "inter"}}>Breeder</h2>
+          <h2 style={{ fontFamily: "inter" }}>Breeder</h2>
         </Modal.Header>
         <Modal.Body>
           <BreederPopup data={modaldata} />

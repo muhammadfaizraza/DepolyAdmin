@@ -174,10 +174,11 @@ const Tracklength = () => {
                   <table>
                     <thead>
                       <tr>
+                      <th>Action</th>
+
                         <th>Track Length</th>
                         <th>Race Course </th>
                         <th>RaceCourse Image</th>
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -185,21 +186,7 @@ const Tracklength = () => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.TrackLength}</td>
-                              <td>
-                                {item.TrackLengthRaceCourseData === null ||
-                                undefined ? (
-                                  <>N/A</>
-                                ) : (
-                                  <>
-                                    {item.TrackLengthRaceCourseData.TrackNameEn}
-                                  </>
-                                )}
-                              </td>
-                              <td>
-                                <img src={item.RaceCourseImage} alt="" />
-                              </td>
-                              <td className="table_delete_btn1">
+                            <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
                                     navigate("/edittrack", {
@@ -217,6 +204,21 @@ const Tracklength = () => {
                                 />
                                 <BsEyeFill onClick={() => handleShow(item)} />
                               </td>
+                              <td>{item.TrackLength}</td>
+                              <td>
+                                {item.TrackLengthRaceCourseData === null ||
+                                undefined ? (
+                                  <>N/A</>
+                                ) : (
+                                  <>
+                                    {item.TrackLengthRaceCourseData.TrackNameEn}
+                                  </>
+                                )}
+                              </td>
+                              <td>
+                                <img src={item.RaceCourseImage} alt="" />
+                              </td>
+                             
                             </tr>
                           </>
                         );

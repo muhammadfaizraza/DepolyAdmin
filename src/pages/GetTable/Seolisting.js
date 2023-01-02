@@ -167,12 +167,13 @@ const SeoTable = () => {
                   <table>
                     <thead>
                       <tr>
+                      <th>Action</th>
+
                         <th>Key Word</th>
                         <th>Key Word Arabic </th>
                         <th>Title</th>
                         <th>Title Arabic</th>
 
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -180,12 +181,7 @@ const SeoTable = () => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.KeywordEn}</td>
-                              <td>{item.KeywordAr}</td>
-                              <td>{item.TitleEn} </td>
-                              <td>{item.TitleAr} </td>
-
-                              <td className="table_delete_btn1">
+                            <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
                                     history("/editseo", {
@@ -203,6 +199,12 @@ const SeoTable = () => {
                                 />
                                 <BsEyeFill onClick={() => handleShow(item)} />
                               </td>
+                              <td>{item.KeywordEn}</td>
+                              <td>{item.KeywordAr}</td>
+                              <td>{item.TitleEn} </td>
+                              <td>{item.TitleAr} </td>
+
+                              
                             </tr>
                           </>
                         );

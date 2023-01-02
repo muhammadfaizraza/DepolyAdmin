@@ -169,6 +169,7 @@ const [ShowCalender, setShowCalender] = useState(false)
                   <table id="customers">
                     <thead>
                       <tr>
+                      <th>Actions</th>
                         <th>Name</th>
                         <th>Name Arabic</th>
                         <th>Age</th>
@@ -190,7 +191,6 @@ const [ShowCalender, setShowCalender] = useState(false)
                         {/* <th>Cap</th> */}
 
                         <th>Image</th>
-                        <th>Actions</th>
                       </tr>
                     </thead>
 
@@ -198,7 +198,28 @@ const [ShowCalender, setShowCalender] = useState(false)
                       return (
                         <>
                           <tbody>
-                            <tr>
+                            <tr  className="tr_table_class">
+                            <td
+                                className="table_delete_btn1"
+                                // style={{ textAlign: "center" }}
+                              >
+                                <BiEdit
+                                  onClick={() =>
+                                    history("/edithorse", {
+                                      state: {
+                                        horseid: item,
+                                      },
+                                    })
+                                  }
+                                />
+                                <MdDelete
+                                  style={{
+                                    fontSize: "22px",
+                                  }}
+                                  onClick={() => handleRemove(item._id)}
+                                />
+                                <BsEyeFill onClick={() => handleShow(item)}/>
+                              </td>
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
                               <td>
@@ -247,24 +268,7 @@ const [ShowCalender, setShowCalender] = useState(false)
                                   }}
                                 ></img>
                               </td>
-                              <td
-                                className="table_delete_btn1"
-                                style={{ textAlign: "center" }}
-                              >
-                                <BiEdit
-                                  onClick={() =>
-                                    history("/edithorse", {
-                                      state: {
-                                        horseid: item,
-                                      },
-                                    })
-                                  }
-                                />
-                                <MdDelete
-                                  onClick={() => handleRemove(item._id)}
-                                />
-                                <BsEyeFill onClick={() => handleShow(item)}/>
-                              </td>
+                              
                             </tr>
                           </tbody>
                         </>

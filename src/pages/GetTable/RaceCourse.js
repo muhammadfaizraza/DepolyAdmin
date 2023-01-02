@@ -162,6 +162,8 @@ const Racecourse = () => {
                 <table striped bordered hover>
                   <thead>
                     <tr>
+                    <th>Actions</th>
+
                       <th>Track Name</th>
                       <th>Track Name Arabic </th>
                       <th>Abbreviation</th>
@@ -173,7 +175,6 @@ const Racecourse = () => {
 
                       <th>Image</th>
 
-                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -181,6 +182,25 @@ const Racecourse = () => {
                       return (
                         <>
                           <tr className="tr_table_class">
+                          <td className="table_delete_btn1">
+                              <BiEdit
+                                onClick={() =>
+                                  navigate("/editracecourse", {
+                                    state: {
+                                      courseid: item,
+                                    },
+                                  })
+                                }
+                              />
+
+                              <MdDelete
+                                style={{
+                                  fontSize: "22px",
+                                }}
+                                onClick={() => handleRemove(item._id)}
+                              />
+                              <BsEyeFill onClick={() => handleShow(item)} />
+                            </td>
                             <td>
                               {item.TrackNameEn === null ? (
                                 <>N/A</>
@@ -227,25 +247,7 @@ const Racecourse = () => {
                             <td>
                               <img src={item.image} alt="" />
                             </td>
-                            <td className="table_delete_btn1">
-                              <BiEdit
-                                onClick={() =>
-                                  navigate("/editracecourse", {
-                                    state: {
-                                      courseid: item,
-                                    },
-                                  })
-                                }
-                              />
-
-                              <MdDelete
-                                style={{
-                                  fontSize: "22px",
-                                }}
-                                onClick={() => handleRemove(item._id)}
-                              />
-                              <BsEyeFill onClick={() => handleShow(item)} />
-                            </td>
+                          
                           </tr>
                         </>
                       );

@@ -155,6 +155,8 @@ const ColorTable = () => {
                   <table>
                     <thead>
                       <tr>
+                      <th>Action</th>
+
                         <th>Group Name</th>
                         <th>Rank </th>
                         <th>Point</th>
@@ -166,7 +168,6 @@ const ColorTable = () => {
                         <th>Fifth Price</th>
                         <th>Sixth Price</th> */}
                         <th>Short Code</th>
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -174,19 +175,7 @@ const ColorTable = () => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.Group_Name}</td>
-                              <td>{item.Rank}</td>
-                              <td>{item.Point}</td>
-                              <td>{item.Bonus_Point}</td>
-                              {/* <td>{item.First_Place_Bonus_Point}</td>
-                              <td>{item.Second_Place_Bonus_Point}</td>
-                              <td>{item.Third_Place_Bonus_Point}</td>
-                              <td>{item.FourthPrice}</td>
-                              <td>{item.FifthPrice}</td>
-                              <td>{item.SixthPrice}</td> */}
-                              <td>{item.shortCode} </td>
-
-                              <td className="table_delete_btn1">
+                            <td className="table_delete_btn1">
                                 <BiEdit
                                   // onClick={() =>
                                   //   history("/editcolor", {
@@ -206,6 +195,19 @@ const ColorTable = () => {
                                  onClick={() => handleShow(item)}
                                  />
                               </td>
+                              <td>{item.Group_Name}</td>
+                              <td>{item.Rank}</td>
+                              <td>{item.Point}</td>
+                              <td>{item.Bonus_Point}</td>
+                              {/* <td>{item.First_Place_Bonus_Point}</td>
+                              <td>{item.Second_Place_Bonus_Point}</td>
+                              <td>{item.Third_Place_Bonus_Point}</td>
+                              <td>{item.FourthPrice}</td>
+                              <td>{item.FifthPrice}</td>
+                              <td>{item.SixthPrice}</td> */}
+                              <td>{item.shortCode} </td>
+
+                              
                             </tr>
                           </>
                         );

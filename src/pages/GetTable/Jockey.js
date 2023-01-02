@@ -171,6 +171,7 @@ const Statistic = () => {
                   <table>
                     <thead>
                       <tr>
+                      <th>Action</th>
                         <th>Jockey Name</th>
                         <th>Name Arabic </th>
                         <th>Short Name </th>
@@ -184,7 +185,6 @@ const Statistic = () => {
                         <th>Max Weight</th>
                         <th>Nationality</th>
                         <th>Image</th>
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -192,6 +192,17 @@ const Statistic = () => {
                         return (
                           <>
                             <tr className="tr_table_class">
+                            <td className="table_delete_btn1">
+                                  <BiEdit onClick={() => navigate('/editjockey',{
+                                state:{
+                                  jockeyid:item
+                                }
+                              })}/>
+                                  <MdDelete
+                                  onClick={() => handleRemove(item._id)}
+                                />
+                                <BsEyeFill onClick={() => handleShow(item)}/>
+                              </td>
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
                               <td>{item.ShortNameEn}</td>
@@ -218,17 +229,7 @@ const Statistic = () => {
                                 <img src={item.image} alt="" />
                               </td>
 
-                              <td className="table_delete_btn1">
-                                  <BiEdit onClick={() => navigate('/editjockey',{
-                                state:{
-                                  jockeyid:item
-                                }
-                              })}/>
-                                  <MdDelete
-                                  onClick={() => handleRemove(item._id)}
-                                />
-                                <BsEyeFill onClick={() => handleShow(item)}/>
-                              </td>
+                              
                             </tr>
                           </>
                         );

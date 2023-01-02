@@ -176,6 +176,8 @@ const News = () => {
                   <table>
                     <thead>
                       <tr>
+                      <th>Action</th>
+
                         <th>Title </th>
                         <th>Sub Title </th>
                         <th>Title Arabic</th>
@@ -183,14 +185,30 @@ const News = () => {
                         <th>Description </th>
                         <th>Description Arabic</th>
                         <th>Image</th>
-<th>Active</th>
-                        <th>Action</th>
+{/* <th>Active</th> */}
                       </tr>
                     </thead>
                     <tbody>
                       {currentPosts.map((item, index) => {
                         return (
                           <tr className="tr_table_class" key={index}>
+                            <td className="table_delete_btn1"
+                              // style={{ textAlign: "center" }}
+                              >
+                            <BiEdit
+                                onClick={() =>
+                                  history("/editnews", {
+                                    state: {
+                                      newsid: item
+                                    },
+                                  })
+                                }
+                              />
+                              <MdDelete
+                                onClick={() => handleRemove(item._id)}
+                              />
+                              <BsFillEyeFill onClick={() => handleShow(item)}/>
+                            </td>
                             <td>{item.TitleEn}</td>
                             <td>{item.TitleAr}</td>
 
@@ -212,22 +230,7 @@ const News = () => {
                                   value={Value}
                                 />
                                 </td>
-                            <td className="table_delete_btn1"
-                              style={{ textAlign: "center" }}>
-                            <BiEdit
-                                onClick={() =>
-                                  history("/editnews", {
-                                    state: {
-                                      newsid: item
-                                    },
-                                  })
-                                }
-                              />
-                              <MdDelete
-                                onClick={() => handleRemove(item._id)}
-                              />
-                              <BsFillEyeFill onClick={() => handleShow(item)}/>
-                            </td>
+                            
                           </tr>
                         );
                       })}

@@ -16,6 +16,8 @@ const NewsForm = () => {
   const [state1, setState] = useState({
     NameEn: "",
     NameAr: "",
+    AbbrevEn:"",
+    AbbrevAr:"",
     shortCode: "",
   });
 
@@ -24,6 +26,8 @@ const NewsForm = () => {
       setState({
         NameEn: groundtypeid.NameEn,
         NameAr: groundtypeid.NameAr,
+        AbbrevEn:groundtypeid.AbbrevEn,
+        AbbrevAr:groundtypeid.AbbrevAr,
         shortCode: groundtypeid.shortCode,
       });
     } else {
@@ -103,6 +107,58 @@ const NewsForm = () => {
                       <Form.Control  type="text" placeholder="Description" value={state1.NameAr}/>
                     </FloatingLabel>
                     
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Abbrevation"
+                      className="mb-3"
+                      name="AbbrevEn"
+                      onChange={(e) =>
+                        setState({ ...state1, AbbrevEn: e.target.value })
+                      }
+                 
+                    >
+                      <Form.Control
+                        required
+                       
+                        name="AbbrevEn"
+                        type="text"
+                        placeholder="Abbrevation"
+                        value={state1.AbbrevEn}
+                      />
+                    </FloatingLabel>
+                 
+                    <span className="spanForm"> |</span>
+             
+                  </div>
+
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="اختصار"
+                      className="mb-3 floatingInputAr"
+                      name="AbbrevAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, AbbrevAr: e.target.value })
+                      }
+                 
+                      
+                    >
+                      <Form.Control
+                        name="AbbrevAr" 
+                        type="text"
+                        placeholder="اختصار"
+                        required
+                        value={state1.AbbrevAr}
+                    
+                     
+                      />
+                    </FloatingLabel>
+         
                   </div>
                 </div>
                 <div className="row mainrow">

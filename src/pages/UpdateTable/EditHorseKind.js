@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+  import React, { useState, useEffect } from "react";
 import "../../Components/CSS/forms.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
@@ -16,7 +16,8 @@ const NewsForm = () => {
   const [state1, setState] = useState({
     NameEn: "",
     NameAr: "",
-    shortName: "",
+    AbbrevEn: "",
+    AbbrevAr: "",
   });
 
   useEffect(() => {
@@ -24,7 +25,8 @@ const NewsForm = () => {
       setState({
         NameEn: horsekindid.NameEn,
         NameAr: horsekindid.NameAr,
-        shortName: horsekindid.shortName,
+        AbbrevEn: horsekindid.AbbrevEn,
+        AbbrevAr: horsekindid.AbbrevAr,
       });
     } else {
       alert("No Data");
@@ -38,7 +40,8 @@ const NewsForm = () => {
       const formData = new FormData();
       formData.append("NameEn", state1.NameEn);
       formData.append("NameAr", state1.NameAr + ' ');
-      formData.append("shortName", state1.shortName);
+      formData.append("AbbrevEn", state1.AbbrevEn);
+      formData.append("AbbrevAr", state1.AbbrevAr);
 
       const response = await axios.put(
         `${window.env.API_URL}/updateHorseKind/${horsekindid._id}`,
@@ -108,22 +111,39 @@ const NewsForm = () => {
                   </div>
                 </div>
                 <div className="row mainrow">
-                  <div className="col-sm">
+                <div className="col-sm">
                   <FloatingLabel
-                      controlId="floatingInput"
-                      label="Short Name"
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, shortName: e.target.value })
-                      }
-                    
-                    >
-                      <Form.Control type="text" placeholder="Description" value={state1.shortName}/>
-                    </FloatingLabel>
-                 
-									
-                  </div>
+                    controlId="floatingInput"
+                    label="Abbreviation"
+                    className="mb-3"
+                    onChange={(e) =>
+                      setState({ ...state1, AbbrevEn: e.target.value })
+                    }
+         
+                  >
+                    <Form.Control type="text" placeholder="ShortCode" value={state1.AbbrevEn} />
+                  </FloatingLabel>
+                  <span className="spanForm"> |</span>
+           
                 </div>
+
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label=" اختصار                    "
+                    className="mb-3 floatingInputAr"
+                    onChange={(e) =>
+                      setState({ ...state1, AbbrevAr: e.target.value })
+                    }
+                 
+                    style={{ direction: "rtl" }}
+               
+                  >
+                    <Form.Control type="text" placeholder="التفاصيل" value={state1.AbbrevAr} />
+                  </FloatingLabel>
+    
+                </div>
+              </div>
                 
 
                 <div className="ButtonSection" style={{ justifyContent: "end" }}>

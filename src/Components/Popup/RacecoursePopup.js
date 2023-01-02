@@ -158,7 +158,7 @@ const RacecoursePopup = (data) => {
 
 
                                 placeholder="Track Name"
-                                value={data.data.NationalityDataRaceCourse.NameEn} readOnly
+                                value={data.data.NationalityDataRaceCourse&& data.data.NationalityDataRaceCourse.NameEn} readOnly
                             />
                         </FloatingLabel>
                         <span className="spanForm"> |</span>
@@ -176,7 +176,8 @@ const RacecoursePopup = (data) => {
                                 type="text"
                                 placeholder="رمز قصير"
                                 style={{ left: "%" }}
-                                value={data.data.NationalityDataRaceCourse.NameAr} readOnly
+                                value={data.data.NationalityDataRaceCourse&& data.data.NationalityDataRaceCourse.NameAr} readOnly
+                                readOnly
                             />
                         </FloatingLabel>
                     </div>
@@ -196,7 +197,7 @@ const RacecoursePopup = (data) => {
 
 
                                 placeholder="Color "
-                                value={data.data.ColorCodeData.NameEn} readOnly
+                                value={data.data.ColorCodeData&& data.data.ColorCodeData.NameEn } readOnly
                             />
                         </FloatingLabel>
                         <span className="spanForm"> |</span>
@@ -214,7 +215,7 @@ const RacecoursePopup = (data) => {
                                 type="text"
                                 placeholder="رمز قصير"
                                 style={{ left: "%" }}
-                                value={data.data.ColorCodeData.NameAr} readOnly
+                                value={data.data.ColorCodeData&& data.data.ColorCodeData.NameAr } readOnly
                             />
                         </FloatingLabel>
                     </div>

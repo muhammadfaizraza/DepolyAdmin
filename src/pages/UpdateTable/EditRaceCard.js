@@ -10,8 +10,12 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import {AiOutlineReload} from "react-icons/ai"
+import { Modal } from "react-bootstrap";
+import RaceCoursePopup from "../PostTable/RaceCourseForm";
 
 const NewsForm = () => {
+  const dispatch = useDispatch()
   const history = useNavigate();
   const { state } = useLocation();
 
@@ -28,6 +32,13 @@ const NewsForm = () => {
       };
     })
   );
+  const [showActiveRacecourse, setShowActiveRacecourse] = useState(false);
+
+  const handleCloseActivenationality = () => setShowActiveRacecourse(false);
+
+  const handleShowActiverRacecouse = async () => {
+    await setShowActiveRacecourse(true);
+  };
 
 
   const { RaceId } = state;
@@ -40,6 +51,11 @@ const NewsForm = () => {
     RaceCardCourse:""
 
   });
+  const FetchNew =() =>{
+
+    dispatch(fetchracecourse())
+    
+      }
 console.log(RaceId)
   useEffect(() => {
     if (RaceId) {
@@ -63,9 +79,10 @@ console.log(RaceId)
       const formData = new FormData();
       formData.append("RaceCardNameEn", state1.RaceCardNameEn);
       formData.append("RaceCardNameEn", state1.RaceCardNameEn);
-      formData.append("RaceCourse",RaceCourse.id);
+ 
+      formData.append("RaceCourse", RaceCourse.id === undefined ? state1.RaceCourse : RaceCourse.id);
 
-      const response = await axios.put(
+ await axios.put(
         `${window.env.API_URL}/updateRaceCard/${RaceId._id}`,
         formData
       );
@@ -86,6 +103,7 @@ console.log(RaceId)
       });
     }
   };
+  
   return (
     <>
       <div className="page">
@@ -139,26 +157,32 @@ console.log(RaceId)
               <div className="row mainrow">
                 <div className="col-sm">
                   <Select
-                    placeholder={<div>Select Race Course</div>}
+                    placeholder={<div>{RaceId.RaceCardCourseData.TrackNameEn}</div>}
                     defaultValue={RaceCourse}
                     onChange={setRaceCourse}
                     options={courseoptions}
                     isClearable={true}
                     isSearchable={true}
                   />
-                  <span className="spanForm">
-                    <OverlayTrigger
-                      overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
-                    >
-                      <button
-                        className="addmore"
-                        onClick={() => history("/racecourseform")}
+                     <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        +
-                      </button>
-                    </OverlayTrigger>
-                    |
-                  </span>
+                        <span className="addmore" onClick={handleShowActiverRacecouse}>
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>
+                      |
+                    </span>
                 </div>
                 <div className="col-sm">
                   <Select
@@ -185,6 +209,20 @@ console.log(RaceId)
           </div>
         </div>
       </div>
+      <Modal
+       show={showActiveRacecourse}
+       onHide={handleCloseActivenationality}
+       size="lg"
+       aria-labelledby="contained-modal-title-vcenter"
+       centered
+     >
+       <Modal.Header closeButton>
+         <h2>Race Course</h2>
+       </Modal.Header>
+       <Modal.Body>
+         < RaceCoursePopup/>
+       </Modal.Body>
+     </Modal>
     </>
   );
 };

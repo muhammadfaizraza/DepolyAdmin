@@ -74,11 +74,11 @@ const RaceForm = () => {
   const [ErrorRaceNameEn, setErrorRaceNameEn] = useState("");
   const [ErrorMeetingCode, setErrorMeetingCode] = useState("");
   const [ErrorGround, setErrorGround] = useState("");
-  const [ErrorRaceNameAr, setErrorRaceNameAr] = useState("");
+ 
   const [ErrorRaceKind, setErrorRaceKind] = useState("");
   const [ErrorDescriptionEn, setErrorDescriptionEn] = useState("");
   const [ErrorDescriptionAr, setErrorDescriptionAr] = useState("");
-  const [ErrorDay, setErrorDay] = useState("");
+ 
   const [ErrorWeatherType, setErrorWeatherType] = useState("");
   const [ErrorRaceStatus, setErrorRaceStatus] = useState("");
   const [ErrorRaceCourse, setErrorRaceCourse] = useState("");
@@ -86,8 +86,7 @@ const RaceForm = () => {
   const [ErrorWeatherDegree, setErrorWeatherDegree] = useState("");
   const [ErrorSponsor, setErrorSponsor] = useState("");
   const [ErrorTrackLength, setErrorTrackLength] = useState("");
-  const [ErrorActiveJockeyForTheRace, setErrorActiveJockeyForTheRace] =
-    useState("");
+
   const [ErrorDate, setErrorDate] = useState("");
   const [ErrorStartTime, setErrorStartTime] = useState("");
   const [ErrorEndTime, setErrorEndTime] = useState("");
@@ -109,7 +108,7 @@ const RaceForm = () => {
   const { data: RaceType } = useSelector((state) => state.RaceType);
   const { data: RaceName } = useSelector((state) => state.RaceName);
   const { data: trackLength } = useSelector((state) => state.trackLength);
-  const { data: raceKinds, status } = useSelector((state) => state.raceKinds);
+  const { data: raceKinds,  } = useSelector((state) => state.raceKinds);
   const { data: groundtype } = useSelector((state) => state.groundtype);
   const { data: pointTable } = useSelector((state) => state.pointTable);
 
@@ -189,7 +188,7 @@ const RaceForm = () => {
           value: item.image,
           label: (
             <div>
-              <img src={item.image} height="30px" width="30px" />{" "}
+              <img src={item.image} height="30px" width="30px" alt=""/>
             </div>
           ),
         };

@@ -13,7 +13,6 @@ import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../../utils/TextInputValidation";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { AiOutlineAim } from "react-icons/ai";
 import {AiOutlineReload} from "react-icons/ai"
 import { Fragment } from "react";
 import { Modal } from "react-bootstrap";

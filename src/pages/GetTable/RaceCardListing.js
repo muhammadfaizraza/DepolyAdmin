@@ -53,9 +53,7 @@ const Racecourse = () => {
         buttons: true,
         dangerMode: true,
       }).then(async (willDelete) => {
-        const res = await axios.delete(
-          `${window.env.API_URL}/softdeleteRaceCard/${Id}`
-        );
+        await axios.delete(`${window.env.API_URL}/softdeleteRaceCard/${Id}`);
 
         if (willDelete) {
           swal("Poof! Your data has been deleted!", {
@@ -105,13 +103,6 @@ const Racecourse = () => {
               <h4>Race Card Listing</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
                 <Link to="/racecard">
                   <button>Add Race Card</button>
                 </Link>
@@ -164,10 +155,10 @@ const Racecourse = () => {
                 <table striped bordered hover>
                   <thead>
                     <tr>
+                      <th>Actions</th>
                       <th>Race Card Name</th>
                       <th>Race Card Name Arabic </th>
                       <th>Race Course</th>
-                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -175,24 +166,6 @@ const Racecourse = () => {
                       return (
                         <>
                           <tr className="tr_table_class">
-                            <td>
-                              {item.RaceCardNameEn === null ? (
-                                <>N/A</>
-                              ) : (
-                                item.RaceCardNameEn
-                              )}
-                            </td>
-                            <td>
-                              {item.RaceCardNameAr === null ? (
-                                <>N/A</>
-                              ) : (
-                                item.RaceCardNameAr
-                              )}
-                            </td>
-                            <td>
-                              {item.RaceCardCourseData &&
-                                item.RaceCardCourseData.TrackNameEn}
-                            </td>
                             <td className="table_delete_btn1">
                               <BiEdit
                                 onClick={() =>
@@ -211,6 +184,24 @@ const Racecourse = () => {
                                 onClick={() => handleRemove(item._id)}
                               />
                               <BsEyeFill onClick={() => handleShow(item)} />
+                            </td>
+                            <td>
+                              {item.RaceCardNameEn === null ? (
+                                <>N/A</>
+                              ) : (
+                                item.RaceCardNameEn
+                              )}
+                            </td>
+                            <td>
+                              {item.RaceCardNameAr === null ? (
+                                <>N/A</>
+                              ) : (
+                                item.RaceCardNameAr
+                              )}
+                            </td>
+                            <td>
+                              {item.RaceCardCourseData &&
+                                item.RaceCardCourseData.TrackNameEn}
                             </td>
                           </tr>
                         </>

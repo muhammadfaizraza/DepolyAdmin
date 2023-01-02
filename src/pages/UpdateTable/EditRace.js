@@ -9,6 +9,30 @@ import DateTimePicker from "react-datetime-picker";
 import Select from "react-select";
 import { fetchracecourse } from "../../redux/getReducer/getRaceCourseSlice";
 import { useSelector , useDispatch } from "react-redux";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import { AiOutlineReload } from "react-icons/ai";
+import { Modal } from "react-bootstrap";
+
+import Racename from "../PostTable/Racenameform";
+import MeetingTypePopUp from "../PostTable/MeetingType";
+import RaceTypePopup from "../PostTable/Racetypeform";
+
+import TrackLengthPopup from "../PostTable/Tracklengthform";
+import GroundTypePopup from "../PostTable/GroundType";
+import RaceKindPopup from "../PostTable/RaceKind";
+import RaceCoursePopup from "../PostTable/RaceCourseForm";
+import JockeyPopup from "../PostTable/JockeyForm";
+import SponsorPopup from "../PostTable/SponsorForm";
+
+import { fetchSponsor } from "../../redux/getReducer/getSponsorSlice";
+import { fetchMeeting } from "../../redux/getReducer/getMeeting";
+import { fetchRaceType } from "../../redux/getReducer/getRacetype";
+import { fetchRaceName } from "../../redux/getReducer/getRaceName";
+import { fetchTrackLength } from "../../redux/getReducer/getTracklength";
+import { fetchRaceKind } from "../../redux/getReducer/getRaceKind";
+import { fetchgroundtype } from "../../redux/getReducer/getGroundType";
+
 
 const RaceStatuss = [
   { id: "1", value: "Cancel", label: "Cancel" },
@@ -22,13 +46,22 @@ const NewsForm = () => {
   const { state } = useLocation();
   const dispatch = useDispatch();
   const { data: racecourse } = useSelector((state) => state.racecourse);
-
+  const { data: sponsor } = useSelector((state) => state.sponsor);
+  const { data: meeting } = useSelector((state) => state.meeting);
+  const { data: RaceType } = useSelector((state) => state.RaceType);
+  const { data: RaceName } = useSelector((state) => state.RaceName);
+  const { data: trackLength } = useSelector((state) => state.trackLength);
+  const { data: raceKinds,  } = useSelector((state) => state.raceKinds);
+  const { data: groundtype } = useSelector((state) => state.groundtype);
   const { fullraceid } = state;
   const [DayNTime, setDayNTime] = useState("");
   const [RaceStatus, setRaceStatus] = useState("");
   const [RaceCourse, setRaceCourse] = useState("");
+  const [Sponsor , setSponsor] =useState("");
+  const [MeetingType,setMeetingType] =useState("");
+  const [RaceNameEn, setRaceNameEn] = useState("");
+  
   console.log(fullraceid)
-
   let racecourses =
   racecourse === undefined ? (
     <></>
@@ -41,8 +74,252 @@ const NewsForm = () => {
       };
     })
   );
+let racecoursesAr =
+  racecourse === undefined ? (
+    <></>
+  ) : (
+    racecourse.map(function (item) {
+      return {
+        id: item._id,
+        value: item._id,
+        label: item.TrackNameAr,
+      };
+    })
+  );
 
+let Racenameoptions =
+  RaceName === undefined ? (
+    <></>
+  ) : (
+    RaceName.map(function (item) {
+      return {
+        id: item._id,
+        value: item._id,
+        label: item.NameEn,
+      };
+    })
+  );
+let RacenameoptionsAr =
+  RaceName === undefined ? (
+    <></>
+  ) : (
+    RaceName.map(function (item) {
+      return {
+        id: item._id,
+        value: item._id,
+        label: item.NameAr,
+      };
+    })
+  );
 
+let SponsorForTheRace =
+  sponsor === undefined ? (
+    <></>
+  ) : (
+    sponsor.map(function (item) {
+      return {
+        id: item._id,
+        value: item.image,
+        label: (
+          <div>
+            <img src={item.image} height="30px" width="30px" alt="" />
+          </div>
+        ),
+      };
+    })
+  );
+
+let SponsorForTheRaceAr =
+  sponsor === undefined ? (
+    <></>
+  ) : (
+    sponsor.map(function (item) {
+      return {
+        id: item._id,
+        value: item.TitleAr,
+        label: item.TitleAr,
+      };
+    })
+  );
+
+let MeetingTypes =
+  meeting === undefined ? (
+    <></>
+  ) : (
+    meeting.map(function (item) {
+      return {
+        id: item._id,
+        value: item._id,
+        label: item.NameEn,
+      };
+    })
+  );
+let MeetingTypesAr =
+  meeting === undefined ? (
+    <></>
+  ) : (
+    meeting.map(function (item) {
+      return {
+        id: item._id,
+        value: item._id,
+        label: item.NameAr,
+      };
+    })
+  );
+
+let RaceTypes =
+  RaceType === undefined ? (
+    <></>
+  ) : (
+    RaceType.map(function (item) {
+      return {
+        id: item._id,
+        value: item._id,
+        label: item.NameEn,
+      };
+    })
+  );
+
+let RaceTypesAr =
+  RaceType === undefined ? (
+    <></>
+  ) : (
+    RaceType.map(function (item) {
+      return {
+        id: item._id,
+        value: item._id,
+        label: item.NameAr,
+      };
+    })
+  );
+
+let TrackLenght =
+  trackLength === undefined ? (
+    <></>
+  ) : (
+    trackLength.map(function (item) {
+      return {
+        id: item._id,
+        value: item.TrackLength,
+        label: item.TrackLength,
+      };
+    })
+  );
+
+let OprtionRaceKind =
+  raceKinds === undefined ? (
+    <></>
+  ) : (
+    raceKinds.map(function (item) {
+      return {
+        id: item._id,
+        value: item._id,
+        label: item.NameEn,
+      };
+    })
+  );
+let OprtionRaceKindAr =
+  raceKinds === undefined ? (
+    <></>
+  ) : (
+    raceKinds.map(function (item) {
+      return {
+        id: item._id,
+        value: item._id,
+        label: item.NameAr,
+      };
+    })
+  );
+
+let GroundrTypeAll =
+  groundtype === undefined ? (
+    <></>
+  ) : (
+    groundtype.map(function (item) {
+      return {
+        id: item._id,
+        value: item._id,
+        label: item.NameEn,
+      };
+    })
+  );
+let GroundrTypeAllAr =
+  groundtype === undefined ? (
+    <></>
+  ) : (
+    groundtype.map(function (item) {
+      return {
+        id: item._id,
+        value: item._id,
+        label: item.NameAr,
+      };
+    })
+  );
+  const [showName, setShowName] = useState(false);
+  const [showType, setShowType] = useState(false);
+  const [showRaceType, setShowRaceType] = useState(false);
+  const [showTrackLength, setShowTrackLength] = useState(false);
+  const [showGroundType, setShowGroundType] = useState(false);
+  const [showRaceKind, setShowRaceKind] = useState(false);
+  const [showRaceCourse, setShowRaceCourse] = useState(false);
+  const [showJockey, setShowJockey] = useState(false);
+  const [showSponsor, setShowSponsor] = useState(false);
+
+  const handleCloseName = () => setShowName(false);
+  const handleCloseType = () => setShowType(false);
+  const handleCloseRaceType = () => setShowRaceType(false);
+  const handleCloseTrackLength = () => setShowTrackLength(false);
+  const handleCloseGroundType = () => setShowGroundType(false);
+  const handleCloseRaceKind = () => setShowRaceKind(false);
+  const handleCloseRaceCourse = () => setShowRaceCourse(false);
+  const handleCloseJockey = () => setShowJockey(false);
+  const handleCloseSponsor = () => setShowSponsor(false);
+
+  const handleShowName = async () => {
+    await setShowName(true);
+  };
+  const handleShowType = async () => {
+    await setShowType(true);
+  };
+
+  const handleShowRaceType = async () => {
+    await setShowRaceType(true);
+  };
+  const handleShowTrackLength = async () => {
+    await setShowTrackLength(true);
+  };
+
+  const handleShowGroundType = async () => {
+    await setShowGroundType(true);
+  };
+
+  const handleShowRaceKind = async () => {
+    await setShowRaceKind(true);
+  };
+
+  const handleShowRaceCourse = async () => {
+    await setShowRaceCourse(true);
+  };
+
+  const handleShowJockey = async () => {
+    await setShowJockey(true);
+  };
+
+  const handleShowSponsor = async () => {
+    await setShowSponsor(true);
+  };
+
+  const FetchNew = () => {
+    dispatch(fetchracecourse());
+    dispatch(fetchSponsor());
+    dispatch(fetchMeeting());
+    dispatch(fetchRaceType());
+    dispatch(fetchRaceName());
+    dispatch(fetchTrackLength());
+    dispatch(fetchRaceKind());
+    dispatch(fetchgroundtype());
+  
+  };
   const [state1, setState] = useState({
 		MeetingCode: '',
     DescriptionEn:'',
@@ -79,8 +356,7 @@ const NewsForm = () => {
         FifthPrice: fullraceid.FifthPrice,
         SixthPrice: fullraceid.SixthPrice,
         RaceStatus: fullraceid.RaceStatus,
-        RaceStatus:fullraceid.RaceStatus,
-        DayNTime:fullraceid.DayNTime,
+         DayNTime:fullraceid.DayNTime,
         RaceCourse:fullraceid.RaceCourse,
         image:fullraceid.image
 			});
@@ -154,6 +430,96 @@ const NewsForm = () => {
             <div className="Headers">Edit Race</div>
             <div className="form">
               <form onSubmit={submit}>
+              <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>{fullraceid.MeetingTypeData.NameEn}</div>}
+                      defaultValue={MeetingType}
+                      onChange={setMeetingType}
+                      options={MeetingTypes}
+                      isClearable={true}
+                      isSearchable={true}
+                
+                    />
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span className="addmore" onClick={handleShowType}>
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>
+                      |
+                    </span>
+                 
+                  </div>
+
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>نوع الاجتماع</div>}
+                      defaultValue={MeetingType}
+                      className="selectdir"
+                      options={MeetingTypesAr}
+                      onChange={setMeetingType}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Race Name</div>}
+                      defaultValue={RaceNameEn}
+                      onChange={setRaceNameEn}
+                      options={Racenameoptions}
+                      isClearable={true}
+                      isSearchable={true}
+                 
+                    />
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span className="addmore" onClick={handleShowName}>
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>
+                      |
+                    </span>
+                 
+                  </div>
+
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>اسم العرق</div>}
+                      className="selectdir"
+                      defaultValue={RaceNameEn}
+                      onChange={setRaceNameEn}
+                      options={RacenameoptionsAr}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
               <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
@@ -306,15 +672,85 @@ const NewsForm = () => {
                       options={racecourses}
                       isClearable={true}
                       isSearchable={true}
+                 
                     />
-                   <span className="spanForm">|</span>
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                          onClick={handleShowRaceCourse}
+                        >
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
+                
                   </div>
 
                   <div className="col-sm">
                     <Select
                       placeholder={<div>دورة السباق</div>}
                       className="selectdir"
-                      options={racecourses}
+                      options={racecoursesAr}
+                      defaultValue={RaceCourse}
+                      onChange={setRaceCourse}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Sponsor Image</div>}
+                      defaultValue={Sponsor}
+                      onChange={setSponsor}
+                      options={SponsorForTheRace}
+                      isClearable={true}
+                      isSearchable={true}
+                  
+                    />
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span className="addmore" onClick={handleShowSponsor}>
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>
+                      |
+                    </span>
+               
+                  </div>
+
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>نوع السباق</div>}
+                      defaultValue={Sponsor}
+                      onChange={setSponsor}
+                      options={SponsorForTheRaceAr}
+                      className="selectdir"
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -522,6 +958,135 @@ const NewsForm = () => {
           </div>
         </div>
       </div>
+    
+      <Modal
+        show={showName}
+        onHide={handleCloseName}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Race Name</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <Racename />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showType}
+        onHide={handleCloseType}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Meeting Type</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <MeetingTypePopUp />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showRaceType}
+        onHide={handleCloseRaceType}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Race Type</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <RaceTypePopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showTrackLength}
+        onHide={handleCloseTrackLength}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Track Length</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <TrackLengthPopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showRaceKind}
+        onHide={handleCloseRaceKind}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Race Kind</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <RaceKindPopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showRaceCourse}
+        onHide={handleCloseRaceCourse}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Create Race Course</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <RaceCoursePopup />
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={showJockey}
+        onHide={handleCloseJockey}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Create Jockey</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <JockeyPopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showSponsor}
+        onHide={handleCloseSponsor}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Sponsor</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <SponsorPopup />
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={showGroundType}
+        onHide={handleCloseGroundType}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Ground Type</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <GroundTypePopup />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

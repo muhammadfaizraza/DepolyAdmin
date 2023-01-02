@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate ,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Select from "react-select";
 import { fetchracecourse } from "../../redux/getReducer/getRaceCourseSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,40 +13,37 @@ import { fetchgroundtype } from "../../redux/getReducer/getGroundType";
 import { Modal } from "react-bootstrap";
 import { AiOutlineReload } from "react-icons/ai";
 import TextInputValidation from "../../utils/TextInputValidation";
-import { ImCross } from 'react-icons/im';
+import { ImCross } from "react-icons/im";
 
 import RaceCoursePopup from "./RaceCourseForm";
 import GroundTypePopup from "./GroundType";
 
 const Tracklengthform = () => {
-
   const [ErrorTrackLength, setErrorTrackLength] = useState("");
   const [ErrorRaceCourse, setErrorRaceCourse] = useState("");
 
   const [ErrorGroundType, setErrorGroundType] = useState("");
- 
+
   const [ErrorRailPosition, setErrorRailPosition] = useState("");
   const [isLoading, setisLoading] = useState(false);
-
-
 
   const dispatch = useDispatch();
   const { data: racecourse } = useSelector((state) => state.racecourse);
   const { data: groundtype } = useSelector((state) => state.groundtype);
 
-    const [showGroundType, setShowGroundType] = useState(false);
-    const [showActiveRaceCourse, setShowActiveRaceCourse] = useState(false);
+  const [showGroundType, setShowGroundType] = useState(false);
+  const [showActiveRaceCourse, setShowActiveRaceCourse] = useState(false);
 
-    const handleCloseGroundType= () => setShowGroundType(false);
-    const handleCloseActiveRaceCourse= () => setShowActiveRaceCourse(false);
+  const handleCloseGroundType = () => setShowGroundType(false);
+  const handleCloseActiveRaceCourse = () => setShowActiveRaceCourse(false);
 
-    const handleShowGroundType = async () => {
-      await setShowGroundType(true);
-    };
-  
-    const handleShowRaceCourse = async () => {
-      await setShowActiveRaceCourse(true);
-    };
+  const handleShowGroundType = async () => {
+    await setShowGroundType(true);
+  };
+
+  const handleShowRaceCourse = async () => {
+    await setShowActiveRaceCourse(true);
+  };
 
   const [TrackLength, setTrackLength] = useState();
   const [RaceCourse, setRaceCourse] = useState("");
@@ -55,12 +52,12 @@ const Tracklengthform = () => {
   const [preview, setPreview] = useState();
   const [RailPosition, setRailPosition] = useState();
 
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const history = useNavigate();
 
   const submit = async (event) => {
     event.preventDefault();
-    setisLoading(true)
+    setisLoading(true);
     try {
       const formData = new FormData();
       formData.append("TrackLength", TrackLength);
@@ -76,10 +73,10 @@ const Tracklengthform = () => {
         icon: "success",
         button: "OK",
       });
-      if(pathname === '/tracklengthform'){
+      if (pathname === "/tracklengthform") {
         history("/tracklength");
       }
-     setisLoading(false)
+      setisLoading(false);
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -88,7 +85,7 @@ const Tracklengthform = () => {
         icon: "error",
         button: "OK",
       });
-      setisLoading(false)
+      setisLoading(false);
     }
   };
   const onSelectFile = (e) => {
@@ -105,25 +102,21 @@ const Tracklengthform = () => {
     }
 
     if (!RaceCourseImage.name.match(/\.(gif)$/)) {
-   
       swal({
         title: "Error!",
         text: "Enter Gif Image",
         icon: "error",
         button: "OK",
-    
       });
-      
-      
     }
-  
+
     const objectUrl = URL.createObjectURL(RaceCourseImage);
     setPreview(objectUrl);
     return () => URL.revokeObjectURL(objectUrl);
-  }, [RaceCourseImage ,dispatch]);
+  }, [RaceCourseImage, dispatch]);
   const handlePreview = () => {
-    setRaceCourseImage()
-  document.getElementById("file").value=""
+    setRaceCourseImage();
+    document.getElementById("file").value = "";
   };
   const FetchNew = () => {
     dispatch(fetchgroundtype());
@@ -154,12 +147,11 @@ const Tracklengthform = () => {
         };
       })
     );
-    
+
   const data1 = JSON.stringify(
     TextInputValidation("en", RailPosition, "Rail Position ")
-    
   );
-  const position = JSON.parse(data1)
+  const position = JSON.parse(data1);
   return (
     <div className="page">
       <div className="rightsidedata">
@@ -186,9 +178,11 @@ const Tracklengthform = () => {
                     }
                     required
                   >
-                    <Form.Control type="number" placeholder="Track Length"   />
+                    <Form.Control type="number" placeholder="Track Length" />
                   </FloatingLabel>
-                  <span className={TrackLength === "" ? "error" :"success"}>{ErrorTrackLength}</span>
+                  <span className={TrackLength === "" ? "error" : "success"}>
+                    {ErrorTrackLength}
+                  </span>
                   {/* <span className="spanForm"> |</span> */}
                 </div>
 
@@ -215,11 +209,18 @@ const Tracklengthform = () => {
                     value={RailPosition}
                     onBlur={() => setErrorRailPosition(position)}
                   >
-                    <Form.Control type="text" placeholder="Rail Position" required/>
+                    <Form.Control
+                      type="text"
+                      placeholder="Rail Position"
+                      required
+                    />
                   </FloatingLabel>
                   <span className="spanForm"> |</span>
-                  <span className={ErrorRailPosition.status ?"success" :"error" }>{ErrorRailPosition.message}</span>
-
+                  <span
+                    className={ErrorRailPosition.status ? "success" : "error"}
+                  >
+                    {ErrorRailPosition.message}
+                  </span>
                 </div>
 
                 <div className="col-sm">
@@ -230,9 +231,12 @@ const Tracklengthform = () => {
                     name="Name"
                     value={RailPosition}
                     style={{ direction: "rtl" }}
-
                   >
-                    <Form.Control type="text" placeholder="طول المسار" required/>
+                    <Form.Control
+                      type="text"
+                      placeholder="طول المسار"
+                      required
+                    />
                   </FloatingLabel>
                 </div>
               </div>
@@ -245,28 +249,32 @@ const Tracklengthform = () => {
                     options={courseoptions}
                     isClearable={true}
                     isSearchable={true}
-                    onBlur={() => RaceCourse === "" ?  setErrorRaceCourse("Race Course is required "):setErrorRaceCourse("Race Course is Validated ")}
+                    onBlur={() =>
+                      RaceCourse === ""
+                        ? setErrorRaceCourse("Race Course is required ")
+                        : setErrorRaceCourse("Race Course is Validated ")
+                    }
                   />
-                 <span className="spanForm">
-                      <OverlayTrigger
-                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
-                      >
-                        <span className="addmore" onClick={handleShowRaceCourse}>
-                            +
-                          </span>
-                      </OverlayTrigger>
-                      <OverlayTrigger
-                        overlay={
-                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
-                        }
-                      >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
-                      </OverlayTrigger>{" "}
-                      |
-                    </span>
-                    <span className={RaceCourse === "" ? "error" : "success"}>{ErrorRaceCourse}</span>
+                  <span className="spanForm">
+                    <OverlayTrigger
+                      overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                    >
+                      <span className="addmore" onClick={handleShowRaceCourse}>
+                        +
+                      </span>
+                    </OverlayTrigger>
+                    <OverlayTrigger
+                      overlay={<Tooltip id={`tooltip-top`}>Fetch New</Tooltip>}
+                    >
+                      <span className="addmore" onClick={FetchNew}>
+                        <AiOutlineReload />
+                      </span>
+                    </OverlayTrigger>{" "}
+                    |
+                  </span>
+                  <span className={RaceCourse === "" ? "error" : "success"}>
+                    {ErrorRaceCourse}
+                  </span>
                 </div>
                 <div className="col-sm">
                   <Select
@@ -278,7 +286,6 @@ const Tracklengthform = () => {
                     options={courseoptions}
                     isClearable={true}
                     isSearchable={true}
-
                   />
                 </div>
               </div>
@@ -292,28 +299,32 @@ const Tracklengthform = () => {
                     options={groundtypeopt}
                     isClearable={true}
                     isSearchable={true}
-                    onBlur={() => GroundType === "" ? setErrorGroundType("Ground Type is required") : setErrorGroundType(" ")}
+                    onBlur={() =>
+                      GroundType === ""
+                        ? setErrorGroundType("Ground Type is required")
+                        : setErrorGroundType(" ")
+                    }
                   />
-                <span className="spanForm">
-                      <OverlayTrigger
-                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
-                      >
-                        <span className="addmore" onClick={handleShowGroundType}>
-                            +
-                          </span>
-                      </OverlayTrigger>
-                      <OverlayTrigger
-                        overlay={
-                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
-                        }
-                      >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
-                      </OverlayTrigger>
-                      |
-                    </span>
-                    <span className={GroundType === "" ? "error" : "success"}>{ErrorGroundType}</span>
+                  <span className="spanForm">
+                    <OverlayTrigger
+                      overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                    >
+                      <span className="addmore" onClick={handleShowGroundType}>
+                        +
+                      </span>
+                    </OverlayTrigger>
+                    <OverlayTrigger
+                      overlay={<Tooltip id={`tooltip-top`}>Fetch New</Tooltip>}
+                    >
+                      <span className="addmore" onClick={FetchNew}>
+                        <AiOutlineReload />
+                      </span>
+                    </OverlayTrigger>
+                    |
+                  </span>
+                  <span className={GroundType === "" ? "error" : "success"}>
+                    {ErrorGroundType}
+                  </span>
                 </div>
                 <div className="col-sm">
                   <Select
@@ -329,26 +340,27 @@ const Tracklengthform = () => {
                 </div>
               </div>
               <div className="ButtonSection">
-           
                 <div>
-                <label className="Multipleownerlabel">
-                      Select GIF Image
-                    </label>
+                  <label className="Multipleownerlabel">Select GIF Image</label>
                   <input
                     type="file"
                     onChange={onSelectFile}
                     className="formInput"
                     id="file"
                   />
-                    {RaceCourseImage && (
-                      <>
-                       <ImCross onClick={handlePreview} className="crossIcon"/>
-                       <img src={preview} className="PreviewImage" alt="" />
-                      </>
-                    )}
+                  {RaceCourseImage && (
+                    <>
+                      <ImCross onClick={handlePreview} className="crossIcon" />
+                      <img src={preview} className="PreviewImage" alt="" />
+                    </>
+                  )}
                 </div>
 
-                <button type="submit" className="SubmitButton" disabled={isLoading}>
+                <button
+                  type="submit"
+                  className="SubmitButton"
+                  disabled={isLoading}
+                >
                   Add Track Length
                 </button>
               </div>

@@ -98,13 +98,7 @@ const CategoryTable = () => {
               <h4>Category Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
+         
 
                 <Link to="/addCategory">
                   <button>Add Category</button>
@@ -154,7 +148,7 @@ const CategoryTable = () => {
                         <th>Name</th>
                         <th>Name Arabic </th>
 
-                        <th>Short Code</th>
+            
 
                       </tr>
                     </thead>
@@ -184,7 +178,7 @@ const CategoryTable = () => {
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
 
-                              <td>{item.shortCode} </td>
+                            
 
                               
                             </tr>

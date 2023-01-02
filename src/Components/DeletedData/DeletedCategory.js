@@ -11,7 +11,7 @@ import Pagination from "../../pages/GetTable/Pagination";
 import {FaTrashRestoreAlt} from "react-icons/fa"
 import { Modal } from "react-bootstrap";
 import { BsEyeFill } from "react-icons/bs";
-import BreederPopup from "../Popup/BreederPopup";
+                                                                                                                                                                                                                                                                            
 import CategoryPopup from "../Popup/CategoryPopup";
 
 
@@ -31,7 +31,7 @@ const DeletedCategory = () => {
       //buttons disable
       setDisable(false)
     
-     await axios.post(`${window.env.API_URL}/RestoreSoftDeletedCompetitionCategory/${id}`, );
+     await axios.post(`${window.env.API_URL}/restoresoftdeletecompetitioncategory/${id}`, );
       // api 
       // button enable
       dispatch(fetchdeletedcategory());

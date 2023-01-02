@@ -74,10 +74,7 @@ const DeletedCurrency = () => {
 
   if (status === STATUSES.LOADING) {
     return (
-      <Lottie animationData={HorseAnimation} loop={true} className="Lottie searchLottie" style={{
-        height: '100px',
-        width: "100px"
-      }} />
+      <Lottie animationData={HorseAnimation} loop={true} className="Lottie"/>
     );
   }
 
@@ -108,15 +105,7 @@ const DeletedCurrency = () => {
                   <h4>Currency Listings</h4>
     
                   <div>
-                    <h6
-                      style={{
-                        marginRight: "100px",
-                        alignItems: "center",
-                        color: "rgba(0, 0, 0, 0.6)",
-                      }}
-                    >
-                      
-                    </h6>
+              
     
                     <Link to="/currency">
                       <button>Add Currency</button>
@@ -131,6 +120,7 @@ const DeletedCurrency = () => {
                         <tr>
                           <th>Name</th>
                           <th>Name Arabic </th>
+                          <th>Symbol</th>
                         
                           <th>Short Code</th>
                         <th>Rate</th>
@@ -144,7 +134,7 @@ const DeletedCurrency = () => {
                               <tr className="tr_table_class">
                                 <td>{item.NameEn}</td>
                                 <td>{item.NameAr}</td>
-    
+    <td>{item.symbol}</td>
                                 <td>{item.shortCode} </td>
                                 <td>{item.Rate} </td>
                               

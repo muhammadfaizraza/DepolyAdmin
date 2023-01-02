@@ -24,7 +24,6 @@ import RaceKindPopup from "../PostTable/RaceKind";
 import RaceCoursePopup from "../PostTable/RaceCourseForm";
 import JockeyPopup from "../PostTable/JockeyForm";
 import SponsorPopup from "../PostTable/SponsorForm";
-
 import { fetchSponsor } from "../../redux/getReducer/getSponsorSlice";
 import { fetchMeeting } from "../../redux/getReducer/getMeeting";
 import { fetchRaceType } from "../../redux/getReducer/getRacetype";
@@ -32,6 +31,7 @@ import { fetchRaceName } from "../../redux/getReducer/getRaceName";
 import { fetchTrackLength } from "../../redux/getReducer/getTracklength";
 import { fetchRaceKind } from "../../redux/getReducer/getRaceKind";
 import { fetchgroundtype } from "../../redux/getReducer/getGroundType";
+import src from "gsap/src";
 
 
 const RaceStatuss = [
@@ -60,7 +60,10 @@ const NewsForm = () => {
   const [Sponsor , setSponsor] =useState("");
   const [MeetingType,setMeetingType] =useState("");
   const [RaceNameEn, setRaceNameEn] = useState("");
-  
+  const [RaceKind ,setRaceKind] =useState("");
+ const [RaceTyp, setRaceType] =useState("");
+ const [TrackLength,setTrackLength] =useState("");
+ const [Ground ,setGround] =useState(""); 
   console.log(fullraceid)
   let racecourses =
   racecourse === undefined ? (
@@ -69,7 +72,7 @@ const NewsForm = () => {
     racecourse.map(function (item) {
       return {
         id: item._id,
-        value: item.TrackNameEn,
+        value: item._id,
         label: item.TrackNameEn,
       };
     })
@@ -333,7 +336,16 @@ let GroundrTypeAllAr =
     FifthPrice:'',
     SixthPrice:'',
     DayNTime:'',
-    RaceCourse:''
+    RaceCourse:'',
+    WeatherIcon:"",
+    Sponsor:"",
+    MeetingType:"",
+    RaceName:"",
+    RaceType:"",
+    TrackLength:"",
+    Ground:"",
+    RaceKind:""
+
     
 	});
   const [image,setImage] = useState();
@@ -358,7 +370,15 @@ let GroundrTypeAllAr =
         RaceStatus: fullraceid.RaceStatus,
          DayNTime:fullraceid.DayNTime,
         RaceCourse:fullraceid.RaceCourse,
-        image:fullraceid.image
+        WeatherIcon:fullraceid.WeatherIcon,
+        Sponsor:fullraceid.Sponsor,
+        image:fullraceid.image,
+        MeetingType:fullraceid.MeetingType,
+        RaceName:fullraceid.RaceName,
+        RaceType:fullraceid.RaceType,
+        RaceKind:fullraceid.RaceKind,
+        Ground:fullraceid.Ground,
+        TrackLength:fullraceid.TrackLength
 			});
 
 		} else {
@@ -391,7 +411,13 @@ let GroundrTypeAllAr =
       formData.append("FirstPrice", state1.FirstPrice);
       formData.append("RaceStatus", (RaceStatus.value ===  undefined ? state1.RaceStatus : RaceStatus.value));
       formData.append("RaceCourse", RaceCourse.id === undefined ? state1.RaceCourse : RaceCourse.id);
-      formData.append("SecondPrice", state1.SecondPrice);
+      formData.append("Sponsor", Sponsor.id === undefined ? state1.Sponsor : Sponsor.id);
+      formData.append("TrackLength", TrackLength.id === undefined ? state1.TrackLength : TrackLength.id);
+      formData.append("Ground", Ground.id === undefined ? state1.Ground : Ground.id);
+      formData.append("RaceName", RaceName.id === undefined ? state1.RaceName : RaceName.id);
+      formData.append("RaceType", RaceTyp.id === undefined ? state1.RaceTyp : RaceTyp.id);
+  
+      formData.append("SecondPrice", state1.SecondPrice); 
       formData.append("ThirdPrice", state1.ThirdPrice);
       formData.append("FourthPrice", state1.FourthPrice);
       formData.append("FifthPrice", state1.FifthPrice);
@@ -478,7 +504,7 @@ let GroundrTypeAllAr =
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
-                      placeholder={<div>Race Name</div>}
+                      placeholder={<div>{fullraceid.RaceNameModelData.NameEn}</div>}
                       defaultValue={RaceNameEn}
                       onChange={setRaceNameEn}
                       options={Racenameoptions}
@@ -515,6 +541,51 @@ let GroundrTypeAllAr =
                       defaultValue={RaceNameEn}
                       onChange={setRaceNameEn}
                       options={RacenameoptionsAr}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>{fullraceid.RaceKindData.NameEn}</div>}
+                      defaultValue={RaceKind}
+                      onChange={setRaceKind}
+                      options={OprtionRaceKind}
+                      isClearable={true}
+                      isSearchable={true}
+                  
+                    />
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span className="addmore" onClick={handleShowRaceKind}>
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
+                 
+                  </div>
+
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>نوع السباق</div>}
+                      defaultValue={RaceKind}
+                      className="selectdir"
+                      onChange={setRaceKind}
+                      options={OprtionRaceKindAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -583,6 +654,35 @@ let GroundrTypeAllAr =
                     </FloatingLabel>
                   </div>
                 </div>
+                <div className="row  mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Weather Icon"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, WeatherIcon: e.target.value })
+                      }      
+               
+                    >
+                      <Form.Control type="text" placeholder="Weather Icon"  value={state1.WeatherIcon} />
+                    </FloatingLabel>
+                    <span className="spanForm">|</span>
+             
+                  </div>
+
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label=" رمز الطقس"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                    
+                    >
+                      <Form.Control type="text" placeholder=" رمز الطقس" value={state1.WeatherIcon}/>
+                    </FloatingLabel>
+                  </div>
+                </div>
                 <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
@@ -643,6 +743,55 @@ let GroundrTypeAllAr =
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
+                      placeholder={<div>{fullraceid.RaceTypeModelData.NameEn}</div>}  
+                      defaultValue={RaceTyp}
+                      onChange={setRaceType}
+                      options={RaceTypes}
+                      isClearable={true}
+                      isSearchable={true}
+                  
+                    />
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span className="addmore" onClick={handleShowRaceType}>
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
+                 
+                  </div>
+
+                  <div className="col-sm">
+                    <Select
+                      className="selectdir"
+                      placeholder={
+                        <div style={{ direction: "rtl" }}>
+                          اكتب للبحث عن الجنسية
+                        </div>
+                      }
+                      defaultValue={RaceTyp}
+                      onChange={setRaceType}
+                      options={RaceTypesAr}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
                       placeholder={<div>Race Status</div>}
                       defaultValue={RaceStatus}
                       onChange={setRaceStatus}
@@ -664,9 +813,10 @@ let GroundrTypeAllAr =
                   </div>
                 </div>
                 <div className="row mainrow">
+                <p className="selectLabel">Race Course</p>
                   <div className="col-sm">
                     <Select
-                      placeholder={<div>Race Course</div>}
+                      placeholder={<div>{fullraceid.RaceCourseData.TrackNameEn}</div>}
                       defaultValue={RaceCourse}
                       onChange={setRaceCourse}
                       options={racecourses}
@@ -712,9 +862,10 @@ let GroundrTypeAllAr =
                   </div>
                 </div>
                 <div className="row mainrow">
+                <p className="selectLabel">Sponsor Image</p>
                   <div className="col-sm">
                     <Select
-                      placeholder={<div>Sponsor Image</div>}
+                      placeholder={<div className="sponsorPlaceholder">  <img src={fullraceid.SponsorData.image} alt=""/></div>}
                       defaultValue={Sponsor}
                       onChange={setSponsor}
                       options={SponsorForTheRace}
@@ -756,7 +907,107 @@ let GroundrTypeAllAr =
                     />
                   </div>
                 </div>
+                <div className="row mainrow">
+                <p className="selectLabel">Track Length</p>
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>{fullraceid.TrackLengthData.TrackLength}</div>}
+                      defaultValue={TrackLength}
+                      onChange={setTrackLength}
+                      options={TrackLenght}
+                      isClearable={true}
+                      isSearchable={true}
+              
+                    />
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                          onClick={handleShowTrackLength}
+                        >
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
                 
+                  </div>
+
+                  <div className="col-sm">
+                    <Select
+                      className="selectdir"
+                      placeholder={
+                        <div style={{ direction: "rtl" }}>
+                          اكتب للبحث عن الجنسية
+                        </div>
+                      }
+                      defaultValue={TrackLength}
+                      onChange={setTrackLength}
+                      options={TrackLenght}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>{fullraceid.GroundData.NameEn}</div>}
+                      defaultValue={Ground}
+                      onChange={setGround}
+                      options={GroundrTypeAll}
+                      isClearable={true}
+                      isSearchable={true}
+                
+                    />{" "}
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                          onClick={handleShowGroundType}
+                        >
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
+          
+                  </div>
+
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>طقس</div>}
+                      className="selectdir"
+                      options={GroundrTypeAllAr}
+                      defaultValue={Ground}
+                      onChange={setGround}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div>
                 <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel

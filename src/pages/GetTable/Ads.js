@@ -168,15 +168,15 @@ const Ads = () => {
                   <table striped bordered hover>
                     <thead>
                       <tr>
-                         <th>Action</th>
+                        <th>Action</th>
                         <th>Title </th>
                         <th>Title Arabic</th>
                         <th>Description </th>
                         <th>Description Arabic</th>
+                        <th>Url</th>
                         <th>Image</th>
-                        
+
                         {/* <th>Active</th> */}
-                       
                       </tr>
                     </thead>
                     <tbody>
@@ -184,7 +184,7 @@ const Ads = () => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                            <td className="table_delete_btn1">
+                              <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
                                     history("/editads", {
@@ -207,6 +207,8 @@ const Ads = () => {
                               <td>{item.TitleAr}</td>
                               <td>{item.DescriptionEn}</td>
                               <td>{item.DescriptionAr}</td>
+                              <td>{item.url}</td>
+
                               <td>
                                 <img src={item.image} alt="" />
                               </td>
@@ -219,7 +221,6 @@ const Ads = () => {
                                   value={Value}
                                 />
                                 </td> */}
-                              
                             </tr>
                           </>
                         );

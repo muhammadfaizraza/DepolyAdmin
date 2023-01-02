@@ -902,3 +902,14 @@ p.selectLabel {
   margin: 2px;
   color: #8d8d8a;
 }
+.sponsorPlaceholder img{
+width: 40px;
+height: 40px;
+
+}
+.css-2613qy-menu{
+color: #800000 !important; 
+}
+#react-select-23-listbox{
+ background-color:  #800000 !important; 
+}

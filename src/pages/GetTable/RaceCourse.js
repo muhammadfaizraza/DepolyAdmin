@@ -48,6 +48,7 @@ const Racecourse = () => {
     dispatch(fetchracecourse());
   }, [dispatch]);
 
+
   const handleRemove = async (Id) => {
     try {
       swal({
@@ -56,21 +57,29 @@ const Racecourse = () => {
         icon: "warning",
         buttons: true,
         dangerMode: true,
-      }).then(async (willDelete) => {
-        const res = await axios.delete(
-          `${window.env.API_URL}/softdeletecourse/${Id}`
-        );
+      })
 
+      .then( async(willDelete) => {
+
+  
+   
         if (willDelete) {
+          
+        await axios.delete(`${window.env.API_URL}/softdeletecourse/${Id}`)
           swal("Your data has been deleted Successfully!", {
             icon: "success",
-          });
-          dispatch(fetchracecourse());
+         
+          }
+          )
+          dispatch(fetchracecourse())
+          
         } else {
           swal("Your data is safe!");
         }
       });
-    } catch (error) {
+   
+    }catch(error) {
+
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -79,7 +88,11 @@ const Racecourse = () => {
         button: "OK",
       });
     }
-  };
+
+
+
+  }
+
 
   if (status === STATUSES.LOADING) {
     <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />;

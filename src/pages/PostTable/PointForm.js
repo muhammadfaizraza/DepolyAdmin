@@ -204,7 +204,7 @@ const [isLoading, setisLoading] = useState(false);
                       name="Name"
                     >
                       <Form.Control
-                      onChange={(e) =>
+                    onChange={(e) => 
                         setregisteration({ ...registeration, Bonus_Point: e.target.value })
                       } 
                       value={registeration.Bonus_Point}

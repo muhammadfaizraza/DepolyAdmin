@@ -110,6 +110,7 @@ const Competition = () => {
                 </div>
               </div>
 
+
               {/* <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
@@ -140,6 +141,7 @@ const Competition = () => {
                   </FloatingLabel>
                 </div>
               </div> */}
+              
 
               <div className="ButtonSection " style={{ justifyContent: "end" }}>
                 <button

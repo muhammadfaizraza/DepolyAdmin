@@ -22,7 +22,9 @@ const AdsForm = () => {
   const [TitleAr, setTitleAr] = useState("");
   const [DescriptionAr, setDescriptionAr] = useState("");
   const [DescriptionEn, setDescriptionEn] = useState("");
+  const [Url , setUrl] = useState("");
   const [image, setImage] = useState();
+
   const [preview, setPreview] = useState();
 
   const submit = async (event) => {
@@ -35,6 +37,7 @@ const AdsForm = () => {
       formData.append("TitleAr", TitleAr);
       formData.append("DescriptionEn", DescriptionEn);
       formData.append("DescriptionAr", DescriptionAr);
+      formData.append("Url", Url);
       await axios.post(`${window.env.API_URL}/uploadAds`, formData);
       setisLoading(false);
       swal({
@@ -187,6 +190,25 @@ const AdsForm = () => {
                       {ErrorDescAr.message}
                     </span>
                   </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="URL"
+                      className="mb-3"
+                      onChange={(e) => setUrl(e.target.value)}
+                      name="Name"
+                      value={Url}
+            
+                    >
+                      <Form.Control type="text" placeholder="Title" required/>
+                    </FloatingLabel>
+                
+
+                  </div>
+
+                
                 </div>
 
                 <div className="ButtonSection">

@@ -242,9 +242,9 @@ td.table_delete_btn1 {
 }
 
 td:last-child {
-    color: #19469D;
+    /* color: #19469D; */
     text-align: inherit;
-    font-size: 22px;
+    font-size: 14px;
 }
 .div_maintb >td:last-child >svg {
     margin-left: 5px;

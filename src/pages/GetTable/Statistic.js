@@ -2,10 +2,13 @@ import React, { useEffect } from "react";
 import Sidebar from "../../Components/Common/Sidebar";
 import { fetchTrainer, STATUSES } from "../../redux/getReducer/getTrainerSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Table from "react-bootstrap/Table";
+import { MdDelete } from "react-icons/md";
 import { remove } from "../../redux/postReducer/PostTrainer";
+import { BsPlusCircleFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import Lottie from "lottie-react";
-import HorseAnimation from "../../assets/horselottie.json";
+import Header from "../../Components/Common/Header";
+
 const Statistic = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
@@ -18,7 +21,13 @@ const Statistic = () => {
     history("/trainer");
   };
   if (status === STATUSES.LOADING) {
-    return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
+    return (
+      <h2
+      className="loader"
+      >
+       
+      </h2>
+    );
   }
 
   if (status === STATUSES.ERROR) {

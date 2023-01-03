@@ -31,7 +31,6 @@ import { fetchRaceName } from "../../redux/getReducer/getRaceName";
 import { fetchTrackLength } from "../../redux/getReducer/getTracklength";
 import { fetchRaceKind } from "../../redux/getReducer/getRaceKind";
 import { fetchgroundtype } from "../../redux/getReducer/getGroundType";
-import src from "gsap/src";
 
 
 const RaceStatuss = [

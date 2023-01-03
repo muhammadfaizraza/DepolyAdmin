@@ -28,6 +28,8 @@ const [ShowCalender, setShowCalender] = useState(false)
 const [SearchAge, setSearchAge] = useState('');
 const [SearchCode, setSearchCode] = useState('');
 const [SearchTitle, setSearchTitle] = useState('');
+const [SearchStartDate, setSearchStartDate] = useState('');
+const [SearchEndStart, setSearchEndStart] = useState('');
 const [state, setState] = useState([
   {
     startDate: new Date(),

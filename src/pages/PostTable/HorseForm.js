@@ -89,7 +89,8 @@ const HorseForm = () => {
   const [SearchAge, setSearchAge] = useState('');
   const [SearchCode, setSearchCode] = useState('');
   const [SearchTitle, setSearchTitle] = useState('');
-
+  const [SearchStartDate, setSearchStartDate] = useState('');
+  const [SearchEndStart, setSearchEndStart] = useState('');
 
 
   const dispatch = useDispatch();
@@ -109,7 +110,7 @@ const HorseForm = () => {
     dispatch(fetchTrainer({SearchTitle,SearchCode,SearchAge}));
     dispatch(fetchHorse({SearchTitle,SearchCode,SearchAge}));
     dispatch(fetchcolor({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchbreeder({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchbreeder({SearchTitle,SearchCode,SearchAge,SearchStartDate,SearchEndStart}));
     dispatch(fetchnationality({SearchTitle,SearchCode,SearchAge}));
     dispatch(fetchgender({SearchTitle,SearchCode,SearchAge}));
     dispatch(fetchHorseKind({SearchTitle,SearchCode,SearchAge}));
@@ -375,13 +376,14 @@ const HorseForm = () => {
   
   
     const FetchNew = () => {
-      dispatch(fetchOwner());
-      dispatch(fetchTrainer());
-      dispatch(fetchcolor());
-      dispatch(fetchbreeder());
-      dispatch(fetchnationality());
-      dispatch(fetchgender());
-      dispatch(fetchHorseKind());
+      dispatch(fetchOwner({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchTrainer({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchHorse({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchcolor({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchbreeder({SearchTitle,SearchCode,SearchAge,SearchStartDate,SearchEndStart}));
+    dispatch(fetchnationality({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchgender({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchHorseKind({SearchTitle,SearchCode,SearchAge}));
 
     };
     // Modal functionalities End Here

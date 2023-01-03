@@ -60,7 +60,7 @@ const GenderTable = () => {
     setSearchAge('')
   };
   useEffect(() => {
-    dispatch(fetchgender());
+    dispatch(fetchgender({SearchTitle,SearchCode,SearchAge}));
   }, [dispatch]);
 
   const handleRemove = async (Id) => {

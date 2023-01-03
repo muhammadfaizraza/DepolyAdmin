@@ -29,8 +29,7 @@ const TrainerForm = () => {
 
   const [ErrorDateofBirth, setErrorDateofBirth] = useState("");
   const [ErrorLicenseDate, setErrorLicenseDate] = useState("");
-  const [ErrorRemarks, setErrorRemarks] = useState("");
-  const [ErrorRemarksAr, setErrorRemarksAr] = useState("");
+
   const [ErrorDetail, setErrorDetail] = useState("");
   const [ErrorDetailAr, setErrorDetailAr] = useState("");
   const [ErrorNationality, setErrorNationality] = useState("");
@@ -162,7 +161,7 @@ const TrainerForm = () => {
 
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl);
-  }, [image]);
+  },[image]);
   const FetchNew = () => {
     dispatch(fetchnationality());
 }
@@ -171,30 +170,28 @@ const TrainerForm = () => {
   };
 
   let AllNationality =
-    nationality === undefined ? (
-      <></>
-    ) : (
-      nationality.map(function (item) {
-        return {
-          id: item._id,
-          value: item.NameEn,
-          label: item.NameEn,
-        };
-      })
-    );
+  nationality === undefined ? (
+    <></>
+  ) : (
+    nationality.map(function (item) {
+      return {
+        id: item._id,
+        value: item._id,
+        label: (
+          <div style={{
+            display:'flex',
+            justifyContent:'space-between'
+          }}>
+           <p>{item.NameEn}</p> 
+           <p>{item.NameAr}</p> 
 
-  let AllNationalityAr =
-    nationality === undefined ? (
-      <></>
-    ) : (
-      nationality.map(function (item) {
-        return {
-          id: item._id,
-          value: item.NameAr,
-          label: item.NameAr,
-        };
-      })
-    );
+          </div>
+        ),
+      };
+    })
+  );
+
+
     const handlePreview = () => {
       setImage()
     document.getElementById("file").value=""
@@ -234,14 +231,7 @@ const TrainerForm = () => {
   );
   const detail = JSON.parse(data7);
 
-  const data8 = JSON.stringify(
-    TextInputValidation("en", RemarksEn, "Trainer Remarks English")
-  );
-  const Remark = JSON.parse(data8);
-  const data9 = JSON.stringify(
-    TextInputValidation("ar", RemarksAr, "Trainer Remarks Arabic")
-  );
-  const Remarkar = JSON.parse(data9);
+
 
   const data10 = JSON.stringify(
     TextInputValidation("ar", DetailAr, "Trainer Detail Arabic")
@@ -502,23 +492,12 @@ const TrainerForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>{" "}
-                      |
+                      
                     </span>
 
                     <span className="error">{ErrorNationality}</span>
                   </div>
-                  <div className="col-sm">
-                    <Select
-                      required
-                      placeholder={<div>حدد جيلتي</div>}
-                      className="selectdir"
-                      defaultValue={NationalityId}
-                      onChange={setNationalityId}
-                      options={AllNationalityAr}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                  </div>
+             
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -528,16 +507,16 @@ const TrainerForm = () => {
                       className="mb-3"
                       onChange={(e) => setRemarksEn(e.target.value)}
                       value={RemarksEn}
-                    onBlur={() => setErrorRemarks(Remark)}
+            
                     >
                       <Form.Control
                         type="text"
                         placeholder="Details"
-                        required
+                       
                       />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
-                    <span className={ErrorRemarks.status ? 'success' : 'error'}>{ErrorRemarks.message}</span>
+                
                   </div>
 
                   <div className="col-sm">
@@ -546,13 +525,13 @@ const TrainerForm = () => {
                       label="ملاحظات"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
-                      onChange={(e) => setRemarksAr(e.target.value)}
-                      onBlur={() => setErrorRemarksAr(Remarkar)}
+           onChange={(e) => setRemarksAr(e.target.value)}
+                    
                       value={RemarksAr}
                     >
                       <Form.Control type="text" placeholder="ملاحظات" />
                     </FloatingLabel>
-                    <span className={ErrorRemarksAr.status ? 'successAr' : 'errorAr'}>{ErrorRemarksAr.message}</span>
+                 
                   </div>
                 </div>
                 <div className="ButtonSection">

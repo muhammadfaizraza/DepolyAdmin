@@ -19,12 +19,22 @@ import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { DateRangePicker } from 'react-date-range';
 
 const Horse = () => {
 //for errors
 
 const [ShowCalender, setShowCalender] = useState(false)
-
+const [SearchAge, setSearchAge] = useState('');
+const [SearchCode, setSearchCode] = useState('');
+const [SearchTitle, setSearchTitle] = useState('');
+const [state, setState] = useState([
+  {
+    startDate: new Date(),
+    endDate: new Date(),
+    key: 'selection'
+  }
+]);
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -44,9 +54,14 @@ const [ShowCalender, setShowCalender] = useState(false)
   const currentPosts = horse.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
-
+  const GetSearch = async () => {
+    dispatch(fetchHorse({SearchTitle,SearchCode,SearchAge}));
+    setSearchTitle('')
+    setSearchCode('')
+    setSearchAge('')
+  };
   useEffect(() => {
-    dispatch(fetchHorse());
+    dispatch(fetchHorse({SearchTitle,SearchCode,SearchAge}));
   }, [dispatch]);
 
  
@@ -149,21 +164,41 @@ const [ShowCalender, setShowCalender] = useState(false)
               
               {
                 ShowCalender ?
-                <span className="transitionclass">
+                <>
                 <div className="userfilter">
-                
-                <div className="filtertextform forflex">
-                
-                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                  <div className="calenderuser">
+                    <DateRangePicker
+                      onChange={(item) => setState([item.selection])}
+                      showSelectionPreview={true}
+                      moveRangeOnFirstSelection={false}
+                      months={2}
+                      ranges={state}
+                      direction="horizontal"
+                    />
+                  </div>
+                  <div className="filtertextform">
+                    <input
+                      type="text"
+                      class="form-control"
+                      onChange={(e) => setSearchTitle(e.target.value)}
+                      placeholder="Enter Name"
+                    />
                  <input type='text' class="form-control" placeholder="Enter Gender"/>
                  <input type='text' class="form-control" placeholder="Enter Color"/>
                  <input type='text' class="form-control" placeholder="Enter Age"/>
-
-                 </div>
-                
+                    <input
+                      type="text"
+                      class="form-control"
+                      onChange={(e) => setSearchAge(e.target.value)}
+                      placeholder="Enter Description"
+                    />
+                   
+                  </div>
                 </div>
-                <button className="filterbtn">Apply Filter</button>
-                </span>:<></>
+                <button className="filterbtn" onClick={GetSearch}>
+                  Apply Filter
+                </button>
+              </>:<></>
               }
               </div>
             <>

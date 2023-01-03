@@ -20,9 +20,23 @@ import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { DateRangePicker } from 'react-date-range';
 
 const Trainer = () => {
   const [ShowCalender, setShowCalender] = useState(false);
+  const [SearchData, setSearchData] = useState([]);
+  const [SearchNameEn, setSearchNameEn] = useState('');
+  const [SearchRating, setSearchRating] = useState('');
+  const [SearchRemarks, setSearchRemarks] = useState('');
+  const [SearchAge, setSearchAge] = useState('');
+
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
 
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -42,8 +56,15 @@ const Trainer = () => {
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = trainer.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = SearchData.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const GetSearch = async () => {
+    const response = await axios.get(
+      `${window.env.API_URL}/SearchTrainer?NameEn=${SearchNameEn}&DOB=${SearchAge}&RemarksEn=${SearchRemarks}&Rating=${SearchRating}`
+    );
+    setSearchData(response.data.data);
+  };
 
   useEffect(() => {
     dispatch(fetchTrainer());
@@ -148,28 +169,51 @@ const Trainer = () => {
             </div>
             <div>
               {ShowCalender ? (
-                <span className="transitionclass">
-                  <div className="userfilter">
-                    <div className="filtertextform forflex">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Title"
-                      />
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Remarks"
-                      />
-                      <input
-                        type="number"
-                        class="form-control"
-                        placeholder="Enter Age"
-                      />
-                    </div>
-                  </div>
-                  <button className="filterbtn">Apply Filter</button>
-                </span>
+              <>
+              <div className="userfilter">
+                <div className="calenderuser">
+                  <DateRangePicker
+                    onChange={(item) => setState([item.selection])}
+                    showSelectionPreview={true}
+                    moveRangeOnFirstSelection={false}
+                    months={2}
+                    ranges={state}
+                    direction="horizontal"
+                  />
+                </div>
+                <div className="filtertextform">
+                  <input
+                    type="text"
+                    class="form-control"
+                    onChange={(e) => setSearchRemarks(e.target.value)}
+                    placeholder="Enter Maximum Weight"
+                  />
+                   <input
+                    type="text"
+                    class="form-control"
+                    onChange={(e) => setSearchAge(e.target.value)}
+                    placeholder="Enter Minimum Weight"
+                  />
+                  <input
+                    type="text"
+                    class="form-control"
+                    onChange={(e) => setSearchRating(e.target.value)}
+                    placeholder="Enter Rating"
+                  />
+                  <input
+                    type="text"
+                    class="form-control"
+                    onChange={(e) => setSearchNameEn(e.target.value)}
+                    placeholder="Enter Name"
+                  />
+                 
+                 
+                </div>
+              </div>
+              <button className="filterbtn" onClick={GetSearch}>
+                Apply Filter
+              </button>
+            </>
               ) : (
                 <></>
               )}

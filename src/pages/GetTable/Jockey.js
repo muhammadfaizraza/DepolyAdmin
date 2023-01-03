@@ -19,11 +19,25 @@ import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { DateRangePicker } from 'react-date-range';
 
 
 const Statistic = () => {
-  const [ShowCalender, setShowCalender] = useState(false)
 
+  const [SearchData, setSearchData] = useState([]);
+  const [ShowCalender, setShowCalender] = useState(false)
+  const [SearchNameEn, setSearchNameEn] = useState('');
+  const [SearchRating, setSearchRating] = useState('');
+  const [SearchMaximumJockeyWeight, setSearchMaximumJockeyWeight] = useState('');
+  const [SearchMinimumJockeyWeight, setSearchMinimumJockeyWeight] = useState('');
+
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -40,11 +54,18 @@ const Statistic = () => {
   
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = jockey.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = SearchData.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
+  const GetSearch = async () => {
+    const response = await axios.get(
+      `${window.env.API_URL}/SearchJockey?NameEn=${SearchNameEn}&MiniumumJockeyWeight=${SearchMinimumJockeyWeight}&MaximumJockeyWeight=${SearchMaximumJockeyWeight}&Rating=${SearchRating}`
+    );
+    setSearchData(response.data.data);
+  };
+
   useEffect(() => {
-    dispatch(fetchjockey()); 
+    dispatch(fetchjockey());
   }, [dispatch]);
   
  
@@ -151,18 +172,51 @@ const Statistic = () => {
               
               {
                 ShowCalender ?
-                <span className="transitionclass">
+                <>
                 <div className="userfilter">
-                
-                <div className="filtertextform forflex">
-                
-                 <input type='text' class="form-control" placeholder="Enter Title"/>
-                 <input type='text' class="form-control" placeholder="Enter Description"/>
-                 </div>
-                
+                  <div className="calenderuser">
+                    <DateRangePicker
+                      onChange={(item) => setState([item.selection])}
+                      showSelectionPreview={true}
+                      moveRangeOnFirstSelection={false}
+                      months={2}
+                      ranges={state}
+                      direction="horizontal"
+                    />
+                  </div>
+                  <div className="filtertextform">
+                    <input
+                      type="text"
+                      class="form-control"
+                      onChange={(e) => setSearchMaximumJockeyWeight(e.target.value)}
+                      placeholder="Enter Maximum Weight"
+                    />
+                     <input
+                      type="text"
+                      class="form-control"
+                      onChange={(e) => setSearchMinimumJockeyWeight(e.target.value)}
+                      placeholder="Enter Minimum Weight"
+                    />
+                    <input
+                      type="text"
+                      class="form-control"
+                      onChange={(e) => setSearchRating(e.target.value)}
+                      placeholder="Enter Rating"
+                    />
+                    <input
+                      type="text"
+                      class="form-control"
+                      onChange={(e) => setSearchNameEn(e.target.value)}
+                      placeholder="Enter Name"
+                    />
+                   
+                   
+                  </div>
                 </div>
-                <button className="filterbtn">Apply Filter</button>
-                </span>:<></>
+                <button className="filterbtn" onClick={GetSearch}>
+                  Apply Filter
+                </button>
+              </>:<></>
               }
               </div>
             <>

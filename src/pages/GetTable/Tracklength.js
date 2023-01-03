@@ -163,12 +163,12 @@ const Tracklength = () => {
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Enter Title"
+                        placeholder="Enter Track Length"
                       />
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Enter Description"
+                        placeholder="Enter Race Course"
                       />
                     </div>
                   </div>

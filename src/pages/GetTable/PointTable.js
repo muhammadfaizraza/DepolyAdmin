@@ -54,6 +54,13 @@ const ColorTable = () => {
   const currentPosts = pointTable.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
+
+  const GetSearch = async () => {
+    dispatch(fetchpointTable({SearchTitle,SearchCode,SearchAge}));
+    setSearchTitle('')
+    setSearchCode('')
+    setSearchAge('')
+  };
   useEffect(() => {
     dispatch(fetchpointTable());
   }, [dispatch]);
@@ -150,13 +157,32 @@ const ColorTable = () => {
                 
                 <div className="filtertextform forflex">
                 
-                 <input type='text' class="form-control" placeholder="Enter Title"/>
-                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchTitle(e.target.value)}
+                       placeholder="Enter Name"
+                     />
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchAge(e.target.value)}
+                       placeholder="Enter Abbreviation"
+                     />
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchCode(e.target.value)}
+                       placeholder="Enter Short Code"
+                     />
                  </div>
                 
                 </div>
-                <button className="filterbtn">Apply Filter</button>
-                </span>:<></>
+                <button className="filterbtn" onClick={GetSearch}>
+                   Apply Filter
+                 </button>
+                 </span>
+                :<></>
               }
               </div>
             <>

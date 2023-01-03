@@ -21,7 +21,6 @@ import { DateRangePicker } from 'react-date-range';
 
 const Racetype = () => {
   const [ShowCalender, setShowCalender] = useState(false);
-  const [SearchAge, setSearchAge] = useState('');
   const [SearchCode, setSearchCode] = useState('');
   const [SearchTitle, setSearchTitle] = useState('');
   const [state, setState] = useState([
@@ -52,6 +51,12 @@ const Racetype = () => {
   const currentPosts = RaceType.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+
+  const GetSearch = async () => {
+    dispatch(fetchRaceType({SearchTitle,SearchCode}));
+    setSearchTitle('')
+    setSearchCode('')
+  };
   useEffect(() => {
     dispatch(fetchRaceType());
   }, [dispatch]);
@@ -149,23 +154,31 @@ const Racetype = () => {
             </div>
             <div>
               {ShowCalender ? (
-                <span className="transitionclass">
-                  <div className="userfilter">
-                    <div className="filtertextform forflex">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Title"
-                      />
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Description"
-                      />
-                    </div>
-                  </div>
-                  <button className="filterbtn">Apply Filter</button>
-                </span>
+             <span className="transitionclass">
+             <div className="userfilter">
+             
+             <div className="filtertextform forflex">
+             
+             <input
+                    type="text"
+                    class="form-control"
+                    onChange={(e) => setSearchTitle(e.target.value)}
+                    placeholder="Enter Name"
+                  />
+                 
+                  <input
+                    type="text"
+                    class="form-control"
+                    onChange={(e) => setSearchCode(e.target.value)}
+                    placeholder="Enter Short Code"
+                  />
+              </div>
+             
+             </div>
+             <button className="filterbtn" onClick={GetSearch}>
+                Apply Filter
+              </button>
+              </span>
               ) : (
                 <></>
               )}

@@ -53,6 +53,11 @@ const Racename = () => {
   const currentPosts = RaceName.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const GetSearch = async () => {
+    dispatch(fetchRaceName({SearchTitle,SearchCode}));
+    setSearchTitle('')
+    setSearchCode('')
+  };
   useEffect(() => {
     dispatch(fetchRaceName());
   }, [dispatch]);
@@ -151,22 +156,30 @@ const Racename = () => {
             <div>
               {ShowCalender ? (
                 <span className="transitionclass">
-                  <div className="userfilter">
-                    <div className="filtertextform forflex">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Title"
-                      />
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Description"
-                      />
-                    </div>
-                  </div>
-                  <button className="filterbtn">Apply Filter</button>
-                </span>
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchTitle(e.target.value)}
+                       placeholder="Enter Name"
+                     />
+                    
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchCode(e.target.value)}
+                       placeholder="Enter Short Code"
+                     />
+                 </div>
+                
+                </div>
+                <button className="filterbtn" onClick={GetSearch}>
+                   Apply Filter
+                 </button>
+                 </span>
               ) : (
                 <></>
               )}

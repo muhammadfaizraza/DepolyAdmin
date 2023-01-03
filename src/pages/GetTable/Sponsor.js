@@ -52,6 +52,12 @@ const News = () => {
   const currentPosts = sponsor.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const GetSearch = async () => {
+    dispatch(fetchSponsor({SearchTitle,SearchCode}));
+    setSearchTitle('')
+    setSearchCode('')
+  };
+
   useEffect(() => {
     dispatch(fetchSponsor());
   }, []);
@@ -142,23 +148,31 @@ const News = () => {
             </div>
             <div>
               {ShowCalender ? (
-                <span className="transitionclass">
-                  <div className="userfilter">
-                    <div className="filtertextform forflex">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Title"
-                      />
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Description"
-                      />
-                    </div>
-                  </div>
-                  <button className="filterbtn">Apply Filter</button>
-                </span>
+                       <span className="transitionclass">
+                       <div className="userfilter">
+                       
+                       <div className="filtertextform forflex">
+                       
+                       <input
+                              type="text"
+                              class="form-control"
+                              onChange={(e) => setSearchTitle(e.target.value)}
+                              placeholder="Enter Title"
+                            />
+                           
+                            <input
+                              type="text"
+                              class="form-control"
+                              onChange={(e) => setSearchCode(e.target.value)}
+                              placeholder="Enter URL"
+                            />
+                        </div>
+                       
+                       </div>
+                       <button className="filterbtn" onClick={GetSearch}>
+                          Apply Filter
+                        </button>
+                        </span>
               ) : (
                 <></>
               )}

@@ -21,7 +21,7 @@ import { DateRangePicker } from 'react-date-range';
 
 const CurrencyTable = () => {
   const [ShowCalender, setShowCalender] = useState(false);
-  const [SearchAge, setSearchAge] = useState('');
+  const [SearchRate, setSearchRate] = useState('');
   const [SearchCode, setSearchCode] = useState('');
   const [SearchTitle, setSearchTitle] = useState('');
   const [state, setState] = useState([
@@ -51,12 +51,13 @@ const CurrencyTable = () => {
   const currentPosts = currency.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const GetSearch = async () => {
-    dispatch(fetchcurrency({SearchTitle,SearchCode}));
+    dispatch(fetchcurrency({SearchTitle,SearchCode,SearchRate}));
     setSearchTitle('')
     setSearchCode('')
+    setSearchRate('')
   };
   useEffect(() => {
-    dispatch(fetchcurrency());
+    dispatch(fetchcurrency({SearchTitle,SearchCode,SearchRate}));
   }, [dispatch]);
 
   const handleRemove = async (Id) => {
@@ -158,6 +159,12 @@ const CurrencyTable = () => {
                        class="form-control"
                        onChange={(e) => setSearchCode(e.target.value)}
                        placeholder="Enter Short Code"
+                     />
+                      <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchRate(e.target.value)}
+                       placeholder="Enter Rate"
                      />
                     </div>
                   </div>

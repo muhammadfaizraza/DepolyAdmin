@@ -54,6 +54,12 @@ const Racecourse = () => {
   const currentPosts = racecourse.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const GetSearch = async () => {
+    dispatch(fetchracecourse({SearchTitle,SearchCode,SearchAge}));
+    setSearchTitle('')
+    setSearchCode('')
+    setSearchAge('')
+  };
   useEffect(() => {
     dispatch(fetchracecourse());
   }, [dispatch]);
@@ -160,22 +166,35 @@ const Racecourse = () => {
             <div>
               {ShowCalender ? (
                 <span className="transitionclass">
-                  <div className="userfilter">
-                    <div className="filtertextform forflex">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Title"
-                      />
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Description"
-                      />
-                    </div>
-                  </div>
-                  <button className="filterbtn">Apply Filter</button>
-                </span>
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchTitle(e.target.value)}
+                       placeholder="Enter Track Name"
+                     />
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchAge(e.target.value)}
+                       placeholder="Enter Abbreviation"
+                     />
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchCode(e.target.value)}
+                       placeholder="Enter Short Code"
+                     />
+                 </div>
+                
+                </div>
+                <button className="filterbtn" onClick={GetSearch}>
+                   Apply Filter
+                 </button>
+                 </span>
               ) : (
                 <></>
               )}

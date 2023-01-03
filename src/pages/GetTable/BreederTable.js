@@ -1,8 +1,7 @@
-import React, { useEffect, Fragment,useState } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import { fetchbreeder, STATUSES } from "../../redux/getReducer/getBreeder";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
 import { Link, useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import swal from "sweetalert";
@@ -13,8 +12,17 @@ import axios from "axios";
 import { Modal } from "react-bootstrap";
 import { BsEyeFill } from "react-icons/bs";
 import BreederPopup from "../../Components/Popup/BreederPopup";
+import Pagination from "./Pagination";
+import { BiFilter } from "react-icons/bi";
+import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const BreederTable = () => {
+  const [ShowCalender, setShowCalender] = useState(false);
+
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
 
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -23,24 +31,48 @@ const BreederTable = () => {
     setmodaldata(data);
     await setShow(true);
   };
+  
   const dispatch = useDispatch();
   const history = useNavigate();
+
   const { data: breeder, status } = useSelector((state) => state.breeder);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = breeder.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const GetSearch = async () => {
+    dispatch(fetchbreeder({SearchTitle,SearchCode}));
+    setSearchTitle('')
+    setSearchCode('')
+  };
+
   useEffect(() => {
-    dispatch(fetchbreeder());
+    dispatch(fetchbreeder({SearchTitle,SearchCode}));
   }, [dispatch]);
 
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteBreeder/${Id}`);
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          await axios.delete(`${window.env.API_URL}/softdeleteBreeder/${Id}`);
+          swal("Your data has been deleted Successfully!", {
+            icon: "success",
+          });
+          dispatch(fetchbreeder());
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      history("/breederlist");
-      dispatch(fetchbreeder());
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -50,9 +82,7 @@ const BreederTable = () => {
         button: "OK",
       });
     }
-    dispatch(fetchbreeder());
   };
-  
 
   if (status === STATUSES.LOADING) {
     return (
@@ -92,11 +122,53 @@ const BreederTable = () => {
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
                 ></h6>
-
                 <Link to="/breeder">
                   <button>Add Breeder</button>
                 </Link>
+                <OverlayTrigger
+                  overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                >
+                  <span className="addmore">
+                    <BiFilter
+                      className="calendericon"
+                      onClick={() => setShowCalender(!ShowCalender)}
+                    />
+                  </span>
+                </OverlayTrigger>{" "}
+                <CSVLink
+                  data={breeder}
+                  separator={";"}
+                  filename={"MKS Breeder.csv"}
+                  className="csvclass"
+                >
+                  Export CSV
+                </CSVLink>
               </div>
+            </div>
+            <div>
+              {ShowCalender ? (
+                <span className="transitionclass">
+                  <div className="userfilter">
+                    <div className="filtertextform forflex">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Title"
+                        onChange={(e) => setSearchTitle(e.target.value)}
+                      />
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Short Code"
+                        onChange={(e) => setSearchCode(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <button className="filterbtn"  onClick={GetSearch}>Apply Filter</button>
+                </span>
+              ) : (
+                <></>
+              )}
             </div>
             <>
               <div className="div_maintb">
@@ -104,32 +176,20 @@ const BreederTable = () => {
                   <table>
                     <thead>
                       <tr>
+                        <th>Action</th>
                         <th>Name</th>
                         <th>Name Arabic </th>
-
                         <th>Short Code</th>
                         <th>Description</th>
                         <th>Description Arabic</th>
                         <th>Image</th>
-
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {breeder.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.NameEn}</td>
-                              <td>{item.NameAr}</td>
-
-                              <td>{item.shortCode} </td>
-                              <td>{item.DescriptionEn} </td>
-                              <td>{item.DescriptionAr} </td>
-                              <td>
-                                <img src={item.image} alt="" />
-                              </td>
-
                               <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
@@ -146,8 +206,16 @@ const BreederTable = () => {
                                   }}
                                   onClick={() => handleRemove(item._id)}
                                 />
-                                <BsEyeFill onClick={() => handleShow(item)
-                                }/>
+                                <BsEyeFill onClick={() => handleShow(item)} />
+                              </td>
+                              <td>{item.NameEn}</td>
+                              <td>{item.NameAr}</td>
+
+                              <td>{item.shortCode} </td>
+                              <td>{item.DescriptionEn} </td>
+                              <td>{item.DescriptionAr} </td>
+                              <td>
+                                <img src={item.image} alt="" />
                               </td>
                             </tr>
                           </>
@@ -160,6 +228,12 @@ const BreederTable = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={breeder.length}
+            currentPage={currentPage}
+            paginate={paginate}
+          />
         </div>
       </div>
       <Modal
@@ -170,7 +244,7 @@ const BreederTable = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2 style={{fontFamily: "inter"}}>Breeder</h2>
+          <h2 style={{ fontFamily: "inter" }}>Breeder</h2>
         </Modal.Header>
         <Modal.Body>
           <BreederPopup data={modaldata} />

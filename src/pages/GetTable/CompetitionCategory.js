@@ -12,7 +12,15 @@ import { BiEdit } from "react-icons/bi";
 import { Modal } from "react-bootstrap";
 import CategoryPopup from "../../Components/Popup/CategoryPopup";
 import { BsEyeFill } from "react-icons/bs";
+import Pagination from "./Pagination";
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+
 const CategoryTable = () => {
+  const [ShowCalender, setShowCalender] = useState(false)
+
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -23,6 +31,15 @@ const CategoryTable = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const { data: category, status } = useSelector((state) => state.category);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = category.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchcategory());
   }, [dispatch]);
@@ -81,44 +98,66 @@ const CategoryTable = () => {
               <h4>Category Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
+         
 
                 <Link to="/addCategory">
                   <button>Add Category</button>
                 </Link>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>                  <CSVLink  data={category}  separator={";"} filename={"MKS Category.csv"} className='csvclass'>
+                        Export CSV
+                    </CSVLink>
               </div>
             </div>
+            <div>
+              
+              {
+                ShowCalender ?
+                <span className="transitionclass">
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </span>:<></>
+              }
+              </div>
             <>
               <div className="div_maintb">
                 <ScrollContainer>
                   <table>
                     <thead>
                       <tr>
+                      <th>Action</th>
+
                         <th>Name</th>
                         <th>Name Arabic </th>
 
-                        <th>Short Code</th>
+            
 
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {category.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.NameEn}</td>
-                              <td>{item.NameAr}</td>
-
-                              <td>{item.shortCode} </td>
-
-                              <td className="table_delete_btn1">
+                            <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
                                     history("/editcategory", {
@@ -136,6 +175,12 @@ const CategoryTable = () => {
                                 />
                                 <BsEyeFill  onClick={() => handleShow(item)} />
                               </td>
+                              <td>{item.NameEn}</td>
+                              <td>{item.NameAr}</td>
+
+                            
+
+                              
                             </tr>
                           </>
                         );
@@ -147,6 +192,13 @@ const CategoryTable = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={category.length}
+          paginate={paginate}
+          currentPage={currentPage}
+
+        />
         </div>
       </div>
       <Modal

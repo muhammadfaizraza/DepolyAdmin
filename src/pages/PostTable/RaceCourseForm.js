@@ -15,8 +15,23 @@ import ColorPopUp from "../PostTable/Color";
 import NationalityPopUp from "../PostTable/Nationality";
 import { AiOutlineReload } from 'react-icons/ai'
 import { Modal } from "react-bootstrap";
+import TextInputValidation from "../../utils/TextInputValidation";
+import { ImCross } from 'react-icons/im';
 
 const RaceCourseForm = () => {
+  const [Error , setError] =useState("");
+  const [ErrorAr , setErrorAr] =useState("");
+  const [ErrorColor , setErrorColor] =useState("");
+  const [ErrorAbbrev , setErrorAbbrev  ] =useState("");
+  const [ErrorNationality , setErrorNationality] =useState("");
+  const [ErrorAbbrevAr ,setErrorAbbrevAr] = useState("")
+  
+
+  const [isLoading, setisLoading] = useState(false);
+
+
+  
+
   const dispatch = useDispatch();
   const history = useNavigate();
   const {pathname} = useLocation();
@@ -36,7 +51,18 @@ const RaceCourseForm = () => {
         };
       })
     );
-
+    let AllNationalityAr =
+    nationality === undefined ? (
+      <></>
+    ) : (
+      nationality.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameAr,
+          label: item.NameAr,
+        };
+      })
+    );
   let AllColor =
     color === undefined ? (
       <></>
@@ -50,12 +76,26 @@ const RaceCourseForm = () => {
       })
     );
 
+    let AllColorAr =
+    color === undefined ? (
+      <></>
+    ) : (
+      color.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameAr,
+          label: item.NameAr,
+        };
+      })
+    );
  
 
     
   const [TrackNameEn, setTrackNameEn] = useState("");
   const [TrackNameAr, setTrackNameAr] = useState("");
   // const [shortCode, setshortCode] = useState("");
+  const [AbbrevEn, setAbbrevEn] = useState("");
+  const [AbbrevAr, setAbbrevAr] = useState("");
   const [NationalityId, setNationalityId] = useState("");
   const [ColorCode, setColorCode] = useState("");
   const [image, setImage] = useState();
@@ -79,13 +119,17 @@ const RaceCourseForm = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("image", image);
       formData.append("TrackNameEn", TrackNameEn);
-      formData.append("TrackNameAr", TrackNameAr);
+      formData.append("TrackNameAr", TrackNameAr + ' ');
       formData.append("ColorCode", ColorCode.id);
       formData.append("NationalityID", NationalityId.id);
+      formData.append("AbbrevEn", AbbrevEn);
+      formData.append("AbbrevAr", AbbrevAr);
+      
       // formData.append("shortCode", shortCode);
       const response = await axios.post(
         `${window.env.API_URL}/createcourse?keyword=&page=`,
@@ -100,6 +144,7 @@ const RaceCourseForm = () => {
       if(pathname === '/racecourseform'){
         history("/racecourse");
       }
+      setisLoading(false)
     } catch (error) {
       
       const err = error.response.data.message;
@@ -109,6 +154,7 @@ const RaceCourseForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
 
@@ -130,12 +176,48 @@ const RaceCourseForm = () => {
     setImage(e.target.files[0]);
     
   };
-
+  const handlePreview = () => {
+    setImage()
+  document.getElementById("file").value=""
+  };
   
   const FetchNew = () => {
     dispatch(fetchnationality());
     dispatch(fetchcolor());
   };
+
+  const data1 =  (JSON.stringify(
+    TextInputValidation(
+      "en",
+      TrackNameEn,
+      "Track Name English"
+    )
+  ));
+  const data3 = JSON.stringify(
+    TextInputValidation("en", AbbrevEn, "Gender Abbreviation English")
+  );
+
+  const abbrev = JSON.parse(data3);
+  const data4 = JSON.stringify(
+    TextInputValidation("ar", AbbrevAr, "Gender Abbreviation Arabic")
+  );
+  const abbrevar = JSON.parse(data4);
+
+
+  const obj = JSON.parse(data1);
+  console.log(obj.status,'aszxZ2dasd')
+ const data2 =  (JSON.stringify(
+    TextInputValidation(
+      "ar",
+    TrackNameAr,
+      "Track Name Arabic"
+    )
+  ));
+
+
+  const objAr = JSON.parse(data2);
+
+
 
   return (
     <Fragment>
@@ -158,10 +240,12 @@ const RaceCourseForm = () => {
                       onChange={(e) => setTrackNameEn(e.target.value)}
                       name="Name"
                       value={TrackNameEn}
+                      onBlur={() => setError(obj)}
                     >
-                      <Form.Control type="text" placeholder="Track Name" />
+                      <Form.Control type="text" placeholder="Track Name" required/>
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
+                    <span className={Error.status ? "success" :"error"}>{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -172,15 +256,63 @@ const RaceCourseForm = () => {
                       value={TrackNameAr}
                       className="mb-3 floatingInputAr "
                       style={{ direction: "rtl", left: "initial", right: 0 }}
+                      onBlur={() => setErrorAr(objAr)}
                     >
                       <Form.Control
                         type="text"
                         placeholder="رمز قصير"
                         style={{ left: "%" }}
+                        required
                       />
                     </FloatingLabel>
+                    <span className={ErrorAr.status ? "successAr" :"errorAr"}>{ErrorAr.message}</span>
+
                   </div>
                 </div>
+                <div className="row mainrow">
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Abbrevation"
+                    className="mb-3"
+                    name="AbbrevEn"
+                    onChange={(e) => setAbbrevEn(e.target.value)}
+                    value={AbbrevEn}
+                  >
+                    <Form.Control
+                      required
+                      name="AbbrevEn"
+                      type="text"
+                      placeholder="Abbrevation"
+                      onBlur={() => setErrorAbbrev(abbrev)}
+                    />
+                  </FloatingLabel>
+
+                  <span className="spanForm"> |</span>
+                  <span className={ErrorAbbrev.status ? "success" :"error"}>{ErrorAbbrev.message}</span>
+                </div>
+
+                <div className="col-sm">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="اختصار"
+                    className="mb-3 floatingInputAr"
+                    name="AbbrevAr"
+                    style={{ direction: "rtl" }}
+                    onChange={(e) => setAbbrevAr(e.target.value)}
+                    value={AbbrevAr}
+                  >
+                    <Form.Control
+                      name="AbbrevAr"
+                      type="text"
+                      placeholder="اختصار"
+                      required
+                      onBlur={() => setErrorAbbrevAr(abbrevar)}
+                    />
+                  </FloatingLabel>
+                  <span className={ErrorAbbrev.status ? "successAr" :"errorAr"}>{ErrorAbbrevAr.message}</span>
+                </div>
+              </div>
                 
 
                 {/* <div className="row mainrow">
@@ -223,6 +355,8 @@ const RaceCourseForm = () => {
                       options={AllColor}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => ColorCode === "" ?  setErrorColor("Color is required "):setErrorColor("Color is Validated")}
+                  
                     />
                     <span className="spanForm">
                       <OverlayTrigger 
@@ -247,6 +381,8 @@ const RaceCourseForm = () => {
                         <span className="addmore" onClick={FetchNew}><AiOutlineReload /></span>
                         </>
                       </OverlayTrigger> |</span>
+                      <span className={ColorCode === "" ? "error":"success"}>{ErrorColor}</span>
+
                   </div>
                   <div className="col-sm">
                     <Select
@@ -256,9 +392,10 @@ const RaceCourseForm = () => {
                       defaultValue={ColorCode}
                       value={ColorCode}
                       onChange={setColorCode}
-                      options={AllColor}
+                      options={AllColorAr}
                       isClearable={true}
                       isSearchable={true}
+
                     />
                   </div>
                 </div>
@@ -272,6 +409,9 @@ const RaceCourseForm = () => {
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() => NationalityId === "" ?  setErrorNationality("Nationality is required "):setErrorNationality("Nationality is Validated ")}
+                  
+
                     />
                     <span className="spanForm">
                       <OverlayTrigger 
@@ -296,6 +436,7 @@ const RaceCourseForm = () => {
                         <span className="addmore" onClick={FetchNew}><AiOutlineReload /></span>
                         </>
                       </OverlayTrigger> |</span>
+                      <span  className={NationalityId === "" ? "error":"success"}>{ErrorNationality}</span>
                   </div>
 
                   <div className="col-sm">
@@ -308,25 +449,33 @@ const RaceCourseForm = () => {
                       }
                       defaultValue={NationalityId}
                       onChange={setNationalityId}
-                      options={AllNationality}
+                      options={AllNationalityAr}
                       isClearable={true}
                       isSearchable={true}
                     />
                   </div>
                 </div>
+          
                 <div className="ButtonSection">
                   <div>
+                  <label className="Multipleownerlabel">
+                      Select Race Course image
+                    </label>
                     <input
                       type="file"
                       onChange={onSelectFile}
                       className="formInput"
+                      id="file"
                     />
-                    {image && (
-                      <img src={preview} className="PreviewImage" alt="" />
+                     {image && (
+                      <>
+                       <ImCross onClick={handlePreview} className="crossIcon"/>
+                       <img src={preview} className="PreviewImage" alt="" />
+                      </>
                     )}
                   </div>
 
-                  <button type="submit" className="SubmitButton">
+                  <button type="submit" className="SubmitButton" disabled={isLoading}>
                     Add Race Course
                   </button>
                 </div>

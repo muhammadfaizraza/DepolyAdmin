@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
-import { fetchsubscriber ,STATUSES} from "../../redux/getReducer/getSubscriber";
+import { fetchnewsletter ,STATUSES} from "../../redux/getReducer/getNewLetter";
 import { useNavigate } from "react-router-dom";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Moment from "react-moment";
@@ -8,15 +8,62 @@ import swal from 'sweetalert';
 import axios from "axios";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
+import Pagination from "../GetTable/Pagination";
+import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css';
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
+import { BiBlock } from "react-icons/bi";
+
 
 const SubscriberList = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { data: subscriber, status } = useSelector((state) => state.subscriber);
+  const history = useNavigate();
+  const { data: newsletter, status } = useSelector((state) => state.newsletter);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(6);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = newsletter.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
+
+  const [ShowCalender, setShowCalender] = useState(false)
 
   useEffect(() => {
-    dispatch(fetchsubscriber());
+    dispatch(fetchnewsletter());
   }, [dispatch]);
+
+  const handleRole = async (Id) => {
+    try {
+      const res = await axios.put(`${window.env.API_URL}/ChangeStatus/${Id}`);
+      swal({
+        title: "Success!",
+        text: "Data has been Updated successfully ",
+        icon: "success",
+        button: "OK",
+      });
+      history("/subscriberlist");
+      dispatch(fetchnewsletter());
+    } catch (error) {
+      const err = error.response.data.message;
+      swal({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        button: "OK",
+      });
+    }
+    history("/subscriberlist");
+  };
 
   if (status === STATUSES.LOADING) {
         return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
@@ -35,25 +82,27 @@ const SubscriberList = () => {
       </h2>
     );
   }
-  const handleRole = async (Id) => {
-    swal({
-      title: "Are you sure?",
-      text: "You want to Approve User!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-      .then((willDelete) => {
-        if (willDelete) {
-          swal("Poof! User has been Approved!", {
-            icon: "success",
-          });
-           axios.put(`${window.env.API_URL}/ChangeStatus/${Id}`);
-        } else {
-          swal("Not Approved");
-        }
-      });
-  };
+  // const handleRole = async (Id) => {
+  //   swal({
+  //     title: "Are you sure?",
+  //     text: "You want to Approve User!",
+  //     icon: "warning",
+  //     buttons: true,
+  //     dangerMode: true,
+  //   })
+  //     .then((willDelete) => {
+  //       if (willDelete) {
+  //         swal("Poof! User has been Approved!", {
+  //           icon: "success",
+  //         });
+  //          axios.put(`${window.env.API_URL}/ChangeStatus/${Id}`);
+  //       } else {
+  //         swal("Not Approved");
+  //       }
+  //     });
+  // };
+ 
+
   return (
     <>
       <div className="page">
@@ -63,8 +112,9 @@ const SubscriberList = () => {
               marginTop: "30px",
             }}
           >
+              
             <div className="Header ">
-              <h4>Subscriber List</h4>
+              <h4>Subscriber Management</h4>
               <div>
                 <h6
                   style={{
@@ -73,54 +123,71 @@ const SubscriberList = () => {
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
                 >
-                  
+                  <BiFilter className="calendericon" onClick={() => setShowCalender(!ShowCalender)}/>
+                  <CSVLink data={newsletter} separator={";"} filename={"MKS Subscriber.csv"} className='csvclass'>
+                        Export CSV
+                    </CSVLink>
                 </h6>
 
                 
               </div>
             </div>
+            
+              <div>
+              
+              {
+                ShowCalender ?
+                <>
+                <div className="userfilter">
+                <div className="calenderuser">
+                <DateRangePicker
+                 onChange={item => setState([item.selection])}
+                 showSelectionPreview={true}
+                 moveRangeOnFirstSelection={false}
+                 months={2}
+                 ranges={state}
+                 direction="horizontal"
+               />
+                </div>
+                <div className="filtertextform">
+                
+            <input type='text' class="form-control" placeholder="Enter Email"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </>:<></>
+              }
+              </div>
+              
             <>
               <div className="div_maintb">
                 <ScrollContainer className="scroll-container">
                   <table>
                     <thead>
                       <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Passport No</th>
+                        <th>No #</th>
                         <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>createdAt</th>
-                        <th>Passport Picture</th>
-                        <th style={{ textAlign: "center" }}>Status</th>
+                        <th>createdAt</th>   
+                       <th style={{ textAlign: "center" }}>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {subscriber.map((item, index) => {
-                        const { role } = item;
+                      {currentPosts.map((item, index) => {
                         return (
                             <tr className="tr_table_class">
-                            <td>{item.FirstName}</td>
-                            <td>{item.LastName}</td>
-                            <td>{item.PassportNo}</td>
+                            <td>{index + 1}</td>
                             <td>{item.Email}</td>
-                            <td>{item.PhoneNumber}</td>
                             <td>
                               {" "}
                               <Moment format="YYYY/MM/DD">
                                 {item.createdAt}
                               </Moment>
                             </td>
-                            <td>
-                              <img src={item.PassportPicture} alt="" />
-                            </td>
+                            
                             <td style={{ textAlign: "center" }}>
-                              <button className="Approvedbtn"  style={{
-                                  backgroundColor: `${
-                                    role === "approveduser"
-                                      ? "#4547EE"
-                                      : "#DE3E28"
-                                  }`}} onClick={() => handleRole(item._id)}>{item.role}</button>
+                               
+                                <BiBlock />
                             </td>
                           </tr>
                         );
@@ -129,15 +196,22 @@ const SubscriberList = () => {
                   </table>
                 </ScrollContainer>
               </div>
-              <div className="ButtonSection">
+              {/* <div className="ButtonSection">
                    
-                  <button type="submit" className="SubmitButton" onClick={() => navigate(-1)}>
+                  <button type="submit" className="SubmitButton" onClick={() => history(-1)}>
                     Back
                   </button>
-              </div>
+              </div> */}
             </>
           </div>
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={newsletter.length}
+            paginate={paginate}
+            currentPosts={currentPosts}
+          />
         </div>
+        
       </div>
     </>
   );

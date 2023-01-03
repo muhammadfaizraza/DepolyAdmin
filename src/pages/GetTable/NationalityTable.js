@@ -5,7 +5,6 @@ import {
 } from "../../redux/getReducer/getNationality";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
 import { Link, useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import swal from "sweetalert";
@@ -16,9 +15,16 @@ import axios from "axios";
 import { Modal } from "react-bootstrap";
 import NationalityPopup from "../../Components/Popup/NationalityPopup";
 import { BsEyeFill } from "react-icons/bs";
+import Pagination from "./Pagination";
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const NationalityTable = () => {
-//for Modal 
+//for Modal
+const [ShowCalender, setShowCalender] = useState(false)
+
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -32,20 +38,52 @@ const NationalityTable = () => {
   const { data: nationality, status } = useSelector(
     (state) => state.nationality
   );
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = nationality.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchnationality());
   }, [dispatch]);
+
+
+
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteNationality/${Id}`)
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+
+      .then( async(willDelete) => {
+
+  
+   
+        if (willDelete) {
+          
+        await axios.delete(`${window.env.API_URL}/softdeleteNationality/${Id}`)
+          swal("Your data has been deleted Successfully!", {
+            icon: "success",
+         
+          }
+          )
+          dispatch(fetchnationality())
+          
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      dispatch(fetchnationality());
-    } catch (error) {
+   
+    }catch(error) {
+
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -54,7 +92,10 @@ const NationalityTable = () => {
         button: "OK",
       });
     }
-  };
+
+
+
+  }
 
   if (status === STATUSES.LOADING) {
     return (
@@ -86,59 +127,79 @@ const NationalityTable = () => {
               <h4>Nationality Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
+             
+             
 
                 <Link to="/nationality">
                   <button>Add Nationality</button>
                 </Link>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>
+                <CSVLink  data={nationality}  separator={";"} filename={"MKS Nationality.csv"} className='csvclass'>
+                        Export CSV
+                </CSVLink>
               </div>
             </div>
+            <div>
+              
+              {
+                ShowCalender ?
+                <span className="transitionclass">
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </span>:<></>
+              }
+              </div>
             <>
               <div className="div_maintb">
                 <ScrollContainer>
                   <table>
                     <thead>
                       <tr>
+                      <th>Action</th>
+
                         <th>Name</th>
                         <th>Name Arabic </th>
                         <th>Alternative Name </th>
-
-                        <th>Abbreviation</th>
+                        <th>Alternative Name Arabic</th>
+                        <th>Abrreviation </th>
+                        <th>Abrreviation Arabic</th>
+                        <th>Hemisphere English</th>
+                        <th>Hemisphere Arabic</th>
+                      
                         <th>Short Code</th>
-                        <th>Label</th>
-                        <th>Off Set </th>
+                        {/* <th>Label</th> */}
+                        {/* <th>Off Set </th>
 
-                        <th>Value</th>
+                        <th>Value</th> */}
 
                         <th>Image</th>
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {nationality.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.NameEn}</td>
-                              <td>{item.NameAr}</td>
-                              <td>{item.AltName}</td>
-                              <td>{item.Abbrev}</td>
-                              <td>{item.shortCode} </td>
-                              <td>{item.Label} </td>
-                              <td>{item.Offset} </td>
-                              <td>{item.Value}</td>
-
-                              <td>
-                                <img src={item.image} alt="" />
-                              </td>
-
-                              <td className="table_delete_btn1">
+                            <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
                                     history("/editnationality", {
@@ -156,6 +217,24 @@ const NationalityTable = () => {
                                 />
                                 <BsEyeFill onClick={() => handleShow(item)} />
                               </td>
+                              <td>{item.NameEn}</td>
+                              <td>{item.NameAr}</td>
+                              <td>{item.AltNameEn}</td>
+                              <td>{item.AltNameAr}</td>
+                              <td>{item.AbbrevEn}</td>
+                              <td>{item.AbbrevAr}</td>
+                              <td>{item.HemisphereEn}</td>
+                              <td>{item.HemisphereAr}</td>
+                              <td>{item.shortCode} </td>
+                              {/* <td>{item.Label} </td> */}
+                              {/* <td>{item.Offset === 'true' ? <>True</> : <>False</>} </td> */}
+                              {/* <td>{item.ValueEn}</td> */}
+
+                              <td>
+                                <img src={item.image} alt="" />
+                              </td>
+
+                             
                             </tr>
                           </>
                         );
@@ -167,6 +246,13 @@ const NationalityTable = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={nationality.length}
+          paginate={paginate}
+          currentPage={currentPage}
+
+        />
         </div>
       </div>
       <Modal

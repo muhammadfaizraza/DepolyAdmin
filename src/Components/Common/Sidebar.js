@@ -10,12 +10,12 @@ const Sidebar = () => {
   let { pathname } = useLocation();
   const dispatch = useDispatch();
   const { userToken,userInfo } = useSelector((state) => state.user)
-  useEffect(() => {
-    if (userToken) {
-      dispatch(getUserDetails());
-    }
+  // useEffect(() => {
+  //   if (userToken) {
+  //     dispatch(getUserDetails());
+  //   }
    
-  }, [userToken, dispatch]);
+  // }, [userToken, dispatch]);
 
   return (
     <>
@@ -36,13 +36,24 @@ const Sidebar = () => {
               >
                 <div>
                   <Link to="/races" className="mylink">
-                    View Listings
+                     Race Listings
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/racesPublish" className="mylink">
+                    To Be Publish Race
                   </Link>
                 </div>
                 <div>
                   {" "}
                   <Link to="/raceform" className="mylink">
-                    Add New
+                    Add New Race
+                  </Link>
+                </div>
+                <div>
+                  {" "}
+                  <Link to="/racecardlisting" className="mylink">
+                     Race Card Listings
                   </Link>
                 </div>
                 <div>
@@ -94,6 +105,16 @@ const Sidebar = () => {
                   </Link>{" "}
                 </div>
                 <div>
+                  <Link to="/addcompetitionPoint" className="mylink">
+                   Add Point Table
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/viewcompetitionPoint" className="mylink">
+                   View Point Table
+                  </Link>
+                </div>
+                <div>
                   <Link to="/verdict" className="mylink">
                     Add Verdict
                   </Link>{" "}
@@ -138,15 +159,16 @@ const Sidebar = () => {
                   </Link>{" "}
                 </div>
                 <div>
-                  <Link to="/ground" className="mylink">
-                    Add Ground Type
-                  </Link>{" "}
-                </div>
-                <div>
                   <Link to="/groundlist" className="mylink">
                     Ground Type Listing
                   </Link>{" "}
                 </div>
+                <div>
+                  <Link to="/ground" className="mylink">
+                    Add Ground Type
+                  </Link>{" "}
+                </div>
+                
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="2">
@@ -249,10 +271,10 @@ const Sidebar = () => {
                     Add Category
                   </Link>
                 </div>
-               
+                
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="7">
+            {/* <Accordion.Item eventKey="7">
               <Accordion.Header>Statistics</Accordion.Header>
               <Accordion.Body className="AccordionBody">
                 <div>
@@ -287,7 +309,7 @@ const Sidebar = () => {
                   </Link>
                 </div>
               </Accordion.Body>
-            </Accordion.Item>
+            </Accordion.Item> */}
             <Accordion.Item eventKey="8">
               <Accordion.Header>News</Accordion.Header>
               <Accordion.Body className="AccordionBody">
@@ -548,7 +570,7 @@ const Sidebar = () => {
                       });
                     }}
                   >
-                    Color{" "}
+                    Color
                   </Link>
                 </div>
                 <div>
@@ -627,13 +649,103 @@ const Sidebar = () => {
                       });
                     }}
                   >
-                    Equipment{" "}
-                  </Link>{" "}
+                    Equipment
+                  </Link>
                 </div>
               </Accordion.Body>
             </Accordion.Item>
+            <Accordion.Item eventKey="14">
+              <Accordion.Header>SEO</Accordion.Header>
+              <Accordion.Body className="AccordionBody">
+                <div>
+                  <Link to="/seolisting" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    View Listing
+                  </Link>
+                </div>
+                <div>
+                  
+                  <Link to="/seoform" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    Add New
+                  </Link>
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="15">
+              <Accordion.Header>User Management</Accordion.Header>
+              <Accordion.Body className="AccordionBody">
+                <div>
+                  <Link to="/userlist" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    View User
+                  </Link>
+                </div>
+                <div>
+                  
+                  <Link to="/subscriberlist" className="mylink"   onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}>
+                    View Subscriber
+                  </Link>
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
+           
           </Accordion>
-          <hr />
+         
+          <div className="SettingSec1">
+            <Link
+              to="/deletedtable"
+              className="mylink"
+              onClick={() => {
+                window.scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: "smooth",
+                });
+              }}
+            >
+              Deleted Data
+            </Link>
+          </div>
+          
+          {/* <div className="SettingSec">
+            <Link
+              to="/newsletter"
+              className="mylink"
+              onClick={() => {
+                window.scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: "smooth",
+                });
+              }}
+            >
+              NewsLetter
+            </Link>
+          </div> */}
+          {/* <hr /> */}
+          
           <div className="SettingSec">
             <Link
               to="/setting"
@@ -648,6 +760,7 @@ const Sidebar = () => {
             >
               Setting
             </Link>
+            
           </div>
         </div>
         </div>

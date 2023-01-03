@@ -52,7 +52,7 @@ const NationalityPopup = (data) => {
            
           
           >
-            <Form.Control type="text"  placeholder="Alternative Name"  value={data.data.AltName} readOnly />
+            <Form.Control type="text"  placeholder="Alternative Name"  value={data.data.AltNameEn} readOnly />
           </FloatingLabel>
         
         </div>
@@ -68,14 +68,43 @@ const NationalityPopup = (data) => {
           
           
           >
-            <Form.Control type="text"  placeholder="Abbrevation"  value={data.data.Abbrev} readOnly />
+            <Form.Control type="text"  placeholder="Abbrevation"  value={data.data.AbbrevEn} readOnly />
           </FloatingLabel>
         
         </div>
 
       </div>
-
       <div className="row mainrow">
+        <div className="col-sm">
+        <FloatingLabel
+            controlId="floatingInput"
+            label="Hemisphere"
+            className="mb-3"
+           
+          >
+            <Form.Control type="text"  placeholder="Name" value={data.data.HemisphereEn  } readOnly/>
+          </FloatingLabel>
+       
+        
+          <span className="spanForm"> |</span>
+        </div>
+
+        <div className="col-sm">
+        <FloatingLabel
+            controlId="floatingInput"
+            label="نصف الكرة الأرضية"
+            className="mb-3 floatingInputAr"
+            style={{ direction: "rtl", left: "initial", right: 0 }}
+
+           
+          >
+            <Form.Control type="text"  placeholder="نصف الكرة الأرضية"  value={data.data.HemisphereAr  }  style={{ left: "%" }} readOnly />
+          </FloatingLabel>
+       
+        </div>
+      </div>
+ 
+      {/* <div className="row mainrow">
         <div className="col-sm">
         <FloatingLabel
             controlId="floatingInput"
@@ -89,9 +118,9 @@ const NationalityPopup = (data) => {
         </div>
 
      
-      </div>
+      </div> */}
 
-      <div className="row mainrow">
+      {/* <div className="row mainrow">
         <div className="col-sm">
         <FloatingLabel
             controlId="floatingInput"
@@ -100,27 +129,14 @@ const NationalityPopup = (data) => {
           
           
           >
-            <Form.Control type="number"  placeholder="Offset"  value={data.data.Offset} readOnly />
+            <Form.Control type="number"  placeholder="Offset"  value={data.data.Offset === true ? <>'True'</>:'False'} readOnly />
           </FloatingLabel>
         
         </div>
 
-      </div>
+      </div> */}
 
-      <div className="row mainrow">
-        <div className="col-sm">
-        <FloatingLabel
-            controlId="floatingInput"
-            label="Value"
-            className="mb-3"
-         
-          >
-            <Form.Control type="text"  placeholder="Value" value={data.data.Value} readOnly/>
-          </FloatingLabel>
-      
-        </div>
-
-      </div>
+     
       <div className="row mainrow">
       <div className="col-sm">
 

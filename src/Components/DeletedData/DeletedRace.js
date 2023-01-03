@@ -1,105 +1,57 @@
-import React, { useEffect, useState } from "react";
-import { fetchrace, STATUSES } from "../../redux/getReducer/getRaceSlice";
-import { fetchtobePublishRace } from "../../redux/getReducer/getToBePublishRace";
+import React, { useEffect, Fragment, useState } from "react";
+import { fetchdeletedrace, STATUSES } from "../../redux/getDeletedreducer/DeletedRaceSlice";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { remove } from "../../redux/postReducer/postRace";
-import { Link ,useNavigate } from "react-router-dom";
-import "../../Components/CSS/Table.css";
-import ScrollContainer from "react-indiana-drag-scroll";
-import "../../Components/CSS/race.css";
-import { Modal } from "react-bootstrap";
-import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 import swal from "sweetalert";
-import Moment from "react-moment";
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
+import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
-import axios from "axios";
-import { BiEdit } from "react-icons/bi";
-import RaceDetailPopup from "../../Components/Popup/RaceDetailPopup";
+import Pagination from "../../pages/GetTable/Pagination";
+import {FaTrashRestoreAlt} from "react-icons/fa"
+import { Modal } from "react-bootstrap";
 import { BsEyeFill } from "react-icons/bs";
+import Moment from "react-moment";
 
-const Prize = (data) => {
-  return (
-    <>
-      <table className="Prizeclass">
-        <thead className="Prizeclassthead">
-          <tr>
-            <th>1st</th>
-            <th>2nd </th>
-            <th>3rd </th>
-            <th>4th </th>
-            <th>5th </th>
-            <th>6th </th>
-          </tr>
-        </thead>
-        <tbody className="Prizeclasstbody">
-          <tr>
-            <td>{data.data.FirstPrice}</td>
-            <td>{data.data.SecondPrice}</td>
-            <td>{data.data.ThirdPrice}</td>
-            <td>{data.data.FourthPrice}</td>
-            <td>{data.data.FifthPrice}</td>
-            <td>{data.data.SixthPrice}</td>
-          </tr>
-        </tbody>
-      </table>
-    </>
-  );
-};
+import RaceDetailPopup from "../Popup/RaceDetailPopup";
 
-const Races = () => {
-  const history = useNavigate();
-  const [PublishRace, setPublishRace] = useState(true);
 
-  const [show, setShow] = useState(false);
-  const [modaldata, setmodaldata] = useState();
-  const handleClose = () => setShow(false);
-  const handleShow = async (data) => {
-    setmodaldata(data);
-    await setShow(true);
-  };
-
-  const [showRacePopup, setShowRacePopup] = useState(false);
-  const [modaldataPopup, setmodaldataPopup] = useState();
-  const handleCloseRacePopup = () => setShowRacePopup(false);
-  const handleShowRacePopup = async (data) => {
-    setmodaldataPopup(data);
-    await setShowRacePopup(true);
-  };
-  
-
-  
-  const [shows, setShows] = useState(false);
-  const [modaldatas, setmodaldatas] = useState();
-  const handleCloses = () => setShows(false);
-  const handleShows = async (data) => {
-    setmodaldatas(data);
-    await setShows(true);
-  };
-  const dispatch = useDispatch();
-  const { data: race, status } = useSelector((state) => state.race);
-  const { data: tobePublishRace } = useSelector((state) => state.tobePublishRace);
-
-  const [AllRace, setAllRace] = useState(race)
-
- 
-  useEffect(() => {
-    dispatch(fetchrace());
-    dispatch(fetchtobePublishRace());
-  }, [dispatch]);
-  const handleRemove = async (Id) => {
-    try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleterace/${Id}`)
+const DeletedRace = () => {
+    const [showRacePopup, setShowRacePopup] = useState(false);
+    const [modaldataPopup, setmodaldataPopup] = useState();
+    const handleCloseRacePopup = () => setShowRacePopup(false);
+    const handleShowRacePopup = async (data) => {
+      setmodaldataPopup(data);
+      await setShowRacePopup(true);
+    };
+    
+    const [Disable , setDisable] = useState(true);
+    //for Modal
+    const [show, setShow] = useState(false);
+    const [modaldata, setmodaldata] = useState();
+    const handleClose = () => setShow(false);
+    const handleShow = async (data) => {
+      setmodaldata(data);
+      await setShow(true);
+    };
+    const Restorefunction = async ( id) => {
+      try{
+    
+      //buttons disable
+      setDisable(false)
+    
+     await axios.post(`${window.env.API_URL}/restoresoftdeleterace/${id}`, );
+      // api 
+      // button enable
+      dispatch(fetchdeletedrace());
+      setDisable(true)
       swal({
         title: "Success!",
-        text: "Data has been Deleted successfully ",
+        text: "Data has been added successfully ",
         icon: "success",
         button: "OK",
       });
-      dispatch(fetchrace());
-    } catch (error) {
+    }catch (error) {
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -108,38 +60,73 @@ const Races = () => {
         button: "OK",
       });
     }
-  };
-  // const handleAwaited = async() => {
-  //   await setPublishRace(!PublishRace)
-  //   setAllRace(tobePublishRace)
-    
-  // }
-  // const handleAll = () => {
-  //   setAllRace(race)
-  //   setPublishRace(!PublishRace)
-  // }
-  const GoToPublish = (RaceId) => {
-    history("/publishrace", {
-      state: {
-        RaceId: RaceId,
-      },
-    });
-  }
-  if (status === STATUSES.LOADING) {
-    return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
-  }
-  if (status === STATUSES.ERROR) {
-    return (
-      <h2
-        style={{
-          margin: "100px",
-        }}
-      >
-        Something went wrong!
-      </h2>
-    );
-  }
   
+  
+    
+    }
+    const dispatch = useDispatch();
+  
+    const { data: deletedrace, status } = useSelector((state) => state.deletedrace);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(8)
+  
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = deletedrace.slice(indexOfFirstPost, indexOfLastPost);
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+  
+  
+    useEffect(() => {
+      dispatch(fetchdeletedrace());
+    }, [dispatch]);
+  
+  
+    if (status === STATUSES.LOADING) {
+      return (
+        <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
+      );
+    }
+  
+    if (status === STATUSES.ERROR) {
+      return (
+        <h2
+          style={{
+            margin: "100px",
+          }}
+        >
+          Something went wrong!
+        </h2>
+      );
+    }
+    const Prize = (data) => {
+        return (
+          <>
+            <table className="Prizeclass">
+              <thead className="Prizeclassthead">
+                <tr>
+                  <th>1st</th>
+                  <th>2nd </th>
+                  <th>3rd </th>
+                  <th>4th </th>
+                  <th>5th </th>
+                  <th>6th </th>
+                </tr>
+              </thead>
+              <tbody className="Prizeclasstbody">
+                <tr>
+                  <td>{data.data.FirstPrice}</td>
+                  <td>{data.data.SecondPrice}</td>
+                  <td>{data.data.ThirdPrice}</td>
+                  <td>{data.data.FourthPrice}</td>
+                  <td>{data.data.FifthPrice}</td>
+                  <td>{data.data.SixthPrice}</td>
+                </tr>
+              </tbody>
+            </table>
+          </>
+        );
+      };
+          
   return (
     <>
       <div className="page">
@@ -150,21 +137,9 @@ const Races = () => {
             }}
           >
             <div className="Header ">
-              <h4>Race Listings</h4>
-              <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                >
-                  {/* <DropdownButton id="dropdown-basic-button" title="Filter">
-                  <Dropdown.Item onClick={() => handleAll()}>Published</Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleAwaited()}>Publish Awaited</Dropdown.Item>
-                </DropdownButton> */}
-                </h6>
-
+            <h4> Race Listings</h4>
+            <div>
+               
                 <Link to="/raceform">
                   <button>Add Race</button>
                 </Link>
@@ -195,13 +170,11 @@ const Races = () => {
                       <th>Race Status</th>
                       <th>Prize Money</th>
                       <th>image</th>
-                      {
-                        !PublishRace ? <th>Publish</th>: <></>
-                      }
+                    
                       <th>Action</th>
                     </tr>
                   </thead>
-                  {race === undefined ? (
+                  {deletedrace === undefined ? (
                     <h3
                       style={{
                         textAlign: "center",
@@ -211,7 +184,7 @@ const Races = () => {
                     </h3>
                   ) : (
                     <>
-                      {race.map((item) => {
+                      {currentPosts.map((item) => {
                         const { RaceStatus } = item;
                         return (
                           <tbody
@@ -243,20 +216,17 @@ const Races = () => {
                                   }`,
                                 }}
                               >
-                                {item.RaceNameModelData.NameEn}
+                                {item.RaceNameModelData&&  item.RaceNameModelData.NameEn}
                               </td>
-                              <td>{item.RaceNameModelData.NameAr} </td>
-                              <td>{item.RaceTypeModelData.NameEn} </td>
+                              <td>   {item.RaceNameModelData&&  item.RaceNameModelData.NameAr} </td>
+                              <td>{item.RaceTypeModelData&& item.RaceTypeModelData.NameEn} </td>
                               <td>
-                                {item.RaceCourseData === null ? (
-                                  <>N/A</>
-                                ) : (
-                                  item.RaceCourseData.TrackNameEn
-                                )}
+                                {item.RaceCourseData&& item.RaceCourseData.TrackNameEn}
+                              
                               </td>
                               <td
                                 style={{
-                                  maxWidth: "400px",
+                                  maxHeight: "400px",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
                                   whiteSpace: "nowrap",
@@ -266,7 +236,7 @@ const Races = () => {
                               </td>
                               <td
                                 style={{
-                                  maxWidth: "400px",
+                                  maxHeight: "400px",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
                                   whiteSpace: "nowrap",
@@ -274,12 +244,12 @@ const Races = () => {
                               >
                                 {item.DescriptionAr}
                               </td>
-                              <td>{item.TrackLengthData.TrackLength}</td>
-                              <td>{item.HorseModels.length}</td>
+                              <td>{item.TrackLengthData&& item.TrackLengthData.TrackLength}</td>
+                              <td>{item.RaceAndHorseModelData.length}</td>
                               <td>{item.WeatherDegree}</td>
                               <td>{item.WeatherType}</td>
                               <td>
-                                {" "}
+                          
                                 <Moment parse="YYYY-MM-DD HH:mm">
                                   {item.DayNTime}
                                 </Moment>
@@ -296,38 +266,19 @@ const Races = () => {
                                 </button>
                               </td>
                               <td>
-                                {" "}
+                         
                                 <img
                                   src={item.image}
                                   alt=""
                                   style={{
                                     width: "50px",
                                   }}
-                                />{" "}
+                                />
                               </td>
-                              {
-                                !PublishRace ? <td>
-                                <button  className="Approvedbtn resultbtn" onClick={() => GoToPublish(item._id)}>Click</button>
-                              </td>:null
-                              }
-                              <td
-                                className="table_delete_btn1"
-                                style={{ textAlign: "center" }}
-                              >
-                                <BiEdit
-                                  onClick={() =>
-                                    history("/editrace", {
-                                      state: {
-                                        fullraceid: item,
-                                      },
-                                    })
-                                  }
-                                />
-                                <MdDelete
-                                  onClick={() => handleRemove(item._id)}
-                                />
-                                <BsEyeFill onClick={() => handleShows(item)} /> 
-                                <BsEyeFill onClick={() => handleShowRacePopup(item)} />                               </td>
+                              <td className="table_delete_btn1">
+                                <FaTrashRestoreAlt onClick={() => Restorefunction(item._id)} disabled={!Disable}/>
+                                <BsEyeFill onClick={() => handleShow(item)}/>
+                              </td> 
                             </tr>
                           </tbody>
                         );
@@ -338,6 +289,11 @@ const Races = () => {
               </ScrollContainer>
             </div>
           </div>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={deletedrace.length}
+          paginate={paginate}
+        />
         </div>
       </div>
       <Modal
@@ -349,7 +305,7 @@ const Races = () => {
       >
         <Modal.Header closeButton>
           <h2>Race Prize </h2>
-        </Modal.Header>
+        </Modal.Header> 
         <Modal.Body>
           <Prize data={modaldata} />
         </Modal.Body>
@@ -361,8 +317,6 @@ const Races = () => {
       </Modal>
 
       <Modal
-        show={shows}
-        onHide={handleCloses}
         show={showRacePopup}
         onHide={handleCloseRacePopup}
         size="lg"
@@ -376,7 +330,6 @@ const Races = () => {
           <RaceDetailPopup data={modaldataPopup} />
         </Modal.Body>
          <Modal.Footer>
-          <button onClick={handleCloses} className="modalClosebtn">
           <button onClick={handleCloseRacePopup} className="modalClosebtn">
             Close
           </button>
@@ -384,7 +337,7 @@ const Races = () => {
      
       </Modal>
     </>
+  )
+}
 
-  );
-};
-export default Races;
+export default DeletedRace

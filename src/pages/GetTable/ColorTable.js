@@ -2,7 +2,7 @@ import React, { useEffect, Fragment,useState } from "react";
 import { fetchcolor, STATUSES } from "../../redux/getReducer/getColor";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
+
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -13,10 +13,17 @@ import { BiEdit } from "react-icons/bi";
 import { Modal } from "react-bootstrap";
 import ColorPopup from "../../Components/Popup/ColorPopup";
 import {BsEyeFill} from "react-icons/bs"
+import Pagination from "./Pagination";
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const ColorTable = () => {
-  const [show, setShow] = useState(false);
+  const [ShowCalender, setShowCalender] = useState(false)
+
   const [modaldata, setmodaldata] = useState();
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = async (data) => {
     setmodaldata(data);
@@ -29,21 +36,49 @@ const ColorTable = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const { data: Color, status } = useSelector((state) => state.color);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = Color.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchcolor());
   }, [dispatch]);
+
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteColor/${Id}`);
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+
+      .then( async(willDelete) => {
+     
+  
+   
+        if (willDelete) {
+          await axios.delete(`${window.env.API_URL}/softdeleteColor/${Id}`);
+          swal("Your data has been deleted Successfully!", {
+            icon: "success",
+         
+          }
+          )
+          dispatch(fetchcolor())
+          
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      history("/colorlist");
-      dispatch(fetchcolor());
-    } catch (error) {
+   
+    }catch(error) {
+
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -52,9 +87,10 @@ const ColorTable = () => {
         button: "OK",
       });
     }
-    history("/colorlist");
-  };
 
+
+
+  }
   if (status === STATUSES.LOADING) {
     return (
       <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
@@ -99,33 +135,63 @@ const ColorTable = () => {
                 <Link to="/color">
                   <button>Add Color</button>
                 </Link>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>
+                <CSVLink  data={Color}  separator={";"} filename={"MKS Color.csv"} className='csvclass'>
+                        Export CSV
+                </CSVLink>
               </div>
             </div>
+            <div>
+              
+              {
+                ShowCalender ?
+                <span className="transitionclass">
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </span>:<></>
+              }
+              </div>
             <>
               <div className="div_maintb">
                 <ScrollContainer>
                   <table>
                     <thead>
                       <tr>
+                      <th>Action</th>
                         <th>Name</th>
                         <th>Name Arabic </th>
-
+                        <th>Abrevation</th>
+                        <th>Abrevation Arabic </th>
                         <th>Short Code</th>
 
-                        <th>Action</th>
+                        
                       </tr>
                     </thead>
                     <tbody>
-                      {Color.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.NameEn}</td>
-                              <td>{item.NameAr}</td>
-
-                              <td>{item.shortCode} </td>
-
-                              <td className="table_delete_btn1">
+                            <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
                                     history("/editcolor", {
@@ -143,6 +209,13 @@ const ColorTable = () => {
                                 />
                                 <BsEyeFill onClick={() => handleShow(item)}/>
                               </td>
+                              <td>{item.NameEn}</td>
+                              <td>{item.NameAr}</td>
+                              <td>{item.AbbrevEn}</td>
+                              <td>{item.AbbrevAr}</td>
+                              <td>{item.shortCode} </td>
+
+                           
                             </tr>
                           </>
                         );
@@ -154,6 +227,13 @@ const ColorTable = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={Color.length}
+          paginate={paginate}
+          currentPage={currentPage}
+
+        />
         </div>
       </div>
       <Modal

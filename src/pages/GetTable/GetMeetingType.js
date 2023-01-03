@@ -2,7 +2,6 @@ import React, { useEffect, Fragment ,useState} from "react";
 import { fetchMeeting, STATUSES } from "../../redux/getReducer/getMeeting";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
@@ -13,8 +12,14 @@ import { BiEdit } from "react-icons/bi";
 import { BsEyeFill } from "react-icons/bs";
 import { Modal } from "react-bootstrap";
 import MeetingPopup from "../../Components/Popup/MeetingPopup";
+import Pagination from "./Pagination";
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const GetMeetingType = () => {
+  const [ShowCalender, setShowCalender] = useState(false)
 
 //for Modal
 const [show, setShow] = useState(false);
@@ -29,21 +34,48 @@ const handleShow = async (data) => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const { data: meeting, status } = useSelector((state) => state.meeting);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = meeting.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchMeeting());
   }, [dispatch]);
   
+ 
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteMeetingType/${Id}`)
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+  
+      .then( async(willDelete) => {
+    
+        if (willDelete) {
+          await axios.delete(`${window.env.API_URL}/softdeleteMeetingType/${Id}`)
+          swal(" Your data has been deleted Successfully!", {
+            icon: "success",
+         
+          }
+          )
+          dispatch(fetchMeeting())
+          
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      dispatch(fetchMeeting());
-    } catch (error) {
+   
+    }catch(error) {
+  
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -52,8 +84,10 @@ const handleShow = async (data) => {
         button: "OK",
       });
     }
-  };
-
+  
+  
+  
+  }
   if (status === STATUSES.LOADING) {
     return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
   }
@@ -83,46 +117,67 @@ const handleShow = async (data) => {
               <h4>Meeting Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    meeting: "rgba(0, 0, 0, 0.6)",
-                  }}
-                >
-                  
-                </h6>
+       
 
                 <Link to="/meeting">
                   <button>Add meeting</button>
                 </Link>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>
+                <CSVLink  data={meeting}  separator={";"} filename={"MKS Meeting.csv"} className='csvclass'>
+                        Export CSV
+                </CSVLink>
               </div>
             </div>
+            <div>
+              
+              {
+                ShowCalender ?
+                <span className="transitionclass">
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </span>:<></>
+              }
+              </div>
             <>
               <div className="div_maintb">
                 <ScrollContainer>
                   <table>
                     <thead>
                       <tr>
+                      <th>Action</th>
+
                         <th>Name</th>
                         <th>Name Arabic </th>
 
                         <th>Short Code</th>
 
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {meeting.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.NameEn}</td>
-                              <td>{item.NameAr}</td>
-
-                              <td>{item.shortCode} </td>
-
-                              <td className="table_delete_btn1">
+                            <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
                                     history("/editmeetingtype", {
@@ -140,6 +195,12 @@ const handleShow = async (data) => {
                                 />
                                 <BsEyeFill onClick={() => handleShow(item)}/>
                               </td>
+                              <td>{item.NameEn}</td>
+                              <td>{item.NameAr}</td>
+
+                              <td>{item.shortCode} </td>
+
+                              
                             </tr>
                           </>
                         );
@@ -151,6 +212,13 @@ const handleShow = async (data) => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={meeting.length}
+          paginate={paginate}
+          currentPage={currentPage}
+
+        />
         </div>
       </div>
       <Modal

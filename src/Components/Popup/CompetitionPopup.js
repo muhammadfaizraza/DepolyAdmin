@@ -1,6 +1,7 @@
 import React from 'react'
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import Moment from "react-moment";
 
 const CompetitionPopup = (data) => {
     console.log(data)
@@ -38,18 +39,22 @@ const CompetitionPopup = (data) => {
       </div>
     </div>
 
-    <div className="row mainrow">
+    {/* <div className="row mainrow">
       <div className="col-sm">
 
       <FloatingLabel
           controlId="floatingInput"
-          label="Description"
+          label="Start Date"
           className="mb-3"
         
         
        
         >
-          <Form.Control type="text" placeholder="Description" readOnly value={data.data.DescEn}/>
+          <Form.Control type="text" placeholder="Description" readOnly  value={
+            <Moment format="YYYY/MM/DD">
+            {data.data.StartDate}
+          </Moment>
+          }/>
         </FloatingLabel>
      
         <span className="spanForm"> |</span>
@@ -67,7 +72,7 @@ const CompetitionPopup = (data) => {
         </FloatingLabel>
         
       </div>
-    </div>
+    </div> */}
     <div className="row mainrow">
       <div className="col-sm">
 
@@ -107,37 +112,37 @@ const CompetitionPopup = (data) => {
 
     </div>
 
-    <div className="row mainrow">
+    {/* <div className="row mainrow">
       <div className="col-sm">
 
       <FloatingLabel
           controlId="floatingInput"
-          label="TriCount"
+          label="Count"
           className="mb-3"
         
         
        
         >
-          <Form.Control type="text" placeholder="Description" readOnly value={data.data.TriCount}/>
+          <Form.Control type="text" placeholder="Description" readOnly value={data.data.CategoryCount}/>
         </FloatingLabel>
      
       </div>
 
       
-    </div>
+    </div> */}
    
     <div className="row mainrow">
       <div className="col-sm">
 
       <FloatingLabel
           controlId="floatingInput"
-          label="pickCount"
+          label="Count"
           className="mb-3"
         
         
        
         >
-          <Form.Control type="text" placeholder="Description" readOnly value={data.data.pickCount}/>
+          <Form.Control type="text" placeholder="Description" readOnly value={data.data.CategoryCount}/>
         </FloatingLabel>
      
       </div>
@@ -145,7 +150,7 @@ const CompetitionPopup = (data) => {
       
     </div>
 
-    <div className="row mainrow">
+    {/* <div className="row mainrow">
       <div className="col-sm">
 
       <FloatingLabel
@@ -162,7 +167,7 @@ const CompetitionPopup = (data) => {
       </div>
 
       
-    </div>
+    </div> */}
 </div>
   )
 }

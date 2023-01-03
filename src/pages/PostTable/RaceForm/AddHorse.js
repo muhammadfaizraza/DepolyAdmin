@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Moment from "moment";
 import "react-toastify/dist/ReactToastify.css";
 import { fetchjockey } from "../../../redux/getReducer/getJockeySlice";
 import { useState } from "react";
@@ -9,10 +8,8 @@ import { useSelector } from "react-redux";
 import { fetchHorse } from "../../../redux/getReducer/getHorseSlice";
 import { fetchequipment } from "../../../redux/getReducer/getEquipment";
 import { toast } from 'react-toastify';
-
 import Select from "react-select";
 import swal from "sweetalert";
-import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 
 const LocalItem = () => {
@@ -99,36 +96,43 @@ const ItemLength = items.length;
   const Remove = () => {
     setitems([]);
     setGate(1)
+    SetinputData("");
+    SetJockeyData("");
+    SetEquipmentData("");
   };
 
   const submit = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post(`${window.env.API_URL}addracehorses/${RaceId}`, {HorseEntry:items});
-      localStorage.removeItem('lists')
-      setGate(1)
-      history("/fullpublishrace", {
-        state: {
-          RaceId: RaceId
-        },
-      });
-     
-      swal({
-        title: "Success",
-        text: "Data has been added successfully ",
-        icon: "success",
-        button: "OK",
-      });
-    } catch (error) {
-      const err = error.response.data.message;
-      swal({
-        title: "Error!",
-        text: err,
-        icon: "error",
-        button: "OK",
-      });
+    if (ItemLength === 0) {
+      toast('Please Add and Save Horse ')
     }
-    setitems([]);
+    else{
+      try {
+        const response = await axios.post(`${window.env.API_URL}addracehorses/${RaceId}`, {HorseEntry:items});
+        localStorage.removeItem('lists')
+        setGate(1)
+        history("/addracePoint", {
+          state: {
+            RaceId: RaceId
+          },
+        });
+       
+        swal({
+          title: "Success",
+          text: "Data has been added successfully ",
+          icon: "success",
+          button: "OK",
+        });
+      } catch (error) {
+        const err = error.response.data.message;
+        swal({
+          title: "Error!",
+          text: err,
+          icon: "error",
+          button: "OK",
+        });
+      }
+    }
   };
 
   return (
@@ -159,6 +163,7 @@ const ItemLength = items.length;
                 </span>
                 <span>
                       <Select
+                        className="dropdown multidropdown"
                         defaultValue={InputData}
                         onChange={SetinputData}
                         options={horseoptions}
@@ -168,6 +173,7 @@ const ItemLength = items.length;
                     </span>
                     <span>
                       <Select
+                        className="dropdown multidropdown"
                         defaultValue={JockeyData}
                         onChange={SetJockeyData}
                         options={AllJockey}
@@ -184,6 +190,7 @@ const ItemLength = items.length;
                     </span> */}
                     <span>
                   <Select
+                    className="dropdown multidropdown"
                     defaultValue={EquipmentData}
                     onChange={SetEquipmentData}
                     options={AllEquipment}
@@ -236,7 +243,7 @@ const ItemLength = items.length;
 
               <div className="addbtn">
                 <button className="AddAnother" onClick={addItem}>
-                Save & Add Another{" "}
+                Save & Add Another
                 </button>
               </div>
               <div className="sbmtbtndiv">
@@ -251,7 +258,7 @@ const ItemLength = items.length;
                     onClick={submit}
                    
                   >
-                    Next & Add Verdict
+                    Next & Add Point
                   </button>
                 </div>
               </div>

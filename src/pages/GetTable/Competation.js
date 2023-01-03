@@ -5,18 +5,23 @@ import { MdDelete } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import swal from "sweetalert";
-import JockeyPopup from "../../Components/Popup/JockeyPopup";
 import { Modal } from "react-bootstrap";
-import { BsEyeFill, BsFillEyeFill } from "react-icons/bs";
+import { BsEyeFill } from "react-icons/bs";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Moment from "react-moment";
 import axios from "axios";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import CompetitionPopup from "../../Components/Popup/CompetitionPopup";
-
+import Pagination from "./Pagination";
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const Statistic = () => {
+  const [ShowCalender, setShowCalender] = useState(false)
+
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -29,10 +34,29 @@ const Statistic = () => {
   const history = useNavigate();
 
   const { data: competition, status } = useSelector((state) => state.competition);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = competition.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchcompetition()); 
   }, [dispatch]);
   
+
+  const GoToPublish = (competitionId) => {
+    history("/competitionrace", {
+      state: {
+        CompetitionId: competitionId,
+      },
+    });
+  }
+
+
   const handleRemove = async (Id) => {
     try {
       const res = await axios.delete(`${window.env.API_URL}/softdeleteCompetiton/${Id}`)
@@ -42,7 +66,7 @@ const Statistic = () => {
         icon: "success",
         button: "OK",
       });
-      history("/CategoryListing");
+      history("/competitionlisting");
       dispatch(fetchcompetition());
     } catch (error) {
       const err = error.response.data.message;
@@ -96,49 +120,63 @@ const Statistic = () => {
                 <Link to="/addcompetition">
                   <button>Add Competition</button>
                 </Link>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>                  <CSVLink  data={competition}  separator={";"} filename={"MKS Competition.csv"} className='csvclass'>
+                        Export CSV
+                    </CSVLink>
               </div>
             </div>
+            <div>
+              
+              {
+                ShowCalender ?
+                <span className="transitionclass">
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </span>:<></>
+              }
+              </div>
             <>
               <div className="div_maintb">
                 <ScrollContainer>
                   <table>
                     <thead>
                       <tr>
-                        <th>Competition Name</th>
+                      <th>Action</th>
+                        <th>Name</th>
                         <th>Name Arabic </th>
-                        <th>Competition Category </th>
-                        <th>Competition Code</th>
-                        <th>Description </th>
-                        <th>Description Arabic</th>
+                        <th>Competition Code </th>
                         <th>Short Code</th>
-                        <th>Pick Count</th>
-                        <th>Tri Count</th>
+                        <th>Type/Category</th>
+                        <th>Count </th>
                         <th>Start Date </th>
-                        <th>Action</th>
+                        <th>End Date </th>
                       </tr>
                     </thead>
                     <tbody>
-                      {competition.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
-                              <td>{item.NameEn}</td>
-                              <td>{item.NameAr}</td>
-                              <td>{item.CompetitionCategory === null ? <>N/A</> : item.CompetitionCategoryData.NameEn}</td>
-                              <td>{item.CompetitionCode === '' ? <>N/A</> : item.CompetitionCode}</td>
-                              
-                              <td>{item.DescEn}</td>
-                              <td>{item.DescAr} </td>
-                              <td>{item.shortCode}</td>
-                              <td>{item.pickCount}</td>
-                              <td>{item.TriCount}</td>
-                              <td>
-                                <Moment format="YYYY/MM/DD">
-                                  {item.StartDate}
-                                </Moment>{" "}
-                              </td>
-                             
-                              <td className="table_delete_btn1">
+                            <td className="table_delete_btn1">
                                   <BiEdit onClick={() => navigate('/editcompetition',{
                                 state:{
                                   competitionid:item
@@ -149,6 +187,25 @@ const Statistic = () => {
                                 />
                                 <BsEyeFill onClick={() => handleShow(item) } /> 
                               </td>
+                              <td>{item.NameEn === null ? <>N/A</>: item.NameEn}</td>
+                              <td>{item.NameAr === null ? <>N/A</>:item.NameAr}</td>
+                              <td>{item.CompetitionCode === null ? <>N/A</> : item.CompetitionCode}</td>
+                              <td>{item.shortCode}</td>
+                              <td>{item.CompetitionCategory}</td>
+                              <td>{item.CategoryCount}</td>
+                              <td>
+                                <Moment format="YYYY/MM/DD">
+                                  {item.StartDate}
+                                </Moment>{" "}
+                              </td>
+                              <td>
+                                <Moment format="YYYY/MM/DD">
+                                  {item.EndDate}
+                                </Moment>{" "}
+                              </td>
+                            
+
+                             
                             </tr>
                           </>
                         );
@@ -160,6 +217,13 @@ const Statistic = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={competition.length}
+          paginate={paginate}
+          currentPage={currentPage}
+
+        />
         </div>
       </div>
       <Modal

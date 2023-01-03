@@ -8,14 +8,19 @@ import '../Components/CSS/login.css'
 import {useform} from 'react-hook-form'
 import {BsEyeFill} from 'react-icons/bs'
 import { toast } from 'react-toastify';
-
+import ForgetPassword from './Popup/ForgetPassword'
+import { Modal } from "react-bootstrap";
 
 const Login = () => {
   const { loading, userInfo, error ,success} = useSelector((state) => state.user)
   const dispatch = useDispatch()
   const [customError, setCustomError] = useState(null)
   const [passwordShown, setPasswordShown] = useState(false);
-
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = async () => {
+    await setShow(true);
+  };
   const { register, handleSubmit } = useForm()
   const navigate = useNavigate()
 
@@ -33,6 +38,13 @@ const Login = () => {
     dispatch(userLogin(data))  
     toast(error || customError)
   }
+  useEffect(() => {
+    if (userInfo) {
+      window.location.reload(); 
+
+      navigate('/dashboard')
+    }
+  }, [navigate, userInfo])
 
   // const AllFilled = (register.Email !== '') && (register.password !== "")
   // 
@@ -75,11 +87,29 @@ const Login = () => {
       disabled={loading}>
         Login
       </button>
+      <div className='ForgetPassword'>
+      <p onClick={() => handleShow()}>Forget Password</p>
+      </div>
+      <hr/>
     </form>
+  
    </div>
-
+   <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2 style={{ fontFamily: "inter" }}>Forget Email </h2>
+        </Modal.Header>
+        <Modal.Body>
+          <ForgetPassword />
+        </Modal.Body>
+      </Modal>
     </div>
   )
 }
 
-export default Login
+export default Login;

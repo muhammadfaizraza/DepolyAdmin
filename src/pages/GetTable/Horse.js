@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { remove } from "../../redux/postReducer/PostHorse";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { fetchHorse, STATUSES } from "../../redux/getReducer/getHorseSlice";
@@ -15,8 +14,17 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import {BsEyeFill} from "react-icons/bs"
+import Pagination from "./Pagination";
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const Horse = () => {
+//for errors
+
+const [ShowCalender, setShowCalender] = useState(false)
+
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -27,30 +35,51 @@ const Horse = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const { data: horse, status } = useSelector((state) => state.horse);
-  const [pagenumber, setPageNumber] = useState(1);
 
-  const previousPageHandler = () => {
-    setPageNumber((pagenumber) => pagenumber - 1);
-  };
-  const nextPageHandler = () => {
-    setPageNumber((pagenumber) => pagenumber + 1);
-  };
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = horse.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
 
   useEffect(() => {
-    dispatch(fetchHorse({ pagenumber }));
+    dispatch(fetchHorse());
   }, [dispatch]);
+
+ 
 
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/deletehorse/${Id}`)
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+
+      .then( async(willDelete) => {
+
+   
+        if (willDelete) {
+          await axios.delete(`${window.env.API_URL}/softdeletehorse/${Id}`)
+          swal("Your data has been deleted Successfully!", {
+            icon: "success",
+         
+          }
+          )
+          dispatch(fetchHorse())
+          
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      dispatch(fetchHorse());
-    } catch (error) {
+   
+    }catch(error) {
+
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -59,7 +88,10 @@ const Horse = () => {
         button: "OK",
       });
     }
-  };
+
+
+
+  }
 
   if (status === STATUSES.LOADING) {
     return (
@@ -91,62 +123,116 @@ const Horse = () => {
               <h4>Horse Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
+       
 
                 <Link to="/horseform">
                   <button>Add Horse</button>
                 </Link>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>
+                <CSVLink  data={horse}  separator={";"} filename={"MKS Horses.csv"} className='csvclass'>
+                        Export CSV
+                </CSVLink>
               </div>
             </div>
+            <div>
+              
+              {
+                ShowCalender ?
+                <span className="transitionclass">
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 <input type='text' class="form-control" placeholder="Enter Gender"/>
+                 <input type='text' class="form-control" placeholder="Enter Color"/>
+                 <input type='text' class="form-control" placeholder="Enter Age"/>
+
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </span>:<></>
+              }
+              </div>
             <>
               <div className="div_maintb">
                 <ScrollContainer className="scroll-container">
                   <table id="customers">
                     <thead>
                       <tr>
+                      <th>Actions</th>
                         <th>Name</th>
-                        <th>Name Ar</th>
+                        <th>Name Arabic</th>
                         <th>Age</th>
                         <th>Sex</th>
                         <th>Color</th>
                         <th>Purchase Price</th>
                         <th>Breeder</th>
+                        
+                        <th>Remarks</th>
+
+                        <th>Rds</th>
                         {/* <th>Active Owner</th>
                         <th>Over All Rating</th> */}
                         {/* <th>Dam</th>
                         <th>Sire</th>
                         <th>GSire</th> */}
-                        <th>Remarks</th>
 
-                        <th>Rds</th>
+                        
                         {/* <th>Cap</th> */}
 
                         <th>Image</th>
-                        <th>Actions</th>
                       </tr>
                     </thead>
 
-                    {horse.map((item) => {
+                    {currentPosts.map((item) => {
                       return (
                         <>
                           <tbody>
-                            <tr>
+                            <tr  className="tr_table_class">
+                            <td
+                                className="table_delete_btn1"
+                                // style={{ textAlign: "center" }}
+                              >
+                                <BiEdit
+                                  onClick={() =>
+                                    history("/edithorse", {
+                                      state: {
+                                        horseid: item,
+                                      },
+                                    })
+                                  }
+                                />
+                                <MdDelete
+                                  style={{
+                                    fontSize: "22px",
+                                  }}
+                                  onClick={() => handleRemove(item._id)}
+                                />
+                                <BsEyeFill onClick={() => handleShow(item)}/>
+                              </td>
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
                               <td>
                            
                                 <Moment fromNow ago>
-                                  {item.Age}
+                                  {item.DOB}
                                 </Moment>
                               </td>
 
-                              <td>{item.SexModelData.NameEn}</td>
+                              <td>{item.SexModelData === null ? <>N/A</>: <>{item.SexModelData.NameEn}</>}</td>
 
                               <td>{item.ColorIDData === null ? <>N/A</> : item.ColorIDData.NameEn} </td>
                               {/* <td>{item.KindOfHorse === '' ? <>N/A</>: item.KindOfHorse}</td> */}
@@ -158,7 +244,7 @@ const Horse = () => {
                                   <>{item.BreederData.NameEn}</>
                                 )}
                               </td>
-                              <td>{item.Remarks}</td>
+                              <td className='cell'>{item.RemarksEn}</td>
                               {/* <td>
                                 {item.OwnerModels === undefined ? (
                                   <>No Data</>
@@ -185,24 +271,7 @@ const Horse = () => {
                                   }}
                                 ></img>
                               </td>
-                              <td
-                                className="table_delete_btn1"
-                                style={{ textAlign: "center" }}
-                              >
-                                <BiEdit
-                                  onClick={() =>
-                                    history("/edithorse", {
-                                      state: {
-                                        horseid: item,
-                                      },
-                                    })
-                                  }
-                                />
-                                <MdDelete
-                                  onClick={() => handleRemove(item._id)}
-                                />
-                                <BsEyeFill onClick={() => handleShow(item)}/>
-                              </td>
+                              
                             </tr>
                           </tbody>
                         </>
@@ -213,37 +282,16 @@ const Horse = () => {
               </div>
             </>
           </div>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={horse.length}
+          paginate={paginate}
+          currentPage={currentPage}
+
+        />
         </div>
       </div>
-      {/* <div
-        style={{
-          display: "flex",
-          marginTop: "20px",
-          justifyContent: "space-between",
-        }}
-      >
-        <button
-          className="button btn btn-primary"
-          onClick={previousPageHandler}
-          disabled={pagenumber === 1}
-        >
-          Previous
-        </button>
-        <p
-          style={{
-            marginTop: "20px",
-          }}
-        >
-          Page {pagenumber}
-        </p>
-        <button
-          className="button btn btn-primary"
-          onClick={nextPageHandler}
-          disabled={horse.length <= 1}
-        >
-          Next
-        </button>
-      </div> */}
+    
       <Modal
         show={show}
         onHide={handleClose}

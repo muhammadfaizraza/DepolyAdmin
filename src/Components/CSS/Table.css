@@ -14,11 +14,10 @@
     margin-top: -35px;
 }
 .Header h4 {
-    font-size: 1.5rem;
     font-family: 'Inter';
     font-style: normal;
-    font-weight: 600;
-    font-size: 18.5949px;
+    font-weight: 700;
+    font-size: 15.5949px;
     line-height: 19px;
     padding-top: 7px;
     color: #000000;
@@ -60,6 +59,7 @@
     overflow: scroll;
     margin-left: 20px;
     width: 101%;
+    height: 75vh;
 }
 
 table {
@@ -106,6 +106,9 @@ tbody, td, tfoot, th, thead, tr {
     font-size: 14px;
     line-height: 17px;
     color: #000000;
+    max-width: 80px; 
+    white-space : nowrap;
+    overflow : hidden;
 }
 
 .div_maintb th {
@@ -239,9 +242,9 @@ td.table_delete_btn1 {
 }
 
 td:last-child {
-    color: #19469D;
+    /* color: #19469D; */
     text-align: inherit;
-    font-size: 22px;
+    font-size: 14px;
 }
 .div_maintb >td:last-child >svg {
     margin-left: 5px;
@@ -276,7 +279,7 @@ td:last-child {
     left: 0 !important;
     border-radius: 0 20px 20px 0 !important;
     position: sticky !IMPORTANT;
-    padding-right: 150px;
+    padding-right: 100px;
 }
 .div_maintb td {
     position: relative;
@@ -359,4 +362,121 @@ td:last-child {
 img.PreviewHorseImage {
     margin-top: 15px;
     margin-left: 20px;
+    width: 150px;
+    height: 150px;
+}
+
+.authclass {
+    margin-top: -5px;
+}
+.css-26l3qy-menu{
+    margin-top: 12px !important;
+}
+
+
+.checkbox-label {
+    display: block;
+    position: relative;
+    margin: auto;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 24px;
+    height: 24px;
+    width: 24px;
+    clear: both;
+}
+
+.checkbox-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkbox-label .checkbox-custom {
+    position: absolute;
+    top: -12px;
+    left: -46px;
+    height: 57px;
+    width: 116px;
+    background-color: transparent;
+    border-radius: 20px;
+    transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    /* border: 2px solid #FFFFFF; */
+}
+
+
+.checkbox-label input:checked ~ .checkbox-custom {
+    background-color: #00A3FF;
+    border-radius: 20px;
+    -webkit-transform: rotate(0deg) scale(1);
+    -ms-transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
+    opacity:1;
+    /* border: 2px solid #FFFFFF; */
+}
+
+
+.checkbox-label .checkbox-custom::after {
+    position: absolute;
+    content: "";
+    left: 12px;
+    top: 12px;
+    height: 0px;
+    width: 0px;
+    border-radius: 5px;
+    border: solid #009BFF;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(0deg) scale(0);
+    -ms-transform: rotate(0deg) scale(0);
+    transform: rotate(0deg) scale(0);
+    opacity:1;
+    transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+}
+
+
+.checkbox-label input:checked ~ .checkbox-custom::after {
+    transform: rotate(45deg) scale(1);
+    opacity: 1;
+    left: 50px;
+    top: 20px;
+    width: 8px;
+    height: 12px;
+    border: solid #f5f5f5;
+    border-width: 0 2px 2px 0;
+    background-color: transparent;
+    border-radius: 0;
+}
+.deletedDropdown {
+    position: absolute;
+    right: 214px;
+    top: 120px;
+}
+.btn-primary {
+    --bs-btn-color:  black !important;
+    --bs-btn-bg: transparent !important;
+    --bs-btn-border-color:transparent !important;
+    --bs-btn-hover-color: black;
+    --bs-btn-hover-bg: transparent !important;
+    --bs-btn-hover-border-color:transparent !important;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: transparent !important;
+    --bs-btn-active-border-color: #0a53be;
+    --bs-btn-active-shadow: inset 0 3px 5pxrgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #0d6efd;
+    --bs-btn-disabled-border-color: #0d6efd;
+}
+.dropdown-menu.show {
+    display: block;
+    height: 330px;
+    overflow-y: auto;
 }

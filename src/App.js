@@ -59,6 +59,8 @@ import EditHorseKind from "./pages/UpdateTable/EditHorseKind";
 import EditRace from "./pages/UpdateTable/EditRace";
 import EditCategory from "./pages/UpdateTable/EditCategory";
 import EditCompetition from "./pages/UpdateTable/EditCompetition";
+import EditRaceCard from "./pages/UpdateTable/EditRaceCard";
+import EditSeo from "./pages/UpdateTable/EditSeo";
 
 import ResultForm from "./pages/PostTable/Result/ResultForm";
 import RacesResult from "./pages/PostTable/Result/ResultRaces";
@@ -73,6 +75,7 @@ import BreederTable from "./pages/GetTable/BreederTable";
 import CurrencyTable from "./pages/GetTable/CurrencyTable";
 import Gender from "./pages/PostTable/Gender";
 import GenderTable from "./pages/GetTable/GenderTable";
+import RaceCardListing from "./pages/GetTable/RaceCardListing";
 import HorseKind from "./pages/GetTable/HorseKind";
 import Horsekindform from "./pages/PostTable/Horsekindform";
 import Racetype from "./pages/GetTable/Racetype";
@@ -86,7 +89,12 @@ import GetMeetingType from "./pages/GetTable/GetMeetingType";
 import Verdict from "./pages/PostTable/Verdict";
 import Setting from "./pages/GetTable/Setting";
 import AdminProfile from "./pages/Setting/AdminProfile";
-import SubscriberList from "./pages/Setting/SubscriberList";
+import AdminListing from "./pages/Setting/AdminList";
+import AddPoint from "./pages/PostTable/PointForm";
+import ViewPoint from "./pages/GetTable/PointTable";
+
+import Userlist from "./pages/Setting/UserList";
+import Subscriberlist from "./pages/Setting/SubscriberList";
 import AdminRole from "./pages/Setting/AdminRole";
 import RaceKind from "./pages/GetTable/RaceKind";
 import RaceKindForm from "./pages/PostTable/RaceKind";
@@ -95,6 +103,7 @@ import Equipment from "./pages/PostTable/Equipment";
 import EquiptmentTable from "./pages/GetTable/EquiptmentTable";
 import Verdicts from "./pages/PostTable/Verdicts";
 import VerdictTable from "./pages/GetTable/VerdictTable";
+import RaceToBePublish from "./pages/GetTable/RacesToPublish";
 import GroundType from "./pages/PostTable/GroundType";
 import GroundTypeTable from "./pages/GetTable/GroundTypeTable";
 import TestTable from './pages/PostTable/RaceForm/RaceTwo'
@@ -102,9 +111,46 @@ import RaceCard from './pages/PostTable/RaceCard/RaceCard'
 import { ToastContainer } from 'react-toastify';
 import NotFound from "./Components/Common/NotFound";
 import AddCompetition from "./pages/PostTable/Competition/AddCompetition";
+import NewCompetition from "./pages/PostTable/Competition/NewCompetition";
+import AddPointInRace from "./pages/PostTable/RaceForm/AddPoints";
+
 import AddCategory from "./pages/PostTable/Competition/AddCategory";
 import CompetitionCategory from "./pages/GetTable/CompetitionCategory";
 import PublishRaceCard from "./pages/PostTable/RaceCard/PublishRaceCard";
+import Seolisting from "./pages/GetTable/Seolisting";
+import SEOForm from "./pages/PostTable/SEOForm";
+import PublishRaceCompetition from "./pages/PostTable/Competition/PublishRaceCompetition";
+import NewsLetter from "./pages/GetTable/NewsLetter";
+import Forgetpage from "./pages/GetTable/Forgetpage";
+import DeletedHorse from "./Components/DeletedData/DeletedHorse";
+import DeletedJockey from "./Components/DeletedData/DeletedJockey";
+import DeletedOwner from "./Components/DeletedData/DeletedOwner";
+import DeletedAds from "./Components/DeletedData/DeletedAds";
+import DeletedBreeder from "./Components/DeletedData/DeletedBreeder";
+import DeletedColor from "./Components/DeletedData/DeletedColor";
+import DeletedCurrency from "./Components/DeletedData/DeletedCurrency";
+import DeletedEquipment from "./Components/DeletedData/DeletedEquipment";
+import DeletedGender from "./Components/DeletedData/DeletedGender";
+import DeletedNationality from "./Components/DeletedData/DeletedNationality";
+import DeletedSeo from "./Components/DeletedData/DeletedSeo";
+import DeletedSlider from "./Components/DeletedData/DeletedSlider";
+import DeletedSponor from "./Components/DeletedData/DeletedSponor";
+import DeletedNews from "./Components/DeletedData/DeletedNews";
+import DeletedTrainer from "./Components/DeletedData/DeletedTrainer";
+import DeletedHorseKind from "./Components/DeletedData/DeletedHorseKind";
+import DeletedGroundType from "./Components/DeletedData/DeletedGroundType";
+import DeletedTrackLength from "./Components/DeletedData/DeletedTrackLength";
+import DeletedRaceCourse from "./Components/DeletedData/DeletedRaceCourse";
+import DeletedRace from "./Components/DeletedData/DeletedRace";
+import DeletedRaceCard from "./Components/DeletedData/DeletedRaceCard";
+import DeletedRaceName from "./Components/DeletedData/DeletedRaceName";
+import DeletedRaceType from "./Components/DeletedData/DeletedRaceType";
+import DeletedRaceKind from "./Components/DeletedData/DeletedRaceKind";
+import DeletedMeeting from "./Components/DeletedData/DeletedMeeting";
+import DeletedVerdict from "./Components/DeletedData/DeletedVerdict";
+import DeletedCategory from "./Components/DeletedData/DeletedCategory";
+import DeletedCompetition from "./Components/DeletedData/DeletedCompetition";
+import DeletedTable from "./pages/GetTable/DeletedTable";
 
 
 function App() {
@@ -140,7 +186,9 @@ function App() {
              <Route path="/dashboard" element={<Dashboard />} />
              <Route path='/setting' element={<Setting/>} />
              <Route path='/AdminProfile' element={<AdminProfile />} />
-             <Route path='/subscriberlist' element={<SubscriberList />} />
+             <Route path='/AdminListing' element={<AdminListing />} />
+             <Route path='/userlist' element={<Userlist />} />
+             <Route path='/subscriberlist' element={<Subscriberlist />} />
              <Route path='/AddRole' element={<AdminRole />} />
              <Route path="/racecourse" element={<RaceCourse />} />
              <Route path="/races" element={<Races />} />
@@ -202,9 +250,61 @@ function App() {
              <Route path="/testTable" element={<TestTable />} />
              <Route path="/racecard" element={<RaceCard />} />
              <Route path="/addcompetition" element={<AddCompetition />} />
+             <Route path="/newcompetition" element={<NewCompetition />} />
+
              <Route path="/addCategory" element={<AddCategory />} />
              <Route path="/CategoryListing" element={<CompetitionCategory />} />
              <Route path="/publishracecard" element={<PublishRaceCard />} />
+             <Route path="/racecardlisting" element={<RaceCardListing />} />
+             <Route path="/racesPublish" element={<RaceToBePublish />} />
+             <Route path="/seolisting" element={<Seolisting />} />
+             <Route path="/seoform" element={<SEOForm />} />
+             <Route path="/competitionrace" element={<PublishRaceCompetition />} />
+             <Route path="/newsletter" element={<NewsLetter />} />
+             <Route path="/viewcompetitionPoint" element={<ViewPoint />} />
+             <Route path="/addcompetitionPoint" element={<AddPoint />} />
+             <Route path="/addracePoint" element={<AddPointInRace />} />
+
+
+
+             <Route path="/password/reset/:token" element={<Forgetpage />} />
+
+ {/* Deleted Data */}
+             <Route path="/deletedhorse" element={<DeletedHorse />} />
+             <Route path="/deletedjockey" element={<DeletedJockey />} />
+             <Route path="/deletedowner" element={<DeletedOwner />} />
+             <Route path="/deletedads" element={<DeletedAds />} /> 
+             <Route path="/deletedbreeder" element={<DeletedBreeder />} />
+             <Route path="/deletedcolor" element={< DeletedColor/>} />
+             <Route path="/deletedcurrency" element={< DeletedCurrency/>} />
+             <Route path="/deletedequipment" element={< DeletedEquipment/>} />
+             <Route path="/deletedgender" element={< DeletedGender/>} />
+             <Route path="/deletednationality" element={< DeletedNationality/>} />
+             <Route path="/deletedseo" element={< DeletedSeo/>} />
+             <Route path="/deletedslider" element={< DeletedSlider/>} />
+             <Route path="/deletedsponsor" element={< DeletedSponor/>} />
+             <Route path="/deletednews" element={< DeletedNews/>} />
+             <Route path="/deletedtrainer" element={< DeletedTrainer/>} />
+             <Route path="/deletedhorsekind" element={< DeletedHorseKind/>} />
+             <Route path="/deletedgroundtype" element={< DeletedGroundType/>} />
+             <Route path="/deletedtracklength" element={<DeletedTrackLength/>} />
+             <Route path="/deletedracecourse" element={<DeletedRaceCourse/>} />
+             <Route path="/deletedrace" element={<DeletedRace/>} />
+             <Route path="/deletedracecard" element={<DeletedRaceCard/>} />
+             <Route path="/deletedracename" element={<DeletedRaceName/>} />
+             <Route path="/deletedracetype" element={<DeletedRaceType/>} />
+             <Route path="/deletedracekind" element={<DeletedRaceKind/>} />
+             <Route path="/deletedmeeting" element={<DeletedMeeting/>} />
+             <Route path="/deletedverdict" element={<DeletedVerdict/>} />
+             <Route path="/deletedcategory" element={<DeletedCategory/>} />
+             <Route path="/deletedcompetition" element={<DeletedCompetition/>} />
+             <Route path="/deletedtable" element={<DeletedTable/>} />
+
+             
+             
+             
+             
+             
 
              <Route path="*" element={<NotFound />} />
 
@@ -235,6 +335,8 @@ function App() {
              <Route path="/editrace" element={<EditRace />}/>
              <Route path="/editcategory" element={<EditCategory />}/>
              <Route path="/editcompetition" element={<EditCompetition />}/>
+             <Route path="/editraceCard" element={<EditRaceCard />}/>
+             <Route path="/editseo" element={<EditSeo />}/>
 
            </Route>
          </Routes>

@@ -1,21 +1,27 @@
 import React,{useEffect} from 'react'
 import '../Components/CSS/home.css'
 import { fetchrace, STATUSES } from "../redux/getReducer/getRaceSlice";
-import { fetchtobePublishRace } from "../redux/getReducer/getToBePublishRace";
+import { fetchResult } from "../redux/getReducer/getResultSlice";
+import { fetchcompetition } from "../redux/getReducer/getCompetition";
+
 import { useDispatch, useSelector } from "react-redux";
 import Lottie from "lottie-react";
 import HorseAnimation from "../assets/horselottie.json";
-
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { data: race, status } = useSelector((state) => state.race);
-  const { data: tobePublishRace } = useSelector((state) => state.tobePublishRace);
+  const { data: Result } = useSelector((state) => state.Result);
+  const { data: competition } = useSelector((state) => state.competition);
 
+  console.log(Result)
   useEffect(() => {
     dispatch(fetchrace());
-    dispatch(fetchtobePublishRace());
+    dispatch(fetchResult());
+    dispatch(fetchcompetition());
   }, [dispatch]);
   if (status === STATUSES.LOADING) {
         return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
@@ -41,19 +47,27 @@ const Dashboard = () => {
   
       <div className='rightsidedata'>
         <div className='dashboardheader'>
-          <h2>Dashboard</h2>
+          <h4 className='topheading'>Dashboard</h4>
         </div>
        <div className='DashboardCard'>
-        <div className='OngoingRaces'>
+        <div className='OngoingRaces' onClick={() => {
+          navigate('/races')
+        }}>
           <p>Ongoing Races </p>
           <h3>{race.length < 10 ? <>0</> : <></>}{race.length}</h3>
         </div>
-        <div className='ResultAwaited'>
+        <div className='ResultAwaited' onClick={() => {
+          navigate('/resultrace')
+        }}>
         <p>Result Awaited</p>
-        <h3>{tobePublishRace.length < 10 ? <>0</> : <></>}{tobePublishRace.length}</h3>
+        <h3>{Result.length < 10 ? <>0</> : <></>}{Result.length}</h3>
         </div>
-        <div className='CompetitionsRaces'>
+        <div className='CompetitionsRaces' onClick={() => {
+          navigate('/competitionlisting')
+        }}>
         <p>Competitions</p>
+        <h3>{competition.length < 10 ? <>0</> : <></>}{competition.length}</h3>
+
         </div>
         <div className='TeamsRace'>
         <p>Teams</p>

@@ -12,8 +12,18 @@ import { BsFillEyeFill } from "react-icons/bs";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
+import Pagination from "./Pagination";
+import {Form} from "react-bootstrap"
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const News = () => {
+  const [ShowCalender, setShowCalender] = useState(false)
+
+  const [Value , setValue] = useState(false)
+  //For Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -22,31 +32,52 @@ const News = () => {
     await setShow(true);
   };
   const dispatch = useDispatch();
-  const [pagenumber, setPageNumber] = useState(1);
-
-  const previousPageHandler = () => {
-    setPageNumber((pagenumber) => pagenumber - 1);
-  };
-  const nextPageHandler = () => {
-    setPageNumber((pagenumber) => pagenumber + 1);
-  };
 
   const history = useNavigate();
   const { data: allnews, status } = useSelector((state) => state.news);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = allnews.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
+
   useEffect(() => {
     dispatch(fetchNews());
   }, []);
+
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeletenews/${Id}`)
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+
+      .then( async(willDelete) => {
+       
+   
+        if (willDelete) {
+        await axios.delete(`${window.env.API_URL}/softdeletenews/${Id}`)
+          swal("Your data has been deleted Successfully!", {
+            icon: "success",
+         
+          }
+          )
+          dispatch(fetchNews())
+          
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      dispatch(fetchNews());
-    } catch (error) {
+   
+    }catch(error) {
+
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -55,7 +86,11 @@ const News = () => {
         button: "OK",
       });
     }
-  };
+
+
+
+  }
+
 
   if (status === STATUSES.LOADING) {
     return (
@@ -100,45 +135,66 @@ const News = () => {
                 <Link to="/newsform">
                   <button>Add News</button>
                 </Link>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>
+                <CSVLink  data={allnews}  separator={";"} filename={"MKS News.csv"} className='csvclass'>
+                        Export CSV
+                </CSVLink>
               </div>
             </div>
+            <div>
+              
+              {
+                ShowCalender ?
+                <span className="transitionclass">
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </span>:<></>
+              }
+              </div>
             <>
               <div className="div_maintb">
                 <ScrollContainer className="scroll-container">
                   <table>
                     <thead>
                       <tr>
+                      <th>Action</th>
+
                         <th>Title </th>
-
                         <th>Sub Title </th>
-
-                        <th>Description </th>
                         <th>Title Arabic</th>
                         <th>Sub Title Arabic</th>
+                        <th>Description </th>
                         <th>Description Arabic</th>
                         <th>Image</th>
-
-                        <th>Action</th>
+{/* <th>Active</th> */}
                       </tr>
                     </thead>
                     <tbody>
-                      {allnews.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <tr className="tr_table_class" key={index}>
-                            <td>{item.TitleEn}</td>
-
-                            <td>{item.SecondTitleEn}</td>
-
-                            <td>{item.DescriptionEn}</td>
-
-                            <td>{item.TitleAr}</td>
-                            <td>{item.DescriptionAr}</td>
-                            <td>{item.SecondTitleAr}</td>
-                            <td>
-                              <img src={item.image} alt="" />
-                            </td>
                             <td className="table_delete_btn1"
-                              style={{ textAlign: "center" }}>
+                              // style={{ textAlign: "center" }}
+                              >
                             <BiEdit
                                 onClick={() =>
                                   history("/editnews", {
@@ -153,6 +209,28 @@ const News = () => {
                               />
                               <BsFillEyeFill onClick={() => handleShow(item)}/>
                             </td>
+                            <td>{item.TitleEn}</td>
+                            <td>{item.TitleAr}</td>
+
+                            <td>{item.SecondTitleEn}</td>
+                            <td>{item.SecondTitleAr}</td>
+
+                            <td>{item.DescriptionEn}</td>
+                            <td>{item.DescriptionAr}</td>
+                            
+                            <td>
+                              <img src={item.image} alt="" />
+                            </td>
+                            <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
+                                />
+                                </td>
+                            
                           </tr>
                         );
                       })}
@@ -162,6 +240,13 @@ const News = () => {
               </div>
             </>
           </div>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={allnews.length}
+          paginate={paginate}
+          currentPage={currentPage}
+
+        />
         </div>
       </div>
       <Modal

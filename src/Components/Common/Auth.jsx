@@ -1,7 +1,5 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {NavLink } from "react-router-dom";
-import { getUserDetails } from "../../redux/postReducer/UserPost";
 import { logout } from '../../redux/getReducer/UserSlice'
 import { useNavigate } from "react-router-dom";
 
@@ -9,12 +7,12 @@ const Auth = () => {
   const { userInfo, userToken } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  useEffect(() => {
-    if (userToken) {
-      dispatch(getUserDetails());
-    }
+  // useEffect(() => {
+  //   if (userToken) {
+  //     dispatch(getUserDetails());
+  //   }
    
-  }, [userToken, dispatch]);
+  // }, [userToken, dispatch]);
 
   const handleLogout = () => {
     dispatch(logout())

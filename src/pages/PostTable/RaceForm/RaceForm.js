@@ -13,9 +13,14 @@ import { fetchRaceName } from "../../../redux/getReducer/getRaceName";
 import { fetchTrackLength } from "../../../redux/getReducer/getTracklength";
 import { fetchRaceKind } from "../../../redux/getReducer/getRaceKind";
 import { fetchgroundtype } from "../../../redux/getReducer/getGroundType";
+import { fetchpointTable } from "../../../redux/getReducer/getPointTable";
 import Select from "react-select";
 import swal from "sweetalert";
-import DateTimePicker from "react-datetime-picker";
+import DatePicker from "react-date-picker";
+import TimePicker from "react-time-picker";
+import "react-calendar/dist/Calendar.css";
+import "react-clock/dist/Clock.css";
+import { ImCross } from "react-icons/im";
 import axios from "axios";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -23,20 +28,32 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { AiOutlineReload } from "react-icons/ai";
 import { Modal } from "react-bootstrap";
-
+import TextInputValidation from "../../../utils/TextInputValidation";
 import Racename from "../Racenameform";
 import MeetingTypePopUp from "../MeetingType";
-import RaceTypePopup from '../Racetypeform'
-import TrackLengthPopup from '../Tracklengthform'
-import GroundTypePopup from '../GroundType'
-import RaceKindPopup from '../RaceKind'
-import RaceCoursePopup from '../RaceCourseForm'
-import JockeyPopup from '../JockeyForm'
-import SponsorPopup from '../SponsorForm'
+import RaceTypePopup from "../Racetypeform";
+import TrackLengthPopup from "../Tracklengthform";
+import GroundTypePopup from "../GroundType";
+import RaceKindPopup from "../RaceKind";
+import RaceCoursePopup from "../RaceCourseForm";
+import JockeyPopup from "../JockeyForm";
+import SponsorPopup from "../SponsorForm";
 
 const WeatherTypes = [
   { id: "1", value: "Sunny", label: "Sunny" },
   { id: "2", value: "Cloudy", label: "Cloudy" },
+];
+
+// const ResultStatus = [
+//   { id: "1", value: "Announced", label: "Announced" },
+//   { id: "2", value: "Awaited", label: "Awaited" },
+//   { id: "3", value: "Cancelled", label: "Cancelled" },
+
+// ];
+
+const WeatherTypesAr = [
+  { id: "1", value: "مشمس", label: "مشمس" },
+  { id: "2", value: "غائم", label: "غائم" },
 ];
 const RaceStatuss = [
   { id: "1", value: "Cancel", label: "Cancel" },
@@ -44,8 +61,46 @@ const RaceStatuss = [
   { id: "2", value: "Live", label: "Live" },
   { id: "2", value: "End", label: "End" },
 ];
+const RaceStatussAr = [
+  { id: "1", value: "يلغي", label: "يلغي" },
+  { id: "2", value: "بسبب", label: "بسبب" },
+  { id: "2", value: "يعيش", label: "يعيش" },
+  { id: "2", value: "نهاية", label: "نهاية" },
+];
 
 const RaceForm = () => {
+  //state for error
+  const [ErrorMeetingType, setErrorMeetingType] = useState("");
+  const [ErrorRaceNameEn, setErrorRaceNameEn] = useState("");
+  const [ErrorMeetingCode, setErrorMeetingCode] = useState("");
+  const [ErrorGround, setErrorGround] = useState("");
+ 
+  const [ErrorRaceKind, setErrorRaceKind] = useState("");
+  const [ErrorDescriptionEn, setErrorDescriptionEn] = useState("");
+  const [ErrorDescriptionAr, setErrorDescriptionAr] = useState("");
+ 
+  const [ErrorWeatherType, setErrorWeatherType] = useState("");
+  const [ErrorRaceStatus, setErrorRaceStatus] = useState("");
+  const [ErrorRaceCourse, setErrorRaceCourse] = useState("");
+  const [ErrorWeatherIcon, setErrorWeatherIcon] = useState("");
+  const [ErrorWeatherDegree, setErrorWeatherDegree] = useState("");
+  const [ErrorSponsor, setErrorSponsor] = useState("");
+  const [ErrorTrackLength, setErrorTrackLength] = useState("");
+
+  const [ErrorDate, setErrorDate] = useState("");
+  const [ErrorStartTime, setErrorStartTime] = useState("");
+  const [ErrorEndTime, setErrorEndTime] = useState("");
+  const [ErrorRaceTyp, setErrorRaceType] = useState("");
+
+  const [ErrorFirstPrice, setErrorFirstPrice] = useState("");
+  const [ErrorSecondPrice, setErrorSecondPrice] = useState("");
+  const [ErrorThirdPrice, setErrorThirdPrice] = useState("");
+  const [ErrorFourthPrice, setErrorFourthPrice] = useState("");
+  const [ErrorFifthPrice, setErrorFifthPrice] = useState("");
+  const [ErrorSixthPrice, setErrorSixthPrice] = useState("");
+  const [isLoading, setisLoading] = useState(false);
+
+  //end
   const { data: racecourse } = useSelector((state) => state.racecourse);
   const { data: jockey } = useSelector((state) => state.jockey);
   const { data: sponsor } = useSelector((state) => state.sponsor);
@@ -53,11 +108,25 @@ const RaceForm = () => {
   const { data: RaceType } = useSelector((state) => state.RaceType);
   const { data: RaceName } = useSelector((state) => state.RaceName);
   const { data: trackLength } = useSelector((state) => state.trackLength);
-  const { data: raceKinds, status } = useSelector((state) => state.raceKinds);
+  const { data: raceKinds,  } = useSelector((state) => state.raceKinds);
   const { data: groundtype } = useSelector((state) => state.groundtype);
+  const { data: pointTable } = useSelector((state) => state.pointTable);
 
   const history = useNavigate();
   const dispatch = useDispatch();
+
+  // let racepointTable =
+  //    pointTable === undefined ? (
+  //     <></>
+  //   ) : (
+  //     pointTable.map(function (item) {
+  //       return {
+  //         id: item._id,
+  //         value: item.Group_Name,
+  //         label: item.Group_Name,
+  //       };
+  //     })
+  //   );
 
   let racecourses =
     racecourse === undefined ? (
@@ -71,16 +140,15 @@ const RaceForm = () => {
         };
       })
     );
-
-  let JockeyForTheRace =
-    jockey === undefined ? (
+  let racecoursesAr =
+    racecourse === undefined ? (
       <></>
     ) : (
-      jockey.map(function (item) {
+      racecourse.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
-          label: item.NameEn,
+          value: item._id,
+          label: item.TrackNameAr,
         };
       })
     );
@@ -92,8 +160,20 @@ const RaceForm = () => {
       RaceName.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
+        };
+      })
+    );
+  let RacenameoptionsAr =
+    RaceName === undefined ? (
+      <></>
+    ) : (
+      RaceName.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
         };
       })
     );
@@ -108,7 +188,7 @@ const RaceForm = () => {
           value: item.image,
           label: (
             <div>
-              <img src={item.image} height="30px" width="30px" />{" "}
+              <img src={item.image} height="30px" width="30px" alt=""/>
             </div>
           ),
         };
@@ -135,12 +215,23 @@ const RaceForm = () => {
       meeting.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
         };
       })
     );
-    console.log(MeetingTypes ,'MeetingTypes')
+  let MeetingTypesAr =
+    meeting === undefined ? (
+      <></>
+    ) : (
+      meeting.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
+        };
+      })
+    );
 
   let RaceTypes =
     RaceType === undefined ? (
@@ -149,8 +240,21 @@ const RaceForm = () => {
       RaceType.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
+        };
+      })
+    );
+
+  let RaceTypesAr =
+    RaceType === undefined ? (
+      <></>
+    ) : (
+      RaceType.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
         };
       })
     );
@@ -175,27 +279,50 @@ const RaceForm = () => {
       raceKinds.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
         };
       })
     );
+  let OprtionRaceKindAr =
+    raceKinds === undefined ? (
+      <></>
+    ) : (
+      raceKinds.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
+        };
+      })
+    );
 
-    let GroundrTypeAll =
+  let GroundrTypeAll =
     groundtype === undefined ? (
       <></>
     ) : (
       groundtype.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
         };
       })
     );
+  let GroundrTypeAllAr =
+    groundtype === undefined ? (
+      <></>
+    ) : (
+      groundtype.map(function (item) {
+        return {
+          id: item._id,
+          value: item._id,
+          label: item.NameAr,
+        };
+      })
+    );
 
-
-//  Modal functionalities Here
+  //  Modal functionalities Here
   const [showName, setShowName] = useState(false);
   const [showType, setShowType] = useState(false);
   const [showRaceType, setShowRaceType] = useState(false);
@@ -206,7 +333,6 @@ const RaceForm = () => {
   const [showJockey, setShowJockey] = useState(false);
   const [showSponsor, setShowSponsor] = useState(false);
 
-  
   const handleCloseName = () => setShowName(false);
   const handleCloseType = () => setShowType(false);
   const handleCloseRaceType = () => setShowRaceType(false);
@@ -214,7 +340,7 @@ const RaceForm = () => {
   const handleCloseGroundType = () => setShowGroundType(false);
   const handleCloseRaceKind = () => setShowRaceKind(false);
   const handleCloseRaceCourse = () => setShowRaceCourse(false);
-  const handleCloseJockey= () => setShowJockey(false);
+  const handleCloseJockey = () => setShowJockey(false);
   const handleCloseSponsor = () => setShowSponsor(false);
 
   const handleShowName = async () => {
@@ -253,7 +379,6 @@ const RaceForm = () => {
 
   // Modal functionalities End Here
 
-
   const FetchNew = () => {
     dispatch(fetchracecourse());
     dispatch(fetchjockey());
@@ -264,17 +389,17 @@ const RaceForm = () => {
     dispatch(fetchTrackLength());
     dispatch(fetchRaceKind());
     dispatch(fetchgroundtype());
+    dispatch(fetchpointTable());
   };
 
   const [MeetingType, setMeetingType] = useState("");
   const [RaceNameEn, setRaceNameEn] = useState("");
   const [MeetingCode, setMeetingCode] = useState("");
   const [Ground, setGround] = useState("");
-  const [RaceNameAr, setRaceNameAr] = useState("");
+
   const [RaceKind, setRaceKind] = useState("");
   const [DescriptionEn, setDescriptionEn] = useState("");
   const [DescriptionAr, setDescriptionAr] = useState("");
-  const [DayNTime, setDayNTime] = useState("");
   const [WeatherType, setWeatherType] = useState("");
   const [RaceStatus, setRaceStatus] = useState("");
   const [RaceCourse, setRaceCourse] = useState("");
@@ -282,10 +407,13 @@ const RaceForm = () => {
   const [WeatherDegree, setWeatherDegree] = useState("");
   const [Sponsor, setSponsor] = useState("");
   const [TrackLength, setTrackLength] = useState("");
-  const [ActiveJockeyForTheRace, setActiveJockeyForTheRace] = useState("");
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
   const [RaceTyp, setRaceType] = useState("");
+  const [Day, setDay] = useState("");
+  const [StartTime, setStartTime] = useState("");
+  const [EndTime, setEndTime] = useState("");
+
   const [FirstPrice, setFirstPrice] = useState("");
   const [SecondPrice, setSecondPrice] = useState("");
   const [ThirdPrice, setThirdPrice] = useState("");
@@ -304,6 +432,8 @@ const RaceForm = () => {
     dispatch(fetchRaceName());
     dispatch(fetchTrackLength());
     dispatch(fetchRaceKind());
+    dispatch(fetchgroundtype());
+
     if (!image) {
       setPreview(undefined);
       return;
@@ -312,9 +442,13 @@ const RaceForm = () => {
     setPreview(objectUrl);
     return () => URL.revokeObjectURL(objectUrl);
   }, [image, dispatch]);
-
+  const handlePreview = () => {
+    setImage();
+    document.getElementById("file").value = "";
+  };
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true);
     try {
       const formData = new FormData();
       formData.append("RaceName", RaceNameEn.id);
@@ -326,11 +460,13 @@ const RaceForm = () => {
       formData.append("RaceKind", RaceKind.id);
       formData.append("DescriptionEn", DescriptionEn);
       formData.append("DescriptionAr", DescriptionAr);
-      formData.append("DayNTime", DayNTime);
+      formData.append("Day", Day);
       formData.append("WeatherType", WeatherType.value);
       formData.append("RaceStatus", RaceStatus.value);
       formData.append("RaceCourse", RaceCourse.id);
       formData.append("WeatherIcon", WeatherIcon);
+      formData.append("StartTime", StartTime);
+      formData.append("EndTime", EndTime);
       formData.append("FirstPrice", FirstPrice);
       formData.append("SecondPrice", SecondPrice);
       formData.append("ThirdPrice", ThirdPrice);
@@ -340,15 +476,15 @@ const RaceForm = () => {
       formData.append("Sponsor", Sponsor.id);
       formData.append("WeatherDegree", WeatherDegree);
       formData.append("TrackLength", TrackLength.id);
-      // formData.append("ActiveJockeyForTheRace", ActiveJockeyForTheRace.id);
       formData.append("image", image);
       const response = await axios.post(
         `${window.env.API_URL}/createrace`,
         formData
       );
+      setisLoading(false);
       swal({
-        title: "success!",
-        text: "Data Submitted !",
+        title: "Success",
+        text: "Data has been added successfully ",
         icon: "success",
         button: "OK",
       });
@@ -358,6 +494,7 @@ const RaceForm = () => {
           RaceId: RaceId,
         },
       });
+      setisLoading(false);
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -366,21 +503,25 @@ const RaceForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false);
     }
   };
-
-  const isSubmitData =
-    RaceKind === "" ||
-    RaceNameEn === "" ||
-    DescriptionEn === "" ||
-    DayNTime === "" ||
-    WeatherType === "" ||
-    RaceStatus === "" ||
-    RaceCourse === "";
 
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
   };
+
+  const data1 = JSON.stringify(
+    TextInputValidation("en", DescriptionEn, "Race Description")
+  );
+
+  const obj = JSON.parse(data1);
+
+  const data2 = JSON.stringify(
+    TextInputValidation("ar", DescriptionAr, "Race Description Arabic")
+  );
+
+  const objAr = JSON.parse(data2);
   return (
     <>
       <div className="page">
@@ -395,22 +536,26 @@ const RaceForm = () => {
               <form onSubmit={submit}>
                 <div className="row mainrow">
                   <div className="col-sm">
-                      
                     <Select
-                     placeholder={<div>Meeting Type</div>}
-                     defaultValue={MeetingType}
+                      placeholder={<div>Meeting Type</div>}
+                      defaultValue={MeetingType}
                       onChange={setMeetingType}
                       options={MeetingTypes}
                       isClearable={true}
                       isSearchable={true}
-                    />{" "}
+                      onBlur={() =>
+                        MeetingType === ""
+                          ? setErrorMeetingType("Meeting Type is required ")
+                          : setErrorMeetingType("Meeting Type is Validated")
+                      }
+                    />
                     <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
                         <span className="addmore" onClick={handleShowType}>
-                            +
-                          </span>
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
@@ -418,11 +563,13 @@ const RaceForm = () => {
                         }
                       >
                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
-                      </OverlayTrigger>{" "}
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>
                       |
-                      
+                    </span>
+                    <span className={MeetingType === "" ? "error" : "success"}>
+                      {ErrorMeetingType}
                     </span>
                   </div>
 
@@ -431,7 +578,7 @@ const RaceForm = () => {
                       placeholder={<div>نوع الاجتماع</div>}
                       defaultValue={MeetingType}
                       className="selectdir"
-                      options={MeetingTypes}
+                      options={MeetingTypesAr}
                       onChange={setMeetingType}
                       isClearable={true}
                       isSearchable={true}
@@ -439,7 +586,7 @@ const RaceForm = () => {
                   </div>
                 </div>
                 <div className="row mainrow">
-                <div className="col-sm">
+                  <div className="col-sm">
                     <Select
                       placeholder={<div>Race Name</div>}
                       defaultValue={RaceNameEn}
@@ -447,25 +594,33 @@ const RaceForm = () => {
                       options={Racenameoptions}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() =>
+                        RaceNameEn === ""
+                          ? setErrorRaceNameEn("Race Name is required ")
+                          : setErrorRaceNameEn("Race Name is Validated")
+                      }
                     />{" "}
                     <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
                         <span className="addmore" onClick={handleShowName}>
-                            +
-                          </span>
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
                       </OverlayTrigger>{" "}
                       |
+                    </span>
+                    <span className={RaceNameEn === "" ? "error" : "success"}>
+                      {ErrorRaceNameEn}
                     </span>
                   </div>
 
@@ -475,7 +630,7 @@ const RaceForm = () => {
                       className="selectdir"
                       defaultValue={RaceNameEn}
                       onChange={setRaceNameEn}
-                      options={Racenameoptions}
+                      options={RacenameoptionsAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -489,10 +644,18 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setMeetingCode(e.target.value)}
                       value={MeetingCode}
+                      onBlur={() =>
+                        MeetingCode === ""
+                          ? setErrorMeetingCode("Meeting Code is required ")
+                          : setErrorMeetingCode("Meeting Code is Validated")
+                      }
                     >
                       <Form.Control type="text" placeholder="Meeting Code" />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
+                    <span className={MeetingType === "" ? "error" : "success"}>
+                      {ErrorMeetingCode}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -515,10 +678,18 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setDescriptionEn(e.target.value)}
                       value={DescriptionEn}
+                      onBlur={() => setErrorDescriptionEn(obj)}
                     >
                       <Form.Control type="text" placeholder="Description" />
                     </FloatingLabel>
                     <span className="spanForm"> |</span>
+                    <span
+                      className={
+                        ErrorDescriptionEn.status ? "success" : "error"
+                      }
+                    >
+                      {ErrorDescriptionEn.message}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -529,9 +700,17 @@ const RaceForm = () => {
                       onChange={(e) => setDescriptionAr(e.target.value)}
                       value={DescriptionAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() => setErrorDescriptionAr(objAr)}
                     >
                       <Form.Control type="text" placeholder=" وصف" />
                     </FloatingLabel>
+                    <span
+                      className={
+                        ErrorDescriptionAr.status ? "successAr" : "errorAr"
+                      }
+                    >
+                      {ErrorDescriptionAr.message}
+                    </span>
                   </div>
                 </div>
                 <div className="row  mainrow">
@@ -542,10 +721,18 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setWeatherIcon(e.target.value)}
                       value={WeatherIcon}
+                      onBlur={() =>
+                        WeatherIcon === " "
+                          ? setErrorWeatherIcon("Weather Icon is required ")
+                          : setErrorWeatherIcon("Weather Icon is Required")
+                      }
                     >
                       <Form.Control type="text" placeholder="Weather Icon" />
                     </FloatingLabel>
-                    <span className="spanForm"> |</span>
+                    <span className="spanForm">|</span>
+                    <span className={WeatherIcon === "" ? "error" : "success"}>
+                      {ErrorWeatherIcon}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -567,16 +754,26 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setWeatherDegree(e.target.value)}
                       value={WeatherDegree}
+                      onBlur={() =>
+                        WeatherDegree === ""
+                          ? setErrorWeatherDegree("Weather Degree is required ")
+                          : setErrorWeatherDegree("Weather Degree is Validated")
+                      }
                     >
                       <Form.Control
                         type="number"
                         placeholder="Weather Degree"
                       />
                     </FloatingLabel>
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
+                    <span
+                      className={WeatherDegree === "" ? "error" : "success"}
+                    >
+                      {ErrorWeatherDegree}
+                    </span>
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <input
                       style={{ direction: "rtl" }}
                       placeholder="درجة الطقس "
@@ -584,7 +781,7 @@ const RaceForm = () => {
                       value={WeatherDegree}
                       type="number"
                     ></input>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -595,26 +792,33 @@ const RaceForm = () => {
                       options={RaceTypes}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() =>
+                        RaceTyp === ""
+                          ? setErrorRaceType("Race Type is required ")
+                          : setErrorRaceType("Race Type is Validated")
+                      }
                     />
                     <span className="spanForm">
-                    <OverlayTrigger
+                      <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
-                       
                       >
                         <span className="addmore" onClick={handleShowRaceType}>
-                            +
-                          </span>
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
                       </OverlayTrigger>{" "}
                       |
+                    </span>
+                    <span className={RaceTyp === "" ? "error" : "success"}>
+                      {ErrorRaceTyp}
                     </span>
                   </div>
 
@@ -628,7 +832,7 @@ const RaceForm = () => {
                       }
                       defaultValue={RaceTyp}
                       onChange={setRaceType}
-                      options={RaceTypes}
+                      options={RaceTypesAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -643,25 +847,36 @@ const RaceForm = () => {
                       options={TrackLenght}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() =>
+                        TrackLength === ""
+                          ? setErrorTrackLength("Track Length is required ")
+                          : setErrorTrackLength("")
+                      }
                     />
                     <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <span className="addmore" onClick={handleShowTrackLength}>
-                            +
-                          </span>
+                        <span
+                          className="addmore"
+                          onClick={handleShowTrackLength}
+                        >
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
                       </OverlayTrigger>{" "}
                       |
+                    </span>
+                    <span className={TrackLength === "" ? "error" : "success"}>
+                      {ErrorTrackLength}
                     </span>
                   </div>
 
@@ -690,25 +905,36 @@ const RaceForm = () => {
                       options={GroundrTypeAll}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() =>
+                        Ground === ""
+                          ? setErrorGround("Ground Type is required ")
+                          : setErrorGround("")
+                      }
                     />{" "}
-                   <span className="spanForm">
+                    <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <span className="addmore" onClick={handleShowGroundType}>
-                            +
-                          </span>
+                        <span
+                          className="addmore"
+                          onClick={handleShowGroundType}
+                        >
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
                       </OverlayTrigger>{" "}
                       |
+                    </span>
+                    <span className={Ground === "" ? "error" : "success"}>
+                      {ErrorGround}{" "}
                     </span>
                   </div>
 
@@ -716,7 +942,9 @@ const RaceForm = () => {
                     <Select
                       placeholder={<div>طقس</div>}
                       className="selectdir"
-                      options={GroundrTypeAll}
+                      options={GroundrTypeAllAr}
+                      defaultValue={Ground}
+                      onChange={setGround}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -731,25 +959,33 @@ const RaceForm = () => {
                       options={OprtionRaceKind}
                       isClearable={true}
                       isSearchable={true}
-                    />{" "}
+                      onBlur={() =>
+                        RaceKind === ""
+                          ? setErrorRaceKind("Race Kind is required ")
+                          : setErrorRaceKind("")
+                      }
+                    />
                     <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
                         <span className="addmore" onClick={handleShowRaceKind}>
-                            +
-                          </span>
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
                       </OverlayTrigger>{" "}
                       |
+                    </span>
+                    <span className={RaceKind === "" ? "error" : "success"}>
+                      {ErrorRaceKind}
                     </span>
                   </div>
 
@@ -759,7 +995,7 @@ const RaceForm = () => {
                       defaultValue={RaceKind}
                       className="selectdir"
                       onChange={setRaceKind}
-                      options={OprtionRaceKind}
+                      options={OprtionRaceKindAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -774,15 +1010,23 @@ const RaceForm = () => {
                       options={WeatherTypes}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() =>
+                        WeatherType === ""
+                          ? setErrorWeatherType("Weather Type is required ")
+                          : setErrorWeatherType("Weather Type is Validated")
+                      }
                     />{" "}
                     <span className="spanForm"> |</span>
+                    <span className={WeatherType === "" ? "error" : "success"}>
+                      {ErrorWeatherType}
+                    </span>
                   </div>
 
                   <div className="col-sm">
                     <Select
                       placeholder={<div>طقس</div>}
                       className="selectdir"
-                      options={WeatherTypes}
+                      options={WeatherTypesAr}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -797,25 +1041,36 @@ const RaceForm = () => {
                       options={racecourses}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() =>
+                        RaceCourse === ""
+                          ? setErrorRaceCourse("Race Course is required ")
+                          : setErrorRaceCourse("Race Course is Validated")
+                      }
                     />
                     <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <span className="addmore" onClick={handleShowRaceCourse}>
-                            +
-                          </span>
+                        <span
+                          className="addmore"
+                          onClick={handleShowRaceCourse}
+                        >
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
                       </OverlayTrigger>{" "}
                       |
+                    </span>
+                    <span className={RaceCourse === "" ? "error" : "success"}>
+                      {ErrorRaceCourse}
                     </span>
                   </div>
 
@@ -823,55 +1078,15 @@ const RaceForm = () => {
                     <Select
                       placeholder={<div>دورة السباق</div>}
                       className="selectdir"
-                      options={racecourses}
+                      options={racecoursesAr}
+                      defaultValue={RaceCourse}
+                      onChange={setRaceCourse}
                       isClearable={true}
                       isSearchable={true}
                     />
                   </div>
                 </div>
-                {/* <div className="row mainrow">
-                  <div className="col-sm">
-                    <Select
-                      placeholder={<div>Active Jockey For The Race</div>}
-                      defaultValue={ActiveJockeyForTheRace}
-                      onChange={setActiveJockeyForTheRace}
-                      options={JockeyForTheRace}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                    <span className="spanForm">
-                      <OverlayTrigger
-                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
-                      >
-                        <span className="addmore" onClick={handleShowJockey}>
-                            +
-                          </span>
-                      </OverlayTrigger>
-                      <OverlayTrigger
-                        overlay={
-                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
-                        }
-                      >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
-                      </OverlayTrigger>{" "}
-                      |
-                    </span>
-                  </div>
 
-                  <div className="col-sm">
-                    <Select
-                      placeholder={<div>دورة السباق</div>}
-                      className="selectdir"
-                      defaultValue={ActiveJockeyForTheRace}
-                      onChange={ActiveJockeyForTheRace}
-                      options={JockeyForTheRace}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                  </div>
-                </div> */}
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
@@ -881,15 +1096,25 @@ const RaceForm = () => {
                       options={RaceStatuss}
                       isClearable={true}
                       isSearchable={true}
-                    />{" "}
+                      onBlur={() =>
+                        RaceStatus === ""
+                          ? setErrorRaceStatus("Race Status is required ")
+                          : setErrorRaceStatus("")
+                      }
+                    />
                     <span className="spanForm"> |</span>
+                    <span className={RaceStatus === "" ? "error" : "success"}>
+                      {ErrorRaceStatus}
+                    </span>
                   </div>
 
                   <div className="col-sm">
                     <Select
                       placeholder={<div>حالة السباق</div>}
                       className="selectdir"
-                      options={RaceStatuss}
+                      options={RaceStatussAr}
+                      defaultValue={RaceStatus}
+                      onChange={setRaceStatus}
                       isClearable={true}
                       isSearchable={true}
                     />
@@ -904,25 +1129,33 @@ const RaceForm = () => {
                       options={SponsorForTheRace}
                       isClearable={true}
                       isSearchable={true}
+                      onBlur={() =>
+                        Sponsor === ""
+                          ? setErrorSponsor("Sponsor is required ")
+                          : setErrorSponsor("Sponsor is Validated")
+                      }
                     />
                     <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
                         <span className="addmore" onClick={handleShowSponsor}>
-                            +
-                          </span>
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
-                      </OverlayTrigger>{" "}
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>
                       |
+                    </span>
+                    <span className={Sponsor === "" ? "error" : "success"}>
+                      {ErrorSponsor}
                     </span>
                   </div>
 
@@ -938,7 +1171,7 @@ const RaceForm = () => {
                     />
                   </div>
                 </div>
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
@@ -960,33 +1193,117 @@ const RaceForm = () => {
                       <Form.Control type="text" placeholder=" أدخل كاب" />
                     </FloatingLabel>
                   </div>
-                </div>
+                </div> */}
+
                 <div className="row mainrow">
                   <div className="col-sm">
-                    <DateTimePicker
-                      onChange={setDayNTime}
-                      value={DayNTime}
+                    <DatePicker
+                      onChange={setDay}
+                      value={Day}
                       monthPlaceholder="Date "
-                      dayPlaceholder="&"
+                      // dayPlaceholder="&"
                       minDate={today}
                       maxDate={new Date("02-29-2023")}
-                      yearPlaceholder="Time"
+                      // yearPlaceholder="Time"
+                      onBlur={() =>
+                        Day === ""
+                          ? setErrorDate("Date is required ")
+                          : setErrorDate("Date is Validated")
+                      }
                     />
-                    <span className="spanForm"> |</span>
-                  </div>
-                  <div className="col-sm"  style={{ direction: "rtl" }}>
-                    <DateTimePicker
-                      onChange={setDayNTime}
-                      value={DayNTime}
-                      monthPlaceholder="Date "
-                      dayPlaceholder="&"
-                      minDate={today}
-                      maxDate={new Date("02-29-2023")}
-                      yearPlaceholder="Time"
-                     
-                    />
+
+                    <span className={Day === "" ? "error" : "success"}>
+                      {ErrorDate}
+                    </span>
                   </div>
                 </div>
+
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <TimePicker
+                      onChange={setStartTime}
+                      minutePlaceholder={"Start Time"}
+                      secondPlaceholder={""}
+                      onBlur={() =>
+                        StartTime === ""
+                          ? setErrorStartTime("Start Time is required ")
+                          : setErrorStartTime("Start Time is Validated")
+                      }
+                    />
+                    <span className="spanForm">|</span>
+                    <span className={StartTime === "" ? "error" : "success"}>
+                      {ErrorStartTime}
+                    </span>
+                  </div>
+
+                  <div className="col-sm">
+                    <TimePicker
+                      onChange={setEndTime}
+                      minutePlaceholder={"End Time"}
+                      secondPlaceholder={""}
+                      onBlur={() =>
+                        EndTime === ""
+                          ? setErrorEndTime("End Time is required ")
+                          : setErrorEndTime("End Time is Validated")
+                      }
+                    />
+
+                    <span className={StartTime === "" ? "error" : "success"}>
+                      {ErrorStartTime}
+                    </span>
+                  </div>
+                </div>
+                {/* <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Select Point Table</div>}
+                      defaultValue={PointTableSystem}
+                      onChange={setPointTableSystem}
+                      options={racepointTable}
+                      isClearable={true}
+                      isSearchable={true}
+                      onBlur={() => RaceTyp === "" ? setErrorRaceType("Race Type is required ") : setErrorRaceType("")}
+
+                    />
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span className="addmore" onClick={handleShowRaceType}>
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>{" "}
+                      |
+                    </span>
+                    <span className="error">{ErrorRaceTyp}</span>
+                  </div>
+
+                  <div className="col-sm">
+                    <Select
+                      className="selectdir"
+                      placeholder={
+                        <div style={{ direction: "rtl" }}>
+                          اكتب للبحث عن الجنسية
+                        </div>
+                      }
+                      defaultValue={RaceTyp}
+                      onChange={setRaceType}
+                      options={RaceTypesAr}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div>
+                </div> */}
+
                 <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
@@ -995,21 +1312,22 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setFirstPrice(e.target.value)}
                       value={FirstPrice}
-                      min='0'
+                      min="0"
+                      onBlur={() =>
+                        FirstPrice === ""
+                          ? setErrorFirstPrice("First Prize is required ")
+                          : setErrorFirstPrice("First Prize is Validated")
+                      }
                     >
-                      <Form.Control  type="number" min='0' placeholder="Enter 1st Prize" />
+                      <Form.Control
+                        type="number"
+                        min="0"
+                        placeholder="Enter 1st Prize"
+                      />
                     </FloatingLabel>
-                    <span className="spanForm"> |</span>
-                  </div>
-                  <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="الجائزة الأولى "
-                      value={FirstPrice}
-                      onChange={(e) => setFirstPrice(e.target.value)}
-                      type='number'
-                      min='0'
-                    ></input>
+                    <span className={FirstPrice === "" ? "error" : "success"}>
+                      {ErrorFirstPrice}
+                    </span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -1020,21 +1338,21 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setSecondPrice(e.target.value)}
                       value={SecondPrice}
-                     
+                      onBlur={() =>
+                        SecondPrice === ""
+                          ? setErrorSecondPrice("Second Prize is required ")
+                          : setErrorSecondPrice("Second Prize is Validated")
+                      }
                     >
-                      <Form.Control  type="number" min='0' placeholder="Enter 2nd Prize" />
+                      <Form.Control
+                        type="number"
+                        min="0"
+                        placeholder="Enter 2nd Prize"
+                      />
                     </FloatingLabel>
-                    <span className="spanForm"> |</span>
-                  </div>
-                  <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="الجائزة الثانية "
-                      value={SecondPrice}
-                      onChange={(e) => setSecondPrice(e.target.value)}
-                      type='number'
-                      min='0'
-                    ></input>
+                    <span className={SecondPrice === "" ? "error" : "success"}>
+                      {ErrorSecondPrice}
+                    </span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -1045,22 +1363,21 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setThirdPrice(e.target.value)}
                       value={ThirdPrice}
-                     
+                      onBlur={() =>
+                        ThirdPrice === ""
+                          ? setErrorThirdPrice("Third Prize is required ")
+                          : setErrorThirdPrice("Third Prize is Validated")
+                      }
                     >
-                      <Form.Control  type="number" min='0' placeholder="Enter 3rd Prize" />
+                      <Form.Control
+                        type="number"
+                        min="0"
+                        placeholder="Enter 3rd Prize"
+                      />
                     </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-                  <div className="col-sm">
-                    <input
-                      placeholder="الجائزة الثالثة"
-                      style={{ direction: "rtl" }}
-                      onChange={(e) => setThirdPrice(e.target.value)}
-                      value={ThirdPrice}
-                      type='number'
-                      min='0'
-                    ></input>
+                    <span className={ThirdPrice === "" ? "error" : "success"}>
+                      {ErrorThirdPrice}
+                    </span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -1071,22 +1388,21 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setFourthPrice(e.target.value)}
                       value={FourthPrice}
-                     
+                      onBlur={() =>
+                        FourthPrice === ""
+                          ? setErrorFourthPrice("Fourth Prize is required ")
+                          : setErrorFourthPrice("Fourth Prize is Validated")
+                      }
                     >
-                      <Form.Control  type="number" min='0' placeholder="Enter 4th Prize" />
+                      <Form.Control
+                        type="number"
+                        min="0"
+                        placeholder="Enter 4th Prize"
+                      />
                     </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-                  <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="الجائزة الرابعة "
-                      onChange={(e) => setFourthPrice(e.target.value)}
-                      value={FourthPrice}
-                      type='number'
-                      min='0'
-                    ></input>
+                    <span className={FourthPrice === "" ? "error" : "success"}>
+                      {ErrorFourthPrice}
+                    </span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -1097,21 +1413,21 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setFifthPrice(e.target.value)}
                       value={FifthPrice}
-                     
+                      onBlur={() =>
+                        FifthPrice === ""
+                          ? setErrorFifthPrice("Fifth Prize is required ")
+                          : setErrorFifthPrice("Fifth Prize is Validated")
+                      }
                     >
-                      <Form.Control  type="number" min='0' placeholder="Enter 5th Prize" />
+                      <Form.Control
+                        type="number"
+                        min="0"
+                        placeholder="Enter 5th Prize"
+                      />
                     </FloatingLabel>
-                    <span className="spanForm"> |</span>
-                  </div>
-                  <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="الجائزة الخامسة "
-                      onChange={(e) => setFifthPrice(e.target.value)}
-                      value={FifthPrice}
-                      type='number'
-                      min='0'
-                    ></input>
+                    <span className={FifthPrice === "" ? "error" : "success"}>
+                      {ErrorFifthPrice}
+                    </span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -1122,36 +1438,51 @@ const RaceForm = () => {
                       className="mb-3"
                       onChange={(e) => setSixthPrice(e.target.value)}
                       value={SixthPrice}
-                     
+                      onBlur={() =>
+                        SixthPrice === ""
+                          ? setErrorSixthPrice("Sixth Prize is required ")
+                          : setErrorSixthPrice("Sixth Prize is Validated")
+                      }
                     >
-                      <Form.Control  type="number" min='0' placeholder="Enter 6th Prize" />
+                      <Form.Control
+                        type="number"
+                        min="0"
+                        placeholder="Enter 6th Prize"
+                      />
                     </FloatingLabel>
-                    <span className="spanForm"> |</span>
-                  </div>
-                  <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="الجائزة السادسة"
-                      onChange={(e) => setSixthPrice(e.target.value)}
-                      value={SixthPrice}
-                      type='number'
-                      min='0'
-                    ></input>
+                    <span className={SixthPrice === "" ? "error" : "success"}>
+                      {ErrorSixthPrice}
+                    </span>
                   </div>
                 </div>
+
                 <div className="ButtonSection">
                   <div>
+                    <label className="Multipleownerlabel">
+                      Select Race image
+                    </label>
                     <input
                       type="file"
                       onChange={onSelectFile}
                       className="formInput"
+                      id="file"
                     />
                     {image && (
-                      <img src={preview} alt="" className="PreviewImage" />
+                      <>
+                        <ImCross
+                          onClick={handlePreview}
+                          className="crossIcon"
+                        />
+                        <img src={preview} className="PreviewImage" alt="" />
+                      </>
                     )}
                   </div>
 
-                  <button type="submit" className="SubmitButton">
+                  <button
+                    type="submit"
+                    className="SubmitButton"
+                    disabled={isLoading}
+                  >
                     Save & Add Horses
                   </button>
                 </div>
@@ -1160,7 +1491,6 @@ const RaceForm = () => {
           </div>
         </div>
       </div>
-
 
       {/*  ------------Modal Popup ------------------ */}
 
@@ -1292,8 +1622,6 @@ const RaceForm = () => {
           <GroundTypePopup />
         </Modal.Body>
       </Modal>
- 
-      
     </>
   );
 };

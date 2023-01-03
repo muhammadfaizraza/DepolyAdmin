@@ -60,9 +60,9 @@ const NewsForm = () => {
       
       const formData = new FormData();
       formData.append("TitleEn", state1.TitleEn);
-      formData.append("TitleAr", state1.TitleAr);
+      formData.append("TitleAr", state1.TitleAr + ' ');
       formData.append("DescriptionEn", state1.DescriptionEn);
-      formData.append("DescriptionAr", state1.DescriptionAr);
+      formData.append("DescriptionAr", state1.DescriptionAr + ' ');
       formData.append("image",image);
       const response = await axios.put(`${window.env.API_URL}/updateAds/${adsid._id}`, formData);
       history("/ads");
@@ -116,7 +116,6 @@ const NewsForm = () => {
                       controlId="floatingInput"
                       label="عنوان"
                       style={{ direction: "rtl" }}
-
                       className="mb-3 floatingInputAr"
                       onChange={(e) =>
                         setState({ ...state1, TitleAr: e.target.value })

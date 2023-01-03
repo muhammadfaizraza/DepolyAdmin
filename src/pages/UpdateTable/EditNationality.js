@@ -3,13 +3,26 @@ import "../../Components/CSS/forms.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
+import Select from "react-select";
 
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+
+const Hemisphere = [
+  { id: "0", value: "Southern Hemisphere", label: "Southern Hemisphere" },
+  { id: "1", value: "Northern Hemisphere", label: "Northern Hemisphere" },
+];
+
+const HemisphereArS = [
+  { id: "0", value: "نصف الكرة الجنوبي", label: "نصف الكرة الجنوبي" },
+  { id: "1", value: "نصف الكرة الشمالي", label: "نصف الكرة الشمالي" },
+];
 const NewsForm = () => {
+  
   const history = useNavigate();
   const { state } = useLocation();
-
+  const [HemisphereEn, setHemisphereEn] = useState("");
+  const [HemisphereAr, setHemisphereAr] = useState("");
   const { nationalityid } = state;
   console.log(nationalityid)
   const [image,setImage] = useState();
@@ -19,11 +32,14 @@ const NewsForm = () => {
 		NameEn: '',
     NameAr:'',
     shortCode: '',
-		AltName: '',
-    Abbrev: '',
-    Label:'',
+		AltNameEn: '',
+    AltNameAr: '',
+    AbbrevAr: '',
+    AbbrevEn: '',
+   
     Offset:'',
-    Value:'',
+    ValueEn:'',
+    ValueAr:'',
     image:image
     
 	});
@@ -40,11 +56,13 @@ const NewsForm = () => {
 				NameEn: nationalityid.NameEn,
         NameAr: nationalityid.NameAr,
         shortCode: nationalityid.shortCode,
-        AltName: nationalityid.AltName,
-        Abbrev: nationalityid.Abbrev,
-        Label:nationalityid.Label,
+        AltNameEn: nationalityid.AltNameEn,
+        AltNameAr: nationalityid.AltNameAr,
+        AbbrevAr: nationalityid.AbbrevAr,
+        AbbrevEn: nationalityid.AbbrevEn,
         Offset:nationalityid.Offset,
-        Value:nationalityid.Value,
+        ValueEn:nationalityid.ValueEn,
+        ValueAr:nationalityid.ValueAr,
 				image:nationalityid.image
 			});
 		} else {
@@ -69,16 +87,21 @@ const NewsForm = () => {
       formData.append("NameEn", state1.NameEn);
       formData.append("NameAr", state1.NameAr);
       formData.append("shortCode", state1.shortCode);
-      formData.append("AltName", state1.AltName);
-      formData.append("Abbrev", state1.Abbrev);
-      formData.append("Label", state1.Label);
+      formData.append("AltNameEn", state1.AltNameEn);
+      formData.append("AltNameAr", state1.AltNameAr);
+
+      formData.append("AbbrevAr", state1.AbbrevAr);
+      formData.append("AbbrevEn", state1.AbbrevEn);
+      // formData.append("Label", state1.Label);
       formData.append("Offset", state1.Offset);
-      formData.append("Value", state1.Value);
+      formData.append("ValueEn", state1.ValueEn);
+      formData.append("ValueAr", state1.ValueAr);
+
       const response = await axios.put(`${window.env.API_URL}/updateNationality/${nationalityid._id}`, formData);
       history("/nationalitylist");
       swal({
         title: "Success!",
-        text: "Data has been Updated successfully ",
+        text: "Data has been Updated Successfully ",
         icon: "success",
         button: "OK",
       });
@@ -150,7 +173,7 @@ const NewsForm = () => {
                       }
                     
                     >
-                      <Form.Control type="text"  placeholder="Description" value={state1.shortCode}/>
+                      <Form.Control type="number"  placeholder="Description" value={state1.shortCode}/>
                     </FloatingLabel>
                   
                   </div>
@@ -164,36 +187,68 @@ const NewsForm = () => {
                       label="Alternate Name"
                       className="mb-3"
                       onChange={(e) =>
-                        setState({ ...state1, AltName: e.target.value })
+                        setState({ ...state1, AltNameEn: e.target.value })
                       }
                     
                     >
-                      <Form.Control type="text"  placeholder="Description" value={state1.AltName}/>
+                      <Form.Control type="text"  placeholder="Description" value={state1.AltNameEn}/>
                     </FloatingLabel>
-                  
+                    <span className="spanForm"> |</span>
                   </div>
 
-                </div>
-
-                <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="Abbrev"
-                      className="mb-3"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
                       onChange={(e) =>
-                        setState({ ...state1, Abbrev: e.target.value })
+                        setState({ ...state1, AltNameAr: e.target.value })
                       }
                     
                     >
-                      <Form.Control type="text"  placeholder="Description" value={state1.Abbrev}/>
+                      <Form.Control type="text"  placeholder="Description" value={state1.AltNameAr}/>
                     </FloatingLabel>
-                  
+                 
                   </div>
 
                 </div>
 
-                <div className="row mainrow">
+                 <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Abbrevation"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, AbbrevEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text"  placeholder="Description" value={state1.AbbrevEn}/>
+                    </FloatingLabel>
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, AbbrevAr: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text"  placeholder="Description" value={state1.AbbrevAr}/>
+                    </FloatingLabel>
+                 
+                  </div>
+
+                </div> 
+
+                {/* <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
@@ -210,9 +265,9 @@ const NewsForm = () => {
                   </div>
 
                
-                </div>
+                </div> */}
 
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
@@ -228,24 +283,72 @@ const NewsForm = () => {
                   
                   </div>
 
-                </div>
+                </div> */}
 
-                <div className="row mainrow">
+                {/* <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="Value"
+                      label="ValueEn"
                       className="mb-3"
                       onChange={(e) =>
-                        setState({ ...state1, Value: e.target.value })
+                        setState({ ...state1, ValueEn: e.target.value })
                       }
                     
                     >
-                      <Form.Control type="text"  placeholder="Description" value={state1.Value}/>
+                      <Form.Control type="text"  placeholder="Description" value={state1.ValueEn}/>
                     </FloatingLabel>
-                
+                    <span className="spanForm"> |</span>
                   </div>
 
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اسم"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+                      onChange={(e) =>
+                        setState({ ...state1, NameAr: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text"  placeholder="Description" value={state1.NameAr}/>
+                    </FloatingLabel>
+                 
+                  </div>
+
+                </div> */}
+                     <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Select Hemisphere</div>}
+                      defaultValue={HemisphereEn}
+                      onChange={setHemisphereEn}
+                      options={Hemisphere}
+                      isClearable={true}
+                      isSearchable={true}
+                 
+
+                    />
+              
+               
+                    <span className="spanForm"> |</span>
+                    {/* <span className="error">{ErrorWeatherType}</span> */}
+                  </div>
+
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>طقس</div>}
+                      className="selectdir"
+                      defaultValue={HemisphereAr}
+                      onChange={setHemisphereAr}
+                      options={HemisphereArS}
+                      isClearable={true}
+                      isSearchable={true}
+                    
+                    />
+       
+                  </div>
                 </div>
 
                 <div className="ButtonSection">

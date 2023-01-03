@@ -112,7 +112,7 @@ style={{ left: "%" }} readOnly/>
 
 
             >
-                <Form.Control type="text" placeholder="Second-Title" value={data.data.RaceCourseData.TrackNameEn}readOnly />
+                <Form.Control type="text" placeholder="Second-Title" value={data.data.RaceCourseData === null ? <>N/A</> : <>{data.data.RaceCourseData.TrackNameEn}</>}readOnly />
             </FloatingLabel>
 
             <span className="spanForm"> |</span>
@@ -157,7 +157,24 @@ style={{ left: "%" }} readOnly/>
 
 
             >
-                <Form.Control type="text" placeholder="Second-Title" value={data.data.HorseModels.length}readOnly />
+                <Form.Control type="text" placeholder="Second-Title" value={data.data.RaceAndHorseModelData.length}readOnly />
+            </FloatingLabel>
+
+
+        </div>
+
+        
+    </div>
+    <div className="row mainrow">
+        <div className="col-sm">
+            <FloatingLabel
+                controlId="floatingInput"
+                label="Day & Time"
+                className="mb-3"
+
+
+            >
+                <Form.Control type="text" placeholder="Second-Title" value={data.data.DayNTime}readOnly />
             </FloatingLabel>
 
 

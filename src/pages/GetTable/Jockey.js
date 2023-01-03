@@ -2,21 +2,28 @@ import React, { useEffect, useState } from "react";
 import { fetchjockey, STATUSES } from "../../redux/getReducer/getJockeySlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostJockey";
+
 import { Link, useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import swal from "sweetalert";
 import JockeyPopup from "../../Components/Popup/JockeyPopup";
 import { Modal } from "react-bootstrap";
-import { BsEyeFill, BsFillEyeFill } from "react-icons/bs";
+import { BsEyeFill } from "react-icons/bs";
 import ScrollContainer from "react-indiana-drag-scroll";
 import Moment from "react-moment";
 import axios from "axios";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
+import Pagination from "./Pagination";
+import { BiFilter } from 'react-icons/bi';
+import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 
 const Statistic = () => {
+  const [ShowCalender, setShowCalender] = useState(false)
+
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -27,21 +34,49 @@ const Statistic = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data: jockey, status } = useSelector((state) => state.jockey);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8)
+  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = jockey.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchjockey()); 
   }, [dispatch]);
   
+ 
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteJockey/${Id}`)
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+
+      .then( async(willDelete) => {
+   
+   
+        if (willDelete) {
+           await axios.delete(`${window.env.API_URL}/softdeleteJockey/${Id}`)
+          swal(" Your data has been deleted Successfully!", {
+            icon: "success",
+         
+          }
+          )
+          dispatch(fetchjockey())
+          
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      dispatch(fetchjockey());
-    } catch (error) {
+   
+    }catch(error) {
+
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -50,8 +85,10 @@ const Statistic = () => {
         button: "OK",
       });
     }
-  };
 
+
+
+  }
   if (status === STATUSES.LOADING) {
     return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
   }
@@ -93,14 +130,48 @@ const Statistic = () => {
                 <Link to="/jockeyform">
                   <button>Add Jockey</button>
                 </Link>
+                <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                        >
+                          <BiFilter
+                    className="calendericon"
+                    onClick={() => setShowCalender(!ShowCalender)}
+                  />
+                        </span>
+                  </OverlayTrigger>
+                <CSVLink  data={jockey}  separator={";"} filename={"MKS Jockey.csv"} className='csvclass'>
+                        Export CSV
+                </CSVLink>
               </div>
             </div>
+            <div>
+              
+              {
+                ShowCalender ?
+                <span className="transitionclass">
+                <div className="userfilter">
+                
+                <div className="filtertextform forflex">
+                
+                 <input type='text' class="form-control" placeholder="Enter Title"/>
+                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                 </div>
+                
+                </div>
+                <button className="filterbtn">Apply Filter</button>
+                </span>:<></>
+              }
+              </div>
             <>
               <div className="div_maintb">
                 <ScrollContainer>
                   <table>
                     <thead>
                       <tr>
+                      <th>Action</th>
                         <th>Jockey Name</th>
                         <th>Name Arabic </th>
                         <th>Short Name </th>
@@ -114,14 +185,24 @@ const Statistic = () => {
                         <th>Max Weight</th>
                         <th>Nationality</th>
                         <th>Image</th>
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {jockey.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
+                            <td className="table_delete_btn1">
+                                  <BiEdit onClick={() => navigate('/editjockey',{
+                                state:{
+                                  jockeyid:item
+                                }
+                              })}/>
+                                  <MdDelete
+                                  onClick={() => handleRemove(item._id)}
+                                />
+                                <BsEyeFill onClick={() => handleShow(item)}/>
+                              </td>
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
                               <td>{item.ShortNameEn}</td>
@@ -143,22 +224,12 @@ const Statistic = () => {
                               <td>{item.RemarksAr} </td>
                               <td>{item.MiniumumJockeyWeight} KG</td>
                               <td>{item.MaximumJockeyWeight} KG</td>
-                              <td>{item.JockeyNationalityData === null ? <></> : item.JockeyNationalityData.NameEn}</td>
+                              <td>{item.JockeyNationalityData === null ? <>N/A</> : item.JockeyNationalityData.NameEn}</td>
                               <td>
                                 <img src={item.image} alt="" />
                               </td>
 
-                              <td className="table_delete_btn1">
-                                  <BiEdit onClick={() => navigate('/editjockey',{
-                                state:{
-                                  jockeyid:item
-                                }
-                              })}/>
-                                  <MdDelete
-                                  onClick={() => handleRemove(item._id)}
-                                />
-                                <BsEyeFill onClick={() => handleShow(item)}/>
-                              </td>
+                              
                             </tr>
                           </>
                         );
@@ -170,6 +241,13 @@ const Statistic = () => {
             </>
           </div>
           <span className="plusIconStyle"></span>
+          <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={jockey.length}
+          paginate={paginate}
+          currentPage={currentPage}
+
+        />
         </div>
       </div>
       <Modal

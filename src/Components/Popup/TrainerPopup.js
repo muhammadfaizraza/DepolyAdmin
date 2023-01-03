@@ -95,7 +95,7 @@ const TrainerPopup = (data) => {
             <div className="col-sm">
             <FloatingLabel
                 controlId="floatingInput"
-                label="اسم"
+                label="اسم قصير"
                 className="mb-3 floatingInputAr"
                 style={{ direction: "rtl", left: "initial", right: 0 }}
              
@@ -114,7 +114,7 @@ const TrainerPopup = (data) => {
                 className="mb-3"
               
               >
-                <Form.Control type="text" placeholder="Description" value={data.data.Detail} readOnly/>
+                <Form.Control type="text" placeholder="Description" value={data.data.DetailEn} readOnly/>
               </FloatingLabel>
            
      
@@ -131,7 +131,7 @@ const TrainerPopup = (data) => {
               
               
               >
-                <Form.Control type="text" placeholder="Description" value={data.data.Remarks} readOnly/>
+                <Form.Control type="text" placeholder="Description" value={data.data.RemarksEn} readOnly/>
               </FloatingLabel>
             
             </div>

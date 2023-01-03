@@ -59,10 +59,13 @@ margin-right: 12px;
 .PreviewImage {
     width: 8rem;
     height: 8rem;
-   
-    border-radius: 20px;    
+    margin: 20px;
+    border-radius: 20px
 }
 .modalPreview img{
 
     border-radius: 20px;
+}
+.modal-content {
+    height: fit-content !important;
 }

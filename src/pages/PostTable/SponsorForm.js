@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from "react";
 import "../../Components/CSS/forms.css";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+
 import { useNavigate ,useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-
+import TextInputValidation from "../../utils/TextInputValidation";
+import { ImCross } from 'react-icons/im';
 import swal from "sweetalert";
 
 const SponsorForm = () => {
-  const dispatch = useDispatch();
+     //for error
+ const [Error, setError] = useState("");
+ const [ErrorAr, setErrorAr] = useState("");
+ const [descError, setdescError] = useState("");
+ const [descErrorAr, setdescErrorAr] = useState("");
+ const [ErrorURL ,setErrorURL] = useState("");
+ const [isLoading, setisLoading] = useState(false);
+
+  
   const history = useNavigate();
 
   const {pathname} = useLocation();
@@ -28,25 +37,29 @@ const SponsorForm = () => {
   };
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("image", image);
       formData.append("TitleEn", TitleEn);
-      formData.append("TitleAr", TitleAr);
-      formData.append("DescriptionAr", DescriptionAr);
+      formData.append("TitleAr", TitleAr + ' ');
+      formData.append("DescriptionAr", DescriptionAr + ' ');
       formData.append("DescriptionEn", DescriptionEn);
       formData.append("Url", Url);
 
-      const response = await axios.post(
+     
+      await axios.post(
         `${window.env.API_URL}uploadSponsor?keyword=&page=`,
         formData
       );
+
       swal({
         title: "Success!",
         text: "Data has been added successfully",
         icon: "success",
         button: "OK",
       });
+      setisLoading(false)
       if(pathname === '/sponsorform'){
         history("/sponsor");      }
     
@@ -58,6 +71,7 @@ const SponsorForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
   useEffect(() => {
@@ -76,14 +90,49 @@ const SponsorForm = () => {
   const onSelectFile = (e) => {
     setImage(e.target.files[0])(image, "image");
   };
-  const isSubmitData =
-    TitleAr === "" ||
-    TitleEn === "" ||
-    DescriptionAr === "" ||
-    DescriptionEn === "" ||
-    image === null ||
-    image === undefined;
-  return (
+
+  const handlePreview = () => {
+    setImage()
+  document.getElementById("file").value=""
+  };
+
+    const data1 = (JSON.stringify(
+      TextInputValidation(
+        "en",
+        TitleEn,
+        "Sponsor Title English"
+      )
+    ));
+  
+    const obj = JSON.parse(data1);
+    const data2 = (JSON.stringify(
+      TextInputValidation(
+        "ar",
+        TitleAr,
+        "Sponsor Title Arabic"
+      )
+    ));
+    const objAr = JSON.parse(data2);
+    const data3 = (JSON.stringify(
+      TextInputValidation(
+        "en",
+        DescriptionEn,
+        "Sponsor Description English"
+      )
+    ));
+  
+    const description = JSON.parse(data3);
+    const data4 = (JSON.stringify(
+      TextInputValidation(
+        "ar",
+        DescriptionAr,
+        "Sponsor Description Arabic"
+      )
+    ));
+    const descriptionAr = JSON.parse(data4);
+
+
+    return (
     <>
       <div className="page">
         <div className="rightsidedata">
@@ -104,11 +153,17 @@ const SponsorForm = () => {
                       onChange={(e) => setTitleEn(e.target.value)}
                       name="Name"
                       value={TitleEn}
+                      onBlur={() =>
+                        setError(obj)
+  
+                      }
                     >
-                      <Form.Control type="text" placeholder="Title" />
+                      <Form.Control type="text" placeholder="Title" required />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className={Error.status ? 'success' : 'error'}
+                  >{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -120,9 +175,14 @@ const SponsorForm = () => {
                       name="Name"
                       value={TitleAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() =>
+                        setErrorAr(objAr)
+                             
+                       }
                     >
-                      <Form.Control type="text" placeholder="عنوان" />
+                      <Form.Control type="text" placeholder="عنوان" required/>
                     </FloatingLabel>
+                    <span className={ErrorAr.status ? 'successAr' : 'errorAr'}>{ErrorAr.message}</span>
                   </div>
                 </div>
 
@@ -134,11 +194,13 @@ const SponsorForm = () => {
                       className="mb-3"
                       onChange={(e) => setDescriptionEn(e.target.value)}
                       value={DescriptionEn}
+                      onBlur={() => setdescError(description)}
                     >
-                      <Form.Control type="text" placeholder="Description" />
+                      <Form.Control type="text" placeholder="Description" required />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className={descError.status ? 'success' : 'error'}>{descError.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -149,9 +211,12 @@ const SponsorForm = () => {
                       onChange={(e) => setDescriptionAr(e.target.value)}
                       value={DescriptionAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() => setdescErrorAr(descriptionAr)}
+                      
                     >
-                      <Form.Control type="text" placeholder="التفاصيل" />
+                      <Form.Control type="text" placeholder="التفاصيل" required />
                     </FloatingLabel>
+                    <span className={descErrorAr.status ? 'successAr' : 'errorAr'}>{descErrorAr.message}</span>
                   </div>
                 </div>
 
@@ -165,9 +230,11 @@ const SponsorForm = () => {
                       onChange={(e) => setUrl(e.target.value)}
                       name="Name"
                       value={Url}
+                      onBlur={() => Url === " " ? setErrorURL("URL is required"):setErrorURL("")}
                     >
-                      <Form.Control type="text" placeholder="Title" />
+                      <Form.Control type="text" placeholder="Title" required/>
                     </FloatingLabel>
+                    <span className="error">{ErrorURL}</span>
 
                   </div>
 
@@ -176,17 +243,24 @@ const SponsorForm = () => {
 
                 <div className="ButtonSection">
                   <div>
+                  <label className="Multipleownerlabel">
+                      Select Sponsor image
+                    </label>
                     <input
                       type="file"
                       onChange={onSelectFile}
                       className="formInput"
+                      id="file"
                     />
                     {image && (
-                      <img src={preview} className="PreviewImage" alt="" />
+                      <>
+                       <ImCross onClick={handlePreview} className="crossIcon"/>
+                       <img src={preview} className="PreviewImage" alt="" />
+                      </>
                     )}
                   </div>
 
-                  <button type="submit" className="SubmitButton">
+                  <button type="submit" className="SubmitButton" disabled={isLoading}>
                     Add Sponsor
                   </button>
                 </div>

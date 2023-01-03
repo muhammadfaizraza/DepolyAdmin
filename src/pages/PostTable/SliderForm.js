@@ -5,9 +5,16 @@ import { useDispatch } from "react-redux";
 import swal from "sweetalert";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import TextInputValidation from "../../utils/TextInputValidation";
+import { ImCross } from 'react-icons/im';
 
 const SliderForm = () => {
-  const dispatch = useDispatch();
+   //for error
+ const [Error, setError] = useState("");
+ const [ErrorAr, setErrorAr] = useState("");
+ const [ErrorURL, setErrorURL] = useState("");
+ const [isLoading, setisLoading] = useState(false);
+
   const history = useNavigate();
   const [TitleEn, setTitleEn] = useState("");
   const [TitleAr, setTitleAr] = useState("");
@@ -15,15 +22,35 @@ const SliderForm = () => {
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
 
+
+    //error Function
+  const data1 = (JSON.stringify(
+    TextInputValidation(
+      "en",
+      TitleEn,
+      "Slider Title"
+    )
+  ));
+
+  const obj = JSON.parse(data1);
+  const data2 = (JSON.stringify(
+    TextInputValidation(
+      "ar",
+      TitleAr,
+      "Slider Title Arabic"
+    )
+  ));
+  const objAr = JSON.parse(data2);
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true)
     try {
       const formData = new FormData();
       formData.append("image", image);
       formData.append("TitleEn", TitleEn);
-      formData.append("TitleAr", TitleAr);
+      formData.append("TitleAr", TitleAr + ' ');
       formData.append("Url", Url);
-      const response = await axios.post(
+      await axios.post(
         `${window.env.API_URL}/uploadSlider`,
         formData
       );
@@ -34,7 +61,8 @@ const SliderForm = () => {
         icon: "success",
         button: "OK",
       });
-    }  catch (error) {
+      setisLoading(false)
+    } catch (error) {
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -42,6 +70,7 @@ const SliderForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false)
     }
   };
   useEffect(() => {
@@ -60,7 +89,11 @@ const SliderForm = () => {
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
   };
-  const isSubmitData = TitleAr === "" || TitleEn === "";
+  const handlePreview = () => {
+    setImage()
+  document.getElementById("file").value=""
+  };
+
   return (
     <>
       <div className="page">
@@ -82,11 +115,17 @@ const SliderForm = () => {
                       onChange={(e) => setTitleEn(e.target.value)}
                       name="Name"
                       value={TitleEn}
+                      onBlur={() =>
+                        setError(obj)
+  
+                      }
                     >
-                      <Form.Control type="text" placeholder="Title" />
+                      <Form.Control type="text" placeholder="Title" required />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className={Error.status ? 'success' : 'error'} 
+                  >{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -98,9 +137,14 @@ const SliderForm = () => {
                       name="Name"
                       value={TitleAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() =>
+                        setErrorAr(objAr)
+                             
+                       }
                     >
-                      <Form.Control type="text" placeholder="عنوان" />
+                      <Form.Control type="text" placeholder="عنوان" required />
                     </FloatingLabel>
+                    <span className={ErrorAr.status ? 'successAr' : 'errorAr'} >{ErrorAr.message}</span>
                   </div>
                 </div>
 
@@ -113,35 +157,46 @@ const SliderForm = () => {
                       onChange={(e) => setUrl(e.target.value)}
                       name="Name"
                       value={Url}
+                      onBlur={() => Url === " " ? setErrorURL("URL is required"):setErrorURL("")}
                     >
-                      <Form.Control type="text" placeholder="Title" />
+                      <Form.Control type="text" placeholder="Title" required />
                     </FloatingLabel>
-
+<span className="error">{ErrorURL}</span>
                   </div>
 
-                
+
                 </div>
 
                 <div className="ButtonSection">
                   <div>
+                    <label className="Multipleownerlabel">
+                      Select Slider image
+                    </label>
                     <input
                       type="file"
                       onChange={onSelectFile}
                       className="formInput"
+                      id="file"
                     />
                     {image && (
-                      <img src={preview} className="PreviewImage" alt="" />
+                      <>
+                       <ImCross onClick={handlePreview} className="crossIcon"/>
+                       <img src={preview} className="PreviewImage" alt="" />
+                      </>
                     )}
                   </div>
-
+<div>
                   <button
                     type="submit"
                     onClick={submit}
                     className="SubmitButton"
+                    disabled={isLoading}
                   >
                     Add Slider
                   </button>
+                  </div>
                 </div>
+     
               </form>
             </div>
           </div>

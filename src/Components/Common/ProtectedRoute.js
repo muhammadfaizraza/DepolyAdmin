@@ -8,12 +8,12 @@ import { useEffect } from "react";
 const ProtectedRoute = () => {
   const dispatch = useDispatch();
   const { userToken,userInfo } = useSelector((state) => state.user)
-  useEffect(() => {
-    if (userToken) {
-      dispatch(getUserDetails());
-    }
+  // useEffect(() => {
+  //   if (userToken) {
+  //     dispatch(getUserDetails());
+  //   }
    
-  }, [userToken, dispatch]);
+  // }, [userToken, dispatch]);
   // show unauthorized screen if no user is found in redux store
   if (!userInfo && !userToken) {
     return (

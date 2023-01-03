@@ -46,13 +46,7 @@ const PublishRace = () => {
       label: item.NameEn,
     };
   });
-  let AllJockey = jockey.map(function (item) {
-    return {
-      id: item._id,
-      value: item.NameEn,
-      label: item.NameEn,
-    };
-  });
+
 
   let AllVerdict = verdict.map(function (item) {
     return {
@@ -84,10 +78,12 @@ const PublishRace = () => {
     if(verdictLength === ItemLength){
       toast('No Verdict ')
     }
-    
+    else  if (InputData === "" || VerdictName === "") {
+      toast('Select Values ')
+    }
     else {
       setitems([...items, VerdictEntry]);
-    setGate(Gate + 1)
+      setGate(Gate + 1)
     }
     SetVerdictName("");
     SetinputData("");
@@ -102,7 +98,7 @@ const PublishRace = () => {
     try {
       const response = await axios.post(`${window.env.API_URL}addverdicts/${RaceId}`, {VerdictEntry:items});
       const response1 = await axios.put(`${window.env.API_URL}/publishrace/${RaceId}`);
-      setitems([]);
+      localStorage.removeItem('verdict')
       setGate(1)
       history("/races");
       swal({
@@ -127,36 +123,51 @@ const PublishRace = () => {
   return (
     <Fragment>
       <div className="page">
-        <div className="rightsidedata">
-          <div
-            className="Header"
-            style={{ marginTop: "2px", marginLeft: "12px" }}
+      <div className="rightsidedata">
+      <div
+            style={{
+              marginTop: "30px",
+            }}
           >
-            <h4>Verdict Selection</h4>
-            <button onClick={addItem}>Add Verdict</button>
-          </div>
-
-          <Tabs defaultActiveKey="0" id="justify-tab-example" className="mb-3">
-
-           {
-            items.map((data,index) => {
-              return(
-                <Tab eventKey={index} title={`Verdict # ${index + 1 }`} className="Verdicttab">
-                <div className="myselecthorse">
-                  <div className="myselecthorsedata">
-                    <span>Rank #</span>
+            <div className="Header ">
+              <h4>Add Verdict</h4>
+            </div>
+            <div className="myselecthorse">
+              <div className="myselecthorsedata">
+                   <span>Rank #</span>
                     <span>Verdict Name</span>
                     <span>Horse Name</span>
-                    {/* <span>Jockey Name</span> */}
+              </div>
+            </div>
+            <div className="myselectdata">
+            <div className="myselectiondata">
+                    <span onChange={setGate} value={1}>1</span>
+                    
+                     <span>
+                      <Select
+                        defaultValue={VerdictName}
+                        onChange={SetVerdictName}
+                        options={AllVerdict}
+                        isClearable={false}
+                        isSearchable={true}
+                      />
+                    </span>
+                    <span>
+                      <Select
+                        defaultValue={InputData}
+                        onChange={SetinputData}
+                        options={horseoptions}
+                        isClearable={false}
+                        isSearchable={true}
+                      />
+                    </span>
+               
                   </div>
-                </div>
-                {items.map((e, i) => {
+              {items.map((e, i) => {
                 return (
                   <div className="myselectiondata">
-                    <span >{i + 1}</span>
-                    {/* <span>
-                      <input type='text' value={VerdictName} onChange={() => SetVerdictName(e.target.value)} placeholder='Verdict Name' className='textverdict' />
-                    </span> */}
+                    <span onChange={setGate} value={i+1}>{i + 2}</span>
+                    
                      <span>
                       <Select
                         defaultValue={VerdictName}
@@ -197,27 +208,31 @@ const PublishRace = () => {
                 );
               })}
 
-                </Tab> 
-              )
-            })
-           }
+              <div className="addbtn">
+                <button className="AddAnother" onClick={addItem}>
+                Save & Add Another{" "}
+                </button>
+              </div>
+              <div className="sbmtbtndiv">
+                <div className="RaceButtonDiv">
+                  <button className="updateButton" onClick={Remove}>
+                    Remove
+                  </button>
 
-          </Tabs>
-          <button
+                  <button
                     className="SubmitButton"
                     type="submit"
                     onClick={submit}
-                  >
-                    Publish
-                  </button>
-                  <button
-                    className="SubmitButton"
                    
-                    onClick={Remove}
                   >
-                    Remove
+                    Publish Race
                   </button>
-        </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+     
       </div>
     </Fragment>
   );

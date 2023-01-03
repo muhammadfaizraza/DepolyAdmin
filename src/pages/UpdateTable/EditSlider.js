@@ -56,9 +56,9 @@ const NewsForm = () => {
       
       const formData = new FormData();
       formData.append("TitleEn", state1.TitleEn);
-      formData.append("TitleAr", state1.TitleAr);
+      formData.append("TitleAr", state1.TitleAr + ' ');
       formData.append("Url", state1.Url);
-      formData.append("image", image);
+      formData.append("image", state1.image);
 
       const response = await axios.put(`${window.env.API_URL}/updateSlider/${sliderid._id}`, formData);
       history("/slider");

@@ -20,7 +20,7 @@ const Races = () => {
   const handleClose = () => setShow(false);
   
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const history = useNavigate()
   const { data: Result, status } = useSelector((state) => state.Result);
   const handleRemove = async (Id) => {
     swal({
@@ -101,7 +101,7 @@ const Races = () => {
                       <th>Race Name</th>
                       <th>Race Name Arabic </th>
                       <th>Race Type</th>
-                      <th>Racecource</th>
+                      <th>Race Cource</th>
                       <th>Description</th>
                       <th>Description Arabic</th>
                       <th>Track Length</th>
@@ -134,7 +134,7 @@ const Races = () => {
                             }}
                           >
                             <tr>
-                              <td
+                            <td
                                 style={{
                                   backgroundColor: `${
                                     RaceStatus === "Cancel"
@@ -156,21 +156,20 @@ const Races = () => {
                                   }`,
                                 }}
                               >
-                                {item.RaceNameModelData.NameEn}
+                                {item.RaceNameModelData === null ? <>N/A</> : item.RaceNameModelData.NameEn}
                               </td>
-                              <td>{item.RaceNameModelData.NameAr} </td>
-                              <td>{item.RaceTypeModelData.NameEn} </td>
+                              <td>{item.RaceNameModelData === null ? <>N/A</> : item.RaceNameModelData.NameAr} </td>
+                              <td>{item.RaceTypeModelData === null ? <>N/A</> : item.RaceTypeModelData.NameEn} </td>
                               <td>
                                 {item.RaceCourseData === null ? (
                                   <>N/A</>
                                 ) : (
                                   item.RaceCourseData.TrackNameEn
-
                                 )}
                               </td>
                               <td
                                 style={{
-                                  maxWidth: "400px",
+                                  maxHeight: "400px",
                                   overflow: "hidden",
                                   textOverflow: "ellipsis",
                                   whiteSpace: "nowrap",
@@ -203,14 +202,19 @@ const Races = () => {
                               <td>
                                 {" "}
                                 <img src={item.image} alt=""  style={{
-                                  width:"50px"
+                                  width:"50px",
+                                  height:'50px'
                                 }}/>{" "}
                               </td>
                               <td>
-                               <button className="Approvedbtn resultbtn"  onClick={() => navigate('/resultform')}> Add Result</button>
-                                {/* <MdDelete
-                                  onClick={() => handleRemove(item._id)}
-                                /> */}
+                               <button className="Approvedbtn resultbtn"   onClick={() =>
+                                    history("/resultform", {
+                                      state: {
+                                        RaceId: item._id,
+                                      },
+                                    })
+                                  }> Add Result</button>
+                                
                               </td>
                             </tr>
                           </tbody>

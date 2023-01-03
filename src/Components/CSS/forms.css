@@ -82,7 +82,7 @@ form {
   color: white;
   border: none;
   font-size: 16px;
-}
+} 
 
 
 
@@ -96,14 +96,15 @@ form {
 }
 
 .updateButton {
-  margin-top: 1.5rem;
+  /* margin-top: 1.5rem; */
   width: 186px;
   height: 51px;
-  background: linear-gradient(89.98deg, #010306 23.67%, #4d5a62 97.94%);
-  border-radius: 20px;
+  background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
+    border-radius: 20px;
   color: white;
   border: none;
   margin-right: 2.8rem;
+  padding: 10px;
 }
 
 
@@ -166,9 +167,8 @@ input::file-selector-button {
   border-radius: 20px;
   width: 97%;
   margin: 0px auto !important;
-  margin-top: 15px !important;
+  margin-top: 25px !important;
 }
-
 
 
 .css-1s2u09g-control:focus {
@@ -287,24 +287,25 @@ input::file-selector-button {
   margin-left: -54px;
 }
 
-.formInput {
-
-  width: 97%;
-  height: 50px;
+.form-switch {
+  padding: -0.5em;
   border: none;
-  border-radius: 20px;
-margin-top: 10px;
-  padding-left: 20px;
-
-  font-weight: 300;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 17px;
-
-
-
+  margin: 0px 0px 0p;
+  font-size: 25px;
+  /* margin-left: 60px; */
+}
+.EmailForget{
+  width: 100% !important;
+}
+.EmailForgetBtn{
+  margin: 25px;
+}
+.ForgetPassword p {
+  text-align: center;
+  padding: 15px;
+  color: #ef3f3f;
+  font-weight: 500;
+  cursor: pointer;
 }
 .css-6j8wv5-Input {
   margin: -3px;
@@ -329,15 +330,6 @@ margin-top: 10px;
   margin-bottom: 10px;
 }
 
-<<<<<<< HEAD
-=======
-  width: 7rem;
-  height: 7rem;
-  margin: 19px;
-  border-radius: 50px;
-
-}
->>>>>>> ebe0350d919ca4c2deae2e82151aef12326019e4
 span.react-date-picker__inputGroup__divider {
   display: none !important;
 }
@@ -376,7 +368,7 @@ border: none !important;
 }
 .react-date-picker__calendar .react-calendar {
   border-width: 3px !important;
-  border-radius: 20px;
+
   font-size: 12px;
   border-color:#19469D;
 }
@@ -477,6 +469,7 @@ border: none !important;
 }
 button.Approvedbtn.resultbtn{
   color: #000;
+  margin-left: -30px;
 
 }
 input#floatingInput {
@@ -580,7 +573,7 @@ table.Prizeclass {
 .spanForm {
   display: flex;
   font-size: 2rem;
-  margin-top: -52px;
+  margin-top: -53px;
   font-weight: 100;
   color: lightgray;
   justify-content: flex-end;
@@ -640,4 +633,283 @@ td.table_delete_btn1 {
 }
 .fileinputdata{
   width: 200px;
+}
+
+.topheading{
+padding: 20px;
+font-weight: 500;
+}
+
+.form input#floatingInput:required {
+  border-color: #800000 !important;
+  border-width: 3px !important;
+  
+}
+
+.form :required:invalid {
+  border-color: #c00000 !important;
+}
+.has-success .input#floatingInput {
+  border-bottom: 2px solid #168b3f !important;
+}
+
+.has-danger  {
+  border-bottom: 2px solid #dc1d34 !important; 
+}
+.email-field {
+  outline: 0;
+}
+
+.input#floatingInput:valid {
+  border: 1px solid green;
+}
+
+.input#floatingInput:invalid {
+  border: 1px solid red;
+}
+
+/* .cell {
+  max-width: 80px; 
+  white-space : nowrap;
+  overflow : hidden;
+} */
+/* .cell::-webkit-scrollbar {
+  width: 0.4em;
+} */
+
+.page-link:active{
+background-color: #00A3FF;
+}
+
+.addresultform{
+  border: none !important;
+}
+.quill {
+  height: 170px;
+  margin: 0 19px;
+  border-radius: 13px !important;
+  width: 95%;
+}
+.QuillAr{
+  text-align: right;
+  direction: rtl;
+}
+
+
+
+.pickCountstyle{
+margin: 34px;
+font-size: 15.59px;
+}
+.error {
+  font-size: 11px;
+  position: absolute;
+  color: red;
+  top: 45px;
+}
+.errorAr {
+  font-size: 11px;
+  direction: rtl;
+  display: flex;
+  color: red;
+  position: absolute;
+  top: 45px;
+  right: 0;
+}
+.successAr {
+  font-size: 11px;
+  direction: rtl;
+  display: flex;
+ color: #228B22;
+  position: absolute;
+  top: 45px;
+  right: 0;
+}
+
+
+.addbtn.competitionaddbtn {
+  margin-top: 35px;
+}
+.newsError{
+color: red;
+font-size: 9px;
+position: relative;
+top: 36px;
+left: 18px;
+}
+.newsErrorAr {
+  color: red;
+  font-size: 11px;
+  float: right;
+  margin-top: 47px;
+  margin-right: 18px;
+}
+.success{
+
+  color:  #228B22;
+  font-size: 11px;
+  position: absolute;
+  top: 45px;
+}
+
+.userfilter{
+display: flex;
+}
+.calenderuser {
+  margin-left: 15px;
+}
+.calendericon {
+  margin: 0px 20px 0 25px;
+  font-size: 36px;
+  color: #000;
+  cursor: pointer;
+}
+
+.filtertextform {
+  padding: 20px;
+}
+.filtertextform > input  {
+  margin: 24px;
+}
+.filtertextform > select {
+  margin: 24px;
+}
+
+button.filterbtn {
+    float: right;
+    margin: -100px 55px 0 0;
+    background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
+    border-radius: 40px;
+    width: 186px;
+    height: 51px;
+    color: white;
+    border: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15.5949px;
+    line-height: 19px;
+}
+a.csvclass {
+  text-decoration: none;
+  font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15.5949px;
+    line-height: 19px;
+    padding-top: 7px;
+    color: #000000;
+    padding-left: 6px;
+}
+
+.myselectioncompetition{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-right: 10rem;
+  padding-left: 1rem;
+}
+.myselectioncompetition > span {
+  color: #fff;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  padding: 18px;
+}
+
+.myselectioncompetition > span:nth-child(2) {
+  color: #fff;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  margin-left: 30px;
+}
+
+p.competitionrace1 {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 17px;
+}
+input[type='checkbox']{
+    width: 20px;
+    height: 100%;
+}
+.form-switch .form-check-input {
+  width: 2em;
+  margin-left: -2.5em;
+  height: 27px;
+}
+.quillRow {
+  margin-top: 22px;
+} 
+
+.newsError{
+  color: red;
+  font-size: 11px !important;
+  position: relative;
+}
+
+.newsErrorAr{
+  color: red;
+  font-size: 11px !important;
+  position: relative;
+}
+/* .crossIcon {
+  display: block;
+  margin-left: 157px;
+  margin-bottom: -18px;
+  margin-top: 10px;
+  height: 14px;
+} */
+.react-time-picker__wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  border: none !important;
+}
+.react-time-picker {
+  display: inline-flex;
+  position: relative;
+  width: 48%;
+}
+svg.crossIcon {
+  position: relative;
+  left: -77%;
+  top: 15%;
+}
+.editDate::placeholder {
+  width: 79px !important;
+}
+
+.react-date-picker__inputGroup__input {
+  min-width: 5rem !important;
+}
+
+p.selectLabel {
+  position: relative;
+  top: 11px;
+  left: 30px;
+  font-size: 11px;
+  z-index: 15;
+  line-height: 0px;
+  margin: 2px;
+  color: #8d8d8a;
+}
+.sponsorPlaceholder img{
+width: 40px;
+height: 40px;
+
+}
+.css-2613qy-menu{
+color: #800000 !important; 
+}
+#react-select-23-listbox{
+ background-color:  #800000 !important; 
 }

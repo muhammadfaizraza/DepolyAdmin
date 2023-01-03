@@ -1,23 +1,29 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchAds, STATUSES } from "../../redux/getReducer/getAdsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostAds";
-import { Link } from 'react-router-dom'
-import { edit } from "../../redux/postReducer/PostAds";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import AdsPopup from "../../Components/Popup/AdsPopup";
-import ScrollContainer from 'react-indiana-drag-scroll';
+import ScrollContainer from "react-indiana-drag-scroll";
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
-import {BiEdit} from 'react-icons/bi'
+import { BiEdit } from "react-icons/bi";
 import axios from "axios";
 import swal from "sweetalert";
 import { BsEyeFill } from "react-icons/bs";
-
+import Pagination from "./Pagination";
+import Form from "react-bootstrap/Form";
+import { BiFilter } from "react-icons/bi";
+import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const Ads = () => {
+  const [Value, setValue] = useState(false);
+  const [ShowCalender, setShowCalender] = useState(false);
+
   //for Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -26,24 +32,41 @@ const Ads = () => {
     setmodaldata(data);
     await setShow(true);
   };
-
-  const history = useNavigate()
-  const dispatch = useDispatch();
   const { data: allads, status } = useSelector((state) => state.ads);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = allads.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const history = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAds());
   }, []);
 
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteAds/${Id}`)
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          const res = await axios.delete(
+            `${window.env.API_URL}/softdeleteAds/${Id}`
+          );
+          swal("Your data has been deleted Successfully!", {
+            icon: "success",
+          });
+          dispatch(fetchAds());
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      dispatch(fetchAds());
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -54,11 +77,10 @@ const Ads = () => {
       });
     }
   };
-  
-
- 
   if (status === STATUSES.LOADING) {
-        return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
+    return (
+      <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
+    );
   }
 
   if (status === STATUSES.ERROR) {
@@ -73,11 +95,9 @@ const Ads = () => {
     );
   }
 
-
   return (
     <>
       <div className="page">
-
         <div className="rightsidedata">
           <div
             style={{
@@ -89,79 +109,128 @@ const Ads = () => {
                 <h4>Advertisement Listings</h4>
 
                 <div>
-                  <h6
-                    style={{
-                      marginRight: "100px",
-                      alignItems: "center",
-                      color: "rgba(0, 0, 0, 0.6)",
-                    }}
-                  >
-                    
-                  </h6>
+           
 
                   <Link to="/adsform">
                     <button>Create Ad</button>
                   </Link>
+                  <OverlayTrigger
+                    overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                  >
+                    <span className="addmore">
+                      <BiFilter
+                        className="calendericon"
+                        onClick={() => setShowCalender(!ShowCalender)}
+                      />
+                    </span>
+                  </OverlayTrigger>
+                  <CSVLink
+                    data={allads}
+                    separator={";"}
+                    filename={"MKS Ads.csv"}
+                    className="csvclass"
+                  >
+                    Export CSV
+                  </CSVLink>
                 </div>
               </div>
+              <div>
+                {ShowCalender ? (
+                  <span className="transitionclass">
+                    <div className="userfilter">
+                      <div className="filtertextform forflex">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Title"
+                        />
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Description"
+                        />
+                      </div>
+                    </div>
+                    <button className="filterbtn">Apply Filter</button>
+                  </span>
+                ) : (
+                  <></>
+                )}
+              </div>
               <div className="div_maintb">
-              <ScrollContainer className="scroll-container">
-                <table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>Title </th>
-                      <th>Title Arabic</th>
-                      <th>Description </th>
-                      <th>Description Arabic</th>
-                      <th>Image</th>
-                      <th >Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {allads.map((item, index) => {
-                      return (
-                        <>
-                          <tr className="tr_table_class">
-                            <td>{item.TitleEn}</td>
-                            <td>{item.TitleAr}</td>
-                            <td>{item.DescriptionEn}</td>
-                            <td>{item.DescriptionAr}</td>
-                            <td>
-                              <img src={item.image} alt="" />
-                            </td>
+                <ScrollContainer className="scroll-container">
+                  <table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>Action</th>
+                        <th>Title </th>
+                        <th>Title Arabic</th>
+                        <th>Description </th>
+                        <th>Description Arabic</th>
+                        <th>Url</th>
+                        <th>Image</th>
 
-                            <td className="table_delete_btn1">
-
-                            <BiEdit onClick={() => history('/editads',{
-                                state:{
-                                  adsid:item
-                                }
-                              })} />
+                        {/* <th>Active</th> */}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {currentPosts.map((item, index) => {
+                        return (
+                          <>
+                            <tr className="tr_table_class">
+                              <td className="table_delete_btn1">
+                                <BiEdit
+                                  onClick={() =>
+                                    history("/editads", {
+                                      state: {
+                                        adsid: item,
+                                      },
+                                    })
+                                  }
+                                />
 
                                 <MdDelete
-                                style={{
-                                  fontSize: "22px",
-                                }}
+                                  style={{
+                                    fontSize: "22px",
+                                  }}
                                   onClick={() => handleRemove(item._id)}
                                 />
-                                <BsEyeFill onClick={() => handleShow(item)}/>
+                                <BsEyeFill onClick={() => handleShow(item)} />
                               </td>
-                          
+                              <td>{item.TitleEn}</td>
+                              <td>{item.TitleAr}</td>
+                              <td>{item.DescriptionEn}</td>
+                              <td>{item.DescriptionAr}</td>
+                              <td>{item.url}</td>
 
-                       
-
-                          </tr>
-                        </>
-                      );
-                    })}
-
-                  </tbody>
-                </table>
+                              <td>
+                                <img src={item.image} alt="" />
+                              </td>
+                              {/* <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
+                                />
+                                </td> */}
+                            </tr>
+                          </>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </ScrollContainer>
               </div>
             </>
           </div>
-
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={allads.length}
+            paginate={paginate}
+            currentPosts={currentPosts}
+          />
         </div>
       </div>
       <Modal
@@ -172,7 +241,7 @@ const Ads = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2 style={{fontFamily:"inter"}}>Advertisement </h2>
+          <h2 style={{ fontFamily: "inter" }}>Advertisement </h2>
         </Modal.Header>
         <Modal.Body>
           <AdsPopup data={modaldata} />
@@ -182,9 +251,7 @@ const Ads = () => {
             Close
           </button>
         </Modal.Footer>
-      
       </Modal>
-
     </>
   );
 };

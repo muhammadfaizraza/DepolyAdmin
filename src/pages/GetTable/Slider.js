@@ -6,7 +6,6 @@ import { MdDelete } from "react-icons/md";
 import { Modal } from "react-bootstrap";
 import SliderPopup from "../../Components/Popup/SliderPopup";
 import swal from "sweetalert";
-import remove from "../../redux/postReducer/PostSlider";
 import { fetchSlider, STATUSES } from "../../redux/getReducer/getSliderSlice";
 import "../../Components/CSS/Table.css";
 import { BsEyeFill, BsFillEyeFill } from "react-icons/bs";
@@ -15,10 +14,18 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import ScrollContainer from "react-indiana-drag-scroll";
-
-
+import Pagination from "./Pagination";
+import { Form } from "react-bootstrap";
+import { BiFilter } from "react-icons/bi";
+import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const Slider = () => {
+  const [Value, setValue] = useState(false);
+  const [ShowCalender, setShowCalender] = useState(false);
+
+  //For Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -27,7 +34,7 @@ const Slider = () => {
     setmodaldata(data);
     await setShow(true);
   };
-  
+
   const dispatch = useDispatch();
   const [pagenumber, setPageNumber] = useState(1);
 
@@ -38,21 +45,40 @@ const Slider = () => {
     setPageNumber((pagenumber) => pagenumber + 1);
   };
   const { data: slider, status } = useSelector((state) => state.slider);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = slider.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   const history = useNavigate();
 
   useEffect(() => {
     dispatch(fetchSlider());
   }, []);
+
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteSlider/${Id}`)
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          await axios.delete(`${window.env.API_URL}/softdeleteSlider/${Id}`);
+          swal(" Your data has been deleted Successfully!", {
+            icon: "success",
+          });
+          dispatch(fetchSlider());
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      dispatch(fetchSlider());
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -63,11 +89,11 @@ const Slider = () => {
       });
     }
   };
+
   if (status === STATUSES.LOADING) {
-        return <Lottie animationData={HorseAnimation} loop={true}  className='Lottie'/>
-
-
-
+    return (
+      <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
+    );
   }
 
   if (status === STATUSES.ERROR) {
@@ -81,8 +107,6 @@ const Slider = () => {
       </h2>
     );
   }
-
-
 
   return (
     <>
@@ -103,32 +127,92 @@ const Slider = () => {
                     alignItems: "center",
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
-                >
-                  
-                </h6>
+                ></h6>
 
                 <Link to="/sliderform">
                   <button>Add Slider</button>
                 </Link>
+                <OverlayTrigger
+                  overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                >
+                  <span className="addmore">
+                    <BiFilter
+                      className="calendericon"
+                      onClick={() => setShowCalender(!ShowCalender)}
+                    />
+                  </span>
+                </OverlayTrigger>
+                <CSVLink
+                  data={slider}
+                  separator={";"}
+                  filename={"MKS Slider.csv"}
+                  className="csvclass"
+                >
+                  Export CSV
+                </CSVLink>
+              </div>
+            </div>
+            <div>
+              <div>
+                {ShowCalender ? (
+                  <span className="transitionclass">
+                    <div className="userfilter">
+                      <div className="filtertextform forflex">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Title"
+                        />
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Description"
+                        />
+                      </div>
+                    </div>
+                    <button className="filterbtn">Apply Filter</button>
+                  </span>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div className="div_maintb">
               <ScrollContainer className="scroll-container">
                 <table striped bordered hover>
-                <thead>
+                  <thead>
                     <tr>
+                    <th style={{ textAlign: "center" }}>Action</th>
+
                       <th>Title</th>
                       <th>Title Arabic </th>
                       <th>Url</th>
                       <th>Image</th>
-                      <th style={{ textAlign: "center" }}>Action</th>
+                      {/* <th>Active</th> */}
                     </tr>
                   </thead>
                   <tbody>
-                    {slider.map((item, index) => {
+                    {currentPosts.map((item, index) => {
                       return (
                         <>
                           <tr className="tr_table_class">
+                          <td
+                              className="table_delete_btn1"
+                            >
+                              <BiEdit
+                                onClick={() =>
+                                  history("/editslider", {
+                                    state: {
+                                      sliderid: item,
+                                    },
+                                  })
+                                }
+                              />
+                              <MdDelete
+                                onClick={() => handleRemove(item._id)}
+                              />
+                              <BsEyeFill onClick={() => handleShow(item)} />
+                            </td>
                             <td>{item.TitleEn}</td>
 
                             <td>{item.TitleAr}</td>
@@ -143,23 +227,17 @@ const Slider = () => {
                                 }}
                               />
                             </td>
+                            {/* <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                      
+                                  value={Value}
+                                />
+                                </td> */}
 
-                            <td className="table_delete_btn1"
-                              style={{ textAlign: "center" }}>
-                              <BiEdit
-                                onClick={() =>
-                                  history("/editslider", {
-                                    state: {
-                                      sliderid: item,
-                                    },
-                                  })
-                                }
-                              />
-                              <MdDelete
-                                onClick={() => handleRemove(item._id)}
-                              />
-                              <BsEyeFill  onClick={() => handleShow(item)}/> 
-                            </td>
+                           
                           </tr>
                         </>
                       );
@@ -168,9 +246,13 @@ const Slider = () => {
                 </table>
               </ScrollContainer>
             </div>
-             
-            
           </div>
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={slider.length}
+            paginate={paginate}
+            currentPage={currentPage}
+          />
         </div>
       </div>
       <Modal

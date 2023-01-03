@@ -38,7 +38,7 @@ const NewsForm = () => {
     try {
       const formData = new FormData();
       formData.append("NameEn", state1.NameEn);
-      formData.append("NameAr", state1.NameAr);
+      formData.append("NameAr", state1.NameAr + ' ');
       formData.append("shortCode", state1.shortCode);
 
       const response = await axios.put(
@@ -64,74 +64,80 @@ const NewsForm = () => {
   };
   return (
     <>
-      <div className="page">
-        <div className="rightsidedata">
-          <div
-            style={{
-              marginTop: "30px",
-            }}
-          >
-            <div className="Headers">Edit Verdict</div>
-            <div className="form">
-              <form onSubmit={submit}>
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <input
-                      type="text"
-                      name="NameEn"
-                      id="NameEn"
-                      className="group__control"
-                      placeholder="Name"
-                      value={state1.NameEn}
-                      onChange={(e) =>
-                        setState({ ...state1, NameEn: e.target.value })
-                      }
-                    />
-                    <span className="spanForm"> |</span>
-                  </div>
+    <div className="page">
+      <div className="rightsidedata">
+        <div
+          style={{
+            marginTop: "30px",
+          }}
+        >
+          <div className="Headers">Edit Race Type</div>
+          <div className="form">
+          <form onSubmit={submit}>
+              <div className="row mainrow">
+                <div className="col-sm">
 
-                  <div className="col-sm">
-                    <input
-                      style={{ direction: "rtl" }}
-                      placeholder="اسم "
-                      type="text"
-                      name="NameAr"
-                      id="NameAr"
-                      className="group__control"
-                      value={state1.NameAr}
-                      onChange={(e) =>
-                        setState({ ...state1, NameAr: e.target.value })
-                      }
-                    ></input>
-                  </div>
-                </div>
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <input
-                      type="number"
-                      name="MiniumumJockeyWeight"
-                      id="MiniumumJockeyWeight"
-                      className="group__control"
-                      placeholder="Short Code"
-                      value={state1.shortCode}
-                      onChange={(e) =>
-                        setState({ ...state1, shortCode: e.target.value })
-                      }
-                    />
-                  </div>
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label="Name"
+                    className="mb-3"
+                    onChange={(e) =>
+                      setState({ ...state1, NameEn: e.target.value })
+                    }
+                  
+                  >
+                    <Form.Control type="text" placeholder="Description" value={state1.NameEn}/>
+                  </FloatingLabel>
+               
+                  <span className="spanForm"> |</span>
                 </div>
 
-                <div className="ButtonSection">
-                  <button type="submit" className="SubmitButton">
-                    Update
-                  </button>
+                <div className="col-sm">
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label="اسم"
+                    className="mb-3 floatingInputAr"
+                    style={{ direction: "rtl" }}
+                    onChange={(e) =>
+                      setState({ ...state1, NameAr: e.target.value })
+                    }
+                   
+                  >
+                    <Form.Control type="text" placeholder="Description" value={state1.NameAr}/>
+                  </FloatingLabel>
+                  
                 </div>
-              </form>
+              </div>
+              <div className="row mainrow">
+                <div className="col-sm">
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label="Short Code"
+                    className="mb-3"
+                    onChange={(e) =>
+                      setState({ ...state1, shortCode: e.target.value })
+                    }
+                  
+                  >
+                    <Form.Control type="text" placeholder="Description" value={state1.shortCode}/>
+                  </FloatingLabel>
+               
+                
+                </div>
+              </div>
+              
+
+              <div className="ButtonSection" style={{ justifyContent: "end" }}>
+              <button type="submit" className="SubmitButton">
+                Update
+              </button>
             </div>
+            </form>
           </div>
         </div>
       </div>
-    </>
+    </div>
+  </>
   );
 };
 

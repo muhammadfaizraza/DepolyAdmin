@@ -3,7 +3,7 @@ import { fetchTrainer, STATUSES } from "../../redux/getReducer/getTrainerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { remove } from "../../redux/postReducer/PostTrainer";
-import { Link ,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import TrainerPopup from "../../Components/Popup/TrainerPopup";
 import { BsFillEyeFill } from "react-icons/bs";
@@ -15,8 +15,15 @@ import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BiEdit } from "react-icons/bi";
 import { BsEyeFill } from "react-icons/bs";
+import Pagination from "./Pagination";
+import { BiFilter } from "react-icons/bi";
+import { CSVLink } from "react-csv";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const Trainer = () => {
+  const [ShowCalender, setShowCalender] = useState(false);
+
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -29,28 +36,40 @@ const Trainer = () => {
   const navigate = useNavigate();
 
   const { data: trainer, status } = useSelector((state) => state.trainer);
-  
-  const [items, setItems] = useState([]);
 
-  const [pageCount, setpageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8);
 
-  let limit = 8;
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = trainer.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    dispatch(fetchTrainer({ limit }));
-    setpageCount(Math.ceil(trainer / limit));
-    setItems(trainer);
+    dispatch(fetchTrainer());
   }, []);
+
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeletetrainer/${Id}`)
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          const res = await axios.delete(
+            `${window.env.API_URL}/softdeletetrainer/${Id}`
+          );
+          swal("Your data has been deleted Successfully!", {
+            icon: "success",
+          });
+          dispatch(fetchTrainer());
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      dispatch(fetchTrainer());
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -62,10 +81,6 @@ const Trainer = () => {
     }
   };
 
-  const handlePageClick = async (data) => {
-    let currentPage = data.selected + 1;
-    setItems(trainer);
-  };
   if (status === STATUSES.LOADING) {
     return (
       <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
@@ -111,7 +126,53 @@ const Trainer = () => {
                 <Link to="/trainerform">
                   <button>Add Trainer</button>
                 </Link>
+                <OverlayTrigger
+                  overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                >
+                  <span className="addmore">
+                    <BiFilter
+                      className="calendericon"
+                      onClick={() => setShowCalender(!ShowCalender)}
+                    />
+                  </span>
+                </OverlayTrigger>
+                <CSVLink
+                  data={trainer}
+                  separator={";"}
+                  filename={"MKS Trainer.csv"}
+                  className="csvclass"
+                >
+                  Export CSV
+                </CSVLink>
               </div>
+            </div>
+            <div>
+              {ShowCalender ? (
+                <span className="transitionclass">
+                  <div className="userfilter">
+                    <div className="filtertextform forflex">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Title"
+                      />
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Remarks"
+                      />
+                      <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Enter Age"
+                      />
+                    </div>
+                  </div>
+                  <button className="filterbtn">Apply Filter</button>
+                </span>
+              ) : (
+                <></>
+              )}
             </div>
             <>
               <div className="div_maintb">
@@ -119,6 +180,8 @@ const Trainer = () => {
                   <table>
                     <thead>
                       <tr>
+                        
+                      <th>Action</th>
                         <th>Name</th>
                         <th>Name Arabic</th>
                         <th>Age</th>
@@ -132,16 +195,35 @@ const Trainer = () => {
 
                         <th>Remarks</th>
                         <th>Detail</th>
+                        <th>Nationality</th>
+
                         <th>Image</th>
 
-                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {trainer.map((item, index) => {
+                      {currentPosts.map((item, index) => {
                         return (
                           <>
                             <tr className="tr_table_class">
+                            <td
+                                className="table_delete_btn1"
+                                // style={{ textAlign: "center" }}
+                              >
+                                <BiEdit
+                                  onClick={() =>
+                                    navigate("/edittrainer", {
+                                      state: {
+                                        trainerid: item,
+                                      },
+                                    })
+                                  }
+                                />
+                                <MdDelete
+                                  onClick={() => handleRemove(item._id)}
+                                />
+                                <BsEyeFill onClick={() => handleShow(item)} />
+                              </td>
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
                               <td>
@@ -180,7 +262,7 @@ const Trainer = () => {
                                   whiteSpace: "nowrap",
                                 }}
                               >
-                                {item.Remarks}
+                                {item.RemarksEn}
                               </td>
                               <td
                                 style={{
@@ -190,27 +272,20 @@ const Trainer = () => {
                                   whiteSpace: "nowrap",
                                 }}
                               >
-                                {item.Detail}
+                                {item.DetailEn}
                               </td>
+                              <td>
+                                {item.TrainerNationalityData === null ? (
+                                  <>N/A</>
+                                ) : (
+                                  item.TrainerNationalityData.NameEn
+                                )}
+                              </td>
+
                               <td>
                                 <img src={item.image} alt="" />
                               </td>
-                              <td className="table_delete_btn1"
-                              style={{ textAlign: "center" }}>
-                            <BiEdit
-                                onClick={() =>
-                                  navigate("/edittrainer", {
-                                    state: {
-                                      trainerid: item,
-                                    },
-                                  })
-                                }
-                              />
-                              <MdDelete
-                                onClick={() => handleRemove(item._id)}
-                              />
-                              <BsEyeFill onClick={() => handleShow(item) }/>
-                            </td>
+                              
                             </tr>
                           </>
                         );
@@ -221,6 +296,12 @@ const Trainer = () => {
               </div>
             </>
           </div>
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={trainer.length}
+            paginate={paginate}
+            currentPage={currentPage}
+          />
         </div>
       </div>
       <Modal
@@ -231,13 +312,15 @@ const Trainer = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2 style={{fontFamily:"inter"}}>Trainer </h2>
+          <h2 style={{ fontFamily: "inter" }}>Trainer </h2>
         </Modal.Header>
         <Modal.Body>
           <TrainerPopup data={modaldata} />
         </Modal.Body>
         <Modal.Footer>
-        <button onClick={handleClose} className="modalClosebtn">Close</button>
+          <button onClick={handleClose} className="modalClosebtn">
+            Close
+          </button>
         </Modal.Footer>
       </Modal>
     </>

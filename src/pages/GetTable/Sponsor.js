@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { fetchSponsor, STATUSES } from "../../redux/getReducer/getSponsorSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
-import { remove } from "../../redux/postReducer/PostSponsor";
 import swal from "sweetalert";
-import { Link ,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import ScrollContainer from "react-indiana-drag-scroll";
 import SponserPopup from "../../Components/Popup/SponserPopup";
@@ -13,8 +12,16 @@ import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BsEyeFill } from "react-icons/bs";
+import Pagination from "./Pagination";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import { BiFilter } from "react-icons/bi";
+import { CSVLink } from "react-csv";
 
 const News = () => {
+  const [ShowCalender, setShowCalender] = useState(false);
+
+  //For Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -26,19 +33,38 @@ const News = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data: sponsor, status } = useSelector((state) => state.sponsor);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = sponsor.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   useEffect(() => {
     dispatch(fetchSponsor());
   }, []);
+
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeletesponsor/${Id}`)
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          await axios.delete(`${window.env.API_URL}/softdeletesponsor/${Id}`);
+          swal("Your data has been deleted Successfully!", {
+            icon: "success",
+          });
+          dispatch(fetchSponsor());
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      dispatch(fetchSponsor());
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -49,6 +75,7 @@ const News = () => {
       });
     }
   };
+
   if (status === STATUSES.LOADING) {
     return (
       <Lottie animationData={HorseAnimation} loop={true} className="Lottie" />
@@ -80,38 +107,92 @@ const News = () => {
               <h4>Sponsor Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
-
                 <Link to="/sponsorform">
                   <button>Add Sponsor</button>
                 </Link>
+                <OverlayTrigger
+                  overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                >
+                  <span className="addmore">
+                    <BiFilter
+                      className="calendericon"
+                      onClick={() => setShowCalender(!ShowCalender)}
+                    />
+                  </span>
+                </OverlayTrigger>
+                <CSVLink
+                  data={sponsor}
+                  separator={";"}
+                  filename={"MKS sponsor.csv"}
+                  className="csvclass"
+                >
+                  Export CSV
+                </CSVLink>
               </div>
+            </div>
+            <div>
+              {ShowCalender ? (
+                <span className="transitionclass">
+                  <div className="userfilter">
+                    <div className="filtertextform forflex">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Title"
+                      />
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Description"
+                      />
+                    </div>
+                  </div>
+                  <button className="filterbtn">Apply Filter</button>
+                </span>
+              ) : (
+                <></>
+              )}
             </div>
             <div className="div_maintb">
               <ScrollContainer className="scroll-container">
                 <table striped bordered hover>
                   <thead>
                     <tr>
+                    <th style={{ textAlign: "center" }}>Action</th>
+
                       <th>Title </th>
                       <th>Title Arabic</th>
                       <th>Description </th>
                       <th>Description Arabic</th>
                       <th>Url</th>
                       <th>Image</th>
-                      <th style={{ textAlign: "center" }}>Action</th>
+                      {/* <th>Active</th> */}
+
                     </tr>
                   </thead>
                   <tbody>
-                    {sponsor.map((item, index) => {
+                    {currentPosts.map((item, index) => {
                       return (
                         <>
                           <tr className="tr_table_class">
+                          <td
+                              className="table_delete_btn1"
+                              // style={{ textAlign: "center" }}
+                            >
+                              <BiEdit
+                                onClick={() =>
+                                  navigate("/editsponsor", {
+                                    state: {
+                                      sponsorid: item,
+                                    },
+                                  })
+                                }
+                              />
+                              <MdDelete
+                                onClick={() => handleRemove(item._id)}
+                              />
+                              <BsEyeFill onClick={() => handleShow(item)} />
+                            </td>
                             <td>{item.TitleEn}</td>
                             <td>{item.TitleAr}</td>
                             <td>{item.DescriptionEn}</td>
@@ -127,20 +208,16 @@ const News = () => {
                                 }}
                               />
                             </td>
-                            <td
-                              className="table_delete_btn1"
-                              style={{ textAlign: "center" }}
-                            >
-                              <BiEdit onClick={() => navigate('/editsponsor',{
-                                state:{
-                                  sponsorid:item
-                                }
-                              })} />
-                              <MdDelete
-                                onClick={() => handleRemove(item._id)}
-                              />
-                              <BsEyeFill onClick={()=> handleShow(item)}/>
-                            </td>
+                            {/* <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
+                                />
+                                </td> */}
+                            
                           </tr>
                         </>
                       );
@@ -150,6 +227,12 @@ const News = () => {
               </ScrollContainer>
             </div>
           </div>
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={sponsor.length}
+            paginate={paginate}
+            currentPage={currentPage}
+          />
         </div>
       </div>
       <Modal
@@ -171,7 +254,6 @@ const News = () => {
             Close
           </button>
         </Modal.Footer>
-
       </Modal>
     </>
   );

@@ -3,7 +3,7 @@ import DatePicker from "react-date-picker";
 import "../../Components/CSS/forms.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { add } from "../../redux/postReducer/PostJockey";
 import { fetchnationality } from "../../redux/getReducer/getNationality";
 import swal from "sweetalert";
@@ -15,13 +15,32 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { AiOutlineReload } from "react-icons/ai";
 import { Modal } from "react-bootstrap";
-
+import TextInputValidation from "../../utils/TextInputValidation";
 import NationalityPopup from "./Nationality";
+import { ImCross } from "react-icons/im";
 
 const NewsForm = () => {
+  //for Errors
+  const [Error, setError] = useState("");
+  const [ErrorAr, setErrorAr] = useState("");
+
+  const [ErrorShortName, setErrorShortName] = useState("");
+  const [ErrorShortNameAr, setErrorShortNameAr] = useState("");
+
+  const [ErrorDateofBirth, setErrorDateofBirth] = useState("");
+  const [ErrorLicenseDate, setErrorLicenseDate] = useState("");
+  const [ErrorRemarks, setErrorRemarks] = useState("");
+  const [ErrorRemarksAr, setErrorRemarksAr] = useState("");
+  const [ErrorRating, setErrorRating] = useState("");
+  const [ErrorMinWeight, setErrorMinWeight] = useState("");
+  const [ErrorMaxWeight, setErrorMaxWeight] = useState("");
+  const [ErrorAllowance, setErrorAllowance] = useState("");
+  const [ErrorNationality, setErrorNationality] = useState("");
+  const [isLoading, setisLoading] = useState(false);
+
   const dispatch = useDispatch();
   const history = useNavigate();
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
 
   const { data: nationality } = useSelector((state) => state.nationality);
   var today = new Date();
@@ -44,7 +63,7 @@ const NewsForm = () => {
 
   const [showActivenationality, setShowActivenationality] = useState(false);
 
-  const handleCloseActivenationality= () => setShowActivenationality(false);
+  const handleCloseActivenationality = () => setShowActivenationality(false);
 
   const handleShowActivenationality = async () => {
     await setShowActivenationality(true);
@@ -52,6 +71,7 @@ const NewsForm = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+    setisLoading(true);
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -76,9 +96,10 @@ const NewsForm = () => {
         icon: "success",
         button: "OK",
       });
-      if(pathname === '/jockeyform'){
+      if (pathname === "/jockeyform") {
         history("/jockey");
       }
+      setisLoading(false);
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -87,10 +108,10 @@ const NewsForm = () => {
         icon: "error",
         button: "OK",
       });
+      setisLoading(false);
     }
   };
 
-  const areAllFieldsFilled = image !== undefined && DOB !== "";
   useEffect(() => {
     dispatch(fetchnationality());
     if (!image) {
@@ -162,7 +183,53 @@ const NewsForm = () => {
       })
     );
 
-   
+  let AllNationalityAr =
+    nationality === undefined ? (
+      <></>
+    ) : (
+      nationality.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameAr,
+          label: item.NameAr,
+        };
+      })
+    );
+  const handlePreview = () => {
+    setImage();
+    document.getElementById("file").value = "";
+  };
+  //Checking Validation
+
+  const data3 = JSON.stringify(
+    TextInputValidation("en", NameEn, "Jockey Name English")
+  );
+
+  const Name = JSON.parse(data3);
+  const data4 = JSON.stringify(
+    TextInputValidation("ar", NameAr, "Jockey Name Arabic")
+  );
+  const Namear = JSON.parse(data4);
+
+  const data5 = JSON.stringify(
+    TextInputValidation("en", ShortNameEn, "Jockey Short Name English")
+  );
+
+  const shotName = JSON.parse(data5);
+  const data6 = JSON.stringify(
+    TextInputValidation("ar", ShortNameAr, "Jockey Short Name Arabic")
+  );
+  const shotNameAr = JSON.parse(data6);
+
+  const data8 = JSON.stringify(
+    TextInputValidation("en", RemarksEn, "Jockey Remarks English")
+  );
+  const Remark = JSON.parse(data8);
+  const data9 = JSON.stringify(
+    TextInputValidation("ar", RemarksAr, "Jockey Remarks Arabic")
+  );
+  const Remarkar = JSON.parse(data9);
+
   return (
     <>
       <div className="page">
@@ -184,11 +251,15 @@ const NewsForm = () => {
                       onChange={(e) => setNameEn(e.target.value)}
                       name="Name"
                       value={NameEn}
+                      onBlur={() => setError(Name)}
                     >
-                      <Form.Control type="text" placeholder="Name" />
+                      <Form.Control type="text" placeholder="Name" required />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className={Error.status ? "success" : "error"}>
+                      {Error.message}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -200,9 +271,13 @@ const NewsForm = () => {
                       name="Name"
                       value={NameAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() => setErrorAr(Namear)}
                     >
-                      <Form.Control type="text" placeholder="اسم" />
+                      <Form.Control type="text" placeholder="اسم" required />
                     </FloatingLabel>
+                    <span className={ErrorAr.status ? "successAr" : "errorAr"}>
+                      {ErrorAr.message}
+                    </span>
                   </div>
                 </div>
 
@@ -214,11 +289,21 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setShortNameEn(e.target.value)}
                       value={ShortNameEn}
+                      onBlur={() => setErrorShortName(shotName)}
                     >
-                      <Form.Control type="text" placeholder="Short Name" />
+                      <Form.Control
+                        type="text"
+                        placeholder="Short Name"
+                        required
+                      />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span
+                      className={ErrorShortName.status ? "success" : "error"}
+                    >
+                      {ErrorShortName.message}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -230,9 +315,21 @@ const NewsForm = () => {
                       name="Name"
                       value={ShortNameAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() => setErrorShortNameAr(shotNameAr)}
                     >
-                      <Form.Control type="text" placeholder="اسم قصير" />
+                      <Form.Control
+                        type="text"
+                        placeholder="اسم قصير"
+                        required
+                      />
                     </FloatingLabel>
+                    <span
+                      className={
+                        ErrorShortNameAr.status ? "successAr" : "errorAr"
+                      }
+                    >
+                      {ErrorShortNameAr.message}
+                    </span>
                   </div>
                 </div>
 
@@ -244,11 +341,19 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setRemarksEn(e.target.value)}
                       value={RemarksEn}
+                      onBlur={() => setErrorRemarks(Remark)}
                     >
-                      <Form.Control type="text" placeholder="Remarks" />
+                      <Form.Control
+                        type="text"
+                        placeholder="Remarks"
+                        required
+                      />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
+                    <span className={ErrorRemarks.status ? "success" : "error"}>
+                      {ErrorRemarks.message}
+                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -260,9 +365,21 @@ const NewsForm = () => {
                       name="Name"
                       value={RemarksAr}
                       style={{ direction: "rtl" }}
+                      onBlur={() => setErrorRemarksAr(Remarkar)}
                     >
-                      <Form.Control type="text" placeholder="ملاحظات" />
+                      <Form.Control
+                        type="text"
+                        placeholder="ملاحظات"
+                        required
+                      />
                     </FloatingLabel>
+                    <span
+                      className={
+                        ErrorRemarksAr.status ? "successAr" : "errorAr"
+                      }
+                    >
+                      {ErrorRemarksAr.message}
+                    </span>
                   </div>
                 </div>
 
@@ -273,19 +390,62 @@ const NewsForm = () => {
                       value={DOB}
                       dayPlaceholder="  "
                       maxDate={today}
-                      monthPlaceholder="Date Of Birth"
+                      monthPlaceholder="Date of Birth "
                       yearPlaceholder=""
+                      onBlur={() =>
+                        DOB === ""
+                          ? setErrorDateofBirth(
+                              "Jockey Date Of Birth is required"
+                            )
+                          : setErrorDateofBirth(" ")
+                      }
+                    />
+                    <span className="spanForm"> |</span>
+                    <span className="error">{ErrorDateofBirth}</span>
+                  </div>
+
+                  <div className="col-sm" style={{ direction: "rtl" }}>
+                    <DatePicker
+                      onChange={setDOB}
+                      value={DOB}
+                      maxDate={today}
+                      dayPlaceholder="  "
+                      monthPlaceholder="تاريخ الولادة"
+                      yearPlaceholder=""
+                      style={{ direction: "rtl" }}
+                    />
+                  </div>
+                </div>
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <DatePicker
+                      onChange={setJockeyLicenseDate}
+                      value={JockeyLicenseDate}
+                      dayPlaceholder="  "
+                      // maxDate={today}
+                      monthPlaceholder="License Date"
+                      yearPlaceholder=""
+                      onBlur={() =>
+                        DOB === ""
+                          ? setErrorLicenseDate(
+                              "Jockey License Date is required"
+                            )
+                          : setErrorLicenseDate(" ")
+                      }
                     />
 
                     <span className="spanForm"> |</span>
+                    <span className="error">{ErrorLicenseDate}</span>
                   </div>
 
-                  <div className="col-sm">
-                    <input
-                      type="text"
-                      placeholder="Date Of Birth"
-                      onChange={setDOB}
-                      value={convert(DOB)}
+                  <div className="col-sm" style={{ direction: "rtl" }}>
+                    <DatePicker
+                      onChange={setJockeyLicenseDate}
+                      value={JockeyLicenseDate}
+                      dayPlaceholder="  "
+                      // maxDate={today}
+                      monthPlaceholder="تاريخ التسجيل"
+                      yearPlaceholder=""
                       style={{ direction: "rtl" }}
                     />
                   </div>
@@ -293,29 +453,56 @@ const NewsForm = () => {
 
                 <div className="row mainrow">
                   <div className="col-sm">
-                    <DatePicker
-                      onChange={setJockeyLicenseDate}
-                      value={JockeyLicenseDate}
-                      dayPlaceholder="  "
-                      maxDate={today}
-                      monthPlaceholder="Jockey License Date"
-                      yearPlaceholder=""
+                    <Select
+                      placeholder={<div>Select Nationality</div>}
+                      defaultValue={NationalityID}
+                      onChange={setNationalityID}
+                      options={AllNationality}
+                      isClearable={true}
+                      isSearchable={true}
+                      onBlur={() =>
+                        NationalityID === ""
+                          ? setErrorNationality("Nationality is required")
+                          : setErrorNationality("")
+                      }
                     />
-
-                    <span className="spanForm"> |</span>
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                          onClick={handleShowActivenationality}
+                        >
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>
+                      |
+                    </span>
+                    <span className="error">{ErrorNationality}</span>
                   </div>
-
                   <div className="col-sm">
-                    <input
-                      type="text"
-                      onChange={setJockeyLicenseDate}
-                      value={convert(JockeyLicenseDate)}
-                      style={{ direction: "rtl" }}
-                      placeholder="Jockey Licence Date"
+                    <Select
+                      required
+                      placeholder={<div>حدد جيلتي</div>}
+                      className="selectdir"
+                      defaultValue={NationalityID}
+                      onChange={setNationalityID}
+                      options={AllNationalityAr}
+                      isClearable={true}
+                      isSearchable={true}
                     />
                   </div>
                 </div>
-
                 <div className="row mainrow">
                   <div className="col-sm">
                     <FloatingLabel
@@ -324,13 +511,25 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setRating(e.target.value)}
                       value={Rating}
+                      onBlur={(e) =>
+                        Rating === ""
+                          ? setErrorRating("Jockey Rating is required ")
+                          : setErrorRating("Jockey Rating is validated")
+                      }
                     >
-                      <Form.Control type="number" placeholder="Rating" />
+                      <Form.Control
+                        placeholder="Rating"
+                        min="1"
+                        step={0.1}
+                        type="number"
+                      />
                     </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
+                    <span className={Rating === "" ? "error" : "success"}>
+                      {ErrorRating}
+                    </span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
-
+                  {/* 
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
@@ -341,7 +540,7 @@ const NewsForm = () => {
                     >
                       <Form.Control type="number" placeholder="معدل" />
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="row mainrow">
@@ -352,18 +551,34 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setMiniumumJockeyWeight(e.target.value)}
                       value={MiniumumJockeyWeight}
+                      onBlur={(e) =>
+                        MiniumumJockeyWeight === ""
+                          ? setErrorMinWeight(
+                              "Minimum Jockey Weight is required"
+                            )
+                          : setErrorMinWeight(
+                              "Minimum Jockey Weight is Validated "
+                            )
+                      }
                     >
                       <Form.Control
                         type="number"
                         placeholder="Jockey Minimum Weight"
-                        min='0'
+                        min="0"
+                        required
                       />
                     </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
+                    <span
+                      className={
+                        MiniumumJockeyWeight === "" ? "error" : "success"
+                      }
+                    >
+                      {ErrorMinWeight}
+                    </span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
                       label="الحد الأدنى لوزن الجوكي"
@@ -376,7 +591,7 @@ const NewsForm = () => {
                         placeholder="الحد الأدنى لوزن الجوكي"
                       />
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="row mainrow">
@@ -387,18 +602,35 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setMaximumJockeyWeight(e.target.value)}
                       value={MaximumJockeyWeight}
+                      onBlur={(e) =>
+                        MaximumJockeyWeight === ""
+                          ? setErrorMaxWeight(
+                              "Maximum Jockey Weight is required"
+                            )
+                          : setErrorMaxWeight(
+                              " Maximum Jockey Weight is Validated"
+                            )
+                      }
                     >
                       <Form.Control
                         type="number"
                         placeholder="Jockey Maximum Weight"
-                        min='0'
+                        min="0"
+                        required
                       />
                     </FloatingLabel>
+                    <span
+                      className={
+                        MaximumJockeyWeight === "" ? "error" : "success"
+                      }
+                    >
+                      {ErrorMaxWeight}
+                    </span>
 
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
                       label="الحد الأدنى لوزن الجوكي"
@@ -412,50 +644,7 @@ const NewsForm = () => {
                         min='0'
                       />
                     </FloatingLabel>
-                  </div>
-                </div>
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <Select
-                      placeholder={<div>Select Nationality</div>}
-                      defaultValue={NationalityID}
-                      onChange={setNationalityID}
-                      options={AllNationality}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                    <span className="spanForm">
-                      <OverlayTrigger
-                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
-                      >
-                        <span className="addmore" onClick={handleShowActivenationality}>
-                            +
-                          </span>
-                      </OverlayTrigger>
-                      <OverlayTrigger
-                        overlay={
-                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
-                        }
-                      >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
-                      </OverlayTrigger>{" "}
-                      |
-                    </span>
-                  </div>
-                  <div className="col-sm">
-                    <Select
-                      required
-                      placeholder={<div>حدد جيلتي</div>}
-                      className="selectdir"
-                      defaultValue={NationalityID}
-                      onChange={setNationalityID}
-                      options={AllNationality}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="row mainrow">
@@ -466,18 +655,28 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setJockeyAllowance(e.target.value)}
                       value={JockeyAllowance}
+                      onBlur={(e) =>
+                        JockeyAllowance === ""
+                          ? setErrorAllowance("Jockey Allowance is required ")
+                          : setErrorAllowance("Jockey Allowance is Validated ")
+                      }
                     >
                       <Form.Control
                         type="number"
                         placeholder="Jockey Allowance"
-                        min='0'
+                        min="0"
+                        required
                       />
                     </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
+                    <span
+                      className={JockeyAllowance === "" ? "error" : "success"}
+                    >
+                      {ErrorAllowance}
+                    </span>
+                    {/* <span className="spanForm"> |</span> */}
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
                       label="الحد الأدنى لوزن الجوكي"
@@ -491,22 +690,36 @@ const NewsForm = () => {
                         min='0'
                       />
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="ButtonSection">
                   <div>
+                    <label className="Multipleownerlabel">
+                      Select Jockey image
+                    </label>
                     <input
                       type="file"
                       onChange={onSelectFile}
                       className="formInput"
+                      id="file"
                     />
                     {image && (
-                      <img src={preview} alt="" className="PreviewImage" />
+                      <>
+                        <ImCross
+                          onClick={handlePreview}
+                          className="crossIcon"
+                        />
+                        <img src={preview} className="PreviewImage" alt="" />
+                      </>
                     )}
                   </div>
 
-                  <button type="submit" className="SubmitButton">
+                  <button
+                    type="submit"
+                    className="SubmitButton"
+                    disabled={isLoading}
+                  >
                     Add Jockey
                   </button>
                 </div>

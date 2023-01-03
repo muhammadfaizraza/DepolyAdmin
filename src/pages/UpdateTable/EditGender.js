@@ -17,6 +17,8 @@ const NewsForm = () => {
 		NameEn: '',
     NameAr:'',
 		shortCode: '',
+    AbbrevAr:'',
+		shortCode: '',
     
 	});
  
@@ -27,6 +29,8 @@ const NewsForm = () => {
 				NameEn: genderid.NameEn,
         NameAr: genderid.NameAr,
 				shortCode: genderid.shortCode,
+        AbbrevEn:genderid.AbbrevEn,
+        AbbrevAr:genderid.AbbrevAr,
    
 			});
 		} else {
@@ -41,7 +45,9 @@ const NewsForm = () => {
       
       const formData = new FormData();
       formData.append("NameEn", state1.NameEn);
-      formData.append("NameAr", state1.NameAr);
+      formData.append("NameAr", state1.NameAr + ' ');
+      formData.append("AbbrevEn", state1.AbbrevEn);
+      formData.append("AbbrevAr", state1.AbbrevAr );
       formData.append("shortCode", state1.shortCode);
 
       const response = await axios.put(`${window.env.API_URL}/updateSex/${genderid._id}`, formData);
@@ -103,6 +109,43 @@ const NewsForm = () => {
                       }
                     >
                       <Form.Control type="text" placeholder="Description" value={state1.NameAr}/>
+                    </FloatingLabel>
+                    
+                  </div>
+                </div>
+
+
+                <div className="row mainrow">
+                  <div className="col-sm">
+
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Abreviation"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, AbbrevEn: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.AbbrevEn}/>
+                    </FloatingLabel>
+                 
+                    <span className="spanForm"> |</span>
+                  </div>
+
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="اختصار"
+                      className="mb-3 floatingInputAr"
+                      style={{ direction: "rtl" }}
+
+                      onChange={(e) =>
+                        setState({ ...state1, AbbrevAr: e.target.value })
+                      }
+                     
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.AbbrevAr}/>
                     </FloatingLabel>
                     
                   </div>

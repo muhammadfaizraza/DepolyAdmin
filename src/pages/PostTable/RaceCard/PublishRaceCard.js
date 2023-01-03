@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-import { useNavigate ,useLocation} from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import Select from "react-select";
 import DateTimePicker from "react-datetime-picker";
 import { fetchracecourse } from "../../../redux/getReducer/getRaceCourseSlice";
@@ -11,19 +11,10 @@ import dateFormat from "dateformat";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
-
 const Nationality = () => {
-  const [Race, setRace] = useState("");
   const [DayNTime, setDayNTime] = useState("");
   const [FetchData, setFetchData] = useState([]);
-  const [NameEn, setNameEn] = useState('');
-  const [NameAr, setNameAr] = useState('');
-
-  const [RaceData, setRaceData] = useState("");
-  const { data: racecourse } = useSelector((state) => state.racecourse);
-  const {state} = useLocation();
-  const {CardId} = state;
-  console.log(CardId,'id is this')
+  const dispatch = useDispatch();
 
   let AllFetchData =
     FetchData === undefined ? (
@@ -32,27 +23,32 @@ const Nationality = () => {
       FetchData.map(function (item) {
         return {
           id: item._id,
-          value: item.RaceNameModelData.shortCode,
-          label: item.RaceNameModelData.NameEn,
+          value: item._id,
+          label: item.MeetingCode,
         };
       })
     );
-    
+
   // const history = useNavigate();
-  const dispatch = useDispatch();
-  const animatedComponents = makeAnimated();
   const FormaredDate = dateFormat(DayNTime, "isoDateTime");
-  var today = new Date();
+  const history = useNavigate();
+  const [selectedValue, setSelectedValue] = useState([]);
+  const { state } = useLocation();
+  const { CardId, RaceCourseId } = state;
 
   useEffect(() => {
     dispatch(fetchracecourse());
   }, [dispatch]);
 
+  const handleChange = (e) => {
+    setSelectedValue(Array.isArray(e) ? e.map((x) => x.id) : []);
+  };
+
   const FatchRace = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        `${window.env.API_URL}/getracesthroughracecourseandtime/${CardId}/${FormaredDate}`
+        `${window.env.API_URL}/getracesthroughracecourseandtime/${RaceCourseId}/${FormaredDate}`
       );
       setFetchData(response.data.data);
       const msg = response.data.data.length;
@@ -73,23 +69,22 @@ const Nationality = () => {
       });
     }
   };
-
   const Publish = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        `${window.env.API_URL}/addracesinracecard/${'be9704d5-a531-4a6b-974e-29297c384cb2'}`,[RaceData[0].id]
+        `${window.env.API_URL}/addracesinracecard/${CardId}`,
+        { RaceEntry: selectedValue }
       );
-      setFetchData(response.data.data);
-      const msg = response.data.data.length;
+      const msgdata = response.data.msg;
+      history("/racecardlisting");
       swal({
-        // title: "Success!",
-        text: `${msg} Data Found`,
+        title: "Success!",
+        text: msgdata,
         icon: "success",
         button: "OK",
       });
     } catch (error) {
-      console.log(error);
       const err = error.response.data.message;
       swal({
         title: "Error!",
@@ -99,6 +94,7 @@ const Nationality = () => {
       });
     }
   };
+  // if(state.CardId === null) return <Navigate replace to="/"/>
 
   return (
     <div className="page">
@@ -110,7 +106,6 @@ const Nationality = () => {
         >
           <div className="Headers">Create Race Card</div>
           <div className="form">
-          
             <div className="row mainrow">
               <div className="col-sm">
                 <DateTimePicker
@@ -119,29 +114,43 @@ const Nationality = () => {
                   yearPlaceholder="Time"
                   dateFormat="dd MMMM yyyy"
                   onChange={setDayNTime}
-                  minDate={today}
-                  maxDate={new Date("02-29-2023")}
+                  // minDate={today}
+                  // maxDate={new Date("02-29-2023")}
                   value={DayNTime}
                 />
               </div>
             </div>
             <div className="ButtonSection " style={{ justifyContent: "end" }}>
-              <button Name="submit" className="SubmitButton" onClick={FatchRace}>
+              <button
+                Name="submit"
+                className="SubmitButton"
+                onClick={FatchRace}
+              >
                 Fetch Races
               </button>
             </div>
 
             <div className="row mainrow">
-              <Select
+              {/* <Select
                 closeMenuOnSelect={false}
                 components={animatedComponents}
                 isMulti
                 options={AllFetchData}
                 onChange={setRaceData}
-                value={RaceData}
-                className='multidropdown'
+                value={RaceData.id}
+               '
+              /> */}
+              <Select
+                className="dropdown multidropdown"
+                placeholder="Select Option"
+                value={AllFetchData.filter((obj) =>
+                  selectedValue.includes(obj.id)
+                )} // set selected values
+                options={AllFetchData} // set list of the data
+                onChange={handleChange} // assign onChange function
+                isMulti
+                isClearable
               />
-             
             </div>
 
             <div className="ButtonSection " style={{ justifyContent: "end" }}>

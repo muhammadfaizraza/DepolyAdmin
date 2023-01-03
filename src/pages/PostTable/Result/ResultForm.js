@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import Moment from "moment";
 import "react-toastify/dist/ReactToastify.css";
-import { fetchjockey } from "../../../redux/getReducer/getJockeySlice";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -9,30 +7,32 @@ import { useSelector } from "react-redux";
 import { fetchHorse } from "../../../redux/getReducer/getHorseSlice";
 import Select from "react-select";
 import swal from "sweetalert";
-import { AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 const LocalItem = () => {
-  const list = localStorage.getItem("lists");
+  const list = localStorage.getItem("results");
   if (list) {
-    return JSON.parse(localStorage.getItem("lists"));
+    return JSON.parse(localStorage.getItem("results"));
   } else {
     return [];
   }
 };
 
 const RaceForm = () => {
-  const [InputData, SetinputData] = useState("");
-  const [InputData2, SetinputData2] = useState("");
-  const [Gate, setGate] = useState("");
-  const [JockeyData, SetJockeyData] = useState("");
+
+  const [HorseID, SetHorseID] = useState("");
+  const [Prize, SetPrize] = useState("");
+  const [Points, SetPoints] = useState("");
+  const [BonusPoints, SetBonusPoints] = useState("");
+  const [Rank, setRank] = useState(1);
+
   const [items, setitems] = useState(LocalItem());
-  const { data: jockey } = useSelector((state) => state.jockey);
   const { data: horse } = useSelector((state) => state.horse);
 
   const history = useNavigate();
   const { state } = useLocation();
-  // const { RaceId } = state;
+  const { RaceId } = state;
 
   let horseoptions = horse.map(function (item) {
     return {
@@ -41,46 +41,58 @@ const RaceForm = () => {
       label: item.NameEn,
     };
   });
-  let AllJockey = jockey.map(function (item) {
-    return {
-      id: item._id,
-      value: item.NameEn,
-      label: item.NameEn,
-      weight: item.MaximumJockeyWeight,
-    };
-  });
 
+  const horseLength = horse.length;
+  const ItemLength = items.length;
+  
+  console.log()
   const dispatch = useDispatch();
-  const HorseEntry = [
-    `1,${InputData.id},${JockeyData.id},${JockeyData.weight}`,
-  ];
-
+  
+  
   useEffect(() => {
     dispatch(fetchHorse());
-    dispatch(fetchjockey());
   }, [dispatch]);
+
   useEffect(() => {
-    localStorage.setItem("lists", JSON.stringify(items));
+    localStorage.setItem("results", JSON.stringify(items));
   }, [items]);
-  const addItem = () => {
-    setitems([...items, HorseEntry]);
-    SetinputData("");
+
+
+  const addItem = (e) => {
+    e.preventDefault();
+     let ResultEntry = [
+      `${Rank},${HorseID.id},${Prize},${Points},${BonusPoints}`,
+    ];
+
+    if(horseLength === ItemLength){
+      toast('No Horse ')
+    }
+    else  if (HorseID === "" || BonusPoints === "") {
+      toast('Select Values ')
+    }
+    else {
+    setitems([...items, ResultEntry]);
+    setRank(Rank + 1);
+    }
+    //   
   };
+ 
   const Remove = () => {
     setitems([]);
+    SetBonusPoints("");
+    SetPoints("");
+    SetPrize("");
+    SetHorseID("");
+    setRank(1);
   };
+
   const submit = async (event) => {
     event.preventDefault();
-    try {
-      
-      // const response = await axios.post(`${window.env.API_URL}addracehorses/${RaceId}`, {HorseEntry:items});
-      // const response1 = await axios.put(`${window.env.API_URL}/publishrace/${RaceId}`);
-      // history("/fullpublishrace", {
-      //   state: {
-      //     RaceId: RaceId
-      //   },
-      // });
-      // history("/races");
+    try { 
+      const response = await axios.post(`${window.env.API_URL}createraceresult/${RaceId}`,{ResultEntry:items});
+      localStorage.removeItem('results')
+
+      history("/races");
       swal({
         title: "Success",
         text: "Data has been added successfully ",
@@ -97,7 +109,7 @@ const RaceForm = () => {
       });
     }
   };
-
+ 
   return (
     <>
       <div className="page">
@@ -112,41 +124,87 @@ const RaceForm = () => {
             </div>
             <div className="myselecthorse">
               <div className="myselecthorsedata">
-                <span>Position #</span>
+                <span>Rank #</span>
                 <span>Horse Name</span>
                 <span>Prize</span>
+                <span>Points</span>
+                <span>BonusPoints</span>
               </div>
+
             </div>
             <div className="myselectdata">
               <div className="myselectiondata">
-                <span>1</span>
+                <span onChange={setRank} value={1}>1</span>
                 <span>
                   <Select
-                    defaultValue={InputData2}
-                    onChange={SetinputData2}
-                    options={horseoptions[0]}
+                   className="dropdown multidropdown"
+                    defaultValue={HorseID}
+                    onChange={SetHorseID}
+                    options={horseoptions}
                     isClearable={false}
                     isSearchable={true}
                   />
                 </span>
-
                 <span>
-                  {JockeyData.weight === undefined ? (
-                    <></>
-                  ) : (
-                    <>{JockeyData.weight} KG</>
-                  )}{" "}
+                  <input type='number' value={Prize} onChange={(e) => SetPrize(e.target.value)} placeholder="Prize" className="resultforminput"/>
                 </span>
-              </div>
-              <div className="sbmtbtndiv">
-                <div className="RaceButtonDiv">
-                  <button className="updateButton">Back</button>
+                <span>
+                <input type='number'  value={Points} onChange={(e) => SetPoints(e.target.value)} placeholder="Points"  className="resultforminput"/>
+                </span>
+                <span>
+                <input type='number'  value={BonusPoints} onChange={(e) => SetBonusPoints(e.target.value)} placeholder="BonusPoints"  className="resultforminput"/>
+                </span>
 
-                  <button className="SubmitButton" type="submit">
-                    Save
-                  </button>
-                </div>
+                
               </div>
+            
+            {
+              items.map((data,i) => {
+                return(
+                  <div className="myselectdata" key={i}>
+                  <div className="myselectiondata">
+                    <span onChange={setRank} value={i+1}>{i + 2}</span>
+                    <span>
+                      <Select
+                        defaultValue={data[0]}
+                        onChange={SetHorseID}
+                        options={horseoptions}
+                        isClearable={false}
+                        isSearchable={true}
+                      />
+                    </span>
+                    <span>
+                      <input type='number' value={data[1]} placeholder="Prize" className="resultforminput"/>
+                    </span>
+                    <span>
+                    <input type='number'  value={data[2]}  placeholder="Points"  className="resultforminput"/>
+                    </span>
+                    <span>
+                    <input type='number'  value={data[3]} placeholder="BonusPoints"  className="resultforminput"/>
+                    </span>
+    
+                    
+                  </div>
+                  
+                </div>
+                )
+              })
+            }
+            <div className="addbtn">
+                    <button className="AddAnother" onClick={addItem}>
+                    Save & Add Another
+                    </button>
+                  </div>
+                  <div className="sbmtbtndiv">
+                    <div className="RaceButtonDiv">
+                    <button className="updateButton" onClick={Remove}>
+                        Remove
+                      </button>    
+                      <button className="SubmitButton" type="submit" onClick={submit}>
+                        Save
+                      </button>
+                    </div>
+                  </div>
             </div>
           </div>
         </div>

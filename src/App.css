@@ -9,7 +9,7 @@ body::-webkit-scrollbar {
     width: 0.1em;
   }
   .page::-webkit-scrollbar {
-    width: 0.5em;
+    width: 0.1em;
     background: linear-gradient(45deg, rgb(48, 8, 139), darksalmon);
 
   }
@@ -21,6 +21,7 @@ body::-webkit-scrollbar {
   }
   body::-webkit-scrollbar-thumb {
     background: linear-gradient(45deg, rgb(48, 8, 139), darksalmon);
+    width: 0.1em;
   }
    .rightsidedata::-webkit-scrollbar {
     width: 0.1em;
@@ -30,6 +31,7 @@ body::-webkit-scrollbar {
   }
    .rightsidedata::-webkit-scrollbar-thumb {
     background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
+    width: 0.1em;
   }
 
   
@@ -43,4 +45,65 @@ body::-webkit-scrollbar {
 button:focus, input:focus, a:focus {
     text-decoration: none !important;
     outline: none !important;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paginationItem {
+  background: #fff;
+  border: 2px solid #666;
+  padding: 10px 15px;
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+  position: relative;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.paginationItem span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.prev,
+.next {
+  background: #fff;
+  border: none;
+  padding: 10px;
+  color: blue;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.paginationItem.active {
+  border: 1px solid #888;
+  color: #888;
+  pointer-events: none;
+
+}
+
+.prev.disabled,
+.next.disabled {
+  pointer-events: none;
+  box-shadow: none;
+  color: #999;
+}
+.page-link {
+  cursor: pointer;
+}
+.searchLottie{
+  height: 100px !important;
+}
+.homeLottie{
+
+  height: 100px !important;
+
 }

@@ -3,15 +3,73 @@ import swal from "sweetalert";
 import axios from "axios";
 import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getUserDetails } from "../../redux/postReducer/UserPost";
+import { Form } from "react-bootstrap";
+import { FloatingLabel } from "react-bootstrap";
+
 
 const AdminProfile = () => {
   const naviagate = useNavigate();
-  const { data: userProfile } = useSelector((state) => state.userProfile);
+  const dispatch = useDispatch();
+  const { userInfo, token } = useSelector((state) => state.user);
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
   const [shortCode, setshortCode] = useState("");
 
-  const submit = async (event) => {};
+  useEffect(() => {
+    if (userInfo === null) {
+      dispatch(getUserDetails());
+    }
+  }, [userInfo, dispatch]);
+  
+  const [state1, setState] = useState({
+		FirstName: '',
+    LastName:'',
+    role:'',
+    Email: '',
+	});
+
+  useEffect(() => {
+		if (userInfo) {
+			setState({
+        id:userInfo.data._id,
+				FirstName: userInfo.data.FirstName,
+        LastName: userInfo.data.LastName,
+				role: userInfo.data.role,
+        Email: userInfo.data.Email,
+			});
+		} else {
+		}
+	}, [userInfo]);
+
+  const submit = async (event) => {
+    event.preventDefault();
+    try {
+      
+      const formData = new FormData();
+      formData.append("FirstName", state1.FirstName);
+      formData.append("LastName", state1.LastName);
+      formData.append("role", state1.role);
+      formData.append("Email", state1.Email);
+
+      const response = await axios.put(`${window.env.API_URL}/updateadmin/${state1.id}`, formData);
+      // history("/colorlist");
+      swal({
+        title: "Success!",
+        text: "Data has been Updated successfully ",
+        icon: "success",
+        button: "OK",
+      });
+    } catch (error) {
+      const err = error.response.data.message;
+      swal({
+      title: "Error!",
+      text: err,
+      icon: "error",
+      button: "OK",
+    });
+    }
+  };
 
   return (
     <div className="page">
@@ -24,44 +82,76 @@ const AdminProfile = () => {
           <div className="Headers">Admin Info</div>
           <div className="form">
             <form onSubmit={submit}>
-              <div className="row mainrow">
-                <div className="col-sm">
-                  <input
-                    placeholder=" First Name"
-                    name="Name"
-                    value={NameEn}
-                    required
-                  ></input>
-                  <span className="spanForm"> |</span>
-                </div>
+            <div className="row mainrow">
+            <div className="col-sm">
+              <FloatingLabel
+                controlId="floatingInput"
+                label="First Name"
+                className="mb-3"
+                onChange={(e) =>
+                  setState({ ...state1, FirstName: e.target.value })
+                }
+                name="Name"
+               
+              >
+                <Form.Control
+                  type="text"
+                  value={state1.FirstName}
+                  placeholder="Name"
+                />
+              </FloatingLabel>
 
-                <div className="col-sm">
-                  <input
-                   
-                    placeholder="Last Name "
-                    name="Name"
-                    value={NameAr}
-                  ></input>
-                </div>
-              </div>
+              <span className="spanForm"> |</span>
+            </div>
 
-              <div className="row mainrow">
-                <div className="col-sm">
-                  <input
-                    placeholder="Passport No"
-                    name="Detail"
-                    value={shortCode}
-                  ></input>
-                  <span className="spanForm"> |</span>
-                </div>
+            <div className="col-sm">
+              <FloatingLabel
+                controlId="floatingInput"
+                label="Last Name"
+                className="mb-3"
+                onChange={(e) =>
+                  setState({ ...state1, LastName: e.target.value })
+                }
+              >
+                <Form.Control type="text"  value={state1.LastName} />
+              </FloatingLabel>
+            </div>
+          </div>
 
-                <div className="col-sm">
-                  <input
-                    placeholder="Email"
-                    name="Detail"
-                  ></input>
-                </div>
-              </div>
+          <div className="row mainrow">
+            <div className="col-sm">
+              <FloatingLabel
+                controlId="floatingInput"
+                label="Role"
+                className="mb-3"
+                onChange={(e) =>
+                  setState({ ...state1, role: e.target.value })
+                }
+                name="Name"
+               
+              >
+                <Form.Control
+                  type="text"
+                  value={state1.role}
+                  placeholder="Name"
+                />
+              </FloatingLabel>
+
+              <span className="spanForm"> |</span>
+            </div>
+            <div className="col-sm">
+              <FloatingLabel
+                controlId="floatingInput"
+                label="Email"
+                className="mb-3"
+                onChange={(e) =>
+                  setState({ ...state1, Email: e.target.value })
+                }
+              >
+                <Form.Control type="text"  value={state1.Email} />
+              </FloatingLabel>
+            </div>
+          </div>
               <div className="ButtonSection">
                   <button type="submit" className="SubmitButton"
                   onClick={() => naviagate(-1)}>

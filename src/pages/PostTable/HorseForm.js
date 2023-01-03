@@ -272,22 +272,31 @@ const HorseForm = () => {
         return {
           id: item._id,
           value: item._id,
-          label: item.NameEn,
+          label: (
+            <div style={{
+              display:'flex',
+              justifyContent:'space-between'
+            }}>
+             <p>{item.NameEn}</p> 
+             <p>{item.NameAr}</p> 
+  
+            </div>
+          ),
         };
       })
     );
-    let AllNationalityAr =
-    nationality === undefined ? (
-      <></>
-    ) : (
-      nationality.map(function (item) {
-        return {
-          id: item._id,
-          value: item._id,
-          label: item.NameAr,
-        };
-      })
-    );
+    // let AllNationalityAr =
+    // nationality === undefined ? (
+    //   <></>
+    // ) : (
+    //   nationality.map(function (item) {
+    //     return {
+    //       id: item._id,
+    //       value: item._id,
+    //       label: item.NameAr,
+    //     };
+    //   })
+    // );
 
     let AllGender =
     gender === undefined ? (
@@ -1218,12 +1227,12 @@ const HorseForm = () => {
                             <AiOutlineReload />
                           </span>
                       </OverlayTrigger>
-                      |
+                      
                     </span>
                     <span className={NationalityId === "" ?  "error": "success"} >{ErrorNationality}</span>
 
                   </div>
-
+{/* 
                   <div className="col-sm">
                     <Select
                       className="selectdir"
@@ -1238,7 +1247,7 @@ const HorseForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="row mainrow">
@@ -1252,12 +1261,11 @@ const HorseForm = () => {
                       isSearchable={true}
                       onBlur={() => CreationId === "" ?  setErrorCreationid("Horse Creation id is required "):setErrorCreationid("Horse Creation id is Validated ")}
                     />
-                    <span className="spanForm"> |</span>
                     <span className={CreationId === "" ?  "error": "success"} >{ErrorCreationid}</span>
 
   
                   </div>
-
+{/* 
                   <div className="col-sm">
                     <Select
                       className="selectdir"
@@ -1273,7 +1281,7 @@ const HorseForm = () => {
                       isSearchable={true}
 
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">

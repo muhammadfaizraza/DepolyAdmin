@@ -59,23 +59,21 @@ const OwnerForm = () => {
         return {
           id: item._id,
           value: item._id,
-          label: item.NameEn,
+          label: (
+            <div style={{
+              display:'flex',
+              justifyContent:'space-between'
+            }}>
+             <p>{item.NameEn}</p> 
+             <p>{item.NameAr}</p> 
+
+            </div>
+          ),
         };
       })
     );
 
-  let AllNationalityAr =
-    nationality === undefined ? (
-      <></>
-    ) : (
-      nationality.map(function (item) {
-        return {
-          id: item._id,
-          value: item.NameAr,
-          label: item.NameAr,
-        };
-      })
-    );
+
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState();
@@ -439,26 +437,12 @@ const OwnerForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>{" "}
-                      |
+                      
                     </span>
                     <span className="error">{ErrorNatinalty}</span>
                   </div>
 
-                  <div className="col-sm">
-                    <Select
-                      className="selectdir"
-                      placeholder={
-                        <div style={{ direction: "rtl" }}>
-                          اكتب للبحث عن الجنسية
-                        </div>
-                      }
-                      defaultValue={NationalityID}
-                      onChange={setNationalityID}
-                      options={AllNationalityAr}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
-                  </div>
+                  
                 </div>
 
                 <div className="SelectOwnerimage">

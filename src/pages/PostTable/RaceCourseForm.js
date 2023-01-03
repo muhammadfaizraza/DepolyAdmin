@@ -25,8 +25,6 @@ const RaceCourseForm = () => {
   const [ErrorAbbrev , setErrorAbbrev  ] =useState("");
   const [ErrorNationality , setErrorNationality] =useState("");
   const [ErrorAbbrevAr ,setErrorAbbrevAr] = useState("")
-  
-
   const [isLoading, setisLoading] = useState(false);
 
 
@@ -40,29 +38,27 @@ const RaceCourseForm = () => {
   const { data: color } = useSelector((state) => state.color);
 
   let AllNationality =
-    nationality === undefined ? (
-      <></>
-    ) : (
-      nationality.map(function (item) {
-        return {
-          id: item._id,
-          value: item.NameEn,
-          label: item.NameEn,
-        };
-      })
-    );
-    let AllNationalityAr =
-    nationality === undefined ? (
-      <></>
-    ) : (
-      nationality.map(function (item) {
-        return {
-          id: item._id,
-          value: item.NameAr,
-          label: item.NameAr,
-        };
-      })
-    );
+  nationality === undefined ? (
+    <></>
+  ) : (
+    nationality.map(function (item) {
+      return {
+        id: item._id,
+        value: item._id,
+        label: (
+          <div style={{
+            display:'flex',
+            justifyContent:'space-between'
+          }}>
+           <p>{item.NameEn}</p> 
+           <p>{item.NameAr}</p> 
+
+          </div>
+        ),
+      };
+    })
+  );
+   
   let AllColor =
     color === undefined ? (
       <></>
@@ -435,24 +431,8 @@ const RaceCourseForm = () => {
                         <>
                         <span className="addmore" onClick={FetchNew}><AiOutlineReload /></span>
                         </>
-                      </OverlayTrigger> |</span>
+                      </OverlayTrigger> </span>
                       <span  className={NationalityId === "" ? "error":"success"}>{ErrorNationality}</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <Select
-                      className="selectdir"
-                      placeholder={
-                        <div style={{ direction: "rtl" }}>
-                          اكتب للبحث عن الجنسية
-                        </div>
-                      }
-                      defaultValue={NationalityId}
-                      onChange={setNationalityId}
-                      options={AllNationalityAr}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
                   </div>
                 </div>
           

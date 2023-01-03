@@ -21,7 +21,6 @@ import { DateRangePicker } from 'react-date-range';
 
 const GetMeetingType = () => {
   const [ShowCalender, setShowCalender] = useState(false)
-  const [SearchAge, setSearchAge] = useState('');
   const [SearchCode, setSearchCode] = useState('');
   const [SearchTitle, setSearchTitle] = useState('');
   const [state, setState] = useState([
@@ -54,13 +53,12 @@ const handleShow = async (data) => {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   const GetSearch = async () => {
-    dispatch(fetchMeeting({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchMeeting({SearchTitle,SearchCode}));
     setSearchTitle('')
     setSearchCode('')
-    setSearchAge('')
   };
   useEffect(() => {
-    dispatch(fetchMeeting());
+    dispatch(fetchMeeting({SearchTitle,SearchCode}));
   }, [dispatch]);
   
  
@@ -170,12 +168,7 @@ const handleShow = async (data) => {
                        onChange={(e) => setSearchTitle(e.target.value)}
                        placeholder="Enter Name"
                      />
-                     <input
-                       type="text"
-                       class="form-control"
-                       onChange={(e) => setSearchAge(e.target.value)}
-                       placeholder="Enter Abbreviation"
-                     />
+                     
                      <input
                        type="text"
                        class="form-control"

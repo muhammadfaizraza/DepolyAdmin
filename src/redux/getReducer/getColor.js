@@ -32,7 +32,7 @@ const getColorSlice = createSlice({
 export const {setcolor , setStatus} = getColorSlice.actions;
 export default getColorSlice.reducer;
 
-export const fetchcolor = createAsyncThunk('/Colorget/fetch', async({SearchTitle,SearchCode,SearchUrl}) => {
+export const fetchcolor = createAsyncThunk('/Colorget/fetch', async({SearchTitle,SearchCode}) => {
     const res = await axios.get(`${window.env.API_URL}/Colorget?shortCode=${SearchCode}&NameEn=${SearchTitle}`);
     const colorData = res.data;
     return colorData.data;

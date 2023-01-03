@@ -32,8 +32,8 @@ const getOwnerSlice = createSlice({
 export const { setOwner, setStatus } = getOwnerSlice.actions;
 export default getOwnerSlice.reducer;
 
-export const fetchOwner = createAsyncThunk('Ownerget/fetch', async () => {
-    const res = await axios.get(`${window.env.API_URL}/Ownerget?keyword=&page=`)
+export const fetchOwner = createAsyncThunk('Ownerget/fetch', async ({SearchTitle,SearchCode,SearchAge}) => {
+    const res = await axios.get(`${window.env.API_URL}/Ownerget?shortCode=${SearchCode}&NameEn=${SearchTitle}&DescriptionEn=${SearchAge}`)
     const data =  res.data;
     return data.data;
 });

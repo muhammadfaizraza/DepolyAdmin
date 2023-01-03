@@ -63,7 +63,7 @@ const ColorTable = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchcolor());
+    dispatch(fetchcolor({SearchTitle,SearchCode,SearchUrl}));
   }, [dispatch]);
 
   const handleRemove = async (Id) => {

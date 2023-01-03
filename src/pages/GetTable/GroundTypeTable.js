@@ -21,7 +21,6 @@ import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
-import { fetchbreeder } from "../../redux/getReducer/getBreeder";
 
 const GroundTypeTable = () => {
   const [ShowCalender, setShowCalender] = useState(false);
@@ -56,7 +55,7 @@ const GroundTypeTable = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const GetSearch = async () => {
-    dispatch(fetchbreeder({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchgroundtype({SearchTitle,SearchCode,SearchAge}));
     setSearchTitle('')
     setSearchCode('')
     setSearchAge('')
@@ -64,7 +63,7 @@ const GroundTypeTable = () => {
 
 
   useEffect(() => {
-    dispatch(fetchgroundtype());
+    dispatch(fetchgroundtype({SearchTitle,SearchCode,SearchAge}));
   }, [dispatch]);
 
   const handleRemove = async (Id) => {

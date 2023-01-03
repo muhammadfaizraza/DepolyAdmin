@@ -86,7 +86,9 @@ const HorseForm = () => {
      const [ErrorRemarksAr, setErrorRemarksAr] = useState("");
      
   const [ErrorRegistration, setErrorRegistration] = useState("");
-
+  const [SearchAge, setSearchAge] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
 
 
 
@@ -103,14 +105,14 @@ const HorseForm = () => {
   const { data: HorseKind} = useSelector((state) => state.HorseKind);
 
   useEffect(() => {
-    dispatch(fetchOwner());
-    dispatch(fetchTrainer());
-    dispatch(fetchHorse());
-    dispatch(fetchcolor());
-    dispatch(fetchbreeder());
-    dispatch(fetchnationality());
-    dispatch(fetchgender());
-    dispatch(fetchHorseKind());
+    dispatch(fetchOwner({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchTrainer({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchHorse({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchcolor({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchbreeder({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchnationality({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchgender({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchHorseKind({SearchTitle,SearchCode,SearchAge}));
   }, [dispatch]);
 
   let horseoptions =

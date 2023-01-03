@@ -46,12 +46,6 @@ const Owner = () => {
   const dispatch = useDispatch();
   const [pagenumber, setPageNumber] = useState(1);
 
-  const previousPageHandler = () => {
-    setPageNumber((pagenumber) => pagenumber - 1);
-  };
-  const nextPageHandler = () => {
-    setPageNumber((pagenumber) => pagenumber + 1);
-  };
   const { data: owner, status } = useSelector((state) => state.owner);
 
   const [currentPage, setCurrentPage] = useState(1);

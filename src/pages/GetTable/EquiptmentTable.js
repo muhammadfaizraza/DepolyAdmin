@@ -57,7 +57,7 @@ const EquiptmentTable = () => {
     setSearchAge('')
   };
   useEffect(() => {
-    dispatch(fetchequipment());
+    dispatch(fetchequipment({SearchTitle,SearchCode,SearchAge}));
   }, [dispatch]);
   const handleRemove = async (Id) => {
     try {
@@ -169,7 +169,9 @@ const EquiptmentTable = () => {
                      />
                     </div>
                   </div>
-                  <button className="filterbtn">Apply Filter</button>
+                  <button className="filterbtn" onClick={GetSearch}>
+                   Apply Filter
+                 </button>
                 </span>
               ) : (
                 <></>

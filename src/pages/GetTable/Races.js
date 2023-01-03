@@ -21,8 +21,7 @@ import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { DateRangePicker } from 'react-date-range';
-
+import { DateRangePicker } from "react-date-range";
 
 const Prize = (data) => {
   return (
@@ -55,16 +54,70 @@ const Prize = (data) => {
 
 const Races = () => {
   const [ShowCalender, setShowCalender] = useState(false);
-  const [SearchAge, setSearchAge] = useState('');
-  const [SearchCode, setSearchCode] = useState('');
-  const [SearchTitle, setSearchTitle] = useState('');
+  const [MeetingType, setMeetingType] = useState("");
+  const [MeetingCode, setMeetingCode] = useState("");
+  const [RaceName, setRaceName] = useState("");
+  const [TrackLength, setTrackLength] = useState("");
+  const [Ground, setGround] = useState("");
+  const [DescriptionAr, setDescriptionAr] = useState("");
+
+  const [DescriptionEn, setDescriptionEn] = useState("");
+  const [RaceType, setRaceType] = useState("");
+  const [RaceStatus, setRaceStatus] = useState("");
+  const [RaceCourse, setRaceCourse] = useState("");
+
+  const [WeatherType, setWeatherType] = useState("");
+  const [WeatherDegree, setWeatherDegree] = useState("");
+  const [Competition, setCompetition] = useState("");
+  const [Sponsor, setSponsor] = useState("");
+
   const [state, setState] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
-      key: 'selection'
-    }
+      key: "selection",
+    },
   ]);
+
+  const GetSearch = async () => {
+    dispatch(
+      fetchrace({
+        MeetingType,
+        MeetingCode,
+        RaceName,
+        TrackLength,
+        Ground,
+        DescriptionAr,
+        DescriptionEn,
+        RaceType,
+        RaceStatus,
+        RaceCourse,
+        WeatherType,
+        WeatherDegree,
+        Competition,
+        Sponsor,
+      })
+    );
+    setMeetingType("");
+    setMeetingCode("");
+    setRaceName("");
+
+    setTrackLength("");
+    setGround("");
+    setDescriptionAr("");
+
+    setDescriptionEn("");
+    setRaceType("");
+    setRaceStatus("");
+
+    setRaceCourse("");
+    setWeatherType("");
+    setRaceName("");
+    setSponsor("");
+    setCompetition("");
+    setWeatherDegree("");
+  };
+
   const history = useNavigate();
   const [PublishRace, setPublishRace] = useState(true);
 
@@ -96,7 +149,20 @@ const Races = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    dispatch(fetchrace());
+    dispatch(fetchrace({     MeetingType,
+      MeetingCode,
+      RaceName,
+      TrackLength,
+      Ground,
+      DescriptionAr,
+      DescriptionEn,
+      RaceType,
+      RaceStatus,
+      RaceCourse,
+      WeatherType,
+      WeatherDegree,
+      Competition,
+      Sponsor,}));
     dispatch(fetchtobePublishRace());
   }, [dispatch]);
 
@@ -109,9 +175,7 @@ const Races = () => {
         buttons: true,
         dangerMode: true,
       }).then(async (willDelete) => {
-    await axios.delete(
-          `${window.env.API_URL}/softdeleterace/${Id}`
-        );
+        await axios.delete(`${window.env.API_URL}/softdeleterace/${Id}`);
 
         if (willDelete) {
           swal("Your data has been deleted Successfully!", {
@@ -168,7 +232,6 @@ const Races = () => {
             <div className="Header ">
               <h4> Race Listings</h4>
               <div>
-          
                 <Link to="/raceform">
                   <button>Add Race</button>
                 </Link>
@@ -200,16 +263,29 @@ const Races = () => {
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Enter Title"
+                        placeholder="Enter Race Name"
+                        onChange={(e)=> setRaceName(e.target.value)}
+
                       />
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Enter Description"
+                        placeholder="Enter Meeting Type"
+                        onChange={(e)=> setMeetingType(e.target.value)}
+
+                      />
+                          <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Meeting Code"
+                        onChange={(e)=> setMeetingCode(e.target.value)}
+
                       />
                     </div>
                   </div>
-                  <button className="filterbtn">Apply Filter</button>
+                  <button className="filterbtn" onClick={GetSearch}>
+                    Apply Filter
+                  </button>
                 </span>
               ) : (
                 <></>

@@ -157,11 +157,11 @@ const SliderForm = () => {
                       onChange={(e) => setUrl(e.target.value)}
                       name="Name"
                       value={Url}
-                      onBlur={() => Url === " " ? setErrorURL("URL is required"):setErrorURL("")}
+                      onBlur={() => Url === "" ? setErrorURL("URL is required"):setErrorURL("URL is Validated ")}
                     >
                       <Form.Control type="text" placeholder="Title" required />
                     </FloatingLabel>
-<span className="error">{ErrorURL}</span>
+<span className={Url === "" ? "error" :"success"}>{ErrorURL}</span>
                   </div>
 
 

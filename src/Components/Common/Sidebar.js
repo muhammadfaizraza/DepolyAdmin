@@ -197,7 +197,7 @@ const Sidebar = () => {
                 </div>
               
                 <div>
-                  {" "}
+              
                   <Link to="/trainerform" className="mylink">
                     Add Trainer
                   </Link>
@@ -279,7 +279,7 @@ const Sidebar = () => {
                 </div>
                 <div>
                   <Link to="/addcompetitionPoint" className="mylink">
-                   Add Point Table
+                   Add Point 
                   </Link>
                 </div>
                 
@@ -290,18 +290,18 @@ const Sidebar = () => {
               <Accordion.Body className="AccordionBody">
                 <div>
                   <Link to="/competitionlisting" className="mylink">
-                    View Listing
+                   Competition
                   </Link>
                 </div>
           
                 <div>
                   <Link to="/CategoryListing" className="mylink">
-                     Category Listing
+                   Competition Category 
                   </Link>
                 </div>
                 <div>
                   <Link to="/viewcompetitionPoint" className="mylink">
-                   View Point Table
+                    Points   
                   </Link>
                 </div>
                 

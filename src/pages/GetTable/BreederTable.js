@@ -124,13 +124,7 @@ const BreederTable = () => {
               <h4>Breeder Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
+          
                 <Link to="/breeder">
                   <button>Add Breeder</button>
                 </Link>

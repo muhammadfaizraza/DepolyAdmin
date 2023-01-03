@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-date-picker";
 import "../../Components/CSS/forms.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import { add } from "../../redux/postReducer/PostJockey";
 import { fetchnationality } from "../../redux/getReducer/getNationality";
 import swal from "sweetalert";
 import { useSelector } from "react-redux";
@@ -29,9 +28,7 @@ const NewsForm = () => {
 
   const [ErrorDateofBirth, setErrorDateofBirth] = useState("");
   const [ErrorLicenseDate, setErrorLicenseDate] = useState("");
-  const [ErrorRemarks, setErrorRemarks] = useState("");
-  const [ErrorRemarksAr, setErrorRemarksAr] = useState("");
-  const [ErrorRating, setErrorRating] = useState("");
+
   const [ErrorMinWeight, setErrorMinWeight] = useState("");
   const [ErrorMaxWeight, setErrorMaxWeight] = useState("");
   const [ErrorAllowance, setErrorAllowance] = useState("");
@@ -129,46 +126,45 @@ const NewsForm = () => {
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);
   };
-  const ref = useRef();
 
-  const convert = (num) => {
-    if (num) {
-      var date = new Date(num);
-      var months = [
-        "يناير",
-        "فبراير",
-        "مارس",
-        "إبريل",
-        "مايو",
-        "يونيو",
-        "يوليو",
-        "أغسطس",
-        "سبتمبر",
-        "أكتوبر",
-        "نوفمبر",
-        "ديسمبر",
-      ];
-      var days = [
-        "اﻷحد",
-        "اﻷثنين",
-        "الثلاثاء",
-        "اﻷربعاء",
-        "الخميس",
-        "الجمعة",
-        "السبت",
-      ];
-      var delDateString =
-        days[date.getDay()] +
-        " " +
-        date.getDate() +
-        " " +
-        months[date.getMonth()] +
-        " " +
-        date.getFullYear();
+  // const convert = (num) => {
+  //   if (num) {
+  //     var date = new Date(num);
+  //     var months = [
+  //       "يناير",
+  //       "فبراير",
+  //       "مارس",
+  //       "إبريل",
+  //       "مايو",
+  //       "يونيو",
+  //       "يوليو",
+  //       "أغسطس",
+  //       "سبتمبر",
+  //       "أكتوبر",
+  //       "نوفمبر",
+  //       "ديسمبر",
+  //     ];
+  //     var days = [
+  //       "اﻷحد",
+  //       "اﻷثنين",
+  //       "الثلاثاء",
+  //       "اﻷربعاء",
+  //       "الخميس",
+  //       "الجمعة",
+  //       "السبت",
+  //     ];
+  //     var delDateString =
+  //       days[date.getDay()] +
+  //       " " +
+  //       date.getDate() +
+  //       " " +
+  //       months[date.getMonth()] +
+  //       " " +
+  //       date.getFullYear();
 
-      return delDateString;
-    }
-  };
+  //     return delDateString;
+  //   }
+  // };
 
   let AllNationality =
     nationality === undefined ? (
@@ -176,22 +172,19 @@ const NewsForm = () => {
     ) : (
       nationality.map(function (item) {
         return {
-          ID: item._id,
-          value: item.NameEn,
-          label: item.NameEn,
-        };
-      })
-    );
-
-  let AllNationalityAr =
-    nationality === undefined ? (
-      <></>
-    ) : (
-      nationality.map(function (item) {
-        return {
           id: item._id,
-          value: item.NameAr,
-          label: item.NameAr,
+          value: item._id,
+          label: (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
+            </div>
+          ),
         };
       })
     );
@@ -220,15 +213,6 @@ const NewsForm = () => {
     TextInputValidation("ar", ShortNameAr, "Jockey Short Name Arabic")
   );
   const shotNameAr = JSON.parse(data6);
-
-  const data8 = JSON.stringify(
-    TextInputValidation("en", RemarksEn, "Jockey Remarks English")
-  );
-  const Remark = JSON.parse(data8);
-  const data9 = JSON.stringify(
-    TextInputValidation("ar", RemarksAr, "Jockey Remarks Arabic")
-  );
-  const Remarkar = JSON.parse(data9);
 
   return (
     <>
@@ -341,19 +325,11 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setRemarksEn(e.target.value)}
                       value={RemarksEn}
-                      onBlur={() => setErrorRemarks(Remark)}
                     >
-                      <Form.Control
-                        type="text"
-                        placeholder="Remarks"
-                        required
-                      />
+                      <Form.Control type="text" placeholder="Remarks" />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className={ErrorRemarks.status ? "success" : "error"}>
-                      {ErrorRemarks.message}
-                    </span>
                   </div>
 
                   <div className="col-sm">
@@ -365,21 +341,9 @@ const NewsForm = () => {
                       name="Name"
                       value={RemarksAr}
                       style={{ direction: "rtl" }}
-                      onBlur={() => setErrorRemarksAr(Remarkar)}
                     >
-                      <Form.Control
-                        type="text"
-                        placeholder="ملاحظات"
-                        required
-                      />
+                      <Form.Control type="text" placeholder="ملاحظات" />
                     </FloatingLabel>
-                    <span
-                      className={
-                        ErrorRemarksAr.status ? "successAr" : "errorAr"
-                      }
-                    >
-                      {ErrorRemarksAr.message}
-                    </span>
                   </div>
                 </div>
 
@@ -397,11 +361,11 @@ const NewsForm = () => {
                           ? setErrorDateofBirth(
                               "Jockey Date Of Birth is required"
                             )
-                          : setErrorDateofBirth(" ")
+                          : setErrorDateofBirth("Jockey Date of Birth is Validated")
                       }
                     />
                     <span className="spanForm"> |</span>
-                    <span className="error">{ErrorDateofBirth}</span>
+                    <span className={DOB === "" ? "error" :"success"}>{ErrorDateofBirth}</span>
                   </div>
 
                   <div className="col-sm" style={{ direction: "rtl" }}>
@@ -430,12 +394,12 @@ const NewsForm = () => {
                           ? setErrorLicenseDate(
                               "Jockey License Date is required"
                             )
-                          : setErrorLicenseDate(" ")
+                          : setErrorLicenseDate("Jockey License Date is Validated")
                       }
                     />
 
                     <span className="spanForm"> |</span>
-                    <span className="error">{ErrorLicenseDate}</span>
+                    <span className={JockeyLicenseDate === "" ? "error" :"success "}>{ErrorLicenseDate}</span>
                   </div>
 
                   <div className="col-sm" style={{ direction: "rtl" }}>
@@ -486,21 +450,8 @@ const NewsForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>
-                      |
                     </span>
                     <span className="error">{ErrorNationality}</span>
-                  </div>
-                  <div className="col-sm">
-                    <Select
-                      required
-                      placeholder={<div>حدد جيلتي</div>}
-                      className="selectdir"
-                      defaultValue={NationalityID}
-                      onChange={setNationalityID}
-                      options={AllNationalityAr}
-                      isClearable={true}
-                      isSearchable={true}
-                    />
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -511,11 +462,6 @@ const NewsForm = () => {
                       className="mb-3"
                       onChange={(e) => setRating(e.target.value)}
                       value={Rating}
-                      onBlur={(e) =>
-                        Rating === ""
-                          ? setErrorRating("Jockey Rating is required ")
-                          : setErrorRating("Jockey Rating is validated")
-                      }
                     >
                       <Form.Control
                         placeholder="Rating"
@@ -524,9 +470,6 @@ const NewsForm = () => {
                         type="number"
                       />
                     </FloatingLabel>
-                    <span className={Rating === "" ? "error" : "success"}>
-                      {ErrorRating}
-                    </span>
                     {/* <span className="spanForm"> |</span> */}
                   </div>
                   {/* 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import env from "react-dotenv";
+
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
 export const STATUSES = Object.freeze({
@@ -32,7 +32,7 @@ const getRaceSlice = createSlice({
 export const { setRace, setStatus } = getRaceSlice.actions;
 export default getRaceSlice.reducer;
 export const fetchrace = createAsyncThunk(
-  "SearchRace/fetch",
+  "getrace/fetch",
   async ({
     MeetingType,
     MeetingCode,
@@ -50,7 +50,7 @@ export const fetchrace = createAsyncThunk(
     Competition,
   }) => {
     const res = await axios.get(
-      `${window.env.API_URL}SearchRace?MeetingType=${MeetingType}&MeetingCode=${MeetingCode}&RaceName=${RaceName}&TrackLength=${TrackLength}&Ground=${Ground}&DescriptionAr=${DescriptionAr}&DescriptionEn=${DescriptionEn}&RaceStatus=${RaceStatus}&RaceCourse=${RaceCourse}&WeatherType=${WeatherType}&WeatherDegree=${WeatherDegree}&RaceType=${RaceType}&Competition=${Competition}&Sponsor=${Sponsor}   `
+      `${window.env.API_URL}getrace?MeetingType=${MeetingType}&MeetingCode=${MeetingCode}&RaceName=${RaceName}&TrackLength=${TrackLength}&Ground=${Ground}&DescriptionAr=${DescriptionAr}&DescriptionEn=${DescriptionEn}&RaceStatus=${RaceStatus}&RaceCourse=${RaceCourse}&WeatherType=${WeatherType}&WeatherDegree=${WeatherDegree}&RaceType=${RaceType}&Competition=${Competition}&Sponsor=${Sponsor}   `
     );
     const data = res.data;
     return data.data;

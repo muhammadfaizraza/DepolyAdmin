@@ -257,36 +257,103 @@ const Races = () => {
             </div>
             <div>
               {ShowCalender ? (
-                <span className="transitionclass">
-                  <div className="userfilter">
-                    <div className="filtertextform forflex">
+                 <>
+                 <div className="userfilter">
+                   <div className="calenderuser">
+                     <DateRangePicker
+                       onChange={(item) => setState([item.selection])}
+                       showSelectionPreview={true}
+                       moveRangeOnFirstSelection={false}
+                       months={2}
+                       ranges={state}
+                       direction="horizontal"
+                     />
+                   </div>
+                   <div className="filtertextform">
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setRaceName(e.target.value)}
+                       placeholder="Enter Race Name"
+                     />
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setMeetingCode(e.target.value)}
+                       placeholder="Enter Meeting Code"
+                     />
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setMeetingType(e.target.value)}
+                       placeholder="Enter Meeting Type"
+                     />
                       <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Race Name"
-                        onChange={(e)=> setRaceName(e.target.value)}
-
-                      />
+                       type="number"
+                       class="form-control"
+                       onChange={(e) => setTrackLength(e.target.value)}
+                       placeholder="Enter Track Length"
+                     />
+                        <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setGround(e.target.value)}
+                       placeholder="Enter Ground Type"
+                     />
+                       <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setDescriptionEn(e.target.value)}
+                       placeholder="Enter Description"
+                     />
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setDescriptionAr(e.target.value)}
+                       placeholder="Enter Description Arabic"
+                     />
+                       <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setRaceType(e.target.value)}
+                       placeholder="Enter Race Type"
+                     />
                       <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Meeting Type"
-                        onChange={(e)=> setMeetingType(e.target.value)}
-
-                      />
-                          <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Meeting Code"
-                        onChange={(e)=> setMeetingCode(e.target.value)}
-
-                      />
-                    </div>
-                  </div>
-                  <button className="filterbtn" onClick={GetSearch}>
-                    Apply Filter
-                  </button>
-                </span>
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setRaceStatus(e.target.value)}
+                       placeholder="Enter Race Status"
+                     />
+                      <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setRaceCourse(e.target.value)}
+                       placeholder="Enter Race Course"
+                     />
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setWeatherType(e.target.value)}
+                       placeholder="Enter Weather Type"
+                     />
+                        <input
+                       type="number"
+                       class="form-control"
+                       onChange={(e) => setWeatherDegree(e.target.value)}
+                       placeholder="Enter Weather Degree"
+                     />
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setCompetition(e.target.value)}
+                       placeholder="Enter Competition"
+                     />
+                   </div>
+                 </div>
+                 <button className="filterbtn" onClick={GetSearch}>
+                   Apply Filter
+                 </button>
+               </>
               ) : (
                 <></>
               )}

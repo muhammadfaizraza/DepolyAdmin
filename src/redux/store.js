@@ -186,7 +186,8 @@ const store = configureStore({
     verdictshortcode:getverdictshortcode,
     newsletter:getNewLetter,
     pointTable:getPointTable,
-    horsekindshortcode:gethorsekindshortcode
+    horsekindshortcode:gethorsekindshortcode,
+    
 
   },
 });

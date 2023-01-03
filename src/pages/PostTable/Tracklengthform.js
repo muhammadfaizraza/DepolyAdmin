@@ -19,9 +19,13 @@ import RaceCoursePopup from "./RaceCourseForm";
 import GroundTypePopup from "./GroundType";
 
 const Tracklengthform = () => {
+
   const [ErrorTrackLength, setErrorTrackLength] = useState("");
   const [ErrorRaceCourse, setErrorRaceCourse] = useState("");
+  const [SearchAge, setSearchAge] = useState('');
 
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
   const [ErrorGroundType, setErrorGroundType] = useState("");
 
   const [ErrorRailPosition, setErrorRailPosition] = useState("");
@@ -44,7 +48,31 @@ const Tracklengthform = () => {
   const handleShowRaceCourse = async () => {
     await setShowActiveRaceCourse(true);
   };
+ let courseoptions =
+    racecourse === undefined ? (
+      <></>
+    ) : (
+      racecourse.map(function (item) {
+        return {
+          id: item._id,
+          value: item.TrackNameEn,
+          label: item.TrackNameEn,
+        };
+      })
+    );
 
+  let groundtypeopt =
+    groundtype === undefined ? (
+      <></>
+    ) : (
+      groundtype.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameEn,
+          label: item.NameEn,
+        };
+      })
+    );
   const [TrackLength, setTrackLength] = useState();
   const [RaceCourse, setRaceCourse] = useState("");
   const [RaceCourseImage, setRaceCourseImage] = useState();
@@ -63,8 +91,8 @@ const Tracklengthform = () => {
       formData.append("TrackLength", TrackLength);
       formData.append("RaceCourse", RaceCourse.id);
       formData.append("image", RaceCourseImage);
-      formData.append("GroundType", GroundType.id);
-      formData.append("RailPosition", RailPosition);
+      formData.append("GroundType", GroundType.id );
+      formData.append("RailPosition", GroundType.value === 'Truf' || 'truf' ? 0 : RailPosition);
 
       await axios.post(`${window.env.API_URL}/uploadTrackLength`, formData);
       swal({
@@ -93,7 +121,7 @@ const Tracklengthform = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchgroundtype());
+    dispatch(fetchgroundtype({SearchTitle,SearchCode,SearchAge}));
     dispatch(fetchracecourse());
 
     if (!RaceCourseImage) {
@@ -119,34 +147,10 @@ const Tracklengthform = () => {
     document.getElementById("file").value = "";
   };
   const FetchNew = () => {
-    dispatch(fetchgroundtype());
+    dispatch(fetchgroundtype({SearchTitle,SearchCode,SearchAge}));
     dispatch(fetchracecourse());
   };
-  let courseoptions =
-    racecourse === undefined ? (
-      <></>
-    ) : (
-      racecourse.map(function (item) {
-        return {
-          id: item._id,
-          value: item.TrackNameEn,
-          label: item.TrackNameEn,
-        };
-      })
-    );
-
-  let groundtypeopt =
-    groundtype === undefined ? (
-      <></>
-    ) : (
-      groundtype.map(function (item) {
-        return {
-          id: item._id,
-          value: item.NameEn,
-          label: item.NameEn,
-        };
-      })
-    );
+ 
 
   const data1 = JSON.stringify(
     TextInputValidation("en", RailPosition, "Rail Position ")
@@ -201,6 +205,55 @@ const Tracklengthform = () => {
               </div>
               <div className="row mainrow">
                 <div className="col-sm">
+                  <Select
+                    placeholder={<div>Select Ground Type</div>}
+                    defaultValue={GroundType}
+                    onChange={setGroundType}
+                    options={groundtypeopt}
+                    isClearable={true}
+                    isSearchable={true}
+                    onBlur={() =>
+                      GroundType === ""
+                        ? setErrorGroundType("Ground Type is required")
+                        : setErrorGroundType(" ")
+                    }
+                  />
+                  <span className="spanForm">
+                    <OverlayTrigger
+                      overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                    >
+                      <span className="addmore" onClick={handleShowGroundType}>
+                        +
+                      </span>
+                    </OverlayTrigger>
+                    <OverlayTrigger
+                      overlay={<Tooltip id={`tooltip-top`}>Fetch New</Tooltip>}
+                    >
+                      <span className="addmore" onClick={FetchNew}>
+                        <AiOutlineReload />
+                      </span>
+                    </OverlayTrigger>
+                    |
+                  </span>
+                  <span className={GroundType === "" ? "error" : "success"}>
+                    {ErrorGroundType}
+                  </span>
+                </div>
+                <div className="col-sm">
+                  <Select
+                    required
+                    placeholder={<div>نوع الأرض</div>}
+                    className="selectdir"
+                    defaultValue={GroundType}
+                    onChange={setGroundType}
+                    options={groundtypeopt}
+                    isClearable={true}
+                    isSearchable={true}
+                  />
+                </div>
+              </div>
+              <div className="row mainrow">
+                <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="Rail Position"
@@ -212,7 +265,7 @@ const Tracklengthform = () => {
                     <Form.Control
                       type="text"
                       placeholder="Rail Position"
-                      required
+                      
                     />
                   </FloatingLabel>
                   <span className="spanForm"> |</span>
@@ -235,7 +288,7 @@ const Tracklengthform = () => {
                     <Form.Control
                       type="text"
                       placeholder="طول المسار"
-                      required
+                      
                     />
                   </FloatingLabel>
                 </div>
@@ -290,55 +343,7 @@ const Tracklengthform = () => {
                 </div>
               </div>
 
-              <div className="row mainrow">
-                <div className="col-sm">
-                  <Select
-                    placeholder={<div>Select Ground Type</div>}
-                    defaultValue={GroundType}
-                    onChange={setGroundType}
-                    options={groundtypeopt}
-                    isClearable={true}
-                    isSearchable={true}
-                    onBlur={() =>
-                      GroundType === ""
-                        ? setErrorGroundType("Ground Type is required")
-                        : setErrorGroundType(" ")
-                    }
-                  />
-                  <span className="spanForm">
-                    <OverlayTrigger
-                      overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
-                    >
-                      <span className="addmore" onClick={handleShowGroundType}>
-                        +
-                      </span>
-                    </OverlayTrigger>
-                    <OverlayTrigger
-                      overlay={<Tooltip id={`tooltip-top`}>Fetch New</Tooltip>}
-                    >
-                      <span className="addmore" onClick={FetchNew}>
-                        <AiOutlineReload />
-                      </span>
-                    </OverlayTrigger>
-                    |
-                  </span>
-                  <span className={GroundType === "" ? "error" : "success"}>
-                    {ErrorGroundType}
-                  </span>
-                </div>
-                <div className="col-sm">
-                  <Select
-                    required
-                    placeholder={<div>نوع الأرض</div>}
-                    className="selectdir"
-                    defaultValue={GroundType}
-                    onChange={setGroundType}
-                    options={groundtypeopt}
-                    isClearable={true}
-                    isSearchable={true}
-                  />
-                </div>
-              </div>
+              
               <div className="ButtonSection">
                 <div>
                   <label className="Multipleownerlabel">Select GIF Image</label>

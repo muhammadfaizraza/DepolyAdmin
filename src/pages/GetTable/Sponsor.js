@@ -59,7 +59,7 @@ const News = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchSponsor());
+    dispatch(fetchSponsor({SearchTitle,SearchCode}));
   }, []);
 
   const handleRemove = async (Id) => {

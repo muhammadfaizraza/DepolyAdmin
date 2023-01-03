@@ -57,13 +57,12 @@ const HorseKind = () => {
 
 
   const GetSearch = async () => {
-    dispatch(fetchHorseKind({SearchTitle,SearchAge}));
+    dispatch(fetchHorseKind({SearchTitle,SearchCode}));
     setSearchTitle('')
     setSearchCode('')
-    setSearchAge('')
   };
   useEffect(() => {
-    dispatch(fetchHorseKind());
+    dispatch(fetchHorseKind({SearchTitle,SearchCode}));
   }, [dispatch]);
 
   const handleRemove = async (Id) => {

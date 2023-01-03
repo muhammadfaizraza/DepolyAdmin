@@ -131,6 +131,7 @@ const DeletedAds = () => {
                       <th>Title Arabic</th>
                       <th>Description </th>
                       <th>Description Arabic</th>
+                      <th>URL</th>
                       <th>Image</th>
                      
                       <th>Action</th>
@@ -145,6 +146,7 @@ const DeletedAds = () => {
                             <td>{item.TitleAr}</td>
                             <td>{item.DescriptionEn}</td>
                             <td>{item.DescriptionAr}</td>
+                            <td>{item.url}</td>
                             <td>
                               <img src={item.image} alt="" />
                             </td>

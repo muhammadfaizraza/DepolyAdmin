@@ -32,8 +32,8 @@ const getHorseKindSlice = createSlice({
 export const {setHorseKind , setStatus} = getHorseKindSlice.actions;
 export default getHorseKindSlice.reducer;
 
-export const fetchHorseKind = createAsyncThunk('/HorseKind/fetch', async() => {
-    const res = await axios.get(`${window.env.API_URL}/HorseKindget?keyword=&page=`);
+export const fetchHorseKind = createAsyncThunk('/HorseKind/fetch', async({SearchTitle,SearchCode}) => {
+    const res = await axios.get(`${window.env.API_URL}/HorseKindget?shortCode=${SearchCode}&NameEn=${SearchTitle}`);
     const HorseKindData = res.data;
     return HorseKindData.data;
 })

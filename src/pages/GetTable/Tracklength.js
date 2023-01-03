@@ -188,6 +188,7 @@ const Tracklength = () => {
 
                         <th>Track Length</th>
                         <th>Race Course </th>
+                        <th>Rail Position</th>
                         <th>RaceCourse Image</th>
                       </tr>
                     </thead>
@@ -225,6 +226,7 @@ const Tracklength = () => {
                                   </>
                                 )}
                               </td>
+                              <td>{item.RailPosition}</td>
                               <td>
                                 <img src={item.RaceCourseImage} alt="" />
                               </td>

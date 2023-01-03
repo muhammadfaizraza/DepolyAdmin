@@ -100,9 +100,12 @@ const RaceForm = () => {
   const [ErrorSixthPrice, setErrorSixthPrice] = useState("");
   const [isLoading, setisLoading] = useState(false);
 
+
+  const [SearchAge, setSearchAge] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
   //end
   const { data: racecourse } = useSelector((state) => state.racecourse);
-  const { data: jockey } = useSelector((state) => state.jockey);
   const { data: sponsor } = useSelector((state) => state.sponsor);
   const { data: meeting } = useSelector((state) => state.meeting);
   const { data: RaceType } = useSelector((state) => state.RaceType);
@@ -266,7 +269,7 @@ const RaceForm = () => {
       trackLength.map(function (item) {
         return {
           id: item._id,
-          value: item.TrackLength,
+          value: item._id,
           label: item.TrackLength,
         };
       })
@@ -383,12 +386,12 @@ const RaceForm = () => {
     dispatch(fetchracecourse());
     dispatch(fetchjockey());
     dispatch(fetchSponsor());
-    dispatch(fetchMeeting());
+    dispatch(fetchMeeting({SearchCode,SearchTitle,SearchAge}));
     dispatch(fetchRaceType());
     dispatch(fetchRaceName());
     dispatch(fetchTrackLength());
     dispatch(fetchRaceKind());
-    dispatch(fetchgroundtype());
+    dispatch(fetchgroundtype({SearchCode,SearchTitle,SearchAge}));
     dispatch(fetchpointTable());
   };
 

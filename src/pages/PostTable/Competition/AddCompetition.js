@@ -13,6 +13,9 @@ import { fetchcategory } from "../../../redux/getReducer/getCategory";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { fetchSponsor } from "../../../redux/getReducer/getSponsorSlice";
+import { Modal } from "react-bootstrap";
+import SponsorPopup from "../SponsorForm";
+import CategoryPopup from "./AddCategory"
 
 const CategoryType = [
     {
@@ -43,14 +46,27 @@ const TrainerForm = () => {
   const [ErrorTriCount, setErrorTriCount] = useState("");
   const [ErrorNoofRaces, setErrorNoofRaces] = useState("");
   const [ErrorCategory, setErrorCategory] = useState("");
-  const [ErrorCategorys, setErrorCategorys] = useState("");
-  
+  const [ErrorCategorys, setErrorCategorys] = useState("");  
   const [ErrorCode, setErrorCode] = useState("");
   const [ErrorCodeAr, setErrorCodeAr] = useState("");
-
-
   const [isLoading, setisLoading] = useState(false);
 
+    const [SearchAge, setSearchAge] = useState('');
+    const [SearchCode, setSearchCode] = useState('');
+    const [SearchTitle, setSearchTitle] = useState('');
+
+
+  const [showSponsor, setShowSponsor] = useState(false);
+  const [showCategory, setShowCategory] = useState(false);
+ 
+  const handleCloseSponsor = () => setShowSponsor(false);
+  const handleCloseCategory = () => setShowCategory(false);
+  const handleShowSponsor = async () => {
+    await setShowSponsor(true);
+  };
+  const handleShowCategory = async () => {
+    await setShowCategory(true);
+  };
   const history = useNavigate();
   const dispatch = useDispatch();
 
@@ -59,11 +75,12 @@ const TrainerForm = () => {
 
   useEffect(() => {
     dispatch(fetchcategory());
-    dispatch(fetchSponsor());
+    dispatch(fetchSponsor({SearchAge,SearchCode,SearchTitle}));
   }, []);
 
   const FetchNew = () => {
     dispatch(fetchcategory());
+    dispatch(fetchSponsor());
   };
 
   let AllCategory =
@@ -415,7 +432,7 @@ const TrainerForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <span className="addmore">
+                        <span className="addmore" onClick={handleShowCategory}>
                           +
                         </span>
                       </OverlayTrigger>
@@ -461,7 +478,7 @@ const TrainerForm = () => {
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
-                        <span className="addmore">
+                          <span className="addmore" onClick={handleShowSponsor}>
                           +
                         </span>
                       </OverlayTrigger>
@@ -639,7 +656,35 @@ const TrainerForm = () => {
           </div>
         </div>
       </div>
-  
+      <Modal
+        show={showSponsor}
+        onHide={handleCloseSponsor}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Sponsor</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <SponsorPopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showCategory}
+        onHide={handleCloseCategory}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Competition Category</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <CategoryPopup />
+        </Modal.Body>
+      </Modal>
+
     </Fragment>
   );
 };

@@ -10,8 +10,7 @@ import { useSelector ,useDispatch } from "react-redux";
 const GroundType = () => {
   const {data:groundshortcode} = useSelector((state) => state.groundshortcode)
 
-  const [Error, setError] = useState("");
-  const [ErrorAr, setErrorAr] = useState("");
+
 
   
   const [ErrorAbbrev, setErrorAbbrev] = useState("");
@@ -23,7 +22,7 @@ const GroundType = () => {
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
-  const [shortCode, setshortCode] = useState("");
+
   const [AbbrevEn, setAbbrevEn] = useState("");
   const [AbbrevAr, setAbbrevAr] = useState("");
 

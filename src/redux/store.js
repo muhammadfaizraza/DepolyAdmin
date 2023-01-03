@@ -187,7 +187,7 @@ const store = configureStore({
     newsletter:getNewLetter,
     pointTable:getPointTable,
     horsekindshortcode:gethorsekindshortcode,
-    
+   
 
   },
 });

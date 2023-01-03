@@ -21,14 +21,33 @@ const Currency = () => {
 
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
-  const [shortCode, setshortCode] = useState("");
   const [Rate, setRate] = useState("");
   const [Symbol, setSymbol] = useState("");
 
   const [isLoading, setisLoading] = useState(false);
+  const [state1, setState] = useState({
+		shortCode: '',
+	});
+
+
 
   const history = useNavigate();
   const { pathname } = useLocation();
+
+
+
+
+
+
+  useEffect(() => {
+		if (currencyshortcode) {
+			setState({
+        shortCode: currencyshortcode.length === 0 ? 10 : currencyshortcode[0].maxshortCode + 1,
+			});
+		} else {
+      setState.shortCode('9')
+		}
+	}, [currencyshortcode]);
   useEffect(() => {
     dispatch(fetchcurrencyshortcode());
   }, [dispatch]);
@@ -173,7 +192,7 @@ const Currency = () => {
                   <span className="error">{ErrorRate}</span>
                   {/* <span className="spanForm"> |</span> */}
                 </div>
-
+            
                 {/* <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
@@ -215,6 +234,23 @@ const Currency = () => {
                   </FloatingLabel>
                 </div>
               </div> */}
+                  <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="Short Code"
+                      className="mb-3"
+                      onChange={(e) =>
+                        setState({ ...state1, shortCode: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="number" placeholder="Description" value={state1.shortCode}/>
+                    </FloatingLabel>
+                 
+									
+                  </div>
+                </div>
               <div className="ButtonSection" style={{ justifyContent: "end" }}>
                 <button type="submit" className="SubmitButton" disabled={isLoading}>
                   Add Currency

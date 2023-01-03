@@ -92,7 +92,7 @@ const Tracklengthform = () => {
       formData.append("RaceCourse", RaceCourse.id);
       formData.append("image", RaceCourseImage);
       formData.append("GroundType", GroundType.id );
-      formData.append("RailPosition", RailPosition);
+      formData.append("RailPosition", GroundType.value === 'Truf' || 'truf' ? 0 : RailPosition);
 
       await axios.post(`${window.env.API_URL}/uploadTrackLength`, formData);
       swal({

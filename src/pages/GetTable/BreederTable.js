@@ -31,6 +31,10 @@ const BreederTable = () => {
       key: 'selection'
     }
   ]);
+  const [SearchStartDate, setSearchStartDate] = useState('');
+  const [SearchEndStart, setSearchEndStart] = useState('');
+
+
 
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -53,14 +57,19 @@ const BreederTable = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const GetSearch = async () => {
-    dispatch(fetchbreeder({SearchTitle,SearchCode,SearchAge}));
+    setSearchEndStart(state[0].startDate.toISOString());
+    setSearchStartDate(state[0].endDate.toISOString());
+    dispatch(fetchbreeder({SearchTitle,SearchCode,SearchAge,SearchStartDate,SearchEndStart}));
     setSearchTitle('')
     setSearchCode('')
     setSearchAge('')
+    setSearchEndStart('');
+    setSearchStartDate('')
+
   };
 
   useEffect(() => {
-    dispatch(fetchbreeder({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchbreeder({SearchTitle,SearchCode,SearchAge,SearchStartDate,SearchEndStart}));
   }, [dispatch]);
 
   const handleRemove = async (Id) => {

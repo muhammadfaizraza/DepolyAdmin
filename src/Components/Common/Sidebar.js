@@ -29,16 +29,12 @@ const Sidebar = () => {
           </Link>
           <Accordion>
             <Accordion.Item eventKey="0">
-              <Accordion.Header>Races</Accordion.Header>
+              <Accordion.Header>Race</Accordion.Header>
               <Accordion.Body
                 className="AccordionBody"
                 style={{ height: "157px" }}
               >
-                <div>
-                  <Link to="/races" className="mylink">
-                     Race Listings
-                  </Link>
-                </div>
+          
                 <div>
                   <Link to="/racesPublish" className="mylink">
                     To Be Publish Race
@@ -47,228 +43,265 @@ const Sidebar = () => {
                 <div>
                   {" "}
                   <Link to="/raceform" className="mylink">
-                    Add New Race
+                    Add Race
                   </Link>
                 </div>
-                <div>
-                  {" "}
-                  <Link to="/racecardlisting" className="mylink">
-                     Race Card Listings
-                  </Link>
-                </div>
+             
                 <div>
                   {" "}
                   <Link to="/racecard" className="mylink">
-                    Create Race Card
+                    Add Race Card
                   </Link>
                 </div>
-                <div>
-                  <Link to="/racename" className="mylink">
-                    Race Name Listing
-                  </Link>{" "}
-                </div>
+          
                 
                 <div>
                   <Link to="/racenameform" className="mylink">
                     Add Race Name
                   </Link>
                 </div>
-                <div>
-                  <Link to="/racetype" className="mylink">
-                    Race Type Listing
-                  </Link>{" "}
-                </div>
-                <div>
-                  <Link to="/racetypeform" className="mylink">
-                    Add Race Type
-                  </Link>{" "}
-                </div>
-                <div>
-                  <Link to="/racekindform" className="mylink">
-                    Add Race Kind
-                  </Link>{" "}
-                </div>
-                <div>
-                  <Link to="/racekind" className="mylink">
-                    {" "}
-                    Race Kind Listing
-                  </Link>{" "}
-                </div>
+           
+            
+            
+          
                 <div>
                   <Link to="/meeting" className="mylink">
-                    Add Meeting{" "}
-                  </Link>{" "}
-                </div>
-                <div>
-                  <Link to="/getmeeting" className="mylink">
-                    Meeting Type
-                  </Link>{" "}
-                </div>
-                <div>
-                  <Link to="/addcompetitionPoint" className="mylink">
-                   Add Point Table
+                    Add Meeting Type
                   </Link>
                 </div>
-                <div>
-                  <Link to="/viewcompetitionPoint" className="mylink">
-                   View Point Table
-                  </Link>
-                </div>
+              
+           
+             
                 <div>
                   <Link to="/verdict" className="mylink">
                     Add Verdict
-                  </Link>{" "}
-                </div>
-                <div>
-                  <Link to="/verdictlist" className="mylink">
-                    Verdict
-                  </Link>{" "}
+                  </Link>
                 </div>
                 <div>
                   {" "}
+                  <Link
+                    to="/sponsorform"
+                    className="mylink"
+                    onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}
+                  >
+                    Add Sponsor
+                  </Link>
+                </div>
+             
+                <div>
+            
                   <Link to="/resultrace" className="mylink">
-                    Add Results
+                    Race Results 
                   </Link>
                 </div>
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="1">
-              <Accordion.Header>Race Course</Accordion.Header>
-              <Accordion.Body className="AccordionBody">
+                   <Accordion.Item eventKey="14">
+              <Accordion.Header>Race Listing</Accordion.Header>
+              <Accordion.Body
+                className="AccordionBody"
+                style={{ height: "157px" }} >
                 <div>
-                  {" "}
-                  <Link to="/racecourse" className="mylink">
-                    View Listing
+                  <Link to="/races" className="mylink">
+                     Race 
                   </Link>
                 </div>
+            
+             
                 <div>
-                  {" "}
-                  <Link to="/racecourseform" className="mylink">
-                    Add New
+             
+                  <Link to="/racecardlisting" className="mylink">
+                     Race Card 
+                  </Link>
+                </div>
+              
+                <div>
+                  <Link to="/racename" className="mylink">
+                    Race Name 
+                  </Link>
+                </div>
+                
+                <div>
+                  <Link
+                    to="/sponsor"
+                    className="mylink"
+                    onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}
+                  >
+                  Sponsor
+                  </Link>
+                </div>
+           
+            
+            
+          
+             
+                <div>
+                  <Link to="/getmeeting" className="mylink">
+                    Meeting Type
+                  </Link>
+                </div>
+              
+             
+         
+                <div>
+                  <Link to="/verdictlist" className="mylink">
+                    Verdict
+                  </Link>
+                </div>
+               
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="1">
+              <Accordion.Header>Actors</Accordion.Header>
+              <Accordion.Body className="AccordionBody">
+              <div>
+           
+                  <Link
+                    to="/breeder"
+                    className="mylink"
+                    onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}
+                  >
+                    Add Breeder
+                  </Link>
+                </div>
+              <div>
+               
+                  <Link to="/horseform" className="mylink">
+                    Add Horse
                   </Link>
                 </div>
 
                 <div>
-                  <Link to="/tracklength" className="mylink">
-                    Track Length Listing
-                  </Link>{" "}
-                </div>
-                <div>
-                  <Link to="/tracklengthform" className="mylink">
-                    Add Track Length
-                  </Link>{" "}
-                </div>
-                <div>
-                  <Link to="/groundlist" className="mylink">
-                    Ground Type Listing
-                  </Link>{" "}
-                </div>
-                <div>
-                  <Link to="/ground" className="mylink">
-                    Add Ground Type
-                  </Link>{" "}
-                </div>
-                
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="2">
-              <Accordion.Header>Horses</Accordion.Header>
-              <Accordion.Body className="AccordionBody">
-                <div>
-                  <Link to="/horse" className="mylink">
-                    View Listing
-                  </Link>
-                </div>
-                <div>
-                  {" "}
-                  <Link to="/horseform" className="mylink">
-                    Add New
-                  </Link>
-                </div>
-                <div>
-                  {" "}
-                  <Link to="/horsekind" className="mylink">
-                    Horse Kind Listing
-                  </Link>
-                </div>
-                <div>
-                  <Link to="/horsekindform" className="mylink">
-                    Add Horse Kind{" "}
-                  </Link>{" "}
-                </div>
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="3">
-              <Accordion.Header>Jockey</Accordion.Header>
-              <Accordion.Body className="AccordionBody">
-                <div>
-                  <Link to="/jockey" className="mylink">
-                    View Listing
-                  </Link>
-                </div>
-                <div>
                   {" "}
                   <Link to="/jockeyform" className="mylink">
-                    Add New
+                   Add Jockey 
                   </Link>
                 </div>
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="4">
-              <Accordion.Header>Trainer</Accordion.Header>
-              <Accordion.Body className="AccordionBody">
-                <div>
-                  <Link to="/trainer" className="mylink">
-                    View Listing
-                  </Link>
-                </div>
+              
                 <div>
                   {" "}
                   <Link to="/trainerform" className="mylink">
-                    Add New
-                  </Link>
-                </div>
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="5">
-              <Accordion.Header>Owner</Accordion.Header>
-              <Accordion.Body className="AccordionBody">
-                <div>
-                  <Link to="/owner" className="mylink">
-                    View Listing
+                    Add Trainer
                   </Link>
                 </div>
                 <div>
                   {" "}
                   <Link to="/ownerform" className="mylink">
-                    Add New
+                Add Owner
                   </Link>
                 </div>
+         
+         
+                
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="6">
-              <Accordion.Header>Competition</Accordion.Header>
+            <Accordion.Item eventKey="2">
+              <Accordion.Header>Actors Listing</Accordion.Header>
               <Accordion.Body className="AccordionBody">
-                <div>
-                  <Link to="/competitionlisting" className="mylink">
-                    View Listing
+              <div>
+                  {" "}
+                  <Link
+                    to="/breederlist"
+                    className="mylink"
+                    onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}
+                  >
+                    Breeder
                   </Link>
                 </div>
+                <div>
+                  <Link to="/horse" className="mylink">
+                  Horse
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/jockey" className="mylink">
+                 Jockey
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/trainer" className="mylink">
+                   Trainer
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/owner" className="mylink">
+                 Owner
+                  </Link>
+                </div>
+          
+             
+         
+           
+              </Accordion.Body>
+            </Accordion.Item>
+      
+        
+            <Accordion.Item eventKey="3">
+              <Accordion.Header>Competition </Accordion.Header>
+              <Accordion.Body className="AccordionBody">
+        
                 <div>
                   {" "}
                   <Link to="/addcompetition" className="mylink">
                     Add Competition
                   </Link>
                 </div>
+       
+                <div>
+                  {" "}
+                  <Link to="/addCategory" className="mylink">
+                    Add Category
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/addcompetitionPoint" className="mylink">
+                   Add Point Table
+                  </Link>
+                </div>
+                
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="16">
+              <Accordion.Header>Competition Listing </Accordion.Header>
+              <Accordion.Body className="AccordionBody">
+                <div>
+                  <Link to="/competitionlisting" className="mylink">
+                    View Listing
+                  </Link>
+                </div>
+          
                 <div>
                   <Link to="/CategoryListing" className="mylink">
                      Category Listing
                   </Link>
                 </div>
                 <div>
-                  {" "}
-                  <Link to="/addCategory" className="mylink">
-                    Add Category
+                  <Link to="/viewcompetitionPoint" className="mylink">
+                   View Point Table
                   </Link>
                 </div>
                 
@@ -310,7 +343,7 @@ const Sidebar = () => {
                 </div>
               </Accordion.Body>
             </Accordion.Item> */}
-            <Accordion.Item eventKey="8">
+            <Accordion.Item eventKey="4">
               <Accordion.Header>News</Accordion.Header>
               <Accordion.Body className="AccordionBody">
                 <div>
@@ -346,7 +379,7 @@ const Sidebar = () => {
                 </div>
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="9">
+            <Accordion.Item eventKey="5">
               <Accordion.Header>Advertisement</Accordion.Header>
               <Accordion.Body className="AccordionBody">
                 <div>
@@ -382,43 +415,8 @@ const Sidebar = () => {
                 </div>
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="10">
-              <Accordion.Header>Sponsor</Accordion.Header>
-              <Accordion.Body className="AccordionBody">
-                <div>
-                  <Link
-                    to="/sponsor"
-                    className="mylink"
-                    onClick={() => {
-                      window.scrollTo({
-                        top: 0,
-                        left: 0,
-                        behavior: "smooth",
-                      });
-                    }}
-                  >
-                    View Listing
-                  </Link>
-                </div>
-                <div>
-                  {" "}
-                  <Link
-                    to="/sponsorform"
-                    className="mylink"
-                    onClick={() => {
-                      window.scrollTo({
-                        top: 0,
-                        left: 0,
-                        behavior: "smooth",
-                      });
-                    }}
-                  >
-                    Add New
-                  </Link>
-                </div>
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey="11">
+       
+            <Accordion.Item eventKey="7">
               <Accordion.Header>Slider</Accordion.Header>
               <Accordion.Body className="AccordionBody">
                 <div>
@@ -454,8 +452,8 @@ const Sidebar = () => {
                 </div>
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="12">
-              <Accordion.Header>Create Features </Accordion.Header>
+            <Accordion.Item eventKey="8">
+              <Accordion.Header>Setup Forms </Accordion.Header>
               <Accordion.Body className="AccordionBody">
                 <div>
                   <Link
@@ -488,22 +486,7 @@ const Sidebar = () => {
                     Add Currency
                   </Link>
                 </div>
-                <div>
-                  {" "}
-                  <Link
-                    to="/breeder"
-                    className="mylink"
-                    onClick={() => {
-                      window.scrollTo({
-                        top: 0,
-                        left: 0,
-                        behavior: "smooth",
-                      });
-                    }}
-                  >
-                    Add Breeder
-                  </Link>
-                </div>
+             
                 <div>
                   {" "}
                   <Link
@@ -519,6 +502,11 @@ const Sidebar = () => {
                   >
                     Add Nationality
                   </Link>
+                </div>
+                <div>
+                  <Link to="/ground" className="mylink">
+                    Add Ground Type
+                  </Link>{" "}
                 </div>
                 <div>
                   {" "}
@@ -537,6 +525,32 @@ const Sidebar = () => {
                   </Link>
                 </div>
                 <div>
+                  {" "}
+                  <Link to="/racecourseform" className="mylink">
+                    Add Race Course
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/horsekindform" className="mylink">
+                    Add Horse Kind{" "}
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/racekindform" className="mylink">
+                    Add Race Kind{" "}
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/tracklengthform" className="mylink">
+                    Add Track Length
+                  </Link>{" "}
+                </div>
+                <div>
+                  <Link to="/racetypeform" className="mylink">
+                    Add Race Type
+                  </Link>
+                </div>
+                <div>
                   <Link
                     to="/equipment"
                     className="mylink"
@@ -548,15 +562,15 @@ const Sidebar = () => {
                       });
                     }}
                   >
-                    {" "}
-                    Add Equipment{" "}
+                    
+                    Add Equipment
                   </Link>
                 </div>
               </Accordion.Body>
             </Accordion.Item>
 
-            <Accordion.Item eventKey="13">
-              <Accordion.Header>Features Listing</Accordion.Header>
+            <Accordion.Item eventKey="9">
+              <Accordion.Header>Setup Listing</Accordion.Header>
               <Accordion.Body className="AccordionBody">
                 <div>
                   <Link
@@ -574,7 +588,7 @@ const Sidebar = () => {
                   </Link>
                 </div>
                 <div>
-                  {" "}
+                  
                   <Link
                     to="/currencylist"
                     className="mylink"
@@ -586,24 +600,25 @@ const Sidebar = () => {
                       });
                     }}
                   >
-                    Currency{" "}
+                    Currency
+                  </Link>
+                </div>
+             
+                <div>
+                  {" "}
+                  <Link to="/horsekind" className="mylink">
+                    Horse Kind 
                   </Link>
                 </div>
                 <div>
-                  {" "}
-                  <Link
-                    to="/breederlist"
-                    className="mylink"
-                    onClick={() => {
-                      window.scrollTo({
-                        top: 0,
-                        left: 0,
-                        behavior: "smooth",
-                      });
-                    }}
-                  >
-                    Breeder{" "}
-                  </Link>
+                  <Link to="/groundlist" className="mylink">
+                    Ground Type 
+                  </Link>{" "}
+                </div>
+                <div>
+                  <Link to="/tracklength" className="mylink">
+                    Track Length
+                  </Link>{" "}
                 </div>
                 <div>
                   {" "}
@@ -623,6 +638,23 @@ const Sidebar = () => {
                 </div>
                 <div>
                   {" "}
+                  <Link to="/racecourse" className="mylink">
+                    Race Course
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/racekind" className="mylink">
+               
+                    Race Kind 
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/racetype" className="mylink">
+                    Race Type
+                  </Link>{" "}
+                </div>
+                <div>
+              
                   <Link
                     to="/genderlist"
                     className="mylink"
@@ -634,7 +666,7 @@ const Sidebar = () => {
                       });
                     }}
                   >
-                    Gender{" "}
+                    Gender
                   </Link>
                 </div>
                 <div>
@@ -654,7 +686,7 @@ const Sidebar = () => {
                 </div>
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="14">
+            <Accordion.Item eventKey="10">
               <Accordion.Header>SEO</Accordion.Header>
               <Accordion.Body className="AccordionBody">
                 <div>
@@ -682,7 +714,7 @@ const Sidebar = () => {
                 </div>
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="15">
+            <Accordion.Item eventKey="11">
               <Accordion.Header>User Management</Accordion.Header>
               <Accordion.Body className="AccordionBody">
                 <div>

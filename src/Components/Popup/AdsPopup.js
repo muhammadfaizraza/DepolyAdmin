@@ -12,6 +12,12 @@ const AdsPopup = (data) => {
     return (
         <>
             <div className="form">
+            <div className="modalPreview">
+
+<img src={data.data.image} className="PreviewImage" alt="" />
+
+
+</div>
 
                 <div className="row mainrow">
 
@@ -73,14 +79,7 @@ const AdsPopup = (data) => {
                 </div>
 
 
-                <div className="ButtonSection">
-                    <div className="modalPreview">
-
-                        <img src={data.data.image} className="PreviewImage" alt="" />
-
-                    </div>
-
-                </div>
+   
 
             </div>
         </>

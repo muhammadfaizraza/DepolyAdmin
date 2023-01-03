@@ -114,7 +114,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="عنوان"
                       style={{ direction: "rtl" }}
 
                       className="mb-3 floatingInputAr"
@@ -148,7 +148,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="وصف"
                       style={{ direction: "rtl" }}
 
                       className="mb-3 floatingInputAr"

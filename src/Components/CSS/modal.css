@@ -47,8 +47,22 @@ font-family: inherit;
   border: none;
   margin-top: 22px;
 font-size: 20px;
-margin-right: 9px;
+
+margin-right: 12px;
+
 }
-.modalPreview{
-    margin-top: -10px;
+.modalPreview {
+    
+    display: flex;
+    justify-content: center;
+}
+.PreviewImage {
+    width: 8rem;
+    height: 8rem;
+   
+    border-radius: 20px;    
+}
+.modalPreview img{
+
+    border-radius: 20px;
 }

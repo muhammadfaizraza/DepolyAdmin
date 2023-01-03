@@ -107,7 +107,7 @@ console.log(preview,'preview')
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="Name"
                       className="mb-3 "
                       onChange={(e) =>
                         setState({ ...state1, NameEn: e.target.value })
@@ -155,7 +155,7 @@ console.log(preview,'preview')
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="الحد الأدنى من وزن الجوكي"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
@@ -187,7 +187,7 @@ console.log(preview,'preview')
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="اسم"
+                      label="أقصى وزن للجوكي"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>

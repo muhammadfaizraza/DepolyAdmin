@@ -190,7 +190,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="ملاحظات"
+                      label="اسم"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>
@@ -305,7 +305,7 @@ const NewsForm = () => {
                     <Select         className='selectdir'
                       placeholder={
                         <div style={{ direction: "rtl" }}>
-                         اكتب للبحث عن المالك النشط
+                        اكتب للبحث عن المالك النشط
                         </div>
                       }
                       defaultValue={ActiveOwner}
@@ -343,7 +343,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <Select
                       required
-                      placeholder={<div>حدد نوع الجنس</div>}
+                      placeholder={<div>حدد المربي</div>}
                       className="selectdir"
                       defaultValue={Breeder}
                       onChange={setBreeder}
@@ -373,7 +373,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="نوع الجنس"
+                      label="سعر الشراء"
                       className="mb-3 floatingInputAr"
                       style={{ direction: "rtl" }}
                       onChange={(e) =>

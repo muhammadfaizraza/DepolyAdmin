@@ -316,7 +316,7 @@ const TrainerForm = () => {
                       <Form.Control type="text" placeholder="Details" />
                     </FloatingLabel>
 
-                    <span className="spanForm"> |</span>
+      
                   </div>
 
                   {/* <div className="col-sm">

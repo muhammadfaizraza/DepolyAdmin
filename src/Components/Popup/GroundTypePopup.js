@@ -13,7 +13,7 @@ const GroundTypePopup = (data) => {
 
               <FloatingLabel
                   controlId="floatingInput"
-                  label="Name"
+                  label="Ground Type "
                   className="mb-3"
                 
                 
@@ -28,7 +28,7 @@ const GroundTypePopup = (data) => {
               <div className="col-sm">
               <FloatingLabel
                   controlId="floatingInput"
-                  label="اسم"
+                  label="نوع الأرض"
                   className="mb-3 floatingInputAr"
                   style={{ direction: "rtl", left: "initial", right: 0 }}
                 

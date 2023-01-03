@@ -14,6 +14,16 @@ const RacecoursePopup = (data) => {
         <>
             <div className="form">
 
+            <div className="modalPreview">
+                     
+                   
+                     <img src={data.data.image} className="PreviewImage" alt="" />
+               
+                 
+
+
+               </div>
+
                 <div className="row mainrow">
                     <div className="col-sm">
                         <FloatingLabel
@@ -37,7 +47,7 @@ const RacecoursePopup = (data) => {
                     <div className="col-sm">
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="رمز قصير"
+                            label="اسم المسار"
                             name="TrackNameAr"
                             className="mb-3 floatingInputAr "
                             style={{ direction: "rtl", left: "initial", right: 0 }}
@@ -114,7 +124,7 @@ const RacecoursePopup = (data) => {
                     <div className="col-sm">
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="رمز قصير"
+                            label="جنسية"
                             name="TrackNameAr"
                             className="mb-3 floatingInputAr "
                             style={{ direction: "rtl", left: "initial", right: 0 }}
@@ -152,7 +162,7 @@ const RacecoursePopup = (data) => {
                     <div className="col-sm">
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="رمز قصير"
+                            label="اللون"
                             name="TrackNameAr"
                             className="mb-3 floatingInputAr "
                             style={{ direction: "rtl", left: "initial", right: 0 }}
@@ -191,17 +201,7 @@ const RacecoursePopup = (data) => {
                 </div>
 
 
-                <div className="ButtonSection">
-                    <div>
-                     
-                   
-                      <img src={data.data.image} className="PreviewImage" alt="" />
-                
-                    </div>
-
-
-                </div>
-
+              
             </div>
         </>
     );

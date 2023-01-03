@@ -7,6 +7,13 @@ const RaceDetailPopup = (data) => {
 console.log(data)
     return (
     <div className="form">
+          <div className="modalPreview">
+
+<img src={data.data.image} className="PreviewImage" alt="" />
+
+
+
+</div>
 
     <div className="row mainrow">
 
@@ -159,14 +166,8 @@ style={{ left: "%" }} readOnly/>
         
     </div>
 
-    <div className="ButtonSection">
-        <div className="modalPreview">
 
-            <img src={data.data.image} className="PreviewImage" alt="" />
-
-        </div>
-
-    </div>
+      
 
 </div>
   )

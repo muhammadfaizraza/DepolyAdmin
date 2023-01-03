@@ -106,8 +106,8 @@ const GroundTypeTable = () => {
                   <table>
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>Name Arabic </th>
+                        <th>Ground Type</th>
+                        <th>Ground Type Arabic </th>
 
                         <th>Short Code</th>
 

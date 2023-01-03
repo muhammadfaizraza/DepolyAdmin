@@ -14,6 +14,13 @@ const HorsePopup = (data) => {
         <>
       
       <div className="form">
+      <div className="modalPreview">
+
+<img src={data.data.HorseImage} className="PreviewImage" alt="" />
+
+
+
+</div>
    
    <div className="row mainrow">
      <div className="col-sm">
@@ -193,7 +200,26 @@ const HorsePopup = (data) => {
 
    </div>
 
+   
+   <div className="row mainrow">
+     <div className="col-sm">
 
+     <FloatingLabel
+         controlId="floatingInput"
+         label="Rds"
+         className="mb-3"
+       
+       
+      
+       >
+         <Form.Control type="text" placeholder="Date Of Birth" readOnly value={data.data.Rds}/>
+       </FloatingLabel>
+    
+     </div>
+
+   </div>
+
+                  
 </div>
         </>
     );

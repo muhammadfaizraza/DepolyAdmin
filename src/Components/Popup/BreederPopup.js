@@ -6,7 +6,14 @@ const BreederPopup = (data) => {
     console.log(data, "dtaaa")
   return (
     <div className="form">
-            
+              
+              <div className='modalPreview'>
+               
+               <img src={data.data.image}  className="PreviewImage" alt=""/>
+
+      
+              
+               </div>
                 <div className="row mainrow">
                   <div className="col-sm">
                   <FloatingLabel
@@ -84,14 +91,6 @@ const BreederPopup = (data) => {
 
                
 
-            
-                <div>
-               
-                <img src={data.data.image}  className="PreviewImage" alt=""/>
-
-       
-               
-                </div>
             
             </div>
    

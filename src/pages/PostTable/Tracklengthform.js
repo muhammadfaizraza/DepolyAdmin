@@ -55,7 +55,7 @@ const Tracklengthform = () => {
       racecourse.map(function (item) {
         return {
           id: item._id,
-          value: item.TrackNameEn,
+          value: item._id,
           label: item.TrackNameEn,
         };
       })
@@ -68,7 +68,7 @@ const Tracklengthform = () => {
       groundtype.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: item.NameEn,
         };
       })

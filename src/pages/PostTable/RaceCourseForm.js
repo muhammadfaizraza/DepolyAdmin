@@ -94,7 +94,9 @@ const RaceCourseForm = () => {
   const [ColorCode, setColorCode] = useState("");
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
-
+  const [SearchUrl, setSearchUrl] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
 
   const [show, setShow] = useState(false);
   const [showNationality, setShowNationality] = useState(false);
@@ -154,8 +156,8 @@ const RaceCourseForm = () => {
 
   useEffect(() => {
     dispatch(fetchnationality());
-    dispatch(fetchcolor());
-    if (!image) {
+    dispatch(fetchcolor({SearchTitle,SearchCode,SearchUrl}));
+        if (!image) {
       setPreview(undefined);
       return;
     }
@@ -177,7 +179,7 @@ const RaceCourseForm = () => {
   
   const FetchNew = () => {
     dispatch(fetchnationality());
-    dispatch(fetchcolor());
+    dispatch(fetchcolor({SearchTitle,SearchCode,SearchUrl}));
   };
 
   const data1 =  (JSON.stringify(

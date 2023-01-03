@@ -20,11 +20,21 @@ import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { DateRangePicker } from 'react-date-range';
 
 const NationalityTable = () => {
 //for Modal
 const [ShowCalender, setShowCalender] = useState(false)
-
+const [SearchAge, setSearchAge] = useState('');
+const [SearchCode, setSearchCode] = useState('');
+const [SearchTitle, setSearchTitle] = useState('');
+const [state, setState] = useState([
+  {
+    startDate: new Date(),
+    endDate: new Date(),
+    key: 'selection'
+  }
+]);
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -46,6 +56,13 @@ const [ShowCalender, setShowCalender] = useState(false)
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = nationality.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  const GetSearch = async () => {
+    dispatch(fetchnationality({SearchTitle,SearchCode,SearchAge}));
+    setSearchTitle('')
+    setSearchCode('')
+    setSearchAge('')
+  };
 
   useEffect(() => {
     dispatch(fetchnationality());
@@ -159,13 +176,31 @@ const [ShowCalender, setShowCalender] = useState(false)
                 
                 <div className="filtertextform forflex">
                 
-                 <input type='text' class="form-control" placeholder="Enter Title"/>
-                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchTitle(e.target.value)}
+                       placeholder="Enter Name"
+                     />
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchAge(e.target.value)}
+                       placeholder="Enter Abbreviation"
+                     />
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchCode(e.target.value)}
+                       placeholder="Enter Alternative Name"
+                     />
                  </div>
                 
                 </div>
-                <button className="filterbtn">Apply Filter</button>
-                </span>:<></>
+                <button className="filterbtn" onClick={GetSearch}>
+                   Apply Filter
+                 </button>
+                 </span>:<></>
               }
               </div>
             <>

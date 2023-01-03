@@ -18,10 +18,20 @@ import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { DateRangePicker } from 'react-date-range';
 
 const ColorTable = () => {
   const [ShowCalender, setShowCalender] = useState(false)
-
+  const [SearchUrl, setSearchUrl] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
   const [modaldata, setmodaldata] = useState();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -44,6 +54,13 @@ const ColorTable = () => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = Color.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  const GetSearch = async () => {
+    dispatch(fetchcolor({SearchTitle,SearchCode,SearchUrl}));
+    setSearchTitle('')
+    setSearchCode('')
+    setSearchUrl('')
+  };
 
   useEffect(() => {
     dispatch(fetchcolor());
@@ -157,17 +174,36 @@ const ColorTable = () => {
               {
                 ShowCalender ?
                 <span className="transitionclass">
-                <div className="userfilter">
-                
-                <div className="filtertextform forflex">
-                
-                 <input type='text' class="form-control" placeholder="Enter Title"/>
-                 <input type='text' class="form-control" placeholder="Enter Description"/>
-                 </div>
-                
-                </div>
-                <button className="filterbtn">Apply Filter</button>
-                </span>:<></>
+                    <div className="userfilter">
+                      <div className="filtertextform forflex">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Title"
+                          onChange={(e) => setSearchTitle(e.target.value)}
+
+                        />
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Short Code"
+                          onChange={(e) => setSearchCode(e.target.value)}
+
+                        />
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Abbreviation"
+                          onChange={(e) => setSearchUrl(e.target.value)}
+
+                        />
+                      </div>
+                      
+                    </div>
+                    <button className="filterbtn" onClick={GetSearch}>
+                   Apply Filter
+                 </button>
+                  </span>:<></>
               }
               </div>
             <>
@@ -179,8 +215,8 @@ const ColorTable = () => {
                       <th>Action</th>
                         <th>Name</th>
                         <th>Name Arabic </th>
-                        <th>Abrevation</th>
-                        <th>Abrevation Arabic </th>
+                        <th>Abbreviation</th>
+                        <th>Abbreviation Arabic </th>
                         <th>Short Code</th>
 
                         

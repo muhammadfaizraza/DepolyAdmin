@@ -56,16 +56,16 @@ const Trainer = () => {
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = SearchData.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = trainer.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const GetSearch = async () => {
     const response = await axios.get(
-      `${window.env.API_URL}/SearchTrainer?NameEn=${SearchNameEn}&DOB=${SearchAge}&RemarksEn=${SearchRemarks}&Rating=${SearchRating}`
+      `${window.env.API_URL}/SearchTrainer?NameEn=${SearchNameEn}&DOB=${SearchAge}&RemarksEn=${SearchRemarks}&ShortNameEn=${SearchRating}`
     );
     setSearchData(response.data.data);
   };
-
+console.log(SearchData,'SearchData')
   useEffect(() => {
     dispatch(fetchTrainer());
   }, []);

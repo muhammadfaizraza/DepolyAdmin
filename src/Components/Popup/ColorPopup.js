@@ -38,6 +38,36 @@ const ColorPopup = (data) => {
       </div>
     </div>
 
+    <div className="row mainrow">
+      <div className="col-sm">
+
+      <FloatingLabel
+          controlId="floatingInput"
+          label="Abbreviation"
+          className="mb-3"
+        
+        
+       
+        >
+          <Form.Control type="text" placeholder="Description" readOnly value={data.data.AbbrevEn}/>
+        </FloatingLabel>
+     
+        <span className="spanForm"> |</span>
+      </div>
+
+      <div className="col-sm">
+      <FloatingLabel
+          controlId="floatingInput"
+          label="اختصار"
+          style={{ direction: "rtl", left: "initial", right: 0 }}
+          className="mb-3 floatingInputAr"
+        
+        >
+          <Form.Control type="text" placeholder="اسم" readOnly value={data.data.AbbrevAr}     style={{ left: "%" }}/>
+        </FloatingLabel>
+        
+      </div>
+    </div>
     
     <div className="row mainrow">
       <div className="col-sm">

@@ -17,10 +17,20 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
+import { DateRangePicker } from 'react-date-range';
 
 const News = () => {
   const [ShowCalender, setShowCalender] = useState(false);
-
+  const [SearchAge, setSearchAge] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
   //For Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();

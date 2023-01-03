@@ -232,7 +232,7 @@ const Color = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="Abbrevation"
+                      label="Abbreviation"
                       className="mb-3"
                       name="AbbrevEn"
                     >

@@ -121,7 +121,7 @@ const NewsForm = () => {
 
                   <FloatingLabel
                       controlId="floatingInput"
-                      label="Abrevation"
+                      label="Abbreviation"
                       className="mb-3"
                       onChange={(e) =>
                         setState({ ...state1, AbbrevEn: e.target.value })

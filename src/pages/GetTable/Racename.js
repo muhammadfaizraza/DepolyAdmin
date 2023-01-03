@@ -17,9 +17,21 @@ import { Modal } from "react-bootstrap";
 import Pagination from "./Pagination";
 import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
+import { DateRangePicker } from 'react-date-range';
+
+
 const Racename = () => {
   const [ShowCalender, setShowCalender] = useState(false);
-
+  const [SearchAge, setSearchAge] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
   //for Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();

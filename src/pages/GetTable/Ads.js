@@ -19,11 +19,21 @@ import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { DateRangePicker } from 'react-date-range';
 
 const Ads = () => {
   const [Value, setValue] = useState(false);
   const [ShowCalender, setShowCalender] = useState(false);
-
+  const [SearchUrl, setSearchUrl] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
   //for Modal
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -42,8 +52,17 @@ const Ads = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const history = useNavigate();
   const dispatch = useDispatch();
+
+  const GetSearch = async () => {
+    dispatch(fetchAds({SearchTitle,SearchCode,SearchUrl}));
+    setSearchTitle('')
+    setSearchCode('')
+    setSearchUrl('')
+  };
+
+
   useEffect(() => {
-    dispatch(fetchAds());
+    dispatch(fetchAds({SearchTitle,SearchCode,SearchUrl}));
   }, []);
 
   const handleRemove = async (Id) => {
@@ -143,15 +162,29 @@ const Ads = () => {
                           type="text"
                           class="form-control"
                           placeholder="Enter Title"
+                          onChange={(e) => setSearchTitle(e.target.value)}
+
                         />
                         <input
                           type="text"
                           class="form-control"
                           placeholder="Enter Description"
+                          onChange={(e) => setSearchCode(e.target.value)}
+
+                        />
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter URL"
+                          onChange={(e) => setSearchUrl(e.target.value)}
+
                         />
                       </div>
+                      
                     </div>
-                    <button className="filterbtn">Apply Filter</button>
+                    <button className="filterbtn" onClick={GetSearch}>
+                   Apply Filter
+                 </button>
                   </span>
                 ) : (
                   <></>

@@ -15,6 +15,7 @@ import RaceKindpopup from "../../Components/Popup/RaceKindpopup";
 import Pagination from "./Pagination";
 import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
+import { DateRangePicker } from 'react-date-range';
 
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -28,7 +29,16 @@ const RaceKind = () => {
     await setShow(true);
   };
   const [ShowCalender, setShowCalender] = useState(false);
-
+  const [SearchAge, setSearchAge] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
   const dispatch = useDispatch();
   const history = useNavigate();
 

@@ -17,12 +17,22 @@ import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { DateRangePicker } from 'react-date-range';
 
 
 const HorseKind = () => {
 
   const [ShowCalender, setShowCalender] = useState(false)
-
+  const [SearchAge, setSearchAge] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
 
   //for Modal
   const [show, setShow] = useState(false);
@@ -45,6 +55,13 @@ const HorseKind = () => {
   const currentPosts = HorseKind.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
+
+  const GetSearch = async () => {
+    dispatch(fetchHorseKind({SearchTitle,SearchAge}));
+    setSearchTitle('')
+    setSearchCode('')
+    setSearchAge('')
+  };
   useEffect(() => {
     dispatch(fetchHorseKind());
   }, [dispatch]);
@@ -163,13 +180,26 @@ const HorseKind = () => {
                 
                 <div className="filtertextform forflex">
                 
-                 <input type='text' class="form-control" placeholder="Enter Title"/>
-                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchTitle(e.target.value)}
+                       placeholder="Enter Name"
+                     />
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchAge(e.target.value)}
+                       placeholder="Enter Abbreviation"
+                     />
+                     
                  </div>
                 
                 </div>
-                <button className="filterbtn">Apply Filter</button>
-                </span>:<></>
+                <button className="filterbtn" onClick={GetSearch}>
+                   Apply Filter
+                 </button>
+                 </span>:<></>
               }
               </div>
             <>

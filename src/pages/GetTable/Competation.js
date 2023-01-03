@@ -18,10 +18,38 @@ import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { DateRangePicker } from 'react-date-range';
 
+
+const CategoryType = [
+  {
+      id: 1,
+      value: 'pick',
+      label: 'Pick',
+  },
+  {
+      id: 1,
+      value: 'cast',
+      label: 'Cast',
+  }
+  
+]
 const Statistic = () => {
   const [ShowCalender, setShowCalender] = useState(false)
+  const [SearchData, setSearchData] = useState('');
 
+  const [SearchAge, setSearchAge] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
+  const [SearchCategoryType, setSearchCategoryType] = useState('');
+
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -42,6 +70,13 @@ const Statistic = () => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = competition.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  const GetSearch = async () => {
+    const response = await axios.get(
+      `${window.env.API_URL}/SearchUser?CategoryCount=${SearchAge}&NameEn=${SearchTitle}&CompetitionCode=${SearchCode}&CompetitionType=${SearchCategoryType}`
+    );
+    setSearchData(response.data.data);
+  };
 
   useEffect(() => {
     dispatch(fetchcompetition()); 
@@ -140,18 +175,63 @@ const Statistic = () => {
               
               {
                 ShowCalender ?
-                <span className="transitionclass">
-                <div className="userfilter">
-                
-                <div className="filtertextform forflex">
-                
-                 <input type='text' class="form-control" placeholder="Enter Title"/>
-                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                <>
+                 <div className="userfilter">
+                   <div className="calenderuser">
+                     <DateRangePicker
+                       onChange={(item) => setState([item.selection])}
+                       showSelectionPreview={true}
+                       moveRangeOnFirstSelection={false}
+                       months={2}
+                       ranges={state}
+                       direction="horizontal"
+                     />
+                   </div>
+                   <div className="filtertextform">
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchTitle(e.target.value)}
+                       placeholder="Enter Name"
+                     />
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchCode(e.target.value)}
+                       placeholder="Enter Competition Code"
+                     />
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchAge(e.target.value)}
+                       placeholder="Enter Count"
+                     />
+                     <select
+                        class="form-control"
+                        id="exampleFormControlSelect1"
+                        name="country"
+                        onChange={(e) => setSearchCategoryType(e.target.value)}
+                        required
+                      >
+                        {CategoryType.map((item) => {
+                          return (
+                            <option
+                              key={item.id}
+                              name="country"
+                              value={item.id}
+                            >
+                              {item.value}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    
+                   </div>
                  </div>
-                
-                </div>
-                <button className="filterbtn">Apply Filter</button>
-                </span>:<></>
+                 <button className="filterbtn" onClick={GetSearch}>
+                   Apply Filter
+                 </button>
+               </>:<></>
               }
               </div>
             <>

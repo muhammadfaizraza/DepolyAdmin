@@ -17,11 +17,21 @@ import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import { DateRangePicker } from 'react-date-range';
 
 const EquiptmentTable = () => {
   //for Modal
   const [ShowCalender, setShowCalender] = useState(false);
-
+  const [SearchAge, setSearchAge] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -40,6 +50,12 @@ const EquiptmentTable = () => {
   const currentPosts = equipment.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const GetSearch = async () => {
+    dispatch(fetchequipment({SearchTitle,SearchCode,SearchAge}));
+    setSearchTitle('')
+    setSearchCode('')
+    setSearchAge('')
+  };
   useEffect(() => {
     dispatch(fetchequipment());
   }, [dispatch]);
@@ -139,16 +155,18 @@ const EquiptmentTable = () => {
                 <span className="transitionclass">
                   <div className="userfilter">
                     <div className="filtertextform forflex">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Title"
-                      />
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter Description"
-                      />
+                    <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchTitle(e.target.value)}
+                       placeholder="Enter Name"
+                     />
+                     <input
+                       type="text"
+                       class="form-control"
+                       onChange={(e) => setSearchCode(e.target.value)}
+                       placeholder="Enter Short Code"
+                     />
                     </div>
                   </div>
                   <button className="filterbtn">Apply Filter</button>

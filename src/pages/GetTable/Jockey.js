@@ -54,7 +54,7 @@ const Statistic = () => {
   
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = SearchData.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = jockey.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   const GetSearch = async () => {

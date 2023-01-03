@@ -67,23 +67,21 @@ const RaceCourseForm = () => {
         return {
           id: item._id,
           value: item.NameEn,
-          label: item.NameEn,
+          label: (
+            <div style={{
+              display:'flex',
+              justifyContent:'space-between'
+            }}>
+             <p>{item.NameEn}</p> 
+             <p>{item.NameAr}</p> 
+  
+            </div>
+          ),
         };
       })
     );
 
-    let AllColorAr =
-    color === undefined ? (
-      <></>
-    ) : (
-      color.map(function (item) {
-        return {
-          id: item._id,
-          value: item.NameAr,
-          label: item.NameAr,
-        };
-      })
-    );
+ 
  
 
     
@@ -376,11 +374,11 @@ const RaceCourseForm = () => {
                         <>
                         <span className="addmore" onClick={FetchNew}><AiOutlineReload /></span>
                         </>
-                      </OverlayTrigger> |</span>
+                      </OverlayTrigger> </span>
                       <span className={ColorCode === "" ? "error":"success"}>{ErrorColor}</span>
 
                   </div>
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <Select
                       required
                       placeholder="تقييم الحصان"
@@ -393,7 +391,7 @@ const RaceCourseForm = () => {
                       isSearchable={true}
 
                     />
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="row mainrow">

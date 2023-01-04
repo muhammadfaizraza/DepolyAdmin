@@ -88,7 +88,9 @@ const OwnerForm = () => {
   const [image, setimage] = useState([]);
   const [preview, setPreview] = useState();
   const [showActivenationality, setShowActivenationality] = useState(false);
-
+  const [SearchAge, setSearchAge] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
   const handleCloseActivenationality = () => setShowActivenationality(false);
 
   const handleShowActivenationality = async () => {
@@ -135,7 +137,7 @@ const OwnerForm = () => {
   };
   useEffect(() => {
     dispatch(fetchcolor());
-    dispatch(fetchnationality());
+    dispatch(fetchnationality({SearchCode,SearchTitle,SearchAge}));
   }, [dispatch]);
 
   const submit = async (event) => {
@@ -189,7 +191,7 @@ const OwnerForm = () => {
   }, [Ownerimage]);
 
   const FetchNew = () => {
-    dispatch(fetchnationality());
+    dispatch(fetchnationality({SearchCode,SearchTitle,SearchAge}));
   };
   const onSelectFile = (e) => {
     setOwnerimage(e.target.files[0]);

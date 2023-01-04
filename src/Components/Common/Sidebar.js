@@ -378,11 +378,7 @@ const Sidebar = () => {
                           Race Card
                         </Link>
                       </div>
-                      <div>
-                        <Link to="/racesPublish" className="mylink">
-                          Race To Be Publish
-                        </Link>
-                      </div>
+                  
                       <div>
                         {" "}
                         <Link
@@ -409,11 +405,7 @@ const Sidebar = () => {
 
 
 
-                      <div>
-                        <Link to="/resultrace" className="mylink">
-                          Race Results
-                        </Link>
-                      </div>
+                      
                     </Accordion.Body>
                   </Accordion.Item>
 
@@ -436,14 +428,18 @@ const Sidebar = () => {
                         </Link>
                       </div>
 
-
+                      <div>
+                        <Link to="/racesPublish" className="mylink">
+                          Race To Be Publish
+                        </Link>
+                      </div>
                       <div>
                         <Link to="/racecardlisting" className="mylink">
                           Race Card
                         </Link>
                       </div>
 
-
+                  
                       <div>
                         <Link
                           to="/sponsor"
@@ -466,7 +462,11 @@ const Sidebar = () => {
                           Race Name
                         </Link>
                       </div>
-                    
+                      <div>
+                        <Link to="/resultrace" className="mylink">
+                          Race Results
+                        </Link>
+                      </div>    
                     </Accordion.Body>
                   </Accordion.Item>
           
@@ -477,19 +477,19 @@ const Sidebar = () => {
                     <Accordion.Body className="AccordionBody">
                       <div>
                         {" "}
-                        <Link to="/competition" className="mylink">
+                        <Link to="/addcompetition" className="mylink">
                           Competition
                         </Link>
                       </div>
 
                       <div>
                         {" "}
-                        <Link to="/Category" className="mylink">
+                        <Link to="/addCategory" className="mylink">
                          Competition Category
                         </Link>
                       </div>
                       <div>
-                        <Link to="/competitionPoint" className="mylink">
+                        <Link to="/addcompetitionPoint" className="mylink">
                           Point
                         </Link>
                       </div>

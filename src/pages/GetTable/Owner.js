@@ -122,13 +122,7 @@ const Owner = () => {
               <h4>Owner Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
+             
 
                 <Link to="/ownerform">
                   <button>Add Owner</button>
@@ -210,7 +204,7 @@ const Owner = () => {
                         <th>Title Arabic</th>
                         <th>Short Name</th>
                         <th>Short Name Arabic</th>
-                        <th>Registeration Date</th>
+                        <th>registration Date</th>
                         <th>Nationality</th>
                         {/* <th>Silk Color</th> */}
                         <th>Image</th>
@@ -267,7 +261,8 @@ const Owner = () => {
                           <img src={item.OwnerIDData === undefined ? <></> : item.OwnerIDData.OwnerSilkColor} alt='' />
                          </td> */}
                               <td>
-                                <img src={item.image} alt="" />
+                                <img src={item.image} alt="No Image Provided" />
+                               
                               </td>
                               
                             </tr>

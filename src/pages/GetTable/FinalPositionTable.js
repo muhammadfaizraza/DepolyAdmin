@@ -217,7 +217,9 @@ const FinalPositionTable = () => {
                     {currentPosts.map((item, index) => {
                       return (
                         <>
-                          <tr className="tr_table_class">
+                          <tr className="tr_table_class"  style={{
+                    display:'none'
+                  }}>
                           <td className="table_delete_btn1">
                               <BiEdit
                                 onClick={() =>

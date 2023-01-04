@@ -480,3 +480,6 @@ img.PreviewHorseImage {
     height: 330px;
     overflow-y: auto;
 }
+td.table_delete_btn1 svg {
+    margin: 0 6px;
+}

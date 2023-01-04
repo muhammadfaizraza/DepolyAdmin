@@ -61,8 +61,17 @@ const Nationality = () => {
       racecourse.map(function (item) {
         return {
           id: item._id,
-          value: item.TrackNameEn,
-          label: item.TrackNameEn,
+          value: item._id,
+          label: (
+            <div style={{
+              display:'flex',
+              justifyContent:'space-between'
+            }}>
+             <p>{item.TrackNameEn}</p> 
+             <p>{item.TrackNameAr}</p> 
+  
+            </div>
+          ),
         };
       })
     );
@@ -207,12 +216,12 @@ dispatch(fetchracecourse())
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>
-                      |
+                      
                     </span>
                 <span className={Race === '' ? "error" : "success"}>{ErrorRaceCourse}</span>
               </div>
 
-              <div className="col-sm">
+              {/* <div className="col-sm">
                 <Select
                   required
                   placeholder={<div>حدد نوع الجنس</div>}
@@ -220,7 +229,7 @@ dispatch(fetchracecourse())
                   isClearable={true}
                   isSearchable={true}
                 />
-              </div>
+              </div> */}
             </div>
 
             <div className="ButtonSection " style={{ justifyContent: "end" }}>

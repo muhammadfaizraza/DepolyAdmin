@@ -91,23 +91,21 @@ const TrainerForm = () => {
         return {
           id: item._id,
           value: item.NameEn,
-          label: item.NameEn,
+          label: (
+            <div style={{
+              display:'flex',
+              justifyContent:'space-between'
+            }}>
+             <p>{item.NameEn}</p> 
+             <p>{item.NameAr}</p> 
+  
+            </div>
+          ),
         };
       })
     );
 
-  let AllCategoryAr =
-    category === undefined ? (
-      <></>
-    ) : (
-      category.map(function (item) {
-        return {
-          id: item._id,
-          value: item.NameAr,
-          label: item.NameAr,
-        };
-      })
-    );
+ 
 
     let SponsorForTheRace =
     sponsor === undefined ? (
@@ -121,7 +119,7 @@ const TrainerForm = () => {
             <div style={{
               display:'flex'
             }}>
-              <img src={item.image} height="30px" width="30px" alt="" />
+              <img src={item.image} height="30px" width="30px"  alt=""/>
               <p style={{
                 padding:'5px'
               }}>{item.TitleEn}</p>
@@ -445,11 +443,11 @@ const TrainerForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>
-                      |
+                      
                     </span>
                     <span className={CompetitionCategory === "" ? "error" :"success"}>{ErrorCategory}</span>
                   </div>
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <Select
                       required
                       placeholder={<div>حدد جيلتي</div>}
@@ -460,7 +458,7 @@ const TrainerForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -491,12 +489,12 @@ const TrainerForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>{" "}
-                      |
+                      
                     </span>
                     <span className={Sponsor === "" ? "error" :"success"}>{ErrorSponsor}</span>
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <Select
                       placeholder={<div>نوع السباق</div>}
                       defaultValue={Sponsor}
@@ -506,7 +504,7 @@ const TrainerForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">

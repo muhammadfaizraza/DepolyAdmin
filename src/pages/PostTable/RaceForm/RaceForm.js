@@ -40,8 +40,26 @@ import JockeyPopup from "../JockeyForm";
 import SponsorPopup from "../SponsorForm";
 
 const WeatherTypes = [
-  { id: "1", value: "Sunny", label: "Sunny" },
-  { id: "2", value: "Cloudy", label: "Cloudy" },
+  { id: "1", value: "Sunny", label: (
+    <div style={{
+      display:'flex',
+      justifyContent:'space-between'
+    }}>
+     <p>Sunny</p> 
+     <p>مشمس</p> 
+
+    </div>
+  ), },
+  { id: "2", value: "Cloudy", label: (
+    <div style={{
+      display:'flex',
+      justifyContent:'space-between'
+    }}>
+     <p>Cloudy</p> 
+     <p>غائم</p> 
+
+    </div>
+  ), },
 ];
 
 // const ResultStatus = [
@@ -51,22 +69,58 @@ const WeatherTypes = [
 
 // ];
 
-const WeatherTypesAr = [
-  { id: "1", value: "مشمس", label: "مشمس" },
-  { id: "2", value: "غائم", label: "غائم" },
-];
+// const WeatherTypesAr = [
+//   { id: "1", value: "مشمس", label: "مشمس" },
+//   { id: "2", value: "غائم", label: "غائم" },
+// ];
 const RaceStatuss = [
-  { id: "1", value: "Cancel", label: "Cancel" },
-  { id: "2", value: "Due", label: "Due" },
-  { id: "2", value: "Live", label: "Live" },
-  { id: "2", value: "End", label: "End" },
+  { id: "1", value: "Cancel", label: (
+    <div style={{
+      display:'flex',
+      justifyContent:'space-between'
+    }}>
+     <p>Cancel</p> 
+     <p>يلغي</p> 
+
+    </div>
+  ), },
+  { id: "2", value: "Due", label: (
+    <div style={{
+      display:'flex',
+      justifyContent:'space-between'
+    }}>
+     <p>Due</p> 
+     <p>بسبب</p> 
+
+    </div>
+  ), },
+  { id: "2", value: "Live", label: (
+    <div style={{
+      display:'flex',
+      justifyContent:'space-between'
+    }}>
+     <p>Live</p> 
+     <p>يعيش</p> 
+
+    </div>
+  ), },
+  { id: "2", value: "End", label: (
+    <div style={{
+      display:'flex',
+      justifyContent:'space-between'
+    }}>
+     <p>End</p> 
+     <p>نهاية</p> 
+
+    </div>
+  ), },
 ];
-const RaceStatussAr = [
-  { id: "1", value: "يلغي", label: "يلغي" },
-  { id: "2", value: "بسبب", label: "بسبب" },
-  { id: "2", value: "يعيش", label: "يعيش" },
-  { id: "2", value: "نهاية", label: "نهاية" },
-];
+// const RaceStatussAr = [
+//   { id: "1", value: "يلغي", label: "يلغي" },
+//   { id: "2", value: "بسبب", label: "بسبب" },
+//   { id: "2", value: "يعيش", label: "يعيش" },
+//   { id: "2", value: "نهاية", label: "نهاية" },
+// ];
 
 const RaceForm = () => {
   //state for error
@@ -139,7 +193,16 @@ const RaceForm = () => {
         return {
           id: item._id,
           value: item.TrackNameEn,
-          label: item.TrackNameEn,
+          label: (
+            <div style={{
+              display:'flex',
+              justifyContent:'space-between'
+            }}>
+             <p>{item.TrackNameEn}</p> 
+             <p>{item.TrackNameAr}</p> 
+        
+            </div>
+          ),
         };
       })
     );
@@ -164,22 +227,31 @@ const RaceForm = () => {
         return {
           id: item._id,
           value: item._id,
-          label: item.NameEn,
+          label: (
+            <div style={{
+              display:'flex',
+              justifyContent:'space-between'
+            }}>
+             <p>{item.NameEn}</p> 
+             <p>{item.NameAr}</p> 
+  
+            </div>
+          ),
         };
       })
     );
-  let RacenameoptionsAr =
-    RaceName === undefined ? (
-      <></>
-    ) : (
-      RaceName.map(function (item) {
-        return {
-          id: item._id,
-          value: item._id,
-          label: item.NameAr,
-        };
-      })
-    );
+  // let RacenameoptionsAr =
+  //   RaceName === undefined ? (
+  //     <></>
+  //   ) : (
+  //     RaceName.map(function (item) {
+  //       return {
+  //         id: item._id,
+  //         value: item._id,
+  //         label: item.NameAr,
+  //       };
+  //     })
+  //   );
 
   let SponsorForTheRace =
     sponsor === undefined ? (
@@ -190,26 +262,32 @@ const RaceForm = () => {
           id: item._id,
           value: item.image,
           label: (
-            <div>
+            <div style={{
+              display:'flex',
+              justifyContent:'space-between'
+            }}>
               <img src={item.image} height="30px" width="30px" alt=""/>
+              <img src={item.image} height="30px" width="30px" alt=""/>
+  
             </div>
           ),
+          
         };
       })
     );
 
-  let SponsorForTheRaceAr =
-    sponsor === undefined ? (
-      <></>
-    ) : (
-      sponsor.map(function (item) {
-        return {
-          id: item._id,
-          value: item.TitleAr,
-          label: item.TitleAr,
-        };
-      })
-    );
+  // let SponsorForTheRaceAr =
+  //   sponsor === undefined ? (
+  //     <></>
+  //   ) : (
+  //     sponsor.map(function (item) {
+  //       return {
+  //         id: item._id,
+  //         value: item.TitleAr,
+  //         label: item.TitleAr,
+  //       };
+  //     })
+  //   );
 
   let MeetingTypes =
     meeting === undefined ? (
@@ -219,7 +297,16 @@ const RaceForm = () => {
         return {
           id: item._id,
           value: item._id,
-          label: item.NameEn,
+          label: (
+            <div style={{
+              display:'flex',
+              justifyContent:'space-between'
+            }}>
+             <p>{item.NameEn}</p> 
+             <p>{item.NameAr}</p> 
+  
+            </div>
+          ),
         };
       })
     );
@@ -244,7 +331,16 @@ const RaceForm = () => {
         return {
           id: item._id,
           value: item._id,
-          label: item.NameEn,
+          label: (
+            <div style={{
+              display:'flex',
+              justifyContent:'space-between'
+            }}>
+             <p>{item.NameEn}</p> 
+             <p>{item.NameAr}</p> 
+  
+            </div>
+          ),
         };
       })
     );
@@ -270,7 +366,17 @@ const RaceForm = () => {
         return {
           id: item._id,
           value: item._id,
-          label: item.TrackLength,
+          label: (
+            <div style={{
+              display:'flex',
+              justifyContent:'space-between'
+            }}>
+             <p>{item.TrackLength}</p> 
+             <p>{item.TrackLength}</p> 
+  
+            </div>
+          ),
+         
         };
       })
     );
@@ -283,7 +389,16 @@ const RaceForm = () => {
         return {
           id: item._id,
           value: item._id,
-          label: item.NameEn,
+          label: (
+            <div style={{
+              display:'flex',
+              justifyContent:'space-between'
+            }}>
+             <p>{item.NameEn}</p> 
+             <p>{item.NameAr}</p> 
+  
+            </div>
+          ),
         };
       })
     );
@@ -308,7 +423,16 @@ const RaceForm = () => {
         return {
           id: item._id,
           value: item._id,
-          label: item.NameEn,
+          label: (
+            <div style={{
+              display:'flex',
+              justifyContent:'space-between'
+            }}>
+             <p>{item.NameEn}</p> 
+             <p>{item.NameAr}</p> 
+  
+            </div>
+          ),
         };
       })
     );
@@ -570,14 +694,14 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>
-                      |
+                      
                     </span>
                     <span className={MeetingType === "" ? "error" : "success"}>
                       {ErrorMeetingType}
                     </span>
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <Select
                       placeholder={<div>نوع الاجتماع</div>}
                       defaultValue={MeetingType}
@@ -587,7 +711,7 @@ const RaceForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -621,14 +745,14 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>{" "}
-                      |
+                      
                     </span>
                     <span className={RaceNameEn === "" ? "error" : "success"}>
                       {ErrorRaceNameEn}
                     </span>
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <Select
                       placeholder={<div>اسم العرق</div>}
                       className="selectdir"
@@ -638,7 +762,7 @@ const RaceForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row  mainrow">
                   <div className="col-sm">
@@ -819,14 +943,14 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>{" "}
-                      |
+                      
                     </span>
                     <span className={RaceTyp === "" ? "error" : "success"}>
                       {ErrorRaceTyp}
                     </span>
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <Select
                       className="selectdir"
                       placeholder={
@@ -840,7 +964,7 @@ const RaceForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -877,13 +1001,13 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>{" "}
-                      |
+                      
                     </span>
                     <span className={TrackLength === "" ? "error" : "success"}>
                       {ErrorTrackLength}
                     </span>
                   </div>
-
+{/* 
                   <div className="col-sm">
                     <Select
                       className="selectdir"
@@ -898,7 +1022,7 @@ const RaceForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -935,13 +1059,13 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>{" "}
-                      |
+                      
                     </span>
                     <span className={Ground === "" ? "error" : "success"}>
                       {ErrorGround}{" "}
                     </span>
                   </div>
-
+{/* 
                   <div className="col-sm">
                     <Select
                       placeholder={<div>طقس</div>}
@@ -952,7 +1076,7 @@ const RaceForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -986,14 +1110,14 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>{" "}
-                      |
+                      
                     </span>
                     <span className={RaceKind === "" ? "error" : "success"}>
                       {ErrorRaceKind}
                     </span>
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <Select
                       placeholder={<div>نوع السباق</div>}
                       defaultValue={RaceKind}
@@ -1003,7 +1127,7 @@ const RaceForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -1020,13 +1144,13 @@ const RaceForm = () => {
                           : setErrorWeatherType("Weather Type is Validated")
                       }
                     />{" "}
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                     <span className={WeatherType === "" ? "error" : "success"}>
                       {ErrorWeatherType}
                     </span>
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <Select
                       placeholder={<div>طقس</div>}
                       className="selectdir"
@@ -1034,7 +1158,7 @@ const RaceForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -1071,13 +1195,13 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>{" "}
-                      |
+                      
                     </span>
                     <span className={RaceCourse === "" ? "error" : "success"}>
                       {ErrorRaceCourse}
                     </span>
                   </div>
-
+{/* 
                   <div className="col-sm">
                     <Select
                       placeholder={<div>دورة السباق</div>}
@@ -1088,7 +1212,7 @@ const RaceForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="row mainrow">
@@ -1106,13 +1230,13 @@ const RaceForm = () => {
                           : setErrorRaceStatus("")
                       }
                     />
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                     <span className={RaceStatus === "" ? "error" : "success"}>
                       {ErrorRaceStatus}
                     </span>
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <Select
                       placeholder={<div>حالة السباق</div>}
                       className="selectdir"
@@ -1122,7 +1246,7 @@ const RaceForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">
@@ -1156,14 +1280,14 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>
-                      |
+                      
                     </span>
                     <span className={Sponsor === "" ? "error" : "success"}>
                       {ErrorSponsor}
                     </span>
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <Select
                       placeholder={<div>نوع السباق</div>}
                       defaultValue={Sponsor}
@@ -1173,7 +1297,7 @@ const RaceForm = () => {
                       isClearable={true}
                       isSearchable={true}
                     />
-                  </div>
+                  </div> */}
                 </div>
                 {/* <div className="row mainrow">
                   <div className="col-sm">

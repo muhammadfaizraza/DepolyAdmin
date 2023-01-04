@@ -383,16 +383,16 @@ const RaceForm = () => {
   // Modal functionalities End Here
 
   const FetchNew = () => {
-    dispatch(fetchracecourse());
-    dispatch(fetchjockey());
-    dispatch(fetchSponsor());
+    dispatch(fetchracecourse({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchjockey({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchSponsor({SearchCode,SearchTitle,SearchAge}));
     dispatch(fetchMeeting({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchRaceType());
-    dispatch(fetchRaceName());
-    dispatch(fetchTrackLength());
-    dispatch(fetchRaceKind());
+    dispatch(fetchRaceType({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchRaceName({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchTrackLength({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchRaceKind({SearchCode,SearchTitle,SearchAge}));
     dispatch(fetchgroundtype({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchpointTable());
+    dispatch(fetchpointTable({SearchCode,SearchTitle,SearchAge}));
   };
 
   const [MeetingType, setMeetingType] = useState("");
@@ -427,15 +427,16 @@ const RaceForm = () => {
   var today = new Date();
 
   useEffect(() => {
-    dispatch(fetchracecourse());
-    dispatch(fetchjockey());
-    dispatch(fetchSponsor());
-    dispatch(fetchMeeting());
-    dispatch(fetchRaceType());
-    dispatch(fetchRaceName());
-    dispatch(fetchTrackLength());
-    dispatch(fetchRaceKind());
-    dispatch(fetchgroundtype());
+    dispatch(fetchracecourse({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchjockey({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchSponsor({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchMeeting({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchRaceType({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchRaceName({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchTrackLength({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchRaceKind({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchgroundtype({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchpointTable({SearchCode,SearchTitle,SearchAge}));
 
     if (!image) {
       setPreview(undefined);

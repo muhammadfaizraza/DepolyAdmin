@@ -61,7 +61,7 @@ const Racecourse = () => {
     setSearchAge('')
   };
   useEffect(() => {
-    dispatch(fetchracecourse());
+    dispatch(fetchracecourse({SearchTitle,SearchCode,SearchAge}));
   }, [dispatch]);
 
 

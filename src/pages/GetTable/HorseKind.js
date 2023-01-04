@@ -188,7 +188,7 @@ const HorseKind = () => {
                      <input
                        type="text"
                        class="form-control"
-                       onChange={(e) => setSearchAge(e.target.value)}
+                       onChange={(e) => setSearchCode(e.target.value)}
                        placeholder="Enter Abbreviation"
                      />
                      

@@ -185,9 +185,13 @@ const [state, setState] = useState([
                       onChange={(e) => setSearchTitle(e.target.value)}
                       placeholder="Enter Name"
                     />
-                 <input type='text' class="form-control" placeholder="Enter Gender"/>
-                 <input type='text' class="form-control" placeholder="Enter Color"/>
-                 <input type='text' class="form-control" placeholder="Enter Age"/>
+                    <input type='text' class="form-control" 
+                      onChange={(e) => setSearchCode(e.target.value)}
+                    placeholder="Enter Gender"/>
+                    <input type='text' class="form-control" placeholder="Enter Color"/>
+                    <input type='text' class="form-control" 
+                    onChange={(e) => setSearchAge(e.target.value)}
+                    placeholder="Enter Age"/>
                     <input
                       type="text"
                       class="form-control"

@@ -57,8 +57,15 @@ const Tracklength = () => {
   const currentPosts = trackLength.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+
+  const GetSearch = async () => {
+    dispatch(fetchTrackLength({SearchTitle,SearchCode}));
+    setSearchTitle('')
+    setSearchCode('')
+  };
+
   useEffect(() => {
-    dispatch(fetchTrackLength());
+    dispatch(fetchTrackLength({SearchTitle,SearchCode}));
   }, [dispatch]);
 
   const handleRemove = async (Id) => {
@@ -164,16 +171,20 @@ const Tracklength = () => {
                         type="text"
                         class="form-control"
                         placeholder="Enter Track Length"
+                        onChange={(e) => setSearchTitle(e.target.value)}
                       />
                       <input
                         type="text"
                         class="form-control"
                         placeholder="Enter Race Course"
+                        onChange={(e) => setSearchCode(e.target.value)}
                       />
                     </div>
                   </div>
-                  <button className="filterbtn">Apply Filter</button>
-                </span>
+                  <button className="filterbtn" onClick={GetSearch}>
+                   Apply Filter
+                 </button>
+                                 </span>
               ) : (
                 <></>
               )}

@@ -30,7 +30,9 @@ const RaceForm = () => {
   const { data: jockey } = useSelector((state) => state.jockey);
   const { data: horse } = useSelector((state) => state.horse);
   const { data: equipment } = useSelector((state) => state.equipment);
-
+  const [SearchAge, setSearchAge] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
   const history = useNavigate();
   const { state } = useLocation();
   const { RaceId } = state;
@@ -65,9 +67,9 @@ const ItemLength = items.length;
 
 
   useEffect(() => {
-    dispatch(fetchHorse());
-    dispatch(fetchjockey());
-    dispatch(fetchequipment());
+    dispatch(fetchHorse({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchjockey({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchequipment({SearchTitle,SearchCode,SearchAge}));
   }, [dispatch]);
 
   useEffect(() => {

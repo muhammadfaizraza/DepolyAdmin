@@ -186,13 +186,13 @@ console.log(SearchData,'SearchData')
                     type="text"
                     class="form-control"
                     onChange={(e) => setSearchRemarks(e.target.value)}
-                    placeholder="Enter Maximum Weight"
+                    placeholder="Enter Remarks"
                   />
                    <input
                     type="text"
                     class="form-control"
                     onChange={(e) => setSearchAge(e.target.value)}
-                    placeholder="Enter Minimum Weight"
+                    placeholder="Enter Age"
                   />
                   <input
                     type="text"

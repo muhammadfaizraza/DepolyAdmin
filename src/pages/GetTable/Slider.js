@@ -68,13 +68,12 @@ const Slider = () => {
 
 
   const GetSearch = async () => {
-    dispatch(fetchSlider({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchSlider({SearchTitle,SearchCode}));
     setSearchTitle('')
     setSearchCode('')
-    setSearchAge('')
   };
   useEffect(() => {
-    dispatch(fetchSlider());
+    dispatch(fetchSlider({SearchTitle,SearchCode}));
   }, []);
 
   const handleRemove = async (Id) => {

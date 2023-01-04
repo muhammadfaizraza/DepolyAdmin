@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+  import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { remove } from "../../../redux/postReducer/postRace";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -188,7 +188,7 @@ const Races = () => {
                                 {item.DescriptionAr}
                               </td>
                               <td>
-                                {item.TrackLengthData.TrackLength}
+                                {item.TrackLengthData&& item.TrackLengthData.TrackLength }
                               </td>
 
                               <td>{item.WeatherDegree}</td>

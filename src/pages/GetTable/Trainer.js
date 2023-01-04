@@ -79,7 +79,7 @@ const Trainer = () => {
         dangerMode: true,
       }).then(async (willDelete) => {
         if (willDelete) {
-          const res = await axios.delete(
+        await axios.delete(
             `${window.env.API_URL}/softdeletetrainer/${Id}`
           );
           swal("Your data has been deleted Successfully!", {
@@ -135,13 +135,7 @@ const Trainer = () => {
               <h4>Trainer Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
+             
 
                 <Link to="/trainerform">
                   <button>Add Trainer</button>
@@ -248,7 +242,8 @@ const Trainer = () => {
                       {currentPosts.map((item, index) => {
                         return (
                           <>
-                            <tr className="tr_table_class">
+                            <tr key={index}
+                             className="tr_table_class">
                             <td
                                 className="table_delete_btn1"
                                 // style={{ textAlign: "center" }}
@@ -281,6 +276,8 @@ const Trainer = () => {
                               </td>
 
                               {/* <td>{item.DOB} </td> */}
+                              
+                              
                               <td>
                                 {" "}
                                 <Moment format="YYYY/MM/DD">

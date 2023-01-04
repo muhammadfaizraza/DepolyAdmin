@@ -87,6 +87,7 @@ let AllNationalityAr =
     })
   );
   let dateall = Date.parse(trainerid.TrainerLicenseDate);
+  console.log(trainerid, "dateall 4324");
 
   console.log(dateall, "dateall 1");
   useEffect(() => {

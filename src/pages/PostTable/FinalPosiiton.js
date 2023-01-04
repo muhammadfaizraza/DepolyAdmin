@@ -27,7 +27,7 @@ const FinalPosiiton = () => {
     AbbrevAr:""
   });
 
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState(true);
   const [state1, setState] = useState({
 		shortCode: '',
 	});

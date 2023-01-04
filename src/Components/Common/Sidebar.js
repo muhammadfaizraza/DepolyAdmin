@@ -422,17 +422,9 @@ const Sidebar = () => {
                         </Link>
                       </div>
 
-                      <div>
-                        <Link to="/races" className="mylink">
-                          Race
-                        </Link>
-                      </div>
+                    
 
-                      <div>
-                        <Link to="/racesPublish" className="mylink">
-                          Race To Be Publish
-                        </Link>
-                      </div>
+                  
                       <div>
                         <Link to="/racecardlisting" className="mylink">
                           Race Card
@@ -466,7 +458,18 @@ const Sidebar = () => {
                         <Link to="/resultrace" className="mylink">
                           Race Results
                         </Link>
-                      </div>    
+                      </div>   
+                      <div>
+                        <Link to="/races" className="mylink">
+                          Race
+                        </Link>
+                      </div>  
+                      <div>
+                        <Link to="/racesPublish" className="mylink">
+                          Race To Be Publish
+                        </Link>
+                      </div> 
+                      
                     </Accordion.Body>
                   </Accordion.Item>
           

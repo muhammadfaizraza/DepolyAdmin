@@ -19,13 +19,12 @@ import RaceCoursePopup from "./RaceCourseForm";
 import GroundTypePopup from "./GroundType";
 
 const Tracklengthform = () => {
-
   const [ErrorTrackLength, setErrorTrackLength] = useState("");
   const [ErrorRaceCourse, setErrorRaceCourse] = useState("");
-  const [SearchAge, setSearchAge] = useState('');
+  const [SearchAge, setSearchAge] = useState("");
 
-  const [SearchCode, setSearchCode] = useState('');
-  const [SearchTitle, setSearchTitle] = useState('');
+  const [SearchCode, setSearchCode] = useState("");
+  const [SearchTitle, setSearchTitle] = useState("");
   const [ErrorGroundType, setErrorGroundType] = useState("");
 
   const [ErrorRailPosition, setErrorRailPosition] = useState("");
@@ -49,7 +48,7 @@ const Tracklengthform = () => {
     await setShowActiveRaceCourse(true);
   };
 
- let courseoptions =
+  let courseoptions =
     racecourse === undefined ? (
       <></>
     ) : (
@@ -58,13 +57,14 @@ const Tracklengthform = () => {
           id: item._id,
           value: item._id,
           label: (
-            <div style={{
-              display:'flex',
-              justifyContent:'space-between'
-            }}>
-             <p>{item.TrackNameEn}</p> 
-             <p>{item.TrackNameAr}</p> 
-
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <p>{item.TrackNameEn}</p>
+              <p>{item.TrackNameAr}</p>
             </div>
           ),
         };
@@ -80,29 +80,29 @@ const Tracklengthform = () => {
           id: item._id,
           value: item._id,
           label: (
-            <div style={{
-              display:'flex',
-              justifyContent:'space-between'
-            }}>
-             <p>{item.NameEn}</p> 
-             <p>{item.NameAr}</p> 
-
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
             </div>
           ),
         };
       })
     );
 
-  const [TrackLength, setTrackLength] = useState('');
+  const [TrackLength, setTrackLength] = useState("");
   const [RaceCourse, setRaceCourse] = useState("");
-  const [RaceCourseImage, setRaceCourseImage] = useState('');
-  const [GroundType, setGroundType] = useState('');
-  const [preview, setPreview] = useState('');
-  const [RailPosition, setRailPosition] = useState('');
+  const [RaceCourseImage, setRaceCourseImage] = useState("");
+  const [GroundType, setGroundType] = useState("");
+  const [preview, setPreview] = useState("");
+  const [RailPosition, setRailPosition] = useState("");
 
   const { pathname } = useLocation();
   const history = useNavigate();
-
 
   const submit = async (event) => {
     event.preventDefault();
@@ -112,7 +112,7 @@ const Tracklengthform = () => {
       formData.append("TrackLength", TrackLength);
       formData.append("RaceCourse", RaceCourse.id);
       formData.append("image", RaceCourseImage);
-      formData.append("GroundType", GroundType.id );
+      formData.append("GroundType", GroundType.id);
       formData.append("RailPosition", RailPosition);
 
       await axios.post(`${window.env.API_URL}/uploadTrackLength`, formData);
@@ -142,8 +142,8 @@ const Tracklengthform = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchgroundtype({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchracecourse({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchgroundtype({ SearchTitle, SearchCode, SearchAge }));
+    dispatch(fetchracecourse({ SearchTitle, SearchCode, SearchAge }));
 
     if (!RaceCourseImage) {
       setPreview(undefined);
@@ -168,15 +168,10 @@ const Tracklengthform = () => {
     document.getElementById("file").value = "";
   };
   const FetchNew = () => {
-    dispatch(fetchgroundtype({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchracecourse({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchgroundtype({ SearchTitle, SearchCode, SearchAge }));
+    dispatch(fetchracecourse({ SearchTitle, SearchCode, SearchAge }));
   };
- 
 
-  const data1 = JSON.stringify(
-    TextInputValidation("en", RailPosition, "Rail Position ")
-  );
-  const position = JSON.parse(data1);
   return (
     <div className="page">
       <div className="rightsidedata">
@@ -254,7 +249,6 @@ const Tracklengthform = () => {
                         <AiOutlineReload />
                       </span>
                     </OverlayTrigger>
-                    
                   </span>
                   <span className={GroundType === "" ? "error" : "success"}>
                     {ErrorGroundType}
@@ -280,45 +274,28 @@ const Tracklengthform = () => {
                     controlId="floatingInput"
                     label="Rail Position"
                     className="mb-3"
+                    onChange={(e) => setRailPosition(e.target.value)}
                     value={RailPosition}
-                    onBlur={() => setErrorRailPosition(position)}
+                    onBlur={() =>
+                      RailPosition === ""
+                        ? setErrorRailPosition("Rail Position is required")
+                        : setErrorRailPosition("Rail Position is Validated")
+                    }
                   >
                     <Form.Control
-                      type="text"
+                      type="number"
                       placeholder="Rail Position"
                       // value='0'
                       // readOnly
                       // value={GroundType.label ===}
-                      
                     />
                   </FloatingLabel>
-                  <span className="spanForm"> |</span>
-                  <span
-                    className={ErrorRailPosition.status ? "success" : "error"}
-                  >
-                    {ErrorRailPosition.message}
+
+                  <span className={RailPosition === "" ? "error" : "success"}>
+                    {ErrorRailPosition}
                   </span>
                 </div>
-
-                <div className="col-sm">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="موقف السكك الحديدية"
-                    className="mb-3 floatingInputAr"
-                    name="Name"
-                    value={RailPosition}
-                    style={{ direction: "rtl" }}
-                  >
-                    <Form.Control
-                      type="text"
-                      placeholder="طول المسار"
-                      
-                    />
-                  </FloatingLabel>
-                </div>
               </div>
-              
-
 
               <div className="row mainrow">
                 <div className="col-sm">
@@ -350,7 +327,6 @@ const Tracklengthform = () => {
                         <AiOutlineReload />
                       </span>
                     </OverlayTrigger>{" "}
-                    
                   </span>
                   <span className={RaceCourse === "" ? "error" : "success"}>
                     {ErrorRaceCourse}
@@ -368,7 +344,7 @@ const Tracklengthform = () => {
                     isSearchable={true}
                   />
                 </div> */}
-              </div>              
+              </div>
               <div className="ButtonSection">
                 <div>
                   <label className="Multipleownerlabel">Select GIF Image</label>

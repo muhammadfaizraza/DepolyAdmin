@@ -151,6 +151,8 @@ import DeletedVerdict from "./Components/DeletedData/DeletedVerdict";
 import DeletedCategory from "./Components/DeletedData/DeletedCategory";
 import DeletedCompetition from "./Components/DeletedData/DeletedCompetition";
 import DeletedTable from "./pages/GetTable/DeletedTable";
+import FinalPosiiton from "./pages/PostTable/FinalPosiiton";
+import FinalPositionTable from "./pages/GetTable/FinalPositionTable";
 
 
 function App() {
@@ -261,6 +263,9 @@ function App() {
              <Route path="/seoform" element={<SEOForm />} />
              <Route path="/competitionrace" element={<PublishRaceCompetition />} />
              <Route path="/newsletter" element={<NewsLetter />} />
+             <Route path="/finalposition" element={<FinalPosiiton />} />
+             <Route path="/finalpositionlist" element={<FinalPositionTable />} />
+
              <Route path="/viewcompetitionPoint" element={<ViewPoint />} />
              <Route path="/addcompetitionPoint" element={<AddPoint />} />
              <Route path="/addracePoint" element={<AddPointInRace />} />

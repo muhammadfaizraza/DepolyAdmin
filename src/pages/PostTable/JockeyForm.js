@@ -57,7 +57,9 @@ const NewsForm = () => {
   const [image, setImage] = useState();
   const [NationalityID, setNationalityID] = useState("");
   const [preview, setPreview] = useState();
-
+  const [SearchAge, setSearchAge] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
   const [showActivenationality, setShowActivenationality] = useState(false);
 
   const handleCloseActivenationality = () => setShowActivenationality(false);
@@ -110,7 +112,7 @@ const NewsForm = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchnationality());
+    dispatch(fetchnationality({SearchCode,SearchTitle,SearchAge}));
     if (!image) {
       setPreview(undefined);
       return;
@@ -121,7 +123,7 @@ const NewsForm = () => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [image, dispatch]);
   const FetchNew = () => {
-    dispatch(fetchnationality());
+    dispatch(fetchnationality({SearchCode,SearchTitle,SearchAge}));
   };
   const onSelectFile = (e) => {
     setImage(e.target.files[0]);

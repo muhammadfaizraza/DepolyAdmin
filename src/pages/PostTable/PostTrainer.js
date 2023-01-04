@@ -159,7 +159,6 @@ const TrainerForm = () => {
     const objectUrl = URL.createObjectURL(image);
     setPreview(objectUrl);
 
-    // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl);
   },[image]);
   const FetchNew = () => {

@@ -65,7 +65,6 @@ const Trainer = () => {
     );
     setSearchData(response.data.data);
   };
-console.log(SearchData,'SearchData')
   useEffect(() => {
     dispatch(fetchTrainer());
   }, []);

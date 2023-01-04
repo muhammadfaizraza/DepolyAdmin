@@ -12,7 +12,6 @@ import Form from "react-bootstrap/Form";
 import { fetchgroundtype } from "../../redux/getReducer/getGroundType";
 import { Modal } from "react-bootstrap";
 import { AiOutlineReload } from "react-icons/ai";
-import TextInputValidation from "../../utils/TextInputValidation";
 import { ImCross } from "react-icons/im";
 
 import RaceCoursePopup from "./RaceCourseForm";
@@ -193,8 +192,8 @@ const Tracklengthform = () => {
                     value={TrackLength}
                     onBlur={() =>
                       TrackLength === ""
-                        ? setErrorTrackLength("Tracklength is required ")
-                        : setErrorTrackLength("Tracklength is Validated ")
+                        ? setErrorTrackLength("Track Length is required ")
+                        : setErrorTrackLength("Track Length is Validated ")
                     }
                     required
                   >
@@ -231,7 +230,7 @@ const Tracklengthform = () => {
                     onBlur={() =>
                       GroundType === ""
                         ? setErrorGroundType("Ground Type is required")
-                        : setErrorGroundType(" ")
+                        : setErrorGroundType("Ground Type is Validated ")
                     }
                   />
                   <span className="spanForm">

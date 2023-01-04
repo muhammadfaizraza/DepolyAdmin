@@ -110,33 +110,57 @@ const TrainerPopup = (data) => {
             <div className="col-sm">
             <FloatingLabel
                 controlId="floatingInput"
-                label="Detail"
+                label="Remarks"
                 className="mb-3"
               
               >
-                <Form.Control type="text" placeholder="Description" value={data.data.DetailEn} readOnly/>
+                <Form.Control type="text" placeholder="Description" value={data.data.RemarksEn === undefined ? <>N/A </> : data.data.RemarksEn} readOnly  />
               </FloatingLabel>
-           
-     
+            
+              <span className="spanForm"> |</span>
             </div>
 
-           
+            <div className="col-sm">
+            <FloatingLabel
+                controlId="floatingInput"
+                label="ملاحظات"
+                className="mb-3 floatingInputAr"
+                style={{ direction: "rtl", left: "initial", right: 0 }}
+             
+              
+              >
+                <Form.Control type="text" placeholder="Description" value={data.data.ShortNameAr=== undefined ? <>N/A</> :  data.data.RemarksAr}  style={{ left: "%" }} readOnly />
+              </FloatingLabel>
+              
+            </div>
           </div>
           <div className="row mainrow">
             <div className="col-sm">
             <FloatingLabel
                 controlId="floatingInput"
-                label="Remarks"
+                label="Details"
                 className="mb-3"
               
-              
               >
-                <Form.Control type="text" placeholder="Description" value={data.data.RemarksEn} readOnly/>
+                <Form.Control type="text" placeholder="Description" value={data.data.DetailEn === undefined ? <>N/A </> : data.data.DetailEn} readOnly  />
               </FloatingLabel>
             
+              <span className="spanForm"> |</span>
             </div>
 
-          
+            <div className="col-sm">
+            <FloatingLabel
+                controlId="floatingInput"
+                label="تفاصيل"
+                className="mb-3 floatingInputAr"
+                style={{ direction: "rtl", left: "initial", right: 0 }}
+             
+              
+              >
+                <Form.Control type="text" placeholder="Description" value={data.data.DetailAr=== undefined ? <>N/A</> :  data.data.DetailAr}  style={{ left: "%" }} readOnly />
+              </FloatingLabel>
+              
+            </div>
           </div>
           <div className="row mainrow">
             <div className="col-sm">

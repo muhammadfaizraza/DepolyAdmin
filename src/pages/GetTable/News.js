@@ -189,9 +189,9 @@ const News = () => {
                       <th>Action</th>
 
                         <th>Title </th>
-                        <th>Sub Title </th>
-                        <th>Title Arabic</th>
-                        <th>Sub Title Arabic</th>
+                        <th>Title Arabic</th> 
+                        <th>Subtitle </th>
+                        <th>Subtitle Arabic</th>
                         <th>Description </th>
                         <th>Description Arabic</th>
                         <th>Image</th>
@@ -231,7 +231,7 @@ const News = () => {
                             <td>
                               <img src={item.image} alt="" />
                             </td>
-                            <td>
+                            {/* <td>
                                 <Form.Check 
                                   type="switch"
                                   id="custom-switch"
@@ -239,7 +239,7 @@ const News = () => {
                                   // label="Check this switch"
                                   value={Value}
                                 />
-                                </td>
+                                </td> */}
                             
                           </tr>
                         );

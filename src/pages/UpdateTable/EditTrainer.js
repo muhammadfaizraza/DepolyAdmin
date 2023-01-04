@@ -14,11 +14,14 @@ import { Tooltip ,OverlayTrigger} from "react-bootstrap";
 import {AiOutlineReload} from "react-icons/ai"
 import { Modal } from "react-bootstrap";
 import NationalityPopup from "../PostTable/Nationality";
+const EditTrainer = () => {
 
-const NewsForm = () => {
   const history = useNavigate();
   const dispatch = useDispatch();
   const { state } = useLocation();
+  const [SearchAge, setSearchAge] = useState('');
+const [SearchCode, setSearchCode] = useState('');
+const [SearchTitle, setSearchTitle] = useState('');
   const { data: nationality } = useSelector((state) => state.nationality);
   const [TrainerLicenseDate, setTrainerLicenseDate] = useState("");
   const [NationalityID, setNationalityID] = useState("");
@@ -61,6 +64,9 @@ const NewsForm = () => {
     const image = event.target.files[0];
     setImage(image);
   };
+  useEffect( () => {
+    dispatch(fetchnationality({SearchTitle,SearchCode,SearchAge}));
+ },[]);
   let AllNationality =
   nationality === undefined ? (
     <></>
@@ -104,15 +110,14 @@ let AllNationalityAr =
         DetailEn: trainerid.DetailEn,
         DetailAr: trainerid.DetailAr,
         TrainerLicenseDate: trainerid.TrainerLicenseDate,
-        NationalityID:trainerid.NationalityID
+        NationalityID:trainerid.NationalityID,
+        DOB:trainerid.DOB
       });
     } else {
     }
   }, [trainerid]);
 
-  useEffect(() => {
-    dispatch(fetchnationality());
-  });
+
   useEffect(() => {
     if (image === undefined) {
       setPreview(trainerid.image);
@@ -164,368 +169,369 @@ let AllNationalityAr =
       });
     }
   };
-  return (
-    <>
-      <div className="page">
-        <div className="rightsidedata">
-          <div
-            style={{
-              marginTop: "30px",
-            }}
-          >
-            <div className="Headers">Edit Trainer</div>
-            <div className="form">
-              <form onSubmit={submit}>
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Name"
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, NameEn: e.target.value })
-                      }
-                    >
-                      <Form.Control
-                        type="text"
-                        placeholder="Description"
-                        value={state1.NameEn}
-                      />
-                    </FloatingLabel>
 
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="اسم"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                      onChange={(e) =>
-                        setState({ ...state1, NameAr: e.target.value })
-                      }
-                    >
-                      <Form.Control
-                        type="text"
-                        placeholder="Description"
-                        value={state1.NameAr}
-                      />
-                    </FloatingLabel>
-                  </div>
-                </div>
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Short Name"
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, ShortNameEn: e.target.value })
-                      }
-                    >
-                      <Form.Control
-                        type="text"
-                        placeholder="Description"
-                        value={state1.ShortNameEn}
-                      />
-                    </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="اسم قصير"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                      onChange={(e) =>
-                        setState({ ...state1, ShortNameAr: e.target.value })
-                      }
-                    >
-                      <Form.Control
-                        type="text"
-                        placeholder="Description"
-                        value={state1.ShortNameAr}
-                      />
-                    </FloatingLabel>
-                  </div>
-                </div>
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Title"
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, TitleEn: e.target.value })
-                      }
-                    >
-                      <Form.Control
-                        type="text"
-                        placeholder="Description"
-                        value={state1.TitleEn}
-                      />
-                    </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="لقب"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                      onChange={(e) =>
-                        setState({ ...state1, TitleAr: e.target.value })
-                      }
-                    >
-                      <Form.Control
-                        type="text"
-                        placeholder="Description"
-                        value={state1.TitleAr}
-                      />
-                    </FloatingLabel>
-                  </div>
-                </div>
-                {/* <div className="row mainrow">
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="Remarks"
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, Remarks: e.target.value })
-                      }
-                    
-                    >
-                      <Form.Control type="text" placeholder="Description" value={state1.Remarks}/>
-                    </FloatingLabel>
-                
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                  <FloatingLabel
-                      controlId="floatingInput"
-                      label="اسم"
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, NameAr: e.target.value })
-                      }
-                    
-                    >
-                      <Form.Control type="text" placeholder="Description" value={state1.NameAr}/>
-                    </FloatingLabel>
-                    
-                  </div>
-                </div> */}
-
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Detail"
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, DetailEn: e.target.value })
-                      }
-                    >
-                      <Form.Control
-                        type="text"
-                        placeholder="Description"
-                        value={state1.DetailEn}
-                      />
-                    </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="التفاصيل"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                      onChange={(e) =>
-                        setState({ ...state1, DetailAr: e.target.value })
-                      }
-                    >
-                      <Form.Control
-                        type="text"
-                        placeholder="Description"
-                        value={state1.NameAr}
-                      />
-                    </FloatingLabel>
-                  </div>
-                </div>
-
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Remarks"
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, RemarksEn: e.target.value })
-                      }
-                    >
-                      <Form.Control
-                        type="text"
-                        placeholder="Description"
-                        value={state1.RemarksEn}
-                      />
-                    </FloatingLabel>
-
-                    <span className="spanForm"> |</span>
-                  </div>
-
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="ملاحظات"
-                      className="mb-3 floatingInputAr"
-                      style={{ direction: "rtl" }}
-                      onChange={(e) =>
-                        setState({ ...state1, RemarksAr: e.target.value })
-                      }
-                    >
-                      <Form.Control
-                        type="text"
-                        placeholder="Description"
-                        value={state1.RemarksAr}
-                      />
-                    </FloatingLabel>
-                  </div>
-                </div>
-
-                <div className="row mainrow">
-                  <DatePicker
-                    onChange={setTrainerLicenseDate}
-                    value={TrainerLicenseDate}
-                    dayPlaceholder=""
-                    maxDate={today}
-                    monthPlaceholder={state1.TrainerLicenseDate}
-                    yearPlaceholder=""
-                    className="editDate"
+ return (
+  <>
+  <div className="page">
+    <div className="rightsidedata">
+      <div
+        style={{
+          marginTop: "30px",
+        }}
+      >
+        <div className="Headers">Edit Trainer</div>
+        <div className="form">
+          <form onSubmit={submit}>
+            <div className="row mainrow">
+              <div className="col-sm">
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Name"
+                  className="mb-3"
+                  onChange={(e) =>
+                    setState({ ...state1, NameEn: e.target.value })
+                  }
+                >
+                  <Form.Control
+                    type="text"
+                    placeholder="Description"
+                    value={state1.NameEn}
                   />
+                </FloatingLabel>
 
-                  {/* <div className="col-sm" style={{ direction: "rtl" }}>
-                    <input
-                      
-                      placeholder="تاريخ الولادة"
-                    />
-                  </div> */}
-                </div>
-                <div className="row mainrow">
-                <p className="selectLabel">Nationality</p>
-                    <div className="col-sm">
-              
-                      <Select
-                        placeholder={<div>{trainerid.TrainerNationalityData.NameEn}</div>}
-                        defaultValue={NationalityID}
-                        onChange={setNationalityID}
-                        options={AllNationality}
-                        isClearable={true}
-                        isSearchable={true}
-                      />
-                      <span className="spanForm">
-                        <OverlayTrigger
-                          overlay={
-                            <Tooltip id={`tooltip-top`}>Add more</Tooltip>
-                          }
-                        >
-                          <span
-                            className="addmore"
-                            onClick={handleShowActivenationality}
-                          >
-                            +
-                          </span>
-                        </OverlayTrigger>
-                        <OverlayTrigger
-                          overlay={
-                            <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
-                          }
-                        >
-                          <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
-                        </OverlayTrigger>
-                        |
-                      </span>
-                    </div>
+                <span className="spanForm"> |</span>
+              </div>
 
-                    <div className="col-sm">
-                      <Select
-                        className="selectdir"
-                        placeholder={
-                          <div style={{ direction: "rtl" }}>
-                            اكتب للبحث عن الجنسية
-                          </div>
-                        }
-                        defaultValue={NationalityID}
-                        onChange={setNationalityID}
-                        options={AllNationalityAr}
-                        isClearable={true}
-                        isSearchable={true}
-                      />
-                    </div>
-                  </div>
-                <div className="row mainrow">
-                  <DatePicker
-                    onChange={setDOB}
-                    value={DOB}
-                    dayPlaceholder=""
-                    maxDate={today}
-                    monthPlaceholder={state1.DOB}
-                    yearPlaceholder=""
-                    className="editDate"
+              <div className="col-sm">
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="اسم"
+                  className="mb-3 floatingInputAr"
+                  style={{ direction: "rtl" }}
+                  onChange={(e) =>
+                    setState({ ...state1, NameAr: e.target.value })
+                  }
+                >
+                  <Form.Control
+                    type="text"
+                    placeholder="Description"
+                    value={state1.NameAr}
                   />
-
-                  {/* <div className="col-sm" style={{ direction: "rtl" }}>
-              <input
-                
-                placeholder="تاريخ الولادة"
-              />
-            </div> */}
-                </div>
-         
-                <div className="ButtonSection">
-                  <div>
-                    <input
-                      type="file"
-                      onChange={fileSelected}
-                      className="formInput"
-                    />
-                    <img src={preview} className="PreviewImage" alt="" />
-                  </div>
-                  <button type="submit" className="SubmitButton">
-                    Update
-                  </button>
-                </div>
-              </form>
+                </FloatingLabel>
+              </div>
             </div>
-          </div>
+            <div className="row mainrow">
+              <div className="col-sm">
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Short Name"
+                  className="mb-3"
+                  onChange={(e) =>
+                    setState({ ...state1, ShortNameEn: e.target.value })
+                  }
+                >
+                  <Form.Control
+                    type="text"
+                    placeholder="Description"
+                    value={state1.ShortNameEn}
+                  />
+                </FloatingLabel>
+
+                <span className="spanForm"> |</span>
+              </div>
+
+              <div className="col-sm">
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="اسم قصير"
+                  className="mb-3 floatingInputAr"
+                  style={{ direction: "rtl" }}
+                  onChange={(e) =>
+                    setState({ ...state1, ShortNameAr: e.target.value })
+                  }
+                >
+                  <Form.Control
+                    type="text"
+                    placeholder="Description"
+                    value={state1.ShortNameAr}
+                  />
+                </FloatingLabel>
+              </div>
+            </div>
+            <div className="row mainrow">
+              <div className="col-sm">
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Title"
+                  className="mb-3"
+                  onChange={(e) =>
+                    setState({ ...state1, TitleEn: e.target.value })
+                  }
+                >
+                  <Form.Control
+                    type="text"
+                    placeholder="Description"
+                    value={state1.TitleEn}
+                  />
+                </FloatingLabel>
+
+                <span className="spanForm"> |</span>
+              </div>
+
+              <div className="col-sm">
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="لقب"
+                  className="mb-3 floatingInputAr"
+                  style={{ direction: "rtl" }}
+                  onChange={(e) =>
+                    setState({ ...state1, TitleAr: e.target.value })
+                  }
+                >
+                  <Form.Control
+                    type="text"
+                    placeholder="Description"
+                    value={state1.TitleAr}
+                  />
+                </FloatingLabel>
+              </div>
+            </div>
+            {/* <div className="row mainrow">
+              <div className="col-sm">
+              <FloatingLabel
+                  controlId="floatingInput"
+                  label="Remarks"
+                  className="mb-3"
+                  onChange={(e) =>
+                    setState({ ...state1, Remarks: e.target.value })
+                  }
+                
+                >
+                  <Form.Control type="text" placeholder="Description" value={state1.Remarks}/>
+                </FloatingLabel>
+            
+                <span className="spanForm"> |</span>
+              </div>
+
+              <div className="col-sm">
+              <FloatingLabel
+                  controlId="floatingInput"
+                  label="اسم"
+                  className="mb-3"
+                  onChange={(e) =>
+                    setState({ ...state1, NameAr: e.target.value })
+                  }
+                
+                >
+                  <Form.Control type="text" placeholder="Description" value={state1.NameAr}/>
+                </FloatingLabel>
+                
+              </div>
+            </div> */}
+
+            <div className="row mainrow">
+              <div className="col-sm">
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Detail"
+                  className="mb-3"
+                  onChange={(e) =>
+                    setState({ ...state1, DetailEn: e.target.value })
+                  }
+                >
+                  <Form.Control
+                    type="text"
+                    placeholder="Description"
+                    value={state1.DetailEn}
+                  />
+                </FloatingLabel>
+
+                <span className="spanForm"> |</span>
+              </div>
+
+              <div className="col-sm">
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="التفاصيل"
+                  className="mb-3 floatingInputAr"
+                  style={{ direction: "rtl" }}
+                  onChange={(e) =>
+                    setState({ ...state1, DetailAr: e.target.value })
+                  }
+                >
+                  <Form.Control
+                    type="text"
+                    placeholder="Description"
+                    value={state1.NameAr}
+                  />
+                </FloatingLabel>
+              </div>
+            </div>
+
+            <div className="row mainrow">
+              <div className="col-sm">
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Remarks"
+                  className="mb-3"
+                  onChange={(e) =>
+                    setState({ ...state1, RemarksEn: e.target.value })
+                  }
+                >
+                  <Form.Control
+                    type="text"
+                    placeholder="Description"
+                    value={state1.RemarksEn}
+                  />
+                </FloatingLabel>
+
+                <span className="spanForm"> |</span>
+              </div>
+
+              <div className="col-sm">
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="ملاحظات"
+                  className="mb-3 floatingInputAr"
+                  style={{ direction: "rtl" }}
+                  onChange={(e) =>
+                    setState({ ...state1, RemarksAr: e.target.value })
+                  }
+                >
+                  <Form.Control
+                    type="text"
+                    placeholder="Description"
+                    value={state1.RemarksAr}
+                  />
+                </FloatingLabel>
+              </div>
+            </div>
+
+            <div className="row mainrow">
+            <p className="selectLabel">Trainer license Date</p>
+              <DatePicker
+                onChange={setTrainerLicenseDate}
+                value={TrainerLicenseDate}
+                dayPlaceholder=""
+                maxDate={today}
+                monthPlaceholder={state1.TrainerLicenseDate}
+                yearPlaceholder=""
+                className="editDate"
+              />
+
+              {/* <div className="col-sm" style={{ direction: "rtl" }}>
+                <input
+                  
+                  placeholder="تاريخ الولادة"
+                />
+              </div> */}
+            </div>
+            <div className="row mainrow">
+            <p className="selectLabel">Nationality</p>
+                <div className="col-sm">
+          
+                  <Select
+                    placeholder={<div>{trainerid.TrainerNationalityData&& trainerid.TrainerNationalityData.NameEn}</div>}
+                    defaultValue={NationalityID}
+                    onChange={setNationalityID}
+                    options={AllNationality}
+                    isClearable={true}
+                    isSearchable={true}
+                  />
+                  <span className="spanForm">
+                    <OverlayTrigger
+                      overlay={
+                        <Tooltip id={`tooltip-top`}>Add more</Tooltip>
+                      }
+                    >
+                      <span
+                        className="addmore"
+                        onClick={handleShowActivenationality}
+                      >
+                        +
+                      </span>
+                    </OverlayTrigger>
+                    <OverlayTrigger
+                      overlay={
+                        <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                      }
+                    >
+                      <span className="addmore" onClick={FetchNew}>
+                        <AiOutlineReload />
+                      </span>
+                    </OverlayTrigger>
+                    |
+                  </span>
+                </div>
+
+                <div className="col-sm">
+                  <Select
+                    className="selectdir"
+                    placeholder={
+                      <div style={{ direction: "rtl" }}>
+                        اكتب للبحث عن الجنسية
+                      </div>
+                    }
+                    defaultValue={NationalityID}
+                    onChange={setNationalityID}
+                    options={AllNationalityAr}
+                    isClearable={true}
+                    isSearchable={true}
+                  />
+                </div>
+              </div>
+            <div className="row mainrow">
+            <p className="selectLabel">Date of Birth</p>
+              <DatePicker
+                onChange={setDOB}
+                value={DOB}
+                dayPlaceholder=""
+                maxDate={today}
+                monthPlaceholder={state1.DOB}
+                yearPlaceholder=""              />
+
+              {/* <div className="col-sm" style={{ direction: "rtl" }}>
+          <input
+            
+            placeholder="تاريخ الولادة"
+          />
+        </div> */}
+            </div>
+     
+            <div className="ButtonSection">
+              <div>
+                <input
+                  type="file"
+                  onChange={fileSelected}
+                  className="formInput"
+                />
+                <img src={preview} className="PreviewImage" alt="" />
+              </div>
+              <button type="submit" className="SubmitButton">
+                Update
+              </button>
+            </div>
+          </form>
         </div>
       </div>
-      <Modal
-        show={showActivenationality}
-        onHide={handleCloseActivenationality}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <h2>Nationality</h2>
-        </Modal.Header>
-        <Modal.Body>
-          <NationalityPopup />
-        </Modal.Body>
-      </Modal>
-    </>
-  );
-};
+    </div>
+  </div>
+  <Modal
+    show={showActivenationality}
+    onHide={handleCloseActivenationality}
+    size="lg"
+    aria-labelledby="contained-modal-title-vcenter"
+    centered
+  >
+    <Modal.Header closeButton>
+      <h2>Nationality</h2>
+    </Modal.Header>
+    <Modal.Body>
+      <NationalityPopup />
+    </Modal.Body>
+  </Modal>
+</>
+  )
+}
 
-export default NewsForm;
+export default EditTrainer

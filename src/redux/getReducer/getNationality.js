@@ -1,5 +1,10 @@
 import axios from "axios";
 import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
+import { getDefaultMiddleware } from '@reduxjs/toolkit';
+
+const customizedMiddleware = getDefaultMiddleware({
+    serializableCheck: false
+  })
 
 export const STATUSES = Object.freeze({
     IDLE : 'idle',

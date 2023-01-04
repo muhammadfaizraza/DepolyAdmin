@@ -413,6 +413,7 @@ const NewsForm = () => {
                       monthPlaceholder="تاريخ التسجيل"
                       yearPlaceholder=""
                       style={{ direction: "rtl" }}
+                      maxDate={today}
                     />
                   </div>
                 </div>

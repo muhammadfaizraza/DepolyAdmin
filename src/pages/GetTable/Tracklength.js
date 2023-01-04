@@ -25,7 +25,7 @@ import { DateRangePicker } from 'react-date-range';
 
 const Tracklength = () => {
   const [ShowCalender, setShowCalender] = useState(false);
-  const [SearchAge, setSearchAge] = useState('');
+
   const [SearchCode, setSearchCode] = useState('');
   const [SearchTitle, setSearchTitle] = useState('');
   const [state, setState] = useState([
@@ -131,13 +131,7 @@ const Tracklength = () => {
               <h4>Track Length Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
+          
 
                 <Link to="/tracklengthform">
                   <button>Add Track Length</button>
@@ -200,7 +194,7 @@ const Tracklength = () => {
                         <th>Track Length</th>
                         <th>Race Course </th>
                         <th>Rail Position</th>
-                        <th>RaceCourse Image</th>
+                        <th>Race Course Image</th>
                       </tr>
                     </thead>
                     <tbody>

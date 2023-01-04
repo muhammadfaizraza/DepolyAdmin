@@ -41,7 +41,7 @@ const TrainerForm = () => {
 
   const { data: nationality } = useSelector((state) => state.nationality);
   const [NameEn, setNameEn] = useState("");
-  const [DetailEn, setDetailEn] = useState("");
+  const [DetailEn, setDetailEn] = useState(""); 
   const [DetailAr, setDetailAr] = useState("");
   const [RemarksEn, setRemarksEn] = useState("");
   const [RemarksAr, setRemarksAr] = useState("");
@@ -322,7 +322,7 @@ const TrainerForm = () => {
                       onChange={setTrainerLicenseDate}
                       value={TrainerLicenseDate}
                       dayPlaceholder="  "
-                      // maxDate={today}
+                      maxDate={today}
                       monthPlaceholder="License Date"
                       yearPlaceholder=""
                       onBlur={() =>

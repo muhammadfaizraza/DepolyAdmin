@@ -430,7 +430,7 @@ const Nationality = () => {
                                               }}
 
                     />{" "}
-                         <span className={HemisphereEn === "" ? "error" :"success"}></span>
+                         <span className={HemisphereEn === "" ? "error" :"success"}>{ErrorHemisphere}</span>
                
                     <span className="spanForm"> |</span>
                     {/* <span className="error">{ErrorWeatherType}</span> */}

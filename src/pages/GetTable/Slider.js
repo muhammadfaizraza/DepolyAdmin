@@ -210,7 +210,7 @@ const Slider = () => {
 
                       <th>Title</th>
                       <th>Title Arabic </th>
-                      <th>Url</th>
+                      <th>URL</th>
                       <th>Image</th>
                       {/* <th>Active</th> */}
                     </tr>

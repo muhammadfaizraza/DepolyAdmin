@@ -183,12 +183,12 @@ const SeoTable = () => {
               <div className="div_maintb">
                 <ScrollContainer>
                   <table>
-                    <thead>
+                    <thead> 
                       <tr>
                       <th>Action</th>
 
-                        <th>KeyWord</th>
-                        <th>KeyWord Arabic </th>
+                        <th>Keyword</th>
+                        <th>Keyword Arabic </th>
                         <th>Title</th>
                         <th>Title Arabic</th>
 

@@ -737,8 +737,22 @@ position: relative;
 top: 36px;
 left: 18px;
 }
+.newsSuccess{
+  color:  #228B22;
+  font-size: 11px;
+  position: relative;
+  top: 36px;
+  left: 18px;
+  }
 .newsErrorAr {
   color: red;
+  font-size: 11px;
+  float: right;
+  margin-top: 47px;
+  margin-right: 18px;
+}
+.newsSuccessAr {
+  color:  #228B22;
   font-size: 11px;
   float: right;
   margin-top: 47px;

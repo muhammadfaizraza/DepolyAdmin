@@ -136,12 +136,12 @@ const NewsForm = () => {
   const subtitleAr = JSON.parse(data4);
 
   const data5 = JSON.stringify(
-    TextInputValidation("en", DescriptionEn, "News Sub Title English")
+    TextInputValidation("en", DescriptionEn, "News Description English")
   );
 
   const description = JSON.parse(data5);
   const data6 = JSON.stringify(
-    TextInputValidation("ar", DescriptionAr, "News Sub Title Arabic")
+    TextInputValidation("ar", DescriptionAr, "News Description Arabic")
   );
   const descriptionAr = JSON.parse(data6);
 
@@ -194,7 +194,7 @@ const NewsForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="Sub-Title"
+                      label="Subtitle"
                       className="mb-3"
                       onChange={(e) => setSecondTitleEn(e.target.value)}
                       value={SecondTitleEn}
@@ -238,7 +238,7 @@ const NewsForm = () => {
                       onBlur={() => setdescError(description)}
              
              />
-             <span className="newsError">{descError.message}</span>
+             <span className={descError.status ? "newsSuccess" : "newsError"}>{descError.message}</span>
                   </div>
                   <div className="col-sm">
                     <ReactQuill
@@ -250,7 +250,7 @@ const NewsForm = () => {
                       onChange={setDescriptionAr}
                       onBlur={() => setdescErrorAr(descriptionAr)}
                     />
-             <span className="newsErrorAr">{descErrorAr.message}</span>
+             <span className={descErrorAr.status ? "newsSuccessAr" : "newsErrorAr"}>{descErrorAr.message}</span>
                   </div>
                 </div>
 

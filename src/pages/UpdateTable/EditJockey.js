@@ -458,7 +458,7 @@ const NewsForm = () => {
                     <div className="col-sm">
               
                       <Select
-                        placeholder={<div>{jockeyid.JockeyNationalityData.NameEn}</div>}
+                        placeholder={<div>{jockeyid.JockeyNationalityData&& jockeyid.JockeyNationalityData.NameEn}</div>}
                         defaultValue={NationalityID}
                         onChange={setNationalityID}
                         options={AllNationality}

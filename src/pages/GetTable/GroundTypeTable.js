@@ -129,13 +129,7 @@ const GroundTypeTable = () => {
               <h4>Ground Type Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
+          
 
                 <Link to="/ground">
                   <button>Add Ground Type</button>
@@ -205,8 +199,8 @@ const GroundTypeTable = () => {
                       <th>Action</th>
                         <th>Ground Type</th>
                         <th>Ground Type Arabic </th>
-                        <th>Abrevation</th>
-                        <th>Abrevation Arabic </th>
+                        <th>Abreviation</th>
+                        <th>Abreviation Arabic </th>
                         <th>Short Code</th>
 
                       

@@ -69,7 +69,6 @@ const NewsForm = () => {
     TitleAr: "",
     ShortEn: "",
     ShortAr: "",
-
     image: image,
   });
 
@@ -288,7 +287,8 @@ const NewsForm = () => {
                 
                     <Select
                       placeholder={
-                        <div>{ownerid.OwnerDataNationalityData.NameEn}</div>
+                        <div>{ownerid.OwnerDataNationalityData&& ownerid.OwnerDataNationalityData.NameEn }</div>
+                        
                       }
                       defaultInputValue={NationalityID}
                       onChange={setNationalityID}

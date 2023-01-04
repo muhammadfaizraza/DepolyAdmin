@@ -51,17 +51,26 @@ const CategoryTable = () => {
     dispatch(fetchcategory());
   }, [dispatch]);
 
+
   const handleRemove = async (Id) => {
     try {
-      const res = await axios.delete(`${window.env.API_URL}/softdeleteCompetitionCategory/${Id}`);
       swal({
-        title: "Success!",
-        text: "Data has been Deleted successfully ",
-        icon: "success",
-        button: "OK",
+        title: "Are you sure?",
+        text: "do you want to delete this data ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then(async (willDelete) => {
+        if (willDelete) {
+          await axios.delete(`${window.env.API_URL}/softdeleteCompetitionCategory/${Id}`);
+          swal("Your data has been deleted Successfully!", {
+            icon: "success",
+          });
+          dispatch(fetchcategory());
+        } else {
+          swal("Your data is safe!");
+        }
       });
-      history("/CategoryListing");
-      dispatch(fetchcategory());
     } catch (error) {
       const err = error.response.data.message;
       swal({
@@ -71,7 +80,6 @@ const CategoryTable = () => {
         button: "OK",
       });
     }
-    history("/CategoryListing");
   };
 
   if (status === STATUSES.LOADING) {

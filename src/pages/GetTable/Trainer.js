@@ -216,7 +216,7 @@ const Trainer = () => {
                 <ScrollContainer className="scroll-container">
                   <table>
                     <thead>
-                      <tr>
+                      <tr >
                         
                       <th>Action</th>
                         <th>Name</th>
@@ -225,13 +225,16 @@ const Trainer = () => {
                         <th>Title</th>
                         <th>Title Arabic</th>
                         {/* <th>Date Of Birth</th> */}
-                        <th>Licence Date</th>
+                        <th>License Date</th>
                         <th>Short Name</th>
                         <th>Short Name Arabic </th>
                         {/* <th>Rating</th> */}
 
                         <th>Remarks</th>
-                        <th>Detail</th>
+                        <th>Remarks Arabic</th>
+                        <th>Details</th>
+                        <th>Details Arabic</th>
+                     
                         <th>Nationality</th>
 
                         <th>Image</th>
@@ -248,11 +251,11 @@ const Trainer = () => {
                                 className="table_delete_btn1"
                                 // style={{ textAlign: "center" }}
                               >
-                                <BiEdit
+                                 <BiEdit
                                   onClick={() =>
                                     navigate("/edittrainer", {
                                       state: {
-                                        trainerid: item,
+                                        trainerid:item,
                                       },
                                     })
                                   }
@@ -302,7 +305,17 @@ const Trainer = () => {
                                   whiteSpace: "nowrap",
                                 }}
                               >
-                                {item.RemarksEn}
+                                {item.RemarksEn === null ?<>N/A</> : <>{item.RemarksEn}</>}
+                              </td>
+                              <td
+                                style={{
+                                  maxWidth: "400px",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  whiteSpace: "nowrap",
+                                }}
+                              >
+                                {item.RemarksAr === null ?<>N/A</> : <>{item.RemarksAr}</>}
                               </td>
                               <td
                                 style={{
@@ -313,6 +326,16 @@ const Trainer = () => {
                                 }}
                               >
                                 {item.DetailEn}
+                              </td>
+                              <td
+                                style={{
+                                  maxWidth: "400px",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  whiteSpace: "nowrap",
+                                }}
+                              >
+                                {item.DetailAr}
                               </td>
                               <td>
                                 {item.TrainerNationalityData === null ? (

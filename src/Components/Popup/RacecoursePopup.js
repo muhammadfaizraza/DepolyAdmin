@@ -177,7 +177,6 @@ const RacecoursePopup = (data) => {
                                 placeholder="رمز قصير"
                                 style={{ left: "%" }}
                                 value={data.data.NationalityDataRaceCourse&& data.data.NationalityDataRaceCourse.NameAr} readOnly
-                                
                             />
                         </FloatingLabel>
                     </div>

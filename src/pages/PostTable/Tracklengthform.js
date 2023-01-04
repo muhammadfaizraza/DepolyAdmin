@@ -48,6 +48,7 @@ const Tracklengthform = () => {
   const handleShowRaceCourse = async () => {
     await setShowActiveRaceCourse(true);
   };
+
  let courseoptions =
     racecourse === undefined ? (
       <></>
@@ -73,6 +74,7 @@ const Tracklengthform = () => {
         };
       })
     );
+
   const [TrackLength, setTrackLength] = useState('');
   const [RaceCourse, setRaceCourse] = useState("");
   const [RaceCourseImage, setRaceCourseImage] = useState('');
@@ -83,8 +85,6 @@ const Tracklengthform = () => {
   const { pathname } = useLocation();
   const history = useNavigate();
 
-  console.log(RailPosition,'RailPosition')
-  console.log(GroundType,'RailPosition')
 
   const submit = async (event) => {
     event.preventDefault();
@@ -104,9 +104,9 @@ const Tracklengthform = () => {
         icon: "success",
         button: "OK",
       });
-      // if (pathname === "/tracklengthform") {
-      //   history("/tracklength");
-      // }
+      if (pathname === "/tracklengthform") {
+        history("/tracklength");
+      }
       setisLoading(false);
     } catch (error) {
       const err = error.response.data.message;
@@ -255,20 +255,22 @@ const Tracklengthform = () => {
                   />
                 </div>
               </div>
-              
+
               <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="Rail Position"
                     className="mb-3"
-                    onChange={(e) => setRailPosition(e.target.value)}
                     value={RailPosition}
                     onBlur={() => setErrorRailPosition(position)}
                   >
                     <Form.Control
                       type="text"
                       placeholder="Rail Position"
+                      value='0'
+                      readOnly
+                      // value={GroundType.label ===}
                       
                     />
                   </FloatingLabel>
@@ -298,6 +300,8 @@ const Tracklengthform = () => {
                 </div>
               </div>
               
+
+
               <div className="row mainrow">
                 <div className="col-sm">
                   <Select

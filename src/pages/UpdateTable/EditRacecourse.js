@@ -345,7 +345,7 @@ let AllColorAr =
 
                   <div className="col-sm">
                     <Select
-                      placeholder={<div>{courseid.ColorCodeData.NameEn}</div>}
+                      placeholder={<div>{courseid.ColorCodeData === null ? 'N/A': courseid.ColorCodeData.NameEn}</div>}
                       defaultValue={ColorID}
                       onChange={setColor}
                       options={AllColor}

@@ -255,6 +255,7 @@ const Tracklengthform = () => {
                   />
                 </div>
               </div>
+              
               <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
@@ -296,6 +297,7 @@ const Tracklengthform = () => {
                   </FloatingLabel>
                 </div>
               </div>
+              
               <div className="row mainrow">
                 <div className="col-sm">
                   <Select
@@ -344,9 +346,7 @@ const Tracklengthform = () => {
                     isSearchable={true}
                   />
                 </div>
-              </div>
-
-              
+              </div>              
               <div className="ButtonSection">
                 <div>
                   <label className="Multipleownerlabel">Select GIF Image</label>

@@ -58,7 +58,7 @@ const Racetype = () => {
     setSearchCode('')
   };
   useEffect(() => {
-    dispatch(fetchRaceType());
+    dispatch(fetchRaceType({SearchTitle,SearchCode}));
   }, [dispatch]);
 
   const handleRemove = async (Id) => {
@@ -75,7 +75,7 @@ const Racetype = () => {
           swal(" Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchRaceType());
+          dispatch(fetchRaceType({SearchTitle,SearchCode}));
         } else {
           swal("Your data is safe!");
         }

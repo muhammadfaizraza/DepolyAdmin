@@ -73,7 +73,7 @@ const EquiptmentTable = () => {
           swal("Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchequipment());
+          dispatch(fetchequipment({SearchTitle,SearchCode,SearchAge}));
         } else {
           swal("Your data is safe!");
         }

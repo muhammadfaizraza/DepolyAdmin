@@ -87,7 +87,7 @@ const ColorTable = () => {
          
           }
           )
-          dispatch(fetchcolor())
+          dispatch(fetchcolor({SearchTitle,SearchCode,SearchUrl}));
           
         } else {
           swal("Your data is safe!");

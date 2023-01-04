@@ -55,7 +55,7 @@ const SeoTable = () => {
     setSearchCode('')
   };
   useEffect(() => {
-    dispatch(fetchSeo());
+    dispatch(fetchSeo({SearchTitle,SearchCode}));
   }, [dispatch]);
 
   const handleRemove = async (Id) => {
@@ -75,7 +75,7 @@ const SeoTable = () => {
           swal("Poof! Your data has been deleted!", {
             icon: "success",
           });
-          dispatch(fetchSeo());
+          dispatch(fetchSeo({SearchTitle,SearchCode}));
         } else {
           swal("Your data is safe!");
         }

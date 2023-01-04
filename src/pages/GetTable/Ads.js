@@ -81,7 +81,7 @@ const Ads = () => {
           swal("Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchAds());
+          dispatch(fetchAds({SearchTitle,SearchCode,SearchUrl}));
         } else {
           swal("Your data is safe!");
         }

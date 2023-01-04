@@ -76,7 +76,7 @@ const News = () => {
           swal("Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchSponsor());
+          dispatch(fetchSponsor({SearchTitle,SearchCode}));
         } else {
           swal("Your data is safe!");
         }

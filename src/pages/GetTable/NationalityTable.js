@@ -65,7 +65,7 @@ const [state, setState] = useState([
   };
 
   useEffect(() => {
-    dispatch(fetchnationality());
+    dispatch(fetchnationality({SearchTitle,SearchCode,SearchAge}));
   }, [dispatch]);
 
 
@@ -92,7 +92,7 @@ const [state, setState] = useState([
          
           }
           )
-          dispatch(fetchnationality())
+          dispatch(fetchnationality({SearchTitle,SearchCode,SearchAge}));
           
         } else {
           swal("Your data is safe!");

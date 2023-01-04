@@ -88,7 +88,7 @@ const [state, setState] = useState([
          
           }
           )
-          dispatch(fetchHorse())
+          dispatch(fetchHorse({SearchTitle,SearchCode,SearchAge}));
           
         } else {
           swal("Your data is safe!");

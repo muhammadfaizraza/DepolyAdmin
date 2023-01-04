@@ -85,7 +85,7 @@ const GenderTable = () => {
          
           }
           )
-          dispatch(fetchgender())
+          dispatch(fetchgender({SearchTitle,SearchCode,SearchAge}));
           
         } else {
           swal("Your data is safe!");

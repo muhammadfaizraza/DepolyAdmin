@@ -74,7 +74,7 @@ const CurrencyTable = () => {
           swal(" Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchcurrency());
+          dispatch(fetchcurrency({SearchTitle,SearchCode,SearchRate}));
         } else {
           swal("Your data is safe!");
         }

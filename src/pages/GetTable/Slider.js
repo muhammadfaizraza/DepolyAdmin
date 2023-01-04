@@ -90,7 +90,7 @@ const Slider = () => {
           swal(" Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchSlider());
+          dispatch(fetchSlider({SearchTitle,SearchCode}));
         } else {
           swal("Your data is safe!");
         }

@@ -82,7 +82,7 @@ const Owner = () => {
           swal("Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchOwner());
+          dispatch(fetchOwner({SearchTitle,SearchCode,SearchAge}));
         } else {
           swal("Your data is safe!");
         }

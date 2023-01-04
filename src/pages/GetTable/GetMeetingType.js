@@ -81,7 +81,7 @@ const handleShow = async (data) => {
          
           }
           )
-          dispatch(fetchMeeting())
+          dispatch(fetchMeeting({SearchTitle,SearchCode}));
           
         } else {
           swal("Your data is safe!");

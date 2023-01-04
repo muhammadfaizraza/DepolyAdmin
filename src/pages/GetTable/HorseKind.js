@@ -87,7 +87,7 @@ const HorseKind = () => {
          
           }
           )
-          dispatch(fetchHorseKind())
+          dispatch(fetchHorseKind({SearchTitle,SearchCode}));
           
         } else {
           swal("Your data is safe!");

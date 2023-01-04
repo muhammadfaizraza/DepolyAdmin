@@ -84,7 +84,7 @@ const Tracklength = () => {
           swal("Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchTrackLength());
+          dispatch(fetchTrackLength({SearchTitle,SearchCode}));
         } else {
           swal("Your data is safe!");
         }

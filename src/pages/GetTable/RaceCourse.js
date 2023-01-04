@@ -87,7 +87,7 @@ const Racecourse = () => {
          
           }
           )
-          dispatch(fetchracecourse())
+          dispatch(fetchracecourse({SearchTitle,SearchCode,SearchAge}));
           
         } else {
           swal("Your data is safe!");

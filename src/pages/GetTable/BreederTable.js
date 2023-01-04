@@ -86,7 +86,7 @@ const BreederTable = () => {
           swal("Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchbreeder());
+          dispatch(fetchbreeder({SearchTitle,SearchCode,SearchAge,SearchStartDate,SearchEndStart}));
         } else {
           swal("Your data is safe!");
         }

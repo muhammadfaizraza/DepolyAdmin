@@ -82,7 +82,7 @@ const GroundTypeTable = () => {
           swal("Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchgroundtype());
+          dispatch(fetchgroundtype({SearchTitle,SearchCode,SearchAge}));
         } else {
           swal("Your data is safe!");
         }

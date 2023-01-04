@@ -62,7 +62,7 @@ const ColorTable = () => {
     setSearchAge('')
   };
   useEffect(() => {
-    dispatch(fetchpointTable());
+    dispatch(fetchpointTable({SearchTitle,SearchCode,SearchAge}));
   }, [dispatch]);
   const handleRemove = async (Id) => {
     try {
@@ -74,7 +74,7 @@ const ColorTable = () => {
         button: "OK",
       });
       history("/viewcompetitionPoint");
-      dispatch(fetchpointTable());
+      dispatch(fetchpointTable({SearchTitle,SearchCode,SearchAge}));
     } catch (error) {
       const err = error.response.data.message;
       swal({

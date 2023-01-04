@@ -57,7 +57,7 @@ const RaceKind = () => {
     setSearchCode('')
   };
   useEffect(() => {
-    dispatch(fetchRaceKind());
+    dispatch(fetchRaceKind({SearchTitle,SearchCode}));
   }, [dispatch]);
 
   const handleRemove = async (Id) => {
@@ -76,7 +76,7 @@ const RaceKind = () => {
           swal("Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchRaceKind());
+          dispatch(fetchRaceKind({SearchTitle,SearchCode}));
         } else {
           swal("Your data is safe!");
         }

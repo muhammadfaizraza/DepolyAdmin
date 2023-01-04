@@ -526,15 +526,6 @@ const HorseForm = () => {
     );
     const remarkar = JSON.parse(data4);
     
-
- 
- 
-
-
-  
-
-
-
   return (
     <Fragment>
       <div className="page">

@@ -57,7 +57,16 @@ const Tracklengthform = () => {
         return {
           id: item._id,
           value: item._id,
-          label: item.TrackNameEn,
+          label: (
+            <div style={{
+              display:'flex',
+              justifyContent:'space-between'
+            }}>
+             <p>{item.TrackNameEn}</p> 
+             <p>{item.TrackNameAr}</p> 
+
+            </div>
+          ),
         };
       })
     );
@@ -70,7 +79,16 @@ const Tracklengthform = () => {
         return {
           id: item._id,
           value: item._id,
-          label: item.NameEn,
+          label: (
+            <div style={{
+              display:'flex',
+              justifyContent:'space-between'
+            }}>
+             <p>{item.NameEn}</p> 
+             <p>{item.NameAr}</p> 
+
+            </div>
+          ),
         };
       })
     );
@@ -236,13 +254,13 @@ const Tracklengthform = () => {
                         <AiOutlineReload />
                       </span>
                     </OverlayTrigger>
-                    |
+                    
                   </span>
                   <span className={GroundType === "" ? "error" : "success"}>
                     {ErrorGroundType}
                   </span>
                 </div>
-                <div className="col-sm">
+                {/* <div className="col-sm">
                   <Select
                     required
                     placeholder={<div>نوع الأرض</div>}
@@ -253,7 +271,7 @@ const Tracklengthform = () => {
                     isClearable={true}
                     isSearchable={true}
                   />
-                </div>
+                </div> */}
               </div>
 
               <div className="row mainrow">
@@ -332,13 +350,13 @@ const Tracklengthform = () => {
                         <AiOutlineReload />
                       </span>
                     </OverlayTrigger>{" "}
-                    |
+                    
                   </span>
                   <span className={RaceCourse === "" ? "error" : "success"}>
                     {ErrorRaceCourse}
                   </span>
                 </div>
-                <div className="col-sm">
+                {/* <div className="col-sm">
                   <Select
                     required
                     placeholder={<div>حدد جيلتي</div>}
@@ -349,7 +367,7 @@ const Tracklengthform = () => {
                     isClearable={true}
                     isSearchable={true}
                   />
-                </div>
+                </div> */}
               </div>              
               <div className="ButtonSection">
                 <div>

@@ -33,7 +33,7 @@ export const {setTrackLength , setStatus} = getTrackLengthSlice.actions;
 export default getTrackLengthSlice.reducer;
 
 export const fetchTrackLength = createAsyncThunk('/TrackLength/fetch', async({SearchTitle,SearchCode}) => {
-    const res = await axios.get(`${window.env.API_URL}/TrackLengthget?RaceCourse=${SearchCode}&TrackLength=${SearchTitle}`);
+    const res = await axios.get(`${window.env.API_URL}/TrackLengthget?RaceCourse=${SearchCode}&TrackLength=${SearchTitle}&limit=${'1000'}`);
     const TrackLengthData = res.data;
     return TrackLengthData.data;
 })  

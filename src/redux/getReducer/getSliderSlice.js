@@ -33,7 +33,7 @@ export const { setOwner, setStatus } = getSliderSlice.actions;
 export default getSliderSlice.reducer;
 
 export const fetchSlider = createAsyncThunk('Sliderget/fetch', async ({SearchTitle,SearchCode}) => {
-    const res = await axios.get(`${window.env.API_URL}/Sliderget?Url=${SearchCode}&TitleEn=${SearchTitle}`)
+    const res = await axios.get(`${window.env.API_URL}/Sliderget?Url=${SearchCode}&TitleEn=${SearchTitle}&limit=${'1000'}`)
     const data =  res.data;
     return data.data;
 });

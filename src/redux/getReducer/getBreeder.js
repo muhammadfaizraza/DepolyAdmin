@@ -33,7 +33,7 @@ export const {setbreeder , setStatus} = getBreederSlice.actions;
 export default getBreederSlice.reducer;
 
 export const fetchbreeder = createAsyncThunk('/Breederget/fetch', async({SearchCode,SearchTitle,SearchStartDate,SearchEndStart}) => {
-    const res = await axios.get(`${window.env.API_URL}/Breederget?shortCode=${SearchCode}&NameEn=${SearchTitle}&startdate=${SearchStartDate}&endDate=${SearchEndStart}`);
+    const res = await axios.get(`${window.env.API_URL}/Breederget?shortCode=${SearchCode}&NameEn=${SearchTitle}&startdate=${SearchStartDate}&endDate=${SearchEndStart}&limit=${'1000'}`);
     const breederData = res.data;
     return breederData.data;
 })

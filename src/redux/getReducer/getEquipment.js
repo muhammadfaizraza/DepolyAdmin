@@ -33,7 +33,7 @@ export const {setequipment , setStatus} = getBreederSlice.actions;
 export default getBreederSlice.reducer;
 
 export const fetchequipment = createAsyncThunk('/Equipmentget/fetch', async({SearchTitle,SearchCode}) => {
-    const res = await axios.get(`${window.env.API_URL}/Equipmentget?shortCode=${SearchCode}&NameEn=${SearchTitle}`);
+    const res = await axios.get(`${window.env.API_URL}/Equipmentget?shortCode=${SearchCode}&NameEn=${SearchTitle}&limit=${'1000'}`);
     const breederData = res.data;
     return breederData.data;
 })

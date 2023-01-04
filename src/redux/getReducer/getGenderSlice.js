@@ -33,7 +33,7 @@ export const {setgender , setStatus} = getGenderSlice.actions;
 export default getGenderSlice.reducer;
 
 export const fetchgender = createAsyncThunk('/Sexget/fetch', async({SearchTitle,SearchCode,SearchAge}) => {
-    const res = await axios.get(`${window.env.API_URL}/Sexget?shortCode=${SearchCode}&NameEn=${SearchTitle}&DescriptionEn=${SearchAge}`);
+    const res = await axios.get(`${window.env.API_URL}/Sexget?shortCode=${SearchCode}&NameEn=${SearchTitle}&DescriptionEn=${SearchAge}&limit=${'1000'}`);
     const genderData = res.data;
     return genderData.data;
 })

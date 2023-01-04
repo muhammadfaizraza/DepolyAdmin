@@ -33,7 +33,7 @@ export const {setgroundtype , setStatus} = getGroundSlice.actions;
 export default getGroundSlice.reducer;
 
 export const fetchgroundtype = createAsyncThunk('/GroundTypeget/fetch', async({SearchTitle,SearchCode,SearchAge}) => {
-    const res = await axios.get(`${window.env.API_URL}/GroundTypeget?shortCode=${SearchCode}&NameEn=${SearchTitle}&AbbrevEn=${SearchAge}`);
+    const res = await axios.get(`${window.env.API_URL}/GroundTypeget?shortCode=${SearchCode}&NameEn=${SearchTitle}&AbbrevEn=${SearchAge}&limit=${'1000'}`);
     const groundtype = res.data;
     return groundtype.data;
 })

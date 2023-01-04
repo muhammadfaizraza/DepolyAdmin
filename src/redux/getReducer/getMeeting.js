@@ -33,7 +33,7 @@ export const {setMeeting , setStatus} = getMeetingSlice.actions;
 export default getMeetingSlice.reducer;
 
 export const fetchMeeting = createAsyncThunk('/Meetingget/fetch', async({SearchTitle,SearchCode}) => {
-    const res = await axios.get(`${window.env.API_URL}/MeetingTypeget?shortCode=${SearchCode}&NameEn=${SearchTitle}`);
+    const res = await axios.get(`${window.env.API_URL}/MeetingTypeget?shortCode=${SearchCode}&NameEn=${SearchTitle}&limit=${'1000'}`);
     const MeetingData = res.data;
     return MeetingData.data;
 })

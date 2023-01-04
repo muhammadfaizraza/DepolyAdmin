@@ -268,8 +268,8 @@ const Tracklengthform = () => {
                     <Form.Control
                       type="text"
                       placeholder="Rail Position"
-                      value='0'
-                      readOnly
+                      // value='0'
+                      // readOnly
                       // value={GroundType.label ===}
                       
                     />

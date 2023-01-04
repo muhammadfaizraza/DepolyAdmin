@@ -155,7 +155,7 @@ const RaceCourseForm = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchnationality());
+    dispatch(fetchnationality({SearchTitle,SearchCode,SearchUrl}));
     dispatch(fetchcolor({SearchTitle,SearchCode,SearchUrl}));
         if (!image) {
       setPreview(undefined);
@@ -178,7 +178,7 @@ const RaceCourseForm = () => {
   };
   
   const FetchNew = () => {
-    dispatch(fetchnationality());
+    dispatch(fetchnationality({SearchTitle,SearchCode,SearchUrl}));
     dispatch(fetchcolor({SearchTitle,SearchCode,SearchUrl}));
   };
 

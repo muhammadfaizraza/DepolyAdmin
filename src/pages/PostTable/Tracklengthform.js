@@ -73,15 +73,18 @@ const Tracklengthform = () => {
         };
       })
     );
-  const [TrackLength, setTrackLength] = useState();
+  const [TrackLength, setTrackLength] = useState('');
   const [RaceCourse, setRaceCourse] = useState("");
-  const [RaceCourseImage, setRaceCourseImage] = useState();
-  const [GroundType, setGroundType] = useState();
-  const [preview, setPreview] = useState();
-  const [RailPosition, setRailPosition] = useState();
+  const [RaceCourseImage, setRaceCourseImage] = useState('');
+  const [GroundType, setGroundType] = useState('');
+  const [preview, setPreview] = useState('');
+  const [RailPosition, setRailPosition] = useState('');
 
   const { pathname } = useLocation();
   const history = useNavigate();
+
+  console.log(RailPosition,'RailPosition')
+  console.log(GroundType,'RailPosition')
 
   const submit = async (event) => {
     event.preventDefault();
@@ -92,7 +95,7 @@ const Tracklengthform = () => {
       formData.append("RaceCourse", RaceCourse.id);
       formData.append("image", RaceCourseImage);
       formData.append("GroundType", GroundType.id );
-      formData.append("RailPosition", GroundType.value === 'Truf' || 'truf' ? 0 : RailPosition);
+      formData.append("RailPosition", GroundType.label === 'Truf' || 'truf' ? 0 : RailPosition);
 
       await axios.post(`${window.env.API_URL}/uploadTrackLength`, formData);
       swal({
@@ -101,9 +104,9 @@ const Tracklengthform = () => {
         icon: "success",
         button: "OK",
       });
-      if (pathname === "/tracklengthform") {
-        history("/tracklength");
-      }
+      // if (pathname === "/tracklengthform") {
+      //   history("/tracklength");
+      // }
       setisLoading(false);
     } catch (error) {
       const err = error.response.data.message;
@@ -122,7 +125,7 @@ const Tracklengthform = () => {
 
   useEffect(() => {
     dispatch(fetchgroundtype({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchracecourse());
+    dispatch(fetchracecourse({SearchTitle,SearchCode,SearchAge}));
 
     if (!RaceCourseImage) {
       setPreview(undefined);
@@ -148,7 +151,7 @@ const Tracklengthform = () => {
   };
   const FetchNew = () => {
     dispatch(fetchgroundtype({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchracecourse());
+    dispatch(fetchracecourse({SearchTitle,SearchCode,SearchAge}));
   };
  
 

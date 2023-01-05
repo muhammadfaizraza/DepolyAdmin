@@ -249,14 +249,24 @@ const RaceForm = () => {
       sponsor.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.TitleEn,
           label: (
             <div style={{
               display:'flex',
               justifyContent:'space-between'
             }}>
+              <span style={{
+              display:'flex',
+            }}>
               <img src={item.image} height="30px" width="30px" alt=""/>
+              <p>{item.TitleEn}</p>
+              </span>
+              <span style={{
+              display:'flex',
+            }}>
               <img src={item.image} height="30px" width="30px" alt=""/>
+              <p>{item.TitleAr}</p>
+              </span>
   
             </div>
           ),

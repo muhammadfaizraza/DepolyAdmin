@@ -25,7 +25,9 @@ const Nationality = () => {
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
   const [ErrorRaceCourse, setErrorRaceCourse] = useState("");
-
+  const [SearchAge, setSearchAge] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
   const [Race, setRace] = useState("");
   const [DayNTime, setDayNTime] = useState("");
   const [FetchData, setFetchData] = useState([]);
@@ -82,11 +84,11 @@ const Nationality = () => {
   var today = new Date();
 
   useEffect(() => {
-    dispatch(fetchracecourse());
+    dispatch(fetchracecourse({SearchCode,SearchTitle,SearchAge}));
   }, [dispatch]);
   const FetchNew =() =>{
 
-dispatch(fetchracecourse())
+dispatch(fetchracecourse({SearchCode,SearchTitle,SearchAge}))
 
   }
 

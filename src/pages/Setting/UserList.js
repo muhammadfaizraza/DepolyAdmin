@@ -44,7 +44,7 @@ const SubscriberList = () => {
   const [SearchData, setSearchData] = useState([]);
   const [PassportNo, setPassportNo] = useState("");
   const [Address, setAddress] = useState("");
-
+const [Email , setEmail] =useState("");
   const [Approved, setApproved] = useState("");
   const [StartDate, setStartDate] = useState('2022-12-28');
   const [EndDate, setEndDate] = useState("");
@@ -204,14 +204,15 @@ const SubscriberList = () => {
                       <input
                         type="text"
                         class="form-control"
-                   onChange={() => setEmail(e.target.value)}
+                  
                         placeholder="Enter Phone Number"
                       />
                       <input
                         type="text"
                         class="form-control"
-                        onChange={(e) => setAddress(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter Address"
+                        value={Email}
                       />
                       <select
                         class="form-control"

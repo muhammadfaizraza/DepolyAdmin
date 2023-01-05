@@ -150,6 +150,9 @@ const Tracklengthform = () => {
     }
 
     if (!RaceCourseImage.name.match(/\.(gif)$/)) {
+      setRaceCourseImage("")
+      setPreview(undefined);
+      document.getElementById("file").value = "";
       swal({
         title: "Error!",
         text: "Enter Gif Image",

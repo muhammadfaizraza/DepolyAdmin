@@ -174,7 +174,7 @@ const Racecourse = () => {
                        type="text"
                        class="form-control"
                        onChange={(e) => setSearchTitle(e.target.value)}
-                       placeholder="Enter Track Name"
+                       placeholder="Enter Name"
                      />
                      <input
                        type="text"
@@ -206,8 +206,8 @@ const Racecourse = () => {
                     <tr>
                     <th>Actions</th>
 
-                      <th>Track Name</th>
-                      <th>Track Name Arabic </th>
+                      <th>Race Course Name</th>
+                      <th>Race Course Arabic </th>
                       <th>Abbreviation</th>
                       <th>Abbreviation Arabic</th>
                   

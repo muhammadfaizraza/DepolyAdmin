@@ -255,7 +255,7 @@ const SubscriberList = () => {
                         <th>Email</th>
                         <th>Phone Number</th>
                         <th>Country</th>
-                        <th>createdAt</th>
+                        <th>created At</th>
                         <th>Passport Picture</th>
                         <th style={{ textAlign: "center" }}>Status</th>
                       </tr>

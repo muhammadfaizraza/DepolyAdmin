@@ -634,9 +634,9 @@ const TrainerForm = () => {
                 >
                   <div className="sbmtbtndiv">
                 <div className="RaceButtonDiv">
-                  <button className="updateButton">
+                  {/* <button className="updateButton">
                     Update
-                  </button>
+                  </button> */}
 
                   <button
                     className="SubmitButton"

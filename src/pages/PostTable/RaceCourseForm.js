@@ -44,16 +44,16 @@ const RaceCourseForm = () => {
     nationality.map(function (item) {
       return {
         id: item._id,
-        value: item._id,
+        value: item.value,
         label: (
-          <div style={{
+          <span style={{
             display:'flex',
             justifyContent:'space-between'
           }}>
            <p>{item.NameEn}</p> 
            <p>{item.NameAr}</p> 
 
-          </div>
+          </span>
         ),
       };
     })
@@ -190,12 +190,12 @@ const RaceCourseForm = () => {
     )
   ));
   const data3 = JSON.stringify(
-    TextInputValidation("en", AbbrevEn, "Gender Abbreviation English")
+    TextInputValidation("en", AbbrevEn, "Race Course Abbreviation English")
   );
 
   const abbrev = JSON.parse(data3);
   const data4 = JSON.stringify(
-    TextInputValidation("ar", AbbrevAr, "Gender Abbreviation Arabic")
+    TextInputValidation("ar", AbbrevAr, "Race Course Abbreviation Arabic")
   );
   const abbrevar = JSON.parse(data4);
 
@@ -231,7 +231,7 @@ const RaceCourseForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="Track Name"
+                      label="Race Course Name"
                       className="mb-3"
                       onChange={(e) => setTrackNameEn(e.target.value)}
                       name="Name"
@@ -247,7 +247,7 @@ const RaceCourseForm = () => {
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
-                      label="رمز قصير"
+                      label=" اسم دورة السباق"
                       onChange={(e) => setTrackNameAr(e.target.value)}
                       value={TrackNameAr}
                       className="mb-3 floatingInputAr "

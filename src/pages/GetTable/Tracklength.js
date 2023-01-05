@@ -194,6 +194,7 @@ const Tracklength = () => {
                         <th>Track Length</th>
                         <th>Race Course </th>
                         <th>Rail Position</th>
+                        <th>Ground Type</th>
                         <th>Race Course Image</th>
                       </tr>
                     </thead>
@@ -233,6 +234,17 @@ const Tracklength = () => {
                               </td>
                               <td>{item.RailPosition}</td>
                               <td>
+                                {item.GroundTypeModelData === null ||
+                                undefined ? (
+                                  <>N/A</>
+                                ) : (
+                                  <>
+                                    {item.GroundTypeModelData.NameEn}
+                                  </>
+                                )}
+                              </td>
+                              <td>
+                              
                                 <img src={item.RaceCourseImage} alt="" />
                               </td>
                              

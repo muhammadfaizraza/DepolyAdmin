@@ -16,11 +16,14 @@ import Pagination from "./Pagination";
 import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
 import { DateRangePicker } from 'react-date-range';
+import Form from "react-bootstrap/Form";
 
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 const RaceKind = () => {
   //for Modal
+  const [Value, setValue] = useState(false);
+
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);

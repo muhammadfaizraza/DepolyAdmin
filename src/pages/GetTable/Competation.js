@@ -19,6 +19,7 @@ import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
+import Form from "react-bootstrap/Form";
 
 
 const CategoryType = [
@@ -37,6 +38,7 @@ const CategoryType = [
 const Statistic = () => {
   const [ShowCalender, setShowCalender] = useState(false)
   const [SearchData, setSearchData] = useState('');
+  const [Value, setValue] = useState(false);
 
   const [SearchAge, setSearchAge] = useState('');
   const [SearchCode, setSearchCode] = useState('');
@@ -249,6 +251,7 @@ const Statistic = () => {
                         <th>Count </th>
                         <th>Start Date </th>
                         <th>End Date </th>
+                        <th>Active</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -283,7 +286,15 @@ const Statistic = () => {
                                   {item.EndDate}
                                 </Moment>{" "}
                               </td>
-                            
+                              <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
+                                />
+                                </td>
 
                              
                             </tr>

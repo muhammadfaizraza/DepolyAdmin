@@ -19,7 +19,12 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
 
+import Form from "react-bootstrap/Form";
+
 const ColorTable = () => {
+
+  const [Value, setValue] = useState(false);
+
   const [ShowCalender, setShowCalender] = useState(false)
   const [SearchAge, setSearchAge] = useState('');
   const [SearchCode, setSearchCode] = useState('');

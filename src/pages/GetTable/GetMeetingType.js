@@ -18,11 +18,14 @@ import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
+import Form from "react-bootstrap/Form";
 
 const GetMeetingType = () => {
   const [ShowCalender, setShowCalender] = useState(false)
   const [SearchCode, setSearchCode] = useState('');
   const [SearchTitle, setSearchTitle] = useState('');
+  const [Value, setValue] = useState(false);
+
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -196,6 +199,7 @@ const handleShow = async (data) => {
                         <th>Name Arabic </th>
 
                         <th>Short Code</th>
+                        <th>Active</th>
 
                       </tr>
                     </thead>
@@ -226,7 +230,15 @@ const handleShow = async (data) => {
                               <td>{item.NameAr}</td>
 
                               <td>{item.shortCode} </td>
-
+                              <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
+                                />
+                                </td>
                               
                             </tr>
                           </>

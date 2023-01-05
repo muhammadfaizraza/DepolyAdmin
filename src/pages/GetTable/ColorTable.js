@@ -19,6 +19,7 @@ import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
+import Form from "react-bootstrap/Form";
 
 const ColorTable = () => {
   const [ShowCalender, setShowCalender] = useState(false)
@@ -32,6 +33,8 @@ const ColorTable = () => {
       key: 'selection'
     }
   ]);
+  const [Value, setValue] = useState(false);
+
   const [modaldata, setmodaldata] = useState();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -212,7 +215,7 @@ const ColorTable = () => {
                         <th>Abbreviation</th>
                         <th>Abbreviation Arabic </th>
                         <th>Short Code</th>
-
+                        <th>Active</th>
                         
                       </tr>
                     </thead>
@@ -244,7 +247,15 @@ const ColorTable = () => {
                               <td>{item.AbbrevEn}</td>
                               <td>{item.AbbrevAr}</td>
                               <td>{item.shortCode} </td>
-
+                              <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
+                                />
+                                </td>
                            
                             </tr>
                           </>

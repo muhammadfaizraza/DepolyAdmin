@@ -20,6 +20,7 @@ import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
+import Form from "react-bootstrap/Form";
 
 const Horse = () => {
 //for errors
@@ -37,6 +38,8 @@ const [state, setState] = useState([
     key: 'selection'
   }
 ]);
+const [Value, setValue] = useState(false);
+
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -234,7 +237,9 @@ const [state, setState] = useState([
                         
                         {/* <th>Cap</th> */}
 
+                        <th>Active</th>
                         <th>Image</th>
+
                       </tr>
                     </thead>
 
@@ -303,6 +308,15 @@ const [state, setState] = useState([
                               {/* <td>{item.Rds}</td> */}
                               {/* <td>{item.Cap}</td> */}
                               <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
+                                />
+                                </td>
+                              <td>
                                 <img
                                   src={item.HorseImage}
                                   alt=""
@@ -312,6 +326,7 @@ const [state, setState] = useState([
                                   }}
                                 ></img>
                               </td>
+
                               
                             </tr>
                           </tbody>

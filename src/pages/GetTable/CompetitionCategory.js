@@ -18,11 +18,13 @@ import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
+import Form from "react-bootstrap/Form";
 
 const CategoryTable = () => {
   const [ShowCalender, setShowCalender] = useState(false)
   const [SearchCode, setSearchCode] = useState('');
   const [SearchTitle, setSearchTitle] = useState('');
+  const [Value, setValue] = useState(false);
 
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
@@ -174,7 +176,7 @@ const CategoryTable = () => {
                         <th>Name</th>
                         <th>Name Arabic </th>
 
-            
+                        <th>Active</th>
 
                       </tr>
                     </thead>
@@ -203,7 +205,15 @@ const CategoryTable = () => {
                               </td>
                               <td>{item.NameEn}</td>
                               <td>{item.NameAr}</td>
-
+                              <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
+                                />
+                                </td>
                             
 
                               

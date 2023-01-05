@@ -18,6 +18,7 @@ import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
+import Form from "react-bootstrap/Form";
 
 const SeoTable = () => {
   const [ShowCalender, setShowCalender] = useState(false);
@@ -30,6 +31,8 @@ const SeoTable = () => {
       key: 'selection'
     }
   ]);
+  const [Value, setValue] = useState(false);
+
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);

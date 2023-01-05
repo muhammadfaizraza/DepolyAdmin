@@ -18,12 +18,15 @@ import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
+import Form from "react-bootstrap/Form";
 
 const CurrencyTable = () => {
   const [ShowCalender, setShowCalender] = useState(false);
   const [SearchRate, setSearchRate] = useState('');
   const [SearchCode, setSearchCode] = useState('');
   const [SearchTitle, setSearchTitle] = useState('');
+  const [Value, setValue] = useState(false);
+
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -190,6 +193,7 @@ const CurrencyTable = () => {
                         <th>Short Code</th>
                         <th>Symbol</th>
                         <th>Rate</th>
+                        <th>Active</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -222,6 +226,15 @@ const CurrencyTable = () => {
                               <td>{item.Symbol}</td>
                               <td>{item.Rate} </td>
 
+                              <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
+                                />
+                                </td>
                             
                             </tr>
                           </>

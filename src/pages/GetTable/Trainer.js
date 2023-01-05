@@ -21,6 +21,7 @@ import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
+import Form from "react-bootstrap/Form";
 
 const Trainer = () => {
   const [ShowCalender, setShowCalender] = useState(false);
@@ -29,6 +30,7 @@ const Trainer = () => {
   const [SearchRating, setSearchRating] = useState('');
   const [SearchRemarks, setSearchRemarks] = useState('');
   const [SearchAge, setSearchAge] = useState('');
+  const [Value, setValue] = useState(false);
 
   const [state, setState] = useState([
     {

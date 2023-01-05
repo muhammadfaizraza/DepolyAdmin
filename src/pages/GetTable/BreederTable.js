@@ -18,12 +18,15 @@ import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
+import Form from "react-bootstrap/Form";
 
 const BreederTable = () => {
   const [ShowCalender, setShowCalender] = useState(false);
   const [SearchAge, setSearchAge] = useState('');
   const [SearchCode, setSearchCode] = useState('');
   const [SearchTitle, setSearchTitle] = useState('');
+  const [Value, setValue] = useState(false);
+
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -208,6 +211,7 @@ const BreederTable = () => {
                         <th>Description</th>
                         <th>Description Arabic</th>
                         <th>Image</th>
+                        <th>Active</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -242,6 +246,15 @@ const BreederTable = () => {
                               <td>
                                 <img src={item.image} alt="" />
                               </td>
+                              <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
+                                />
+                                </td>
                             </tr>
                           </>
                         );

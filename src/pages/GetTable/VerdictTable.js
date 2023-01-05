@@ -18,12 +18,15 @@ import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
+import Form from "react-bootstrap/Form";
 
 const VerdictTable = () => {
   const [ShowCalender, setShowCalender] = useState(false);
   const [NameEn, setNameEn] = useState('');
   const [shortCode, setshortCode] = useState('');
   const [SearchTitle, setSearchTitle] = useState('');
+  const [Value, setValue] = useState(false);
+
   const [state, setState] = useState([
     {
       startDate: new Date(),

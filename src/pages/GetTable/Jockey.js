@@ -20,9 +20,11 @@ import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
+import Form from "react-bootstrap/Form";
 
 
 const Statistic = () => {
+  const [Value, setValue] = useState(false);
 
   const [SearchData, setSearchData] = useState([]);
   const [ShowCalender, setShowCalender] = useState(false)
@@ -238,6 +240,8 @@ const Statistic = () => {
                         <th>Min Weight</th>
                         <th>Max Weight</th>
                         <th>Nationality</th>
+                        <th>Active</th>
+
                         <th>Image</th>
                       </tr>
                     </thead>
@@ -279,6 +283,15 @@ const Statistic = () => {
                               <td>{item.MiniumumJockeyWeight} KG</td>
                               <td>{item.MaximumJockeyWeight} KG</td>
                               <td>{item.JockeyNationalityData === null ? <>N/A</> : item.JockeyNationalityData.NameEn}</td>
+                              <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
+                                />
+                                </td>
                               <td>
                                 <img src={item.image} alt="" />
                               </td>

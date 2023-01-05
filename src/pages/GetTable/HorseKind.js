@@ -18,9 +18,11 @@ import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
+import Form from "react-bootstrap/Form";
 
 
 const HorseKind = () => {
+  const [Value, setValue] = useState(false);
 
   const [ShowCalender, setShowCalender] = useState(false)
   const [SearchAge, setSearchAge] = useState('');
@@ -213,7 +215,8 @@ const HorseKind = () => {
                         <th>Name Arabic </th>
                         <th>Abreviation</th>
                         <th>Abreviation Arabic </th>
-                        
+                        <th>Active</th>
+
                         {/* <th>Short Name</th>
                         <th>Short Name Arabic</th> */}
                       </tr>
@@ -248,7 +251,15 @@ const HorseKind = () => {
                               <td>{item.AbbrevAr}</td>
                               {/* <td>{item.short} </td> */}
 
-                              
+                              <td>
+                                <Form.Check 
+                                  type="switch"
+                                  id="custom-switch"
+                                  onChange={() => setValue(true)}
+                                  // label="Check this switch"
+                                  value={Value}
+                                />
+                                </td>
                             </tr>
                           </>
                         );

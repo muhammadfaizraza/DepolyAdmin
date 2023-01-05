@@ -121,13 +121,7 @@ const Racetype = () => {
               <h4>Race Type Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
+           
 
                 <Link to="/racetypeform">
                   <button>Add Race Type</button>

@@ -175,12 +175,7 @@ const GenderTable = () => {
                        onChange={(e) => setSearchTitle(e.target.value)}
                        placeholder="Enter Name"
                      />
-                     <input
-                       type="text"
-                       class="form-control"
-                       onChange={(e) => setSearchAge(e.target.value)}
-                       placeholder="Enter Abbreviation"
-                     />
+                 
                      <input
                        type="text"
                        class="form-control"

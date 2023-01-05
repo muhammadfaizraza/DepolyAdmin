@@ -18,6 +18,8 @@ import NationalityPopup from "./Nationality";
 import { ImCross } from 'react-icons/im';
 
 const TrainerForm = () => {
+  const [SearchTitle, setSearchTitle] = useState("");
+  const [SearchCode, setSearchCode] = useState("");
   //for Errors
   const [Error, setError] = useState("");
   const [ErrorAr, setErrorAr] = useState("");
@@ -151,7 +153,7 @@ const TrainerForm = () => {
 
   var today = new Date();
   useEffect(() => {
-    dispatch(fetchnationality());
+    dispatch(fetchnationality({ SearchTitle,SearchCode}));
     if (!image) {
       setPreview(undefined);
       return;
@@ -175,7 +177,7 @@ const TrainerForm = () => {
     nationality.map(function (item) {
       return {
         id: item._id,
-        value: item.NameEn,
+        value: item._id,
         label: (
           <div style={{
             display:'flex',

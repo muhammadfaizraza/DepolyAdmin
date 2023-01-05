@@ -123,14 +123,8 @@ const RaceKind = () => {
               <h4>Race Kind Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                ></h6>
-                <Link to="/RaceKindform">
+               
+                <Link to="/racekindform">
                   <button>Add Race Kind</button>
                 </Link>
                 <OverlayTrigger

@@ -70,8 +70,8 @@ const BreederTable = () => {
 
   useEffect(() => {
     dispatch(fetchbreeder({SearchTitle,SearchCode,SearchAge,SearchStartDate,SearchEndStart}));
-  }, [dispatch]);
-
+  }, []);
+  
   const handleRemove = async (Id) => {
     try {
       swal({
@@ -184,13 +184,7 @@ const BreederTable = () => {
                        onChange={(e) => setSearchCode(e.target.value)}
                        placeholder="Enter Short Code"
                      />
-                     <input
-                       type="text"
-                       class="form-control"
-                       onChange={(e) => setSearchAge(e.target.value)}
-                       placeholder="Enter Description"
-                     />
-                    
+                 
                    </div>
                  </div>
                  <button className="filterbtn" onClick={GetSearch}>

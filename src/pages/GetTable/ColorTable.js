@@ -179,7 +179,7 @@ const ColorTable = () => {
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Enter Title"
+                          placeholder="Enter Name"
                           onChange={(e) => setSearchTitle(e.target.value)}
 
                         />
@@ -190,13 +190,7 @@ const ColorTable = () => {
                           onChange={(e) => setSearchCode(e.target.value)}
 
                         />
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Enter Abbreviation"
-                          onChange={(e) => setSearchUrl(e.target.value)}
-
-                        />
+                    
                       </div>
                       
                     </div>

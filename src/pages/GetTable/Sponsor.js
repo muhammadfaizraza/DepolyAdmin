@@ -166,7 +166,7 @@ const News = () => {
                               type="text"
                               class="form-control"
                               onChange={(e) => setSearchCode(e.target.value)}
-                              placeholder="Enter URL"
+                              placeholder="Enter Description"
                             />
                         </div>
                        

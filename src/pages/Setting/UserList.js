@@ -45,13 +45,14 @@ const SubscriberList = () => {
   const [PassportNo, setPassportNo] = useState("");
   const [Address, setAddress] = useState("");
 const [Email , setEmail] =useState("");
+const [FirstName ,setFirstName] =useState("")
   const [Approved, setApproved] = useState("");
   const [StartDate, setStartDate] = useState('2022-12-28');
   const [EndDate, setEndDate] = useState("");
 
   const GetSearch = async () => {
     const response = await axios.get(
-      `${window.env.API_URL}/SearchUser?PassportNo=${PassportNo}&Address=${Address}&ApprovedStatus=${Approved}&startdate=${StartDate}&endDate=${EndDate}`
+      `${window.env.API_URL}/SearchUser?PassportNo=${PassportNo}&Address=${Address}&ApprovedStatus=${Approved}&startdate=${StartDate}&endDate=${EndDate}&Email=${Email}&FirstName=${FirstName}`
     );
     setSearchData(response.data.data);
   };
@@ -195,11 +196,19 @@ const [Email , setEmail] =useState("");
                       />
                     </div>
                     <div className="filtertextform">
+                    <input
+                        type="text"
+                        class="form-control"
+                        onChange={(e) => setFirstName(e.target.value)}
+                        placeholder="First Name"
+                        value={FirstName}
+                      />
                       <input
                         type="text"
                         class="form-control"
                         onChange={(e) => setPassportNo(e.target.value)}
                         placeholder="Enter Passport Number"
+                        value={PassportNo}
                       />
                       <input
                         type="text"

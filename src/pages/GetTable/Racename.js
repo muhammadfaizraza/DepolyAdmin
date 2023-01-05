@@ -23,8 +23,8 @@ import { DateRangePicker } from 'react-date-range';
 const Racename = () => {
   const [ShowCalender, setShowCalender] = useState(false);
   const [SearchAge, setSearchAge] = useState('');
-  const [SearchCode, setSearchCode] = useState('');
-  const [SearchTitle, setSearchTitle] = useState('');
+  const [NameEn, setNameEn] = useState('');
+  const [shortCode, setshortCode] = useState('');
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -54,12 +54,12 @@ const Racename = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const GetSearch = async () => {
-    dispatch(fetchRaceName({SearchTitle,SearchCode}));
-    setSearchTitle('')
-    setSearchCode('')
+    dispatch(fetchRaceName({NameEn,shortCode}));
+    setshortCode('')
+    setNameEn('')
   };
   useEffect(() => {
-    dispatch(fetchRaceName({SearchTitle,SearchCode}));
+    dispatch(fetchRaceName({NameEn,shortCode}));
   }, [dispatch]);
 
   const handleRemove = async (Id) => {
@@ -76,7 +76,7 @@ const Racename = () => {
           swal("Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchRaceName({SearchTitle,SearchCode}));
+          dispatch(fetchRaceName({shortCode,NameEn}));
         } else {
           swal("Your data is safe!");
         }
@@ -163,14 +163,14 @@ const Racename = () => {
                 <input
                        type="text"
                        class="form-control"
-                       onChange={(e) => setSearchTitle(e.target.value)}
+                       onChange={(e) => setNameEn(e.target.value)}
                        placeholder="Enter Name"
                      />
                     
                      <input
                        type="text"
                        class="form-control"
-                       onChange={(e) => setSearchCode(e.target.value)}
+                       onChange={(e) => setshortCode(e.target.value)}
                        placeholder="Enter Short Code"
                      />
                  </div>

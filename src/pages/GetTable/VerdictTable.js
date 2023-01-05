@@ -21,8 +21,8 @@ import { DateRangePicker } from 'react-date-range';
 
 const VerdictTable = () => {
   const [ShowCalender, setShowCalender] = useState(false);
-  const [SearchAge, setSearchAge] = useState('');
-  const [SearchCode, setSearchCode] = useState('');
+  const [NameEn, setNameEn] = useState('');
+  const [shortCode, setshortCode] = useState('');
   const [SearchTitle, setSearchTitle] = useState('');
   const [state, setState] = useState([
     {
@@ -52,7 +52,7 @@ const VerdictTable = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    dispatch(fetchverdict());
+    dispatch(fetchverdict({NameEn,shortCode}));
   }, [dispatch]);
 
   const handleRemove = async (Id) => {
@@ -101,6 +101,12 @@ const VerdictTable = () => {
       </h2>
     );
   }
+  const GetSearch = async () => {
+    dispatch(fetchverdict({NameEn,shortCode}));
+    setNameEn('');
+    setshortCode('');
+  };
+ 
 
   return (
     <Fragment>
@@ -146,16 +152,20 @@ const VerdictTable = () => {
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Enter Title"
+                        placeholder="Enter Name"
+                        onChange={(e) => setNameEn(e.target.value)}
+                      
                       />
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Enter Description"
+                        placeholder="Enter Short Code"
+                        onChange={(e) => setshortCode(e.target.value)}
+                      
                       />
                     </div>
                   </div>
-                  <button className="filterbtn">Apply Filter</button>
+                  <button className="filterbtn" onClick={GetSearch}>Apply Filter</button>
                 </span>
               ) : (
                 <></>

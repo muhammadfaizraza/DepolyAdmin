@@ -32,8 +32,8 @@ const getVerdictSlice = createSlice({
 export const {setverdict , setStatus} = getVerdictSlice.actions;
 export default getVerdictSlice.reducer;
 
-export const fetchverdict = createAsyncThunk('/Verdictget/fetch', async() => {
-    const res = await axios.get(`${window.env.API_URL}/Verdictget?keyword=&page=`);
+export const fetchverdict = createAsyncThunk('/Verdictget/fetch', async({NameEn ,shortCode}) => {
+    const res = await axios.get(`${window.env.API_URL}/Verdictget?NameEn=${NameEn}&shortCode=${shortCode}`);
     const verdict = res.data;
     return verdict.data;
 })

@@ -327,27 +327,10 @@ const TrainerForm = () => {
                       }   >
                       <Form.Control type="text" placeholder="Name" />
                     </FloatingLabel>
-                    <span className="spanForm"> |</span>
+       
                     <span className={CodeEn === "" ? "error" : "success"}>{ErrorCode}</span>
                   </div>
-                  <div className="col-sm">
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="الشفرة                      "
-                      className="mb-3 floatingInputAr"
-                      onChange={(e) => setCodeAr(e.target.value)}
-                      name="Name"
-                      value={CodeAr}
-                      style={{ direction: "rtl" }}
-                      onBlur={(e) =>
-                        CodeAr === ""
-                          ? setErrorCodeAr("Competition Code is required")
-                          : setErrorCodeAr("Competition Code is Validated ")
-                      }   > 
-                      <Form.Control type="text" placeholder="اسم" />
-                    </FloatingLabel>
-                    <span className={CodeAr === "" ? "errorAr" : "successAr"}>{ErrorCodeAr}</span>
-                  </div>
+          
                 </div>
                 <div className="row mainrow">
                   <div className="col-sm">

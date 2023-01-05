@@ -262,7 +262,7 @@ const Ads = () => {
             postsPerPage={postsPerPage}
             totalPosts={allads.length}
             paginate={paginate}
-            currentPosts={currentPosts}
+            currentPage={currentPage}
           />
         </div>
       </div>

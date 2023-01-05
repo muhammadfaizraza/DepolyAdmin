@@ -45,6 +45,7 @@ const AdminRole = () => {
       });
     }
   };
+
   return (
     <div className="page">
       <div className="rightsidedata">
@@ -159,6 +160,8 @@ const AdminRole = () => {
                 </button>
               </div>
             </form>
+
+          
           </div>
         </div>
       </div>

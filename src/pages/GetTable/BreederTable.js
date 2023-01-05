@@ -19,6 +19,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
 import Form from "react-bootstrap/Form";
+import CSVBreeder from '../../Components/CSVUploadPopup/BreederPopup'
 
 const BreederTable = () => {
   const [ShowCalender, setShowCalender] = useState(false);
@@ -46,6 +47,14 @@ const BreederTable = () => {
     setmodaldata(data);
     await setShow(true);
   };
+
+  const [showCSV, setShowCSV] = useState(false);
+  const [modaldataCSV, setmodaldataCSV] = useState();
+  const handleCloseCSV = () => setShowCSV(false);
+  const handleShowCSV = async (data) => {
+    setmodaldataCSV(data);
+    await setShowCSV(true);
+  };
   
   const dispatch = useDispatch();
   const history = useNavigate();
@@ -68,6 +77,9 @@ const BreederTable = () => {
     setSearchAge('')
     setSearchEndStart('');
     setSearchStartDate('')
+
+  };
+  const UploadCSV = async () => {
 
   };
 
@@ -150,14 +162,15 @@ const BreederTable = () => {
                     />
                   </span>
                 </OverlayTrigger>{" "}
-                <CSVLink
+                <p onClick={() => handleShowCSV()} className="importcsv">Import CSV</p>
+                {/* <CSVLink
                   data={breeder}
                   separator={";"}
                   filename={"MKS Breeder.csv"}
                   className="csvclass"
                 >
-                  Export CSV
-                </CSVLink>
+                  Export CSV 
+                </CSVLink> */}
               </div>
             </div>
             <div>
@@ -291,6 +304,25 @@ const BreederTable = () => {
           <button onClick={handleClose} className="modalClosebtn">
             Close
           </button>
+        </Modal.Footer>
+      </Modal>
+
+
+      <Modal
+        show={showCSV}
+        onHide={handleCloseCSV}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2 style={{ fontFamily: "inter" }}>Breeder CSV</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <CSVBreeder data={modaldataCSV} />
+        </Modal.Body>
+        <Modal.Footer>
+          
         </Modal.Footer>
       </Modal>
     </Fragment>

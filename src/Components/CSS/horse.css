@@ -190,3 +190,14 @@ grid-area: none !important;
   /* if real placeholder is shown - hide fake placeholder */
   opacity: 0;
 }
+
+.importcsv{
+  margin: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.UploadCSV1{
+  float: right;
+}

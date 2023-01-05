@@ -185,13 +185,13 @@ const [state, setState] = useState([
                      <input
                        type="text"
                        class="form-control"
-                       onChange={(e) => setSearchAge(e.target.value)}
+                       onChange={(e) => setSearchCode(e.target.value)}
                        placeholder="Enter Abbreviation"
                      />
                      <input
                        type="text"
                        class="form-control"
-                       onChange={(e) => setSearchCode(e.target.value)}
+                       onChange={(e) => setSearchAge(e.target.value)}
                        placeholder="Enter Alternative Name"
                      />
                  </div>

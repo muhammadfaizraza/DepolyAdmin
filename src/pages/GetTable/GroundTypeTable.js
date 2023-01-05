@@ -199,8 +199,8 @@ const GroundTypeTable = () => {
                       <th>Action</th>
                         <th>Ground Type</th>
                         <th>Ground Type Arabic </th>
-                        <th>Abreviation</th>
-                        <th>Abreviation Arabic </th>
+                        <th>Abbreviation</th>
+                        <th>Abbreviation Arabic </th>
                         <th>Short Code</th>
 
                       

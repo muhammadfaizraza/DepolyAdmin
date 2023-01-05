@@ -101,7 +101,7 @@ const Races = () => {
                       <th>Race Name</th>
                       <th>Race Name Arabic </th>
                       <th>Race Type</th>
-                      <th>Race Cource</th>
+                      <th>Race Course</th>
                       <th>Description</th>
                       <th>Description Arabic</th>
                       <th>Track Length</th>
@@ -110,7 +110,7 @@ const Races = () => {
                       <th>Day and Time</th>
                       {/* <th>Total Horses</th> */}
                       <th>Race Status</th>
-                      <th>image</th>
+                      <th>Image</th>
                       <th>Action</th>
                     </tr>
                   </thead>

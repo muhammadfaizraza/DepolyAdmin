@@ -74,7 +74,7 @@ const NewsForm = () => {
             marginTop: "30px",
           }}
         >
-          <div className="Headers">Edit Race Type</div>
+          <div className="Headers">Edit Verdict</div>
           <div className="form">
           <form onSubmit={submit}>
               <div className="row mainrow">
@@ -122,7 +122,7 @@ const NewsForm = () => {
                     }
                   
                   >
-                    <Form.Control type="text" placeholder="Description" value={state1.shortCode}/>
+                    <Form.Control type="number" placeholder="Description" value={state1.shortCode}/>
                   </FloatingLabel>
                
                 

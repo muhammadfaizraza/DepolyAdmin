@@ -45,6 +45,24 @@ const MeetingPopup = (data) => {
                 
               </div>
             </div>
+
+            <div className="row mainrow">
+      <div className="col-sm">
+
+      <FloatingLabel
+          controlId="floatingInput"
+          label="Short Code"
+          className="mb-3"
+        
+        
+       
+        >
+          <Form.Control type="text" placeholder="Description" readOnly value={data.data.shortCode}/>
+        </FloatingLabel>
+     
+      </div>
+
+    </div>
    
             
 

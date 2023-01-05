@@ -234,23 +234,23 @@ const Races = () => {
                     }}
                   >
                     <tr className="trtabletd">
+                    <th>Action</th>
                       <th>Race Name</th>
                       <th>Race Name Arabic </th>
                       <th>Race Type</th>
-                      <th>Race Cource</th>
+                      <th>Race Course</th>
                       <th>Description</th>
                       <th>Description Arabic</th>
                       <th>Track Length</th>
                       <th>Number of Horses</th>
-                      <th>Weather in Degree</th>
+                      <th>Weather Degree</th>
                       <th>Weather Type</th>
                       <th>Day & Time</th>
                       {/* <th>Total Horses</th> */}
                       <th>Race Status</th>
                       <th>Prize Money</th>
-                      <th>image</th>
+                      <th>Image</th>
                       <th>Publish</th>
-                      <th>Action</th>
                     </tr>
                   </thead>
                   {tobePublishRace === undefined ||
@@ -270,6 +270,26 @@ const Races = () => {
                             }}
                           >
                             <tr>
+                            <td
+                                className="table_delete_btn1"
+                                style={{ textAlign: "center" }}
+                              >
+                                <BiEdit
+                                  onClick={() =>
+                                    history("/editrace", {
+                                      state: {
+                                        fullraceid: item,
+                                      },
+                                    })
+                                  }
+                                />
+                                <MdDelete
+                                  onClick={() => handleRemove(item._id)}
+                                />
+                                <BsEyeFill
+                                  onClick={() => handleShowRacePopup(item)}
+                                />
+                              </td>
                               <td
                                 style={{
                                   backgroundColor: `${
@@ -379,26 +399,7 @@ const Races = () => {
                                   Click
                                 </button>
                               </td>
-                              <td
-                                className="table_delete_btn1"
-                                style={{ textAlign: "center" }}
-                              >
-                                <BiEdit
-                                  onClick={() =>
-                                    history("/editrace", {
-                                      state: {
-                                        fullraceid: item,
-                                      },
-                                    })
-                                  }
-                                />
-                                <MdDelete
-                                  onClick={() => handleRemove(item._id)}
-                                />
-                                <BsEyeFill
-                                  onClick={() => handleShowRacePopup(item)}
-                                />
-                              </td>
+                              
                             </tr>
                           </tbody>
                         );

@@ -7,7 +7,7 @@ const VerdictPopup = (data) => {
   
   return (
     <div className="page">
-    <div className="rightsidedata">
+   
       <div
         style={{
           marginTop: "30px",
@@ -69,8 +69,7 @@ const VerdictPopup = (data) => {
              
             </div>
        
-        </div>
-      </div>
+  </div>
     </div>
   </div>
   )

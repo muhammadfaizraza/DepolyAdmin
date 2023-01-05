@@ -17,9 +17,11 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { BiFilter } from "react-icons/bi";
 import { CSVLink } from "react-csv";
+import {Form} from "react-bootstrap";
 import { DateRangePicker } from 'react-date-range';
 
 const News = () => {
+  const [Value , setValue] = useState(false)
   const [ShowCalender, setShowCalender] = useState(false);
   const [SearchAge, setSearchAge] = useState('');
   const [SearchCode, setSearchCode] = useState('');
@@ -190,7 +192,7 @@ const News = () => {
                       <th>Description Arabic</th>
                       <th>Url</th>
                       <th>Image</th>
-                      {/* <th>Active</th> */}
+                      <th>Active</th>
 
                     </tr>
                   </thead>
@@ -232,7 +234,7 @@ const News = () => {
                                 }}
                               />
                             </td>
-                            {/* <td>
+                            <td>
                                 <Form.Check 
                                   type="switch"
                                   id="custom-switch"
@@ -240,7 +242,7 @@ const News = () => {
                                   // label="Check this switch"
                                   value={Value}
                                 />
-                                </td> */}
+                                </td>
                             
                           </tr>
                         </>

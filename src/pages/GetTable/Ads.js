@@ -203,7 +203,7 @@ const Ads = () => {
                         <th>Url</th>
                         <th>Image</th>
 
-                        {/* <th>Active</th> */}
+                        <th>Active</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -239,7 +239,7 @@ const Ads = () => {
                               <td>
                                 <img src={item.image} alt="" />
                               </td>
-                              {/* <td>
+                              <td>
                                 <Form.Check 
                                   type="switch"
                                   id="custom-switch"
@@ -247,7 +247,7 @@ const Ads = () => {
                                   // label="Check this switch"
                                   value={Value}
                                 />
-                                </td> */}
+                                </td>
                             </tr>
                           </>
                         );

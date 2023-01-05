@@ -212,7 +212,7 @@ const Slider = () => {
                       <th>Title Arabic </th>
                       <th>URL</th>
                       <th>Image</th>
-                      {/* <th>Active</th> */}
+                      <th>Active</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -251,15 +251,15 @@ const Slider = () => {
                                 }}
                               />
                             </td>
-                            {/* <td>
-                                <Form.Check 
-                                  type="switch"
-                                  id="custom-switch"
-                                  onChange={() => setValue(true)}
-                      
-                                  value={Value}
-                                />
-                                </td> */}
+                              <td>
+                                  <Form.Check 
+                                    type="switch"
+                                    id="custom-switch"
+                                    onChange={() => setValue(true)}
+                        
+                                    value={Value}
+                                  />
+                                  </td>
 
                            
                           </tr>

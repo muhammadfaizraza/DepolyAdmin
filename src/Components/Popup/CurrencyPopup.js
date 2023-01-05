@@ -51,7 +51,25 @@ const CurrencyPopup = (data) => {
           </FloatingLabel>
         
         </div>
+        
       </div>
+      <div className="row mainrow">
+      <div className="col-sm">
+
+      <FloatingLabel
+          controlId="floatingInput"
+          label="Symbol"
+          className="mb-3"
+        
+        
+       
+        >
+          <Form.Control type="text" placeholder="Symbol" readOnly value={data.data.Symbol}/>
+        </FloatingLabel>
+     
+      </div>
+
+    </div>
       <div className="row mainrow">
       <div className="col-sm">
 

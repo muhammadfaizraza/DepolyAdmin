@@ -8,7 +8,7 @@ import { MdDelete } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ScrollContainer from "react-indiana-drag-scroll";
-import { alignPropType } from "react-bootstrap/esm/types";
+
 import Lottie from "lottie-react";
 import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
@@ -69,7 +69,7 @@ const Tracklength = () => {
 
   useEffect(() => {
     dispatch(fetchTrackLength({SearchTitle,SearchCode}));
-  }, [dispatch]);
+  }, []);
 
   const handleRemove = async (Id) => {
     try {

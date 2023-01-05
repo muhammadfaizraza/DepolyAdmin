@@ -78,10 +78,7 @@ const SubscriberList = () => {
                     color: "rgba(0, 0, 0, 0.6)",
                   }}
                 >
-                  
                 </h6>
-
-                
               </div>
             </div>
             <>

@@ -13,7 +13,7 @@ const Dashboard = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const { data: race, status } = useSelector((state) => state.race);
+  // const { data: race } = useSelector((state) => state.race);
   const { data: Result,status } = useSelector((state) => state.Result);
   const { data: competition } = useSelector((state) => state.competition);
 

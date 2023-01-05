@@ -49,7 +49,7 @@ const Verdicts = () => {
           const formData = new FormData();
           formData.append("NameEn", NameEn);
           formData.append("NameAr" , NameAr)
-          // formData.append("shortCode",'1000');
+          formData.append("shortCode",state1.shortCode);
     
           await axios.post(`${window.env.API_URL}uploadVerdict`, formData)
           history('/verdictlist')
@@ -62,11 +62,13 @@ const Verdicts = () => {
           setisLoading(false)
           
         } catch (error) {
-          const err = error.message;
-          swal({
-            title: "Error!",
-            text: err,
-            icon: "error",
+          const err = error.response.data.message[0];
+      const err1 = error.response.data.message[1];
+      const err2 = error.response.data.message[2];
+      swal({
+        title: "Error!",
+        text: err,err1,err2,
+        icon: "error",
             button: "OK",
           });
           setisLoading(false)

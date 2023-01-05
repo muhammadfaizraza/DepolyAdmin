@@ -54,7 +54,7 @@ const Tracklengthform = () => {
       racecourse.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.TrackNameEn,
           label: (
             <div
               style={{
@@ -77,7 +77,7 @@ const Tracklengthform = () => {
       groundtype.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
             <div
               style={{

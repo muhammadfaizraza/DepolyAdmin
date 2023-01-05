@@ -44,7 +44,7 @@ const RaceCourseForm = () => {
     nationality.map(function (item) {
       return {
         id: item._id,
-        value: item.value,
+        value: item.NameEn,
         label: (
           <span style={{
             display:'flex',

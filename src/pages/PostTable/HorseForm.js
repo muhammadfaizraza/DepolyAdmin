@@ -138,7 +138,7 @@ const HorseForm = () => {
       horse.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
             <div style={{
               display:'flex',
@@ -171,7 +171,7 @@ const HorseForm = () => {
       HorseKind.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
             <div style={{
               display:'flex',
@@ -205,7 +205,7 @@ const HorseForm = () => {
       trainer.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
             <div style={{
               display:'flex',
@@ -239,7 +239,7 @@ const HorseForm = () => {
       owner.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
             <div style={{
               display:'flex',
@@ -273,7 +273,7 @@ const HorseForm = () => {
       color.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
             <div style={{
               display:'flex',
@@ -307,7 +307,7 @@ const HorseForm = () => {
       breeder.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
             <div style={{
               display:'flex',
@@ -341,7 +341,7 @@ const HorseForm = () => {
       nationality.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
             <div style={{
               display:'flex',
@@ -375,7 +375,7 @@ const HorseForm = () => {
       gender.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
             <div style={{
               display:'flex',

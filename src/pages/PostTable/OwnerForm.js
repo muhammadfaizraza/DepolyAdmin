@@ -36,21 +36,21 @@ const OwnerForm = () => {
   const history = useNavigate();
   const { pathname } = useLocation();
 
-  const { data: color } = useSelector((state) => state.color);
+  // const { data: color } = useSelector((state) => state.color);
   const { data: nationality } = useSelector((state) => state.nationality);
   var today = new Date();
-  let AllColor =
-    color === undefined ? (
-      <></>
-    ) : (
-      color.map(function (item) {
-        return {
-          id: item._id,
-          value: item.NameEn,
-          label: item.NameEn,
-        };
-      })
-    );
+  // let AllColor =
+  //   color === undefined ? (
+  //     <></>
+  //   ) : (
+  //     color.map(function (item) {
+  //       return {
+  //         id: item._id,
+  //         value: item.NameEn,
+  //         label: item.NameEn,
+  //       };
+  //     })
+  //   );
   let AllNationality =
     nationality === undefined ? (
       <></>
@@ -58,16 +58,15 @@ const OwnerForm = () => {
       nationality.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
-            <div style={{
+            <span style={{
               display:'flex',
               justifyContent:'space-between'
             }}>
-             <p>{item.NameEn}</p> 
-             <p>{item.NameAr}</p> 
-
-            </div>
+             <span>{item.NameEn}</span> 
+             <span>{item.NameAr}</span> 
+            </span>
           ),
         };
       })
@@ -99,7 +98,7 @@ const OwnerForm = () => {
 
   
   useEffect(() => {
-    dispatch(fetchcolor());
+    // dispatch(fetchcolor());
     dispatch(fetchnationality({SearchCode,SearchTitle,SearchAge}));
   }, [dispatch]);
 

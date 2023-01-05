@@ -206,18 +206,7 @@ const RaceForm = () => {
         };
       })
     );
-  let racecoursesAr =
-    racecourse === undefined ? (
-      <></>
-    ) : (
-      racecourse.map(function (item) {
-        return {
-          id: item._id,
-          value: item._id,
-          label: item.TrackNameAr,
-        };
-      })
-    );
+
 
   let Racenameoptions =
     RaceName === undefined ? (
@@ -226,7 +215,7 @@ const RaceForm = () => {
       RaceName.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
             <div style={{
               display:'flex',
@@ -260,7 +249,7 @@ const RaceForm = () => {
       sponsor.map(function (item) {
         return {
           id: item._id,
-          value: item.image,
+          value: item.NameEn,
           label: (
             <div style={{
               display:'flex',
@@ -296,7 +285,7 @@ const RaceForm = () => {
       meeting.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
             <div style={{
               display:'flex',
@@ -310,18 +299,18 @@ const RaceForm = () => {
         };
       })
     );
-  let MeetingTypesAr =
-    meeting === undefined ? (
-      <></>
-    ) : (
-      meeting.map(function (item) {
-        return {
-          id: item._id,
-          value: item._id,
-          label: item.NameAr,
-        };
-      })
-    );
+  // let MeetingTypesAr =
+  //   meeting === undefined ? (
+  //     <></>
+  //   ) : (
+  //     meeting.map(function (item) {
+  //       return {
+  //         id: item._id,
+  //         value: item._id,
+  //         label: item.NameAr,
+  //       };
+  //     })
+  //   );
 
   let RaceTypes =
     RaceType === undefined ? (
@@ -330,7 +319,7 @@ const RaceForm = () => {
       RaceType.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
             <div style={{
               display:'flex',
@@ -345,18 +334,18 @@ const RaceForm = () => {
       })
     );
 
-  let RaceTypesAr =
-    RaceType === undefined ? (
-      <></>
-    ) : (
-      RaceType.map(function (item) {
-        return {
-          id: item._id,
-          value: item._id,
-          label: item.NameAr,
-        };
-      })
-    );
+  // let RaceTypesAr =
+  //   RaceType === undefined ? (
+  //     <></>
+  //   ) : (
+  //     RaceType.map(function (item) {
+  //       return {
+  //         id: item._id,
+  //         value: item._id,
+  //         label: item.NameAr,
+  //       };
+  //     })
+  //   );
 
   let TrackLenght =
     trackLength === undefined ? (
@@ -365,7 +354,7 @@ const RaceForm = () => {
       trackLength.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.TrackLength,
           label: (
             <div style={{
               display:'flex',
@@ -388,7 +377,7 @@ const RaceForm = () => {
       raceKinds.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
             <div style={{
               display:'flex',
@@ -402,18 +391,18 @@ const RaceForm = () => {
         };
       })
     );
-  let OprtionRaceKindAr =
-    raceKinds === undefined ? (
-      <></>
-    ) : (
-      raceKinds.map(function (item) {
-        return {
-          id: item._id,
-          value: item._id,
-          label: item.NameAr,
-        };
-      })
-    );
+  // let OprtionRaceKindAr =
+  //   raceKinds === undefined ? (
+  //     <></>
+  //   ) : (
+  //     raceKinds.map(function (item) {
+  //       return {
+  //         id: item._id,
+  //         value: item._id,
+  //         label: item.NameAr,
+  //       };
+  //     })
+  //   );
 
   let GroundrTypeAll =
     groundtype === undefined ? (
@@ -422,7 +411,7 @@ const RaceForm = () => {
       groundtype.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
             <div style={{
               display:'flex',
@@ -436,18 +425,18 @@ const RaceForm = () => {
         };
       })
     );
-  let GroundrTypeAllAr =
-    groundtype === undefined ? (
-      <></>
-    ) : (
-      groundtype.map(function (item) {
-        return {
-          id: item._id,
-          value: item._id,
-          label: item.NameAr,
-        };
-      })
-    );
+  // let GroundrTypeAllAr =
+  //   groundtype === undefined ? (
+  //     <></>
+  //   ) : (
+  //     groundtype.map(function (item) {
+  //       return {
+  //         id: item._id,
+  //         value: item._id,
+  //         label: item.NameAr,
+  //       };
+  //     })
+  //   );
 
   //  Modal functionalities Here
   const [showName, setShowName] = useState(false);

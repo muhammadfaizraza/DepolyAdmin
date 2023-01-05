@@ -177,7 +177,7 @@ const NewsForm = () => {
       nationality.map(function (item) {
         return {
           id: item._id,
-          value: item._id,
+          value: item.NameEn,
           label: (
             <div
               style={{

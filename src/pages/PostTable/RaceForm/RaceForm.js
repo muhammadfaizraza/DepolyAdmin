@@ -769,13 +769,13 @@ const RaceForm = () => {
                     >
                       <Form.Control type="text" placeholder="Meeting Code" />
                     </FloatingLabel>
-                    <span className="spanForm"> |</span>
+                    {/* <span className="spanForm"> |</span> */}
                     <span className={MeetingType === "" ? "error" : "success"}>
                       {ErrorMeetingCode}
                     </span>
                   </div>
 
-                  <div className="col-sm">
+                  {/* <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
                       label="رمز الاجتماع"
@@ -784,7 +784,7 @@ const RaceForm = () => {
                     >
                       <Form.Control type="text" placeholder="رمز الاجتماع" />
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="row  mainrow">
@@ -846,12 +846,12 @@ const RaceForm = () => {
                     >
                       <Form.Control type="text" placeholder="Weather Icon" />
                     </FloatingLabel>
-                    <span className="spanForm">|</span>
+                    {/* <span className="spanForm">|</span> */}
                     <span className={WeatherIcon === "" ? "error" : "success"}>
                       {ErrorWeatherIcon}
                     </span>
                   </div>
-
+{/* 
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
@@ -861,7 +861,7 @@ const RaceForm = () => {
                     >
                       <Form.Control type="text" placeholder=" رمز الطقس" />
                     </FloatingLabel>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="row  mainrow">
                   <div className="col-sm">

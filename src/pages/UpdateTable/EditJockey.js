@@ -168,6 +168,8 @@ const NewsForm = () => {
       });
     }
   };
+  var today = new Date();
+
   return (
     <>
       <div className="page">
@@ -318,6 +320,7 @@ const NewsForm = () => {
                     onChange={setJockeyLicenseDate}
                     value={JockeyLicenseDate}
                     // value={JockeyLicenseDate}
+                    maxDate={today}
                     dayPlaceholder="  "
                     monthPlaceholder={state1.JockeyLicenseDate}
                     yearPlaceholder=""
@@ -334,6 +337,7 @@ const NewsForm = () => {
                     onChange={setDOB}
                     value={DOB}
                     dayPlaceholder="  "
+                    maxDate={today}
                     monthPlaceholder={state1.DOB}
                     yearPlaceholder=""
                   />

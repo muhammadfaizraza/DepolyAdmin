@@ -249,7 +249,7 @@ const RaceForm = () => {
       sponsor.map(function (item) {
         return {
           id: item._id,
-          value: item.NameEn,
+          value: item._id,
           label: (
             <div style={{
               display:'flex',
@@ -1366,7 +1366,7 @@ const RaceForm = () => {
                     />
 
                     <span className={StartTime === "" ? "error" : "success"}>
-                      {ErrorStartTime}
+                      {ErrorEndTime}
                     </span>
                   </div>
                 </div>

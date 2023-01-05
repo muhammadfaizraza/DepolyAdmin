@@ -64,6 +64,7 @@ const NewsForm = () => {
       });
     }
   };
+  
   return (
     <>
     <div className="page">

@@ -390,7 +390,7 @@ const NewsForm = () => {
                       onChange={setJockeyLicenseDate}
                       value={JockeyLicenseDate}
                       dayPlaceholder="  "
-                      // maxDate={today}
+                      maxDate={today}
                       monthPlaceholder="License Date"
                       yearPlaceholder=""
                       onBlur={() =>
@@ -411,11 +411,10 @@ const NewsForm = () => {
                       onChange={setJockeyLicenseDate}
                       value={JockeyLicenseDate}
                       dayPlaceholder="  "
-                      // maxDate={today}
+                      maxDate={today}
                       monthPlaceholder="تاريخ التسجيل"
                       yearPlaceholder=""
                       style={{ direction: "rtl" }}
-                      maxDate={today}
                     />
                   </div>
                 </div>

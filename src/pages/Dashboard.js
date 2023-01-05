@@ -13,7 +13,7 @@ const Dashboard = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const { data: race, status } = useSelector((state) => state.race);
+  const { data: race } = useSelector((state) => state.race);
   const { data: Result,status } = useSelector((state) => state.Result);
   const { data: competition } = useSelector((state) => state.competition);
 
@@ -54,13 +54,13 @@ const Dashboard = () => {
           navigate('/races')
         }}>
           <p>Ongoing Races </p>
-          {/* <h3>{race.length < 10 ? <>0</> : <></>}{race.length}</h3> */}
+          <h3>{race.length < 10 ? <>0</> : <></>}{race.length}</h3>
         </div>
         <div className='ResultAwaited' onClick={() => {
           navigate('/resultrace')
         }}>
         <p>Result Awaited</p>
-        {/* <h3>{Result.length < 10 ? <>0</> : <></>}{Result.length}</h3> */}
+        <h3>{Result.length < 10 ? <>0</> : <></>}{Result.length}</h3>
         </div>
         <div className='CompetitionsRaces' onClick={() => {
           navigate('/competitionlisting')

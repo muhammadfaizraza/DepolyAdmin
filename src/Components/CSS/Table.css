@@ -483,3 +483,8 @@ img.PreviewHorseImage {
 td.table_delete_btn1 svg {
     margin: 0 6px;
 }
+.imageRow img{
+    background-image:url('../../assets/Placeholder.jpg');
+width:100px;
+height: 50px;
+}

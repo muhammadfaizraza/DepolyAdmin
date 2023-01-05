@@ -21,6 +21,7 @@ const NewsForm = () => {
     TitleAr:'',
     DescriptionEn:'',
     DescriptionAr:'',
+    // Url:"",
     image:image
 	});
 
@@ -34,6 +35,7 @@ const NewsForm = () => {
         TitleAr: adsid.TitleAr,
 				DescriptionEn: adsid.DescriptionEn,
         DescriptionAr: adsid.DescriptionAr,
+        // Url:adsid.Url,
 			});
 		} else {
 		}
@@ -64,7 +66,7 @@ const NewsForm = () => {
       formData.append("DescriptionEn", state1.DescriptionEn);
       formData.append("DescriptionAr", state1.DescriptionAr + ' ');
       formData.append("image",image);
-      const response = await axios.put(`${window.env.API_URL}/updateAds/${adsid._id}`, formData);
+    await axios.put(`${window.env.API_URL}/updateAds/${adsid._id}`, formData);
       history("/ads");
       swal({
         title: "Success!",
@@ -160,7 +162,23 @@ const NewsForm = () => {
                     
                   </div>
                 </div>
-                
+                <div className="row mainrow">
+                  <div className="col-sm">
+                  <FloatingLabel
+                      controlId="floatingInput"
+                      label="URL"
+                      className="mb-3"
+                      onChange={(e) =>  
+                        setState({ ...state1, Url: e.target.value })
+                      }
+                    
+                    >
+                      <Form.Control type="text" placeholder="Description" value={state1.Url}/>
+                    </FloatingLabel>
+                 
+									
+                  </div>
+                  </div>
 
                 <div className="ButtonSection">
                 <div>

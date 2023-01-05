@@ -204,7 +204,7 @@ const Owner = () => {
                         <th>Title Arabic</th>
                         <th>Short Name</th>
                         <th>Short Name Arabic</th>
-                        <th>registration Date</th>
+                        <th>Registration Date</th>
                         <th>Nationality</th>
                         {/* <th>Silk Color</th> */}
                         <th>Image</th>
@@ -260,8 +260,8 @@ const Owner = () => {
                               {/* <td>
                           <img src={item.OwnerIDData === undefined ? <></> : item.OwnerIDData.OwnerSilkColor} alt='' />
                          </td> */}
-                              <td>
-                                <img src={item.image} alt="No Image Provided" />
+                              <td className="imageRow">
+                                <img src={item.image} alt="no image provided" />
                                
                               </td>
                               

@@ -32,8 +32,8 @@ const getjockeyslice = createSlice({
 export const {setjockey, setStatus} = getjockeyslice.actions;
 export default getjockeyslice.reducer;
 //https://mksbackend.herokuapp.com/api/v1/Jockeyget
-export const fetchjockey = createAsyncThunk('getjockey/fetch', async () => {
-    const res = await axios.get(`${window.env.API_URL}/Jockeyget?keyword=&page=`);
+export const fetchjockey = createAsyncThunk('getjockey/fetch', async ({SearchNameEn,SearchRating,}) => {
+    const res = await axios.get(`${window.env.API_URL}/SearchJockey?NameEn=${SearchNameEn}&Rating=${SearchRating}`);
     const data = res.data;
     return data.data;
-})
+})  

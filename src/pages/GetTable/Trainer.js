@@ -29,7 +29,7 @@ const Trainer = () => {
   const [SearchNameEn, setSearchNameEn] = useState('');
   const [SearchRating, setSearchRating] = useState('');
   const [SearchRemarks, setSearchRemarks] = useState('');
-  const [SearchAge, setSearchAge] = useState('');
+  
   const [Value, setValue] = useState(false);
 
   const [state, setState] = useState([
@@ -62,13 +62,20 @@ const Trainer = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const GetSearch = async () => {
-    const response = await axios.get(
-      `${window.env.API_URL}/SearchTrainer?NameEn=${SearchNameEn}&DOB=${SearchAge}&RemarksEn=${SearchRemarks}&ShortNameEn=${SearchRating}`
-    );
-    setSearchData(response.data.data);
+    // const response = await axios.get(
+    //   `${window.env.API_URL}/SearchTrainer?NameEn=${SearchNameEn}&DOB=${SearchAge}&RemarksEn=${SearchRemarks}&ShortNameEn=${SearchRating}`
+    // );
+    // setSearchData(response.data.data);
+    dispatch(fetchTrainer({SearchRemarks,SearchNameEn,SearchRating}));
+    setSearchRemarks('')
+    setSearchRating('')
+
+    setSearchNameEn('')
+  
+
   };
   useEffect(() => {
-    dispatch(fetchTrainer());
+    dispatch(fetchTrainer({SearchRating,SearchRemarks,SearchNameEn}));
   }, []);
 
   const handleRemove = async (Id) => {
@@ -177,30 +184,27 @@ const Trainer = () => {
                   />
                 </div>
                 <div className="filtertextform">
+                <input
+                    type="text"
+                    class="form-control"
+                    onChange={(e) => setSearchNameEn(e.target.value)}
+                    placeholder="Enter Name"
+                  />
+                     <input
+                    type="text"
+                    class="form-control"
+                    onChange={(e) => setSearchRating(e.target.value)}
+                    placeholder="Enter Title"
+                  />
                   <input
                     type="text"
                     class="form-control"
                     onChange={(e) => setSearchRemarks(e.target.value)}
                     placeholder="Enter Remarks"
                   />
-                   <input
-                    type="text"
-                    class="form-control"
-                    onChange={(e) => setSearchAge(e.target.value)}
-                    placeholder="Enter Age"
-                  />
-                  <input
-                    type="text"
-                    class="form-control"
-                    onChange={(e) => setSearchRating(e.target.value)}
-                    placeholder="Enter Rating"
-                  />
-                  <input
-                    type="text"
-                    class="form-control"
-                    onChange={(e) => setSearchNameEn(e.target.value)}
-                    placeholder="Enter Name"
-                  />
+              
+               
+            
                  
                  
                 </div>

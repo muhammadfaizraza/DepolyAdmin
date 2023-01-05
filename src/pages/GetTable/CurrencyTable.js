@@ -22,7 +22,7 @@ import Form from "react-bootstrap/Form";
 
 const CurrencyTable = () => {
   const [ShowCalender, setShowCalender] = useState(false);
-  const [SearchRate, setSearchRate] = useState('');
+ 
   const [SearchCode, setSearchCode] = useState('');
   const [SearchTitle, setSearchTitle] = useState('');
   const [Value, setValue] = useState(false);
@@ -54,13 +54,13 @@ const CurrencyTable = () => {
   const currentPosts = currency.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const GetSearch = async () => {
-    dispatch(fetchcurrency({SearchTitle,SearchCode,SearchRate}));
+    dispatch(fetchcurrency({SearchTitle,SearchCode}));
     setSearchTitle('')
     setSearchCode('')
-    setSearchRate('')
+ 
   };
   useEffect(() => {
-    dispatch(fetchcurrency({SearchTitle,SearchCode,SearchRate}));
+    dispatch(fetchcurrency({SearchTitle,SearchCode}));
   }, [dispatch]);
 
   const handleRemove = async (Id) => {
@@ -77,9 +77,9 @@ const CurrencyTable = () => {
           swal(" Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchcurrency({SearchTitle,SearchCode,SearchRate}));
+          dispatch(fetchcurrency({SearchTitle,SearchCode}));
         } else {
-          swal("Your data is safe!");
+          swal("Your data is safe!"); 
         }
       });
     } catch (error) {
@@ -163,12 +163,7 @@ const CurrencyTable = () => {
                        onChange={(e) => setSearchCode(e.target.value)}
                        placeholder="Enter Short Code"
                      />
-                      <input
-                       type="text"
-                       class="form-control"
-                       onChange={(e) => setSearchRate(e.target.value)}
-                       placeholder="Enter Rate"
-                     />
+            
                     </div>
                   </div>
                   <button className="filterbtn" onClick={GetSearch}>

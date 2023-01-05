@@ -22,7 +22,7 @@ import { DateRangePicker } from 'react-date-range';
 
 const News = () => {
   const [ShowCalender, setShowCalender] = useState(false)
-  const [SearchAge, setSearchAge] = useState('');
+
   const [SearchCode, setSearchCode] = useState('');
   const [SearchTitle, setSearchTitle] = useState('');
   const [state, setState] = useState([
@@ -53,10 +53,15 @@ const News = () => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = allnews.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
+  const GetSearch = async () => {
+    dispatch(fetchNews({SearchTitle,SearchCode}));
+    setSearchTitle('')
+    setSearchCode('')
 
+  };
 
   useEffect(() => {
-    dispatch(fetchNews());
+    dispatch(fetchNews({SearchTitle,SearchCode}));
   }, []);
 
   const handleRemove = async (Id) => {
@@ -132,15 +137,7 @@ const News = () => {
               <h4>News Listings</h4>
 
               <div>
-                <h6
-                  style={{
-                    marginRight: "100px",
-                    alignItems: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                >
-
-                </h6>
+             
 
                 <Link to="/newsform">
                   <button>Add News</button>
@@ -171,12 +168,12 @@ const News = () => {
                 
                 <div className="filtertextform forflex">
                 
-                 <input type='text' class="form-control" placeholder="Enter Title"/>
-                 <input type='text' class="form-control" placeholder="Enter Description"/>
+                 <input type='text' class="form-control" placeholder="Enter Title" onChange={(e) => setSearchTitle(e.target.value)}/>
+                 <input type='text' class="form-control" placeholder="Enter Description" onChange={(e) => setSearchCode(e.target.value)}/>
                  </div>
                 
                 </div>
-                <button className="filterbtn">Apply Filter</button>
+                <button className="filterbtn" onClick={GetSearch}>Apply Filter</button>
                 </span>:<></>
               }
               </div>

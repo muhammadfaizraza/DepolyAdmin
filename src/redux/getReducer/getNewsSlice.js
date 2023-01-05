@@ -32,8 +32,8 @@ const getNewsSlice = createSlice({
 export const { setNews, setStatus } = getNewsSlice.actions;
 export default getNewsSlice.reducer;
 
-export const fetchNews = createAsyncThunk('newsGet/fetch', async () => {
-    const res = await axios.get(`${window.env.API_URL}/newsget?keyword=&page=$`)
+export const fetchNews = createAsyncThunk('newsGet/fetch', async ({SearchCode,SearchTitle}) => {
+    const res = await axios.get(`${window.env.API_URL}/newsget?TitleEn=${SearchTitle}&DescriptionEn=${SearchCode}`)
     const data =  res.data;
     return data.data;
 });

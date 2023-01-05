@@ -30,8 +30,7 @@ const Statistic = () => {
   const [ShowCalender, setShowCalender] = useState(false)
   const [SearchNameEn, setSearchNameEn] = useState('');
   const [SearchRating, setSearchRating] = useState('');
-  const [SearchMaximumJockeyWeight, setSearchMaximumJockeyWeight] = useState('');
-  const [SearchMinimumJockeyWeight, setSearchMinimumJockeyWeight] = useState('');
+
 
   const [state, setState] = useState([
     {
@@ -60,14 +59,21 @@ const Statistic = () => {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   const GetSearch = async () => {
-    const response = await axios.get(
-      `${window.env.API_URL}/SearchJockey?NameEn=${SearchNameEn}&MiniumumJockeyWeight=${SearchMinimumJockeyWeight}&MaximumJockeyWeight=${SearchMaximumJockeyWeight}&Rating=${SearchRating}`
-    );
-    setSearchData(response.data.data);
+    // const response = await axios.get(
+    //   `${window.env.API_URL}/SearchJockey?NameEn=${SearchNameEn}&MiniumumJockeyWeight=${SearchMinimumJockeyWeight}&MaximumJockeyWeight=${SearchMaximumJockeyWeight}&Rating=${SearchRating}`
+    // );
+    // setSearchData(response.data.data);
+    dispatch(fetchjockey({SearchRating,SearchNameEn}));
+    setSearchNameEn('')  
+  setSearchRating('')
+
+
+
+
   };
 
   useEffect(() => {
-    dispatch(fetchjockey());
+    dispatch(fetchjockey({SearchRating,SearchNameEn}));
   }, [dispatch]);
   
  
@@ -187,17 +193,11 @@ const Statistic = () => {
                     />
                   </div>
                   <div className="filtertextform">
-                    <input
+                  <input
                       type="text"
                       class="form-control"
-                      onChange={(e) => setSearchMaximumJockeyWeight(e.target.value)}
-                      placeholder="Enter Maximum Weight"
-                    />
-                     <input
-                      type="text"
-                      class="form-control"
-                      onChange={(e) => setSearchMinimumJockeyWeight(e.target.value)}
-                      placeholder="Enter Minimum Weight"
+                      onChange={(e) => setSearchNameEn(e.target.value)}
+                      placeholder="Enter Name"
                     />
                     <input
                       type="text"
@@ -205,12 +205,7 @@ const Statistic = () => {
                       onChange={(e) => setSearchRating(e.target.value)}
                       placeholder="Enter Rating"
                     />
-                    <input
-                      type="text"
-                      class="form-control"
-                      onChange={(e) => setSearchNameEn(e.target.value)}
-                      placeholder="Enter Name"
-                    />
+               
                    
                    
                   </div>

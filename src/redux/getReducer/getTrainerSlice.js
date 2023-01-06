@@ -33,7 +33,7 @@ export const {setTrainer , setStatus} = getTrainerSlice.actions;
 export default getTrainerSlice.reducer;
 
 export const fetchTrainer = createAsyncThunk('/trainerget/fetch', async({SearchNameEn,SearchRemarks,SearchRating}) => {
-    const res = await axios.get(`${window.env.API_URL}/SearchTrainer?NameEn=${SearchNameEn}&RemarksEn=${SearchRemarks}&TitleEn=${SearchRating}`);
+    const res = await axios.get(`${window.env.API_URL}/trainerget?NameEn=${SearchNameEn}&RemarksEn=${SearchRemarks}&TitleEn=${SearchRating}`);
     const trainerData = res.data;
     return trainerData.data;
 })

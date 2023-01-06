@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
-import { fetchcolorshortcode } from "../../redux/getShortCode/getcolorshortcode";
+import { fetchfinalpositionshortcode } from "../../redux/getShortCode/getfinalpositionshortcode";
 import { useSelector ,useDispatch } from "react-redux";
 
 
@@ -18,7 +18,7 @@ const FinalPosiiton = () => {
   
   const dispatch = useDispatch();
   
-  const {data:colorshortcode} = useSelector((state) => state.colorshortcode)
+  const {data:finalpositionshortcode} = useSelector((state) => state.finalpositionshortcode)
   const [registeration, setregisteration] = useState({
     NameEn: "",
     NameAr: "",
@@ -33,20 +33,20 @@ const FinalPosiiton = () => {
 	});
 
   useEffect(() => {
-		if (colorshortcode) {
+		if (finalpositionshortcode) {
 			setState({
-        shortCode: colorshortcode.length === 0 ? 10 : colorshortcode[0].maxshortCode + 1,
+        shortCode: finalpositionshortcode.length === 0 ? 10 : finalpositionshortcode[0].maxshortCode + 1,
 			});
 		} else {
       setState.shortCode('9')
 		}
-	}, [colorshortcode]);
+	}, [finalpositionshortcode]);
 
 
 
 
   useEffect(() => {
-    dispatch(fetchcolorshortcode());
+    dispatch(fetchfinalpositionshortcode());
   },[dispatch])
 
   const handleChange = (e) => {

@@ -1,50 +1,4 @@
-// import React, { useEffect, Fragment,useState } from "react";
-// import DeletedAds from "../../Components/DeletedData/DeletedAds";
-// import DeletedColor from "../../Components/DeletedData/DeletedColor";
-// import DeletedCategory from "../../Components/DeletedData/DeletedCategory";
 
-// import Dropdown from 'react-bootstrap/Dropdown';
-
-// const DeletedTable = () => {
-
-//     const [value,setValue]=useState('');
-//     const handleSelect=(e)=>{
-//       console.log(e);
-//       setValue(e)
-//     }
-//     function Tab(value) {
-
-//       if (value.toString() == 'Table2') {
-//         return <DeletedAds />;
-//       }else if (value.toString()=='Table1') {
-//         return <DeletedColor />;
-//       }else {
-//         return <DeletedCategory />;
-//       }
-//     }
-
-//   return (
-//     <Fragment>
-//       <div>
-//       <Dropdown  onSelect={handleSelect}>
-//         <Dropdown.Toggle variant="success" id="dropdown-basic">
-//           Dropdown Button
-//         </Dropdown.Toggle>
-
-//         <Dropdown.Menu>
-//           <Dropdown.Item eventKey="Table1">1</Dropdown.Item>
-//           <Dropdown.Item eventKey="Table2">2</Dropdown.Item>
-//           <Dropdown.Item eventKey="Category">3</Dropdown.Item>
-//         </Dropdown.Menu>
-//       </Dropdown>
-//       <h4>You selected {value}</h4>
-//       </div>
-//       <Tab value={value} />
-//     </Fragment>
-//   );
-// };
-
-// export default DeletedTable;
 
 import React, { useState } from "react";
 import Ads from "../../Components/DeletedData/DeletedAds";
@@ -76,6 +30,7 @@ import Verdict from "../../Components/DeletedData/DeletedVerdict";
 import Sponsor from "../../Components/DeletedData/DeletedSponor";
 import Slider from "../../Components/DeletedData/DeletedSlider";
 import Seo from "../../Components/DeletedData/DeletedSeo";
+import FinalPosition from "../../Components/DeletedData/DeletedFinalPosition";
 
 import Dropdown from "react-bootstrap/Dropdown";
 
@@ -100,6 +55,7 @@ function App() {
           <Dropdown.Item eventKey="Color">Color </Dropdown.Item>
           <Dropdown.Item eventKey="Currency">Currency</Dropdown.Item>
           <Dropdown.Item eventKey="Equipment">Equipment</Dropdown.Item>
+          <Dropdown.Item eventKey="Final Position">Final Posiiton</Dropdown.Item>
           <Dropdown.Item eventKey="Gender">Gender</Dropdown.Item>
           <Dropdown.Item eventKey="Ground Type"> GroundType</Dropdown.Item>
           <Dropdown.Item eventKey="Horse"> Horse</Dropdown.Item>
@@ -185,6 +141,8 @@ function Tab({ value }) {
     return <Verdict />;
   }else if (value.toString() === "Sponsor") {
     return <Sponsor />;
+  }else if (value.toString() === "Final Position") {
+      return <FinalPosition />;
   }else if (value.toString() === "Slider") {
     return <Slider />;
   }else if (value.toString() === "Seo") {

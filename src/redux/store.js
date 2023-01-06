@@ -76,7 +76,7 @@ import getDeletedMeeting from "./getDeletedreducer/DeletedMeetingSlice";
 import getDeletedVerdict from "./getDeletedreducer/DeletedVerdictSlice";
 import getDeletedCategory from "./getDeletedreducer/DeletedCategorySlice";
 import getDeletedCompetition from "./getDeletedreducer/DeletedCompetitionSlice";
-
+import getDeletedFinalPosition from "./getDeletedreducer/DeletedFinalPostionSlice"
 import getcolorshortcode from "./getShortCode/getcolorshortcode";
 import getbreedershortcode from "./getShortCode/getbreedershortcode";
 import getcurrencyshortcode from "./getShortCode/getcurrencyshortcode";
@@ -93,6 +93,8 @@ import getNewLetter from "./getReducer/getNewLetter";
 import getPointTable from "./getReducer/getPointTable";
 import gethorsekindshortcode from "./getShortCode/gethorsekindshortcode";
 import getFinalPosition from "./getReducer/getFinalPosition";
+import getfinalpositionshortcode from "./getShortCode/getfinalpositionshortcode";
+
 
 const store = configureStore({
   reducer: {
@@ -165,6 +167,7 @@ const store = configureStore({
     deletedtracklength: getDeletedTrackLength,
     deletedracecourse: getDeletedRaceCourse,
     deletedrace: getDeletedRace,
+    deletedfinalposition:getDeletedFinalPosition,
     deletedracecard: getDeletedRaceCard,
     deletedracename: getDeletedRaceName,
     deletedracetype: getDeletedRaceType,
@@ -172,25 +175,24 @@ const store = configureStore({
     deletedmeeting: getDeletedMeeting,
     deletedverdict: getDeletedVerdict,
     deletedcategory: getDeletedCategory,
-    deletedCompetition:getDeletedCompetition,
-    colorshortcode:getcolorshortcode,
-    breedershortcode:getbreedershortcode,
-    currencyshortcode:getcurrencyshortcode,
-    equipmentshortcode:getequipmentshortcode,
-    groundshortcode:getgroundshortcode,
-    meetingshortcode:getmeetingshortcode,
-    nationalityshortcode:getnationalityshortcode,
-    racekindshortcode:getracekindshortcode,
-    racenameshortcode:getracenameshortcode,
-    racetypeshortcode:getracetypeshortcode,
-    sexshortcode:getsexshortcode,
-    verdictshortcode:getverdictshortcode,
-    newsletter:getNewLetter,
-    pointTable:getPointTable,
-    horsekindshortcode:gethorsekindshortcode,
-    finalposition:getFinalPosition,
-   
-
+    deletedCompetition: getDeletedCompetition,
+    colorshortcode: getcolorshortcode,
+    breedershortcode: getbreedershortcode,
+    currencyshortcode: getcurrencyshortcode,
+    equipmentshortcode: getequipmentshortcode,
+    groundshortcode: getgroundshortcode,
+    meetingshortcode: getmeetingshortcode,
+    nationalityshortcode: getnationalityshortcode,
+    racekindshortcode: getracekindshortcode,
+    racenameshortcode: getracenameshortcode,
+    racetypeshortcode: getracetypeshortcode,
+    sexshortcode: getsexshortcode,
+    verdictshortcode: getverdictshortcode,
+    newsletter: getNewLetter,
+    pointTable: getPointTable,
+    horsekindshortcode: gethorsekindshortcode,
+    finalposition: getFinalPosition,
+    finalpositionshortcode: getfinalpositionshortcode,
   },
 });
 

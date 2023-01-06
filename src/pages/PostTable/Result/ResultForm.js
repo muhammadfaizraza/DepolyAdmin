@@ -5,6 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { fetchHorse } from "../../../redux/getReducer/getHorseSlice";
+import { fetchfinalposition } from "../../../redux/getReducer/getFinalPosition";
+
 import Select from "react-select";
 import swal from "sweetalert";
 import axios from "axios";
@@ -26,15 +28,28 @@ const RaceForm = () => {
   const [Points, SetPoints] = useState("");
   const [BonusPoints, SetBonusPoints] = useState("");
   const [Rank, setRank] = useState(1);
-
+  const [FinalPosition, setFinalPosition] = useState(1);
+  const [VideoLink, setVideoLink] = useState(1);
+  const [SearchAge, setSearchAge] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
   const [items, setitems] = useState(LocalItem());
   const { data: horse } = useSelector((state) => state.horse);
+  const { data: finalposition } = useSelector((state) => state.finalposition);
 
   const history = useNavigate();
   const { state } = useLocation();
   const { RaceId } = state;
 
   let horseoptions = horse.map(function (item) {
+    return {
+      id: item._id,
+      value: item.NameEn,
+      label: item.NameEn,
+    };
+  });
+
+  let finalposition1 = finalposition.map(function (item) {
     return {
       id: item._id,
       value: item.NameEn,
@@ -50,18 +65,18 @@ const RaceForm = () => {
   
   
   useEffect(() => {
-    dispatch(fetchHorse());
+    dispatch(fetchHorse({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchfinalposition({SearchCode,SearchTitle,SearchAge}));
   }, [dispatch]);
 
   useEffect(() => {
     localStorage.setItem("results", JSON.stringify(items));
   }, [items]);
 
-
   const addItem = (e) => {
     e.preventDefault();
      let ResultEntry = [
-      `${Rank},${HorseID.id},${Prize},${Points},${BonusPoints}`,
+      `${Rank},${HorseID.id},${Prize},${Points},${BonusPoints}${VideoLink},${FinalPosition.id}`,
     ];
 
     if(horseLength === ItemLength){
@@ -84,6 +99,8 @@ const RaceForm = () => {
     SetPrize("");
     SetHorseID("");
     setRank(1);
+    setFinalPosition('');
+    setVideoLink('')
   };
 
   const submit = async (event) => {
@@ -129,6 +146,9 @@ const RaceForm = () => {
                 <span>Prize</span>
                 <span>Points</span>
                 <span>BonusPoints</span>
+                <span>FinalPosition</span>
+                <span>VideoLink</span>
+                
               </div>
 
             </div>
@@ -154,10 +174,20 @@ const RaceForm = () => {
                 <span>
                 <input type='number'  value={BonusPoints} onChange={(e) => SetBonusPoints(e.target.value)} placeholder="BonusPoints"  className="resultforminput"/>
                 </span>
-
-                
+                <span>
+                  <Select
+                   className="dropdown multidropdown"
+                    defaultValue={HorseID}
+                    onChange={SetHorseID}
+                    options={horseoptions}
+                    isClearable={false}
+                    isSearchable={true}
+                  />
+                </span>
+                <span>
+                <input type='text'  value={BonusPoints} onChange={(e) => SetBonusPoints(e.target.value)} placeholder="BonusPoints"  className="resultforminput"/>
+                </span>
               </div>
-            
             {
               items.map((data,i) => {
                 return(
@@ -168,7 +198,7 @@ const RaceForm = () => {
                       <Select
                         defaultValue={data[0]}
                         onChange={SetHorseID}
-                        options={horseoptions}
+                        options={finalposition1}
                         isClearable={false}
                         isSearchable={true}
                       />
@@ -182,7 +212,19 @@ const RaceForm = () => {
                     <span>
                     <input type='number'  value={data[3]} placeholder="BonusPoints"  className="resultforminput"/>
                     </span>
-    
+                    <span>
+                  <Select
+                   className="dropdown multidropdown"
+                    defaultValue={FinalPosition}
+                    onChange={setFinalPosition}
+                    options={finalposition1}
+                    isClearable={true}
+                    isSearchable={true}
+                  />
+                </span>
+                <span>
+                <input type='text'  value={VideoLink} onChange={(e) => setVideoLink(e.target.value)} placeholder="VideoLink"  className="resultforminput"/>
+                </span>
                     
                   </div>
                   

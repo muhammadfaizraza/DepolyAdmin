@@ -31,8 +31,8 @@ const getRaceCourseSlice = createSlice({
 
 export const {setRacecourse, setStatus} = getRaceCourseSlice.actions;
 export default getRaceCourseSlice.reducer;
-export const fetchracecourse = createAsyncThunk('getracecourse/fetch', async ({SearchTitle,SearchCode,SearchAge}) => {
-    const res = await axios.get(`${window.env.API_URL}/getracecourse?shortCode=${SearchCode}&TrackNameEn=${SearchTitle}&AbbrevEn=${SearchAge}`);
+export const fetchracecourse = createAsyncThunk('getracecourse/fetch', async () => {
+    const res = await axios.get(`${window.env.API_URL}/getracecourse`);
     const data = res.data;
     return data.data;
 })

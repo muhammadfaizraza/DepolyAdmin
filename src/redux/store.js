@@ -92,6 +92,7 @@ import getracetypeshortcode from "./getShortCode/getracetypeshortcode";
 import getNewLetter from "./getReducer/getNewLetter";
 import getPointTable from "./getReducer/getPointTable";
 import gethorsekindshortcode from "./getShortCode/gethorsekindshortcode";
+import getFinalPosition from "./getReducer/getFinalPosition";
 
 const store = configureStore({
   reducer: {
@@ -187,6 +188,7 @@ const store = configureStore({
     newsletter:getNewLetter,
     pointTable:getPointTable,
     horsekindshortcode:gethorsekindshortcode,
+    finalposition:getFinalPosition,
    
 
   },

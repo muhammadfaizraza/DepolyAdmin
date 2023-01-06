@@ -366,12 +366,7 @@ const Sidebar = () => {
                           Meeting Type
                         </Link>
                       </div>
-                      <div>
-
-                        <Link to="/raceform" className="mylink">
-                          Race
-                        </Link>
-                      </div>
+                 
                       <div>
                         {" "}
                         <Link to="/racecard" className="mylink">

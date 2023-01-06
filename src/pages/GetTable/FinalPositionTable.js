@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment,useState } from "react";
-import { fetchcolor, STATUSES } from "../../redux/getReducer/getColor";
+import { fetchfinalposition, STATUSES } from "../../redux/getReducer/getFinalPosition";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 
@@ -18,6 +18,7 @@ import { BiFilter } from 'react-icons/bi';
 import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import Finalpositionpopup from "../../Components/Popup/Finalpositionpopup";
 
 const FinalPositionTable = () => {
     const [ShowCalender, setShowCalender] = useState(false)
@@ -44,27 +45,28 @@ const FinalPositionTable = () => {
 
   const dispatch = useDispatch();
   const history = useNavigate();
-  const { data: Color, status } = useSelector((state) => state.color);
+  const { data: finalposition, status } = useSelector((state) => state.finalposition);
 
+ 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8)
   
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = Color.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = finalposition.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   const GetSearch = async () => {
-    dispatch(fetchcolor({SearchTitle,SearchCode,SearchUrl}));
+    dispatch(fetchfinalposition({SearchTitle,SearchCode,SearchUrl}));
     setSearchTitle('')
     setSearchCode('')
     setSearchUrl('')
   };
 
   useEffect(() => {
-    dispatch(fetchcolor({SearchTitle,SearchCode,SearchUrl}));
+    dispatch(fetchfinalposition({SearchTitle,SearchCode,SearchUrl}));
   }, [dispatch]);
-
+console.log(currentPosts , "aaya")
   const handleRemove = async (Id) => {
     try {
       swal({
@@ -80,13 +82,13 @@ const FinalPositionTable = () => {
   
    
         if (willDelete) {
-          await axios.delete(`${window.env.API_URL}/softdeleteColor/${Id}`);
+          await axios.delete(`${window.env.API_URL}/softdeleteFinalPosition/${Id}`);
           swal("Your data has been deleted Successfully!", {
             icon: "success",
          
           }
           )
-          dispatch(fetchcolor())
+          dispatch(fetchfinalposition({SearchTitle,SearchCode,SearchUrl}))
           
         } else {
           swal("Your data is safe!");
@@ -155,7 +157,7 @@ const FinalPositionTable = () => {
                 />
                       </span>
                 </OverlayTrigger>
-              <CSVLink  data={Color}  separator={";"} filename={"MKS Color.csv"} className='csvclass'>
+              <CSVLink  data={finalposition}  separator={";"} filename={"MKS Color.csv"} className='csvclass'>
                       Export CSV
               </CSVLink>
             </div>
@@ -206,8 +208,7 @@ const FinalPositionTable = () => {
                     <th>Action</th>
                       <th>Name</th>
                       <th>Name Arabic </th>
-                      <th>Abbreviation</th>
-                      <th>Abbreviation Arabic </th>
+              
                       <th>Short Code</th>
 
                       
@@ -217,15 +218,13 @@ const FinalPositionTable = () => {
                     {currentPosts.map((item, index) => {
                       return (
                         <>
-                          <tr className="tr_table_class"  style={{
-                    display:'none'
-                  }}>
-                          <td className="table_delete_btn1">
+                          <tr className="tr_table_class"  >
+                          <td className="table_delete_btn1">  
                               <BiEdit
                                 onClick={() =>
-                                  history("/editcolor", {
+                                  history("/editfinalposition", {
                                     state: {
-                                      colorid: item,
+                                     finalpositionid: item,
                                     },
                                   })
                                 }
@@ -240,8 +239,6 @@ const FinalPositionTable = () => {
                             </td>
                             <td>{item.NameEn}</td>
                             <td>{item.NameAr}</td>
-                            <td>{item.AbbrevEn}</td>
-                            <td>{item.AbbrevAr}</td>
                             <td>{item.shortCode} </td>
 
                          
@@ -258,7 +255,7 @@ const FinalPositionTable = () => {
         <span className="plusIconStyle"></span>
         <Pagination
         postsPerPage={postsPerPage}
-        totalPosts={Color.length}
+        totalPosts={finalposition.length}
         paginate={paginate}
         currentPage={currentPage}
 
@@ -273,10 +270,10 @@ const FinalPositionTable = () => {
       centered
     >
       <Modal.Header closeButton>
-        <h2>Color  </h2>
+        <h2>Final Posiiton</h2>
       </Modal.Header>
       <Modal.Body>
-        <ColorPopup data={modaldata} />
+        <Finalpositionpopup data={modaldata} />
       </Modal.Body>
       <Modal.Footer>
         <button onClick={handleClose} className="modalClosebtn">

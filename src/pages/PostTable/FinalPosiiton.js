@@ -27,7 +27,7 @@ const FinalPosiiton = () => {
     AbbrevAr:""
   });
 
-  const [isLoading, setisLoading] = useState(true);
+  const [isLoading, setisLoading] = useState(false);
   const [state1, setState] = useState({
 		shortCode: '',
 	});
@@ -58,7 +58,7 @@ const FinalPosiiton = () => {
     TextInputValidation(
       "en",
       registeration.NameEn,
-      "Color Name"
+      "Final Position Name"
     )
   ));
 
@@ -68,31 +68,14 @@ const FinalPosiiton = () => {
     TextInputValidation(
       "ar",
       registeration.NameAr,
-      "Color Name Arabic"
+      "Final Position Name Arabic"
     )
   ));
 
 
   const objAr = JSON.parse(data2);
 
-  const data3 =  (JSON.stringify(
-    TextInputValidation(
-      "ar",
-      registeration.AbbrevAr,
-      "Color Abbreviation Arabic"
-    )
-  ));
 
-
-  const abbrevar = JSON.parse(data3);
-  const data4 =  (JSON.stringify(
-    TextInputValidation(
-      "en",
-      registeration.AbbrevEn,
-      "Color Abbreviation"
-    )
-  ));
-  const AbbrevEn = JSON.parse(data4);
   const submit = async (event) => {
     event.preventDefault();
     setisLoading(true)
@@ -104,7 +87,7 @@ const FinalPosiiton = () => {
       formData.append("AbbrevAr", registeration.AbbrevAr );
       formData.append("shortCode", state1.shortCode);
 
-      await axios.post(`${window.env.API_URL}/uploadColor`, formData);
+      await axios.post(`${window.env.API_URL}/uploadFinalPosition`, formData);
       swal({
         title: "Success!",
         text: "Data has been added Successfully ",
@@ -227,58 +210,7 @@ const FinalPosiiton = () => {
                                   
                 </div>
               </div> */}
-             <div className="row mainrow">
-                <div className="col-sm">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="Abbreviation"
-                    className="mb-3"
-                    name="AbbrevEn"
-                  >
-                    <Form.Control
-                      required
-                      onChange={handleChange}
-                      value={registeration.AbbrevEn}
-                      name="AbbrevEn"
-                      type="text"
-                      placeholder="Abbrevation"
-                      onBlur={() =>
-                       setErrorAbbrev(AbbrevEn)
-                            
-                      }
-                    />
-                  </FloatingLabel>
-               
-                  <span className="spanForm"> |</span>
-                  <span className={ErrorAbbrev.status ? "success" :"error"}
-                  >{ErrorAbbrev.message}</span>
-                </div>
-
-                <div className="col-sm">
-                  <FloatingLabel
-                    controlId="floatingInput"
-                    label="اختصار"
-                    className="mb-3 floatingInputAr"
-                    name="AbbrevAr"
-                    style={{ direction: "rtl" }}
-                  >
-                    <Form.Control
-                      name="AbbrevAr"
-                      onChange={handleChange}
-                      value={registeration.AbbrevAr}
-                      type="text"
-                      placeholder="اختصار"
-                      required
-                      onBlur={() =>
-                        setErrorAbbrevAr(abbrevar)
-                             
-                       }
-                   
-                    />
-                  </FloatingLabel>
-                  <span className={ErrorAbbrevAr.status ? "successAr" :"errorAr"}
-                  >{ErrorAbbrevAr.message}</span>                </div>
-              </div>
+           
               <div className="row mainrow">
                 <div className="col-sm">
                 <FloatingLabel

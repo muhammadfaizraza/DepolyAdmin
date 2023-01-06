@@ -152,9 +152,9 @@ const Currency = () => {
                     onChange={(e) => setSymbol(e.target.value)}
                     value={Symbol}
                     onBlur={() =>
-                      Rate === ""
+                      Symbol === ""
                         ? setErrorSymbol("Symbol is required")
-                        : setErrorSymbol("")
+                        : setErrorSymbol("Symbol is Validated")
                     }
                   >
                     <Form.Control
@@ -164,7 +164,7 @@ const Currency = () => {
                       required
                     />
                   </FloatingLabel>
-                  <span className="error">{ErrorSymbol}</span>
+                  <span className={Symbol === "" ? "error" : "success"}>{ErrorSymbol}</span>
                 </div>
               </div>
               <div className="row mainrow">
@@ -178,7 +178,7 @@ const Currency = () => {
                     onBlur={() =>
                       Rate === ""
                         ? setErrorRate("Rate is required")
-                        : setErrorRate("")
+                        : setErrorRate("Rate is Validated")
                     }
                   >
                     <Form.Control
@@ -189,7 +189,7 @@ const Currency = () => {
                       required
                     />
                   </FloatingLabel>
-                  <span className="error">{ErrorRate}</span>
+                  <span className={Rate === "" ? "error" : "success"}>{ErrorRate}</span>
                   {/* <span className="spanForm"> |</span> */}
                 </div>
             

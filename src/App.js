@@ -153,6 +153,7 @@ import DeletedCompetition from "./Components/DeletedData/DeletedCompetition";
 import DeletedTable from "./pages/GetTable/DeletedTable";
 import FinalPosiiton from "./pages/PostTable/FinalPosiiton";
 import FinalPositionTable from "./pages/GetTable/FinalPositionTable";
+import EditFinalPosition from "./pages/UpdateTable/EditFinalPosition";
 
 
 function App() {
@@ -314,6 +315,7 @@ function App() {
              <Route path="*" element={<NotFound />} />
 
              {/* Edit Pages */}
+             <Route path="/editfinalposition" element={<EditFinalPosition />} />
              <Route path="/editjockey" element={<EditJockey />} />
              <Route path="/editracecourse" element={<EditRacecourse/>}/>
              <Route path="/editowner" element={<EditOwner/>}/>

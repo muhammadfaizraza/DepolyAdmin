@@ -38,7 +38,7 @@ const BreederUploadPopup = () => {
         <div>
           <input type="file" onChange={onSelectFile} />
           <button onClick={UploadCSV} className="modalClosebtn UploadCSV1">
-            Upload CSV
+            Upload JSON
           </button>
           {/* <button onClick={UploadCSV} className="ButtonSection">Upload CSV</button> */}
         </div>

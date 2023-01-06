@@ -32,8 +32,8 @@ const getRaceKindSlice = createSlice({
 export const {setRaceKind , setStatus} = getRaceKindSlice.actions;
 export default getRaceKindSlice.reducer;
 
-export const fetchRaceKind = createAsyncThunk('/RaceKind/fetch', async() => {
-    const res = await axios.get(`${window.env.API_URL}/RaceKindget?keyword=&page=`);
+export const fetchRaceKind = createAsyncThunk('/RaceKind/fetch', async({NameEn,shortCode}) => {
+    const res = await axios.get(`${window.env.API_URL}/RaceKindget??NameEn=${NameEn}&shortCode=${shortCode}`);
     const RaceKindData = res.data;
     return RaceKindData.data;
 })

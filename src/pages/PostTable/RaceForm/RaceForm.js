@@ -549,6 +549,11 @@ const RaceForm = () => {
 
   var today = new Date();
 
+  // console.log(Day,'Day is this')
+  // const DayTime = new Date(Day).getUTCDate;
+
+  // console.log(DayTime,'DayTime is this')
+
   useEffect(() => {
     dispatch(fetchracecourse({SearchCode,SearchTitle,SearchAge}));
     dispatch(fetchjockey({SearchCode,SearchTitle,SearchAge}));

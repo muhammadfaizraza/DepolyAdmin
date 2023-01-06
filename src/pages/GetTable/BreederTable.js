@@ -162,7 +162,7 @@ const BreederTable = () => {
                     />
                   </span>
                 </OverlayTrigger>{" "}
-                <p onClick={() => handleShowCSV()} className="importcsv">Import CSV</p>
+                <p onClick={() => handleShowCSV()} className="importcsv">Import JSON</p>
                 {/* <CSVLink
                   data={breeder}
                   separator={";"}
@@ -316,7 +316,7 @@ const BreederTable = () => {
         centered
       >
         <Modal.Header closeButton>
-          <h2 style={{ fontFamily: "inter" }}>Breeder CSV</h2>
+          <h2 style={{ fontFamily: "inter" }}>Breeder JSON</h2>
         </Modal.Header>
         <Modal.Body>
           <CSVBreeder data={modaldataCSV} />

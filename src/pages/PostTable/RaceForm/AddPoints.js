@@ -83,7 +83,7 @@ import { fetchpointTable } from "../../../redux/getReducer/getPointTable";
             marginTop: "30px",
           }}
         >
-          <div className="Headers">Select Races for Competition</div>
+          <div className="Headers">Select Point for Race</div>
           <div className="myselecthorse">
             <div className="myselectioncompetition">
               <span>Selection</span>

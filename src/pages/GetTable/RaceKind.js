@@ -23,7 +23,9 @@ import Tooltip from "react-bootstrap/Tooltip";
 const RaceKind = () => {
   //for Modal
   const [Value, setValue] = useState(false);
-
+  const [SearchAge, setSearchAge] = useState('');
+  const [NameEn, setNameEn] = useState('');
+  const [shortCode, setshortCode] = useState('');
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);

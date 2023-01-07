@@ -969,3 +969,13 @@ margin: 30px 20px;
 height: 40px;
 border: 1px solid rgb(204, 202, 202);
 }
+.quill {
+  height: fit-content;
+  margin: 0 19px;
+  min-height: 1400px !important;
+  border-radius: 13px !important;
+   width: 95%;
+}
+.ql-container.ql-snow {
+  min-height: 260px;
+}

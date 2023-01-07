@@ -15,7 +15,9 @@ import { toast } from "react-toastify";
   const { state } = useLocation();
   const { CompetitionId  } = state;
 
-
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
+  const [Value, setValue] = useState(false);
   const [checked, setChecked] = useState([]);
   const [isLoading, setisLoading] = useState(false);
  
@@ -25,7 +27,7 @@ import { toast } from "react-toastify";
  
 
   useEffect(() => {
-    dispatch(fetchrace());
+    dispatch(fetchrace({SearchTitle,SearchCode}));
     dispatch(fetchcompetition());
   }, [dispatch]);
  

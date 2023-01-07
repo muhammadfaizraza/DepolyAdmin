@@ -64,6 +64,9 @@ import EditSeo from "./pages/UpdateTable/EditSeo";
 
 import ResultForm from "./pages/PostTable/Result/ResultForm";
 import RacesResult from "./pages/PostTable/Result/ResultRaces";
+import RacesResultAnnounced from "./pages/PostTable/Result/ResultAnnounced";
+import ResultImages from "./pages/PostTable/Result/ResultImages";
+
 import Color from "./pages/PostTable/Color";
 import Nationality from "./pages/PostTable/Nationality";
 import Currency from "./pages/PostTable/Currency";
@@ -256,6 +259,8 @@ function App() {
              <Route path="/racecard" element={<RaceCard />} />
              <Route path="/addcompetition" element={<AddCompetition />} />
              <Route path="/newcompetition" element={<NewCompetition />} />
+             <Route path="/resultannounced" element={<RacesResultAnnounced />} />
+             <Route path="/resultimages" element={<ResultImages />} />
 
              <Route path="/addCategory" element={<AddCategory />} />
              <Route path="/CategoryListing" element={<CompetitionCategory />} />

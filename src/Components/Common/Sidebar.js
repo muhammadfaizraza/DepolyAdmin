@@ -475,7 +475,12 @@ const Sidebar = () => {
                       </div>
                       <div>
                         <Link to="/resultrace" className="mylink">
-                          Race Results
+                           Results Awaited
+                        </Link>
+                      </div>   
+                      <div>
+                        <Link to="/resultannounced" className="mylink">
+                           Results Announced
                         </Link>
                       </div>   
                       <div>

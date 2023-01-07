@@ -28,8 +28,8 @@ const RaceForm = () => {
   const [Points, SetPoints] = useState("");
   const [BonusPoints, SetBonusPoints] = useState("");
   const [Rank, setRank] = useState(1);
-  const [FinalPosition, setFinalPosition] = useState(1);
-  const [VideoLink, setVideoLink] = useState(1);
+  const [FinalPosition, setFinalPosition] = useState('');
+  const [VideoLink, setVideoLink] = useState('');
   const [SearchAge, setSearchAge] = useState('');
   const [SearchCode, setSearchCode] = useState('');
   const [SearchTitle, setSearchTitle] = useState('');
@@ -60,13 +60,12 @@ const RaceForm = () => {
   const horseLength = horse.length;
   const ItemLength = items.length;
   
-  console.log()
   const dispatch = useDispatch();
   
   
   useEffect(() => {
     dispatch(fetchHorse({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchfinalposition({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchfinalposition({SearchCode,SearchTitle}));
   }, [dispatch]);
 
   useEffect(() => {
@@ -76,7 +75,7 @@ const RaceForm = () => {
   const addItem = (e) => {
     e.preventDefault();
      let ResultEntry = [
-      `${Rank},${HorseID.id},${Prize},${Points},${BonusPoints}${VideoLink},${FinalPosition.id}`,
+      `${Rank},${HorseID.id},${Prize},${Points},${BonusPoints},${VideoLink},${FinalPosition.id}`,
     ];
 
     if(horseLength === ItemLength){
@@ -107,9 +106,13 @@ const RaceForm = () => {
     event.preventDefault();
     try { 
       const response = await axios.post(`${window.env.API_URL}createraceresult/${RaceId}`,{ResultEntry:items});
+      const Raceresult = response.data.data._id;
+      history("/resultimages", {
+        state: {
+          Raceresult: Raceresult,
+        },
+      });
       localStorage.removeItem('results')
-
-      history("/races");
       swal({
         title: "Success",
         text: "Data has been added successfully ",
@@ -148,7 +151,7 @@ const RaceForm = () => {
                 <span>BonusPoints</span>
                 <span>FinalPosition</span>
                 <span>VideoLink</span>
-                
+                {/* <span>Action</span> */}
               </div>
 
             </div>
@@ -161,58 +164,20 @@ const RaceForm = () => {
                     defaultValue={HorseID}
                     onChange={SetHorseID}
                     options={horseoptions}
-                    isClearable={false}
+                    isClearable={true}
                     isSearchable={true}
                   />
                 </span>
                 <span>
-                  <input type='number' value={Prize} onChange={(e) => SetPrize(e.target.value)} placeholder="Prize" className="resultforminput"/>
+                  <input type='number'  onChange={(e) => SetPrize(e.target.value)} placeholder="Prize" className="resultforminput"/>
                 </span>
                 <span>
-                <input type='number'  value={Points} onChange={(e) => SetPoints(e.target.value)} placeholder="Points"  className="resultforminput"/>
+                <input type='number'   onChange={(e) => SetPoints(e.target.value)} placeholder="Points"  className="resultforminput"/>
                 </span>
                 <span>
-                <input type='number'  value={BonusPoints} onChange={(e) => SetBonusPoints(e.target.value)} placeholder="BonusPoints"  className="resultforminput"/>
+                <input type='number'  onChange={(e) => SetBonusPoints(e.target.value)} placeholder="BonusPoints"  className="resultforminput"/>
                 </span>
                 <span>
-                  <Select
-                   className="dropdown multidropdown"
-                    defaultValue={HorseID}
-                    onChange={SetHorseID}
-                    options={horseoptions}
-                    isClearable={false}
-                    isSearchable={true}
-                  />
-                </span>
-                <span>
-                <input type='text'  value={BonusPoints} onChange={(e) => SetBonusPoints(e.target.value)} placeholder="BonusPoints"  className="resultforminput"/>
-                </span>
-              </div>
-            {
-              items.map((data,i) => {
-                return(
-                  <div className="myselectdata" key={i}>
-                  <div className="myselectiondata">
-                    <span onChange={setRank} value={i+1}>{i + 2}</span>
-                    <span>
-                      <Select
-                        defaultValue={data[0]}
-                        onChange={SetHorseID}
-                        options={finalposition1}
-                        isClearable={false}
-                        isSearchable={true}
-                      />
-                    </span>
-                    <span>
-                      <input type='number' value={data[1]} placeholder="Prize" className="resultforminput"/>
-                    </span>
-                    <span>
-                    <input type='number'  value={data[2]}  placeholder="Points"  className="resultforminput"/>
-                    </span>
-                    <span>
-                    <input type='number'  value={data[3]} placeholder="BonusPoints"  className="resultforminput"/>
-                    </span>
-                    <span>
                   <Select
                    className="dropdown multidropdown"
                     defaultValue={FinalPosition}
@@ -223,9 +188,55 @@ const RaceForm = () => {
                   />
                 </span>
                 <span>
-                <input type='text'  value={VideoLink} onChange={(e) => setVideoLink(e.target.value)} placeholder="VideoLink"  className="resultforminput"/>
+                <input type='text'  onChange={(e) => setVideoLink(e.target.value)} placeholder="VideoLink"  className="resultforminput"/>
                 </span>
+
+                <button className="AddAnother1" onClick={addItem}>
+                  Save
+                </button>
+              </div>
+            {
+              items.map((data,i) => {
+                return(
+                  <div className="myselectdata" key={i}>
+                  <div className="myselectiondata">
+                    <span onChange={setRank} value={i+1}>{i + 2}</span>
+                    <span>
+                  <Select
+                   className="dropdown multidropdown"
+                    defaultValue={HorseID}
+                    onChange={SetHorseID}
+                    options={horseoptions}
+                    isClearable={true}
+                    isSearchable={true}
+                  />
+                </span>
+                    <span>
+                      <input type='number'  onChange={(e) => SetPrize(e.target.value)} placeholder="Prize" className="resultforminput"/>
+                    </span>
+                    <span>
+                    <input type='number' onChange={(e) => SetPoints(e.target.value)} placeholder="Points"  className="resultforminput"/>
+                    </span>
+                    <span>
+                    <input type='number' onChange={(e) => SetBonusPoints(e.target.value)}   placeholder="BonusPoints"  className="resultforminput"/>
+                    </span>
+                    <span>
+                  <Select
+                   className="dropdown multidropdown"
+                    defaultValue={FinalPosition}
+                    onChange={setFinalPosition}
+                    options={finalposition1}
+                    isClearable={true}
+                    isSearchable={true}
                     
+                  />
+                </span>
+                <span>
+                <input type='text'  onChange={(e) => setVideoLink(e.target.value)} placeholder="VideoLink"  className="resultforminput"/>
+                </span>
+                <button className="AddAnother1" onClick={addItem}>
+                  Save
+                </button>
                   </div>
                   
                 </div>
@@ -233,9 +244,9 @@ const RaceForm = () => {
               })
             }
             <div className="addbtn">
-                    <button className="AddAnother" onClick={addItem}>
+                    {/* <button className="AddAnother" onClick={addItem}>
                     Save & Add Another
-                    </button>
+                    </button> */}
                   </div>
                   <div className="sbmtbtndiv">
                     <div className="RaceButtonDiv">

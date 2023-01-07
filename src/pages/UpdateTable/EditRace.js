@@ -414,14 +414,14 @@ let GroundrTypeAllAr =
       formData.append("TrackLength", TrackLength.id === undefined ? state1.TrackLength : TrackLength.id);
       formData.append("Ground", Ground.id === undefined ? state1.Ground : Ground.id);
       formData.append("RaceName", RaceName.id === undefined ? state1.RaceName : RaceName.id);
-      formData.append("RaceType", RaceTyp.id === undefined ? state1.RaceTyp : RaceTyp.id);
+      // formData.append("RaceType", RaceTyp.id === undefined ? state1.RaceTyp : RaceTyp.id);
   
       formData.append("SecondPrice", state1.SecondPrice); 
       formData.append("ThirdPrice", state1.ThirdPrice);
       formData.append("FourthPrice", state1.FourthPrice);
       formData.append("FifthPrice", state1.FifthPrice);
       formData.append("SixthPrice", state1.SixthPrice);
-      formData.append("DayNTime", (DayNTime ===  '' ? state1.DayNTime : DayNTime));
+      // formData.append("Day", (DayNTime ===  '' ? state1.DayNTime : DayNTime));
 
       const response = await axios.put(`${window.env.API_URL}/updaterace/${fullraceid._id}`, formData);
       history("/races");

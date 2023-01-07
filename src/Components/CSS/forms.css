@@ -128,6 +128,26 @@ form {
   margin-left: 17px;
 }
 
+.AddAnother1 {
+
+
+  background: rgba(202, 202, 202, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  width: 100px;
+  height: 58px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 25px;
+
+  color: #8C8C8C;
+  margin-top: 20px;
+
+  margin-left: 17px;
+}
+
 .AddAnother>svg {
 
 

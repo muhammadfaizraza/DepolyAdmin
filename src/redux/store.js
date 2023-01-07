@@ -94,6 +94,7 @@ import getPointTable from "./getReducer/getPointTable";
 import gethorsekindshortcode from "./getShortCode/gethorsekindshortcode";
 import getFinalPosition from "./getReducer/getFinalPosition";
 import getfinalpositionshortcode from "./getShortCode/getfinalpositionshortcode";
+import getRaceResultAnnounced from "./getReducer/getRaceResultAnnounced";
 
 
 const store = configureStore({
@@ -193,6 +194,7 @@ const store = configureStore({
     horsekindshortcode: gethorsekindshortcode,
     finalposition: getFinalPosition,
     finalpositionshortcode: getfinalpositionshortcode,
+    raceresult:getRaceResultAnnounced
   },
 });
 

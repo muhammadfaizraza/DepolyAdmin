@@ -107,7 +107,7 @@ const Races = () => {
                       <th>Track Length</th>
                       <th>Weather in Degree</th>
                       <th>Weather Type</th>
-                      <th>Day and Time</th>
+                      <th>Date</th>
                       {/* <th>Total Horses</th> */}
                       <th>Race Status</th>
                       <th>Image</th>
@@ -194,7 +194,7 @@ const Races = () => {
                               <td>{item.WeatherDegree}</td>
                               <td>{item.WeatherType}</td>
                               <td> <Moment parse="YYYY-MM-DD HH:mm">
-                              {item.DayNTime}
+                              {item.Day}
                              </Moment></td>
                              {/* <td>{item.HorseModel}</td> */}
                               {/* <td>{item.Horses.length}</td> */}

@@ -66,7 +66,6 @@ const FinalPositionTable = () => {
   useEffect(() => {
     dispatch(fetchfinalposition({SearchTitle,SearchCode,SearchUrl}));
   }, [dispatch]);
-console.log(currentPosts , "aaya")
   const handleRemove = async (Id) => {
     try {
       swal({

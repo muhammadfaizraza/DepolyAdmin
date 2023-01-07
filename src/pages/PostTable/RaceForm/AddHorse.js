@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { fetchHorse } from "../../../redux/getReducer/getHorseSlice";
 import { fetchequipment } from "../../../redux/getReducer/getEquipment";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import Select from "react-select";
 import swal from "sweetalert";
 import axios from "axios";
@@ -23,16 +23,18 @@ const LocalItem = () => {
 
 const RaceForm = () => {
   const [InputData, SetinputData] = useState("");
-  const [Gate , setGate] = useState(1)
+  const [Gate, setGate] = useState(1);
   const [EquipmentData, SetEquipmentData] = useState("");
   const [JockeyData, SetJockeyData] = useState("");
   const [items, setitems] = useState(LocalItem());
   const { data: jockey } = useSelector((state) => state.jockey);
   const { data: horse } = useSelector((state) => state.horse);
   const { data: equipment } = useSelector((state) => state.equipment);
-  const [SearchAge, setSearchAge] = useState('');
-  const [SearchCode, setSearchCode] = useState('');
-  const [SearchTitle, setSearchTitle] = useState('');
+  const [SearchAge, setSearchAge] = useState("");
+  const [SearchCode, setSearchCode] = useState("");
+  const [SearchTitle, setSearchTitle] = useState("");
+  const [SearchNameEn, setSearchNameEn] = useState("");
+  const [SearchRating, setSearchRating] = useState("");
   const history = useNavigate();
   const { state } = useLocation();
   const { RaceId } = state;
@@ -47,48 +49,62 @@ const RaceForm = () => {
   let AllJockey = jockey.map(function (item) {
     return {
       id: item._id,
-      value: item._id ,
+      value: item._id,
       label: item.NameEn,
       weight: item.MaximumJockeyWeight,
     };
   });
-  console.log(jockey , "aaya")
+  console.log(jockey, "aaya");
   let AllEquipment = equipment.map(function (item) {
     return {
       id: item._id,
       value: item.NameEn,
       label: item.NameEn,
-     
     };
   });
   const dispatch = useDispatch();
 
-const HorseLength = horse.length;
-const ItemLength = items.length;
-
+  const HorseLength = horse.length;
+  const ItemLength = items.length;
 
   useEffect(() => {
-    dispatch(fetchHorse({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchjockey({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchequipment({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchHorse({ SearchTitle, SearchCode, SearchAge }));
+    dispatch(fetchjockey({ SearchRating, SearchNameEn }));
+    dispatch(fetchequipment({ SearchTitle, SearchCode, SearchAge }));
   }, [dispatch]);
 
   useEffect(() => {
     localStorage.setItem("lists", JSON.stringify(items));
-  }, [items ,InputData]);
-  
-  const addItem = (e) => {
+  }, [items, InputData]);
+
+  // const addItem = (e) => {
+  //   e.preventDefault();
+  //   let HorseEntry = [
+  //     `${Gate},${InputData.id},${JockeyData.id},${JockeyData.weight},${EquipmentData.id}`,
+  //   ];
+  //   if (HorseLength === ItemLength) {
+  //     toast("No Horse ");
+  //   } else if (InputData === "" || JockeyData === "" || EquipmentData === "") {
+  //     toast("Select Values ");
+  //   } else {
+  //     setitems([...items, HorseEntry]);
+  //     setGate(Gate + 1);
+  //   }
+  //   SetinputData("");
+  //   SetJockeyData("");
+  //   SetEquipmentData("");
+  // };
+
+  const saveItem = (e) => {
     e.preventDefault();
-     let HorseEntry = [
+    let HorseEntry = [
       `${Gate},${InputData.id},${JockeyData.id},${JockeyData.weight},${EquipmentData.id}`,
     ];
-    if(HorseLength === ItemLength){
-      toast('No Horse ')
-    }
-    else  if (InputData === "" || JockeyData === "" || EquipmentData === "") {
-      toast('Select Values ')
-    }
-    else {
+    if (HorseLength === ItemLength) {
+      toast("No Horse ");
+    } else if (InputData === "" || JockeyData === "" || EquipmentData === "") {
+      toast("Select Values ");
+    } else {
       setitems([...items, HorseEntry]);
       setGate(Gate + 1);
     }
@@ -98,7 +114,7 @@ const ItemLength = items.length;
   };
   const Remove = () => {
     setitems([]);
-    setGate(1)
+    setGate(1);
     SetinputData("");
     SetJockeyData("");
     SetEquipmentData("");
@@ -107,19 +123,21 @@ const ItemLength = items.length;
   const submit = async (event) => {
     event.preventDefault();
     if (ItemLength === 0) {
-      toast('Please Add and Save Horse ')
-    }
-    else{
+      toast("Please Add and Save Horse ");
+    } else {
       try {
-        const response = await axios.post(`${window.env.API_URL}addracehorses/${RaceId}`, {HorseEntry:items});
-        localStorage.removeItem('lists')
-        setGate(1)
+        const response = await axios.post(
+          `${window.env.API_URL}addracehorses/${RaceId}`,
+          { HorseEntry: items }
+        );
+        localStorage.removeItem("lists");
+        setGate(1);
         history("/addracePoint", {
           state: {
-            RaceId: RaceId
+            RaceId: RaceId,
           },
         });
-       
+
         swal({
           title: "Success",
           text: "Data has been added successfully ",
@@ -157,61 +175,61 @@ const ItemLength = items.length;
                 <span>Jockey Name</span>
                 {/* <span>Jockey Weight</span> */}
                 <span>Equipment</span>
+                <span>Action</span>
               </div>
             </div>
             <div className="myselectdata">
-            <div className="myselectiondata">
+              <div className="myselectiondata">
                 <span onChange={setGate} value={1}>
                   1
                 </span>
                 <span>
-                      <Select
-                        className="dropdown multidropdown"
-                        defaultValue={InputData}
-                        onChange={SetinputData}
-                        options={horseoptions}
-                        isClearable={false}
-                        isSearchable={true}
-                      />
-                    </span>
-                    <span>
-                      <Select
-                        className="dropdown multidropdown"
-                        defaultValue={JockeyData}
-                        onChange={SetJockeyData}
-                        options={AllJockey}
-                        isClearable={false}
-                        isSearchable={true}
-                      />
-                    </span>
-                    {/* <span>
-                      {JockeyData.weight === undefined ? (
-                        <></>
-                      ) : (
-                        <>{JockeyData.weight} KG</>
-                      )}{" "}
-                    </span> */}
-                    <span>
+                  <Select
+                    className="dropdown multidropdown"
+                    defaultValue={InputData}
+                    onChange={SetinputData}
+                    options={horseoptions}
+                    isClearable={true}
+                    isSearchable={true}
+                  />
+                </span>
+                <span>
+                  <Select
+                    className="dropdown multidropdown"
+                    defaultValue={JockeyData}
+                    onChange={SetJockeyData}
+                    options={AllJockey}
+                    isClearable={true}
+                    isSearchable={true}
+                  />
+                </span>
+                
+                <span>
                   <Select
                     className="dropdown multidropdown"
                     defaultValue={EquipmentData}
                     onChange={SetEquipmentData}
                     options={AllEquipment}
-                    isClearable={false}
+                    isClearable={true}
                     isSearchable={true}
                   />
-                   </span>
+                </span>
+                <button className="AddAnother" onClick={saveItem}>
+                  Save
+                </button>
               </div>
               {items.map((e, i) => {
                 return (
                   <div className="myselectiondata">
-                    <span onChange={setGate} value={i + 1}>{i + 2}</span>
+                    <span onChange={setGate} value={i + 1}>
+                      {i + 2}
+                    </span>
                     <span>
                       <Select
                         defaultValue={InputData}
                         onChange={SetinputData}
                         options={horseoptions}
-                        isClearable={false}
+                        isClearable={true}
                         isSearchable={true}
                       />
                     </span>
@@ -220,7 +238,7 @@ const ItemLength = items.length;
                         defaultValue={JockeyData}
                         onChange={SetJockeyData}
                         options={AllJockey}
-                        isClearable={false}
+                        isClearable={true}
                         isSearchable={true}
                       />
                     </span>
@@ -232,23 +250,26 @@ const ItemLength = items.length;
                       )}{" "}
                     </span> */}
                     <span>
-                  <Select
-                    defaultValue={EquipmentData}
-                    onChange={SetEquipmentData}
-                    options={AllEquipment}
-                    isClearable={false}
-                    isSearchable={true}
-                  />
-                   </span>
+                      <Select
+                        defaultValue={EquipmentData}
+                        onChange={SetEquipmentData}
+                        options={AllEquipment}
+                        isClearable={true}
+                        isSearchable={true}
+                      />
+                    </span>
+                    <button className="AddAnother" onClick={saveItem}>
+                      Save
+                    </button>
                   </div>
                 );
               })}
 
-              <div className="addbtn">
+              {/* <div className="addbtn">
                 <button className="AddAnother" onClick={addItem}>
-                Save & Add Another
+                  Add Another
                 </button>
-              </div>
+              </div> */}
               <div className="sbmtbtndiv">
                 <div className="RaceButtonDiv">
                   <button className="updateButton" onClick={Remove}>
@@ -259,7 +280,6 @@ const ItemLength = items.length;
                     className="SubmitButton"
                     type="submit"
                     onClick={submit}
-                   
                   >
                     Next & Add Point
                   </button>

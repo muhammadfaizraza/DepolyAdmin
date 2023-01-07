@@ -13,31 +13,37 @@ import { ImCross } from 'react-icons/im';
 
 const modules = {
   toolbar: [
-    [{ header: [1, 2, false] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [
-      { list: "ordered" },
-      { list: "bullet" },
-      { indent: "-1" },
-      { indent: "+1" },
-    ],
-    [{ direction: "rtl" }], // this is rtl support
+    [{ 'header': 1 }, { 'header': 2 }],
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'font': [] }],
+    [{size: []}],
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ 'color': [] }, { 'background': [] }],
+    [{ 'script': 'sub'}, { 'script': 'super' }],
+    ['blockquote', 'code-block'],
+    [{ 'align': [] }],
+    [{'list': 'ordered'}, {'list': 'bullet'}, {'list': 'check'}, {'indent': '-1'}, {'indent': '+1'}],
+    ['link', 'image', 'video'],
+    ['clean'],
+    ['formula'],
+    ["undo"],
   ],
-};
-
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  }
+}
+/* 
+ * Quill editor formats
+ * See https://quilljs.com/docs/formats/
+ */
 const formats = [
-  "header",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "blockquote",
-  "list",
-  "bullet",
-  "indent",
-  "link",
-  "image",
-];
+  'header', 'font', 'size',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent',
+  'link', 'image', 'video', 'undo'
+]
+
 
 const NewsForm = () => {
   //for error

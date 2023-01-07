@@ -47,11 +47,12 @@ const RaceForm = () => {
   let AllJockey = jockey.map(function (item) {
     return {
       id: item._id,
-      value: item.NameEn,
+      value: item._id ,
       label: item.NameEn,
       weight: item.MaximumJockeyWeight,
     };
   });
+  console.log(jockey , "aaya")
   let AllEquipment = equipment.map(function (item) {
     return {
       id: item._id,

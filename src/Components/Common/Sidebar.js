@@ -396,6 +396,30 @@ const Sidebar = () => {
                           Race Name
                         </Link>
                       </div>
+                      <div>
+                        {" "}
+                        <Link
+                          to="/raceform"
+                          className="mylink"
+                          onClick={() => {
+                            window.scrollTo({
+                              top: 0,
+                              left: 0,
+                              behavior: "smooth",
+                            });
+                          }}
+                        >
+                          Race
+                        </Link>
+                      </div>
+
+                      <div>
+                        <Link to="/racenameform" className="mylink">
+                          Race Name
+                        </Link>
+                      </div>
+
+
 
 
 

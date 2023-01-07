@@ -154,6 +154,7 @@ import DeletedTable from "./pages/GetTable/DeletedTable";
 import FinalPosiiton from "./pages/PostTable/FinalPosiiton";
 import FinalPositionTable from "./pages/GetTable/FinalPositionTable";
 import EditFinalPosition from "./pages/UpdateTable/EditFinalPosition";
+import Email from "./Components/Template/Email";
 
 
 function App() {
@@ -186,6 +187,7 @@ function App() {
          <Routes>
              <Route exact path="/" element={<Login />} />
              <Route element={<ProtectedRoute />}>
+             <Route path="/sendemail" element={<Email />} />
              <Route path="/dashboard" element={<Dashboard />} />
              <Route path='/setting' element={<Setting/>} />
              <Route path='/AdminProfile' element={<AdminProfile />} />
@@ -270,6 +272,7 @@ function App() {
              <Route path="/viewcompetitionPoint" element={<ViewPoint />} />
              <Route path="/addcompetitionPoint" element={<AddPoint />} />
              <Route path="/addracePoint" element={<AddPointInRace />} />
+            
 
 
 

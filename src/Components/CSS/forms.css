@@ -922,4 +922,30 @@ width: 40px;
 height: 40px;
 
 }
+.parentTemplate{
 
+width: 83%;
+margin: 40px 20px  ;
+
+}
+.templateHeader{
+
+margin-left: 29px;
+height: 60px;
+background-color: #e9e2e2;
+align-items: center;
+display: flex;
+width: 93.5%;
+}
+.templateInputs{
+
+  width: 100%;
+margin: 30px 20px; 
+
+}
+.templateInputs input{
+  width: 93.5%;
+  margin-left: 12px !important;
+height: 40px;
+border: 1px solid rgb(204, 202, 202);
+}

@@ -3,7 +3,6 @@ import "../../Components/CSS/forms.css";
 import axios from "axios";
 // import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { add } from "../../redux/postReducer/PostNewsSlice";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import swal from "sweetalert";

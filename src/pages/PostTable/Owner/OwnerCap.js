@@ -6,8 +6,10 @@ import swal from "sweetalert";
 
 const OwnerColor = () => {
 
-  const { state } = useLocation();
-  const { OwnerId } = state;
+  // const { state } = useLocation();
+  // const { OwnerId } = state;
+
+  const OwnerId= '2323'
   const [selectedImages, setSelectedImages] = useState([]);
   const [isLoading, setisLoading] = useState(false);
   const history = useNavigate();
@@ -38,11 +40,7 @@ const OwnerColor = () => {
         icon: "success",
         button: "OK",
       });
-      history("/ownerCap", {
-        state: {
-          OwnerId: OwnerId,
-        },
-      });
+      history("/owner");
       setisLoading(false);
     } catch (error) {
       const err = error.response.data.message;

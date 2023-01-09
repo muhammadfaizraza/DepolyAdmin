@@ -13,8 +13,6 @@ const FinalPosiiton = () => {
       //for errors
   const [Error , setError] =useState("")
   const [ErrorAr , setErrorAr] =useState("")
-  const [ErrorAbbrev , setErrorAbbrev] =useState("")
-  const [ErrorAbbrevAr , setErrorAbbrevAr] =useState("")
   
   const dispatch = useDispatch();
   
@@ -22,9 +20,9 @@ const FinalPosiiton = () => {
   const [registeration, setregisteration] = useState({
     NameEn: "",
     NameAr: "",
+    Rank:"",
     shortCode: "",
-    AbbrevEn:"",
-    AbbrevAr:""
+
   });
 
   const [isLoading, setisLoading] = useState(false);
@@ -83,8 +81,7 @@ const FinalPosiiton = () => {
       const formData = new FormData();
       formData.append("NameEn", registeration.NameEn);
       formData.append("NameAr", registeration.NameAr);
-      formData.append("AbbrevEn", registeration.AbbrevEn);
-      formData.append("AbbrevAr", registeration.AbbrevAr );
+      formData.append("Rank", registeration.Rank);
       formData.append("shortCode", state1.shortCode);
 
       await axios.post(`${window.env.API_URL}/uploadFinalPosition`, formData);
@@ -210,7 +207,23 @@ const FinalPosiiton = () => {
                                   
                 </div>
               </div> */}
-           
+           <div className="row mainrow">
+                <div className="col-sm">
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label="Rank"
+                    className="mb-3"
+                    onChange={(e) =>
+                      setState({ ...state1, Rank: e.target.value })
+                    }
+                  
+                  >
+                    <Form.Control type="number" placeholder="Rank" value={state1.Rank}/>
+                  </FloatingLabel>
+               
+                                  
+                </div>
+              </div>
               <div className="row mainrow">
                 <div className="col-sm">
                 <FloatingLabel

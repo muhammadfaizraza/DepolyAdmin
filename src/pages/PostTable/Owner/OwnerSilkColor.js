@@ -9,10 +9,16 @@ const OwnerColor = () => {
   const { state } = useLocation();
   const { OwnerId } = state;
   const [selectedImages, setSelectedImages] = useState([]);
+  const [OwnerSlik, setsetOwnerSlik] = useState([]);
+
   const [isLoading, setisLoading] = useState(false);
   const history = useNavigate();
 
+  console.log(selectedImages,'selectedImages')
+
+
   const onSelectFile = (event) => {
+
     const selectedFiles = event.target.files;
     const selectedFilesArray = Array.from(selectedFiles);
 
@@ -27,9 +33,8 @@ const OwnerColor = () => {
     event.preventDefault();
     setisLoading(true);
     try {
-      console.log(selectedImages)
       const formData = new FormData();
-      formData.append("OwnerSilkColor", selectedImages);
+      formData.append("OwnerSilkColor", OwnerSlik);
       await axios.post(`${window.env.API_URL}/AddOwnerSilkColor/${OwnerId}`, formData);
       setisLoading(false);
       swal({
@@ -64,6 +69,27 @@ const OwnerColor = () => {
   function skipdata(){
     history("/ownerCap")
   }
+
+  //   const createServiceImagesChange = (e) => {
+  //   const files = Array.from(e.target.files);
+
+  //   setImages([]);
+  //   setImagesPreview([]);
+  //   setOldImages([]);
+
+  //   files.forEach((file) => {
+  //     const reader = new FileReader();
+
+  //     reader.onload = () => {
+  //       if (reader.readyState === 2) {
+  //         setImagesPreview((old) => [...old, reader.result]);
+  //         setImages((old) => [...old, reader.result]);
+  //       }
+  //     };
+  //     console.log(file);
+  //     reader.readAsDataURL(file);
+  //   });
+  // };
   return (
     <>
       <div className="page">

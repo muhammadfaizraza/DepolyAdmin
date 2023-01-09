@@ -207,7 +207,7 @@ const FinalPositionTable = () => {
                     <th>Action</th>
                       <th>Name</th>
                       <th>Name Arabic </th>
-              
+                      <th>Rank </th>
                       <th>Short Code</th>
 
                       
@@ -238,6 +238,7 @@ const FinalPositionTable = () => {
                             </td>
                             <td>{item.NameEn}</td>
                             <td>{item.NameAr}</td>
+                            <td>{item.Rank}</td>
                             <td>{item.shortCode} </td>
 
                          

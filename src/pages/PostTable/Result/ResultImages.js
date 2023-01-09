@@ -3,39 +3,44 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
-
-const ResultImages = () => {
-
+const OwnerColor = () => {
   const { state } = useLocation();
   const { RaceId } = state;
   const [selectedImages, setSelectedImages] = useState([]);
-  const [image, setimage] = useState([]);
+  const [OwnerSlik, setOwnerSlik] = useState([]);
 
   const [isLoading, setisLoading] = useState(false);
   const history = useNavigate();
 
-  console.log(selectedImages,'selectedImages')
-
-
   const onSelectFile = (event) => {
-
     const selectedFiles = event.target.files;
-    const selectedFilesArray = Array.from(selectedFiles);
 
+    const selectedFilesArray = Array.from(selectedFiles);
     const imagesArray = selectedFilesArray.map((file) => {
       return URL.createObjectURL(file);
     });
+    setOwnerSlik(event.target.files[0]);
+
+    // setsetOwnerSlik(imagesArray)
+
     setSelectedImages((previousImages) => previousImages.concat(imagesArray));
     event.target.value = "";
   };
 
   const UploadSilkColor = async (event) => {
     event.preventDefault();
+
     setisLoading(true);
     try {
       const formData = new FormData();
-      formData.append("image", image);
-      await axios.post(`${window.env.API_URL}/AddRaceImage/${RaceId}`, formData);
+      // selectedImages.forEach((image) => {
+      //   formData.append("image", image);
+      // });
+      formData.append("image", OwnerSlik);
+      await axios.post(
+        `${window.env.API_URL}/AddRaceImage/${RaceId}`,
+        formData
+      );
       setisLoading(false);
       swal({
         title: "Success!",
@@ -62,7 +67,9 @@ const ResultImages = () => {
     URL.revokeObjectURL(image);
   }
 
-  
+  function skipdata() {
+    history("/ownerCap");
+  }
 
   //   const createServiceImagesChange = (e) => {
   //   const files = Array.from(e.target.files);
@@ -93,7 +100,7 @@ const ResultImages = () => {
               marginTop: "30px",
             }}
           >
-            <div className="Headers">Result Images</div>
+            <div className="Headers">Upload Silk Color</div>
             <section className="addsectionimage">
               <label className="AddImages1">
                 + Add Images
@@ -145,12 +152,13 @@ const ResultImages = () => {
               </div>
             </section>
           </div>
+          <button className="skipbutton" onClick={skipdata}>
+            Skip
+          </button>
         </div>
-        
       </div>
-     
     </>
   );
 };
 
-export default ResultImages;
+export default OwnerColor;

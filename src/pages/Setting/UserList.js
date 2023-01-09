@@ -6,7 +6,6 @@ import {
 } from "../../redux/getReducer/getSubscriber";
 import { useNavigate } from "react-router-dom";
 import ScrollContainer from "react-indiana-drag-scroll";
-import Moment from "react-moment";
 import swal from "sweetalert";
 import axios from "axios";
 import Lottie from "lottie-react";
@@ -20,6 +19,8 @@ import { CSVLink } from "react-csv";
 // import { Country_Name, Country_NameAr } from "../../Components/Common/Country";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import Moment from "react-moment";
+
 
 const statusData = [
   {
@@ -265,7 +266,8 @@ const [FirstName ,setFirstName] =useState("")
                         <th>Email</th>
                         <th>Phone Number</th>
                         <th>Country</th>
-                        <th>created At</th>
+                        <th>Date of Birth</th>
+                        <th>Created At</th>
                         <th>Passport Picture</th>
                         <th style={{ textAlign: "center" }}>Status</th>
                       </tr>
@@ -280,6 +282,9 @@ const [FirstName ,setFirstName] =useState("")
                             <td>{item.Email}</td>
                             <td>{item.PhoneNumber}</td>
                             <td>{item.NationalityID}</td>
+                            <td><Moment format="YYYY/MM/DD">
+                                  {item.DOB}
+                                </Moment></td>
                             <td>
                               {" "}
                               <Moment format="YYYY/MM/DD">

@@ -164,6 +164,7 @@ import EditFinalPosition from "./pages/UpdateTable/EditFinalPosition";
 import Email from "./Components/Template/Email";
 import TrackCondition from "./pages/PostTable/TrackCondition";
 import EditTrackCondition from "./pages/UpdateTable/EditTrackCondition";
+import DeletedTrackCondition from "./Components/DeletedData/DeletedTrackCondition";
 
 
 function App() {
@@ -322,6 +323,7 @@ function App() {
                     <Route path="/deletedverdict" element={<DeletedVerdict />} />
                     <Route path="/deletedcategory" element={<DeletedCategory />} />
                     <Route path="/deletedcompetition" element={<DeletedCompetition />} />
+                    <Route path="/deletedtrackcondition" element={<DeletedTrackCondition />} />
                     <Route path="/deletedtable" element={<DeletedTable />} />
 
 

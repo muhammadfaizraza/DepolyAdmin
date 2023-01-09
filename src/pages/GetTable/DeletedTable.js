@@ -33,6 +33,7 @@ import Seo from "../../Components/DeletedData/DeletedSeo";
 import FinalPosition from "../../Components/DeletedData/DeletedFinalPosition";
 
 import Dropdown from "react-bootstrap/Dropdown";
+import TrackCondition from "../../Components/DeletedData/DeletedTrackCondition";
 
 function App() {
   const [value, setValue] = useState("Table");
@@ -75,10 +76,11 @@ function App() {
           <Dropdown.Item eventKey="Sponsor">Sponsor</Dropdown.Item>
           <Dropdown.Item eventKey="Slider">Slider</Dropdown.Item>
           <Dropdown.Item eventKey="Seo">Seo</Dropdown.Item>
+          <Dropdown.Item eventKey="Track Condition">Track Condition</Dropdown.Item>
           <Dropdown.Item eventKey="Track Length">Track Length</Dropdown.Item>
           <Dropdown.Item eventKey="Trainer">Trainer</Dropdown.Item>
           <Dropdown.Item eventKey="Verdict">Verdict</Dropdown.Item>
-         
+
           <Dropdown.Item eventKey="Gender">Gender</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
@@ -127,26 +129,29 @@ function Tab({ value }) {
     return <Racetype />;
   } else if (value.toString() === "Race Name") {
     return <Racename />;
-  }else if (value.toString() === "Race Kind") {
+  } else if (value.toString() === "Race Kind") {
     return <Racekind />;
-  }else if (value.toString() === "Race Card") {
+  } else if (value.toString() === "Race Card") {
     return <RaceCard />;
-  }else if (value.toString() === "Race Course") {
+  } else if (value.toString() === "Race Course") {
     return <RaceCourse />;
-  }else if (value.toString() === "Track Length") {
+  } else if (value.toString() === "Track Length") {
     return <Tracklength />;
-  }else if (value.toString() === "Trainer") {
+  } else if (value.toString() === "Trainer") {
     return <Trainer />;
-  }else if (value.toString() === "Verdict") {
+  } else if (value.toString() === "Verdict") {
     return <Verdict />;
-  }else if (value.toString() === "Sponsor") {
+  } else if (value.toString() === "Sponsor") {
     return <Sponsor />;
-  }else if (value.toString() === "Final Position") {
-      return <FinalPosition />;
-  }else if (value.toString() === "Slider") {
+  } else if (value.toString() === "Final Position") {
+    return <FinalPosition />;
+  } else if (value.toString() === "Track Condition") {
+    return <TrackCondition />;
+  }
+  else if (value.toString() === "Slider") {
     return <Slider />;
-  }else if (value.toString() === "Seo") {
-    return <Seo  />;
+  } else if (value.toString() === "Seo") {
+    return <Seo />;
   }
   else {
     return <Ads />;

@@ -10,7 +10,7 @@ import HorseAnimation from "../../assets/horselottie.json";
 import axios from "axios";
 import { BiEdit } from "react-icons/bi";
 import { BsEyeFill } from "react-icons/bs";
-import HorseKindPopup from "../../Components/Popup/HorseKindPopup";
+import ColorPopup from "../../Components/Popup/ColorPopup";
 import { Modal } from "react-bootstrap";
 import Pagination from "./Pagination";
 import { BiFilter } from 'react-icons/bi';
@@ -227,9 +227,9 @@ const TrackCondtionTable = () => {
                                                             <td className="table_delete_btn1">
                                                                 <BiEdit
                                                                     onClick={() =>
-                                                                        history("/edithorsekind", {
+                                                                        history("/edittrackcondition", {
                                                                             state: {
-                                                                                horsekindid: item,
+                                                                                conditionid: item,
                                                                             },
                                                                         })
                                                                     }
@@ -290,7 +290,7 @@ const TrackCondtionTable = () => {
                     <h2 style={{ fontFamily: "inter" }}>Track Condition </h2>
                 </Modal.Header>
                 <Modal.Body>
-                    <HorseKindPopup data={modaldata} />
+                    <ColorPopup data={modaldata} />
                 </Modal.Body>
                 <Modal.Footer>
                     <button onClick={handleClose} className="modalClosebtn">

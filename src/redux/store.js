@@ -96,7 +96,9 @@ import getFinalPosition from "./getReducer/getFinalPosition";
 import getfinalpositionshortcode from "./getShortCode/getfinalpositionshortcode";
 import getRaceResultAnnounced from "./getReducer/getRaceResultAnnounced";
 import getTrackCondition from "./getReducer/getTrackCondition"
+import getdeletedtrackcondition from "../redux/getDeletedreducer/DeletedTrackConditionSlice"
 import gettrackconditionshortcode from "./getShortCode/gettrackconditionshortcode";
+
 
 const store = configureStore({
   reducer: {
@@ -175,6 +177,7 @@ const store = configureStore({
     deletedracetype: getDeletedRaceType,
     deletedracekind: getDeletedRaceKind,
     deletedmeeting: getDeletedMeeting,
+    deletedtrackcondition: getdeletedtrackcondition,
     deletedverdict: getDeletedVerdict,
     deletedcategory: getDeletedCategory,
     deletedCompetition: getDeletedCompetition,

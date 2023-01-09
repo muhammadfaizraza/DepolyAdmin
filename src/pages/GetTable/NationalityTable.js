@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment ,useState} from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import {
   fetchnationality,
   STATUSES,
@@ -24,20 +24,20 @@ import { DateRangePicker } from 'react-date-range';
 import Form from "react-bootstrap/Form";
 
 const NationalityTable = () => {
-//for Modal
-const [Value, setValue] = useState(false);
+  //for Modal
+  const [Value, setValue] = useState(false);
 
-const [ShowCalender, setShowCalender] = useState(false)
-const [SearchAge, setSearchAge] = useState('');
-const [SearchCode, setSearchCode] = useState('');
-const [SearchTitle, setSearchTitle] = useState('');
-const [state, setState] = useState([
-  {
-    startDate: new Date(),
-    endDate: new Date(),
-    key: 'selection'
-  }
-]);
+  const [ShowCalender, setShowCalender] = useState(false)
+  const [SearchAge, setSearchAge] = useState('');
+  const [SearchCode, setSearchCode] = useState('');
+  const [SearchTitle, setSearchTitle] = useState('');
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
   const [show, setShow] = useState(false);
   const [modaldata, setmodaldata] = useState();
   const handleClose = () => setShow(false);
@@ -54,21 +54,21 @@ const [state, setState] = useState([
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8)
-  
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = nationality.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   const GetSearch = async () => {
-    dispatch(fetchnationality({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchnationality({ SearchTitle, SearchCode, SearchAge }));
     setSearchTitle('')
     setSearchCode('')
     setSearchAge('')
   };
 
   useEffect(() => {
-    dispatch(fetchnationality({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchnationality({ SearchTitle, SearchCode, SearchAge }));
   }, [dispatch]);
 
 
@@ -83,26 +83,26 @@ const [state, setState] = useState([
         dangerMode: true,
       })
 
-      .then( async(willDelete) => {
+        .then(async (willDelete) => {
 
-  
-   
-        if (willDelete) {
-          
-        await axios.delete(`${window.env.API_URL}/softdeleteNationality/${Id}`)
-          swal("Your data has been deleted Successfully!", {
-            icon: "success",
-         
+
+
+          if (willDelete) {
+
+            await axios.delete(`${window.env.API_URL}/softdeleteNationality/${Id}`)
+            swal("Your data has been deleted Successfully!", {
+              icon: "success",
+
+            }
+            )
+            dispatch(fetchnationality({ SearchTitle, SearchCode, SearchAge }));
+
+          } else {
+            swal("Your data is safe!");
           }
-          )
-          dispatch(fetchnationality({SearchTitle,SearchCode,SearchAge}));
-          
-        } else {
-          swal("Your data is safe!");
-        }
-      });
-   
-    }catch(error) {
+        });
+
+    } catch (error) {
 
       const err = error.response.data.message;
       swal({
@@ -147,82 +147,82 @@ const [state, setState] = useState([
               <h4>Nationality Listings</h4>
 
               <div>
-             
-             
+
+
 
                 <Link to="/nationality">
                   <button>Add Nationality</button>
                 </Link>
                 <OverlayTrigger
-                        overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
-                      >
-                        <span
-                          className="addmore"
-                        >
-                          <BiFilter
-                    className="calendericon"
-                    onClick={() => setShowCalender(!ShowCalender)}
-                  />
-                        </span>
-                  </OverlayTrigger>
-                <CSVLink  data={nationality}  separator={";"} filename={"MKS Nationality.csv"} className='csvclass'>
-                        Export CSV
+                  overlay={<Tooltip id={`tooltip-top`}>Filter</Tooltip>}
+                >
+                  <span
+                    className="addmore"
+                  >
+                    <BiFilter
+                      className="calendericon"
+                      onClick={() => setShowCalender(!ShowCalender)}
+                    />
+                  </span>
+                </OverlayTrigger>
+                <CSVLink data={nationality} separator={";"} filename={"MKS Nationality.csv"} className='csvclass'>
+                  Export CSV
                 </CSVLink>
               </div>
             </div>
             <div>
-              
+
               {
                 ShowCalender ?
-                <span className="transitionclass">
-                <div className="userfilter">
-                
-                <div className="filtertextform forflex">
-                
-                <input
-                       type="text"
-                       class="form-control"
-                       onChange={(e) => setSearchTitle(e.target.value)}
-                       placeholder="Enter Name"
-                     />
-                     <input
-                       type="text"
-                       class="form-control"
-                       onChange={(e) => setSearchCode(e.target.value)}
-                       placeholder="Enter Abbreviation"
-                     />
-                     <input
-                       type="text"
-                       class="form-control"
-                       onChange={(e) => setSearchAge(e.target.value)}
-                       placeholder="Enter Alternative Name"
-                     />
-                 </div>
-                
-                </div>
-                <button className="filterbtn" onClick={GetSearch}>
-                   Apply Filter
-                 </button>
-                 </span>:<></>
+                  <span className="transitionclass">
+                    <div className="userfilter">
+
+                      <div className="filtertextform forflex">
+
+                        <input
+                          type="text"
+                          class="form-control"
+                          onChange={(e) => setSearchTitle(e.target.value)}
+                          placeholder="Enter Name"
+                        />
+                        <input
+                          type="text"
+                          class="form-control"
+                          onChange={(e) => setSearchCode(e.target.value)}
+                          placeholder="Enter Abbreviation"
+                        />
+                        <input
+                          type="text"
+                          class="form-control"
+                          onChange={(e) => setSearchAge(e.target.value)}
+                          placeholder="Enter Alternative Name"
+                        />
+                      </div>
+
+                    </div>
+                    <button className="filterbtn" onClick={GetSearch}>
+                      Apply Filter
+                    </button>
+                  </span> : <></>
               }
-              </div>
+            </div>
             <>
               <div className="div_maintb">
                 <ScrollContainer>
                   <table>
                     <thead>
                       <tr>
-                      <th>Action</th>
+                        <th>Action</th>
 
                         <th>Name</th>
                         <th>Name Arabic </th>
                         <th>Alternative Name </th>
                         <th>Alternative Name Arabic</th>
-                        <th>Abrreviation </th>
-                        <th>Abrreviation Arabic</th>
+                        <th>Abreviation </th>
+                        <th>Abreviation Arabic</th>
                         <th>Hemisphere English</th>
                         <th>Hemisphere Arabic</th>
-                      
+
                         <th>Short Code</th>
                         {/* <th>Label</th> */}
                         {/* <th>Off Set </th>
@@ -238,7 +238,7 @@ const [state, setState] = useState([
                         return (
                           <>
                             <tr className="tr_table_class">
-                            <td className="table_delete_btn1">
+                              <td className="table_delete_btn1">
                                 <BiEdit
                                   onClick={() =>
                                     history("/editnationality", {
@@ -269,19 +269,19 @@ const [state, setState] = useState([
                               {/* <td>{item.Offset === 'true' ? <>True</> : <>False</>} </td> */}
                               {/* <td>{item.ValueEn}</td> */}
                               <td>
-                                <Form.Check 
+                                <Form.Check
                                   type="switch"
                                   id="custom-switch"
                                   onChange={() => setValue(true)}
                                   // label="Check this switch"
                                   value={Value}
                                 />
-                                </td>
+                              </td>
                               <td>
                                 <img src={item.image} alt="" />
                               </td>
 
-                             
+
                             </tr>
                           </>
                         );
@@ -294,12 +294,12 @@ const [state, setState] = useState([
           </div>
           <span className="plusIconStyle"></span>
           <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={nationality.length}
-          paginate={paginate}
-          currentPage={currentPage}
+            postsPerPage={postsPerPage}
+            totalPosts={nationality.length}
+            paginate={paginate}
+            currentPage={currentPage}
 
-        />
+          />
         </div>
       </div>
       <Modal
@@ -310,14 +310,14 @@ const [state, setState] = useState([
         centered
       >
         <Modal.Header closeButton>
-          <h2 style={{fontFamily: "inter"}}>Nationality</h2>
+          <h2 style={{ fontFamily: "inter" }}>Nationality</h2>
         </Modal.Header>
         <Modal.Body>
           <NationalityPopup data={modaldata} />
         </Modal.Body>
-      
-      
-    <Modal.Footer>
+
+
+        <Modal.Footer>
           <button onClick={handleClose} className="modalClosebtn">
             Close
           </button>

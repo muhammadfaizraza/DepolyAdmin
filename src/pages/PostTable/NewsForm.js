@@ -16,13 +16,13 @@ const modules = {
     [{ 'header': 1 }, { 'header': 2 }],
     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
     [{ 'font': [] }],
-    [{size: []}],
+    [{ size: [] }],
     ['bold', 'italic', 'underline', 'strike'],
     [{ 'color': [] }, { 'background': [] }],
-    [{ 'script': 'sub'}, { 'script': 'super' }],
+    [{ 'script': 'sub' }, { 'script': 'super' }],
     ['blockquote', 'code-block'],
     [{ 'align': [] }],
-    [{'list': 'ordered'}, {'list': 'bullet'}, {'list': 'check'}, {'indent': '-1'}, {'indent': '+1'}],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' }, { 'indent': '-1' }, { 'indent': '+1' }],
     ['link', 'image', 'video'],
     ['clean'],
     ['formula'],
@@ -118,7 +118,7 @@ const NewsForm = () => {
   };
   const handlePreview = () => {
     setImage()
-  document.getElementById("file").value=""
+    document.getElementById("file").value = ""
   };
 
   const data1 = JSON.stringify(
@@ -238,24 +238,24 @@ const NewsForm = () => {
                       theme="snow"
                       modules={modules}
                       formats={formats}
-                      value={DescriptionEn}  
+                      value={DescriptionEn}
                       onChange={setDescriptionEn}
                       onBlur={() => setdescError(description)}
-             
-             />
-             <span className={descError.status ? "newsSuccess" : "newsError"}>{descError.message}</span>
+
+                    />
+                    <span className={descError.status ? "newsSuccess" : "newsError"}>{descError.message}</span>
                   </div>
                   <div className="col-sm">
                     <ReactQuill
                       theme="snow"
-                      className="QuillAr"
+                      className=""
                       modules={modules}
                       formats={formats}
                       value={DescriptionAr}
                       onChange={setDescriptionAr}
                       onBlur={() => setdescErrorAr(descriptionAr)}
                     />
-             <span className={descErrorAr.status ? "newsSuccessAr" : "newsErrorAr"}>{descErrorAr.message}</span>
+                    <span className={descErrorAr.status ? "newsSuccessAr" : "newsErrorAr"}>{descErrorAr.message}</span>
                   </div>
                 </div>
 
@@ -268,10 +268,10 @@ const NewsForm = () => {
                       className="formInput"
                       id="file"
                     />
-                      {image && (
+                    {image && (
                       <>
-                       <ImCross onClick={handlePreview} className="crossIcon"/>
-                       <img src={preview} className="PreviewImage" alt="" />
+                        <ImCross onClick={handlePreview} className="crossIcon" />
+                        <img src={preview} className="PreviewImage" alt="" />
                       </>
                     )}
                   </div>

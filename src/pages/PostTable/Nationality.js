@@ -8,22 +8,42 @@ import Select from "react-select";
 import TextInputValidation from "../../utils/TextInputValidation";
 import { ImCross } from 'react-icons/im';
 import { fetchnationalityshortcode } from "../../redux/getShortCode/getnationalityshortcode";
-import { useSelector ,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+
 
 
 const Hemisphere = [
-  { id: "0", value: "Southern Hemisphere", label: "Southern Hemisphere" },
-  { id: "1", value: "Northern Hemisphere", label: "Northern Hemisphere" },
+  {
+    id: "1", value: "Southern Hemisphere", label: (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}>
+        <p>Southern Hemisphere</p>
+        <p>نصف الكرة الجنوبي</p>
+
+      </div>
+    ),
+  },
+  {
+    id: "2", value: "Northern Hemisphere", label: (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}>
+        <p>Northern Hemisphere</p>
+        <p>نصف الكرة الشمالي</p>
+
+      </div>
+    ),
+  },
 ];
 
-const HemisphereArS = [
-  { id: "0", value: "نصف الكرة الجنوبي", label: "نصف الكرة الجنوبي" },
-  { id: "1", value: "نصف الكرة الشمالي", label: "نصف الكرة الشمالي" },
-];
 
 const Nationality = () => {
 
-  const {data:nationalityshortcode} = useSelector((state) => state.nationalityshortcode)
+  const { data: nationalityshortcode } = useSelector((state) => state.nationalityshortcode)
 
   const [ErrorNameEn, setErrorNameEn] = useState("");
   const [ErrorNameAr, setErrorNameAr] = useState("");
@@ -33,8 +53,7 @@ const Nationality = () => {
   const [ErrorAltNameEn, setErrorAltNameEn] = useState("");
   const [ErrorAltNameAr, setErrorAltNameAr] = useState("");
   const [ErrorHemisphere, setErrorHemisphere] = useState("");
-  const [ErrorHemispherAr, setErrorHemispherAr] = useState("");
- 
+
   const [isLoading, setisLoading] = useState(false);
 
   const [NameEn, setNameEn] = useState("");
@@ -61,31 +80,31 @@ const Nationality = () => {
   const { pathname } = useLocation();
 
   const [state1, setState] = useState({
-		shortCode: '',
-	});
+    shortCode: '',
+  });
 
-  console.log(nationalityshortcode.length,'nationalityshortcode 1');
-  console.log(nationalityshortcode,'nationalityshortcode 2' )
+  console.log(nationalityshortcode.length, 'nationalityshortcode 1');
+  console.log(nationalityshortcode, 'nationalityshortcode 2')
 
   useEffect(() => {
-		if (nationalityshortcode) {
-			setState({
+    if (nationalityshortcode) {
+      setState({
         shortCode: nationalityshortcode.length === 0 ? 10 : nationalityshortcode[0].maxshortCode + 1,
-			});
-		} else {
+      });
+    } else {
       setState.shortCode('9')
-		}
-	}, [nationalityshortcode]);
+    }
+  }, [nationalityshortcode]);
   useEffect(() => {
     dispatch(fetchnationalityshortcode());
-  },[dispatch])
+  }, [dispatch])
 
 
 
   const submit = async (event) => {
     event.preventDefault();
     setisLoading(true)
-    if(image === undefined){
+    if (image === undefined) {
       swal({
         title: "Error!",
         text: "Please Upload image",
@@ -95,49 +114,49 @@ const Nationality = () => {
       setisLoading(false)
 
     }
-   else{
-    try {
-      const formData = new FormData();
-      formData.append("NameEn", NameEn);
-      formData.append("NameAr", NameAr);
-      formData.append("shortCode", state1.shortCode);
-      formData.append("AbbrevEn", AbbrevEn);
-      formData.append("AbbrevAr", AbbrevAr);
-      formData.append("AltNameEn", AltNameEn);
-      formData.append("AltNameAr", AltNameAr);
-      formData.append("HemisphereEn", HemisphereEn.value);
-      formData.append("HemisphereAr", HemisphereAr.value);
-      // formData.append("Offset", Offset.id);
-      // formData.append("ValueEn", ValueEn);
-      // formData.append("ValueAr", ValueAr);
-      formData.append("image", image);
+    else {
+      try {
+        const formData = new FormData();
+        formData.append("NameEn", NameEn);
+        formData.append("NameAr", NameAr);
+        formData.append("shortCode", state1.shortCode);
+        formData.append("AbbrevEn", AbbrevEn);
+        formData.append("AbbrevAr", AbbrevAr);
+        formData.append("AltNameEn", AltNameEn);
+        formData.append("AltNameAr", AltNameAr);
+        formData.append("HemisphereEn", HemisphereEn.value);
+        formData.append("HemisphereAr", HemisphereAr.value);
+        // formData.append("Offset", Offset.id);
+        // formData.append("ValueEn", ValueEn);
+        // formData.append("ValueAr", ValueAr);
+        formData.append("image", image);
 
-      await axios.post(`${window.env.API_URL}/uploadNationality`, formData);
+        await axios.post(`${window.env.API_URL}/uploadNationality`, formData);
 
-      if (pathname === "/nationality") {
-        history("/nationalitylist");
+        if (pathname === "/nationality") {
+          history("/nationalitylist");
+        }
+        swal({
+          title: "Success!",
+          text: "Data has been added Successfully ",
+          icon: "success",
+          button: "OK",
+        });
+        setisLoading(false)
+      } catch (error) {
+        const err = error.response.data.message[0];
+        const err1 = error.response.data.message[1];
+        const err2 = error.response.data.message[2];
+        const err3 = error.response.data.message[3];
+        swal({
+          title: "Error!",
+          text: err, err1, err2, err3,
+          icon: "error",
+          button: "OK",
+        });
+        setisLoading(false)
       }
-      swal({
-        title: "Success!",
-        text: "Data has been added Successfully ",
-        icon: "success",
-        button: "OK",
-      });
-      setisLoading(false)
-    } catch (error) {
-      const err = error.response.data.message[0];
-      const err1 = error.response.data.message[1];
-      const err2 = error.response.data.message[2];
-      const err3 = error.response.data.message[3];
-      swal({
-        title: "Error!",
-        text: err,err1,err2, err3,
-        icon: "error",
-        button: "OK",
-      });
-      setisLoading(false)
     }
-   }
   };
 
   useEffect(() => {
@@ -156,7 +175,7 @@ const Nationality = () => {
 
   const handlePreview = () => {
     setImage()
-  document.getElementById("file").value=""
+    document.getElementById("file").value = ""
   };
   //Checking Validation
 
@@ -180,8 +199,8 @@ const Nationality = () => {
   );
   const altName = JSON.parse(data6);
 
- 
- 
+
+
   const data12 = JSON.stringify(
     TextInputValidation("ar", AltNameAr, "Nationality Alternative Name Arabic")
   );
@@ -238,7 +257,7 @@ const Nationality = () => {
                 </div>
               </div>
 
-              
+
               <div className="row mainrow">
                 <div className="col-sm">
                   <FloatingLabel
@@ -255,12 +274,12 @@ const Nationality = () => {
                       required
                     />
                   </FloatingLabel>
-                <span className="spanForm"> |</span> 
+                  <span className="spanForm"> |</span>
                   <span className={ErrorAbbrevEn.status ? 'success' : 'error'}>{ErrorAbbrevEn.message}</span>
-                
+
                 </div>
 
-              <div className="col-sm">
+                <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="اكتب الاختصار"
@@ -277,7 +296,7 @@ const Nationality = () => {
                     />
                   </FloatingLabel>
                   <span className={ErrorAbbrevAr.status ? 'successAr' : 'errorAr'}>{ErrorAbbrevAr.message}</span>
-                </div> 
+                </div>
               </div>
 
               <div className="row mainrow">
@@ -296,12 +315,12 @@ const Nationality = () => {
                       required
                     />
                   </FloatingLabel>
-                  <span className="spanForm"> |</span> 
+                  <span className="spanForm"> |</span>
                   <span className={ErrorAltNameEn.status ? 'success' : 'error'}>{ErrorAltNameEn.message}</span>
-          
+
                 </div>
 
-                 <div className="col-sm">
+                <div className="col-sm">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="اكتب الاسم البديل"
@@ -310,7 +329,7 @@ const Nationality = () => {
                     className="mb-3 floatingInputAr "
                     style={{ direction: "rtl", left: "initial", right: 0 }}
                     onBlur={() => setErrorAltNameAr(Altnamear)}
-                  
+
                   >
                     <Form.Control
                       type="text"
@@ -319,7 +338,7 @@ const Nationality = () => {
                     />
                   </FloatingLabel>
                   <span className={ErrorAltNameAr.status ? 'successAr' : 'errorAr'}>{ErrorAltNameAr.message}</span>
-                </div> 
+                </div>
               </div>
 
               {/* <div className="row mainrow">
@@ -360,7 +379,7 @@ const Nationality = () => {
                 </div>
               </div> */}
 
-              
+
 
               {/* <div className="row mainrow">
                 <div className="col-sm">
@@ -415,61 +434,46 @@ const Nationality = () => {
                   </div>
                 </div> */}
 
-                <div className="row mainrow">
-                  <div className="col-sm">
-                    <Select
-                      placeholder={<div>Select Hemisphere</div>}
-                      defaultValue={HemisphereEn}
-                      onChange={setHemisphereEn}
-                      options={Hemisphere}
-                      isClearable={true}
-                      isSearchable={true}
-                      onBlur={()=>{
-                        HemisphereEn === "" ? setErrorHemisphere("Hemisphere Arabic is required"): setErrorHemisphere("Hemisphere Arabic is Validated")
-                        
-                                              }}
+              <div className="row mainrow">
+                <div className="col-sm">
+                  <Select
+                    placeholder={<div>Select Hemisphere</div>}
+                    defaultValue={HemisphereEn}
+                    onChange={setHemisphereEn}
+                    options={Hemisphere}
+                    isClearable={true}
+                    isSearchable={true}
+                    onBlur={() => {
+                      HemisphereEn === "" ? setErrorHemisphere("Hemisphere  is required") : setErrorHemisphere("Hemisphere  is Validated")
 
-                    />{" "}
-                         <span className={HemisphereEn === "" ? "error" :"success"}>{ErrorHemisphere}</span>
-               
-                    <span className="spanForm"> |</span>
-                    {/* <span className="error">{ErrorWeatherType}</span> */}
-                  </div>
+                    }}
 
-                  <div className="col-sm">
-                    <Select
-                      placeholder={<div>طقس</div>}
-                      className="selectdir"
-                      defaultValue={HemisphereAr}
-                      onChange={setHemisphereAr}
-                      options={HemisphereArS}
-                      isClearable={true}
-                      isSearchable={true}
-                      onBlur={()=>{
-HemisphereAr === "" ? setErrorHemispherAr("Hemisphere Arabic is required"): setErrorHemispherAr("Hemisphere Arabic is Validated")
+                  />{" "}
+                  <span className={HemisphereEn === "" ? "error" : "success"}>{ErrorHemisphere}</span>
 
-                      }}
-                    />
-                    <span className={HemisphereAr === "" ? "errorAr" :"successAr"}>{ErrorHemispherAr}</span>
-                  </div>
+
+                  {/* <span className="error">{ErrorWeatherType}</span> */}
                 </div>
-                 <div className="row mainrow">
-                  <div className="col-sm">
+
+
+              </div>
+              <div className="row mainrow">
+                <div className="col-sm">
                   <FloatingLabel
-                      controlId="floatingInput"
-                      label="Short Code"
-                      className="mb-3"
-                      onChange={(e) =>
-                        setState({ ...state1, shortCode: e.target.value })
-                      }
-                    
-                    >
-                      <Form.Control type="number" placeholder="Description" value={state1.shortCode}/>
-                    </FloatingLabel>
-                 
-									
-                  </div>
-                </div> 
+                    controlId="floatingInput"
+                    label="Short Code"
+                    className="mb-3"
+                    onChange={(e) =>
+                      setState({ ...state1, shortCode: e.target.value })
+                    }
+
+                  >
+                    <Form.Control type="number" placeholder="Description" value={state1.shortCode} />
+                  </FloatingLabel>
+
+
+                </div>
+              </div>
 
               <div className="ButtonSection">
                 <div>
@@ -482,12 +486,12 @@ HemisphereAr === "" ? setErrorHemispherAr("Hemisphere Arabic is required"): setE
                     className="formInput fileinputdata"
                     id="file"
                   />
-                   {image && (
-                      <>
-                       <ImCross onClick={handlePreview} className="crossIcon"/>
-                       <img src={preview} className="PreviewImage" alt="" />
-                      </>
-                    )}
+                  {image && (
+                    <>
+                      <ImCross onClick={handlePreview} className="crossIcon" />
+                      <img src={preview} className="PreviewImage" alt="" />
+                    </>
+                  )}
                 </div>
                 <button type="submit" className="SubmitButton" disabled={isLoading}>
                   Add Nationality

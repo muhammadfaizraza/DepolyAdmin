@@ -36,7 +36,7 @@ const Login = () => {
 
   const submitForm = (data) => {
     dispatch(userLogin(data))  
-    toast(error || customError)
+    toast( customError||error )
   }
   useEffect(() => {
     if (userInfo) {

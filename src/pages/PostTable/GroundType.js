@@ -196,7 +196,7 @@ const GroundType = () => {
                         onBlur={() =>
                          setErrorAbbrev(abbrev)
                               
-                        }
+                            }
                       />
                     </FloatingLabel>
                  

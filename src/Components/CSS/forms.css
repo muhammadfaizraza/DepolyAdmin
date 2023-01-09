@@ -82,7 +82,7 @@ form {
   color: white;
   border: none;
   font-size: 16px;
-} 
+}
 
 
 
@@ -100,7 +100,7 @@ form {
   width: 186px;
   height: 51px;
   background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
-    border-radius: 20px;
+  border-radius: 20px;
   color: white;
   border: none;
   margin-right: 2.8rem;
@@ -171,7 +171,7 @@ input::file-selector-button {
   color: white;
   background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
   ;
-  border-radius: 20px;  
+  border-radius: 20px;
 
   border: none;
   width: 186px;
@@ -314,12 +314,15 @@ input::file-selector-button {
   font-size: 25px;
   /* margin-left: 60px; */
 }
-.EmailForget{
+
+.EmailForget {
   width: 100% !important;
 }
-.EmailForgetBtn{
+
+.EmailForgetBtn {
   margin: 25px;
 }
+
 .ForgetPassword p {
   text-align: center;
   padding: 15px;
@@ -327,6 +330,7 @@ input::file-selector-button {
   font-weight: 500;
   cursor: pointer;
 }
+
 .css-6j8wv5-Input {
   margin: -3px;
   padding-bottom: 2px;
@@ -341,6 +345,7 @@ input::file-selector-button {
   grid-template-columns: 0 min-content;
   box-sizing: border-box;
 }
+
 .css-14el2xx-placeholder {
   color: hsl(0, 0%, 50%);
   grid-area: 1/1/2/3;
@@ -353,13 +358,15 @@ input::file-selector-button {
 span.react-date-picker__inputGroup__divider {
   display: none !important;
 }
+
 .react-date-picker__wrapper {
   display: flex;
   flex-grow: 2;
   width: 100% !important;
   flex-shrink: 0;
-border: none !important;
+  border: none !important;
 }
+
 .react-date-picker__inputGroup {
   min-width: calc((4px * 3) + 0.54em * 8 + 0.217em * 2);
   flex-grow: 1;
@@ -367,35 +374,46 @@ border: none !important;
   box-sizing: content-box;
   width: 687px;
 }
+
 .react-datetime-picker.react-datetime-picker--closed.react-datetime-picker--enabled {
   width: 100%;
 }
+
 .react-datetime-picker.react-datetime-picker--open.react-datetime-picker--enabled {
   width: 100%;
 }
+
 .react-datetime-picker__wrapper {
   border: none;
 }
+
 .react-datetime-picker__inputGroup__input {
   min-width: 2.54em;
 }
 
-.react-datetime-picker__inputGroup__divider{
+.react-datetime-picker__inputGroup__divider {
   display: none;
 }
+
 .react-datetime-picker__wrapper {
   border: thin solid #fff !important;
 }
+
 .react-date-picker__calendar .react-calendar {
   border-width: 3px !important;
 
   font-size: 12px;
-  border-color:#19469D;
+  border-color: #19469D;
 }
-.react-date-picker, .react-date-picker *, .react-date-picker *:before, .react-date-picker *:after {
+
+.react-date-picker,
+.react-date-picker *,
+.react-date-picker *:before,
+.react-date-picker *:after {
   font-size: 12px;
   box-sizing: border-box;
 }
+
 /* .col-sm:after {
   content: " *";
   font-size: 31px;
@@ -415,18 +433,19 @@ border: none !important;
   padding: 0px 10px 0px 6px !important;
 }
 
-.displaynew{
+.displaynew {
   display: none !important;
 }
 
-.textverdict{
+.textverdict {
   border: none;
 }
-.textverdict:focus-visible{
+
+.textverdict:focus-visible {
   border: none !important;
 }
 
-.verdictname{
+.verdictname {
   max-width: 300px !important;
 }
 
@@ -444,22 +463,31 @@ border: none !important;
   font-weight: 300;
   font-size: 14px;
 }
+
 .mb-3.form-floating:active {
   border: none;
-  
+
 }
-.form-floating>.form-control, .form-floating>.form-control-plaintext, .form-floating>.form-select {
+
+.form-floating>.form-control,
+.form-floating>.form-control-plaintext,
+.form-floating>.form-select {
   height: calc(2.5rem + 2px);
   line-height: 2.25;
 }
+
 .form-control:focus {
   color: #212529;
   background-color: #fff;
   border-color: #86b7fe;
   outline: 0;
-   box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25); 
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
 }
-.form-floating>.form-control-plaintext:focus, .form-floating>.form-control-plaintext:not(:placeholder-shown), .form-floating>.form-control:focus, .form-floating>.form-control:not(:placeholder-shown) {
+
+.form-floating>.form-control-plaintext:focus,
+.form-floating>.form-control-plaintext:not(:placeholder-shown),
+.form-floating>.form-control:focus,
+.form-floating>.form-control:not(:placeholder-shown) {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
   font-size: 14px;
@@ -478,20 +506,22 @@ border: none !important;
   pointer-events: none;
   border: 1px solid transparent;
   transform-origin: 0 0;
-  transition: opacity .1s ease-in-out,transform .1s ease-in-out;
+  transition: opacity .1s ease-in-out, transform .1s ease-in-out;
   color: #8a9097 !important;
 }
 
-.floatingInputAr>label{
+.floatingInputAr>label {
   right: -31px;
   left: initial;
 
 }
-button.Approvedbtn.resultbtn{
+
+button.Approvedbtn.resultbtn {
   color: #000;
   margin-left: -30px;
 
 }
+
 input#floatingInput {
   margin-right: -28px;
 }
@@ -508,8 +538,9 @@ input#floatingInput {
   /* width: auto; */
   width: fit-content !important;
   box-sizing: border-box;
-  max-width: 83px !important; 
+  max-width: 83px !important;
 }
+
 .css-12jo7m5 {
   border-radius: 2px;
   color: hsl(0, 0%, 20%);
@@ -522,6 +553,7 @@ input#floatingInput {
   box-sizing: border-box;
   margin-left: 15px !important;
 }
+
 .css-tj5bde-Svg {
   display: inline-block;
   fill: currentColor;
@@ -531,6 +563,7 @@ input#floatingInput {
   margin-left: 15px !important;
 
 }
+
 .css-1rhbuit-multiValue {
   background-color: hsl(0, 0%, 90%);
   border-radius: 2px;
@@ -539,13 +572,15 @@ input#floatingInput {
   display: -ms-flexbox;
   display: flex;
   margin: 2px;
- width: fit-content !important;
+  width: fit-content !important;
   box-sizing: border-box;
 }
+
 .css-g1d714-ValueContainer div {
   width: 140px !important;
   margin-right: 10px;
 }
+
 .css-1rhbuit-multiValue {
   background-color: hsl(0, 0%, 90%);
   border-radius: 2px;
@@ -560,26 +595,30 @@ input#floatingInput {
   max-width: 150px !important;
   display: flex !important;
 }
+
 .css-1rhbuit-multiValue svg {
   position: relative;
   left: 20px;
 }
+
 table.Prizeclass {
   width: 100%;
   border-spacing: 0;
 }
 
-.Prizeclassthead{
- text-align: center;
- font-size: 18px;
- color: white;
+.Prizeclassthead {
+  text-align: center;
+  font-size: 18px;
+  color: white;
 }
-.Prizeclasstbody{
+
+.Prizeclasstbody {
   text-align: center;
   font-size: 16px;
- 
+
 }
-.Prizeclasstbody > tr{
+
+.Prizeclasstbody>tr {
   border-width: 0;
   padding-top: 10px
 }
@@ -587,9 +626,11 @@ table.Prizeclass {
 .react-datetime-picker__inputGroup__input:invalid {
   background: transparent !important;
 }
+
 .react-date-picker__inputGroup__input:invalid {
   background: transparent !important;
 }
+
 .spanForm {
   display: flex;
   font-size: 2rem;
@@ -600,13 +641,14 @@ table.Prizeclass {
   margin-left: 134px !important;
   margin-right: -30px;
 }
+
 .floatingInputAr>label {
   /* right: -31px; */
   left: initial;
   /* padding-right: 44px; */
 }
 
-.Lottie{
+.Lottie {
   display: flex;
   margin-left: 30%;
   top: -10 !important;
@@ -616,19 +658,21 @@ label.Multiplecaplabel {
   padding: 10px 0px 10px 35px;
   font-weight: 600;
 }
+
 .Multipleownerlabel {
   padding: 0px 0px 10px 35px;
   font-weight: 600;
 }
+
 .starcss {
-    margin-top: -22px;
+  margin-top: -22px;
 }
 
 .css-1gtu0rj-indicatorContainer {
   padding: 25px !important;
 }
 
-.multidropdown.css-b62m3t-container{
+.multidropdown.css-b62m3t-container {
   margin-top: 2px !important;
 }
 
@@ -640,42 +684,47 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
 }
-.form-control:disabled, .form-control[readonly] {
-  background-color: transparent; 
- 
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: transparent;
+
   opacity: 1;
 }
 
 td.table_delete_btn1 {
   padding: 10px 30px !important;
 }
-.fileinputdata{
+
+.fileinputdata {
   width: 200px;
 }
 
-.topheading{
-padding: 20px;
-font-weight: 500;
+.topheading {
+  padding: 20px;
+  font-weight: 500;
 }
 
 .form input#floatingInput:required {
   border-color: #800000 !important;
   border-width: 3px !important;
-  
+
 }
 
 .form :required:invalid {
   border-color: #c00000 !important;
 }
+
 .has-success .input#floatingInput {
   border-bottom: 2px solid #168b3f !important;
 }
 
-.has-danger  {
-  border-bottom: 2px solid #dc1d34 !important; 
+.has-danger {
+  border-bottom: 2px solid #dc1d34 !important;
 }
+
 .email-field {
   outline: 0;
 }
@@ -697,36 +746,40 @@ font-weight: 500;
   width: 0.4em;
 } */
 
-.page-link:active{
-background-color: #00A3FF;
+.page-link:active {
+  background-color: #00A3FF;
 }
 
-.addresultform{
+.addresultform {
   border: none !important;
 }
+
 .quill {
   height: 170px;
   margin: 0 19px;
   border-radius: 13px !important;
   width: 95%;
 }
-.QuillAr{
+
+.QuillAr {
   text-align: right;
   direction: rtl;
 }
 
 
 
-.pickCountstyle{
-margin: 34px;
-font-size: 15.59px;
+.pickCountstyle {
+  margin: 34px;
+  font-size: 15.59px;
 }
+
 .error {
   font-size: 11px;
   position: absolute;
   color: red;
   top: 45px;
 }
+
 .errorAr {
   font-size: 11px;
   direction: rtl;
@@ -736,11 +789,12 @@ font-size: 15.59px;
   top: 45px;
   right: 0;
 }
+
 .successAr {
   font-size: 11px;
   direction: rtl;
   display: flex;
- color: #228B22;
+  color: #228B22;
   position: absolute;
   top: 45px;
   right: 0;
@@ -750,20 +804,23 @@ font-size: 15.59px;
 .addbtn.competitionaddbtn {
   margin-top: 35px;
 }
-.newsError{
-color: red;
-font-size: 9px;
-position: relative;
-top: 36px;
-left: 18px;
+
+.newsError {
+  color: red;
+  font-size: 9px;
+  position: relative;
+  top: 36px;
+  left: 18px;
 }
-.newsSuccess{
-  color:  #228B22;
+
+.newsSuccess {
+  color: #228B22;
   font-size: 11px;
   position: relative;
   top: 36px;
   left: 18px;
-  }
+}
+
 .newsErrorAr {
   color: red;
   font-size: 11px;
@@ -771,27 +828,31 @@ left: 18px;
   margin-top: 47px;
   margin-right: 18px;
 }
+
 .newsSuccessAr {
-  color:  #228B22;
+  color: #228B22;
   font-size: 11px;
   float: right;
   margin-top: 47px;
   margin-right: 18px;
 }
-.success{
 
-  color:  #228B22;
+.success {
+
+  color: #228B22;
   font-size: 11px;
   position: absolute;
   top: 45px;
 }
 
-.userfilter{
-display: flex;
+.userfilter {
+  display: flex;
 }
+
 .calenderuser {
   margin-left: 15px;
 }
+
 .calendericon {
   margin: 0px 20px 0 25px;
   font-size: 36px;
@@ -801,50 +862,54 @@ display: flex;
 
 .filtertextform {
   padding: 20px;
-  
+
 }
-.filtertextform > input  {
+
+.filtertextform>input {
   margin: 24px;
 }
-.filtertextform > select {
+
+.filtertextform>select {
   margin: 24px;
 }
 
 button.filterbtn {
-    float: right;
-    margin: -100px 55px 0 0;
-    background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
-    border-radius: 40px;
-    width: 186px;
-    height: 51px;
-    color: white;
-    border: none;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15.5949px;
-    line-height: 19px;
+  float: right;
+  margin: -100px 55px 0 0;
+  background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
+  border-radius: 40px;
+  width: 186px;
+  height: 51px;
+  color: white;
+  border: none;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15.5949px;
+  line-height: 19px;
 }
+
 a.csvclass {
   text-decoration: none;
   font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 15.5949px;
-    line-height: 19px;
-    padding-top: 7px;
-    color: #000000;
-    padding-left: 6px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15.5949px;
+  line-height: 19px;
+  padding-top: 7px;
+  color: #000000;
+  padding-left: 6px;
 }
 
-.myselectioncompetition{
+.myselectioncompetition {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding-right: 10rem;
   padding-left: 1rem;
 }
-.myselectioncompetition > span {
+
+.myselectioncompetition>span {
   color: #fff;
   font-family: 'Inter';
   font-style: normal;
@@ -854,7 +919,7 @@ a.csvclass {
   padding: 18px;
 }
 
-.myselectioncompetition > span:nth-child(2) {
+.myselectioncompetition>span:nth-child(2) {
   color: #fff;
   font-family: 'Inter';
   font-style: normal;
@@ -872,30 +937,34 @@ p.competitionrace1 {
   color: rgba(0, 0, 0, 0.5);
   margin: 17px;
 }
-input[type='checkbox']{
-    width: 20px;
-    height: 100%;
+
+input[type='checkbox'] {
+  width: 20px;
+  height: 100%;
 }
+
 .form-switch .form-check-input {
   width: 2em;
   margin-left: -2.5em;
   height: 27px;
 }
+
 .quillRow {
   margin-top: 22px;
-} 
+}
 
-.newsError{
+.newsError {
   color: red;
   font-size: 11px !important;
   position: relative;
 }
 
-.newsErrorAr{
+.newsErrorAr {
   color: red;
   font-size: 11px !important;
   position: relative;
 }
+
 /* .crossIcon {
   display: block;
   margin-left: 157px;
@@ -909,16 +978,19 @@ input[type='checkbox']{
   flex-shrink: 0;
   border: none !important;
 }
+
 .react-time-picker {
   display: inline-flex;
   position: relative;
   width: 48%;
 }
+
 svg.crossIcon {
   position: relative;
   left: -77%;
   top: 15%;
 }
+
 .editDate::placeholder {
   width: 79px !important;
 }
@@ -937,45 +1009,51 @@ p.selectLabel {
   margin: 2px;
   color: #8d8d8a;
 }
-.sponsorPlaceholder img{
-width: 40px;
-height: 40px;
+
+.sponsorPlaceholder img {
+  width: 40px;
+  height: 40px;
 
 }
-.parentTemplate{
 
-width: 83%;
-margin: 40px 20px  ;
+.parentTemplate {
+
+  width: 83%;
+  margin: 40px 20px;
 
 }
-.templateHeader{
 
-margin-left: 29px;
-height: 60px;
-background-color: #e9e2e2;
-align-items: center;
-display: flex;
-width: 93.5%;
+.templateHeader {
+
+  margin-left: 29px;
+  height: 60px;
+  background-color: #e9e2e2;
+  align-items: center;
+  display: flex;
+  width: 93.5%;
 }
-.templateInputs{
+
+.templateInputs {
 
   width: 100%;
-margin: 30px 20px; 
+  margin: 30px 20px;
 
 }
-.templateInputs input{
+
+.templateInputs input {
   width: 93.5%;
   margin-left: 12px !important;
-height: 40px;
-border: 1px solid rgb(204, 202, 202);
+  height: 40px;
+  border: 1px solid rgb(204, 202, 202);
 }
+
 .quill {
   height: fit-content;
   margin: 0 19px;
-  min-height: 1400px !important;
   border-radius: 13px !important;
-   width: 95%;
+  width: 95%;
 }
+
 .ql-container.ql-snow {
   min-height: 260px;
 }

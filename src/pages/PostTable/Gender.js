@@ -178,7 +178,7 @@ const Gender = () => {
                   </FloatingLabel>
 
                   <span className="spanForm"> |</span>
-                  <span className={ErrorAbbrev.status ? "success" :"error"}>{ErrorAbbrev.message}</span>
+                  <span className={ErrorAbbrev.status ? "success" : "error"}>{ErrorAbbrev.message}</span>
                 </div>
 
                 <div className="col-sm">
@@ -199,7 +199,7 @@ const Gender = () => {
                       onBlur={() => setErrorAbbrevAr(abbrevar)}
                     />
                   </FloatingLabel>
-                  <span className={ErrorAbbrev.status ? "successAr" :"errorAr"}>{ErrorAbbrevAr.message}</span>
+                  <span className={ErrorAbbrev.status ? "successAr" : "errorAr"}>{ErrorAbbrevAr.message}</span>
                 </div>
               </div>
               <div className="row mainrow">

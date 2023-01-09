@@ -41,26 +41,30 @@ const GeltedAr = [
   { id: "1", value: "حقيقي", label: "حقيقي" },
 ];
 const HorseStatusAll = [
-  { id: "0", value: "false", label: (
-    <div style={{
-      display:'flex',
-      justifyContent:'space-between'
-    }}>
-     <p>false</p> 
-     <p>خاطئة</p> 
+  {
+    id: "0", value: "false", label: (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}>
+        <p>false</p>
+        <p>خاطئة</p>
 
-    </div>
-  ), },
-  { id: "1", value: "true", label: (
-    <div style={{
-      display:'flex',
-      justifyContent:'space-between'
-    }}>
-     <p>true</p> 
-     <p>حقيقي</p> 
+      </div>
+    ),
+  },
+  {
+    id: "1", value: "true", label: (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}>
+        <p>true</p>
+        <p>حقيقي</p>
 
-    </div>
-  ) },
+      </div>
+    )
+  },
 ];
 
 
@@ -87,19 +91,19 @@ const HorseForm = () => {
   const [ErrorRds, setErrorRds] = useState("");
   const [ErrorHorseKind, setErrorHorseKind] = useState("");
   const [ErrorHorseStatus, setErrorHorseStatus] = useState("");
-   const [ErrorPurchase, setErrorPurchase] = useState("");
-   const [ErrorFoal, setErrorFoal] = useState("");
-     const [ErrorBreeder, setErrorBreeder] = useState("");
-     const [ErrorColor, setErrorColor] = useState("");
-     const [ErrorGender, setErrorGender] = useState("");
-     
-     const [ErrorOwner, setErrorOwner] = useState("");
-     const [ErrorTrainer, setErrorTrainer] = useState("");
-     const [ErrorGelded, setErrorGelded] = useState("");
-     const [ErrorNationality, setErrorNationality] = useState("");
-     const [ErrorCreationid, setErrorCreationid] = useState("");
-     const [ErrorRemarksAr, setErrorRemarksAr] = useState("");
-     
+  const [ErrorPurchase, setErrorPurchase] = useState("");
+  const [ErrorFoal, setErrorFoal] = useState("");
+  const [ErrorBreeder, setErrorBreeder] = useState("");
+  const [ErrorColor, setErrorColor] = useState("");
+  const [ErrorGender, setErrorGender] = useState("");
+
+  const [ErrorOwner, setErrorOwner] = useState("");
+  const [ErrorTrainer, setErrorTrainer] = useState("");
+  const [ErrorGelded, setErrorGelded] = useState("");
+  const [ErrorNationality, setErrorNationality] = useState("");
+  const [ErrorCreationid, setErrorCreationid] = useState("");
+  const [ErrorRemarksAr, setErrorRemarksAr] = useState("");
+
   const [ErrorRegistration, setErrorRegistration] = useState("");
   const [SearchAge, setSearchAge] = useState('');
   const [SearchCode, setSearchCode] = useState('');
@@ -118,17 +122,17 @@ const HorseForm = () => {
   const { data: breeder } = useSelector((state) => state.breeder);
   const { data: nationality } = useSelector((state) => state.nationality);
   const { data: gender } = useSelector((state) => state.gender);
-  const { data: HorseKind} = useSelector((state) => state.HorseKind);
+  const { data: HorseKind } = useSelector((state) => state.HorseKind);
 
   useEffect(() => {
-    dispatch(fetchOwner({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchTrainer({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchHorse({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchcolor({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchbreeder({SearchTitle,SearchCode,SearchAge,SearchStartDate,SearchEndStart}));
-    dispatch(fetchnationality({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchgender({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchHorseKind({SearchTitle,SearchCode,SearchAge}));
+    dispatch(fetchOwner({ SearchTitle, SearchCode, SearchAge }));
+    dispatch(fetchTrainer({ SearchTitle, SearchCode, SearchAge }));
+    dispatch(fetchHorse({ SearchTitle, SearchCode, SearchAge }));
+    dispatch(fetchcolor({ SearchTitle, SearchCode, SearchAge }));
+    dispatch(fetchbreeder({ SearchTitle, SearchCode, SearchAge, SearchStartDate, SearchEndStart }));
+    dispatch(fetchnationality({ SearchTitle, SearchCode, SearchAge }));
+    dispatch(fetchgender({ SearchTitle, SearchCode, SearchAge }));
+    dispatch(fetchHorseKind({ SearchTitle, SearchCode, SearchAge }));
   }, [dispatch]);
 
   let horseoptions =
@@ -141,29 +145,29 @@ const HorseForm = () => {
           value: item.NameEn,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
-             <p>{item.NameEn}</p> 
-             <p>{item.NameAr}</p> 
-  
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
+
             </div>
           ),
         };
       })
     );
-    // let horseoptionsAr =
-    // horse === undefined ? (
-    //   <></>
-    // ) : (
-    //   horse.map(function (item) {
-    //     return {
-    //       id: item._id,
-    //       value: item._id,
-    //       label: item.NameAr,
-    //     };
-    //   })
-    // );
+  // let horseoptionsAr =
+  // horse === undefined ? (
+  //   <></>
+  // ) : (
+  //   horse.map(function (item) {
+  //     return {
+  //       id: item._id,
+  //       value: item._id,
+  //       label: item.NameAr,
+  //     };
+  //   })
+  // );
   let horsekindoptions =
     HorseKind === undefined ? (
       <></>
@@ -174,29 +178,29 @@ const HorseForm = () => {
           value: item.NameEn,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
-             <p>{item.NameEn}</p> 
-             <p>{item.NameAr}</p> 
-  
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
+
             </div>
           ),
         };
       })
     );
-    // let horsekindoptionsAr =
-    // HorseKind === undefined ? (
-    //   <></>
-    // ) : (
-    //   HorseKind.map(function (item) {
-    //     return {
-    //       id: item._id,
-    //       value: item._id,
-    //       label: item.NameAr,
-    //     };
-    //   })
-    // );
+  // let horsekindoptionsAr =
+  // HorseKind === undefined ? (
+  //   <></>
+  // ) : (
+  //   HorseKind.map(function (item) {
+  //     return {
+  //       id: item._id,
+  //       value: item._id,
+  //       label: item.NameAr,
+  //     };
+  //   })
+  // );
 
   let traineroption =
     trainer === undefined ? (
@@ -208,29 +212,29 @@ const HorseForm = () => {
           value: item.NameEn,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
-             <p>{item.NameEn}</p> 
-             <p>{item.NameAr}</p> 
-  
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
+
             </div>
           ),
         };
       })
     );
-    // let traineroptionAr =
-    // trainer === undefined ? (
-    //   <></>
-    // ) : (
-    //   trainer.map(function (item) {
-    //     return {
-    //       id: item._id,
-    //       value: item._id,
-    //       label: item.NameAr,
-    //     };
-    //   })
-    // );
+  // let traineroptionAr =
+  // trainer === undefined ? (
+  //   <></>
+  // ) : (
+  //   trainer.map(function (item) {
+  //     return {
+  //       id: item._id,
+  //       value: item._id,
+  //       label: item.NameAr,
+  //     };
+  //   })
+  // );
 
   let owneroption =
     owner === undefined ? (
@@ -242,30 +246,30 @@ const HorseForm = () => {
           value: item.NameEn,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
-             <p>{item.NameEn}</p> 
-             <p>{item.NameAr}</p> 
-  
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
+
             </div>
           ),
         };
       })
     );
 
-    // let owneroptionAr =
-    // owner === undefined ? (
-    //   <></>
-    // ) : (
-    //   owner.map(function (item) {
-    //     return {
-    //       id: item._id,
-    //       value: item._id,
-    //       label: item.NameAr,
-    //     };
-    //   })
-    // );
+  // let owneroptionAr =
+  // owner === undefined ? (
+  //   <></>
+  // ) : (
+  //   owner.map(function (item) {
+  //     return {
+  //       id: item._id,
+  //       value: item._id,
+  //       label: item.NameAr,
+  //     };
+  //   })
+  // );
   let AllColor =
     color === undefined ? (
       <></>
@@ -276,29 +280,29 @@ const HorseForm = () => {
           value: item.NameEn,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
-             <p>{item.NameEn}</p> 
-             <p>{item.NameAr}</p> 
-  
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
+
             </div>
           ),
         };
       })
     );
-    // let AllColorAr =
-    // color === undefined ? (
-    //   <></>
-    // ) : (
-    //   color.map(function (item) {
-    //     return {
-    //       id: item._id,
-    //       value: item._id,
-    //       label: item.NameAr,
-    //     };
-    //   })
-    // );
+  // let AllColorAr =
+  // color === undefined ? (
+  //   <></>
+  // ) : (
+  //   color.map(function (item) {
+  //     return {
+  //       id: item._id,
+  //       value: item._id,
+  //       label: item.NameAr,
+  //     };
+  //   })
+  // );
 
   let AllBreeder =
     breeder === undefined ? (
@@ -310,29 +314,29 @@ const HorseForm = () => {
           value: item.NameEn,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
-             <p>{item.NameEn}</p> 
-             <p>{item.NameAr}</p> 
-  
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
+
             </div>
           ),
         };
       })
     );
-    // let AllBreederAr =
-    // breeder === undefined ? (
-    //   <></>
-    // ) : (
-    //   breeder.map(function (item) {
-    //     return {
-    //       id: item._id,
-    //       value: item._id,
-    //       label: item.NameAr,
-    //     };
-    //   })
-    // );
+  // let AllBreederAr =
+  // breeder === undefined ? (
+  //   <></>
+  // ) : (
+  //   breeder.map(function (item) {
+  //     return {
+  //       id: item._id,
+  //       value: item._id,
+  //       label: item.NameAr,
+  //     };
+  //   })
+  // );
 
   let AllNationality =
     nationality === undefined ? (
@@ -344,31 +348,31 @@ const HorseForm = () => {
           value: item.NameEn,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
-             <p>{item.NameEn}</p> 
-             <p>{item.NameAr}</p> 
-  
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
+
             </div>
           ),
         };
       })
     );
-    // let AllNationalityAr =
-    // nationality === undefined ? (
-    //   <></>
-    // ) : (
-    //   nationality.map(function (item) {
-    //     return {
-    //       id: item._id,
-    //       value: item._id,
-    //       label: item.NameAr,
-    //     };
-    //   })
-    // );
+  // let AllNationalityAr =
+  // nationality === undefined ? (
+  //   <></>
+  // ) : (
+  //   nationality.map(function (item) {
+  //     return {
+  //       id: item._id,
+  //       value: item._id,
+  //       label: item.NameAr,
+  //     };
+  //   })
+  // );
 
-    let AllGender =
+  let AllGender =
     gender === undefined ? (
       <></>
     ) : (
@@ -378,96 +382,96 @@ const HorseForm = () => {
           value: item.NameEn,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
-             <p>{item.NameEn}</p> 
-             <p>{item.NameAr}</p> 
-  
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
+
             </div>
           ),
         };
       })
     );
-    // let AllGenderAr =
-    // gender === undefined ? (
-    //   <></>
-    // ) : (
-    //   gender.map(function (item) {
-    //     return {
-    //       id: item._id,
-    //       value: item._id,
-    //       label: item.NameAr,
-    //     };
-    //   })
-    // );
+  // let AllGenderAr =
+  // gender === undefined ? (
+  //   <></>
+  // ) : (
+  //   gender.map(function (item) {
+  //     return {
+  //       id: item._id,
+  //       value: item._id,
+  //       label: item.NameAr,
+  //     };
+  //   })
+  // );
 
-    
-    // Modal functionalities End Here
 
-    const [showBreeder, setShowBreeder] = useState(false);
-    const [showColor, setShowColor] = useState(false);
-    const [showGender, setShowGender] = useState(false);
-    const [showActiveOwner, setShowActiveOwner] = useState(false);
-    const [showActiveTrainer, setShowActiveTrainer] = useState(false);
-    const [showActivenationality, setShowActivenationality] = useState(false);
-    const [showHorseKind, setShowHorseKind] = useState(false);
-    const [isLoading, setisLoading] = useState(false);
+  // Modal functionalities End Here
 
-    
- 
-    const handleCloseBreeder = () => setShowBreeder(false);
-    const handleCloseColor = () => setShowColor(false);
-    const handleCloseGender = () => setShowGender(false);
-    const handleCloseActiveOwner = () => setShowActiveOwner(false);
-    const handleCloseActiveTrainer= () => setShowActiveTrainer(false);
-    const handleCloseActivenationality= () => setShowActivenationality(false);
-    const handleCloseHorseKind= () => setShowHorseKind(false);
+  const [showBreeder, setShowBreeder] = useState(false);
+  const [showColor, setShowColor] = useState(false);
+  const [showGender, setShowGender] = useState(false);
+  const [showActiveOwner, setShowActiveOwner] = useState(false);
+  const [showActiveTrainer, setShowActiveTrainer] = useState(false);
+  const [showActivenationality, setShowActivenationality] = useState(false);
+  const [showHorseKind, setShowHorseKind] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
 
-    const handleShowBreeder = async () => {
-      await setShowBreeder(true);
-    };
-  
-    const handleShowColor = async () => {
-      await setShowColor(true);
-    };
-  
-    const handleShowGender = async () => {
-      await setShowGender(true);
-    };
-  
-    const handleShowActiveOwner = async () => {
-      await setShowActiveOwner(true);
-    };
-  
-    const handleShowActiveTrainer = async () => {
-      await setShowActiveTrainer(true);
-    };
 
-    const handleShowActivenationality = async () => {
-      await setShowActivenationality(true);
-    };
 
-    const handleShowHorseKind = async () => {
-      await setShowHorseKind(true);
-    };
-  
-  
-    const FetchNew = () => {
-      dispatch(fetchOwner({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchTrainer({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchHorse({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchcolor({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchbreeder({SearchTitle,SearchCode,SearchAge,SearchStartDate,SearchEndStart}));
-    dispatch(fetchnationality({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchgender({SearchTitle,SearchCode,SearchAge}));
-    dispatch(fetchHorseKind({SearchTitle,SearchCode,SearchAge}));
+  const handleCloseBreeder = () => setShowBreeder(false);
+  const handleCloseColor = () => setShowColor(false);
+  const handleCloseGender = () => setShowGender(false);
+  const handleCloseActiveOwner = () => setShowActiveOwner(false);
+  const handleCloseActiveTrainer = () => setShowActiveTrainer(false);
+  const handleCloseActivenationality = () => setShowActivenationality(false);
+  const handleCloseHorseKind = () => setShowHorseKind(false);
 
-    };
-    // Modal functionalities End Here
+  const handleShowBreeder = async () => {
+    await setShowBreeder(true);
+  };
+
+  const handleShowColor = async () => {
+    await setShowColor(true);
+  };
+
+  const handleShowGender = async () => {
+    await setShowGender(true);
+  };
+
+  const handleShowActiveOwner = async () => {
+    await setShowActiveOwner(true);
+  };
+
+  const handleShowActiveTrainer = async () => {
+    await setShowActiveTrainer(true);
+  };
+
+  const handleShowActivenationality = async () => {
+    await setShowActivenationality(true);
+  };
+
+  const handleShowHorseKind = async () => {
+    await setShowHorseKind(true);
+  };
+
+
+  const FetchNew = () => {
+    dispatch(fetchOwner({ SearchTitle, SearchCode, SearchAge }));
+    dispatch(fetchTrainer({ SearchTitle, SearchCode, SearchAge }));
+    dispatch(fetchHorse({ SearchTitle, SearchCode, SearchAge }));
+    dispatch(fetchcolor({ SearchTitle, SearchCode, SearchAge }));
+    dispatch(fetchbreeder({ SearchTitle, SearchCode, SearchAge, SearchStartDate, SearchEndStart }));
+    dispatch(fetchnationality({ SearchTitle, SearchCode, SearchAge }));
+    dispatch(fetchgender({ SearchTitle, SearchCode, SearchAge }));
+    dispatch(fetchHorseKind({ SearchTitle, SearchCode, SearchAge }));
+
+  };
+  // Modal functionalities End Here
 
   const [ActiveOwner, setActiveOwner] = useState("");
- 
+
   const [NameEn, setNameEn] = useState("");
   const [NameAr, setNameAr] = useState("");
   const [Owner, setOwner] = useState("");
@@ -495,7 +499,7 @@ const HorseForm = () => {
   const [PurchasePrice, setPurchasePrice] = useState("");
   const [Rds, setRds] = useState("");
   const [KindHorse, setKindHorse] = useState("");
-  const [Height,setHeight] = useState("");
+  const [Height, setHeight] = useState("");
   const [preview, setPreview] = useState();
 
 
@@ -507,7 +511,7 @@ const HorseForm = () => {
       formData.append("image", image);
       formData.append("NameEn", NameEn);
       formData.append("DOB", DOB);
-      formData.append("Height",Height)
+      formData.append("Height", Height)
 
       formData.append("NameAr", NameAr + ' ');
       formData.append("RemarksEn", RemarksEn);
@@ -522,15 +526,15 @@ const HorseForm = () => {
       formData.append("ColorID", ColorID.id);
       formData.append("KindHorse", KindHorse.id);
       formData.append("Dam", Dam === '' ? '' : Dam.id);
-      formData.append("Sire",Sire === '' ?  '' : Sire.id);
-      formData.append("GSire",GSire === '' ?  '' : GSire.id);
+      formData.append("Sire", Sire === '' ? '' : Sire.id);
+      formData.append("GSire", GSire === '' ? '' : GSire.id);
       // formData.append("WinningAmount", WinningAmount);
       // formData.append("OverAllRating", OverAllRating);
       formData.append("Foal", Foal.value);
 
       formData.append("Rds", Rds.value);
       formData.append("STARS", STARS);
-      formData.append("isGelded", isGelted.id); 
+      formData.append("isGelded", isGelted.id);
       formData.append("NationalityID", NationalityId.id);
       formData.append("CreationId", NationalityId.id);
       formData.append("PurchasePrice", PurchasePrice);
@@ -570,40 +574,40 @@ const HorseForm = () => {
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrl);
   }, [image]);
-  
+
   const onSelectFile = (e) => {
     setimage(e.target.files[0]);
-  
+
   };
   const handlePreview = () => {
     setimage()
-  document.getElementById("file").value=""
+    document.getElementById("file").value = ""
   };
 
-    var today = new Date();
+  var today = new Date();
 
-    
-    const data1 = JSON.stringify(
-      TextInputValidation("en", NameEn, "Horse English Name ")
-    );
-    const obj = JSON.parse(data1);
-    
-    const data2 = JSON.stringify(
-      TextInputValidation("ar", NameAr, "Horse Arabic Name ")
-    );
-    const objAr = JSON.parse(data2);
 
- 
-    const data3 = JSON.stringify(
-      TextInputValidation("en", RemarksEn, "Horse Remarks English ")
-    );
-    const remark = JSON.parse(data3);
-    
-    const data4 = JSON.stringify(
-      TextInputValidation("ar", RemarksAr, "Horse Remarks Arabic  ")
-    );
-    const remarkar = JSON.parse(data4);
-    
+  const data1 = JSON.stringify(
+    TextInputValidation("en", NameEn, "Horse English Name ")
+  );
+  const obj = JSON.parse(data1);
+
+  const data2 = JSON.stringify(
+    TextInputValidation("ar", NameAr, "Horse Arabic Name ")
+  );
+  const objAr = JSON.parse(data2);
+
+
+  const data3 = JSON.stringify(
+    TextInputValidation("en", RemarksEn, "Horse Remarks English ")
+  );
+  const remark = JSON.parse(data3);
+
+  const data4 = JSON.stringify(
+    TextInputValidation("ar", RemarksAr, "Horse Remarks Arabic  ")
+  );
+  const remarkar = JSON.parse(data4);
+
   return (
     <Fragment>
       <div className="page">
@@ -627,11 +631,11 @@ const HorseForm = () => {
                       value={NameEn}
                       onBlur={() => setError(obj)}
                     >
-                      <Form.Control type="text" placeholder=" Horse Name" required/>
+                      <Form.Control type="text" placeholder=" Horse Name" required />
                     </FloatingLabel>
 
                     <span className="spanForm"> |</span>
-                    <span className={Error.status ? "success" :"error"}>{Error.message}</span>
+                    <span className={Error.status ? "success" : "error"}>{Error.message}</span>
                   </div>
 
                   <div className="col-sm">
@@ -646,13 +650,13 @@ const HorseForm = () => {
                       onBlur={() => setErrorAr(objAr)}
 
                     >
-                      <Form.Control type="text" placeholder="اسم" required/>
+                      <Form.Control type="text" placeholder="اسم" required />
                     </FloatingLabel>
-                    <span className={ErrorAr.status ? "successAr" :"errorAr"}>{ErrorAr.message}</span>
+                    <span className={ErrorAr.status ? "successAr" : "errorAr"}>{ErrorAr.message}</span>
                   </div>
                 </div>
                 <div className="row mainrow">
-                <div className="col-sm">
+                  <div className="col-sm">
                     <DatePicker
                       onChange={setDOB}
                       value={DOB}
@@ -663,17 +667,17 @@ const HorseForm = () => {
                       onBlur={() =>
                         DOB === ""
                           ? setErrorRegistration(
-                              "Horse Date of Birth is required"
-                            )
+                            "Horse Date of Birth is required"
+                          )
                           : setErrorRegistration("Horse Date of Birth is Validated")
                       }
                     />
                     <span className="spanForm"> |</span>
-                    <span className={DOB === ""? "error" :"success"}>{ErrorRegistration}</span>
+                    <span className={DOB === "" ? "error" : "success"}>{ErrorRegistration}</span>
                   </div>
 
                   <div className="col-sm" style={{ direction: "rtl" }}>
-                  <DatePicker
+                    <DatePicker
                       onChange={setDOB}
                       value={DOB}
                       dayPlaceholder=""
@@ -701,10 +705,10 @@ const HorseForm = () => {
                       classNamePrefix="select"
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={(e) => Foal === "" ?  setErrorFoal("Foal is required "):setErrorFoal("Foal is Validated ")}
+                      onBlur={(e) => Foal === "" ? setErrorFoal("Foal is required ") : setErrorFoal("Foal is Validated ")}
                     />
                     <span className="spanForm"> |</span>
-                    <span className={Foal === "" ? "error": "success" }>{ErrorFoal}</span>
+                    <span className={Foal === "" ? "error" : "success"}>{ErrorFoal}</span>
                   </div>
                   <div className="col-sm">
                     <Select
@@ -717,10 +721,10 @@ const HorseForm = () => {
                       options={Foals}
                       isClearable={true}
                       isSearchable={true}
-      
-                   
+
+
                     />
-                
+
                   </div>
 
                 </div>
@@ -738,7 +742,7 @@ const HorseForm = () => {
                     >
                       <Form.Control type="text" placeholder="Details" />
                     </FloatingLabel>
-<span className={ErrorRemarks.status ? "success" :"error"}>{ErrorRemarks.message}</span>
+                    <span className={ErrorRemarks.status ? "success" : "error"}>{ErrorRemarks.message}</span>
                     <span className="spanForm"> |</span>
                   </div>
 
@@ -754,7 +758,7 @@ const HorseForm = () => {
                     >
                       <Form.Control type="text" placeholder="ملاحظات" />
                     </FloatingLabel>
-              <span className={ErrorRemarksAr.status ? "successAr" :"errorAr"}>{ErrorRemarksAr.message}</span>
+                    <span className={ErrorRemarksAr.status ? "successAr" : "errorAr"}>{ErrorRemarksAr.message}</span>
                   </div>
                 </div>
                 <div className="row mainrow">
@@ -766,16 +770,16 @@ const HorseForm = () => {
                       onChange={(e) => setHeight(e.target.value)}
                       name="Name"
                       value={Height}
-                      onBlur={() => Height === "" ?  setErrorHeight("Horse Height is required "):setErrorHeight("Horse Height is Validated ")}
-                   
+                      onBlur={() => Height === "" ? setErrorHeight("Horse Height is required ") : setErrorHeight("Horse Height is Validated ")}
+
                     >
-                      <Form.Control type="number" placeholder="Height" required/>
+                      <Form.Control type="number" placeholder="Height" required />
                     </FloatingLabel>
-<span className={Height === "" ? "error":"success"}>{ErrorHeight}</span>
-                    
+                    <span className={Height === "" ? "error" : "success"}>{ErrorHeight}</span>
+
                   </div>
 
-              
+
                 </div>
 
                 <div className="row mainrow">
@@ -787,29 +791,29 @@ const HorseForm = () => {
                       options={horsekindoptions}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => setKindHorse === "" ?  setErrorHorseKind("Horse Kind is required "):setErrorHorseKind("Horse Kind is Validated ")}
-                      
+                      onBlur={() => setKindHorse === "" ? setErrorHorseKind("Horse Kind is required ") : setErrorHorseKind("Horse Kind is Validated ")}
+
                     />
-                     <span className="spanForm">
+                    <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
                         <span className="addmore" onClick={handleShowHorseKind}>
-                            +
-                          </span>
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
                       </OverlayTrigger>{" "}
-                      
+
                     </span>
-                    <span className={KindHorse === "" ? "error":"success"}>{ErrorHorseKind}</span>
+                    <span className={KindHorse === "" ? "error" : "success"}>{ErrorHorseKind}</span>
                   </div>
                   {/* <div className="col-sm">
                     <Select
@@ -834,11 +838,11 @@ const HorseForm = () => {
                       options={HorseStatusAll}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => HorseStatus === "" ?  setErrorHorseStatus("Horse Status is required "):setErrorHorseStatus("Horse Status is Validated")}
-                     
-                      
+                      onBlur={() => HorseStatus === "" ? setErrorHorseStatus("Horse Status is required ") : setErrorHorseStatus("Horse Status is Validated")}
+
+
                     />
-                    <span className={HorseStatus === "" ? "error":"success"}>{ErrorHorseStatus}</span>
+                    <span className={HorseStatus === "" ? "error" : "success"}>{ErrorHorseStatus}</span>
                   </div>
                   {/* <div className="col-sm">
                     <Select
@@ -857,14 +861,14 @@ const HorseForm = () => {
                   <div className="starstyle">
                     <p>Stars</p>
                     <div className="starcss">
-                    <ReactStars
-                      count={5}
-                      onChange={setSTARS}
-                      size={44}
-                      a11y= {true}
-                      isHalf= {true}
-                      activeColor="#19469D "
-                    />
+                      <ReactStars
+                        count={5}
+                        onChange={setSTARS}
+                        size={44}
+                        a11y={true}
+                        isHalf={true}
+                        activeColor="#19469D "
+                      />
                       {/* <Rating
                         fractions={2}
                         stop={5}
@@ -882,8 +886,8 @@ const HorseForm = () => {
                       className="mb-3"
                       onChange={(e) => setPurchasePrice(e.target.value)}
                       value={PurchasePrice}
-                      onBlur={() => PurchasePrice === "" ?  setErrorPurchase("Horse Purchase Price is required "):setErrorPurchase("Horse Purchase Price is Validated  ")}
-                      
+                      onBlur={() => PurchasePrice === "" ? setErrorPurchase("Horse Purchase Price is required ") : setErrorPurchase("Horse Purchase Price is Validated  ")}
+
                     >
                       <Form.Control
                         type="number"
@@ -892,7 +896,7 @@ const HorseForm = () => {
                         required
                       />
                     </FloatingLabel>
-                    <span className={PurchasePrice === "" ? "error":"success"}>{ErrorPurchase}</span>
+                    <span className={PurchasePrice === "" ? "error" : "success"}>{ErrorPurchase}</span>
 
                     {/* <span className="spanForm"> |</span> */}
                   </div>
@@ -919,11 +923,11 @@ const HorseForm = () => {
                       options={Gelted}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => Rds === "" ?  setErrorRds("Horse Rds is required "):setErrorRds("Horse Rds is Validated")}
+                      onBlur={() => Rds === "" ? setErrorRds("Horse Rds is required ") : setErrorRds("Horse Rds is Validated")}
 
                     />
                     {/* <span className="spanForm"> |</span> */}
-                 <span className={Rds === "" ? "error":"success"}>{ErrorRds}</span>
+                    <span className={Rds === "" ? "error" : "success"}>{ErrorRds}</span>
                   </div>
                   {/* <div className="col-sm">
                     <Select
@@ -948,27 +952,27 @@ const HorseForm = () => {
                       options={AllBreeder}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => Breeder === "" ?  setErrorBreeder("Horse Breeder is required "):setErrorBreeder(" Horse Breeder is Validated")}
+                      onBlur={() => Breeder === "" ? setErrorBreeder("Horse Breeder is required ") : setErrorBreeder(" Horse Breeder is Validated")}
 
                     />
-                     <span className="spanForm">
+                    <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
                         <span className="addmore" onClick={handleShowBreeder}>
-                            +
-                          </span>
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
-                    >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
                       </OverlayTrigger>{" "}
-                      
+
                     </span>
                     <span className={Breeder === "" ? "error" : "success"}>{ErrorBreeder}</span>
                   </div>
@@ -994,27 +998,27 @@ const HorseForm = () => {
                       options={AllColor}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => ColorID === "" ?  setErrorColor("Horse Color is required "):setErrorColor("Horse Color is Validated")}
+                      onBlur={() => ColorID === "" ? setErrorColor("Horse Color is required ") : setErrorColor("Horse Color is Validated")}
 
                     />
-                     <span className="spanForm">
+                    <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
                         <span className="addmore" onClick={handleShowColor}>
-                            +
-                          </span>
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
                       </OverlayTrigger>{" "}
-                      
+
                     </span>
                     <span className={ColorID === "" ? "error" : "success"}>{ErrorColor}</span>
                   </div>
@@ -1032,7 +1036,7 @@ const HorseForm = () => {
                     />
                   </div> */}
                 </div>
-               
+
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
@@ -1042,30 +1046,30 @@ const HorseForm = () => {
                       options={AllGender}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => Sex === "" ?  setErrorGender("Horse Gender is required "):setErrorGender("Horse Gender is Validated ")}
+                      onBlur={() => Sex === "" ? setErrorGender("Horse Gender is required ") : setErrorGender("Horse Gender is Validated ")}
 
-                    
+
                     />
-                     <span className="spanForm">
+                    <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
                         <span className="addmore" onClick={handleShowGender}>
-                            +
-                          </span>
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
                       </OverlayTrigger>{" "}
-                      
+
                     </span>
-                    <span className={Sex === "" ? "error": "success"}>{ErrorGender}</span>
+                    <span className={Sex === "" ? "error" : "success"}>{ErrorGender}</span>
                   </div>
                   {/* <div className="col-sm">
                     <Select
@@ -1201,29 +1205,29 @@ const HorseForm = () => {
                       options={owneroption}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => ActiveOwner === "" ?  setErrorOwner("Horse Owner is required "):setErrorOwner("Horse Owner is Validated ")}
+                      onBlur={() => ActiveOwner === "" ? setErrorOwner("Horse Owner is required ") : setErrorOwner("Horse Owner is Validated ")}
 
-                    /> 
-                     <span className="spanForm">
+                    />
+                    <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
                         <span className="addmore" onClick={handleShowActiveOwner}>
-                            +
-                          </span>
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
                       </OverlayTrigger>{" "}
-                      
+
                     </span>
-                    <span className={ActiveOwner === "" ? "error" :"success"}>{ErrorOwner}</span>
+                    <span className={ActiveOwner === "" ? "error" : "success"}>{ErrorOwner}</span>
                   </div>
 
                   {/* <div className="col-sm">
@@ -1240,7 +1244,7 @@ const HorseForm = () => {
                       isSearchable={true}
                     />
                   </div> */}
-                </div>              
+                </div>
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
@@ -1250,11 +1254,11 @@ const HorseForm = () => {
                       options={Gelted}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => isGelted === "" ?  setErrorGelded("Gelded is required "):setErrorGelded("Gelded is Validated")}
+                      onBlur={() => isGelted === "" ? setErrorGelded("Gelded is required ") : setErrorGelded("Gelded is Validated")}
 
                     />
                     {/* <span className="spanForm"> |</span> */}
-                    <span className={isGelted === "" ? "error" :"success" }>{ErrorGelded}</span>
+                    <span className={isGelted === "" ? "error" : "success"}>{ErrorGelded}</span>
                   </div>
                   {/* <div className="col-sm">
                     <Select
@@ -1278,31 +1282,31 @@ const HorseForm = () => {
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
-                       onBlur={() => NationalityId === "" ?  setErrorNationality("Horse Nationality is required "):setErrorNationality("Horse Nationality is Validated")}
+                      onBlur={() => NationalityId === "" ? setErrorNationality("Horse Nationality is required ") : setErrorNationality("Horse Nationality is Validated")}
                     />
                     <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
                         <span className="addmore" onClick={handleShowActivenationality}>
-                            +
-                          </span>
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
                       </OverlayTrigger>
-                      
+
                     </span>
-                    <span className={NationalityId === "" ?  "error": "success"} >{ErrorNationality}</span>
+                    <span className={NationalityId === "" ? "error" : "success"} >{ErrorNationality}</span>
 
                   </div>
-{/* 
+                  {/* 
                   <div className="col-sm">
                     <Select
                       className="selectdir"
@@ -1329,13 +1333,13 @@ const HorseForm = () => {
                       options={AllNationality}
                       isClearable={true}
                       isSearchable={true}
-                      onBlur={() => CreationId === "" ?  setErrorCreationid("Horse Creation id is required "):setErrorCreationid("Horse Creation id is Validated ")}
+                      onBlur={() => CreationId === "" ? setErrorCreationid("Horse Creation id is required ") : setErrorCreationid("Horse Creation id is Validated ")}
                     />
-                    <span className={CreationId === "" ?  "error": "success"} >{ErrorCreationid}</span>
+                    <span className={CreationId === "" ? "error" : "success"} >{ErrorCreationid}</span>
 
-  
+
                   </div>
-{/* 
+                  {/* 
                   <div className="col-sm">
                     <Select
                       className="selectdir"
@@ -1362,31 +1366,31 @@ const HorseForm = () => {
                       options={traineroption}
                       isClearable={true}
                       isSearchable={true}
-                      
-        onBlur={() => ActiveTrainer === "" ?  setErrorTrainer("Horse Trainer is required "):setErrorTrainer("Horse Trainer is Validated ")}
+
+                      onBlur={() => ActiveTrainer === "" ? setErrorTrainer("Horse Trainer is required ") : setErrorTrainer("Horse Trainer is Validated ")}
                     />
                     <span className="spanForm">
                       <OverlayTrigger
                         overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
                       >
                         <span className="addmore" onClick={handleShowActiveTrainer}>
-                            +
-                          </span>
+                          +
+                        </span>
                       </OverlayTrigger>
                       <OverlayTrigger
                         overlay={
                           <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
                         }
                       >
-                         <span className="addmore" onClick={FetchNew}>
-                            <AiOutlineReload />
-                          </span>
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
                       </OverlayTrigger>{" "}
-                      
+
                     </span>
-                    <span className={ActiveTrainer === "" ?  "error": "success"}>{ErrorTrainer}</span>
+                    <span className={ActiveTrainer === "" ? "error" : "success"}>{ErrorTrainer}</span>
                   </div>
-{/* 
+                  {/* 
                   <div className="col-sm">
                     <Select
                       className="selectdir"
@@ -1406,7 +1410,7 @@ const HorseForm = () => {
 
                 <div className="ButtonSection">
                   <div>
-                  <label className="Multipleownerlabel">
+                    <label className="Multipleownerlabel">
                       Select Horse image
                     </label>
                     <input
@@ -1415,16 +1419,16 @@ const HorseForm = () => {
                       className="formInput"
                       id="file"
                     />
-                   {image && (
+                    {image && (
                       <>
-                       <ImCross onClick={handlePreview} className="crossIcon"/>
-                       <img src={preview} className="PreviewImage" alt="" />
+                        <ImCross onClick={handlePreview} className="crossIcon" />
+                        <img src={preview} className="PreviewImage" alt="" />
                       </>
                     )}
                   </div>
                   <button
                     type="submit"
-                     disabled={isLoading}
+                    disabled={isLoading}
                     className="SubmitButton"
                   >
                     Add Horse

@@ -3,7 +3,6 @@ import "../../Components/CSS/forms.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
-
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 
@@ -11,8 +10,8 @@ const EditTrackCondition = () => {
     const history = useNavigate();
     const { state } = useLocation();
 
-    const { colorid } = state;
-    console.log(colorid);
+    const { conditionid } = state;
+    console.log(conditionid);
 
     const [state1, setState] = useState({
         NameEn: '',
@@ -25,19 +24,19 @@ const EditTrackCondition = () => {
 
 
     useEffect(() => {
-        if (colorid) {
+        if (conditionid) {
             setState({
-                NameEn: colorid.NameEn,
-                NameAr: colorid.NameAr,
-                shortCode: colorid.shortCode,
-                AbbrevEn: colorid.AbbrevEn,
-                AbbrevAr: colorid.AbbrevAr,
+                NameEn: conditionid.NameEn,
+                NameAr: conditionid.NameAr,
+                shortCode: conditionid.shortCode,
+                AbbrevEn: conditionid.AbbrevEn,
+                AbbrevAr: conditionid.AbbrevAr,
 
             });
         } else {
             alert('No Data')
         }
-    }, [colorid]);
+    }, [conditionid]);
 
 
     const submit = async (event) => {
@@ -51,8 +50,8 @@ const EditTrackCondition = () => {
             formData.append("AbbrevAr", state1.AbbrevAr);
             formData.append("shortCode", state1.shortCode);
 
-            await axios.put(`${window.env.API_URL}/updateTrackCondition/${colorid._id}`, formData);
-            history("/colorlist");
+            await axios.put(`${window.env.API_URL}/updateTrackCondition/${conditionid._id}`, formData);
+            history("/trackconditionlist");
             swal({
                 title: "Success!",
                 text: "Data has been Updated successfully ",

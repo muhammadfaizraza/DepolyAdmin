@@ -82,7 +82,7 @@ const TrackCondtionTable = () => {
 
                     if (willDelete) {
                         await axios.delete(
-                            `${window.env.API_URL}/softdeleteHorseKind/${Id}`
+                            `${window.env.API_URL}/softdeleteTrackCondition/${Id}`
                         );
                         swal("Data has been Deleted successfully ", {
                             icon: "success",

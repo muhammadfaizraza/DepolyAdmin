@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
-import { fetchhorsekindshortcode } from "../../redux/getShortCode/gethorsekindshortcode";
+import { fetchtrackconditionshortcode } from "../../redux/getShortCode/gettrackconditionshortcode";
 import { useDispatch, useSelector } from "react-redux";
 
 const TrackCondition = () => {
@@ -35,7 +35,7 @@ const TrackCondition = () => {
                 shortCode: trackconditionshortcode.length === 0 ? 10 : trackconditionshortcode[0].maxshortCode + 1,
             });
         } else {
-            // setState.shortCode('10')
+            setState.shortCode('10')
         }
     }, [trackconditionshortcode]);
 
@@ -43,7 +43,7 @@ const TrackCondition = () => {
 
 
     useEffect(() => {
-        dispatch(fetchhorsekindshortcode());
+        dispatch(fetchtrackconditionshortcode());
     }, [dispatch])
 
 
@@ -64,19 +64,19 @@ const TrackCondition = () => {
                 icon: "success",
                 button: "OK",
             });
-            if (pathname === "/horsekindform") {
-                history("/horsekind");
+            if (pathname === "/trackcondition") {
+                history("/trackconditionlist");
             }
             setisLoading(false)
         } catch (error) {
             const err = error.response.data.message;
-            // const err1 = error.response.data.message[1];
-            // const err2 = error.response.data.message[2];
+            const err1 = error.response.data.message[1];
+            const err2 = error.response.data.message[2];
 
             console.log(err, 'dadasd')
             swal({
                 title: "Error!",
-                text: err,
+                text: err, err1, err2,
                 icon: "error",
                 button: "OK",
             });

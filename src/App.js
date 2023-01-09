@@ -163,6 +163,7 @@ import FinalPositionTable from "./pages/GetTable/FinalPositionTable";
 import EditFinalPosition from "./pages/UpdateTable/EditFinalPosition";
 import Email from "./Components/Template/Email";
 import TrackCondition from "./pages/PostTable/TrackCondition";
+import EditTrackCondition from "./pages/UpdateTable/EditTrackCondition";
 
 
 function App() {
@@ -332,6 +333,7 @@ function App() {
                     <Route path="*" element={<NotFound />} />
 
                     {/* Edit Pages */}
+                    <Route path="/edittrackcondition" element={<EditTrackCondition />} />
                     <Route path="/editfinalposition" element={<EditFinalPosition />} />
                     <Route path="/editjockey" element={<EditJockey />} />
                     <Route path="/editracecourse" element={<EditRacecourse />} />

@@ -181,7 +181,20 @@ const Races = () => {
           swal("Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchrace());
+          dispatch(fetchrace({MeetingType,
+            MeetingCode,
+            RaceName,
+            TrackLength,
+            Ground,
+            DescriptionAr,
+            DescriptionEn,
+            RaceType,
+            RaceStatus,
+            RaceCourse,
+            WeatherType,
+            WeatherDegree,
+            Competition,
+            Sponsor,}));
         } else {
           swal("Your data is safe!");
         }

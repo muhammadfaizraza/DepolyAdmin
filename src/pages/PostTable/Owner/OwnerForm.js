@@ -4,8 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 import DatePicker from "react-date-picker";
-import { fetchcolor } from "../../redux/getReducer/getColor";
-import { fetchnationality } from "../../redux/getReducer/getNationality";
+import { fetchcolor } from "../../../redux/getReducer/getColor";
+import { fetchnationality } from "../../../redux/getReducer/getNationality";
 import Select from "react-select";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -13,10 +13,10 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { AiOutlineReload } from "react-icons/ai";
 import { Modal } from "react-bootstrap";
-import TextInputValidation from "../../utils/TextInputValidation";
+import TextInputValidation from "../../../utils/TextInputValidation";
 import { ImCross } from 'react-icons/im';
 
-import NationalityPopup from "./Nationality";
+import NationalityPopup from "../Nationality";
 
 const OwnerForm = () => {
   //for error
@@ -107,7 +107,7 @@ const OwnerForm = () => {
     setisLoading(true)
     try {
       const formData = new FormData();
-      formData.append("Ownerimage", Ownerimage);
+      // formData.append("Ownerimage", Ownerimage);
       formData.append("NameEn", NameEn);
       formData.append("NameAr", NameAr);
       formData.append("TitleEn", TitleEn);
@@ -117,15 +117,21 @@ const OwnerForm = () => {
       formData.append("NationalityID", NationalityID.id);
       formData.append("RegistrationDate", RegistrationDate);
       formData.append("image", image);
-      await axios.post(`${window.env.API_URL}/createowner`, formData);
+     const response = await axios.post(`${window.env.API_URL}/createowner`, formData);
       swal({
         title: "Success!",
         text: "Data has been added successfully",
         icon: "success",
         button: "OK",
       });
+      const OwnerId = response.data.data._id;
+     
       if (pathname === "/ownerform") {
-        history("/owner");
+        history("/ownerSilkColor", {
+          state: {
+            OwnerId: OwnerId,
+          },
+        });
       }
       setisLoading(false)
     } catch (error) {
@@ -410,16 +416,7 @@ const OwnerForm = () => {
                 </div>
 
                 <div className="SelectOwnerimage">
-                  <label className="Multiplecaplabel">
-                    Select Multiple Caps
-                  </label>
-                  <input
-                    type="file"
-                    name="image"
-                    accept="image/*"
-                    onChange={onSelectFile1}
-                    multiple
-                  />
+                  
                   <div className="ButtonSection">
                     <div>
                       <label className="Multipleownerlabel">
@@ -445,7 +442,7 @@ const OwnerForm = () => {
                       className="SubmitButton"
                       disabled={isLoading}
                     >
-                      Add Owner
+                      Next
                     </button>
                   </div>
                 </div>

@@ -29,3 +29,110 @@ a.page-item1 {
 .forflex{
     display: flex;
 }
+
+.addsectionimage {
+    padding: 2rem 0;
+  }
+  
+
+
+
+  .AddImages1 {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px dotted black;
+    border-radius: 20px;
+    width: 10rem;
+    height: 10rem;
+    cursor: pointer;
+    font-size: large;
+  }
+  
+  .AddImages1 span {
+    font-weight: lighter;
+    font-size: small;
+    padding-top: 0.5rem;
+  }
+  
+  .AddImages1 input {
+    display: none;
+  }
+  
+  img {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .images111 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .image111 {
+    margin: 1rem 0.5rem;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  }
+  
+  .image111 button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    border: none;
+    color: white;
+    background-color: lightcoral;
+  }
+  
+  .image111 button:hover {
+    background-color: red;
+  }
+  
+  .image111 p {
+    padding: 0 0.5rem;
+    margin: 0;
+  }
+  
+  .upload-btn111 {
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    border: none;
+    border-radius: 20px;
+    width: 10rem;
+    height: 3rem;
+    color: white;
+    background-color: green;
+  }
+  
+  label:hover,
+  .upload-btn:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  }
+  
+  .error11 {
+    text-align: center;
+  }
+  
+  .error span {
+    color: red;
+  }
+
+  .skipbutton{
+    float: right;
+    width: 186px;
+  height: 51px;
+  background: linear-gradient(89.98deg, #19469D 23.67%, #00A3FF 97.94%);
+  border-radius: 20px;
+  color: white;
+  border: none;
+  font-size: 16px;
+  margin: 20px;
+  }

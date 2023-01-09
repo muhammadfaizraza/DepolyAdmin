@@ -25,7 +25,7 @@ import TextInputValidation from "../../utils/TextInputValidation";
 import BreederPopup from './Breeder';
 import ColorPopup from './Color';
 import GenderPopup from './Gender';
-import OwnerPopup from "./OwnerForm";
+import OwnerPopup from "./Owner/OwnerForm";
 import TrainerPopup from "./PostTrainer";
 import NationalityPopup from "./Nationality";
 import HorseKindPopup from "./Horsekindform";

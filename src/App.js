@@ -28,7 +28,10 @@ import RaceForm from "./pages/PostTable/RaceForm/RaceForm";
 import ProtectedRoute from "./Components/Common/ProtectedRoute";
 import SelectHorse from "./pages/PostTable/SelectHorse";
 import Owner from "./pages/GetTable/Owner";
-import OwnerForm from "./pages/PostTable/OwnerForm";
+import OwnerForm from "./pages/PostTable/Owner/OwnerForm";
+import OwnerCap from "./pages/PostTable/Owner/OwnerCap";
+import OwnerSilkColor from "./pages/PostTable/Owner/OwnerSilkColor";
+
 import SliderForm from "./pages/PostTable/SliderForm";
 import Slider from "./pages/GetTable/Slider";
 import Header from "./Components/Common/Header";
@@ -273,6 +276,8 @@ function App() {
              <Route path="/newsletter" element={<NewsLetter />} />
              <Route path="/finalposition" element={<FinalPosiiton />} />
              <Route path="/finalpositionlist" element={<FinalPositionTable />} />
+             <Route path="/ownerSilkColor" element={<OwnerSilkColor />} />
+             <Route path="/ownerCap" element={<OwnerCap />} />
 
              <Route path="/viewcompetitionPoint" element={<ViewPoint />} />
              <Route path="/addcompetitionPoint" element={<AddPoint />} />

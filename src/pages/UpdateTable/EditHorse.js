@@ -21,7 +21,7 @@ import { AiOutlineReload } from "react-icons/ai";
 import { Modal } from "react-bootstrap";
 import BreederPopup from "../PostTable/Breeder";
 import ColorPopup from "../PostTable/Color";
-import OwnerPopup from "../PostTable/OwnerForm";
+import OwnerPopup from "../PostTable/Owner/OwnerForm";
 import TrainerPopup from "../PostTable/PostTrainer";
 import GenderPopup from "../PostTable/Gender";
 import NationalityPopup from "../PostTable/Nationality";

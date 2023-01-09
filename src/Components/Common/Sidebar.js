@@ -149,6 +149,11 @@ const Sidebar = () => {
                           Length
                         </Link>{" "}
                       </div>
+                      <div>
+                        <Link to="/trackcondition" className="mylink">
+                          Track Condition
+                        </Link>
+                      </div>
                     </Accordion.Body>
                   </Accordion.Item>
                   <Accordion.Item eventKey="2">
@@ -187,7 +192,7 @@ const Sidebar = () => {
                       <div>
                         <Link to="/groundlist" className="mylink">
                           Ground
-                        </Link>{" "}
+                        </Link>
                       </div>
                       <div>
                         <Link to="/finalpositionlist" className="mylink">
@@ -268,6 +273,11 @@ const Sidebar = () => {
                       <div>
                         <Link to="/tracklength" className="mylink">
                           Length
+                        </Link>
+                      </div>
+                      <div>
+                        <Link to="/trackconditionlist" className="mylink">
+                          Track Condition
                         </Link>
                       </div>
                     </Accordion.Body>

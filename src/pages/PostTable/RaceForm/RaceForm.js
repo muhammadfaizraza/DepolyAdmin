@@ -40,26 +40,30 @@ import JockeyPopup from "../JockeyForm";
 import SponsorPopup from "../SponsorForm";
 
 const WeatherTypes = [
-  { id: "1", value: "Sunny", label: (
-    <div style={{
-      display:'flex',
-      justifyContent:'space-between'
-    }}>
-     <p>Sunny</p> 
-     <p>مشمس</p> 
+  {
+    id: "1", value: "Sunny", label: (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}>
+        <p>Sunny</p>
+        <p>مشمس</p>
 
-    </div>
-  ), },
-  { id: "2", value: "Cloudy", label: (
-    <div style={{
-      display:'flex',
-      justifyContent:'space-between'
-    }}>
-     <p>Cloudy</p> 
-     <p>غائم</p> 
+      </div>
+    ),
+  },
+  {
+    id: "2", value: "Cloudy", label: (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}>
+        <p>Cloudy</p>
+        <p>غائم</p>
 
-    </div>
-  ), },
+      </div>
+    ),
+  },
 ];
 
 // const ResultStatus = [
@@ -74,46 +78,54 @@ const WeatherTypes = [
 //   { id: "2", value: "غائم", label: "غائم" },
 // ];
 const RaceStatuss = [
-  { id: "1", value: "Cancel", label: (
-    <div style={{
-      display:'flex',
-      justifyContent:'space-between'
-    }}>
-     <p>Cancel</p> 
-     <p>يلغي</p> 
+  {
+    id: "1", value: "Cancel", label: (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}>
+        <p>Cancel</p>
+        <p>يلغي</p>
 
-    </div>
-  ), },
-  { id: "2", value: "Due", label: (
-    <div style={{
-      display:'flex',
-      justifyContent:'space-between'
-    }}>
-     <p>Due</p> 
-     <p>بسبب</p> 
+      </div>
+    ),
+  },
+  {
+    id: "2", value: "Due", label: (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}>
+        <p>Due</p>
+        <p>بسبب</p>
 
-    </div>
-  ), },
-  { id: "2", value: "Live", label: (
-    <div style={{
-      display:'flex',
-      justifyContent:'space-between'
-    }}>
-     <p>Live</p> 
-     <p>يعيش</p> 
+      </div>
+    ),
+  },
+  {
+    id: "2", value: "Live", label: (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}>
+        <p>Live</p>
+        <p>يعيش</p>
 
-    </div>
-  ), },
-  { id: "2", value: "End", label: (
-    <div style={{
-      display:'flex',
-      justifyContent:'space-between'
-    }}>
-     <p>End</p> 
-     <p>نهاية</p> 
+      </div>
+    ),
+  },
+  {
+    id: "2", value: "End", label: (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}>
+        <p>End</p>
+        <p>نهاية</p>
 
-    </div>
-  ), },
+      </div>
+    ),
+  },
 ];
 // const RaceStatussAr = [
 //   { id: "1", value: "يلغي", label: "يلغي" },
@@ -128,11 +140,11 @@ const RaceForm = () => {
   const [ErrorRaceNameEn, setErrorRaceNameEn] = useState("");
   const [ErrorMeetingCode, setErrorMeetingCode] = useState("");
   const [ErrorGround, setErrorGround] = useState("");
- 
+
   const [ErrorRaceKind, setErrorRaceKind] = useState("");
   const [ErrorDescriptionEn, setErrorDescriptionEn] = useState("");
   const [ErrorDescriptionAr, setErrorDescriptionAr] = useState("");
- 
+
   const [ErrorWeatherType, setErrorWeatherType] = useState("");
   const [ErrorRaceStatus, setErrorRaceStatus] = useState("");
   const [ErrorRaceCourse, setErrorRaceCourse] = useState("");
@@ -165,7 +177,7 @@ const RaceForm = () => {
   const { data: RaceType } = useSelector((state) => state.RaceType);
   const { data: RaceName } = useSelector((state) => state.RaceName);
   const { data: trackLength } = useSelector((state) => state.trackLength);
-  const { data: raceKinds,  } = useSelector((state) => state.raceKinds);
+  const { data: raceKinds, } = useSelector((state) => state.raceKinds);
   const { data: groundtype } = useSelector((state) => state.groundtype);
   const { data: pointTable } = useSelector((state) => state.pointTable);
 
@@ -195,12 +207,12 @@ const RaceForm = () => {
           value: item.TrackNameEn,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
-             <p>{item.TrackNameEn}</p> 
-             <p>{item.TrackNameAr}</p> 
-        
+              <p>{item.TrackNameEn}</p>
+              <p>{item.TrackNameAr}</p>
+
             </div>
           ),
         };
@@ -218,12 +230,12 @@ const RaceForm = () => {
           value: item.NameEn,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
-             <p>{item.NameEn}</p> 
-             <p>{item.NameAr}</p> 
-  
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
+
             </div>
           ),
         };
@@ -252,25 +264,25 @@ const RaceForm = () => {
           value: item.TitleEn,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
               <span style={{
-              display:'flex',
-            }}>
-              <img src={item.image} height="30px" width="30px" alt=""/>
-              <p>{item.TitleEn}</p>
+                display: 'flex',
+              }}>
+                <img src={item.image} height="30px" width="30px" alt="" />
+                <p>{item.TitleEn}</p>
               </span>
               <span style={{
-              display:'flex',
-            }}>
-              <img src={item.image} height="30px" width="30px" alt=""/>
-              <p>{item.TitleAr}</p>
+                display: 'flex',
+              }}>
+                <img src={item.image} height="30px" width="30px" alt="" />
+                <p>{item.TitleAr}</p>
               </span>
-  
+
             </div>
           ),
-          
+
         };
       })
     );
@@ -298,12 +310,12 @@ const RaceForm = () => {
           value: item.NameEn,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
-             <p>{item.NameEn}</p> 
-             <p>{item.NameAr}</p> 
-  
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
+
             </div>
           ),
         };
@@ -332,12 +344,12 @@ const RaceForm = () => {
           value: item.NameEn,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
-             <p>{item.NameEn}</p> 
-             <p>{item.NameAr}</p> 
-  
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
+
             </div>
           ),
         };
@@ -367,15 +379,15 @@ const RaceForm = () => {
           value: item.TrackLength,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
-             <p>{item.TrackLength}</p> 
-             <p>{item.TrackLength}</p> 
-  
+              <p>{item.TrackLength}</p>
+              <p>{item.TrackLength}</p>
+
             </div>
           ),
-         
+
         };
       })
     );
@@ -390,12 +402,12 @@ const RaceForm = () => {
           value: item.NameEn,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
-             <p>{item.NameEn}</p> 
-             <p>{item.NameAr}</p> 
-  
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
+
             </div>
           ),
         };
@@ -424,12 +436,12 @@ const RaceForm = () => {
           value: item.NameEn,
           label: (
             <div style={{
-              display:'flex',
-              justifyContent:'space-between'
+              display: 'flex',
+              justifyContent: 'space-between'
             }}>
-             <p>{item.NameEn}</p> 
-             <p>{item.NameAr}</p> 
-  
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
+
             </div>
           ),
         };
@@ -506,16 +518,16 @@ const RaceForm = () => {
   // Modal functionalities End Here
 
   const FetchNew = () => {
-    dispatch(fetchracecourse({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchjockey({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchSponsor({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchMeeting({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchRaceType({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchRaceName({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchTrackLength({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchRaceKind({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchgroundtype({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchpointTable({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchracecourse({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchjockey({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchSponsor({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchMeeting({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchRaceType({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchRaceName({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchTrackLength({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchRaceKind({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchgroundtype({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchpointTable({ SearchCode, SearchTitle, SearchAge }));
   };
 
   const [MeetingType, setMeetingType] = useState("");
@@ -555,16 +567,16 @@ const RaceForm = () => {
   // console.log(DayTime,'DayTime is this')
 
   useEffect(() => {
-    dispatch(fetchracecourse({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchjockey({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchSponsor({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchMeeting({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchRaceType({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchRaceName({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchTrackLength({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchRaceKind({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchgroundtype({SearchCode,SearchTitle,SearchAge}));
-    dispatch(fetchpointTable({SearchCode,SearchTitle,SearchAge}));
+    dispatch(fetchracecourse({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchjockey({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchSponsor({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchMeeting({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchRaceType({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchRaceName({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchTrackLength({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchRaceKind({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchgroundtype({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchpointTable({ SearchCode, SearchTitle, SearchAge }));
 
     if (!image) {
       setPreview(undefined);
@@ -698,7 +710,7 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>
-                      
+
                     </span>
                     <span className={MeetingType === "" ? "error" : "success"}>
                       {ErrorMeetingType}
@@ -749,7 +761,7 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>{" "}
-                      
+
                     </span>
                     <span className={RaceNameEn === "" ? "error" : "success"}>
                       {ErrorRaceNameEn}
@@ -866,7 +878,7 @@ const RaceForm = () => {
                       {ErrorWeatherIcon}
                     </span>
                   </div>
-{/* 
+                  {/* 
                   <div className="col-sm">
                     <FloatingLabel
                       controlId="floatingInput"
@@ -947,7 +959,7 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>{" "}
-                      
+
                     </span>
                     <span className={RaceTyp === "" ? "error" : "success"}>
                       {ErrorRaceTyp}
@@ -1005,13 +1017,13 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>{" "}
-                      
+
                     </span>
                     <span className={TrackLength === "" ? "error" : "success"}>
                       {ErrorTrackLength}
                     </span>
                   </div>
-{/* 
+                  {/* 
                   <div className="col-sm">
                     <Select
                       className="selectdir"
@@ -1063,13 +1075,13 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>{" "}
-                      
+
                     </span>
                     <span className={Ground === "" ? "error" : "success"}>
                       {ErrorGround}{" "}
                     </span>
                   </div>
-{/* 
+                  {/* 
                   <div className="col-sm">
                     <Select
                       placeholder={<div>طقس</div>}
@@ -1114,7 +1126,7 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>{" "}
-                      
+
                     </span>
                     <span className={RaceKind === "" ? "error" : "success"}>
                       {ErrorRaceKind}
@@ -1199,13 +1211,13 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>{" "}
-                      
+
                     </span>
                     <span className={RaceCourse === "" ? "error" : "success"}>
                       {ErrorRaceCourse}
                     </span>
                   </div>
-{/* 
+                  {/* 
                   <div className="col-sm">
                     <Select
                       placeholder={<div>دورة السباق</div>}
@@ -1263,8 +1275,8 @@ const RaceForm = () => {
                       isSearchable={true}
                       onBlur={() =>
                         Sponsor === ""
-                          ? setErrorSponsor("Sponsor is required ")
-                          : setErrorSponsor("Sponsor is Validated")
+                          ? setErrorSponsor("Sponsor Image is required ")
+                          : setErrorSponsor("Sponsor Image is Validated")
                       }
                     />
                     <span className="spanForm">
@@ -1284,7 +1296,7 @@ const RaceForm = () => {
                           <AiOutlineReload />
                         </span>
                       </OverlayTrigger>
-                      
+
                     </span>
                     <span className={Sponsor === "" ? "error" : "success"}>
                       {ErrorSponsor}

@@ -36,10 +36,7 @@ const Gelted = [
   { id: "1", value: "true", label: "true" },
 ];
 
-const GeltedAr = [
-  { id: "0", value: "خاطئة", label: "خاطئة" },
-  { id: "1", value: "حقيقي", label: "حقيقي" },
-];
+
 const HorseStatusAll = [
   {
     id: "0", value: "false", label: (

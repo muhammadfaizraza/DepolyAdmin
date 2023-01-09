@@ -9,32 +9,37 @@ const OwnerColor = () => {
   const { state } = useLocation();
   const { OwnerId } = state;
   const [selectedImages, setSelectedImages] = useState([]);
-  const [OwnerSlik, setsetOwnerSlik] = useState([]);
+  const [OwnerSlik, setOwnerSlik] = useState([]);
 
   const [isLoading, setisLoading] = useState(false);
   const history = useNavigate();
 
-  console.log(selectedImages,'selectedImages')
-
-
   const onSelectFile = (event) => {
-
     const selectedFiles = event.target.files;
+    
     const selectedFilesArray = Array.from(selectedFiles);
-
     const imagesArray = selectedFilesArray.map((file) => {
       return URL.createObjectURL(file);
+      
     });
+    setOwnerSlik(event.target.files[0]);
+    
+    // setsetOwnerSlik(imagesArray)
+
     setSelectedImages((previousImages) => previousImages.concat(imagesArray));
     event.target.value = "";
   };
 
   const UploadSilkColor = async (event) => {
     event.preventDefault();
+
     setisLoading(true);
     try {
       const formData = new FormData();
-      formData.append("OwnerSilkColor", OwnerSlik);
+      // selectedImages.forEach((image) => {
+      //   formData.append("image", image);
+      // });
+      formData.append("image",OwnerSlik);
       await axios.post(`${window.env.API_URL}/AddOwnerSilkColor/${OwnerId}`, formData);
       setisLoading(false);
       swal({

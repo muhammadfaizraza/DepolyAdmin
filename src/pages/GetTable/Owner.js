@@ -22,7 +22,7 @@ import { CSVLink } from "react-csv";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
-
+import altimg from '../../assets/Placeholder.jpg'
 
 
 const Owner = () => {
@@ -265,7 +265,7 @@ const Owner = () => {
                           <img src={item.OwnerIDData === undefined ? <></> : item.OwnerIDData.OwnerSilkColor} alt='' />
                          </td> */}
                               <td className="imageRow">
-                                <img src={item.image} alt="no image provided" />
+                                <img src={item.image} alt={'no image'} />
                                
                               </td>
                               

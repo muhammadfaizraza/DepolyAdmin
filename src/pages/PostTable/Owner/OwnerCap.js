@@ -6,33 +6,41 @@ import swal from "sweetalert";
 
 const OwnerColor = () => {
 
-  // const { state } = useLocation();
-  // const { OwnerId } = state;
+  const OwnerId= 'edf66886-62ea-4b25-9cdf-2fb847242c4c'
 
-  const OwnerId= '2323'
   const [selectedImages, setSelectedImages] = useState([]);
+  const [OwnerSlik, setOwnerSlik] = useState([]);
+
   const [isLoading, setisLoading] = useState(false);
   const history = useNavigate();
 
   const onSelectFile = (event) => {
     const selectedFiles = event.target.files;
+    
     const selectedFilesArray = Array.from(selectedFiles);
-
     const imagesArray = selectedFilesArray.map((file) => {
       return URL.createObjectURL(file);
+      
     });
+    setOwnerSlik(event.target.files[0]);
+    
+    // setsetOwnerSlik(imagesArray)
+
     setSelectedImages((previousImages) => previousImages.concat(imagesArray));
     event.target.value = "";
   };
 
   const UploadSilkColor = async (event) => {
     event.preventDefault();
+
     setisLoading(true);
     try {
-      console.log(selectedImages)
       const formData = new FormData();
-      formData.append("OwnerSilkColor", selectedImages);
-      await axios.post(`${window.env.API_URL}/AddOwnerSilkColor/${OwnerId}`, formData);
+      // selectedImages.forEach((image) => {
+      //   formData.append("image", image);
+      // });
+      formData.append("image",OwnerSlik);
+      await axios.post(`${window.env.API_URL}/AddOwnerCap/${OwnerId}`, formData);
       setisLoading(false);
       swal({
         title: "Success!",
@@ -40,7 +48,7 @@ const OwnerColor = () => {
         icon: "success",
         button: "OK",
       });
-      history("/owner");
+      history("/owner")
       setisLoading(false);
     } catch (error) {
       const err = error.response.data.message;
@@ -62,6 +70,27 @@ const OwnerColor = () => {
   function skipdata(){
     history("/ownerCap")
   }
+
+  //   const createServiceImagesChange = (e) => {
+  //   const files = Array.from(e.target.files);
+
+  //   setImages([]);
+  //   setImagesPreview([]);
+  //   setOldImages([]);
+
+  //   files.forEach((file) => {
+  //     const reader = new FileReader();
+
+  //     reader.onload = () => {
+  //       if (reader.readyState === 2) {
+  //         setImagesPreview((old) => [...old, reader.result]);
+  //         setImages((old) => [...old, reader.result]);
+  //       }
+  //     };
+  //     console.log(file);
+  //     reader.readAsDataURL(file);
+  //   });
+  // };
   return (
     <>
       <div className="page">
@@ -71,7 +100,7 @@ const OwnerColor = () => {
               marginTop: "30px",
             }}
           >
-            <div className="Headers">Upload Silk Color</div>
+            <div className="Headers">Upload Owner Cap</div>
             <section className="addsectionimage">
               <label className="AddImages1">
                 + Add Images
@@ -86,7 +115,6 @@ const OwnerColor = () => {
                 />
               </label>
               <br />
-
               {selectedImages.length > 0 &&
                 (selectedImages.length > 10 ? (
                   <p className="error11">
@@ -123,7 +151,7 @@ const OwnerColor = () => {
               </div>
             </section>
           </div>
-          
+       
         </div>
         
       </div>

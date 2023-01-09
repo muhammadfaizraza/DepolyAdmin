@@ -1,4 +1,4 @@
-import React, { useEffect,Fragment } from "react";
+import React, { useEffect, Fragment } from "react";
 import Moment from "moment";
 import "react-toastify/dist/ReactToastify.css";
 import { fetchjockey } from "../../../redux/getReducer/getJockeySlice";
@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { fetchHorse ,STATUSES } from "../../../redux/getReducer/getHorseSlice";
+import { fetchHorse, STATUSES } from "../../../redux/getReducer/getHorseSlice";
 import { fetchverdict } from '../../../redux/getReducer/getVerdict'
 import Select from "react-select";
 import swal from "sweetalert";
@@ -28,13 +28,13 @@ const LocalItem = () => {
 };
 
 const PublishRace = () => {
-  const [SearchTitle , setSearchTitle] = useState()
-  const [SearchCode , setSearchCode] = useState()
+  const [SearchTitle, setSearchTitle] = useState()
+  const [SearchCode, setSearchCode] = useState()
   const [InputData, SetinputData] = useState("");
   const [VerdictName, SetVerdictName] = useState('');
-  const [NameEn , setNameEn] = useState()
+  const [NameEn, setNameEn] = useState()
 
-  const [Gate , setGate] = useState(1)
+  const [Gate, setGate] = useState(1)
   const [items, setitems] = useState(LocalItem());
   const { data: jockey } = useSelector((state) => state.jockey);
   const { data: horse } = useSelector((state) => state.horse);
@@ -63,9 +63,9 @@ const PublishRace = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchHorse({SearchCode,SearchTitle}));
-    dispatch(fetchjockey({SearchCode,SearchTitle}));
-    dispatch(fetchverdict({NameEn ,shortCode}));
+    dispatch(fetchHorse({ SearchCode, SearchTitle }));
+    dispatch(fetchjockey({ SearchCode, SearchTitle }));
+    dispatch(fetchverdict({ SearchCode, SearchTitle }));
   }, [dispatch]);
 
   useEffect(() => {
@@ -79,10 +79,10 @@ const PublishRace = () => {
   const addItem = (e) => {
     e.preventDefault();
     let VerdictEntry = [`${VerdictName.id},${Gate},${InputData.id}`];
-    if(verdictLength === ItemLength){
+    if (verdictLength === ItemLength) {
       toast('No Verdict ')
     }
-    else  if (InputData === "" || VerdictName === "") {
+    else if (InputData === "" || VerdictName === "") {
       toast('Select Values ')
     }
     else {
@@ -91,7 +91,7 @@ const PublishRace = () => {
     }
     SetVerdictName("");
     SetinputData("");
-  
+
   };
   const Remove = () => {
     setitems([]);
@@ -100,7 +100,7 @@ const PublishRace = () => {
   const submit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`${window.env.API_URL}addverdicts/${RaceId}`, {VerdictEntry:items});
+      const response = await axios.post(`${window.env.API_URL}addverdicts/${RaceId}`, { VerdictEntry: items });
       const response1 = await axios.put(`${window.env.API_URL}/publishrace/${RaceId}`);
       localStorage.removeItem('verdict')
       setGate(1)
@@ -122,13 +122,13 @@ const PublishRace = () => {
     }
   };
 
-  
+
 
   return (
     <Fragment>
       <div className="page">
-      <div className="rightsidedata">
-      <div
+        <div className="rightsidedata">
+          <div
             style={{
               marginTop: "30px",
             }}
@@ -138,41 +138,41 @@ const PublishRace = () => {
             </div>
             <div className="myselecthorse">
               <div className="myselecthorsedata">
-                   <span>Rank #</span>
-                    <span>Verdict Name</span>
-                    <span>Horse Name</span>
+                <span>Rank #</span>
+                <span>Verdict Name</span>
+                <span>Horse Name</span>
               </div>
             </div>
             <div className="myselectdata">
-            <div className="myselectiondata">
-                    <span onChange={setGate} value={1}>1</span>
-                    
-                     <span>
-                      <Select
-                        defaultValue={VerdictName}
-                        onChange={SetVerdictName}
-                        options={AllVerdict}
-                        isClearable={false}
-                        isSearchable={true}
-                      />
-                    </span>
-                    <span>
-                      <Select
-                        defaultValue={InputData}
-                        onChange={SetinputData}
-                        options={horseoptions}
-                        isClearable={false}
-                        isSearchable={true}
-                      />
-                    </span>
-               
-                  </div>
+              <div className="myselectiondata">
+                <span onChange={setGate} value={1}>1</span>
+
+                <span>
+                  <Select
+                    defaultValue={VerdictName}
+                    onChange={SetVerdictName}
+                    options={AllVerdict}
+                    isClearable={false}
+                    isSearchable={true}
+                  />
+                </span>
+                <span>
+                  <Select
+                    defaultValue={InputData}
+                    onChange={SetinputData}
+                    options={horseoptions}
+                    isClearable={false}
+                    isSearchable={true}
+                  />
+                </span>
+
+              </div>
               {items.map((e, i) => {
                 return (
                   <div className="myselectiondata">
-                    <span onChange={setGate} value={i+1}>{i + 2}</span>
-                    
-                     <span>
+                    <span onChange={setGate} value={i + 1}>{i + 2}</span>
+
+                    <span>
                       <Select
                         defaultValue={VerdictName}
                         onChange={SetVerdictName}
@@ -214,7 +214,7 @@ const PublishRace = () => {
 
               <div className="addbtn">
                 <button className="AddAnother" onClick={addItem}>
-                Save & Add Another{" "}
+                  Save & Add Another{" "}
                 </button>
               </div>
               <div className="sbmtbtndiv">
@@ -227,7 +227,7 @@ const PublishRace = () => {
                     className="SubmitButton"
                     type="submit"
                     onClick={submit}
-                   
+
                   >
                     Publish Race
                   </button>
@@ -235,8 +235,8 @@ const PublishRace = () => {
               </div>
             </div>
           </div>
-      </div>
-     
+        </div>
+
       </div>
     </Fragment>
   );

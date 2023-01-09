@@ -39,6 +39,8 @@ import RaceKindPopup from "../RaceKind";
 import RaceCoursePopup from "../RaceCourseForm";
 import JockeyPopup from "../JockeyForm";
 import SponsorPopup from "../SponsorForm";
+import TrackConditionPopup from "../TrackCondition";
+
 
 const WeatherTypes = [
   {
@@ -143,6 +145,7 @@ const RaceForm = () => {
   const [ErrorGround, setErrorGround] = useState("");
 
   const [ErrorRaceKind, setErrorRaceKind] = useState("");
+  const [ErrorCondition, setErrorCondition] = useState("");
   const [ErrorDescriptionEn, setErrorDescriptionEn] = useState("");
   const [ErrorDescriptionAr, setErrorDescriptionAr] = useState("");
 
@@ -186,40 +189,29 @@ const RaceForm = () => {
   const history = useNavigate();
   const dispatch = useDispatch();
 
-  // let trackconditionTable =
-  //    trackcondition === undefined ? (
-  //     <></>
-  //   ) : (
-  //     trackcondition.map(function (item) {
-  //       return {
-  //         id: item._id,
-  //         value: item.Group_Name,
-  //         label: item.Group_Name,
-  //       };
-  //     })
-  //   );
+
 
   let trackconditionTable =
-  trackcondition === undefined ? (
-    <></>
-  ) : (
-    trackcondition.map(function (item) {
-      return {
-        id: item._id,
-        value: item.NameEn,
-        label: (
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between'
-          }}>
-            <p>{item.NameEn}</p>
-            <p>{item.NameAr}</p>
+    trackcondition === undefined ? (
+      <></>
+    ) : (
+      trackcondition.map(function (item) {
+        return {
+          id: item._id,
+          value: item.NameEn,
+          label: (
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between'
+            }}>
+              <p>{item.NameEn}</p>
+              <p>{item.NameAr}</p>
 
-          </div>
-        ),
-      };
-    })
-  );
+            </div>
+          ),
+        };
+      })
+    );
 
   let racecourses =
     racecourse === undefined ? (
@@ -494,6 +486,8 @@ const RaceForm = () => {
   const [showRaceCourse, setShowRaceCourse] = useState(false);
   const [showJockey, setShowJockey] = useState(false);
   const [showSponsor, setShowSponsor] = useState(false);
+  const [showCondition, setshowCondition] = useState(false);
+
 
   const handleCloseName = () => setShowName(false);
   const handleCloseType = () => setShowType(false);
@@ -504,6 +498,7 @@ const RaceForm = () => {
   const handleCloseRaceCourse = () => setShowRaceCourse(false);
   const handleCloseJockey = () => setShowJockey(false);
   const handleCloseSponsor = () => setShowSponsor(false);
+  const handleCloseTrackCondition = () => setshowCondition(false);
 
   const handleShowName = async () => {
     await setShowName(true);
@@ -511,6 +506,10 @@ const RaceForm = () => {
   const handleShowType = async () => {
     await setShowType(true);
   };
+  const handleShowTrackCondition = async () => {
+    await setshowCondition(true);
+
+  }
 
   const handleShowRaceType = async () => {
     await setShowRaceType(true);
@@ -1303,14 +1302,36 @@ const RaceForm = () => {
                       isClearable={true}
                       isSearchable={true}
                       onBlur={() =>
-                        RaceStatus === ""
-                          ? setErrorRaceStatus("Race Status is required ")
-                          : setErrorRaceStatus("")
+                        TrackCondition === ""
+                          ? setErrorCondition("Track Condition is required ")
+                          : setErrorCondition("Track Condition is Validated")
                       }
                     />
+                    <span className="spanForm">
+                      <OverlayTrigger
+                        overlay={<Tooltip id={`tooltip-top`}>Add more</Tooltip>}
+                      >
+                        <span
+                          className="addmore"
+                          onClick={handleShowTrackCondition}
+                        >
+                          +
+                        </span>
+                      </OverlayTrigger>
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Fetch New</Tooltip>
+                        }
+                      >
+                        <span className="addmore" onClick={FetchNew}>
+                          <AiOutlineReload />
+                        </span>
+                      </OverlayTrigger>{" "}
+
+                    </span>
                     {/* <span className="spanForm"> |</span> */}
-                    <span className={RaceStatus === "" ? "error" : "success"}>
-                      {ErrorRaceStatus}
+                    <span className={TrackCondition === "" ? "error" : "success"}>
+                      {ErrorCondition}
                     </span>
                   </div>
 
@@ -1402,32 +1423,33 @@ const RaceForm = () => {
                 </div> */}
 
                 <div className="row mainrow">
-                  <div className="col-sm">
-                    <DatePicker
-                      onChange={setDay}
-                      value={Day}
-                      monthPlaceholder="Date "
-                      // dayPlaceholder="&"
-                      minDate={today}
-                      maxDate={new Date("02-29-2023")}
-                      // yearPlaceholder="Time"
-                      onBlur={() =>
-                        Day === ""
-                          ? setErrorDate("Date is required ")
-                          : setErrorDate("Date is Validated")
-                      }
-                    />
 
-                    <span className={Day === "" ? "error" : "success"}>
-                      {ErrorDate}
-                    </span>
-                  </div>
+                  <DatePicker
+                    onChange={setDay}
+                    value={Day}
+                    monthPlaceholder="Date "
+                    // dayPlaceholder="&"
+                    minDate={today}
+                    maxDate={new Date("02-29-2023")}
+                    // yearPlaceholder="Time"
+                    onBlur={() =>
+                      Day === ""
+                        ? setErrorDate("Date is required ")
+                        : setErrorDate("Date is Validated")
+                    }
+                  />
+
+                  <span className={Day === "" ? "error" : "success"}>
+                    {ErrorDate}
+                  </span>
+
                 </div>
 
                 <div className="row mainrow">
                   <div className="col-sm">
                     <TimePicker
                       onChange={setStartTime}
+                      value={StartTime}
                       minutePlaceholder={"Start Time"}
                       secondPlaceholder={""}
                       onBlur={() =>
@@ -1445,6 +1467,7 @@ const RaceForm = () => {
                   <div className="col-sm">
                     <TimePicker
                       onChange={setEndTime}
+                      value={EndTime}
                       minutePlaceholder={"End Time"}
                       secondPlaceholder={""}
                       onBlur={() =>
@@ -1454,7 +1477,7 @@ const RaceForm = () => {
                       }
                     />
 
-                    <span className={StartTime === "" ? "error" : "success"}>
+                    <span className={EndTime === "" ? "error" : "success"}>
                       {ErrorEndTime}
                     </span>
                   </div>
@@ -1826,6 +1849,20 @@ const RaceForm = () => {
         </Modal.Header>
         <Modal.Body>
           <GroundTypePopup />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        show={showCondition}
+        onHide={handleCloseTrackCondition}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2>Track Condition</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <TrackConditionPopup />
         </Modal.Body>
       </Modal>
     </>

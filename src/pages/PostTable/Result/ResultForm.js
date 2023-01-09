@@ -106,19 +106,20 @@ const RaceForm = () => {
     event.preventDefault();
     try { 
       const response = await axios.post(`${window.env.API_URL}createraceresult/${RaceId}`,{ResultEntry:items});
-      const Raceresult = response.data.data._id;
-      history("/resultimages", {
-        state: {
-          Raceresult: Raceresult,
-        },
-      });
-      localStorage.removeItem('results')
+      
       swal({
         title: "Success",
         text: "Data has been added successfully ",
         icon: "success",
         button: "OK",
       });
+      const Raceresult = response.data.data._id;
+      history("/resultannounced", {
+        state: {
+          Raceresult: Raceresult,
+        },
+      });
+      localStorage.removeItem('results')
     } catch (error) {
       const err = error.response.data.message;
       swal({

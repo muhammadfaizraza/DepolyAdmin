@@ -217,8 +217,6 @@ const TrackCondtionTable = () => {
                                                 <th>Abreviation Arabic </th>
                                                 <th>Active</th>
 
-                                                {/* <th>Short Name</th>
-                      <th>Short Name Arabic</th> */}
                                             </tr>
                                         </thead>
                                         <tbody>

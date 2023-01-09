@@ -4,8 +4,9 @@ import axios from "axios";
 import swal from "sweetalert";
 
 const OwnerColor = () => {
-  const { state } = useLocation();
-  const { RaceId } = state;
+  // const { state } = useLocation();
+  // const { RaceId } = state;
+  const RaceId = 'b2849f41-f4b3-4634-a8b6-8bd8f63dd4e0'
   const [selectedImages, setSelectedImages] = useState([]);
   const [OwnerSlik, setOwnerSlik] = useState([]);
 
@@ -100,7 +101,7 @@ const OwnerColor = () => {
               marginTop: "30px",
             }}
           >
-            <div className="Headers">Upload Silk Color</div>
+            <div className="Headers">Upload Race Result Images</div>
             <section className="addsectionimage">
               <label className="AddImages1">
                 + Add Images

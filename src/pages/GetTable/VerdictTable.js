@@ -72,7 +72,7 @@ const VerdictTable = () => {
           swal("Your data has been deleted Successfully!", {
             icon: "success",
           });
-          dispatch(fetchverdict({NameEn,shortCode}));
+          dispatch(fetchverdict({NameEn ,shortCode}));
         } else {
           swal("Your data is safe!");
         }

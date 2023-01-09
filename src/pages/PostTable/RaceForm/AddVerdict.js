@@ -32,7 +32,8 @@ const PublishRace = () => {
   const [SearchCode , setSearchCode] = useState()
   const [InputData, SetinputData] = useState("");
   const [VerdictName, SetVerdictName] = useState('');
-  
+  const [NameEn , setNameEn] = useState()
+
   const [Gate , setGate] = useState(1)
   const [items, setitems] = useState(LocalItem());
   const { data: jockey } = useSelector((state) => state.jockey);
@@ -64,7 +65,7 @@ const PublishRace = () => {
   useEffect(() => {
     dispatch(fetchHorse({SearchCode,SearchTitle}));
     dispatch(fetchjockey({SearchCode,SearchTitle}));
-    dispatch(fetchverdict({SearchCode,SearchTitle}));
+    dispatch(fetchverdict({NameEn ,shortCode}));
   }, [dispatch]);
 
   useEffect(() => {

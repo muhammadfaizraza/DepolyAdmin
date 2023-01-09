@@ -95,7 +95,8 @@ import gethorsekindshortcode from "./getShortCode/gethorsekindshortcode";
 import getFinalPosition from "./getReducer/getFinalPosition";
 import getfinalpositionshortcode from "./getShortCode/getfinalpositionshortcode";
 import getRaceResultAnnounced from "./getReducer/getRaceResultAnnounced";
-
+import getTrackCondition from "./getReducer/getTrackCondition"
+import gettrackconditionshortcode from "./getShortCode/gettrackconditionshortcode";
 
 const store = configureStore({
   reducer: {
@@ -168,7 +169,7 @@ const store = configureStore({
     deletedtracklength: getDeletedTrackLength,
     deletedracecourse: getDeletedRaceCourse,
     deletedrace: getDeletedRace,
-    deletedfinalposition:getDeletedFinalPosition,
+    deletedfinalposition: getDeletedFinalPosition,
     deletedracecard: getDeletedRaceCard,
     deletedracename: getDeletedRaceName,
     deletedracetype: getDeletedRaceType,
@@ -181,6 +182,7 @@ const store = configureStore({
     breedershortcode: getbreedershortcode,
     currencyshortcode: getcurrencyshortcode,
     equipmentshortcode: getequipmentshortcode,
+    trackconditionshortcode: gettrackconditionshortcode,
     groundshortcode: getgroundshortcode,
     meetingshortcode: getmeetingshortcode,
     nationalityshortcode: getnationalityshortcode,
@@ -194,7 +196,8 @@ const store = configureStore({
     horsekindshortcode: gethorsekindshortcode,
     finalposition: getFinalPosition,
     finalpositionshortcode: getfinalpositionshortcode,
-    raceresult:getRaceResultAnnounced
+    raceresult: getRaceResultAnnounced,
+    trackcondition: getTrackCondition,
   },
 });
 

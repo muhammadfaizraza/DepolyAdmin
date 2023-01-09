@@ -47,14 +47,14 @@ const TrackCondtionTable = () => {
 
     const dispatch = useDispatch();
     const history = useNavigate();
-    const { data: HorseKind, status } = useSelector((state) => state.HorseKind);
+    const { data: trackcondition, status } = useSelector((state) => state.trackcondition);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(8)
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = HorseKind.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = trackcondition.slice(indexOfFirstPost, indexOfLastPost);
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
 
@@ -167,7 +167,7 @@ const TrackCondtionTable = () => {
                                         />
                                     </span>
                                 </OverlayTrigger>
-                                <CSVLink data={HorseKind} separator={";"} filename={"MKS Track Condition.csv"} className='csvclass'>
+                                <CSVLink data={trackcondition} separator={";"} filename={"MKS Track Condition.csv"} className='csvclass'>
                                     Export CSV
                                 </CSVLink>
                             </div>
@@ -273,7 +273,7 @@ const TrackCondtionTable = () => {
                     <span className="plusIconStyle"></span>
                     <Pagination
                         postsPerPage={postsPerPage}
-                        totalPosts={HorseKind.length}
+                        totalPosts={trackcondition.length}
                         paginate={paginate}
                         currentPage={currentPage}
 

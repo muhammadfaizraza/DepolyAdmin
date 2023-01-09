@@ -6,7 +6,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import TextInputValidation from "../../utils/TextInputValidation";
 import { fetchhorsekindshortcode } from "../../redux/getShortCode/gethorsekindshortcode";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const TrackCondition = () => {
     //FOR ERRORS
@@ -19,25 +19,25 @@ const TrackCondition = () => {
     const [NameAr, setNameAr] = useState("");
     const [shortName, setshortName] = useState("");
     const [shortNameAr, setshortNameAr] = useState("");
-    const [isLoading, setisLoading] = useState(true);
+    const [isLoading, setisLoading] = useState(false);
     const dispatch = useDispatch();
-    // const { data: horsekindshortcode } = useSelector((state) => state.horsekindshortcode)
+    const { data: trackconditionshortcode } = useSelector((state) => state.trackconditionshortcode)
     const history = useNavigate();
     const { pathname } = useLocation();
 
-    // const [state1, setState] = useState({
-    //     shortCode: '',
-    // });
+    const [state1, setState] = useState({
+        shortCode: '',
+    });
 
-    // useEffect(() => {
-    //     if (horsekindshortcode) {
-    //         setState({
-    //             shortCode: horsekindshortcode.length === 0 ? 10 : horsekindshortcode[0].maxshortCode + 1,
-    //         });
-    //     } else {
-    //         // setState.shortCode('10')
-    //     }
-    // }, [horsekindshortcode]);
+    useEffect(() => {
+        if (trackconditionshortcode) {
+            setState({
+                shortCode: trackconditionshortcode.length === 0 ? 10 : trackconditionshortcode[0].maxshortCode + 1,
+            });
+        } else {
+            // setState.shortCode('10')
+        }
+    }, [trackconditionshortcode]);
 
 
 
@@ -54,10 +54,10 @@ const TrackCondition = () => {
             const formData = new FormData();
             formData.append("NameEn", NameEn);
             formData.append("NameAr", NameAr);
-            // formData.append("shortCode",shortCode);
+            formData.append("shortCode", state1.shortCode);
             formData.append("AbbrevEn", shortName);
             formData.append("AbbrevAr", shortNameAr);
-            await axios.post(`${window.env.API_URL}/uploadHorseKind`, formData);
+            await axios.post(`${window.env.API_URL}/uploadTrackCondition`, formData);
             swal({
                 title: "Success!",
                 text: "Data has been added successfully ",
@@ -177,6 +177,23 @@ const TrackCondition = () => {
                                         <Form.Control type="text" placeholder="التفاصيل" />
                                     </FloatingLabel>
                                     <span className={ErrorShortNameAr.status ? "successAr" : "errorAr"}>{ErrorShortNameAr.message}</span>
+                                </div>
+                            </div>
+                            <div className="row mainrow">
+                                <div className="col-sm">
+                                    <FloatingLabel
+                                        controlId="floatingInput"
+                                        label="Short Code"
+                                        className="mb-3"
+                                        onChange={(e) =>
+                                            setState({ ...state1, shortCode: e.target.value })
+                                        }
+
+                                    >
+                                        <Form.Control type="number" placeholder="Description" value={state1.shortCode} />
+                                    </FloatingLabel>
+
+
                                 </div>
                             </div>
                             {/* <div className="row mainrow">

@@ -14,6 +14,7 @@ import { fetchTrackLength } from "../../../redux/getReducer/getTracklength";
 import { fetchRaceKind } from "../../../redux/getReducer/getRaceKind";
 import { fetchgroundtype } from "../../../redux/getReducer/getGroundType";
 import { fetchpointTable } from "../../../redux/getReducer/getPointTable";
+import { fetchtrackCondition } from "../../../redux/getReducer/getTrackCondition";
 import Select from "react-select";
 import swal from "sweetalert";
 import DatePicker from "react-date-picker";
@@ -180,15 +181,16 @@ const RaceForm = () => {
   const { data: raceKinds, } = useSelector((state) => state.raceKinds);
   const { data: groundtype } = useSelector((state) => state.groundtype);
   const { data: pointTable } = useSelector((state) => state.pointTable);
+  const { data: trackcondition } = useSelector((state) => state.trackcondition);
 
   const history = useNavigate();
   const dispatch = useDispatch();
 
-  // let racepointTable =
-  //    pointTable === undefined ? (
+  // let trackconditionTable =
+  //    trackcondition === undefined ? (
   //     <></>
   //   ) : (
-  //     pointTable.map(function (item) {
+  //     trackcondition.map(function (item) {
   //       return {
   //         id: item._id,
   //         value: item.Group_Name,
@@ -196,6 +198,28 @@ const RaceForm = () => {
   //       };
   //     })
   //   );
+
+  let trackconditionTable =
+  trackcondition === undefined ? (
+    <></>
+  ) : (
+    trackcondition.map(function (item) {
+      return {
+        id: item._id,
+        value: item.NameEn,
+        label: (
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}>
+            <p>{item.NameEn}</p>
+            <p>{item.NameAr}</p>
+
+          </div>
+        ),
+      };
+    })
+  );
 
   let racecourses =
     racecourse === undefined ? (
@@ -528,6 +552,8 @@ const RaceForm = () => {
     dispatch(fetchRaceKind({ SearchCode, SearchTitle, SearchAge }));
     dispatch(fetchgroundtype({ SearchCode, SearchTitle, SearchAge }));
     dispatch(fetchpointTable({ SearchCode, SearchTitle, SearchAge }));
+    dispatch(fetchtrackCondition({ SearchCode, SearchTitle, SearchAge }));
+
   };
 
   const [MeetingType, setMeetingType] = useState("");
@@ -551,6 +577,7 @@ const RaceForm = () => {
   const [Day, setDay] = useState("");
   const [StartTime, setStartTime] = useState("");
   const [EndTime, setEndTime] = useState("");
+  const [TrackCondition, setTrackCondition] = useState("");
 
   const [FirstPrice, setFirstPrice] = useState("");
   const [SecondPrice, setSecondPrice] = useState("");
@@ -619,6 +646,7 @@ const RaceForm = () => {
       formData.append("SixthPrice", SixthPrice);
       formData.append("Sponsor", Sponsor.id);
       formData.append("WeatherDegree", WeatherDegree);
+      formData.append("TrackCondition", TrackCondition.id);
       formData.append("TrackLength", TrackLength.id);
       formData.append("image", image);
       const response = await axios.post(
@@ -1238,6 +1266,40 @@ const RaceForm = () => {
                       defaultValue={RaceStatus}
                       onChange={setRaceStatus}
                       options={RaceStatuss}
+                      isClearable={true}
+                      isSearchable={true}
+                      onBlur={() =>
+                        RaceStatus === ""
+                          ? setErrorRaceStatus("Race Status is required ")
+                          : setErrorRaceStatus("")
+                      }
+                    />
+                    {/* <span className="spanForm"> |</span> */}
+                    <span className={RaceStatus === "" ? "error" : "success"}>
+                      {ErrorRaceStatus}
+                    </span>
+                  </div>
+
+                  {/* <div className="col-sm">
+                    <Select
+                      placeholder={<div>حالة السباق</div>}
+                      className="selectdir"
+                      options={RaceStatussAr}
+                      defaultValue={RaceStatus}
+                      onChange={setRaceStatus}
+                      isClearable={true}
+                      isSearchable={true}
+                    />
+                  </div> */}
+                </div>
+
+                <div className="row mainrow">
+                  <div className="col-sm">
+                    <Select
+                      placeholder={<div>Track Condition</div>}
+                      defaultValue={TrackCondition}
+                      onChange={setTrackCondition}
+                      options={trackconditionTable}
                       isClearable={true}
                       isSearchable={true}
                       onBlur={() =>

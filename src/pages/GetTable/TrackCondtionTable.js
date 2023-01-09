@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment, useState } from "react";
-import { fetchHorseKind, STATUSES } from "../../redux/getReducer/getHorseKind";
+import { fetchtrackCondition, STATUSES } from "../../redux/getReducer/getTrackCondition";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
@@ -59,12 +59,12 @@ const TrackCondtionTable = () => {
 
 
     const GetSearch = async () => {
-        dispatch(fetchHorseKind({ SearchTitle, SearchCode }));
+        dispatch(fetchtrackCondition({ SearchTitle, SearchCode }));
         setSearchTitle('')
         setSearchCode('')
     };
     useEffect(() => {
-        dispatch(fetchHorseKind({ SearchTitle, SearchCode }));
+        dispatch(fetchtrackCondition({ SearchTitle, SearchCode }));
     }, [dispatch]);
 
     const handleRemove = async (Id) => {
@@ -89,7 +89,7 @@ const TrackCondtionTable = () => {
 
                         }
                         )
-                        dispatch(fetchHorseKind({ SearchTitle, SearchCode }));
+                        dispatch(fetchtrackCondition({ SearchTitle, SearchCode }));
 
                     } else {
                         swal("Your data is safe!");
@@ -225,7 +225,7 @@ const TrackCondtionTable = () => {
                                             {currentPosts.map((item, index) => {
                                                 return (
                                                     <>
-                                                        <tr className="tr_table_class" style={{ display: "none" }}>
+                                                        <tr className="tr_table_class">
                                                             <td className="table_delete_btn1">
                                                                 <BiEdit
                                                                     onClick={() =>

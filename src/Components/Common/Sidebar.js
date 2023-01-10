@@ -422,15 +422,6 @@ const Sidebar = () => {
                           Race
                         </Link>
                       </div>
-
-
-
-
-
-
-
-
-
                     </Accordion.Body>
                   </Accordion.Item>
 
@@ -440,22 +431,17 @@ const Sidebar = () => {
                       className="AccordionBody"
                       style={{ height: "157px" }}
                     >
-
                       <div>
                         <Link to="/getmeeting" className="mylink">
                           Meeting Type
                         </Link>
                       </div>
 
-
-
-
                       <div>
                         <Link to="/racecardlisting" className="mylink">
                           Race Card
                         </Link>
                       </div>
-
 
                       <div>
                         <Link
@@ -472,7 +458,6 @@ const Sidebar = () => {
                           Sponsor
                         </Link>
                       </div>
-
 
                       <div>
                         <Link to="/racename" className="mylink">
@@ -499,11 +484,8 @@ const Sidebar = () => {
                           Race To Be Publish
                         </Link>
                       </div>
-
                     </Accordion.Body>
                   </Accordion.Item>
-
-
 
                   <Accordion.Item eventKey="7">
                     <Accordion.Header>Competition </Accordion.Header>
@@ -586,7 +568,6 @@ const Sidebar = () => {
                 </Accordion.Body>
               </Accordion.Item> */}
                   <Accordion.Item eventKey="9">
-
                     <Accordion.Header>Verdict</Accordion.Header>
                     <Accordion.Body className="AccordionBody">
                       <div>
@@ -599,12 +580,7 @@ const Sidebar = () => {
                           Add New
                         </Link>
                       </div>
-
-
                     </Accordion.Body>
-
-
-
                   </Accordion.Item>
                   <Accordion.Item eventKey="10">
                     <Accordion.Header>News</Accordion.Header>
@@ -787,6 +763,22 @@ const Sidebar = () => {
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
+
+                <div className="SettingSec1">
+                  <Link
+                    to="/sendemail"
+                    className="mylink"
+                    onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                      });
+                    }}
+                  >
+                    Email Templete
+                  </Link>
+                </div>
 
                 <div className="SettingSec1">
                   <Link

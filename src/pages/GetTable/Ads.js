@@ -234,7 +234,7 @@ const Ads = () => {
                               <td>{item.TitleAr}</td>
                               <td>{item.DescriptionEn}</td>
                               <td>{item.DescriptionAr}</td>
-                              <td>{item.url}</td>
+                              <td>{item.Url}</td>
 
                               <td>
                                 <img src={item.image} alt="" />

@@ -28,11 +28,12 @@ const LocalItem = () => {
 };
 
 const PublishRace = () => {
-  const [SearchTitle, setSearchTitle] = useState()
-  const [SearchCode, setSearchCode] = useState()
+  const [SearchTitle, setSearchTitle] = useState('')
+  const [shortCode, setSearchCode] = useState('')
   const [InputData, SetinputData] = useState("");
   const [VerdictName, SetVerdictName] = useState('');
-  const [NameEn, setNameEn] = useState()
+  const [SearchAge, setSearchAge] = useState('')
+  const [NameEn, setNameEn] = useState('')
 
   const [Gate, setGate] = useState(1)
   const [items, setitems] = useState(LocalItem());
@@ -63,9 +64,9 @@ const PublishRace = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchHorse({ SearchCode, SearchTitle }));
-    dispatch(fetchjockey({ SearchCode, SearchTitle }));
-    dispatch(fetchverdict({ SearchCode, SearchTitle }));
+    dispatch(fetchHorse({SearchTitle,shortCode,SearchAge}));
+    dispatch(fetchjockey({ shortCode, SearchTitle }));
+    dispatch(fetchverdict({NameEn ,shortCode}));
   }, [dispatch]);
 
   useEffect(() => {

@@ -21,7 +21,7 @@ const Horsekindform = () => {
   const [shortNameAr, setshortNameAr] = useState("");
   const [isLoading, setisLoading] = useState(false);
   const dispatch = useDispatch();
-  const { data: horsekindshortcode } = useSelector((state) => state.horsekindshortcode)
+  // const { data: horsekindshortcode } = useSelector((state) => state.horsekindshortcode)
   const history = useNavigate();
   const { pathname } = useLocation();
 
@@ -29,22 +29,21 @@ const Horsekindform = () => {
     shortCode: '',
   });
 
-  useEffect(() => {
-    if (horsekindshortcode) {
-      setState({
-        shortCode: horsekindshortcode.length === 0 ? 10 : horsekindshortcode[0].maxshortCode + 1,
-      });
-    } else {
-      // setState.shortCode('10')
-    }
-  }, [horsekindshortcode]);
+  // useEffect(() => {
+  //   if (horsekindshortcode) {
+  //     setState({
+  //       shortCode: horsekindshortcode.length === 0 ? 10 : horsekindshortcode[0].maxshortCode + 1,
+  //     });
+  //   } else {
+  //   }
+  // }, [horsekindshortcode]);
 
 
 
 
-  useEffect(() => {
-    dispatch(fetchhorsekindshortcode());
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(fetchhorsekindshortcode());
+  // }, [dispatch])
 
 
   const submit = async (event) => {

@@ -22,6 +22,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { DateRangePicker } from 'react-date-range';
 import Form from "react-bootstrap/Form";
+import TrainerCSV from '../../Components/CSVUploadPopup/TrainerPopup'
 
 const Trainer = () => {
   const [ShowCalender, setShowCalender] = useState(false);
@@ -48,6 +49,13 @@ const Trainer = () => {
     await setShow(true);
   };
 
+   const [showCSV, setShowCSV] = useState(false);
+  const [modaldataCSV, setmodaldataCSV] = useState();
+  const handleCloseCSV = () => setShowCSV(false);
+  const handleShowCSV = async (data) => {
+    setmodaldataCSV(data)
+    await setShowCSV(true);
+  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -159,14 +167,16 @@ const Trainer = () => {
                     />
                   </span>
                 </OverlayTrigger>
-                <CSVLink
+                <p onClick={() => handleShowCSV()} className="importcsv">Import JSON</p>
+
+                {/* <CSVLink
                   data={trainer}
                   separator={";"}
                   filename={"MKS Trainer.csv"}
                   className="csvclass"
                 >
                   Export CSV
-                </CSVLink>
+                </CSVLink> */}
               </div>
             </div>
             <div>
@@ -390,6 +400,25 @@ const Trainer = () => {
           <button onClick={handleClose} className="modalClosebtn">
             Close
           </button>
+        </Modal.Footer>
+      </Modal>
+
+
+      <Modal
+        show={showCSV}
+        onHide={handleCloseCSV}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <h2 style={{ fontFamily: "inter" }}>Trainer JSON</h2>
+        </Modal.Header>
+        <Modal.Body>
+          <TrainerCSV data={modaldataCSV} />
+        </Modal.Body>
+        <Modal.Footer>
+          
         </Modal.Footer>
       </Modal>
     </>

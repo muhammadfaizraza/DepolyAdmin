@@ -42,7 +42,7 @@ const BreederUploadPopup = () => {
     setisLoading(false);
 
     } catch (error) {
-      const err = error.response.data.message[0].errors.errors[0].message;
+      const err = error.response.data.message[0].message;
       // const err1 = error.response.data.message[1].errors.errors[1].message
       // const err2 = error.response.data.message[2].errors.errors[2].message
       // const err3 = error.response.data.message[3].errors.errors[3].message

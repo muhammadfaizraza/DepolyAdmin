@@ -94,8 +94,8 @@ const NewsForm = () => {
       formData.append("AbbrevEn", state1.AbbrevEn);
       // formData.append("Label", state1.Label);
       formData.append("Offset", state1.Offset);
-      formData.append("ValueEn", state1.ValueEn);
-      formData.append("ValueAr", state1.ValueAr);
+      // formData.append("ValueEn", state1.ValueEn);
+      // formData.append("ValueAr", state1.ValueAr);
 
       const response = await axios.put(`${window.env.API_URL}/updateNationality/${nationalityid._id}`, formData);
       history("/nationalitylist");

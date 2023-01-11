@@ -275,7 +275,7 @@ const NationalityTable = () => {
                               <td>{item.AbbrevEn}</td>
                               <td>{item.AbbrevAr}</td>
                               <td>{item.HemisphereEn}</td>
-                              <td>{item.HemisphereAr}</td>
+                              <td>{item.HemisphereAr === undefined ? <>نصف الكرة الجنوبي</> : item.HemisphereAr}</td>
                               <td>{item.shortCode} </td>
                               {/* <td>{item.Label} </td> */}
                               {/* <td>{item.Offset === 'true' ? <>True</> : <>False</>} </td> */}

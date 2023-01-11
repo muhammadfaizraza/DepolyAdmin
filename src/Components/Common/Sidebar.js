@@ -766,7 +766,7 @@ const Sidebar = () => {
 
                 <div className="SettingSec1">
                   <Link
-                    to="/sendemail"
+                    to="/email"
                     className="mylink"
                     onClick={() => {
                       window.scrollTo({
@@ -776,7 +776,7 @@ const Sidebar = () => {
                       });
                     }}
                   >
-                    Email Templete
+                    Email
                   </Link>
                 </div>
 

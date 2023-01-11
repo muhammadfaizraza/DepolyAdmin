@@ -165,6 +165,7 @@ import Email from "./Components/Template/Email";
 import TrackCondition from "./pages/PostTable/TrackCondition";
 import EditTrackCondition from "./pages/UpdateTable/EditTrackCondition";
 import DeletedTrackCondition from "./Components/DeletedData/DeletedTrackCondition";
+import NotificationTable from "./pages/NotificationTable";
 
 
 function App() {
@@ -197,7 +198,7 @@ function App() {
                 <Routes>
                   <Route exact path="/" element={<Login />} />
                   <Route element={<ProtectedRoute />}>
-                    <Route path="/sendemail" element={<Email />} />
+                    <Route path="/email" element={<NotificationTable />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path='/setting' element={<Setting />} />
                     <Route path='/AdminProfile' element={<AdminProfile />} />

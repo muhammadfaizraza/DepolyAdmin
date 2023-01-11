@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactQuill,{Quill} from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import ImageResize from 'quill-image-resize-module-react';
 
 
@@ -48,38 +48,35 @@ const formats = [
   'image',
   'video'
 ];
-const Email = () => {
+const Email = (props) => {
 
 
-    return (
+  return (
     <div className='parentTemplate'>
-        <div className="Headers">Compose Email</div>
-<div className='templateInputs'>
-<input placeholder='To' type="text"/>
+      <div className="Headers">{props.data}</div>
 
-</div>
-<div className='templateInputs'>
-<input placeholder='Subject' type="text"/>
+      <div className='templateInputs'>
+        <input value={props.data} type="text" />
 
-</div>
-    <div className="row">
-    <div className="col-sm">
-      <ReactQuill
-        theme="snow"
-        modules={modules}
-        formats={formats}
-        
-/>
+      </div>
+      <div className="row">
+        <div className="col-sm">
+          <ReactQuill
+            theme="snow"
+            modules={modules}
+            formats={formats}
 
+          />
+
+        </div>
+
+      </div>
+      <div className="ButtonSection " style={{ justifyContent: "end", marginRight: "-11px" }}>
+        <button Name="submit" className="SubmitButton" >
+          Submit
+        </button>
+      </div>
     </div>
- 
-  </div>
-  <div className="ButtonSection " style={{ justifyContent: "end" ,marginRight:"65px"}}>
-                <button Name="submit" className="SubmitButton" >
-                Submit
-                </button>
-                </div>
-  </div>
   )
 }
 

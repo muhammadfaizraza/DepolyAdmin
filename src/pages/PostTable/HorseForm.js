@@ -1245,7 +1245,7 @@ const HorseForm = () => {
                 <div className="row mainrow">
                   <div className="col-sm">
                     <Select
-                      placeholder={<div>Select Gelted</div>}
+                      placeholder={<div>Select Gelded</div>}
                       defaultValue={isGelted}
                       onChange={setisGelted}
                       options={Gelted}
